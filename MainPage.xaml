@@ -1,0 +1,121 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Ben.Dominion.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local="clr-namespace:Ben.Dominion"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <local:StringConverter x:Key="StringConverter" />
+            <local:Cards x:Key="Cards"/>
+            <local:PickerSettings x:Key="Picker"/>
+
+            <DataTemplate x:Key="BasicOptionTemplate">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding OptionValue, Converter={StaticResource StringConverter}}" />
+                </StackPanel>
+            </DataTemplate>
+
+            <DataTemplate x:Key="BooleanOptionTemplate">
+                <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}" Content="{Binding Name}" />
+            </DataTemplate>
+
+            <DataTemplate x:Key="IntOptionTemplate">
+                <toolkit:ListPicker ItemsSource="{Binding ValidValues}" 
+                                    SelectedItem="{Binding OptionValue, Mode=TwoWay}" 
+                                    Header="{Binding Name}"/>
+            </DataTemplate>
+
+            <local:OptionTemplateSelector x:Key="OptionsTemplateSelector"
+                                          BasicOptionTemplate="{StaticResource BasicOptionTemplate}"
+                                          BooleanOptionTemplate="{StaticResource BooleanOptionTemplate}"
+                                          IntOptionTemplate="{StaticResource IntOptionTemplate}" />
+        </ResourceDictionary>
+    </phone:PhoneApplicationPage.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <controls:Pivot Title="Dominion Picker">
+            <controls:PivotItem Header="create">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer>
+                        <StackPanel>
+                            <TextBlock Margin="6,0" Text="sets" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            <ItemsControl x:Name="SetsItemsControl" 
+                                  ItemsSource="{Binding AllSets, Source={StaticResource Cards}}"
+                                  Margin="12,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <CheckBox Margin="0,-15" 
+                                                  Grid.Column="0">
+                                                <CheckBox.Content>
+                                                    <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                                </CheckBox.Content>
+                                            </CheckBox>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Margin="6,0" Text="options" Style="{StaticResource PhoneTextSubtleStyle}" />
+                            <local:MultiTemplateItemsControl x:Name="OptionsItemsControl"
+                                                             TemplateSelector="{StaticResource OptionsTemplateSelector}"
+                                                             ItemsSource="{Binding Options, Source={StaticResource Picker}}"
+                                                             Margin="12,0">
+                            </local:MultiTemplateItemsControl>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Button Grid.Row="1" Content="Create" />
+                </Grid>
+            </controls:PivotItem>
+ 
+            <controls:PivotItem Header="favorites"> 
+                <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,17">
+                                <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PivotItem>
+        </controls:Pivot>
+    </Grid>
+ 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>
