@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ArrayOfCard>
+  <!--Base Set--> 
+  <Card Name="Adventurer" Set="Base" Type="Action" Cost="6"/>
+  <Card Name="Bureaucrat" Set="Base" Type="Action Attack" Cost="4"/>
+  <Card Name="Cellar" Set="Base" Type="Action" Cost="2"/>
+  <Card Name="Chancelor" Set="Base" Type="Action" Cost="3"/>
+  <Card Name="Chapel" Set="Base" Type="Action" Cost="2"/>
+  <Card Name="Council Room" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Feast" Set="Base" Type="Action" Cost="4"/>
+  <Card Name="Festival" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Gardens" Set="Base" Type="Victory" Cost="4"/>
+  <Card Name="Laboratory" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Library" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Market" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Militia" Set="Base" Type="Action Attack" Cost="4"/>
+  <Card Name="Mine" Set="Base" Type="Action" Cost="5"/>
+  <Card Name="Moat" Set="Base" Type="Reaction" Cost="2"/>
+  <Card Name="Moneylender" Set="Base" Type="Action" Cost="4"/>
+  <Card Name="Remodel" Set="Base" Type="Action" Cost="4"/>
+  <Card Name="Smithy" Set="Base" Type="Action" Cost="4"/>
+  <Card Name="Spy" Set="Base" Type="Action Attack" Cost="4"/>
+  <Card Name="Thief" Set="Base" Type="Action Attack" Cost="4"/>
+  <Card Name="Throne Room" Set="Base" Type="Action" Cost="4"/>
+  <Card Name="Village" Set="Base" Type="Action" Cost="3"/>
+  <Card Name="Witch" Set="Base" Type="Action Attack" Cost="5"/>
+  <Card Name="Woodcutter" Set="Base" Type="Action" Cost="3"/>
+  <Card Name="Workshop" Set="Base" Type="Action" Cost="3"/>
+</ArrayOfCard>

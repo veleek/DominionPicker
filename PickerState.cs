@@ -3,15 +3,67 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.IO.IsolatedStorage;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace Ben.Dominion
 {
     public class PickerState : INotifyPropertyChanged
     {
+        public static readonly String PickerStateFileName = "PickerState.xml";
+
+        public static Boolean Loaded = false;
+
+        private static PickerState current;
+        public static PickerState Current
+        {
+            get
+            {
+                if (current == null)
+                {
+                    current = Load();
+                }
+
+                return current;
+            }
+        }
+
+        public static PickerState Load()
+        {
+            PickerState state = null;
+
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                if (store.FileExists(PickerStateFileName))
+                {
+                    using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
+                    {
+                        state = GenericSerializer.Deserialize<PickerState>(stream);
+                    }
+                }
+                else
+                {
+                    state = new PickerState();
+                }
+            }
+
+            Loaded = true;
+            return state;
+        }
+
         private PickerSettings currentSettings;
         public PickerSettings CurrentSettings
         {
-            get { return currentSettings; }
+            get 
+            {
+                if (currentSettings == null)
+                {
+                    currentSettings = new PickerSettings();
+                }
+
+                return currentSettings; 
+            }
             private set
             {
                 if (value != currentSettings)
@@ -21,6 +73,8 @@ namespace Ben.Dominion
                 }
             }
         }
+
+        public Picker CurrentPicker { get; set; }
 
         /// <summary>
         /// A saved list of favorite settings
@@ -47,14 +101,9 @@ namespace Ben.Dominion
             CurrentSettings = settings;
         }
 
-        public void CreateCardList()
+        public void Reset()
         {
-            CreateCardList(CurrentSettings);
-        }
-
-        public void CreateCardList(PickerSettings settings)
-        {
-            List<Card> cardPool = Cards.AllCards.Where(c => c.InSet(settings.Sets)).ToList();
+            CurrentSettings = new PickerSettings();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

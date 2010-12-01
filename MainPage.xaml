@@ -20,7 +20,6 @@
         <ResourceDictionary>
             <local:StringConverter x:Key="StringConverter" />
             <local:Cards x:Key="Cards"/>
-            <local:PickerSettings x:Key="Picker"/>
 
             <DataTemplate x:Key="BasicOptionTemplate">
                 <StackPanel Orientation="Horizontal">
@@ -36,7 +35,9 @@
             <DataTemplate x:Key="IntOptionTemplate">
                 <toolkit:ListPicker ItemsSource="{Binding ValidValues}" 
                                     SelectedItem="{Binding OptionValue, Mode=TwoWay}" 
-                                    Header="{Binding Name}"/>
+                                    Header="{Binding Name}"
+                                    ListPickerMode="Expanded"
+                                    />
             </DataTemplate>
 
             <local:OptionTemplateSelector x:Key="OptionsTemplateSelector"
@@ -46,7 +47,7 @@
         </ResourceDictionary>
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Current, Source={StaticResource PickerState}}">
         <controls:Pivot Title="Dominion Picker">
             <controls:PivotItem Header="create">
                 <Grid>
@@ -70,7 +71,8 @@
                                             </Grid.ColumnDefinitions>
 
                                             <CheckBox Margin="0,-15" 
-                                                  Grid.Column="0">
+                                                      Grid.Column="0"
+                                                      Click="SetCheckBox_Click">
                                                 <CheckBox.Content>
                                                     <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                                                 </CheckBox.Content>
@@ -82,13 +84,13 @@
                             <TextBlock Margin="6,0" Text="options" Style="{StaticResource PhoneTextSubtleStyle}" />
                             <local:MultiTemplateItemsControl x:Name="OptionsItemsControl"
                                                              TemplateSelector="{StaticResource OptionsTemplateSelector}"
-                                                             ItemsSource="{Binding Options, Source={StaticResource Picker}}"
+                                                             ItemsSource="{Binding CurrentSettings.AllOptions, Source={StaticResource PickerState}}"
                                                              Margin="12,0">
                             </local:MultiTemplateItemsControl>
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Button Grid.Row="1" Content="Create" />
+                    <Button x:Name="CreateButton" Grid.Row="1" Content="Create" Click="CreateButton_Click"></Button>
                 </Grid>
             </controls:PivotItem>
  
@@ -109,8 +111,8 @@
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton x:Name="TestIcon" IconUri="/Images/appbar.favs.addto.png" Text="Add Favorite..." Click="AddFavorite_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.reset.png" Text="Reset" Click="Reset_Click"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
