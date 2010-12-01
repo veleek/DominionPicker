@@ -62,11 +62,15 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Cards.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MultiTemplateItemsControl.cs" />
+    <Compile Include="Picker.cs" />
+    <Compile Include="PickerOptions.cs" />
+    <Compile Include="PickerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

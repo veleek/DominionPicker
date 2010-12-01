@@ -34,28 +34,48 @@ namespace Ben.Dominion
 
     public class Cards
     {
-        public IEnumerable<CardSet> AllSets { get { return Enumerable.Range(1, 5).Select(x => (CardSet)x); } }
-        public IEnumerable<CardType> AllTypes { get{ return Enumerable.Range(1, 7).Select(x => (CardType)x); } }
+        public static IEnumerable<CardSet> AllSets { get { return Enumerable.Range(1, 5).Select(x => (CardSet)x); } }
+        public static IEnumerable<CardType> AllTypes { get{ return Enumerable.Range(1, 7).Select(x => (CardType)x); } }
 
-        public Dictionary<CardSet, List<Card>> AllCards { get; set; }
+        public static List<Card> AllCards { get; set; }
     }
 
     public class PickerSettings
     {
         public CardSet Sets { get; set; }
-        public List<PickerOption> Options
+
+        public PickerOption MinimumCardsPerSet = new IntPickerOption("Minimum cards per set", 3, Enumerable.Range(1, 10).ToList());
+        public PickerOption RequirePlusActions = new PickerOption("Require a card that gives actions", false);
+        public PickerOption RequirePlusBuys = new PickerOption("Require a card that gives buys", false);
+        public PickerOption RequireDefense = new PickerOption("If there's an attack, require a defense card", false);
+
+        public List<PickerOption> AllOptions
         {
             get
             {
                 return new List<PickerOption> 
                 { 
-                    new PickerOption("FloatOption", 1.12345),
-                    new IntPickerOption("IntegerOption", 1, Enumerable.Range(1,10).ToList()),
-                    new PickerOption("BooleanOption1", true),
-                    new PickerOption("BooleanOption2", false),
+                    MinimumCardsPerSet,
+                    RequirePlusActions,
+                    RequirePlusBuys,
+                    RequireDefense,
                 };
 
             }
+        }
+
+        public PickerSettings() { }
+
+        public PickerSettings Clone()
+        {
+            PickerSettings clone = new PickerSettings();
+            clone.Sets = this.Sets;
+            clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone();
+            clone.RequirePlusActions = this.RequirePlusActions.Clone();
+            clone.RequirePlusBuys = this.RequirePlusBuys.Clone();
+            clone.RequireDefense = this.RequireDefense.Clone();
+
+            return clone;
         }
     }
 
@@ -87,6 +107,12 @@ namespace Ben.Dominion
         {
             this.Name = name;
             this.optionValue = value;
+        }
+
+        public virtual PickerOption Clone()
+        {
+            PickerOption clone = this.MemberwiseClone() as PickerOption;
+            return clone;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -160,6 +186,7 @@ namespace Ben.Dominion
         Seaside,
         Alchemy,
         Prosperity,
+    Promo,
     }
 
     public enum CardType
@@ -176,6 +203,11 @@ namespace Ben.Dominion
 
     public class Card
     {
+        public Boolean InSet(CardSet cardSets)
+        {
+            return (cardSets & Set) == Set;
+        }
+        
         public String Name { get; set; }
         public CardSet Set { get; set; }
         public CardType Type { get; set; }
