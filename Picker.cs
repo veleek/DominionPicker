@@ -2,24 +2,36 @@
 using System.Linq;
 using System;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Xml.Serialization;
 
 namespace Ben.Dominion
 {
-    public class Picker : INotifyPropertyChanged
+    public class Picker
     {
-        public List<Card> CardSet { get; set; }
-
-        private List<Card> cardPool;
+        private List<Card> cardSet { get; set; }
+        private List<Card> cardPool { get; set; }
         
-        public void CreateCardList()
+        public ObservableCollection<Card> GenerateCardList()
         {
-            CreateCardList(PickerState.Current.CurrentSettings);
+            return GenerateCardList(PickerState.Current.CurrentSettings);
         }
 
-        public void CreateCardList(PickerSettings settings)
+        public ObservableCollection<Card> GenerateCardList(PickerSettings settings)
         {
             cardPool = Cards.AllCards.Where(c => c.InSet(settings.SelectedSets)).ToList();
-            CardSet = cardPool.OrderBy(c => Guid.NewGuid()).Take(10).ToList();
+            cardSet = cardPool.OrderBy(c => Guid.NewGuid()).Take(10).ToList();
+
+            // Order them alphabetically
+            cardSet = cardSet.OrderBy(c => c.Name).ToList();
+
+            ObservableCollection<Card> finalList = new ObservableCollection<Card>();
+            foreach (Card c in cardSet)
+            {
+                finalList.Add(c);
+            }
+
+            return finalList;
         }
 
         public Card GetRandomCard()
@@ -37,32 +49,31 @@ namespace Ben.Dominion
             return cardPool.Where(c => c.Type == type).OrderBy(c => Guid.NewGuid()).FirstOrDefault();
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(String propertyName)
+        public Card GetRandomCard(Card card)
         {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
+            return cardPool.Where(c => c != card).OrderBy(c => Guid.NewGuid()).FirstOrDefault();
         }
 
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
+        public Card GetRandomCard(IList<Card> cards)
         {
-            PropertyChangedEventHandler h = PropertyChanged;
-            if (h != null)
-            {
-                h(this, e);
-            }
+            return cardPool.Where(c => !cards.Contains(c)).OrderBy(c => Guid.NewGuid()).FirstOrDefault();
         }
     }
 
     public class PickerSettings
     {
-        public Dictionary<CardSet, Boolean> Sets { get; set; }
+        [XmlIgnore]
+        public List<SetSelector> Sets { get; set; }
+
         public List<CardSet> SelectedSets
         {
             get
             {
-                return Sets.Where(kvp => kvp.Value).Select(kvp => kvp.Key).ToList();
+                return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
+            }
+            set
+            {
+                Sets = Cards.AllSets.Select(s => new SetSelector(s, value.Contains(s))).ToList();
             }
         }
 
@@ -88,7 +99,7 @@ namespace Ben.Dominion
 
         public PickerSettings() 
         {
-            Sets = Cards.AllSets.ToDictionary(s => s, s => false);
+            Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
         }
 
         public PickerSettings Clone()
@@ -101,6 +112,19 @@ namespace Ben.Dominion
             clone.RequireDefense = this.RequireDefense.Clone();
 
             return clone;
+        }
+    }
+
+    public class SetSelector
+    {
+        public CardSet Set { get; set; }
+        public Boolean IsSelected { get; set; }
+
+        public SetSelector(CardSet set) : this(set, true) { }
+        public SetSelector(CardSet set, Boolean selected)
+        {
+            this.Set = set;
+            this.IsSelected = selected;
         }
     }
 }

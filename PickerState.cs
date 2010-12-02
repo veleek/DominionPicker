@@ -6,11 +6,15 @@ using System.Linq;
 using System.IO.IsolatedStorage;
 using System.IO;
 using System.Xml.Serialization;
+using System.Windows;
 
 namespace Ben.Dominion
 {
+    [XmlInclude(typeof(BooleanPickerOption))]
+    [XmlInclude(typeof(IntPickerOption))]
     public class PickerState : INotifyPropertyChanged
     {
+        #region Statics
         public static readonly String PickerStateFileName = "PickerState.xml";
 
         public static Boolean Loaded = false;
@@ -42,7 +46,8 @@ namespace Ben.Dominion
                         state = GenericSerializer.Deserialize<PickerState>(stream);
                     }
                 }
-                else
+
+                if(state == null)
                 {
                     state = new PickerState();
                 }
@@ -51,6 +56,9 @@ namespace Ben.Dominion
             Loaded = true;
             return state;
         }
+        #endregion
+
+        private Picker picker { get; set; }
 
         private PickerSettings currentSettings;
         public PickerSettings CurrentSettings
@@ -64,7 +72,7 @@ namespace Ben.Dominion
 
                 return currentSettings; 
             }
-            private set
+            set
             {
                 if (value != currentSettings)
                 {
@@ -74,17 +82,47 @@ namespace Ben.Dominion
             }
         }
 
-        public Picker CurrentPicker { get; set; }
-
         /// <summary>
         /// A saved list of favorite settings
         /// </summary>
         public ObservableCollection<PickerSettings> FavoriteSettings { get; set; }
 
+        private ObservableCollection<Card> cardList;
         /// <summary>
         /// The current resultant card list
         /// </summary>
-        public ObservableCollection<Card> CardList { get; set; }
+        public ObservableCollection<Card> CardList
+        {
+            get
+            {
+                return cardList;
+            }
+            set
+            {
+                if (value != cardList)
+                {
+                    cardList = value;
+                    NotifyPropertyChanged("CardList");
+                }
+            }
+        }
+
+        public PickerState()
+        {
+            this.FavoriteSettings = new ObservableCollection<PickerSettings>();
+            this.picker = new Picker();
+        }
+
+        public void Save()
+        {
+            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Create))
+                {
+                    GenericSerializer.Serialize(stream, this);
+                }
+            }
+        }
 
         public void SaveFavorite()
         {
@@ -104,6 +142,25 @@ namespace Ben.Dominion
         public void Reset()
         {
             CurrentSettings = new PickerSettings();
+        }
+
+        public void GenerateCardList()
+        {
+            this.CardList = picker.GenerateCardList();
+            this.Save();
+        }
+
+        public void ReplaceCard(Card c)
+        {
+            if (c == null)
+            {
+                return;
+            }
+
+            Int32 index = CardList.IndexOf(c);
+            CardList.Remove(c);
+
+            CardList.Insert(index, picker.GetRandomCard(CardList));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

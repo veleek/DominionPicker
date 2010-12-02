@@ -36,16 +36,8 @@ namespace Ben.Dominion
 
     public class Card
     {
-        public Boolean InSet(CardSet set)
-        {
-            return set == this.Set;
-        }
-
-        public Boolean InSet(IEnumerable<CardSet> sets)
-        {
-            return sets.Contains(this.Set);
-        }
-
+        [XmlAttribute]
+        public Int32 ID { get; set; }
         [XmlAttribute]
         public String Name { get; set; }
         [XmlAttribute]
@@ -54,6 +46,8 @@ namespace Ben.Dominion
         public CardType Type { get; set; }
         [XmlAttribute]
         public String Cost { get; set; }
+        [XmlAttribute]
+        public String Rules { get; set; }
 
         [XmlIgnore]
         public Int32 Cards { get; set; }
@@ -75,11 +69,21 @@ namespace Ben.Dominion
             this.Type = type;
         }
 
+        public Boolean InSet(CardSet set)
+        {
+            return set == this.Set;
+        }
+
+        public Boolean InSet(IEnumerable<CardSet> sets)
+        {
+            return sets.Contains(this.Set);
+        }
+
         public override string ToString()
         {
             return String.Format("{0} - {1} ({2}): {3}", Name, Type, Set, Cost);
         }
-
+        
         public Brush BackgroundColor
         {
             get
@@ -95,18 +99,17 @@ namespace Ben.Dominion
                     LinearGradientBrush grad = new LinearGradientBrush();
                     grad.StartPoint = new Point(0.5, 0);
                     grad.EndPoint = new Point(0.5, 1);
-                    Double offsetStep = 1.0 / (colors.Count - 1);
-                    Double offset = 0.0;
+                    //Double offsetStep = 1.0 / (colors.Count - 1);
+                    //Double offset = 0.0;
 
-                    foreach (Color c in colors)
-                    {
-                        GradientStop stop = new GradientStop();
-                        stop.Color = c;
-                        stop.Offset = offset;
-                        grad.GradientStops.Add(stop);
+                    Color first = colors[0];
+                    Color second = colors[1];
 
-                        offset += offsetStep;
-                    }
+                    grad.GradientStops.Add(new GradientStop { Color = first, Offset = 0 });
+                    grad.GradientStops.Add(new GradientStop { Color = first, Offset = 0.20 });
+
+                    grad.GradientStops.Add(new GradientStop { Color = second, Offset = 0.80 });
+                    grad.GradientStops.Add(new GradientStop { Color = second, Offset = 1.0 });
 
                     return grad;
                 }
@@ -135,19 +138,19 @@ namespace Ben.Dominion
             switch (type)
             {
                 case CardType.Treasure:
-                    return Colors.Yellow;
+                    return Color.FromArgb(255, 235, 180, 15);
                 case CardType.Victory:
-                    return Colors.Green;
+                    return Color.FromArgb(255, 97, 121, 57);
                 case CardType.Curse:
-                    return Colors.Purple;
+                    return Color.FromArgb(255, 123, 65, 141);
                 case CardType.Attack:
-                    return Colors.Red;
+                    return Color.FromArgb(255, 255, 60, 60);
                 case CardType.Reaction:
-                    return Colors.Blue;
+                    return Color.FromArgb(255, 68, 113, 181);
                 case CardType.Duration:
-                    return Colors.Orange;
+                    return Color.FromArgb(255, 251, 141, 78);
                 case CardType.Action:
-                    return Colors.Gray;
+                    return Color.FromArgb(255, 160, 155, 165);
                 default:
                     return Colors.Black;
             }
@@ -184,27 +187,6 @@ namespace Ben.Dominion
             {
                 cards = GenericSerializer.Deserialize<List<Card>>(resInfo.Stream);
             }
-
-            /*
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                var x = Application.GetResourceStream(new Uri(PickerCardsFileName, UriKind.Relative)).Stream;
-                var y = (new StreamReader(x)).ReadToEnd();
-
-
-                if (store.FileExists(PickerCardsFileName))
-                {
-                    using (IsolatedStorageFileStream stream = store.OpenFile(PickerCardsFileName, FileMode.Open, FileAccess.ReadWrite))
-                    {
-                        cards = GenericSerializer.Deserialize<List<Card>>(stream);
-                    }
-                }
-                else
-                {
-                    cards = new List<Card>();
-                }
-            }
-             */
 
             return cards;
         }

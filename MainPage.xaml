@@ -60,7 +60,7 @@
                         <StackPanel>
                             <TextBlock Margin="6,0" Text="sets" Style="{StaticResource PhoneTextSubtleStyle}"/>
                             <ItemsControl x:Name="SetsItemsControl" 
-                                  ItemsSource="{Binding AllSets, Source={StaticResource Cards}}"
+                                  ItemsSource="{Binding CurrentSettings.Sets}"
                                   Margin="12,0">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
@@ -72,19 +72,20 @@
 
                                             <CheckBox Margin="0,-15" 
                                                       Grid.Column="0"
-                                                      Click="SetCheckBox_Click">
+                                                      IsChecked="{Binding IsSelected, Mode=TwoWay}">
                                                 <CheckBox.Content>
-                                                    <TextBlock Text="{Binding}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                                    <TextBlock Text="{Binding Set}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                                                 </CheckBox.Content>
                                             </CheckBox>
                                         </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+
                             <TextBlock Margin="6,0" Text="options" Style="{StaticResource PhoneTextSubtleStyle}" />
                             <local:MultiTemplateItemsControl x:Name="OptionsItemsControl"
                                                              TemplateSelector="{StaticResource OptionsTemplateSelector}"
-                                                             ItemsSource="{Binding CurrentSettings.AllOptions, Source={StaticResource PickerState}}"
+                                                             ItemsSource="{Binding CurrentSettings.AllOptions}"
                                                              Margin="12,0">
                             </local:MultiTemplateItemsControl>
                         </StackPanel>

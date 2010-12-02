@@ -9,7 +9,7 @@ namespace Ben.Dominion
 {
     public partial class ResultsViewer : PhoneApplicationPage
     {
-        public List<Card> Cards { get { return PickerState.Current.CurrentPicker.CardSet; } }
+        public IList<Card> Cards { get { return PickerState.Current.CardList; } }
 
         public ResultsViewer()
         {
@@ -26,25 +26,16 @@ namespace Ben.Dominion
                     return;
                 }
 
-                Card c = element.DataContext as Card;
-                if (c == null)
-                {
-                    return;
-                }
-
-                Int32 index = Cards.IndexOf(c);
-                Cards.Remove(c);
-                Cards.Insert(index, new Card("Mint", CardType.Action));
+                PickerState.Current.ReplaceCard(element.DataContext as Card);
             }
         }
 
         private void Refresh_Click(object sender, EventArgs e)
         {
-            var c = LayoutRoot.DataContext;
-            var b = CardsList.GetBindingExpression(ItemsControl.ItemsSourceProperty);
+            PickerState.Current.GenerateCardList();
         }
 
-        private void Border_Loaded(object sender, RoutedEventArgs e)
+        private void Sort_Click(object sender, EventArgs e)
         {
 
         }

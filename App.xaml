@@ -4,12 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:local="clr-namespace:Ben.Dominion">
+    xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:media="clr-namespace:System.Windows.Media;assembly=System.Windows">
 
 
     <!--Application Resources-->
     <Application.Resources>
         <local:PickerState x:Key="PickerState"/>
+		<FontFamily x:Key="TrajanPro">.\Assets\TrajanPro-Bold.otf#Trajan Pro</FontFamily>
+        <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="{StaticResource TrajanPro}"/>
+            <Setter Property="FontSize" Value="42"/>
+        </Style>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
