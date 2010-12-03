@@ -4,16 +4,22 @@ using System.Windows;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
+using Microsoft.Phone.Shell;
 
 namespace Ben.Dominion
 {
     public partial class ResultsViewer : PhoneApplicationPage
     {
-        public IList<Card> Cards { get { return PickerState.Current.CardList; } }
-
         public ResultsViewer()
         {
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler(ResultsViewer_Loaded);
+        }
+
+        void ResultsViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = PickerState.Current;
         }
 
         private void CardItem_Flick(object sender, FlickGestureEventArgs e)
@@ -30,6 +36,12 @@ namespace Ben.Dominion
             }
         }
 
+        private void CardItem_Tap(object sender, GestureEventArgs e)
+        {
+            (App.Current as App).SelectedCard = sender.GetContext<Card>();
+            NavigationService.Navigate(new Uri("/CardInfo.xaml", UriKind.Relative));
+        }
+
         private void Refresh_Click(object sender, EventArgs e)
         {
             PickerState.Current.GenerateCardList();
@@ -37,7 +49,8 @@ namespace Ben.Dominion
 
         private void Sort_Click(object sender, EventArgs e)
         {
-
+            ApplicationBarIconButton button = sender as ApplicationBarIconButton;
+            PickerState.Current.SwapSort();
         }
     }
 }

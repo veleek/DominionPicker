@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Xml.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Ben.Dominion
 {
@@ -14,9 +15,11 @@ namespace Ben.Dominion
         {
             get
             {
-                return Cards.AllCards.Where(c => c.InSet(PickerState.Current.CurrentSettings.SelectedSets)).ToList();
+                return Cards.AllCards.Where(c => c.InSet(Settings.SelectedSets)).ToList();
             }
         }
+
+        public PickerSettings Settings { get { return PickerState.Current.CurrentSettings; } }
         
         public ObservableCollection<Card> GenerateCardList()
         {
@@ -25,18 +28,42 @@ namespace Ben.Dominion
 
         public ObservableCollection<Card> GenerateCardList(PickerSettings settings)
         {
-            cardSet = cardPool.OrderBy(c => Guid.NewGuid()).Take(10).ToList();
+            Regex actionRegex = new Regex("\\+. Action");
+            Regex buyRegex = new Regex("\\+. Buy");
+
+            Int32 minCards = settings.MinimumCardsPerSet.SelectedValue;
+            Int32 maxSets = (Int32)Math.Floor(10 / minCards);
+            var availableSets = Settings.SelectedSets.OrderBy(s => Guid.NewGuid()).Take(maxSets).ToList();
+            List<Card> pool = Cards.AllCards.Where(c => c.InSet(availableSets)).ToList();
+
+            do
+            {
+                cardSet = pool.OrderBy(c => Guid.NewGuid()).Take(10).ToList();
+
+                if ((Boolean)Settings.RequirePlusActions.OptionValue)
+                {
+                    if (!cardSet.Any(c => actionRegex.IsMatch(c.Rules)))
+                    {
+                        continue;
+                    }
+                }
+
+                if((Boolean)Settings.RequirePlusBuys.OptionValue)
+                {
+                    if(!cardSet.Any(c=> buyRegex.IsMatch(c.Rules)))
+                    {
+                        continue;
+                    }
+                }
+
+                break;
+            } 
+            while (true);
 
             // Order them alphabetically
             cardSet = cardSet.OrderBy(c => c.Name).ToList();
 
-            ObservableCollection<Card> finalList = new ObservableCollection<Card>();
-            foreach (Card c in cardSet)
-            {
-                finalList.Add(c);
-            }
-
-            return finalList;
+            return cardSet.ToObservableCollection();
         }
 
         public Card GetRandomCard()

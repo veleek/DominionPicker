@@ -18,12 +18,19 @@ namespace Ben.Dominion
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
         }
 
+        public void LoadState()
+        {
+            if (this.CurrentState == null)
+            {
+                // This should already be loaded by this time
+                this.CurrentState = PickerState.Current;
+                this.DataContext = PickerState.Current;
+            }
+        }
+
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if(this.CurrentState == null)
-            {
-                this.CurrentState = PickerState.Current;
-            }
+            LoadState();
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -52,6 +59,7 @@ namespace Ben.Dominion
         private void ClearState_Click(object sender, EventArgs e)
         {
             PickerState.ResetState();
+            LoadState();
         }
     }
 }

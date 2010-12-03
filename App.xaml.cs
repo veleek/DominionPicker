@@ -23,6 +23,8 @@ namespace Ben.Dominion
         /// <returns>The root frame of the Phone Application.</returns>
         public PhoneApplicationFrame RootFrame { get; private set; }
 
+        public Card SelectedCard { get; set; }
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
@@ -56,6 +58,7 @@ namespace Ben.Dominion
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            PickerState.Load();
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -69,7 +72,7 @@ namespace Ben.Dominion
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            PhoneApplicationService.Current.State["State"] = PickerState.Current;
+            //PhoneApplicationService.Current.State["State"] = PickerState.Current;
             //PickerState.Current.Save();
         }
 
@@ -77,8 +80,7 @@ namespace Ben.Dominion
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            // Ensure that required application state is persisted here.
-            PhoneApplicationService.Current.State["State"] = PickerState.Current;
+            //PhoneApplicationService.Current.State["State"] = PickerState.Current;
             //PickerState.Current.Save();
         }
 

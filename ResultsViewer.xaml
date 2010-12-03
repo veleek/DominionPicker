@@ -14,7 +14,7 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Current, Source={StaticResource PickerState}}">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -23,10 +23,23 @@
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Card List" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <Border Visibility="Collapsed" Margin="3" Background="Green">
-                <Grid Margin="24,0,12,0">
-                    <TextBlock Margin="3,2,0,0" Text="SampleCard" Style="{StaticResource CardTitleTextStyle}" Foreground="Black"/>
-                    <TextBlock Margin="0" Text="SampleCard" Style="{StaticResource CardTitleTextStyle}" Foreground="White"/>
+            <Border Visibility="Collapsed" Margin="6" Background="Green" CornerRadius="10" BorderBrush="Blue" BorderThickness="5">
+                <Grid Margin="0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="./Images/coin.png" Grid.Column="0"
+                           Width="60" Height="60" Margin="12,0"/>
+                    <TextBlock Text="3p" Grid.Column="0" Margin="0,-5,0,5"
+                               Foreground="Black" Style="{StaticResource CardTitleTextStyle}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Test Card Name" Grid.Column="1"
+                               Style="{StaticResource CardTitleTextStyle}" 
+                               Margin="3,2,0,0" Foreground="Black"/>
+                    <TextBlock Text="Test Card Name" Grid.Column="1"
+                               Style="{StaticResource CardTitleTextStyle}" 
+                               Margin="0,0,0,0" Foreground="White"/>
                 </Grid>
             </Border>
         </StackPanel>
@@ -36,17 +49,34 @@
                 <ItemsControl x:Name="CardsList" ItemsSource="{Binding CardList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="3, 6" Background="{Binding BackgroundColor}">
+                            <Border Margin="6" Background="{Binding BackgroundColor}" CornerRadius="10"
+                                    BorderBrush="DarkGray" BorderThickness="2">
                                 <toolkit:GestureService.GestureListener>
-                                    <toolkit:GestureListener Flick="CardItem_Flick" />
+                                    <toolkit:GestureListener Flick="CardItem_Flick" Tap="CardItem_Tap"/>
                                 </toolkit:GestureService.GestureListener>
-                                <Grid Margin="24,0,12,0">
-                                    <TextBlock Margin="3,2,0,0" Text="{Binding Name}" 
+                                <Grid Margin="0,5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="./Images/coin.png" Grid.Column="0"
+                                           Width="60" Height="60" Margin="12,0"/>
+                                    <TextBlock Text="{Binding Cost}" Grid.Column="0" Margin="0,-5,0,5"
+                                               Foreground="Black" Style="{StaticResource CardTitleTextStyle}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding SetPrefix}" Grid.Column="1"
+                                               FontStyle="{StaticResource PhoneTextSubtleStyle}"
+                                               TextAlignment="Right"
+                                               VerticalAlignment="Top"
+                                               Margin="0,-2,6,0" Foreground="White"/>
+                                    <TextBlock Text="{Binding Name}" Grid.Column="1"
                                                Style="{StaticResource CardTitleTextStyle}" 
-                                               Foreground="Black" />
-                                    <TextBlock Margin="0,0,0,0" Text="{Binding Name}" 
+                                               Margin="3,2,12,0" Foreground="Black"/>
+                                    <TextBlock Text="{Binding Name}" Grid.Column="1"
                                                Style="{StaticResource CardTitleTextStyle}" 
-                                               Foreground="White"/>
+                                               Margin="0,0,12,0" Foreground="White"/>
+
                                 </Grid>
                             </Border>
                         </DataTemplate>

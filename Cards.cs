@@ -61,6 +61,16 @@ namespace Ben.Dominion
         public Boolean PlusAction { get { return Actions > 0; } }
         public Boolean PlusBuy { get { return Buys > 0; } }
 
+        public String SetPrefix
+        {
+            get { return Set.ToString().Substring(0, 3); }
+        }
+
+        public String FormattedRules
+        {
+            get { return Rules.Replace("\\n", "\n"); }
+        }
+
         public Card() { }
 
         public Card(String name, CardType type)
@@ -112,6 +122,7 @@ namespace Ben.Dominion
                     grad.GradientStops.Add(new GradientStop { Color = second, Offset = 1.0 });
 
                     return grad;
+
                 }
             }
         }

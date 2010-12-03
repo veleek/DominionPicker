@@ -7,6 +7,7 @@ using System.IO.IsolatedStorage;
 using System.IO;
 using System.Xml.Serialization;
 using System.Windows;
+using Microsoft.Phone.Shell;
 
 namespace Ben.Dominion
 {
@@ -14,8 +15,11 @@ namespace Ben.Dominion
     {
         #region Statics
         public static readonly String PickerStateFileName = "PickerState.xml";
+        public static readonly String PickerStateName = "PickerState";
 
         public static Boolean Loaded = false;
+        public static Boolean UseApplicationService = false;
+        public static Boolean UseIsolatedStorage = false;
 
         private static PickerState current;
         public static PickerState Current
@@ -37,46 +41,93 @@ namespace Ben.Dominion
 
             try
             {
-                Object obj = null;
-                if (Microsoft.Phone.Shell.PhoneApplicationService.Current.State.TryGetValue("State", out obj))
+                if (UseApplicationService)
                 {
-                    state = obj as PickerState;
+                    Object obj = null;
+                    if (PhoneApplicationService.Current.State.TryGetValue(PickerStateName, out obj))
+                    {
+                        state = obj as PickerState;
+                    }
                 }
 
-                if (state == null)
+                if (UseIsolatedStorage)
                 {
-                    using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                    if (state == null)
                     {
-                        if (store.FileExists(PickerStateFileName))
+                        using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
                         {
-                            using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
+                            if (store.FileExists(PickerStateFileName))
                             {
-                                state = GenericSerializer.Deserialize<PickerState>(stream);
+                                using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
+                                {
+                                    state = GenericSerializer.Deserialize<PickerState>(stream);
+                                }
                             }
                         }
                     }
                 }
             }
-            catch
-            { }
+            catch(Exception e)
+            {
+                MessageBox.Show("Unable to save picker state: " + e.Message);
+            }
 
             if (state == null)
             {
                 state = new PickerState();
             }
 
-            Loaded = true;
             current = state;
+            Loaded = true;
         }
 
         public static void Save()
         {
-            Current.SaveState();
+            if (current != null)
+            {
+                try
+                {
+                    if (UseApplicationService)
+                    {
+                        PhoneApplicationService.Current.State[PickerStateName] = current;
+                    }
+                    else if (UseIsolatedStorage)
+                    {
+                        using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                        {
+                            using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Create))
+                            {
+                                GenericSerializer.Serialize(stream, current);
+                            }
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show("Unable to save picker state: " + e.Message);
+                }
+            }
         }
 
         public static void ResetState()
         {
-            Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("State");
+            try
+            {
+                // Delete the application state 
+                Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove(PickerStateName);
+
+                // And the persisted state
+                using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    if (store.FileExists(PickerStateFileName))
+                    {
+                        store.DeleteFile(PickerStateFileName);
+                    }
+                }
+            }
+            catch { }
+
+            // Will force the creation of a new state
             current = new PickerState();
         }
         #endregion
@@ -136,17 +187,6 @@ namespace Ben.Dominion
             this.picker = new Picker();
         }
 
-        public void SaveState()
-        {
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Create))
-                {
-                    GenericSerializer.Serialize(stream, this);
-                }
-            }
-        }
-
         public void SaveFavorite()
         {
             PickerSettings fav = CurrentSettings.Clone();
@@ -172,7 +212,13 @@ namespace Ben.Dominion
 
         public void GenerateCardList()
         {
+            if (CurrentSettings.SelectedSets.Count == 0)
+            {
+                MessageBox.Show("Selected at least one set to choose from");
+                return;
+            }
             this.CardList = picker.GenerateCardList();
+            this.sortedAlphabetically = true;
         }
 
         public void ReplaceCard(Card c)
@@ -202,6 +248,21 @@ namespace Ben.Dominion
             {
                 h(this, e);
             }
+        }
+
+        private Boolean sortedAlphabetically;
+        public void SwapSort()
+        {
+            if (sortedAlphabetically)
+            {
+                CardList = CardList.OrderBy(c => c.Cost).ToObservableCollection();
+            }
+            else
+            {
+                CardList = CardList.OrderBy(c => c.Name).ToObservableCollection();
+            }
+
+            sortedAlphabetically = !sortedAlphabetically;
         }
     }
 }

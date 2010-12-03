@@ -13,21 +13,22 @@ namespace Ben.Dominion
     public class PickerSettings
     {
         public String Name { get; set; }
+        public List<SetSelector> Sets { get; set; }
 
         [XmlIgnore]
         [IgnoreDataMember]
-        public List<SetSelector> Sets { get; set; }
-
         public List<CardSet> SelectedSets
         {
             get
             {
                 return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
             }
+            /*
             set
             {
                 Sets = Cards.AllSets.Select(s => new SetSelector(s, value.Contains(s))).ToList();
             }
+             */
         }
 
         public IntPickerOption MinimumCardsPerSet { get; set; }
@@ -36,11 +37,18 @@ namespace Ben.Dominion
         public BooleanPickerOption RequireDefense { get; set; }
                 
         [XmlIgnore]
+        [IgnoreDataMember]
         public List<PickerOption> AllOptions
         {
-            get
+            get { return GetAllOptions(); }
+        }
+
+        private List<PickerOption> allOptions = null;
+        public List<PickerOption> GetAllOptions()
+        {
+            if (allOptions == null)
             {
-                return new List<PickerOption> 
+                allOptions = new List<PickerOption> 
                 { 
                     MinimumCardsPerSet,
                     RequirePlusActions,
@@ -48,13 +56,15 @@ namespace Ben.Dominion
                     RequireDefense,
                 };
             }
+
+            return allOptions;
         }
 
         public PickerSettings()
         {
             Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
 
-            MinimumCardsPerSet = new IntPickerOption("Minimum cards per set", 3, Enumerable.Range(1, 5).ToList());
+            MinimumCardsPerSet = new IntPickerOption("Minimum cards per set", 3, new List<Int32> { 2, 3, 4, 5, 10 });
             RequirePlusActions = new BooleanPickerOption("Require a card that gives actions", false);
             RequirePlusBuys = new BooleanPickerOption("Require a card that gives buys", false);
             RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);

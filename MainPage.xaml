@@ -50,7 +50,7 @@
         </ResourceDictionary>
     </phone:PhoneApplicationPage.Resources>
 
-    <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Current, Source={StaticResource PickerState}}">
+    <Grid x:Name="LayoutRoot" Background="Transparent">
         <controls:Pivot Title="Dominion Picker" x:Name="RootPivot">
             <controls:PivotItem Header="create">
                 <Grid>
