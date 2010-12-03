@@ -33,11 +33,14 @@
             </DataTemplate>
 
             <DataTemplate x:Key="IntOptionTemplate">
-                <toolkit:ListPicker ItemsSource="{Binding ValidValues}" 
-                                    SelectedItem="{Binding OptionValue, Mode=TwoWay}" 
-                                    Header="{Binding Name}"
-                                    ListPickerMode="Expanded"
-                                    />
+                <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}">
+                    <CheckBox.Content>
+                        <toolkit:ListPicker ItemsSource="{Binding ValidValues}" 
+                                            SelectedItem="{Binding SelectedValue, Mode=TwoWay}" 
+                                            Header="{Binding Name}"
+                                            ListPickerMode="Expanded" />
+                    </CheckBox.Content>
+                </CheckBox>
             </DataTemplate>
 
             <local:OptionTemplateSelector x:Key="OptionsTemplateSelector"
@@ -48,7 +51,7 @@
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent" DataContext="{Binding Current, Source={StaticResource PickerState}}">
-        <controls:Pivot Title="Dominion Picker">
+        <controls:Pivot Title="Dominion Picker" x:Name="RootPivot">
             <controls:PivotItem Header="create">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -95,13 +98,13 @@
                 </Grid>
             </controls:PivotItem>
  
-            <controls:PivotItem Header="favorites"> 
-                <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+            <controls:PivotItem Header="favorites">
+                <ListBox x:Name="SecondListBox" Margin="0,0,-12,0" ItemsSource="{Binding FavoriteSettings}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="0,0,0,17">
-                                <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <Button Content="Load" Click="LoadButton_Click"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -115,8 +118,7 @@
             <shell:ApplicationBarIconButton x:Name="TestIcon" IconUri="/Images/appbar.favs.addto.png" Text="Add Favorite..." Click="AddFavorite_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.reset.png" Text="Reset" Click="Reset_Click"/>
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+                <shell:ApplicationBarMenuItem Text="Clear Saved State" Click="ClearState_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

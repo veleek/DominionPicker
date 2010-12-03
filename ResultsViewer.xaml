@@ -20,13 +20,13 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Card List" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
             <Border Visibility="Collapsed" Margin="3" Background="Green">
-                <Grid Margin="24,0,0,0">
-                    <TextBlock Margin="2,3,0,0" Text="SampleCard" FontFamily="{StaticResource TrajanPro}" FontSize="42" Foreground="Black"/>
-                    <TextBlock Margin="0" Text="SampleCard" FontFamily="{StaticResource TrajanPro}" FontSize="42" Foreground="White"/>
+                <Grid Margin="24,0,12,0">
+                    <TextBlock Margin="3,2,0,0" Text="SampleCard" Style="{StaticResource CardTitleTextStyle}" Foreground="Black"/>
+                    <TextBlock Margin="0" Text="SampleCard" Style="{StaticResource CardTitleTextStyle}" Foreground="White"/>
                 </Grid>
             </Border>
         </StackPanel>
@@ -36,13 +36,17 @@
                 <ItemsControl x:Name="CardsList" ItemsSource="{Binding CardList}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="3" Background="{Binding BackgroundColor}">
+                            <Border Margin="3, 6" Background="{Binding BackgroundColor}">
                                 <toolkit:GestureService.GestureListener>
                                     <toolkit:GestureListener Flick="CardItem_Flick" />
                                 </toolkit:GestureService.GestureListener>
-                                <Grid Margin="24,0,0,0">
-                                    <TextBlock Margin="2,3,0,0" Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="Black"/>
-                                    <TextBlock Margin="0" Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="White"/>
+                                <Grid Margin="24,0,12,0">
+                                    <TextBlock Margin="3,2,0,0" Text="{Binding Name}" 
+                                               Style="{StaticResource CardTitleTextStyle}" 
+                                               Foreground="Black" />
+                                    <TextBlock Margin="0,0,0,0" Text="{Binding Name}" 
+                                               Style="{StaticResource CardTitleTextStyle}" 
+                                               Foreground="White"/>
                                 </Grid>
                             </Border>
                         </DataTemplate>
@@ -54,7 +58,7 @@
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.png" Text="Refresh" Click="Refresh_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.refresh.png" Text="Regenerate" Click="Refresh_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.alpha.png" Text="Change Sort" Click="Sort_Click"/>
             <shell:ApplicationBar.MenuItems>
             </shell:ApplicationBar.MenuItems>

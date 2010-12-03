@@ -62,12 +62,15 @@ namespace Ben.Dominion
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            PickerState.Load();
         }
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            PhoneApplicationService.Current.State["State"] = PickerState.Current;
+            //PickerState.Current.Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -75,6 +78,8 @@ namespace Ben.Dominion
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             // Ensure that required application state is persisted here.
+            PhoneApplicationService.Current.State["State"] = PickerState.Current;
+            //PickerState.Current.Save();
         }
 
         // Code to execute if a navigation fails

@@ -10,8 +10,6 @@ using System.Windows;
 
 namespace Ben.Dominion
 {
-    [XmlInclude(typeof(BooleanPickerOption))]
-    [XmlInclude(typeof(IntPickerOption))]
     public class PickerState : INotifyPropertyChanged
     {
         #region Statics
@@ -26,35 +24,60 @@ namespace Ben.Dominion
             {
                 if (current == null)
                 {
-                    current = Load();
+                    Load();
                 }
 
                 return current;
             }
         }
 
-        public static PickerState Load()
+        public static void Load()
         {
             PickerState state = null;
 
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+            try
             {
-                if (store.FileExists(PickerStateFileName))
+                Object obj = null;
+                if (Microsoft.Phone.Shell.PhoneApplicationService.Current.State.TryGetValue("State", out obj))
                 {
-                    using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
-                    {
-                        state = GenericSerializer.Deserialize<PickerState>(stream);
-                    }
+                    state = obj as PickerState;
                 }
 
-                if(state == null)
+                if (state == null)
                 {
-                    state = new PickerState();
+                    using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                    {
+                        if (store.FileExists(PickerStateFileName))
+                        {
+                            using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
+                            {
+                                state = GenericSerializer.Deserialize<PickerState>(stream);
+                            }
+                        }
+                    }
                 }
+            }
+            catch
+            { }
+
+            if (state == null)
+            {
+                state = new PickerState();
             }
 
             Loaded = true;
-            return state;
+            current = state;
+        }
+
+        public static void Save()
+        {
+            Current.SaveState();
+        }
+
+        public static void ResetState()
+        {
+            Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove("State");
+            current = new PickerState();
         }
         #endregion
 
@@ -113,7 +136,7 @@ namespace Ben.Dominion
             this.picker = new Picker();
         }
 
-        public void Save()
+        public void SaveState()
         {
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
             {
@@ -126,7 +149,10 @@ namespace Ben.Dominion
 
         public void SaveFavorite()
         {
-            FavoriteSettings.Add(CurrentSettings.Clone());
+            PickerSettings fav = CurrentSettings.Clone();
+            fav.Name = fav.SelectedSets.Select(s => s.ToString()).Aggregate((a, b) => a + ", " + b);
+
+            FavoriteSettings.Add(fav);
         }
 
         public void LoadSettings(Int32 favoriteIndex)
@@ -136,7 +162,7 @@ namespace Ben.Dominion
 
         public void LoadSettings(PickerSettings settings)
         {
-            CurrentSettings = settings;
+            CurrentSettings = settings.Clone();
         }
 
         public void Reset()
@@ -147,7 +173,6 @@ namespace Ben.Dominion
         public void GenerateCardList()
         {
             this.CardList = picker.GenerateCardList();
-            this.Save();
         }
 
         public void ReplaceCard(Card c)

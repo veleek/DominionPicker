@@ -64,17 +64,39 @@ namespace Ben.Dominion
         public T Value { get; set; }
     }
 
-    public class BooleanPickerOption : PickerOption<Boolean> { }
-
-    public class IntPickerOption : PickerOption
+    public class BooleanPickerOption : PickerOption 
     {
-        public IntPickerOption(String name, Int32 value, List<Int32> validValues)
-            : base(name, value)
+        public BooleanPickerOption() { }
+        public BooleanPickerOption(String name) : base(name, false) { }
+        public BooleanPickerOption(String name, Boolean value) : base(name, value) { }
+    }
+
+    public class IntPickerOption : BooleanPickerOption
+    {
+        private Int32 selectedValue;
+        public Int32 SelectedValue
         {
+            get { return selectedValue; }
+            set
+            {
+                if (value != selectedValue)
+                {
+                    selectedValue = value;
+                    NotifyPropertyChanged("SelectedValue");
+                }
+            }
+        }
+        public List<Int32> ValidValues { get; set; }
+
+        public IntPickerOption() { }
+        public IntPickerOption(String name, Int32 selectedValue, List<Int32> validValues)
+            : base(name)
+        {
+            this.SelectedValue = selectedValue;
             this.ValidValues = validValues;
         }
 
-        public List<Int32> ValidValues { get; set; }
+        
     }
 
     public class OptionTemplateSelector : DataTemplateSelector
@@ -89,14 +111,14 @@ namespace Ben.Dominion
 
             if (o != null)
             {
-                if (o.OptionValue is Boolean)
-                {
-                    return BooleanOptionTemplate;
-                }
-                else if (o.OptionValue is Int32)
+                if (o is IntPickerOption)
                 {
                     return IntOptionTemplate;
                 }
+                else if (o is BooleanPickerOption)
+                {
+                    return BooleanOptionTemplate;
+                }                
 
                 return BasicOptionTemplate;
             }

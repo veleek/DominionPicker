@@ -41,5 +41,17 @@ namespace Ben.Dominion
         {
             CurrentState.Reset();
         }
+
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentState.LoadSettings(((FrameworkElement)sender).DataContext as PickerSettings);
+            RootPivot.SelectedIndex = 0;
+        }
+
+        private void ClearState_Click(object sender, EventArgs e)
+        {
+            PickerState.ResetState();
+        }
     }
 }
