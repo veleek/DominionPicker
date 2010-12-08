@@ -49,21 +49,9 @@ namespace Ben.Dominion
         [XmlAttribute]
         public String Rules { get; set; }
 
-        [XmlIgnore]
-        public Int32 Cards { get; set; }
-        [XmlIgnore]
-        public Int32 Actions { get; set; }
-        [XmlIgnore]
-        public Int32 Buys { get; set; }
-        [XmlIgnore]
-        public Int32 Treasure { get; set; }
-
-        public Boolean PlusAction { get { return Actions > 0; } }
-        public Boolean PlusBuy { get { return Buys > 0; } }
-
         public String SetPrefix
         {
-            get { return Set.ToString().Substring(0, 3); }
+            get { return Set.ToString().Substring(0, 4); }
         }
 
         public String FormattedRules
@@ -87,6 +75,11 @@ namespace Ben.Dominion
         public Boolean InSet(IEnumerable<CardSet> sets)
         {
             return sets.Contains(this.Set);
+        }
+
+        public Boolean IsType(CardType cardType)
+        {
+            return (this.Type & cardType) != CardType.None;
         }
 
         public override string ToString()
@@ -172,8 +165,19 @@ namespace Ben.Dominion
     {
         public static readonly String PickerCardsFileName = "/DominionPickerCards.xml";
 
-        public static IEnumerable<CardSet> AllSets { get { return Enumerable.Range(1, 5).Select(x => (CardSet)x); } }
+        public static IEnumerable<CardSet> AllSets { get { return Enumerable.Range(1, 6).Select(x => (CardSet)x); } }
         public static IEnumerable<CardType> AllTypes { get { return Enumerable.Range(1, 7).Select(x => (CardType)x); } }
+
+        private static Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
+        public static List<Card> GetSet(CardSet set)
+        {
+            if (!cardsBySet.ContainsKey(set))
+            {
+                cardsBySet[set] = AllCards.Where(c => c.Set == set).ToList();
+            }
+
+            return cardsBySet[set];
+        }
 
         private static List<Card> allCards = null;
         public static List<Card> AllCards 
@@ -196,7 +200,7 @@ namespace Ben.Dominion
             StreamResourceInfo resInfo = Application.GetResourceStream(cardsUri);
             if (resInfo != null)
             {
-                cards = GenericSerializer.Deserialize<List<Card>>(resInfo.Stream);
+                cards = GenericXmlSerializer.Deserialize<List<Card>>(resInfo.Stream);
             }
 
             return cards;
@@ -209,7 +213,7 @@ namespace Ben.Dominion
             {
                 using (IsolatedStorageFileStream stream = store.CreateFile(PickerCardsFileName))
                 {
-                    String xml = GenericSerializer.Serialize(cards);
+                    String xml = GenericXmlSerializer.Serialize(cards);
                 }
             }
         }

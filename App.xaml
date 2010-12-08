@@ -10,6 +10,8 @@
 
     <!--Application Resources-->
     <Application.Resources>
+        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
         <!--<FontFamily x:Key="TrajanPro">.\Assets\TrajanPro-Bold.otf#Trajan Pro</FontFamily>-->
         <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
         <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">

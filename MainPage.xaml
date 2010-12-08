@@ -32,13 +32,32 @@
                 <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}" Content="{Binding Name}" />
             </DataTemplate>
 
-            <DataTemplate x:Key="IntOptionTemplate">
-                <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}">
+            <DataTemplate x:Key="ListOptionTemplate">
+                <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}" HorizontalContentAlignment="Stretch">
                     <CheckBox.Content>
-                        <toolkit:ListPicker ItemsSource="{Binding ValidValues}" 
-                                            SelectedItem="{Binding SelectedValue, Mode=TwoWay}" 
-                                            Header="{Binding Name}"
-                                            ListPickerMode="Expanded" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+
+                            <TextBlock Grid.Column="0"  Text="{Binding Name}" VerticalAlignment="Center"/>
+                            <toolkit:ListPicker Grid.Column="1" Margin="12,0"
+                                                ItemsSource="{Binding ValidValues}" 
+                                                SelectedItem="{Binding SelectedValue, Mode=TwoWay}" 
+                                                ListPickerMode="Expanded"/>
+                            
+                            <TextBlock Grid.Row="1" Grid.ColumnSpan="2"
+                                       Visibility="{Binding OptionValue, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                       Text="{Binding Notes}" Style="{StaticResource PhoneTextSubtleStyle}"
+                                       TextAlignment="Center"/>
+                        </Grid>
                     </CheckBox.Content>
                 </CheckBox>
             </DataTemplate>
@@ -46,11 +65,12 @@
             <local:OptionTemplateSelector x:Key="OptionsTemplateSelector"
                                           BasicOptionTemplate="{StaticResource BasicOptionTemplate}"
                                           BooleanOptionTemplate="{StaticResource BooleanOptionTemplate}"
-                                          IntOptionTemplate="{StaticResource IntOptionTemplate}" />
+                                          ListOptionTemplate="{StaticResource ListOptionTemplate}" />
         </ResourceDictionary>
     </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        
         <controls:Pivot Title="Dominion Picker" x:Name="RootPivot">
             <controls:PivotItem Header="create">
                 <Grid>
@@ -59,7 +79,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <ScrollViewer>
+                    <ScrollViewer x:Name="SettingsScrollViewer">
                         <StackPanel>
                             <TextBlock Margin="6,0" Text="sets" Style="{StaticResource PhoneTextSubtleStyle}"/>
                             <ItemsControl x:Name="SetsItemsControl" 
@@ -72,7 +92,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-
+                                            
                                             <CheckBox Margin="0,-15" 
                                                       Grid.Column="0"
                                                       IsChecked="{Binding IsSelected, Mode=TwoWay}">
@@ -94,7 +114,7 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Button x:Name="CreateButton" Grid.Row="1" Content="Create" Click="CreateButton_Click"></Button>
+                    <Button x:Name="CreateButton" Grid.Row="1" Content="Generate Set" Click="CreateButton_Click" Height="100"></Button>
                 </Grid>
             </controls:PivotItem>
  
@@ -103,20 +123,45 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <Button Content="Load" Click="LoadButton_Click"/>
+                                <Button Click="LoadButton_Click">
+                                    <Button.Template>
+                                        <ControlTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Name}" Margin="12,0,0,0" 
+                                                       Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                                <TextBlock Text="{Binding SetsString}" Margin="24,0,0,0"
+                                                       Style="{StaticResource PhoneTextSubtleStyle}" />
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PivotItem>
+
+            <controls:PivotItem Header="log">
+                <ScrollViewer>
+                    <ItemsControl x:Name="AppLogListBox">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Text}" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </controls:PivotItem>
         </controls:Pivot>
+
+        <local:AddFavoritePopupControl x:Name="AddFavoritePopup" />
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="TestIcon" IconUri="/Images/appbar.favs.addto.png" Text="Add Favorite..." Click="AddFavorite_Click"/>
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.reset.png" Text="Reset" Click="Reset_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="Add Favorite..." Click="AddFavorite_Click"/>            
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar.save.png" Text="Save" Click="Save_Click"/>-->
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Clear Saved State" Click="ClearState_Click"/>
             </shell:ApplicationBar.MenuItems>

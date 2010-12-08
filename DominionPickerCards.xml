@@ -75,7 +75,7 @@
   <Card ID="70" Name="Explorer" Set="Seaside" Type="Action" Cost="5" Rules="You may reveal a Province card from your hand. If you do, gain a Gold card, putting it into your hand. Otherwise, gain a Silver card, putting it into your hand." />
   <Card ID="71" Name="Ghost Ship" Set="Seaside" Type="Action Attack" Cost="5" Rules="+2 Card, Each other player with 4 or more cards in hand puts cards from his hand on top of his deck until he has 3 cards in his hand." />
   <Card ID="72" Name="Merchant Ship" Set="Seaside" Type="Action Duration" Cost="5" Rules="Now and at the start of your next turn: +2 Coins." />
-  <Card ID="73" Name="Outpost" Set="Seaside" Type="Action Duration" Cost="5" />
+  <Card ID="73" Name="Outpost" Set="Seaside" Type="Action Duration" Cost="5" Rules="You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns."/>
   <Card ID="74" Name="Tactician" Set="Seaside" Type="Action Duration" Cost="5" Rules="Discard your hand. If you discarded any cards this way, then at the start of your next turn, +5 Cards, +1 Buy, and +1 Action." />
   <Card ID="75" Name="Treasury" Set="Seaside" Type="Action" Cost="5" Rules="+1 Card, +1 Action, +1 Coin, When you discard this from play, if you didn't buy a Victory card this turn, you may put this on top of your deck." />
   <Card ID="76" Name="Wharf" Set="Seaside" Type="Action Duration" Cost="5" Rules="Now and at the start of your next turn: +2 Cards, +1 Buy." />

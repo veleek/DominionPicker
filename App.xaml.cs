@@ -72,16 +72,14 @@ namespace Ben.Dominion
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            //PhoneApplicationService.Current.State["State"] = PickerState.Current;
-            //PickerState.Current.Save();
+            PickerState.Save();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            //PhoneApplicationService.Current.State["State"] = PickerState.Current;
-            //PickerState.Current.Save();
+            PickerState.Save();
         }
 
         // Code to execute if a navigation fails
@@ -99,6 +97,7 @@ namespace Ben.Dominion
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
+                MessageBox.Show(e.ExceptionObject.InnerException.Message);
                 // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }

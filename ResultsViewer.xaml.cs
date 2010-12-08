@@ -24,6 +24,11 @@ namespace Ben.Dominion
 
         private void CardItem_Flick(object sender, FlickGestureEventArgs e)
         {
+            if (AddFavoritePopup.IsOpen)
+            {
+                return;
+            }
+
             if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
                 FrameworkElement element = sender as FrameworkElement;
@@ -38,6 +43,11 @@ namespace Ben.Dominion
 
         private void CardItem_Tap(object sender, GestureEventArgs e)
         {
+            if (AddFavoritePopup.IsOpen)
+            {
+                return;
+            }
+
             (App.Current as App).SelectedCard = sender.GetContext<Card>();
             NavigationService.Navigate(new Uri("/CardInfo.xaml", UriKind.Relative));
         }
@@ -51,6 +61,11 @@ namespace Ben.Dominion
         {
             ApplicationBarIconButton button = sender as ApplicationBarIconButton;
             PickerState.Current.SwapSort();
+        }
+
+        private void AddFavorite_Click(object sender, EventArgs e)
+        {
+            AddFavoritePopup.IsOpen = !AddFavoritePopup.IsOpen;
         }
     }
 }

@@ -8,6 +8,8 @@ using System.IO;
 using System.Xml.Serialization;
 using System.Windows;
 using Microsoft.Phone.Shell;
+using System.Text;
+using System.Xml;
 
 namespace Ben.Dominion
 {
@@ -19,7 +21,7 @@ namespace Ben.Dominion
 
         public static Boolean Loaded = false;
         public static Boolean UseApplicationService = false;
-        public static Boolean UseIsolatedStorage = false;
+        public static Boolean UseIsolatedStorage = true;
 
         private static PickerState current;
         public static PickerState Current
@@ -38,7 +40,7 @@ namespace Ben.Dominion
         public static void Load()
         {
             PickerState state = null;
-
+            DateTime start = DateTime.UtcNow;
             try
             {
                 if (UseApplicationService)
@@ -60,7 +62,7 @@ namespace Ben.Dominion
                             {
                                 using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
                                 {
-                                    state = GenericSerializer.Deserialize<PickerState>(stream);
+                                    state = GenericContractSerializer.Deserialize<PickerState>(stream);
                                 }
                             }
                         }
@@ -69,7 +71,7 @@ namespace Ben.Dominion
             }
             catch(Exception e)
             {
-                MessageBox.Show("Unable to save picker state: " + e.Message);
+                MessageBox.Show("Unable to load picker state: " + e.Message);
             }
 
             if (state == null)
@@ -77,12 +79,16 @@ namespace Ben.Dominion
                 state = new PickerState();
             }
 
+            TimeSpan elapsedTime = DateTime.UtcNow - start;
+            AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
             current = state;
             Loaded = true;
         }
 
         public static void Save()
         {
+            DateTime start = DateTime.UtcNow;
+
             if (current != null)
             {
                 try
@@ -97,7 +103,7 @@ namespace Ben.Dominion
                         {
                             using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Create))
                             {
-                                GenericSerializer.Serialize(stream, current);
+                                GenericContractSerializer.Serialize(stream, current);
                             }
                         }
                     }
@@ -107,6 +113,9 @@ namespace Ben.Dominion
                     MessageBox.Show("Unable to save picker state: " + e.Message);
                 }
             }
+
+            TimeSpan elapsedTime = DateTime.UtcNow - start;
+            AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
         }
 
         public static void ResetState()
@@ -187,10 +196,10 @@ namespace Ben.Dominion
             this.picker = new Picker();
         }
 
-        public void SaveFavorite()
+        public void SaveFavorite(String name)
         {
             PickerSettings fav = CurrentSettings.Clone();
-            fav.Name = fav.SelectedSets.Select(s => s.ToString()).Aggregate((a, b) => a + ", " + b);
+            fav.Name = name;
 
             FavoriteSettings.Add(fav);
         }
@@ -231,7 +240,7 @@ namespace Ben.Dominion
             Int32 index = CardList.IndexOf(c);
             CardList.Remove(c);
 
-            CardList.Insert(index, picker.GetRandomCard(CardList));
+            CardList.Insert(index, picker.GetRandomCardOtherThan(CardList));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

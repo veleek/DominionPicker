@@ -2,13 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Runtime.Serialization;
 
 namespace Ben.Dominion
 {
-
-    public class PickerOption : INotifyPropertyChanged
+    public class PickerOption : INotifyPropertyChanged, IEquatable<PickerOption>
     {
         public String Name { get; set; }
+        public String Notes { get; set; }
+
         private Object optionValue;
         public Object OptionValue
         {
@@ -23,22 +25,26 @@ namespace Ben.Dominion
             }
         }
 
-        public PickerOption() { }
+        public PickerOption() : this("", null) { }
 
-        public PickerOption(String name)
-        {
-            this.Name = name;
-        }
+        public PickerOption(String name) : this(name, null) { }
 
         public PickerOption(String name, Object value)
         {
             this.Name = name;
             this.optionValue = value;
+            this.Notes = "";
         }
 
         public virtual PickerOption Clone()
         {
-            PickerOption clone = this.MemberwiseClone() as PickerOption;
+            return this.Clone<PickerOption>();
+        }
+
+        public T Clone<T>()
+            where T : PickerOption
+        {
+            T clone = this.MemberwiseClone() as T;
             return clone;
         }
 
@@ -57,53 +63,105 @@ namespace Ben.Dominion
                 h(this, e);
             }
         }
-    }
 
-    public class PickerOption<T>
-    {
-        public T Value { get; set; }
-    }
+        public override bool Equals(object obj)
+        {
+            PickerOption option = obj as PickerOption;
 
+            if (option == null)
+            {
+                return false;
+            }
+
+            return this.Equals(option);
+        }
+
+        public bool Equals(PickerOption other)
+        {
+            return this.Name.Equals(other.Name) 
+                && this.OptionValue.Equals(other.OptionValue)
+                && this.Notes.Equals(other.Notes);
+        }
+    }
+    
     public class BooleanPickerOption : PickerOption 
     {
+        public Boolean IsEnabled
+        {
+            get { return (Boolean)OptionValue; }
+            set { OptionValue = value; }
+        }
+    
         public BooleanPickerOption() { }
         public BooleanPickerOption(String name) : base(name, false) { }
         public BooleanPickerOption(String name, Boolean value) : base(name, value) { }
     }
 
-    public class IntPickerOption : BooleanPickerOption
+    /// <summary>
+    /// This is just used to make picking the template easier
+    /// </summary>
+    public abstract class ListPickerOption : BooleanPickerOption
     {
-        private Int32 selectedValue;
-        public Int32 SelectedValue
+        /// <summary>
+        /// Don't use this.  It's presence works around what appears to be a
+        /// bug in WP7 where no data will be serialized for a class if it
+        /// doesn't have a direct DataMember.
+        /// </summary>
+        public int Unused { get; set; }
+
+        public ListPickerOption() { }
+        public ListPickerOption(String name) : base(name, false) { }
+    }
+
+    public class ListPickerOption<T> : ListPickerOption
+    {
+        private T selectedValue;
+        public T SelectedValue
         {
             get { return selectedValue; }
             set
             {
-                if (value != selectedValue)
+                if (!value.Equals(selectedValue))
                 {
                     selectedValue = value;
                     NotifyPropertyChanged("SelectedValue");
                 }
             }
         }
-        public List<Int32> ValidValues { get; set; }
 
-        public IntPickerOption() { }
-        public IntPickerOption(String name, Int32 selectedValue, List<Int32> validValues)
+        public List<T> ValidValues { get; set; }
+
+        public ListPickerOption() { }
+        public ListPickerOption(String name, List<T> validValues) : this(name, validValues, validValues[0]) { }
+        public ListPickerOption(String name, List<T> validValues, T selectedValue)
             : base(name)
         {
             this.SelectedValue = selectedValue;
             this.ValidValues = validValues;
         }
+    }
 
-        
+    public class PolicyOption : ListPickerOption<String>
+    {
+        public static String Require = "Require";
+        public static String Prevent = "Prevent";
+        public static List<String> PolicyOptions = new List<String> { Require, Prevent };
+
+        public Boolean IsRequired
+        {
+            get { return SelectedValue == Require; }
+            set { SelectedValue = value ? Require : Prevent; }
+        }
+
+        public PolicyOption() { }
+        public PolicyOption(String name) : base(name, PolicyOptions) {}
     }
 
     public class OptionTemplateSelector : DataTemplateSelector
     {
         public DataTemplate BasicOptionTemplate { get; set; }
         public DataTemplate BooleanOptionTemplate { get; set; }
-        public DataTemplate IntOptionTemplate { get; set; }
+        public DataTemplate ListOptionTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
@@ -111,9 +169,9 @@ namespace Ben.Dominion
 
             if (o != null)
             {
-                if (o is IntPickerOption)
+                if (o is ListPickerOption)
                 {
-                    return IntOptionTemplate;
+                    return ListOptionTemplate;
                 }
                 else if (o is BooleanPickerOption)
                 {

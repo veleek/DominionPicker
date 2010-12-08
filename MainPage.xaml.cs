@@ -25,6 +25,9 @@ namespace Ben.Dominion
                 // This should already be loaded by this time
                 this.CurrentState = PickerState.Current;
                 this.DataContext = PickerState.Current;
+
+                AppLog.Instance.Log("Test Line");
+                AppLogListBox.ItemsSource = AppLog.Instance.Lines;
             }
         }
 
@@ -39,16 +42,11 @@ namespace Ben.Dominion
             this.NavigationService.Navigate(new Uri("/ResultsViewer.xaml", UriKind.Relative));
         }
 
-        private void AddFavorite_Click(object sender, EventArgs e)
-        {
-            CurrentState.SaveFavorite();
-        }
-
         private void Reset_Click(object sender, EventArgs e)
         {
             CurrentState.Reset();
+            SettingsScrollViewer.ScrollToVerticalOffset(0);
         }
-
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
@@ -60,6 +58,16 @@ namespace Ben.Dominion
         {
             PickerState.ResetState();
             LoadState();
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            PickerState.Save();
+        }
+
+        private void AddFavorite_Click(object sender, EventArgs e)
+        {
+            AddFavoritePopup.IsOpen = !AddFavoritePopup.IsOpen;
         }
     }
 }
