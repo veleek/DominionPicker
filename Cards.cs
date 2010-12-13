@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.IO.IsolatedStorage;
 using System.IO;
 using System.Windows.Resources;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {

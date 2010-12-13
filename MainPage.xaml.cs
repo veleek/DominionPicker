@@ -2,6 +2,7 @@
 using System.Windows;
 using Microsoft.Phone.Controls;
 using System.Windows.Controls;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {

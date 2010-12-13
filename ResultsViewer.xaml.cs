@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using Microsoft.Phone.Controls;
+﻿using System;
 using System.Windows;
-using System;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using Ben.Utilities;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
 namespace Ben.Dominion

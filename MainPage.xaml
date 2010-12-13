@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:localControls ="clr-namespace:Ben.Controls"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -18,7 +19,6 @@
     
     <phone:PhoneApplicationPage.Resources>
         <ResourceDictionary>
-            <local:StringConverter x:Key="StringConverter" />
             <local:Cards x:Key="Cards"/>
 
             <DataTemplate x:Key="BasicOptionTemplate">
@@ -106,11 +106,11 @@
                             </ItemsControl>
 
                             <TextBlock Margin="6,0" Text="options" Style="{StaticResource PhoneTextSubtleStyle}" />
-                            <local:MultiTemplateItemsControl x:Name="OptionsItemsControl"
+                            <localControls:MultiTemplateItemsControl x:Name="OptionsItemsControl"
                                                              TemplateSelector="{StaticResource OptionsTemplateSelector}"
                                                              ItemsSource="{Binding CurrentSettings.AllOptions}"
                                                              Margin="12,0">
-                            </local:MultiTemplateItemsControl>
+                            </localControls:MultiTemplateItemsControl>
                         </StackPanel>
                     </ScrollViewer>
 

@@ -5,13 +5,15 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:localData="clr-namespace:Ben.Data"
     xmlns:media="clr-namespace:System.Windows.Media;assembly=System.Windows">
 
 
     <!--Application Resources-->
     <Application.Resources>
-        <local:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        
+        <localData:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <localData:StringConverter x:Key="StringConverter" />
+
         <!--<FontFamily x:Key="TrajanPro">.\Assets\TrajanPro-Bold.otf#Trajan Pro</FontFamily>-->
         <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
         <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">

@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.IO.IsolatedStorage;
 using System.IO;
-using System.Xml.Serialization;
+using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Windows;
+using Ben.Utilities;
 using Microsoft.Phone.Shell;
-using System.Text;
-using System.Xml;
 
 namespace Ben.Dominion
 {

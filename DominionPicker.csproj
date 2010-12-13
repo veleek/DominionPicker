@@ -53,7 +53,7 @@
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Interop, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="system" />
+    <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e, processorArchitecture=MSIL" />
@@ -62,24 +62,31 @@
     <Reference Include="System.Xml.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\Controls\MultiTemplateItemsControl.cs">
+      <Link>MultiTemplateItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utilities\AppLog.cs">
+      <Link>AppLog.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utilities\FrameworkExtensions.cs">
+      <Link>FrameworkExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utilities\GenericSerializer.cs">
+      <Link>GenericSerializer.cs</Link>
+    </Compile>
     <Compile Include="AddFavoritePopupControl.xaml.cs">
       <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AppLog.cs" />
     <Compile Include="CardInfo.xaml.cs">
       <DependentUpon>CardInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Cards.cs" />
-    <Compile Include="Converters.cs" />
-    <Compile Include="FrameworkExtensions.cs" />
-    <Compile Include="GenericSerializer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MultiTemplateItemsControl.cs" />
     <Compile Include="Picker.cs" />
     <Compile Include="PickerOptions.cs" />
     <Compile Include="PickerSettings.cs" />
@@ -88,6 +95,7 @@
     <Compile Include="ResultsViewer.xaml.cs">
       <DependentUpon>ResultsViewer.xaml</DependentUpon>
     </Compile>
+    <Compile Include="..\Common\Data\Converters.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

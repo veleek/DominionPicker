@@ -1,8 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Runtime.Serialization;
+using Ben.Controls;
 
 namespace Ben.Dominion
 {
@@ -82,6 +83,11 @@ namespace Ben.Dominion
                 && this.OptionValue.Equals(other.OptionValue)
                 && this.Notes.Equals(other.Notes);
         }
+		
+		public override int GetHashCode()
+		{
+			return this.Name.GetHashCode() ^ this.OptionValue.GetHashCode() ^ this.Notes.GetHashCode();
+		}
     }
     
     public class BooleanPickerOption : PickerOption 
