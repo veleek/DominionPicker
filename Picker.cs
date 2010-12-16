@@ -30,7 +30,9 @@ namespace Ben.Dominion
         public ObservableCollection<Card> GenerateCardList(PickerSettings settings)
         {
             Regex actionRegex = new Regex("\\+. Action");
+            Regex twoActionRegex = new Regex("\\+2 Actions");
             Regex buyRegex = new Regex("\\+. Buy");
+            Regex twoBuyRegex = new Regex("\\+2 Buys");
 
             List<CardSet> availableSets = null;
             Int32 creationAttempts = 0;
@@ -95,10 +97,26 @@ namespace Ben.Dominion
                 {
                     // Check if there are any +Actions cards
                     Boolean hasPlusAction = cardSet.Any(c => actionRegex.IsMatch(c.Rules));
+                    Boolean hasPlusTwoAction = cardSet.Any(c => twoActionRegex.IsMatch(c.Rules));
 
                     // If a plus actions card is required and not present or prevented and present
                     // throw out the set and try again.
-                    if (Settings.PlusActions.IsRequired ^ hasPlusAction)
+                    if (Settings.PlusActions.Is("Require") && !hasPlusAction)
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusActions.Is("Prevent") && hasPlusAction)
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusActions.Is("Require +2") && !hasPlusTwoAction)
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusActions.Is("Prevent +2") && hasPlusTwoAction)
                     {
                         continue;
                     }
@@ -108,10 +126,26 @@ namespace Ben.Dominion
                 {
                     // Check if there are any +Buys cards
                     Boolean hasPlusBuy = cardSet.Any(c => buyRegex.IsMatch(c.Rules));
+                    Boolean hasPlusTwoBuy = cardSet.Any(c => twoBuyRegex.IsMatch(c.Rules));
 
                     // If a plus buys card is required and not present or prevented and present
                     // throw out the set and try again.
-                    if (Settings.PlusBuys.IsRequired ^ hasPlusBuy)
+                    if (Settings.PlusBuys.Is("Require") && !hasPlusBuy )
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusBuys.Is("Prevent") && hasPlusBuy)
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusBuys.Is("Require +2") && !hasPlusTwoBuy)
+                    {
+                        continue;
+                    }
+
+                    if (Settings.PlusBuys.Is("Prevent +2") && hasPlusTwoBuy)
                     {
                         continue;
                     }

@@ -151,12 +151,17 @@ namespace Ben.Dominion
     {
         public static String Require = "Require";
         public static String Prevent = "Prevent";
-        public static List<String> PolicyOptions = new List<String> { Require, Prevent };
+        public static List<String> PolicyOptions = new List<String> { Require, "Require +2", Prevent, "Prevent +2" };
 
         public Boolean IsRequired
         {
             get { return SelectedValue == Require; }
             set { SelectedValue = value ? Require : Prevent; }
+        }
+
+        public Boolean Is(String value)
+        {
+            return SelectedValue == value;
         }
 
         public PolicyOption() { }

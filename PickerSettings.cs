@@ -82,7 +82,7 @@ namespace Ben.Dominion
                         RequireDefense,
                         PlusBuys,
                         PlusActions,
-                        PlusCoins,
+                        //PlusCoins,
                         FilterAction,
                         FilterAttack,
                         FilterDuration,
@@ -101,7 +101,7 @@ namespace Ben.Dominion
             Name = "Default Settings";
             Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
 
-            MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 5, 10 }, 3);
+            MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 4);
             RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);
             PlusBuys = new PolicyOption("+Buys Policy");
             PlusBuys.Notes = "This may take a long time";

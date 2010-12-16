@@ -1,0 +1,108 @@
+﻿<phone:PhoneApplicationPage 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+	x:Class="Ben.Dominion.AboutPage"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	Orientation="Portrait"
+	shell:SystemTray.IsVisible="True">
+
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="About" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+		</StackPanel>
+
+		<!--ContentPanel - place additional content here-->
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+			<Grid.Resources>
+                <ControlTemplate x:Key="HyperlinkButtonTemplate" TargetType="Button">
+                    <TextBlock Text="{TemplateBinding Content}" 
+                               TextWrapping="Wrap"
+                               Margin="12,0"
+                               TextDecorations="Underline"
+                               Style="{StaticResource PhoneTextNormalStyle}" />
+                </ControlTemplate>
+
+                <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextTitle2Style}">
+					<Setter Property="TextWrapping" Value="Wrap"/>
+					<Setter Property="VerticalAlignment" Value="Top"/>
+				</Style>
+								
+				<Style x:Key="AboutContentStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+					<Setter Property="TextWrapping" Value="Wrap"/>
+					<Setter Property="Margin" Value="30,0,12,0"/>
+					<Setter Property="VerticalAlignment" Value="Top"/>
+				</Style>
+
+				<Style x:Key="CopyrightStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
+					<Setter Property="TextWrapping" Value="Wrap"/>
+					<Setter Property="TextAlignment" Value="Center"/>
+				</Style>
+			</Grid.Resources>
+			
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+			
+			<ScrollViewer Grid.Row="0">
+				<StackPanel>
+					<TextBlock Style="{StaticResource AboutHeaderStyle}">Dominion Picker</TextBlock>
+                    <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12,0">Created by Ben Randall ©2010</TextBlock>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="24,6,0,0">
+						<TextBlock Margin="0" Width="90" TextAlignment="Right" Style="{StaticResource PhoneTextNormalStyle}" Text="Twitter:"/>
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" Content="http://twitter.com/veleek" Click="TwitterButton_Click"/>
+					</StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="24,6,0,0">
+                        <TextBlock Margin="0" Width="90" TextAlignment="Right" Style="{StaticResource PhoneTextNormalStyle}" Text="Email:"/>
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" Content="randall.ben@gmail.com" Click="EmailButton_Click"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="24,6,0,0">
+                        <TextBlock Margin="0" Width="90" TextAlignment="Right" Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
+                        <TextBlock Style="{StaticResource PhoneTextNormalStyle}" x:Name="VersionTextBlock" Text="1.0.0.0"/>
+                    </StackPanel>
+
+                    <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">This app allows to easily select a randomize set of cards for a game of Dominion.  The available options allow you to filter in or out certain cards as you desire.  All comments and suggestions are appreciated and can be directed to the email address above.</TextBlock>
+					<TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Sets"/>
+					<TextBlock Style="{StaticResource AboutContentStyle}" Text="Filter cards to those from the selected sets"/>
+					<TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Minimum card per set"/>
+					<TextBlock Style="{StaticResource AboutContentStyle}" Text="Each set in the final list will have at least this many cards."/>
+					<TextBlock Style="{StaticResource AboutHeaderStyle}" Text="+Actions/Buys/Cards Policy"/>
+					<TextBlock Style="{StaticResource AboutContentStyle}" Text="This defines how cards with +Actions/+Buys/+Cards are filtered.  If require is selected, there will be at least on card of that type in the final list.  If prevent is selected, none of those cards will be in the final list.  The +2 options do the same for cards with +2 only."/>
+					<TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Filter"/>
+					<TextBlock Style="{StaticResource AboutContentStyle}" Text="The filter options remove all of the cards of the given type from the final set.  It's possible for this to filter the list down to fewer than 10 cards though."/>
+			 	</StackPanel>
+			</ScrollViewer>
+			
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="RateButton" Grid.Column="0" Content="Rate/Review" Click="RateButton_Click"/>
+                <Button x:Name="BuyNowButton" Grid.Column="1" Content="Update" Click="BuyNowButton_Click"/>
+            </Grid>
+            
+			<StackPanel Grid.Row="2" Margin="12">
+				<TextBlock Text=""/>
+				<TextBlock Style="{StaticResource CopyrightStyle}" Text="All Dominion imagery and card info is   ©2008 Rio Grande Games" />
+			</StackPanel>
+		</Grid>
+	</Grid>
+</phone:PhoneApplicationPage>

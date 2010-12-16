@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:local="clr-namespace:Ben.Dominion"
     xmlns:localData="clr-namespace:Ben.Data"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:media="clr-namespace:System.Windows.Media;assembly=System.Windows">
 
 
