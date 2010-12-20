@@ -7,6 +7,7 @@ using System.Linq;
 using System.Windows;
 using Ben.Utilities;
 using Microsoft.Phone.Shell;
+using System.Windows.Threading;
 
 namespace Ben.Dominion
 {
@@ -216,15 +217,21 @@ namespace Ben.Dominion
             CurrentSettings = new PickerSettings();
         }
 
-        public void GenerateCardList()
+        /// <summary>
+        /// Generates a new card list using the current settings  
+        /// </summary>
+        /// <returns>True if the list was successfully generated, false otherwise</returns>
+        public bool GenerateCardList()
         {
             if (CurrentSettings.SelectedSets.Count == 0)
             {
-                MessageBox.Show("Selected at least one set to choose from");
-                return;
+                MessageBox.Show("Select at least one expansion set to choose from");
+                return false;
             }
             this.CardList = picker.GenerateCardList();
             this.sortedAlphabetically = true;
+
+            return this.CardList != null;
         }
 
         public void ReplaceCard(Card c)
@@ -251,8 +258,12 @@ namespace Ben.Dominion
         {
             PropertyChangedEventHandler h = PropertyChanged;
             if (h != null)
-            {
-                h(this, e);
+            {   
+                // :( This enables cross thread property notifications
+                Deployment.Current.Dispatcher.BeginInvoke(delegate
+                {
+                    h(this, e);
+                });
             }
         }
 
@@ -269,6 +280,14 @@ namespace Ben.Dominion
             }
 
             sortedAlphabetically = !sortedAlphabetically;
+        }
+
+        /// <summary>
+        /// This will cancel any current card list generation
+        /// </summary>
+        public void CancelGeneration()
+        {
+            picker.CancelGeneration();
         }
     }
 }

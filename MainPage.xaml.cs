@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Ben.Utilities;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using System.ComponentModel;
 
 namespace Ben.Dominion
 {
@@ -21,6 +22,7 @@ namespace Ben.Dominion
             // Set the data context of the listbox control to the sample data
             this.Loaded += new RoutedEventHandler(MainPage_Loaded);
             this.Unloaded += new RoutedEventHandler(MainPage_Unloaded);
+            this.BackKeyPress += new EventHandler<CancelEventArgs>(MainPage_BackKeyPress);
 
             unlockButton = new ApplicationBarIconButton(new Uri("/Images/appbar.lock.png", UriKind.Relative));
             unlockButton.Click += new EventHandler(unlockButton_Click);
@@ -64,10 +66,54 @@ namespace Ben.Dominion
             app.UnitializeAdControl(AdContainer);
         }
 
+        void MainPage_BackKeyPress(object sender, CancelEventArgs e)
+        {
+            PickerState.Current.CancelGeneration();
+            if (AddFavoritePopup.IsOpen)
+            {
+                AddFavoritePopup.IsOpen = false;
+                e.Cancel = true;
+            }
+        }
+
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            this.CurrentState.GenerateCardList();
-            this.NavigationService.Navigate(new Uri("/ResultsViewer.xaml", UriKind.Relative));
+            // Start and show the progress bar, disable the create button
+            GenerationProgressBar.Visibility = System.Windows.Visibility.Visible;
+            GenerationProgressBar.IsIndeterminate = true;
+            CreateButton.IsEnabled = false;
+
+            // We don't want the generation to happen on the UI thread.
+            // A background worker will enable stuff to continue (e.g.
+            // quit the app) while the generation is happening.
+            BackgroundWorker generateWorker = new BackgroundWorker();
+            generateWorker.DoWork += (backgroundSender, backgroundArgs) =>
+            {
+                try
+                {
+                    if (this.CurrentState.GenerateCardList())
+                    {
+                        // Navigation has to happen on the UI thread, so ask the Dispatcher to do it
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            this.NavigationService.Navigate(new Uri("/ResultsViewer.xaml", UriKind.Relative));
+                        });
+                    }
+                }
+                finally
+                {
+                    // And finally when everything is done, ask the UI thread to reenable
+                    // the buttons and hide the progress bar
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        CreateButton.IsEnabled = true;
+                        GenerationProgressBar.IsIndeterminate = false;
+                        GenerationProgressBar.Visibility = System.Windows.Visibility.Collapsed;
+                    });
+                }
+            };
+
+            generateWorker.RunWorkerAsync();
         }
 
         private void Reset_Click(object sender, EventArgs e)

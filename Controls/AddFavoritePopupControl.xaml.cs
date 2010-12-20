@@ -17,6 +17,7 @@ namespace Ben.Dominion
         public AddFavoritePopupControl()
         {
             InitializeComponent();
+            this.Focus();
         }
 
         public Boolean IsOpen
@@ -24,12 +25,14 @@ namespace Ben.Dominion
             get { return AddFavoritePopup.IsOpen; }
             set 
             {
+                AddFavoritePopup.IsOpen = value;
+
                 if (value)
                 {
                     FavoriteNameTextBox.Text = "Enter a name";
+                    FavoriteNameTextBox.Focus();
                     FavoriteNameTextBox.SelectAll();
                 }
-                AddFavoritePopup.IsOpen = value; 
             }
         }
         

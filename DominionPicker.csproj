@@ -70,7 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\Controls\MultiTemplateItemsControl.cs">
-      <Link>MultiTemplateItemsControl.cs</Link>
+      <Link>Controls\MultiTemplateItemsControl.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Controls\RelativeAnimatingContentControl.cs">
+      <Link>Controls\RelativeAnimatingContentControl.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\AppLog.cs">
       <Link>AppLog.cs</Link>
@@ -84,7 +87,7 @@
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddFavoritePopupControl.xaml.cs">
+    <Compile Include="Controls\AddFavoritePopupControl.xaml.cs">
       <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -112,11 +115,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="..\Common\Themes\Generic.xaml">
+      <Link>Themes\Generic.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="AddFavoritePopupControl.xaml">
+    <Page Include="Controls\AddFavoritePopupControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +146,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">

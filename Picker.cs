@@ -13,6 +13,7 @@ namespace Ben.Dominion
     {
         private List<Card> cardSet;
         private List<Card> pool;
+        private Boolean generationCanceled;
 
         public PickerSettings Settings { get { return PickerState.Current.CurrentSettings; } }
 
@@ -36,9 +37,17 @@ namespace Ben.Dominion
 
             List<CardSet> availableSets = null;
             Int32 creationAttempts = 0;
-            
+
+            generationCanceled = false;
+
             do
             {
+                // Allows fast fail
+                if (generationCanceled)
+                {
+                    return null;
+                }
+
                 creationAttempts++;
                 
                 // Create an empty result set
@@ -162,6 +171,11 @@ namespace Ben.Dominion
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
 
             return cardSet.ToObservableCollection();
+        }
+
+        public void CancelGeneration()
+        {
+            generationCanceled = true;
         }
 
         private void MoveCards(IEnumerable<Card> cards)

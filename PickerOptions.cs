@@ -37,6 +37,16 @@ namespace Ben.Dominion
             this.Notes = "";
         }
 
+        //public virtual Boolean SatisfiedBy(IEnumerable<Card> cardList)
+        //{
+        //    if (SatisfactionDelegate != null)
+        //    {
+        //        return SatisfactionDelegate(cardList);
+        //    }
+        //    return true;
+        //}
+        //public Func<IEnumerable<Card>, Boolean> SatisfactionDelegate;
+
         public virtual PickerOption Clone()
         {
             return this.Clone<PickerOption>();

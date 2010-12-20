@@ -3,6 +3,7 @@ using System.Windows;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.ComponentModel;
 
 namespace Ben.Dominion
 {
@@ -13,6 +14,17 @@ namespace Ben.Dominion
             InitializeComponent();
 
             this.Loaded += new RoutedEventHandler(ResultsViewer_Loaded);
+            this.BackKeyPress += new EventHandler<CancelEventArgs>(ResultsViewer_BackKeyPress);
+        }
+
+        void ResultsViewer_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            PickerState.Current.CancelGeneration();
+            if (AddFavoritePopup.IsOpen)
+            {
+                AddFavoritePopup.IsOpen = false;
+                e.Cancel = true;
+            }
         }
 
         void ResultsViewer_Loaded(object sender, RoutedEventArgs e)
@@ -52,7 +64,37 @@ namespace Ben.Dominion
 
         private void Refresh_Click(object sender, EventArgs e)
         {
-            PickerState.Current.GenerateCardList();
+            // Start and show the progress bar, disable the create button
+            GenerationProgressBar.Visibility = System.Windows.Visibility.Visible;
+            GenerationProgressBar.IsIndeterminate = true;
+            ApplicationBarIconButton refreshButton = sender as ApplicationBarIconButton;
+            refreshButton.IsEnabled = false;
+
+            // We don't want the generation to happen on the UI thread.
+            // A background worker will enable stuff to continue (e.g.
+            // quit the app) while the generation is happening.
+            BackgroundWorker generateWorker = new BackgroundWorker();
+            generateWorker.DoWork += (backgroundSender, backgroundArgs) =>
+            {
+                try
+                {
+                    // If we fail to generate a set, we don't do anything
+                    PickerState.Current.GenerateCardList();
+                }
+                finally
+                {
+                    // And finally when everything is done, ask the UI thread to reenable
+                    // the buttons and hide the progress bar
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        refreshButton.IsEnabled = true;
+                        GenerationProgressBar.IsIndeterminate = false;
+                        GenerationProgressBar.Visibility = System.Windows.Visibility.Collapsed;
+                    });
+                }
+            };
+
+            generateWorker.RunWorkerAsync();
         }
 
         private void Sort_Click(object sender, EventArgs e)
