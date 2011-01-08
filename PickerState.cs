@@ -116,7 +116,21 @@ namespace Ben.Dominion
             AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
         }
 
+        /// <summary>
+        /// Deletes all saved state from the disk and creates a new one
+        /// </summary>
         public static void ResetState()
+        {
+            ClearSavedState();
+
+            // Will force the creation of a new state
+            current = new PickerState();
+        }
+
+        /// <summary>
+        /// Deletes all saved state from the disk
+        /// </summary>
+        public static void ClearSavedState()
         {
             try
             {
@@ -133,10 +147,8 @@ namespace Ben.Dominion
                 }
             }
             catch { }
-
-            // Will force the creation of a new state
-            current = new PickerState();
         }
+
         #endregion
 
         private Picker picker { get; set; }

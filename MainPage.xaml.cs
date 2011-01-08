@@ -33,10 +33,11 @@ namespace Ben.Dominion
 
         public void LoadState()
         {
-            if (this.CurrentState == null)
+            // Check if the state has changed
+            if (PickerState.Current != this.CurrentState)
             {
-                this.CurrentState = PickerState.Current;
-                this.DataContext = PickerState.Current;
+                // If it has, set the appropriate field and data context
+                this.DataContext = this.CurrentState = PickerState.Current;
                 //AppLogListBox.ItemsSource = AppLog.Instance.Lines;
             }
         }
@@ -147,12 +148,13 @@ namespace Ben.Dominion
 
             if (res == MessageBoxResult.OK)
             {
-                PickerState.ResetState();
-                LoadState();
-                CurrentState.Reset();
+                // Delete all the favorites
+                CurrentState.FavoriteSettings.Clear();
+                // And delete all the saved state (probably don't need this)
+                PickerState.ClearSavedState();
+
                 RootPivot.SelectedIndex = 0;
                 SettingsScrollViewer.ScrollToVerticalOffset(0);
-                FavoritesListBox.ItemsSource = PickerState.Current.FavoriteSettings;
             }
         }
 

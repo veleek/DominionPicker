@@ -24,7 +24,8 @@
         <ProgressBar x:Name="GenerationProgressBar"
                      Style="{StaticResource PerformanceProgressBar}"
                      Grid.Row="0"
-                     VerticalAlignment="Top"/>
+                     VerticalAlignment="Top"
+                     Visibility="Collapsed"/>
         
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>

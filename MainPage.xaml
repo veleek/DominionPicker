@@ -107,6 +107,13 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
                                             
+                                            <!--<toolkit:ToggleSwitch Margin="0,-15"
+                                                                  Grid.Column="0"
+                                                                  IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                                                <toolkit:ToggleSwitch.Content>
+                                                    <TextBlock Text="{Binding Set}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                                                </toolkit:ToggleSwitch.Content>
+                                            </toolkit:ToggleSwitch>-->
                                             <CheckBox Margin="0,-15" 
                                                       Grid.Column="0"
                                                       IsChecked="{Binding IsSelected, Mode=TwoWay}">
@@ -178,7 +185,7 @@
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="save" Click="AddFavorite_Click"/>            
             <!--<shell:ApplicationBarIconButton IconUri="/Images/appbar.lock.png" Text="Lock"/>-->
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Clear Favourites" Click="ClearFavorites_Click"/>
+                <shell:ApplicationBarMenuItem Text="Clear Favorites" Click="ClearFavorites_Click"/>
                 <shell:ApplicationBarMenuItem Text="About..." Click="About_Click" x:Name="Unlock"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

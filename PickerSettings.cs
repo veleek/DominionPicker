@@ -104,9 +104,9 @@ namespace Ben.Dominion
             MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 4);
             RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);
             PlusBuys = new PolicyOption("+Buys Policy");
-            PlusBuys.Notes = "This may take a long time";
+            PlusBuys.Notes = "This may take a bit longer";
             PlusActions = new PolicyOption("+Actions Policy");
-            PlusActions.Notes = "This may take a long time";
+            PlusActions.Notes = "This may take a bit longer";
             PlusCoins = new PolicyOption("+Coins Policy");
 
             FilterAction = new BooleanPickerOption("Filter Action Cards");
