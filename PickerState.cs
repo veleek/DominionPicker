@@ -11,14 +11,12 @@ using System.Windows.Threading;
 
 namespace Ben.Dominion
 {
-    public class PickerState : INotifyPropertyChanged
+    public class PickerState : NotifyPropertyChangedBase
     {
         #region Statics
         public static readonly String PickerStateFileName = "PickerState.xml";
-        public static readonly String PickerStateName = "PickerState";
 
         public static Boolean Loaded = false;
-        public static Boolean UseApplicationService = false;
         public static Boolean UseIsolatedStorage = true;
 
         private static PickerState current;
@@ -41,15 +39,6 @@ namespace Ben.Dominion
             DateTime start = DateTime.UtcNow;
             try
             {
-                if (UseApplicationService)
-                {
-                    Object obj = null;
-                    if (PhoneApplicationService.Current.State.TryGetValue(PickerStateName, out obj))
-                    {
-                        state = obj as PickerState;
-                    }
-                }
-
                 if (UseIsolatedStorage)
                 {
                     if (state == null)
@@ -67,9 +56,11 @@ namespace Ben.Dominion
                     }
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                MessageBox.Show("Unable to load picker state: " + e.Message);
+                // There was a problem loading the picker state, just ignore
+                // this and we'll create a new one.
+                //MessageBox.Show("Unable to load picker state: " + e.Message);
             }
 
             if (state == null)
@@ -91,11 +82,7 @@ namespace Ben.Dominion
             {
                 try
                 {
-                    if (UseApplicationService)
-                    {
-                        PhoneApplicationService.Current.State[PickerStateName] = current;
-                    }
-                    else if (UseIsolatedStorage)
+                    if (UseIsolatedStorage)
                     {
                         using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
                         {
@@ -108,7 +95,7 @@ namespace Ben.Dominion
                 }
                 catch(Exception e)
                 {
-                    MessageBox.Show("Unable to save picker state: " + e.Message);
+                    com.mtiks.winmobile.mtiks.Instance.AddException(new Exception("Unable to save picker state", e));
                 }
             }
 
@@ -134,10 +121,7 @@ namespace Ben.Dominion
         {
             try
             {
-                // Delete the application state 
-                Microsoft.Phone.Shell.PhoneApplicationService.Current.State.Remove(PickerStateName);
-
-                // And the persisted state
+                // Delete the persisted state
                 using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
                 {
                     if (store.FileExists(PickerStateFileName))
@@ -180,22 +164,19 @@ namespace Ben.Dominion
         /// </summary>
         public ObservableCollection<PickerSettings> FavoriteSettings { get; set; }
 
-        private ObservableCollection<Card> cardList;
+        private PickerResult result;
         /// <summary>
-        /// The current resultant card list
+        /// The most recent picker results
         /// </summary>
-        public ObservableCollection<Card> CardList
+        public PickerResult Result
         {
-            get
-            {
-                return cardList;
-            }
+            get { return result; }
             set
             {
-                if (value != cardList)
+                if (value != result)
                 {
-                    cardList = value;
-                    NotifyPropertyChanged("CardList");
+                    result = value;
+                    NotifyPropertyChanged("Result");
                 }
             }
         }
@@ -240,10 +221,10 @@ namespace Ben.Dominion
                 MessageBox.Show("Select at least one expansion set to choose from");
                 return false;
             }
-            this.CardList = picker.GenerateCardList();
+            this.Result = picker.GenerateCardList();
             this.sortedAlphabetically = true;
 
-            return this.CardList != null;
+            return this.result != null;
         }
 
         public void ReplaceCard(Card c)
@@ -253,30 +234,10 @@ namespace Ben.Dominion
                 return;
             }
 
-            Int32 index = CardList.IndexOf(c);
-            CardList.Remove(c);
+            Int32 index = Result.Cards.IndexOf(c);
+            Result.Cards.Remove(c);
 
-            CardList.Insert(index, picker.GetRandomCardOtherThan(CardList));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged(String propertyName)
-        {
-            OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            PropertyChangedEventHandler h = PropertyChanged;
-            if (h != null)
-            {   
-                // :( This enables cross thread property notifications
-                Deployment.Current.Dispatcher.BeginInvoke(delegate
-                {
-                    h(this, e);
-                });
-            }
+            Result.Cards.Insert(index, picker.GetRandomCardOtherThan(Result.Cards));
         }
 
         private Boolean sortedAlphabetically;
@@ -284,11 +245,11 @@ namespace Ben.Dominion
         {
             if (sortedAlphabetically)
             {
-                CardList = CardList.OrderBy(c => c.Cost).ToObservableCollection();
+                Result.Cards = Result.Cards.OrderBy(c => c.Cost).ToObservableCollection();
             }
             else
             {
-                CardList = CardList.OrderBy(c => c.Name).ToObservableCollection();
+                Result.Cards = Result.Cards.OrderBy(c => c.Name).ToObservableCollection();
             }
 
             sortedAlphabetically = !sortedAlphabetically;

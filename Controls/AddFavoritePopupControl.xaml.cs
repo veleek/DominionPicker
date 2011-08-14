@@ -29,7 +29,10 @@ namespace Ben.Dominion
 
                 if (value)
                 {
-                    FavoriteNameTextBox.Text = "Enter a name";
+                    if (FavoriteNameTextBox.Text == String.Empty)
+                    {
+                        FavoriteNameTextBox.Text = "Enter a name";
+                    }
                     FavoriteNameTextBox.Focus();
                     FavoriteNameTextBox.SelectAll();
                 }
@@ -37,6 +40,20 @@ namespace Ben.Dominion
         }
         
         private void AddFavoriteAccept_Click(object sender, RoutedEventArgs e)
+        {
+            AddFavorite();
+        }
+
+        private void FavoriteNameTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                AddFavoriteAcceptButton.Focus();
+                AddFavorite();
+            }
+        }
+
+        private void AddFavorite()
         {
             String name = FavoriteNameTextBox.Text;
 

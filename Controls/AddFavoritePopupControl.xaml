@@ -31,15 +31,17 @@
 
             <StackPanel Grid.Row="1" Grid.Column="1">
                 <TextBlock Text="favorite name"
-                               Grid.Row="0"
-                               Style="{StaticResource PhoneTextLargeStyle}" />
+                           Grid.Row="0"
+                           Style="{StaticResource PhoneTextLargeStyle}" />
                 <TextBox x:Name="FavoriteNameTextBox"
-                             TextWrapping="NoWrap" 
-                             Grid.Row="1" 
-                             MaxLength="64"/>
-                <Button Content="Accept"
-                            Grid.Row="2"
-                            Click="AddFavoriteAccept_Click"/>
+                         TextWrapping="NoWrap" 
+                         Grid.Row="1" 
+                         MaxLength="64"
+                         KeyUp="FavoriteNameTextBox_KeyUp"/>
+                <Button x:Name="AddFavoriteAcceptButton"
+                        Content="Accept"
+                        Grid.Row="2"
+                        Click="AddFavoriteAccept_Click"/>
                 <TextBlock Text="Note: The favorites list already specifies which sets this contains"
                            Style="{StaticResource PhoneTextSubtleStyle}"
                            TextWrapping="Wrap"

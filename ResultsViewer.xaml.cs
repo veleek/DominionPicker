@@ -19,11 +19,14 @@ namespace Ben.Dominion
 
         void ResultsViewer_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            PickerState.Current.CancelGeneration();
             if (AddFavoritePopup.IsOpen)
             {
                 AddFavoritePopup.IsOpen = false;
                 e.Cancel = true;
+            }
+            else
+            {
+                PickerState.Current.CancelGeneration();
             }
         }
 

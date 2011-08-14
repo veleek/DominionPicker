@@ -19,12 +19,6 @@ namespace Ben.Dominion
             {
                 return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
             }
-            /*
-            set
-            {
-                Sets = Cards.AllSets.Select(s => new SetSelector(s, value.Contains(s))).ToList();
-            }
-             */
         }
 
         public String SetsString
@@ -52,10 +46,9 @@ namespace Ben.Dominion
             }
         }
 
-        public static List<String> PolicyOptions = new List<String> { "Require", "Prevent" };
-
         public ListPickerOption<Int32> MinimumCardsPerSet { get; set; }
         public BooleanPickerOption RequireDefense { get; set; }
+        public BooleanPickerOption RequireTrash { get; set; }
         public PolicyOption PlusBuys { get; set; }
         public PolicyOption PlusActions { get; set; }
         public PolicyOption PlusCoins { get; set; }
@@ -80,6 +73,7 @@ namespace Ben.Dominion
                     { 
                         MinimumCardsPerSet,
                         RequireDefense,
+                        RequireTrash,
                         PlusBuys,
                         PlusActions,
                         //PlusCoins,
@@ -100,9 +94,12 @@ namespace Ben.Dominion
         {
             Name = "Default Settings";
             Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
+            // Easy way to deselect the 'promo' card set
+            Sets.Last().IsSelected = false;
 
-            MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 4);
+            MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 3);
             RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);
+            RequireTrash = new BooleanPickerOption("Require a card that lets you\ntrash other cards", false);
             PlusBuys = new PolicyOption("+Buys Policy");
             PlusBuys.Notes = "This may take a bit longer";
             PlusActions = new PolicyOption("+Actions Policy");
@@ -124,6 +121,7 @@ namespace Ben.Dominion
             clone.Sets = this.Sets.Select(s => new SetSelector(s.Set, s.IsSelected)).ToList();
             clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone() as ListPickerOption<Int32>;
             clone.RequireDefense = this.RequireDefense.Clone() as BooleanPickerOption;
+            clone.RequireTrash = this.RequireTrash.Clone() as BooleanPickerOption;
             clone.PlusBuys = this.PlusBuys.Clone<PolicyOption>();
             clone.PlusActions = this.PlusActions.Clone<PolicyOption>();
             clone.PlusCoins = this.PlusCoins.Clone<PolicyOption>();

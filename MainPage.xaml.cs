@@ -6,13 +6,16 @@ using Ben.Utilities;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using System.ComponentModel;
+using System.Windows.Media;
+using System.Windows.Data;
+using Ben.Phone;
 
 namespace Ben.Dominion
 {
     public partial class MainPage : PhoneApplicationPage
     {
         public PickerState CurrentState;
-        public ApplicationBarIconButton unlockButton;
+        public ApplicationBarIconButton UnlockButton;
 
         // Constructor
         public MainPage()
@@ -24,9 +27,9 @@ namespace Ben.Dominion
             this.Unloaded += new RoutedEventHandler(MainPage_Unloaded);
             this.BackKeyPress += new EventHandler<CancelEventArgs>(MainPage_BackKeyPress);
 
-            unlockButton = new ApplicationBarIconButton(new Uri("/Images/appbar.lock.png", UriKind.Relative));
-            unlockButton.Click += new EventHandler(unlockButton_Click);
-            unlockButton.Text = "Lock";
+            UnlockButton = new ApplicationBarIconButton(new Uri("/Images/appbar.lock.png", UriKind.Relative));
+            UnlockButton.Click += new EventHandler(UnlockButton_Click);
+            UnlockButton.Text = "Lock";
             
             LoadState();
         }
@@ -38,36 +41,41 @@ namespace Ben.Dominion
             {
                 // If it has, set the appropriate field and data context
                 this.DataContext = this.CurrentState = PickerState.Current;
-                //AppLogListBox.ItemsSource = AppLog.Instance.Lines;
             }
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             App app = App.Current as App;
+            //AdManager.LoadAd(AdContainer);
 
-            app.InitializeAdControl(AdContainer);
+            //if (app.IsTrial)
+            //{
+            //    this.ApplicationBar.Buttons.Add(UnlockButton);    
+            //}
+            //else
+            //{
+            //    if (this.ApplicationBar.Buttons.Contains(UnlockButton))
+            //    {
+            //        this.ApplicationBar.Buttons.Remove(UnlockButton);
+            //    }
+            //}
 
-            if (app.IsTrial)
+            Int32 appLaunchCount = 0;
+            System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
+
+            if (appLaunchCount == 10)
             {
-                this.ApplicationBar.Buttons.Add(unlockButton);    
-            }
-            else
-            {
-                if (this.ApplicationBar.Buttons.Contains(unlockButton))
-                {
-                    this.ApplicationBar.Buttons.Remove(unlockButton);
-                }
+                RequestReviewPopup.Visibility = Visibility.Visible;
             }
         }
 
-        void MainPage_Unloaded(object sender, RoutedEventArgs e)
+        private void MainPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            App app = App.Current as App;
-            app.UnitializeAdControl(AdContainer);
+            AdManager.UnloadAd(AdContainer);
         }
 
-        void MainPage_BackKeyPress(object sender, CancelEventArgs e)
+        private void MainPage_BackKeyPress(object sender, CancelEventArgs e)
         {
             PickerState.Current.CancelGeneration();
             if (AddFavoritePopup.IsOpen)
@@ -135,7 +143,7 @@ namespace Ben.Dominion
             SettingsScrollViewer.ScrollToVerticalOffset(0);
         }
 
-        void unlockButton_Click(object sender, EventArgs e)
+        private void UnlockButton_Click(object sender, EventArgs e)
         {
             MarketplaceDetailTask detailTask = new MarketplaceDetailTask();
             detailTask.ContentType = MarketplaceContentType.Applications;
@@ -161,6 +169,18 @@ namespace Ben.Dominion
         private void About_Click(object sender, EventArgs e)
         {
 			this.NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+        }
+
+        private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
+        {
+            MarketplaceReviewTask review = new MarketplaceReviewTask();
+            review.Show();
+            RequestReviewPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void RequestReviewCancel_Click(object sender, RoutedEventArgs e)
+        {
+            RequestReviewPopup.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -123,8 +123,29 @@
   <Card ID="115" Name="Platinum" Set="Prosperity" Type="Treasure" Cost="9" Rules="5 Coins." />
   <Card ID="116" Name="Colony" Set="Prosperity" Type="Victory" Cost="11" Rules="10 {VP}." />
   -->
+  <!--Cornucopia-->
+  <!--
+  <Card ID="117" Name="Bag of Gold" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Action\nGain a Gold, putting it on top of your deck.\n(This is not in the Supply.)"/>
+  <Card ID="118" Name="Diadem" Set="Cornucopia" Type="Treasure Prize" Cost="0" Rules="Worth $2.\nWhen you play this, +$1 per unused Action you have (Action, not Action card).\n(This is not in the Supply.)"/>
+  <Card ID="119" Name="Followers" Set="Cornucopia" Type="Action Attack Prize" Cost="0" Rules="+2 Cards\nGain an Estate. Each other player gains a Curse and discards down to 3 cards in hand.\n(This is not in the Supply.)"/>
+  <Card ID="120" Name="Princess" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Buy\n________________\nWhile this is in play, cards cost $2 less, but not less than $0.\n(This is not in the Supply.)"/>
+  <Card ID="121" Name="Trusty Steed" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="Choose two: +2 Cards; or +2 Actions; or +$2; or gain 4 Silvers and put your deck into your discard pile.\n(This is not in the Supply.)"/>
+  -->
+  <Card ID="122" Name="Hamlet" Set="Cornucopia" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nYou may discard a card; If you do +1 Action.\nYou may discard a card; If you do +1 Buy"/>
+  <Card ID="123" Name="Fortune Teller" Set="Cornucopia" Type="Action Attack" Cost="3" Rules="+2 Coin\nEach other player reveals cards from the top of his deck until he reveals a Victory of Curse card. He puts it on top and discards the other revealed cards."/>
+  <Card ID="124" Name="Menagerie" Set="Cornucopia" Type="Action" Cost="3" Rules="+1 Action\nReveal your hand.\nIf there are no duplicate cards in it, +3 Cards.\nOtherwise, +1 Card."/>
+  <Card ID="125" Name="Farming Village" Set="Cornucopia" Type="Action" Cost="4" Rules="+2 Actions\nReveal cards from the top of your deck until you reveal an Action or Treasure card. Put that card into your hand and discard the other cards."/>
+  <Card ID="126" Name="Horse Traders" Set="Cornucopia" Type="Action Reaction" Cost="4" Rules="+1 Buy\n+3 Coin\nDiscard 2 Cards\n________________\nWhen another player plays an Attack card, you may set this aside from your hand. If you do, then at the start of your next turn, +1 Card and return this to your hand."/>
+  <Card ID="127" Name="Remake" Set="Cornucopia" Type="Action" Cost="4" Rules="Do this twice: Trash a card from your hand then gain a card costing exactly 1 more than the trashed card."/>
+  <Card ID="128" Name="Tournament" Set="Cornucopia" Type="Action" Cost="4" Rules="+1 Action\nEach player may reveal a Province from his hand. If you do, discard it and gain a Prize (from the Prize pile) or a Duchy, putting it on top of your deck. If no-one else does, +1 Card +1 Coin."/>
+  <Card ID="129" Name="Young Witch" Set="Cornucopia" Type="Action Attack" Cost="4" Rules="+2 Cards\nDiscard 2 cards. Each other player may reveal a Bane card from his hand.\nIf he doesn’t, he gains a Curse.\n______________________\nSetup: Add an extra Kingdom card pile costing 2 or 3 to the Supply. Cards from that pile are Bane cards."/>
+  <Card ID="130" Name="Harvest" Set="Cornucopia" Type="Action" Cost="5" Rules="Reveal the top 4 cards of your deck, then discard them. +1 Coin per differently named card revealed."/>
+  <Card ID="131" Name="Horn of Plenty" Set="Cornucopia" Type="Treasure" Cost="5" Rules="0 Coins\nWhen you play this, gain a card costing up to 1 Coin per differently named card you have in play, counting this. If it’s a Victory card, trash this."/>
+  <Card ID="132" Name="Hunting Party" Set="Cornucopia" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\nReveal your hand. Reveal cards from your deck until you reveal a card that isn’t in a duplicate of one in your hand and discard the rest."/>
+  <Card ID="133" Name="Jester" Set="Cornucopia" Type="Action Attack" Cost="5" Rules="+2 Coins\nEach other player discards the top card of his deck. If it’s a Victory card he gains a Curse. Otherwise he gains a copy of the discarded card or you do, your choice."/>
+  <Card ID="134" Name="Fairgrounds" Set="Cornucopia" Type="Victory" Cost="6" Rules="Worth 2 VP for every 5 differently named cards in your deck (rounded down)"/>
   <!--Promo-->
-  <Card ID="117" Name="Black Market" Set="Promo" Type="Action" Cost="3" Rules="+2 Coins, Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.\n(Before the game, make a Black Market deck out of one copy of each Kingdom card not in the supply.)." />
-  <Card ID="118" Name="Envoy" Set="Promo" Type="Action" Cost="4" Rules="Reveal the top 5 cards of your deck. The player to your left chooses one for you to discard. Draw the rest." />
-  <Card ID="119" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck." />
+  <Card ID="135" Name="Black Market" Set="Promo" Type="Action" Cost="3" Rules="+2 Coins, Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.\n(Before the game, make a Black Market deck out of one copy of each Kingdom card not in the supply.)." />
+  <Card ID="136" Name="Envoy" Set="Promo" Type="Action" Cost="4" Rules="Reveal the top 5 cards of your deck. The player to your left chooses one for you to discard. Draw the rest." />
+  <Card ID="137" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck." />
 </ArrayOfCard>

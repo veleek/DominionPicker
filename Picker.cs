@@ -23,20 +23,17 @@ namespace Ben.Dominion
             pool = Cards.AllCards.OrderBy(c => Guid.NewGuid()).ToList();
         }
 
-        public ObservableCollection<Card> GenerateCardList()
+        public PickerResult GenerateCardList()
         {
             return GenerateCardList(PickerState.Current.CurrentSettings);
         }
 
-        public ObservableCollection<Card> GenerateCardList(PickerSettings settings)
+        public PickerResult GenerateCardList(PickerSettings settings)
         {
-            Regex actionRegex = new Regex("\\+. Action");
-            Regex twoActionRegex = new Regex("\\+2 Actions");
-            Regex buyRegex = new Regex("\\+. Buy");
-            Regex twoBuyRegex = new Regex("\\+2 Buys");
-
             List<CardSet> availableSets = null;
             Int32 creationAttempts = 0;
+
+            PickerResult result = new PickerResult();
 
             generationCanceled = false;
 
@@ -87,76 +84,90 @@ namespace Ben.Dominion
                     MoveCards(pool.Take(10));
                 }
 
-                if (cardSet.Count < 10)
+                result.Cards = cardSet.OrderBy(c => c.Name).ToObservableCollection();
+
+                if (result.Cards.Count < 10)
                 {
                     // We have less than 10 cards total so just return
                     break;
                 }
 
-                if (Settings.RequireDefense.IsEnabled)
+                // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
+
+                // If there are any attacks and no defense, veto this set
+                if (Settings.RequireDefense.IsEnabled && result.HasAttack && !result.HasReaction)
                 {
-                    // If there are any attacks and no defense, veto this set
-                    if (cardSet.Any(c => c.IsType(CardType.Attack)) && !cardSet.Any(c => c.IsType(CardType.Reaction)))
-                    {
-                        continue;
-                    }
+                    continue;
+                }
+
+                if (Settings.RequireTrash.IsEnabled && !result.HasTrash)
+                {
+                    continue;
                 }
 
                 if (Settings.PlusActions.IsEnabled)
                 {
-                    // Check if there are any +Actions cards
-                    Boolean hasPlusAction = cardSet.Any(c => actionRegex.IsMatch(c.Rules));
-                    Boolean hasPlusTwoAction = cardSet.Any(c => twoActionRegex.IsMatch(c.Rules));
-
-                    // If a plus actions card is required and not present or prevented and present
-                    // throw out the set and try again.
-                    if (Settings.PlusActions.Is("Require") && !hasPlusAction)
+                    if (result.HasPlus2Action)
                     {
-                        continue;
+                        if (Settings.PlusActions.Is("Prevent +2"))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (Settings.PlusActions.Is("Require +2"))
+                        {
+                            continue;
+                        }
                     }
 
-                    if (Settings.PlusActions.Is("Prevent") && hasPlusAction)
+                    if (result.HasPlusAction)
                     {
-                        continue;
+                        if (Settings.PlusActions.Is("Prevent"))
+                        {
+                            continue;
+                        }
                     }
-
-                    if (Settings.PlusActions.Is("Require +2") && !hasPlusTwoAction)
+                    else
                     {
-                        continue;
-                    }
-
-                    if (Settings.PlusActions.Is("Prevent +2") && hasPlusTwoAction)
-                    {
-                        continue;
+                        if (Settings.PlusActions.Is("Require"))
+                        {
+                            continue;
+                        }
                     }
                 }
 
                 if (Settings.PlusBuys.IsEnabled)
                 {
-                    // Check if there are any +Buys cards
-                    Boolean hasPlusBuy = cardSet.Any(c => buyRegex.IsMatch(c.Rules));
-                    Boolean hasPlusTwoBuy = cardSet.Any(c => twoBuyRegex.IsMatch(c.Rules));
-
-                    // If a plus buys card is required and not present or prevented and present
-                    // throw out the set and try again.
-                    if (Settings.PlusBuys.Is("Require") && !hasPlusBuy )
+                    if (result.HasPlus2Buy)
                     {
-                        continue;
+                        if (Settings.PlusBuys.Is("Prevent +2"))
+                        {
+                            continue;
+                        }
+                    }
+                    else
+                    {
+                        if (Settings.PlusBuys.Is("Require +2"))
+                        {
+                            continue;
+                        }
                     }
 
-                    if (Settings.PlusBuys.Is("Prevent") && hasPlusBuy)
+                    if (result.HasPlusBuy)
                     {
-                        continue;
+                        if (Settings.PlusBuys.Is("Prevent"))
+                        {
+                            continue;
+                        }
                     }
-
-                    if (Settings.PlusBuys.Is("Require +2") && !hasPlusTwoBuy)
+                    else
                     {
-                        continue;
-                    }
-
-                    if (Settings.PlusBuys.Is("Prevent +2") && hasPlusTwoBuy)
-                    {
-                        continue;
+                        if (Settings.PlusBuys.Is("Require"))
+                        {
+                            continue;
+                        }
                     }
                 }
 
@@ -165,12 +176,9 @@ namespace Ben.Dominion
             }
             while (true);
 
-            // Order them alphabetically
-            cardSet = cardSet.OrderBy(c => c.Name).ToList();
-
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
 
-            return cardSet.ToObservableCollection();
+            return result;
         }
 
         public void CancelGeneration()

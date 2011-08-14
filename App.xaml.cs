@@ -14,6 +14,10 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Advertising.Mobile.UI;
 using Microsoft.Phone.Marketplace;
+using Ben.Phone;
+using com.mtiks.winmobile;
+using System.Reflection;
+using System.IO.IsolatedStorage;
 
 namespace Ben.Dominion
 {
@@ -27,9 +31,7 @@ namespace Ben.Dominion
         
         public Card SelectedCard { get; set; }
 
-        String ApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
-        String AdUnitIdXL = "10012650";
-        String AdUnitIdXXL = "10012855";
+        public static readonly String ApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
 
         public LicenseInformation license = new LicenseInformation();
         public Boolean IsTrial
@@ -49,7 +51,6 @@ namespace Ben.Dominion
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
 
-            /*
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
             {
@@ -63,43 +64,12 @@ namespace Ben.Dominion
                 // which shows areas of a page that are being GPU accelerated with a colored overlay.
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
             }
-            */
 
             // Standard Silverlight initialization
             InitializeComponent();
 
             // Phone-specific initialization
             InitializePhoneApplication();
-        }
-
-        public void InitializeAdControl(Panel adContainer)
-        {
-            if (this.IsTrial && !adContainer.Children.Any(c => c is AdControl))
-            {
-                // Create an Ad, and add it to the provided control
-                AdControl adControl = new AdControl();
-                adControl.Width = 480;
-                adControl.Height = 80;
-                adControl.AdModel = AdModel.Contextual;
-                adControl.AdUnitId = AdUnitIdXXL;
-                adControl.ApplicationId = ApplicationId;
-
-                adContainer.Children.Add(adControl);
-            }
-            else
-            {
-                // Remove any ads if there are any
-                UnitializeAdControl(adContainer);
-            }
-        }
-
-        public void UnitializeAdControl(Panel adContainer)
-        {
-            List<AdControl> existingAds = adContainer.Children.OfType<AdControl>().ToList();
-            foreach (AdControl adControl in existingAds)
-            {
-                adContainer.Children.Remove(adControl);
-            }
         }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -121,6 +91,7 @@ namespace Ben.Dominion
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             PickerState.Save();
+            mtiks.Instance.Stop();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -128,6 +99,7 @@ namespace Ben.Dominion
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             PickerState.Save();
+            mtiks.Instance.Stop();
         }
 
         // Code to execute if a navigation fails
@@ -145,10 +117,11 @@ namespace Ben.Dominion
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                MessageBox.Show(e.ExceptionObject.InnerException.Message);
                 // An unhandled exception has occurred; break into the debugger
                 System.Diagnostics.Debugger.Break();
             }
+
+            mtiks.Instance.AddException(e.ExceptionObject);
         }
 
         #region Phone application initialization
@@ -170,7 +143,21 @@ namespace Ben.Dominion
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
-            AdControl.TestMode = false;
+            AdManager.Initialize(ApplicationId);
+            var a = Assembly.GetExecutingAssembly();
+            mtiks.Instance.Start("166ff6d5917b9569d549eec40", Assembly.GetExecutingAssembly());
+
+            // Increment the launch count
+            Int32 appLaunchCount = 0;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
+            appLaunchCount++;
+            IsolatedStorageSettings.ApplicationSettings["AppLaunchCount"] = appLaunchCount;
+
+            if (appLaunchCount <= 1)
+            {
+                // This is the first launch after update
+                PickerState.ClearSavedState();
+            }
 
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;

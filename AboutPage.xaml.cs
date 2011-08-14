@@ -28,10 +28,10 @@ namespace Ben.Dominion
         {
             App app = App.Current as App;
 
-            if (app.IsTrial)
-            {
-                BuyNowButton.Content = "Buy Now";
-            }
+            //if (app.IsTrial)
+            //{
+            //    BuyNowButton.Content = "Buy Now";
+            //}
         }
 
         private void EmailButton_Click(object sender, RoutedEventArgs e)

@@ -17,7 +17,7 @@
         <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
         <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource DominicanSC}"/>
-            <Setter Property="FontSize" Value="42"/>
+            <Setter Property="FontSize" Value="26"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 

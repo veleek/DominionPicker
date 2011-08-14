@@ -19,6 +19,7 @@ namespace Ben.Dominion
         Seaside,
         Alchemy,
         Prosperity,
+        Cornucopia,
         Promo,
     }
 
@@ -33,6 +34,7 @@ namespace Ben.Dominion
         Reaction = 0x10,
         Attack = 0x20,
         Duration = 0x40,
+        Prize = 0x80,
     }
 
     public class Card
@@ -49,6 +51,11 @@ namespace Ben.Dominion
         public String Cost { get; set; }
         [XmlAttribute]
         public String Rules { get; set; }
+
+        [XmlIgnore]
+        public Boolean HasPotion { get { return Cost.Contains('p'); } }
+        [XmlIgnore]
+        public String CoinCost { get { return Cost.Trim('p'); } }
 
         public String SetPrefix
         {
@@ -156,6 +163,8 @@ namespace Ben.Dominion
                     return Color.FromArgb(255, 251, 141, 78);
                 case CardType.Action:
                     return Color.FromArgb(255, 160, 155, 165);
+                case CardType.Prize:
+                    return Color.FromArgb(255, 153, 217, 234);
                 default:
                     return Colors.Black;
             }
@@ -164,10 +173,42 @@ namespace Ben.Dominion
 
     public class Cards
     {
-        public static readonly String PickerCardsFileName = "/DominionPickerCards.xml";
+        public static readonly String PickerCardsFileName = "./DominionPickerCards.xml";
 
-        public static IEnumerable<CardSet> AllSets { get { return Enumerable.Range(1, 6).Select(x => (CardSet)x); } }
-        public static IEnumerable<CardType> AllTypes { get { return Enumerable.Range(1, 7).Select(x => (CardType)x); } }
+        public static IEnumerable<CardSet> AllSets
+        {
+            get
+            {
+                return new List<CardSet>
+                {
+                    CardSet.Base,
+                    CardSet.Intrigue,
+                    CardSet.Seaside,
+                    CardSet.Alchemy,
+                    CardSet.Prosperity,
+                    CardSet.Cornucopia,
+                    CardSet.Promo,
+                };
+            }
+        }
+
+        public static IEnumerable<CardType> AllTypes
+        {
+            get
+            {
+                return new List<CardType>
+                {
+                    CardType.Treasure,
+                    CardType.Victory,
+                    CardType.Curse,
+                    CardType.Action,
+                    CardType.Reaction,
+                    CardType.Attack,
+                    CardType.Duration,
+                    CardType.Prize,
+                };
+            }
+        }
 
         private static Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
         public static List<Card> GetSet(CardSet set)
@@ -195,16 +236,10 @@ namespace Ben.Dominion
 
         public static List<Card> Load()
         {
-            List<Card> cards = null;
-
-            Uri cardsUri = new Uri("/DominionPicker;component/DominionPickerCards.xml", UriKind.Relative);
-            StreamResourceInfo resInfo = Application.GetResourceStream(cardsUri);
-            if (resInfo != null)
+            using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
             {
-                cards = GenericXmlSerializer.Deserialize<List<Card>>(resInfo.Stream);
+                return GenericXmlSerializer.Deserialize<List<Card>>(stream);
             }
-
-            return cards;
         }
 
         public static void Save()

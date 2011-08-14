@@ -36,10 +36,61 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
-                <ItemsControl x:Name="CardsList" ItemsSource="{Binding CardList}">
+                <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="6" Background="{Binding BackgroundColor}" CornerRadius="10"
+                            <Border Margin="2" Background="{Binding BackgroundColor}" 
+                                    CornerRadius="5"
+                                    BorderBrush="DarkGray" 
+                                    BorderThickness="0">
+                                <toolkit:GestureService.GestureListener>
+                                    <toolkit:GestureListener Flick="CardItem_Flick" Tap="CardItem_Tap"/>
+                                </toolkit:GestureService.GestureListener>
+                                <Grid Margin="0,1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="./Images/coin.png" Grid.Column="0"
+                                           Width="30" Height="30" Margin="12,0,6,0"/>
+                                    <TextBlock Text="{Binding CoinCost}" 
+                                               Grid.Column="0" Margin="5,-5,0,0"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
+                                    <Image Source="./Images/potion_small.png"
+                                           Height="30"
+                                           Grid.Column="1"
+                                           Margin="0,0,12,0"
+                                           Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <TextBlock Text="{Binding Name}" 
+                                               Grid.Column="2"
+                                               Margin="2,4,12,0" 
+                                               Style="{StaticResource CardTitleTextStyle}" 
+                                               Foreground="Black"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                               Grid.Column="2"
+                                               Style="{StaticResource CardTitleTextStyle}" 
+                                               Margin="0,0,12,0" 
+                                               Foreground="White"/>
+                                    <TextBlock Text="{Binding Set}" 
+                                               Grid.Column="3"
+                                               Margin="0,2,6,0"                                                
+                                               FontStyle="{StaticResource PhoneTextSubtleStyle}"
+                                               TextAlignment="Right"
+                                               VerticalAlignment="Center"
+                                               Foreground="Black"/>
+                                    <TextBlock Text="{Binding Set}" 
+                                               Grid.Column="3"
+                                               Margin="0,0,8,0"                                                
+                                               FontStyle="{StaticResource PhoneTextSubtleStyle}"
+                                               TextAlignment="Right"
+                                               VerticalAlignment="Center"
+                                               Foreground="White"/>
+                                </Grid>
+                            </Border>
+                            <!--<Border Margin="6" Background="{Binding BackgroundColor}" CornerRadius="10"
                                     BorderBrush="DarkGray" BorderThickness="2">
                                 <toolkit:GestureService.GestureListener>
                                     <toolkit:GestureListener Flick="CardItem_Flick" Tap="CardItem_Tap"/>
@@ -68,7 +119,7 @@
                                                Margin="0,0,12,0" Foreground="White"/>
 
                                 </Grid>
-                            </Border>
+                            </Border>-->
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
