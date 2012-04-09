@@ -15,9 +15,9 @@ using System.Windows.Threading;
 
 namespace Ben.Phone
 {
-    public class AdManager
+    public static class AdManager
     {
-        private static Random rand;
+        private static Random rand = new Random();
         private static DispatcherTimer timer;
 
         public static AdControl Ad { get; private set; }
@@ -39,11 +39,11 @@ namespace Ben.Phone
             AdControl.TestMode = true;
             #endif
 
-            rand = new Random();
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);           
 
             CycleSeconds = 30;
+
             Ad = new AdControl();
             Ad.RotationEnabled = false;
             Ad.AdModel = AdModel.Contextual;
@@ -60,6 +60,7 @@ namespace Ben.Phone
         {
             #if DEBUG
             applicationId = "test_client";
+            adUnits = new String[] { "Image480_80", "TextAd", "TextAd" };
             #endif
 
             // Set the application id on the AdControl
@@ -73,7 +74,7 @@ namespace Ben.Phone
             AdUnits = adUnits.ToList();
 
             // The first add unit is considered the default, the remaining ad units 
-            // are selected at ~<10% of the rate of the default.  
+            // are selected at <~10% of the rate of the default.  
             Int32 adUnitIndex = rand.Next(-9 * (AdUnits.Count - 1), AdUnits.Count);
             if (adUnitIndex < 0)
             {

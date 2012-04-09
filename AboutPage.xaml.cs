@@ -11,6 +11,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using System.Windows.Resources;
+using System.IO;
 
 namespace Ben.Dominion
 {
@@ -22,11 +24,64 @@ namespace Ben.Dominion
 
             this.Loaded += new RoutedEventHandler(AboutPage_Loaded);
             VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
+            
+            StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Assets/Changes.txt", UriKind.Relative));
+            if (sri != null)
+            {
+                StackPanel changes = new StackPanel();
+
+                using (StreamReader reader = new StreamReader(sri.Stream))
+                {
+                    String line;
+                    bool lastWasEmpty = true;
+                    do
+                    {
+                        line = reader.ReadLine();
+                        if (String.IsNullOrEmpty(line))
+                        {
+                            Rectangle r = new Rectangle
+                            {
+                                Height = 20,
+                            };
+                            changes.Children.Add(r);
+                            lastWasEmpty = true;
+                        }
+                        else
+                        {
+                            FrameworkElement fe = null;
+                            if (lastWasEmpty)
+                            {
+                                fe = new TextBlock
+                                {
+                                    TextWrapping = TextWrapping.Wrap,
+                                    Text = line,
+                                    Style = (Style)Application.Current.Resources["PhoneTextNormalStyle"],
+                                };
+                            }
+                            else
+                            {
+                                fe = new ContentPresenter
+                                {
+                                    HorizontalAlignment = HorizontalAlignment.Stretch,
+                                    ContentTemplate = (DataTemplate)LayoutRoot.Resources["BulletedItem"],
+                                    Content = line,
+                                };
+                            }
+
+                            lastWasEmpty = false;
+                            changes.Children.Add(fe);
+                        }
+                    }
+                    while (line != null);
+                }
+
+                ChangesScrollViewer.Content = changes;
+            }
         }
 
         void AboutPage_Loaded(object sender, RoutedEventArgs e)
         {
-            App app = App.Current as App;
+            //App app = App.Current as App;
 
             //if (app.IsTrial)
             //{
@@ -39,7 +94,7 @@ namespace Ben.Dominion
             EmailComposeTask emailComposeTask = new EmailComposeTask();
             emailComposeTask.To = "randall.ben@gmail.com";
             emailComposeTask.Subject = "Dominion Picker";
-            emailComposeTask.Body = "Comments:\nRequests:";
+            emailComposeTask.Body = "Comments:\nRequests:\n";
             emailComposeTask.Show();
         }
 
@@ -56,11 +111,27 @@ namespace Ben.Dominion
             detailTask.Show();
         }
 
-        private void TwitterButton_Click(object sender, RoutedEventArgs e)
+        private void WebsiteButton_Click(object sender, RoutedEventArgs e)
         {
+            Button b = sender as Button;
+            String url = b.Tag as String;
+
             WebBrowserTask browserTask = new WebBrowserTask();
-            browserTask.URL = "http://twitter.com/veleek";
+            browserTask.Uri = new Uri(url);
             browserTask.Show();
+        }
+
+        private void MarketplaceButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            String tag = b.Tag as String;
+
+            MarketplaceDetailTask dt = new MarketplaceDetailTask();
+            dt.ContentIdentifier = tag;
+            dt.ContentType = MarketplaceContentType.Applications;
+
+            dt.Show();
+
         }
     }
 }

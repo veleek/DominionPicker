@@ -7,11 +7,11 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="480" d:DesignWidth="480"
+    DataContext="{Binding RelativeSource={RelativeSource Self}}">
 
-    <Popup x:Name="AddFavoritePopup">
-        <Grid Width="{Binding ActualWidth, ElementName=AddFavoritePopup}"
-              Height="{Binding ActualHeight, ElementName=AddFavoritePopup}">
+    <Grid x:Name="AddFavoritePopup" Visibility="Collapsed">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="Auto"/>
@@ -37,6 +37,7 @@
                          TextWrapping="NoWrap" 
                          Grid.Row="1" 
                          MaxLength="64"
+                         Text="{Binding FavoriteName, Mode=TwoWay}"
                          KeyUp="FavoriteNameTextBox_KeyUp"/>
                 <Button x:Name="AddFavoriteAcceptButton"
                         Content="Accept"
@@ -48,5 +49,5 @@
                            TextAlignment="Center"/>
             </StackPanel>
         </Grid>
-    </Popup>
+    </Grid>
 </UserControl>

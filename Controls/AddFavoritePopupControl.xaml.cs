@@ -12,33 +12,65 @@ using System.Windows.Shapes;
 
 namespace Ben.Dominion
 {
-    public partial class AddFavoritePopupControl : UserControl
+    public class FavoriteEventArgs : EventArgs
     {
+        public String FavoriteName { get; set; }
+
+        public FavoriteEventArgs(String favoriteName)
+        {
+            this.FavoriteName = favoriteName;
+        }
+    }
+
+    public partial class AddFavoritePopupControl : UserControl
+    {        
+        public event EventHandler<FavoriteEventArgs> SaveFavorite;
+
+        public String FavoriteName
+        {
+            get { return (String)GetValue(FavoriteNameProperty); }
+            set { SetValue(FavoriteNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FavoriteName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FavoriteNameProperty =
+            DependencyProperty.Register("FavoriteName", typeof(String), typeof(AddFavoritePopupControl), new PropertyMetadata(String.Empty, OnFavoriteNameChanged));
+
+        public static void OnFavoriteNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            (d as AddFavoritePopupControl).OnFavoriteNameChanged(e.NewValue as String);
+        }
+
         public AddFavoritePopupControl()
         {
             InitializeComponent();
-            this.Focus();
         }
 
         public Boolean IsOpen
         {
-            get { return AddFavoritePopup.IsOpen; }
+            get { return AddFavoritePopup.Visibility == Visibility.Visible; }
             set 
             {
-                AddFavoritePopup.IsOpen = value;
+                AddFavoritePopup.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
 
                 if (value)
                 {
-                    if (FavoriteNameTextBox.Text == String.Empty)
+                    if (String.IsNullOrEmpty(FavoriteName))
                     {
-                        FavoriteNameTextBox.Text = "Enter a name";
+                        FavoriteName = "Enter a name";
                     }
+
                     FavoriteNameTextBox.Focus();
                     FavoriteNameTextBox.SelectAll();
                 }
             }
         }
-        
+
+        private void OnFavoriteNameChanged(String newName)
+        {
+            AddFavoriteAcceptButton.IsEnabled = !String.IsNullOrEmpty(newName);
+        }
+
         private void AddFavoriteAccept_Click(object sender, RoutedEventArgs e)
         {
             AddFavorite();
@@ -46,7 +78,11 @@ namespace Ben.Dominion
 
         private void FavoriteNameTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            Boolean isEmpty = String.IsNullOrEmpty(FavoriteNameTextBox.Text);
+
+            AddFavoriteAcceptButton.IsEnabled = !isEmpty;
+
+            if(!isEmpty && e.Key == Key.Enter)
             {
                 AddFavoriteAcceptButton.Focus();
                 AddFavorite();
@@ -55,19 +91,23 @@ namespace Ben.Dominion
 
         private void AddFavorite()
         {
-            String name = FavoriteNameTextBox.Text;
+            if (String.IsNullOrEmpty(FavoriteName))
+            {
+                throw new InvalidOperationException("Somehow this got called with an empty name");
+            }
 
-            if (!String.IsNullOrEmpty(name))
+            var saveFavHandler = SaveFavorite;
+            if (saveFavHandler != null)
             {
-                PickerState.Current.SaveFavorite(name);
-                FavoriteNameTextBox.Text = "";
-                AddFavoritePopup.IsOpen = false;
+                saveFavHandler(this, new FavoriteEventArgs(FavoriteName));
             }
-            else
-            {
-                FavoriteNameTextBox.BorderBrush = new SolidColorBrush(Colors.Red);
-                FavoriteNameTextBox.BorderThickness = new Thickness(2);
-            }
+            //PickerState.Current.SaveFavorite(name);
+            FavoriteName = String.Empty;
+
+            // This allows prevents the popup from appearing closed before it's 
+            // actually been dismissed, so we don't accidentally capture touch 
+            // events on stuff underneath it.
+            Dispatcher.BeginInvoke(() => { this.IsOpen = false; });
         }
     }
 }

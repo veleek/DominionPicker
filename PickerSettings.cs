@@ -8,7 +8,37 @@ namespace Ben.Dominion
 {
     public class PickerSettings
     {
-        public String Name { get; set; }
+        public static PickerSettings DefaultSettings
+        {
+            get
+            {
+                PickerSettings settings = new PickerSettings();
+
+                settings.Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
+                // Easy way to deselect the 'promo' card set
+                settings.Sets.Single(s => s.Set == CardSet.Promo).IsSelected = false;
+
+                settings.MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 3);
+                settings.RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);
+                settings.RequireTrash = new BooleanPickerOption("Require a card that lets you\ntrash other cards", false);
+                settings.PlusBuys = new PolicyOption("+Buys Policy");
+                settings.PlusBuys.Notes = "This may take a bit longer";
+                settings.PlusActions = new PolicyOption("+Actions Policy");
+                settings.PlusActions.Notes = "This may take a bit longer";
+                settings.PlusCoins = new PolicyOption("+Coins Policy");
+
+                settings.FilterPotions = new BooleanPickerOption("Filter Cards that Cost Potions");
+                settings.FilterAction = new BooleanPickerOption("Filter Action Cards");
+                settings.FilterAttack = new BooleanPickerOption("Filter Attack Cards");
+                settings.FilterDuration = new BooleanPickerOption("Filter Duration Cards");
+                settings.FilterReaction = new BooleanPickerOption("Filter Reaction Cards");
+                settings.FilterTreasure = new BooleanPickerOption("Filter Treasure Cards");
+                settings.FilterVictory = new BooleanPickerOption("Filter Victory Cards");
+
+                return settings;
+            }
+        }
+
         public List<SetSelector> Sets { get; set; }
 
         [XmlIgnore]
@@ -18,14 +48,6 @@ namespace Ben.Dominion
             get
             {
                 return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
-            }
-        }
-
-        public String SetsString
-        {
-            get
-            {
-                return SelectedSets.Select(s => s.ToString().Substring(0,4)).Aggregate((a, b) => a + ", " + b);
             }
         }
 
@@ -46,6 +68,23 @@ namespace Ben.Dominion
             }
         }
 
+        public CardType FilteredTypes
+        {
+            get
+            {
+                CardType filteredTypes = CardType.None;
+
+                if (FilterAction.IsEnabled) { filteredTypes |= CardType.Action; }
+                if (FilterAttack.IsEnabled) { filteredTypes |= CardType.Attack; }
+                if (FilterDuration.IsEnabled) { filteredTypes |= CardType.Duration; }
+                if (FilterReaction.IsEnabled) { filteredTypes |= CardType.Reaction; }
+                if (FilterTreasure.IsEnabled) { filteredTypes |= CardType.Treasure; }
+                if (FilterVictory.IsEnabled) { filteredTypes |= CardType.Victory; }
+
+                return filteredTypes;
+            }
+        }
+
         public ListPickerOption<Int32> MinimumCardsPerSet { get; set; }
         public BooleanPickerOption RequireDefense { get; set; }
         public BooleanPickerOption RequireTrash { get; set; }
@@ -53,6 +92,7 @@ namespace Ben.Dominion
         public PolicyOption PlusActions { get; set; }
         public PolicyOption PlusCoins { get; set; }
 
+        public BooleanPickerOption FilterPotions { get; set; }
         public BooleanPickerOption FilterAction { get; set; }
         public BooleanPickerOption FilterAttack { get; set; }
         public BooleanPickerOption FilterDuration { get; set; }
@@ -77,6 +117,7 @@ namespace Ben.Dominion
                         PlusBuys,
                         PlusActions,
                         //PlusCoins,
+                        FilterPotions,
                         FilterAction,
                         FilterAttack,
                         FilterDuration,
@@ -90,42 +131,20 @@ namespace Ben.Dominion
             }
         }
 
-        public PickerSettings()
-        {
-            Name = "Default Settings";
-            Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
-            // Easy way to deselect the 'promo' card set
-            Sets.Last().IsSelected = false;
-
-            MinimumCardsPerSet = new ListPickerOption<Int32>("Minimum cards per set", new List<Int32> { 2, 3, 4, 5, 10 }, 3);
-            RequireDefense = new BooleanPickerOption("If there's an attack,\nrequire a defense card", false);
-            RequireTrash = new BooleanPickerOption("Require a card that lets you\ntrash other cards", false);
-            PlusBuys = new PolicyOption("+Buys Policy");
-            PlusBuys.Notes = "This may take a bit longer";
-            PlusActions = new PolicyOption("+Actions Policy");
-            PlusActions.Notes = "This may take a bit longer";
-            PlusCoins = new PolicyOption("+Coins Policy");
-
-            FilterAction = new BooleanPickerOption("Filter Action Cards");
-            FilterAttack = new BooleanPickerOption("Filter Attack Cards");
-            FilterDuration = new BooleanPickerOption("Filter Duration Cards");
-            FilterReaction = new BooleanPickerOption("Filter Reaction Cards");
-            FilterTreasure = new BooleanPickerOption("Filter Treasure Cards");
-            FilterVictory = new BooleanPickerOption("Filter Victory Cards");
-
-        }
+        public PickerSettings() { }
 
         public PickerSettings Clone()
         {
             PickerSettings clone = new PickerSettings();
             clone.Sets = this.Sets.Select(s => new SetSelector(s.Set, s.IsSelected)).ToList();
-            clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone() as ListPickerOption<Int32>;
-            clone.RequireDefense = this.RequireDefense.Clone() as BooleanPickerOption;
-            clone.RequireTrash = this.RequireTrash.Clone() as BooleanPickerOption;
+            clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone<ListPickerOption<Int32>>();
+            clone.RequireDefense = this.RequireDefense.Clone<BooleanPickerOption>();
+            clone.RequireTrash = this.RequireTrash.Clone<BooleanPickerOption>();
             clone.PlusBuys = this.PlusBuys.Clone<PolicyOption>();
             clone.PlusActions = this.PlusActions.Clone<PolicyOption>();
             clone.PlusCoins = this.PlusCoins.Clone<PolicyOption>();
 
+            clone.FilterPotions = this.FilterPotions.Clone<BooleanPickerOption>();
             clone.FilterAction = this.FilterAction.Clone<BooleanPickerOption>();
             clone.FilterAttack = this.FilterAttack.Clone<BooleanPickerOption>();
             clone.FilterDuration = this.FilterDuration.Clone<BooleanPickerOption>();
@@ -135,11 +154,18 @@ namespace Ben.Dominion
 
             return clone;
         }
+
+        public override string ToString()
+        {
+            return SelectedSets.Select(s => s.ToString().Substring(0,4)).Aggregate((a, b) => a + ", " + b);
+        }
     }
 
     public class SetSelector
     {
+        [XmlAttribute]
         public CardSet Set { get; set; }
+        [XmlAttribute]
         public Boolean IsSelected { get; set; }
 
         public SetSelector() { }
@@ -148,6 +174,11 @@ namespace Ben.Dominion
         {
             this.Set = set;
             this.IsSelected = selected;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0} - {1}", Set, IsSelected);
         }
     }
 }

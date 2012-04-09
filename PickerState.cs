@@ -8,6 +8,8 @@ using System.Windows;
 using Ben.Utilities;
 using Microsoft.Phone.Shell;
 using System.Windows.Threading;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace Ben.Dominion
 {
@@ -16,8 +18,32 @@ namespace Ben.Dominion
         #region Statics
         public static readonly String PickerStateFileName = "PickerState.xml";
 
-        public static Boolean Loaded = false;
-        public static Boolean UseIsolatedStorage = true;
+        //private static Boolean Loaded = false;
+        private static Boolean UseIsolatedStorage = true;
+
+        public static PickerState Default
+        {
+            get
+            {
+                PickerState state = null;
+                try
+                {
+                    using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/DefaultPickerState.xml"))
+                    {
+                        state = GenericXmlSerializer.Deserialize<PickerState>(stream);
+                    }
+                }
+                finally
+                {
+                    if (state == null)
+                    {
+                        state = new PickerState();
+                    }
+                }
+
+                return state;
+            }
+        }
 
         private static PickerState current;
         public static PickerState Current
@@ -26,6 +52,7 @@ namespace Ben.Dominion
             {
                 if (current == null)
                 {
+                    //throw new InvalidOperationException();
                     Load();
                 }
 
@@ -56,22 +83,19 @@ namespace Ben.Dominion
                     }
                 }
             }
-            catch(Exception)
+            catch(IsolatedStorageException)
             {
-                // There was a problem loading the picker state, just ignore
-                // this and we'll create a new one.
-                //MessageBox.Show("Unable to load picker state: " + e.Message);
+                // Just ignore the exception
             }
 
             if (state == null)
             {
-                state = new PickerState();
+                state = PickerState.Default;
             }
 
             TimeSpan elapsedTime = DateTime.UtcNow - start;
             AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
             current = state;
-            Loaded = true;
         }
 
         public static void Save()
@@ -93,25 +117,14 @@ namespace Ben.Dominion
                         }
                     }
                 }
-                catch(Exception e)
+                catch(IsolatedStorageException e)
                 {
-                    com.mtiks.winmobile.mtiks.Instance.AddException(new Exception("Unable to save picker state", e));
+                    com.mtiks.winmobile.mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
                 }
             }
 
             TimeSpan elapsedTime = DateTime.UtcNow - start;
             AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
-        }
-
-        /// <summary>
-        /// Deletes all saved state from the disk and creates a new one
-        /// </summary>
-        public static void ResetState()
-        {
-            ClearSavedState();
-
-            // Will force the creation of a new state
-            current = new PickerState();
         }
 
         /// <summary>
@@ -130,12 +143,20 @@ namespace Ben.Dominion
                     }
                 }
             }
-            catch { }
+            catch (IsolatedStorageException) { }
+
+            // Then reload (or recreate it)
+            Load();
         }
 
-        #endregion
+        #endregion Statics
 
         private Picker picker { get; set; }
+
+        public Boolean IsGenerating
+        {
+            get { return picker.IsGenerating; }
+        }
 
         private PickerSettings currentSettings;
         public PickerSettings CurrentSettings
@@ -144,7 +165,7 @@ namespace Ben.Dominion
             {
                 if (currentSettings == null)
                 {
-                    currentSettings = new PickerSettings();
+                    currentSettings = PickerSettings.DefaultSettings;
                 }
 
                 return currentSettings; 
@@ -162,7 +183,11 @@ namespace Ben.Dominion
         /// <summary>
         /// A saved list of favorite settings
         /// </summary>
-        public ObservableCollection<PickerSettings> FavoriteSettings { get; set; }
+        public ObservableCollection<FavoriteSetting> FavoriteSettings { get; set; }
+        /// <summary>
+        /// A saved list of favorite sets
+        /// </summary>
+        public ObservableCollection<FavoriteSet> FavoriteSets { get; set; }
 
         private PickerResult result;
         /// <summary>
@@ -181,23 +206,35 @@ namespace Ben.Dominion
             }
         }
 
+        public ResultSortOrder SortOrder { get; set; }
+
         public PickerState()
         {
-            this.FavoriteSettings = new ObservableCollection<PickerSettings>();
+            //this.Favorites = new ObservableCollection<PickerFavorite>();
+            this.FavoriteSettings = new ObservableCollection<FavoriteSetting>();
+            this.FavoriteSets = new ObservableCollection<FavoriteSet>();
+
             this.picker = new Picker();
+            this.picker.PropertyChanged += new PropertyChangedEventHandler(picker_PropertyChanged);
+            this.SortOrder = ResultSortOrder.Name;
         }
 
-        public void SaveFavorite(String name)
+        void picker_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            PickerSettings fav = CurrentSettings.Clone();
-            fav.Name = name;
-
-            FavoriteSettings.Add(fav);
+            if (e.PropertyName == "IsGenerating")
+            {
+                NotifyPropertyChanged("IsGenerating");
+            }
         }
 
-        public void LoadSettings(Int32 favoriteIndex)
+        public void SaveFavoriteSettings(String name)
         {
-            LoadSettings(FavoriteSettings[favoriteIndex]);
+            FavoriteSettings.Add(new FavoriteSetting(name, CurrentSettings.Clone()));
+        }
+
+        public void SaveFavoriteCardSet(String name)
+        {
+            FavoriteSets.Add(new FavoriteSet(name, this.Result));
         }
 
         public void LoadSettings(PickerSettings settings)
@@ -207,7 +244,7 @@ namespace Ben.Dominion
 
         public void Reset()
         {
-            CurrentSettings = new PickerSettings();
+            CurrentSettings = PickerSettings.DefaultSettings;
         }
 
         /// <summary>
@@ -218,11 +255,10 @@ namespace Ben.Dominion
         {
             if (CurrentSettings.SelectedSets.Count == 0)
             {
-                MessageBox.Show("Select at least one expansion set to choose from");
                 return false;
             }
             this.Result = picker.GenerateCardList();
-            this.sortedAlphabetically = true;
+            this.SortBy(SortOrder);
 
             return this.result != null;
         }
@@ -240,19 +276,33 @@ namespace Ben.Dominion
             Result.Cards.Insert(index, picker.GetRandomCardOtherThan(Result.Cards));
         }
 
-        private Boolean sortedAlphabetically;
-        public void SwapSort()
+        public void SortBy(ResultSortOrder sortOrder)
         {
-            if (sortedAlphabetically)
+            if (Result != null && Result.Cards != null)
             {
-                Result.Cards = Result.Cards.OrderBy(c => c.Cost).ToObservableCollection();
-            }
-            else
-            {
-                Result.Cards = Result.Cards.OrderBy(c => c.Name).ToObservableCollection();
+                switch (sortOrder)
+                {
+                    case ResultSortOrder.Name:
+                        Result.Cards = Result.Cards.OrderBy(c => c.Name).ToObservableCollection();
+                        break;
+                    case ResultSortOrder.Cost:
+                        Result.Cards = Result.Cards.OrderBy(c => c.Cost).ToObservableCollection();
+                        break;
+                    case ResultSortOrder.Set:
+                        // Order them by set then alphabetically
+                        // This makes the most sense because it's probably 
+                        // being used by someone who has the cards in the 
+                        // original set boxes
+                        Result.Cards = Result.Cards.OrderBy(c => c.Set + "," + c.Name).ToObservableCollection();
+                        break;
+                    default:
+                        // Orders them randomly, not used
+                        Result.Cards = Result.Cards.OrderBy(c => Guid.NewGuid()).ToObservableCollection();
+                        break;
+                }
             }
 
-            sortedAlphabetically = !sortedAlphabetically;
+            SortOrder = sortOrder;
         }
 
         /// <summary>
@@ -262,5 +312,13 @@ namespace Ben.Dominion
         {
             picker.CancelGeneration();
         }
+    }
+
+    public enum ResultSortOrder
+    {
+        None,
+        Name,
+        Cost,
+        Set,
     }
 }

@@ -118,13 +118,6 @@ namespace Ben.Dominion
     /// </summary>
     public abstract class ListPickerOption : BooleanPickerOption
     {
-        /// <summary>
-        /// Don't use this.  It's presence works around what appears to be a
-        /// bug in WP7 where no data will be serialized for a class if it
-        /// doesn't have a direct DataMember.
-        /// </summary>
-        public int Unused { get; set; }
-
         public ListPickerOption() { }
         public ListPickerOption(String name) : base(name, false) { }
     }
@@ -159,15 +152,7 @@ namespace Ben.Dominion
 
     public class PolicyOption : ListPickerOption<String>
     {
-        public static String Require = "Require";
-        public static String Prevent = "Prevent";
-        public static List<String> PolicyOptions = new List<String> { Require, "Require +2", Prevent, "Prevent +2" };
-
-        public Boolean IsRequired
-        {
-            get { return SelectedValue == Require; }
-            set { SelectedValue = value ? Require : Prevent; }
-        }
+        private static List<String> PolicyOptions = new List<String> { "Require", "Require +2", "Prevent", "Prevent +2" };
 
         public Boolean Is(String value)
         {

@@ -13,23 +13,23 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity="1">
 
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator Text="Generating card set..." 
+                                 IsIndeterminate="True" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
-        <ProgressBar x:Name="GenerationProgressBar"
-                     Style="{StaticResource PerformanceProgressBar}"
-                     Grid.Row="0"
-                     VerticalAlignment="Top"
-                     Visibility="Collapsed"/>
         
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,6,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Card List" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="Results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
             
             <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="Swipe a card to replace.  Tap for info." />
         </StackPanel>
@@ -39,57 +39,60 @@
                 <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Margin="2" Background="{Binding BackgroundColor}" 
-                                    CornerRadius="5"
-                                    BorderBrush="DarkGray" 
-                                    BorderThickness="0">
-                                <toolkit:GestureService.GestureListener>
-                                    <toolkit:GestureListener Flick="CardItem_Flick" Tap="CardItem_Tap"/>
-                                </toolkit:GestureService.GestureListener>
-                                <Grid Margin="0,1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto" MinWidth="6"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="./Images/coin.png" Grid.Column="0"
-                                           Width="30" Height="30" Margin="12,0,6,0"/>
-                                    <TextBlock Text="{Binding CoinCost}" 
-                                               Grid.Column="0" Margin="5,-5,0,0"
-                                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                                               Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
-                                    <Image Source="./Images/potion_small.png"
-                                           Height="30"
-                                           Grid.Column="1"
-                                           Margin="0,0,12,0"
-                                           Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <TextBlock Text="{Binding Name}" 
-                                               Grid.Column="2"
-                                               Margin="2,4,12,0" 
-                                               Style="{StaticResource CardTitleTextStyle}" 
-                                               Foreground="Black"/>
-                                    <TextBlock Text="{Binding Name}" 
-                                               Grid.Column="2"
-                                               Style="{StaticResource CardTitleTextStyle}" 
-                                               Margin="0,0,12,0" 
-                                               Foreground="White"/>
-                                    <TextBlock Text="{Binding Set}" 
-                                               Grid.Column="3"
-                                               Margin="0,2,6,0"                                                
-                                               FontStyle="{StaticResource PhoneTextSubtleStyle}"
-                                               TextAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               Foreground="Black"/>
-                                    <TextBlock Text="{Binding Set}" 
-                                               Grid.Column="3"
-                                               Margin="0,0,8,0"                                                
-                                               FontStyle="{StaticResource PhoneTextSubtleStyle}"
-                                               TextAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               Foreground="White"/>
-                                </Grid>
-                            </Border>
+                            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
+                                          MouseLeftButtonUp="ScrollViewer_MouseLeftButtonUp" ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                                <Border Margin="2" Background="{Binding BackgroundColor}" 
+                                        CornerRadius="5"
+                                        BorderBrush="DarkGray" 
+                                        BorderThickness="0">
+                                    <toolkit:GestureService.GestureListener>
+                                        <toolkit:GestureListener Flick="CardItem_Flick" Tap="CardItem_Tap"/>
+                                    </toolkit:GestureService.GestureListener>
+                                    <Grid Margin="0,1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="./Images/coin.png" Grid.Column="0"
+                                               Width="32" Height="32" Margin="12,0,6,0"/>
+                                        <TextBlock Text="{Binding CoinCost}" 
+                                                   Grid.Column="0" Margin="5,-5,0,0"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                   Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
+                                        <Image Source="./Images/potion_small.png"
+                                               Height="30"
+                                               Grid.Column="1"
+                                               Margin="0,0,12,0"
+                                               Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <TextBlock Text="{Binding Name}" 
+                                                   Grid.Column="2"
+                                                   Margin="2,4,12,0" 
+                                                   Style="{StaticResource CardTitleTextStyle}" 
+                                                   Foreground="Black"/>
+                                        <TextBlock Text="{Binding Name}" 
+                                                   Grid.Column="2"
+                                                   Style="{StaticResource CardTitleTextStyle}" 
+                                                   Margin="0,0,12,0" 
+                                                   Foreground="White"/>
+                                        <TextBlock Text="{Binding Set}"
+                                                   Grid.Column="3"
+                                                   Margin="0,2,6,0"
+                                                   Style="{StaticResource PhoneTextSubtleStyle}"
+                                                   TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="Black"/>
+                                        <TextBlock Text="{Binding Set}" 
+                                                   Grid.Column="3"
+                                                   Margin="0,0,8,0"                                                
+                                                   Style="{StaticResource PhoneTextSubtleStyle}"
+                                                   TextAlignment="Right"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="White"/>
+                                    </Grid>
+                                </Border>
+                            </ScrollViewer>
                             <!--<Border Margin="6" Background="{Binding BackgroundColor}" CornerRadius="10"
                                     BorderBrush="DarkGray" BorderThickness="2">
                                 <toolkit:GestureService.GestureListener>
@@ -126,14 +129,15 @@
             </ScrollViewer>
         </Grid>
 
-        <local:AddFavoritePopupControl x:Name="AddFavoritePopup"
-                                       Grid.RowSpan="2"/>
+        <local:AddFavoritePopupControl x:Name="AddFavoritePopup" 
+                                       Grid.RowSpan="2"
+                                       SaveFavorite="AddFavoritePopup_SaveFavorite"/>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="AppBarRefreshButton" IconUri="/Images/appbar.refresh.png" Text="regenerate" Click="Refresh_Click"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.alpha.png" Text="change sort" Click="Sort_Click"/>
+            <shell:ApplicationBarIconButton x:Name="AppBarSortButton" IconUri="/Images/appbar.sort.name.png" Text="sort by name" Click="Sort_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="save" Click="AddFavorite_Click"/>
             <shell:ApplicationBar.MenuItems>
             </shell:ApplicationBar.MenuItems>

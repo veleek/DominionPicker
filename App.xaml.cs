@@ -31,9 +31,10 @@ namespace Ben.Dominion
         
         public Card SelectedCard { get; set; }
 
-        public static readonly String ApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
+        public static readonly String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
+        public static readonly String MtiksApplicationId = "166ff6d5917b9569d549eec40";
 
-        public LicenseInformation license = new LicenseInformation();
+        private LicenseInformation license = new LicenseInformation();
         public Boolean IsTrial
         {
             get
@@ -43,11 +44,15 @@ namespace Ben.Dominion
             }
         }
 
+        private Boolean isNew = false;
+
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
         {
+            isNew = true;
+
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
 
@@ -55,7 +60,7 @@ namespace Ben.Dominion
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // Display the current frame rate counters
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                //Application.Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -63,6 +68,8 @@ namespace Ben.Dominion
                 // Enable non-production analysis visualization mode, 
                 // which shows areas of a page that are being GPU accelerated with a colored overlay.
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
+
+                //MetroGridHelper.IsVisible = true;
             }
 
             // Standard Silverlight initialization
@@ -83,6 +90,10 @@ namespace Ben.Dominion
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            if (!isNew)
+            {
+                //MessageBox.Show("Was tombstoned");
+            }
             PickerState.Load();
         }
 
@@ -90,6 +101,7 @@ namespace Ben.Dominion
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            isNew = false;
             PickerState.Save();
             mtiks.Instance.Stop();
         }
@@ -143,22 +155,28 @@ namespace Ben.Dominion
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
-            AdManager.Initialize(ApplicationId);
-            var a = Assembly.GetExecutingAssembly();
-            mtiks.Instance.Start("166ff6d5917b9569d549eec40", Assembly.GetExecutingAssembly());
+            AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
+            mtiks.Instance.Start(MtiksApplicationId, Assembly.GetExecutingAssembly());
 
-            // Increment the launch count
+            // Increment the launch count and save it back
             Int32 appLaunchCount = 0;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
             appLaunchCount++;
             IsolatedStorageSettings.ApplicationSettings["AppLaunchCount"] = appLaunchCount;
 
-            if (appLaunchCount <= 1)
-            {
-                // This is the first launch after update
-                PickerState.ClearSavedState();
-            }
+            // Check if we've updated since the last time we ran
+            String currentAppVersion = Assembly.GetExecutingAssembly().FullName;
+            String appVersion = null;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppVersion", out appVersion);
 
+            if (appVersion == null || appVersion != currentAppVersion)
+            {
+                // This is a new run or an update, so let's clear the saved state
+                PickerState.ClearSavedState();
+                // Save the current app version
+                IsolatedStorageSettings.ApplicationSettings["AppVersion"] = currentAppVersion;
+            }
+            
             // Ensure we don't initialize again
             phoneApplicationInitialized = true;
         }

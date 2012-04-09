@@ -20,6 +20,7 @@ namespace Ben.Dominion
         Alchemy,
         Prosperity,
         Cornucopia,
+        Hinterlands,
         Promo,
     }
 
@@ -171,9 +172,9 @@ namespace Ben.Dominion
         }
     }
 
-    public class Cards
+    public static class Cards
     {
-        public static readonly String PickerCardsFileName = "./DominionPickerCards.xml";
+        public static readonly String PickerCardsFileName = "./Assets/DominionPickerCards.xml";
 
         public static IEnumerable<CardSet> AllSets
         {
@@ -187,6 +188,7 @@ namespace Ben.Dominion
                     CardSet.Alchemy,
                     CardSet.Prosperity,
                     CardSet.Cornucopia,
+                    CardSet.Hinterlands,
                     CardSet.Promo,
                 };
             }
@@ -234,6 +236,19 @@ namespace Ben.Dominion
             }
         }
 
+        private static Dictionary<Int32, Card> lookup = null;
+        public static Dictionary<Int32, Card> Lookup
+        {
+            get
+            {
+                if (lookup == null)
+                {
+                    lookup = AllCards.ToDictionary(c => c.ID);
+                }
+                return lookup;
+            }
+        }
+
         public static List<Card> Load()
         {
             using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
@@ -250,6 +265,7 @@ namespace Ben.Dominion
                 using (IsolatedStorageFileStream stream = store.CreateFile(PickerCardsFileName))
                 {
                     String xml = GenericXmlSerializer.Serialize(cards);
+                    Console.WriteLine(xml);
                 }
             }
         }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using Ben.Utilities;
+using System.Collections.Generic;
 
 namespace Ben.Dominion
 {
@@ -44,5 +45,22 @@ namespace Ben.Dominion
         public Boolean HasPlus2Action { get { return Cards.Any(c => twoActionRegex.IsMatch(c.Rules)); } }
         public Boolean HasPlusBuy { get { return Cards.Any(c => buyRegex.IsMatch(c.Rules)); } }
         public Boolean HasPlus2Buy { get { return Cards.Any(c => twoBuyRegex.IsMatch(c.Rules)); } }
+
+        public override string ToString()
+        {
+            return Cards.Select(c => c.Set).Distinct().Select(s => s.ToString().Substring(0, 4)).Aggregate((a, b) => a + ", " + b);
+        }
+
+        public List<Int32> ToList()
+        {
+            return Cards.Select(c => c.ID).ToList();
+        }
+
+        public static PickerResult FromList(IEnumerable<Int32> cardIds)
+        {
+            PickerResult result = new PickerResult();
+            result.Cards = cardIds.Select(id => Ben.Dominion.Cards.Lookup[id]).ToObservableCollection();
+            return result;
+        }
     }
 }

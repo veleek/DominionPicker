@@ -3,7 +3,7 @@
   <!--Base Set--> 
   <Card ID="1" Name="Cellar" Set="Base" Type="Action" Cost="2" Rules="+1 Action\nDiscard any number of cards.\n+1 Card per card discarded." />
   <Card ID="2" Name="Chapel" Set="Base" Type="Action" Cost="2" Rules="Trash up to 4 cards from your hand." />
-  <Card ID="3" Name="Moat" Set="Base" Type="Action Reaction" Cost="2" Rules="+2 Cards\n----------\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, you are unaffected by that Attack." />
+  <Card ID="3" Name="Moat" Set="Base" Type="Action Reaction" Cost="2" Rules="+2 Cards\n_____\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, you are unaffected by that Attack." />
   <Card ID="4" Name="Chancellor" Set="Base" Type="Action" Cost="3" Rules="+2 Coins\nYou may immediately put your deck into your discard pile." />
   <Card ID="5" Name="Village" Set="Base" Type="Action" Cost="3" Rules="+1 Card\n+2 Actions" />
   <Card ID="6" Name="Woodcutter" Set="Base" Type="Action" Cost="3" Rules="+1 Buy\n+2 Coins" />
@@ -27,9 +27,9 @@
   <Card ID="24" Name="Witch" Set="Base" Type="Action Attack" Cost="5" Rules="+2 Cards\nEach other player gains a Curse card." />
   <Card ID="25" Name="Adventurer" Set="Base" Type="Action" Cost="6" Rules="Reveal cards from your deck until you reveal 2 Treasure cards. Put those Treasure cards in your hand and discard the other revealed cards." />
   <!--Intrigue-->
-  <Card ID="26" Name="Courtyard" Set="Intrigue" Type="Action" Cost="2" Rules="+3 Card\nPut a card from your hand on top of your deck." />
+  <Card ID="26" Name="Courtyard" Set="Intrigue" Type="Action" Cost="2" Rules="+3 Cards\nPut a card from your hand on top of your deck." />
   <Card ID="27" Name="Pawn" Set="Intrigue" Type="Action" Cost="2" Rules="Choose two: +1 Card\n+1 Action\n+1 Buy\n+1 Coin. (The choices must be different.)." />
-  <Card ID="28" Name="Secret Chamber" Set="Intrigue" Type="Action Reaction" Cost="2" Rules="Discard any number of cards. +1 Coin per card discarded.\n----------\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, +2 cards, then put 2 cards from your hand on top of your deck." />
+  <Card ID="28" Name="Secret Chamber" Set="Intrigue" Type="Action Reaction" Cost="2" Rules="Discard any number of cards. +1 Coin per card discarded.\n_____\nWhen another player plays an Attack card, you may reveal this from your hand. If you do, +2 cards, then put 2 cards from your hand on top of your deck." />
   <Card ID="29" Name="Great Hall" Set="Intrigue" Type="Action Victory" Cost="3" Rules="+1 Card\n+1 Action\n1 {VP}" />
   <Card ID="30" Name="Masquerade" Set="Intrigue" Type="Action" Cost="3" Rules="+2 Card, Each player passes a card in their hand to the player on their left. You may trash a card from your hand." />
   <Card ID="31" Name="Shanty Town" Set="Intrigue" Type="Action" Cost="3" Rules="+2 Actions\nReveal your hand. If you have no Action cards in hand, +2 Cards." />
@@ -53,32 +53,32 @@
   <Card ID="49" Name="Harem" Set="Intrigue" Type="Treasure Victory" Cost="6" Rules="2 Coins\n2 {VP}" />
   <Card ID="50" Name="Nobles" Set="Intrigue" Type="Action Victory" Cost="6" Rules="Choose one: +3 Cards, or +2 Actions.\n2 {VP}" />
   <!--Seaside-->
-  <Card ID="51" Name="Embargo" Set="Seaside" Type="Action" Cost="2" Rules="+2 Coins, Trash this card. Put an Embargo token on top of a Supply pile. - When a player buys a card, he gains a Curse card per Embargo token on that pile." />
-  <Card ID="52" Name="Haven" Set="Seaside" Type="Action Duration" Cost="2" Rules="+1 Card, +1 Action, Set aside a card from your hand face down. At the start of your next turn, put it into your hand." />
-  <Card ID="53" Name="Lighthouse" Set="Seaside" Type="Action Duration" Cost="2" Rules="+1 Action, Now and at the start of your next turn: +1 Coin. - While this is in play, when another player plays an Attack card, it doesn't affect you." />
-  <Card ID="54" Name="Native Village" Set="Seaside" Type="Action" Cost="2" Rules="+2 Actions, Choose one: Set aside the top card of your deck face down on your Native Village mat; or put all the cards from your mat into your hand. You may look at the cards on your mat at any time; return them to your deck at the end of the game." />
-  <Card ID="55" Name="Pearl Diver" Set="Seaside" Type="Action" Cost="2" Rules="+1 Card, +1 Action, Look at the bottom card of your deck. You may put it on top." />
+  <Card ID="51" Name="Embargo" Set="Seaside" Type="Action" Cost="2" Rules="+2 Coins\nTrash this card. Put an Embargo token on top of a Supply pile. - When a player buys a card, he gains a Curse card per Embargo token on that pile." />
+  <Card ID="52" Name="Haven" Set="Seaside" Type="Action Duration" Cost="2" Rules="+1 Card\n+1 Action\nSet aside a card from your hand face down. At the start of your next turn, put it into your hand." />
+  <Card ID="53" Name="Lighthouse" Set="Seaside" Type="Action Duration" Cost="2" Rules="+1 Action\nNow and at the start of your next turn: +1 Coin. - While this is in play, when another player plays an Attack card, it doesn't affect you." />
+  <Card ID="54" Name="Native Village" Set="Seaside" Type="Action" Cost="2" Rules="+2 Actions\nChoose one: Set aside the top card of your deck face down on your Native Village mat; or put all the cards from your mat into your hand. You may look at the cards on your mat at any time; return them to your deck at the end of the game." />
+  <Card ID="55" Name="Pearl Diver" Set="Seaside" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nLook at the bottom card of your deck. You may put it on top." />
   <Card ID="56" Name="Ambassador" Set="Seaside" Type="Action" Cost="3" Rules="Reveal a card from your hand. Return up to 2 copies of it from your hand to the Supply. Then each other player gains a copy of it." />
-  <Card ID="57" Name="Fishing Village" Set="Seaside" Type="Action Duration" Cost="3" Rules="+2 Actions, +1 Coin, At the start of your next turn: +1 Action, +1 Coin." />
-  <Card ID="58" Name="Lookout" Set="Seaside" Type="Action" Cost="3" Rules="+1 Action, Look at the top 3 cards of your deck. Trash one of them. Discard one of them. Put the other one on top of your deck." />
+  <Card ID="57" Name="Fishing Village" Set="Seaside" Type="Action Duration" Cost="3" Rules="+2 Actions\n+1 Coin\nAt the start of your next turn:\n+1 Action\n+1 Coin." />
+  <Card ID="58" Name="Lookout" Set="Seaside" Type="Action" Cost="3" Rules="+1 Action\nLook at the top 3 cards of your deck. Trash one of them. Discard one of them. Put the other one on top of your deck." />
   <Card ID="59" Name="Smugglers" Set="Seaside" Type="Action" Cost="3" Rules="Gain a copy of a card costing up to 6 Coins that the player to your right gained on his last turn." />
-  <Card ID="60" Name="Warehouse" Set="Seaside" Type="Action" Cost="3" Rules="+3 Card, +1 Action, Discard 3 cards." />
-  <Card ID="61" Name="Caravan" Set="Seaside" Type="Action Duration" Cost="4" Rules="+1 Card, +1 Action\nAt the start of your next turn, +1 Card." />
-  <Card ID="62" Name="Cutpurse" Set="Seaside" Type="Action Attack" Cost="4" Rules="+2 Coins, Each other player discards a Copper card (or reveals a hand with no Copper)." />
-  <Card ID="63" Name="Island" Set="Seaside" Type="Action Victory" Cost="4" Rules="Set aside this and another card from your hand. Return them to your deck at the end of the game.\n----------\n2{VP}" />
-  <Card ID="64" Name="Navigator" Set="Seaside" Type="Action" Cost="4" Rules="+2 Coins, Look at the top 5 cards of your deck. Either discard all of them, or put them back on top of your deck in any order." />
+  <Card ID="60" Name="Warehouse" Set="Seaside" Type="Action" Cost="3" Rules="+3 Card\n+1 Action\nDiscard 3 cards." />
+  <Card ID="61" Name="Caravan" Set="Seaside" Type="Action Duration" Cost="4" Rules="+1 Card\n+1 Action\nAt the start of your next turn, +1 Card." />
+  <Card ID="62" Name="Cutpurse" Set="Seaside" Type="Action Attack" Cost="4" Rules="+2 Coins\nEach other player discards a Copper card (or reveals a hand with no Copper)." />
+  <Card ID="63" Name="Island" Set="Seaside" Type="Action Victory" Cost="4" Rules="Set aside this and another card from your hand. Return them to your deck at the end of the game.\n_____\n2{VP}" />
+  <Card ID="64" Name="Navigator" Set="Seaside" Type="Action" Cost="4" Rules="+2 Coins\nLook at the top 5 cards of your deck. Either discard all of them, or put them back on top of your deck in any order." />
   <Card ID="65" Name="Pirate Ship" Set="Seaside" Type="Action Attack" Cost="4" Rules="Choose one: Each other player reveals the top 2 cards of his deck, trashes a revealed Treasure that you choose, discards the rest, and if anyone trashed a Treasure you take a Coin token; or, +1 Coin per Coin token you've taken with Pirate Ships this game." />
-  <Card ID="66" Name="Salvager" Set="Seaside" Type="Action" Cost="4" Rules="+1 Buy, Trash a card from your hand. +Coins equal to its cost." />
+  <Card ID="66" Name="Salvager" Set="Seaside" Type="Action" Cost="4" Rules="+1 Buy\nTrash a card from your hand. +Coins equal to its cost." />
   <Card ID="67" Name="Sea Hag" Set="Seaside" Type="Action Attack" Cost="4" Rules="Each other player discards the top card of his deck, then gains a Curse card, putting it on top of his deck." />
   <Card ID="68" Name="Treasure Map" Set="Seaside" Type="Action" Cost="4" Rules="Trash this and another copy of Treasure Map from your hand. If you do trash two Treasure Maps, gain 4 Gold cards, putting them on top of your deck." />
-  <Card ID="69" Name="Bazaar" Set="Seaside" Type="Action" Cost="5" Rules="+1 Card, +2 Actions, +1 Coin." />
+  <Card ID="69" Name="Bazaar" Set="Seaside" Type="Action" Cost="5" Rules="+1 Card\n+2 Actions\n+1 Coin." />
   <Card ID="70" Name="Explorer" Set="Seaside" Type="Action" Cost="5" Rules="You may reveal a Province card from your hand. If you do, gain a Gold card, putting it into your hand. Otherwise, gain a Silver card, putting it into your hand." />
-  <Card ID="71" Name="Ghost Ship" Set="Seaside" Type="Action Attack" Cost="5" Rules="+2 Card, Each other player with 4 or more cards in hand puts cards from his hand on top of his deck until he has 3 cards in his hand." />
+  <Card ID="71" Name="Ghost Ship" Set="Seaside" Type="Action Attack" Cost="5" Rules="+2 Cards\nEach other player with 4 or more cards in hand puts cards from his hand on top of his deck until he has 3 cards in his hand." />
   <Card ID="72" Name="Merchant Ship" Set="Seaside" Type="Action Duration" Cost="5" Rules="Now and at the start of your next turn: +2 Coins." />
   <Card ID="73" Name="Outpost" Set="Seaside" Type="Action Duration" Cost="5" Rules="You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns."/>
-  <Card ID="74" Name="Tactician" Set="Seaside" Type="Action Duration" Cost="5" Rules="Discard your hand. If you discarded any cards this way, then at the start of your next turn, +5 Cards, +1 Buy, and +1 Action." />
-  <Card ID="75" Name="Treasury" Set="Seaside" Type="Action" Cost="5" Rules="+1 Card, +1 Action, +1 Coin, When you discard this from play, if you didn't buy a Victory card this turn, you may put this on top of your deck." />
-  <Card ID="76" Name="Wharf" Set="Seaside" Type="Action Duration" Cost="5" Rules="Now and at the start of your next turn: +2 Cards, +1 Buy." />
+  <Card ID="74" Name="Tactician" Set="Seaside" Type="Action Duration" Cost="5" Rules="Discard your hand.\nIf you discarded any cards this way, then at the start of your next turn, +5 Cards, +1 Buy, and +1 Action." />
+  <Card ID="75" Name="Treasury" Set="Seaside" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\n+1 Coin\nWhen you discard this from play, if you didn't buy a Victory card this turn, you may put this on top of your deck." />
+  <Card ID="76" Name="Wharf" Set="Seaside" Type="Action Duration" Cost="5" Rules="Now and at the start of your next turn:\n+2 Cards\n+1 Buy" />
   <!--Alchemy-->
   <Card ID="77" Name="Transmute" Set="Alchemy" Type="Action" Cost="0p" Rules="Trash a card from your hand.\nIf it is an?\nAction card, Gain a Duchy\nTreasure card, gain a Transmute\nVictory card, gain a Gold" />
   <Card ID="78" Name="Vineyard" Set="Alchemy" Type="Victory" Cost="0p" Rules="Worth 1 Victory for every 3 Action cards in your deck (rounded down)." />
@@ -95,30 +95,30 @@
   <Card ID="89" Name="Possession" Set="Alchemy" Type="Action" Cost="6p" Rules="The player to your left takes an extra turn after this one, in which you can see all cards he can and make all decisions for him.\nAny cards he would gain on that turn, you gain instead; any cards of his that are trashed are set aside and returned to his discard pile at end of turn." />
   <!--Prosperity-->
   <Card ID="90" Name="Loan" Set="Prosperity" Type="Treasure" Cost="3" Rules="Worth 1 Coin.\nWhen you play this, reveal cards from your deck until you reveal a Treasure. Discard it or trash it. Discard the other cards." />
-  <Card ID="91" Name="Trade Route" Set="Prosperity" Type="Action" Cost="3" Rules="+1 Buy\n+1 Coin per token on the Trade Route mat.\nTrash a card from your hand.\n----------\nSetup: Put a token on each Victory card Supply pile. When a card is gained from that pile, move the token to the Trade Route mat." />
-  <Card ID="92" Name="Watchtower" Set="Prosperity" Type="Reaction" Cost="3" Rules="Draw until you have 6 cards in hand.\n----------\nWhen you gain a card, you may reveal this from your hand. If you do, either trash that card, or put it on top of your deck." />
+  <Card ID="91" Name="Trade Route" Set="Prosperity" Type="Action" Cost="3" Rules="+1 Buy\n+1 Coin per token on the Trade Route mat.\nTrash a card from your hand.\n_____\nSetup: Put a token on each Victory card Supply pile. When a card is gained from that pile, move the token to the Trade Route mat." />
+  <Card ID="92" Name="Watchtower" Set="Prosperity" Type="Action Reaction" Cost="3" Rules="Draw until you have 6 cards in hand.\n_____\nWhen you gain a card, you may reveal this from your hand. If you do, either trash that card, or put it on top of your deck." />
   <Card ID="93" Name="Bishop" Set="Prosperity" Type="Action" Cost="4" Rules="1\n+1 {VP}\nTrash a card from your hand. +{VP} equal to half its cost in coins, rounded down.\nEach other player may trash a card from his hand." />
   <Card ID="94" Name="Monument" Set="Prosperity" Type="Action" Cost="4" Rules="+2 Coins; +1 {VP}" />
-  <Card ID="95" Name="Quarry" Set="Prosperity" Type="Treasure" Cost="4" Rules="Worth 1 Coin.\n----------\nWhile this is in play, Action cards cost 2 less, but not less than 0." />
-  <Card ID="96" Name="Talisman" Set="Prosperity" Type="Treasure" Cost="4" Rules="Worth 1 Coin.\n----------\nWhile this is in play, when you buy a card costing 4 or less that is not a Victory card, gain a copy of it." />
+  <Card ID="95" Name="Quarry" Set="Prosperity" Type="Treasure" Cost="4" Rules="Worth 1 Coin.\n_____\nWhile this is in play, Action cards cost 2 less, but not less than 0." />
+  <Card ID="96" Name="Talisman" Set="Prosperity" Type="Treasure" Cost="4" Rules="Worth 1 Coin.\n_____\nWhile this is in play, when you buy a card costing 4 or less that is not a Victory card, gain a copy of it." />
   <Card ID="97" Name="Worker's Village" Set="Prosperity" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n+1 Buy" />
   <Card ID="98" Name="City" Set="Prosperity" Type="Action" Cost="5" Rules="+1 Card\n+2 Actions\nIf there are one or more empty Supply piles, +1 Card. If there are two or more, +1 Coin and +1 Buy." />
   <Card ID="99" Name="Contraband" Set="Prosperity" Type="Treasure" Cost="5" Rules="Worth 3 Coins.\n+1 Buy\nWhen you play this, the player to your left names a card. You can't buy that card this turn." />
   <Card ID="100" Name="Counting House" Set="Prosperity" Type="Action" Cost="5" Rules="Look through your discard pile, reveal any number of Copper cards from it, and put them into your hand." />
-  <Card ID="101" Name="Mint" Set="Prosperity" Type="Action" Cost="5" Rules="You may reveal a Treasure card from your hand. Gain a copy of it.\n----------\nWhen you buy this, trash all Treasures you have in play." />
+  <Card ID="101" Name="Mint" Set="Prosperity" Type="Action" Cost="5" Rules="You may reveal a Treasure card from your hand. Gain a copy of it.\n_____\nWhen you buy this, trash all Treasures you have in play." />
   <Card ID="102" Name="Mountebank" Set="Prosperity" Type="Action Attack" Cost="5" Rules="+2 Coins\nEach other player may discard a Curse. If he doesn't, he gains a Curse and a Copper." />
   <Card ID="103" Name="Rabble" Set="Prosperity" Type="Action Attack" Cost="5" Rules="+3 Cards\nEach other player reveals the top 3 cards of his deck, discards the revealed Actions and Treasures, and puts the rest back on top in any order he chooses." />
-  <Card ID="104" Name="Royal Seal" Set="Prosperity" Type="Treasure" Cost="5" Rules="Worth 2 Coins.\n----------\nWhile this is in play, when you gain a card, you may put that card on top of your deck." />
+  <Card ID="104" Name="Royal Seal" Set="Prosperity" Type="Treasure" Cost="5" Rules="Worth 2 Coins.\n_____\nWhile this is in play, when you gain a card, you may put that card on top of your deck." />
   <Card ID="105" Name="Vault" Set="Prosperity" Type="Action" Cost="5" Rules="+2 Cards\nDiscard any number of cards. +1 Coin per card discarded.\nEach other player may discard 2 cards. If he does, he draws a card." />
   <Card ID="106" Name="Venture" Set="Prosperity" Type="Treasure" Cost="5" Rules="Worth 1 Coin.\nWhen you play this, reveal cards from your deck until you reveal a Treasure. Discard the other cards. Play that Treasure." />
-  <Card ID="107" Name="Goons" Set="Prosperity" Type="Action Attack" Cost="6" Rules="+1 Buy\n+2 Coins\nEach other player discards down to 3 cards in hand.\n----------\nWhile this is in play, when you buy a card, +1 {VP}." />
-  <Card ID="108" Name="Grand Market" Set="Prosperity" Type="Action" Cost="6" Rules="+1 Card\n+1 Action\n+1 Buy\n+2 Coins\n----------\nYou can't buy this if you have any Copper in play." />
-  <Card ID="109" Name="Hoard" Set="Prosperity" Type="Treasure" Cost="6" Rules="Worth 2 Coins.\n----------\nWhile this is in play, when you buy a Victory card, gain a Gold." />
+  <Card ID="107" Name="Goons" Set="Prosperity" Type="Action Attack" Cost="6" Rules="+1 Buy\n+2 Coins\nEach other player discards down to 3 cards in hand.\n_____\nWhile this is in play, when you buy a card, +1 {VP}." />
+  <Card ID="108" Name="Grand Market" Set="Prosperity" Type="Action" Cost="6" Rules="+1 Card\n+1 Action\n+1 Buy\n+2 Coins\n_____\nYou can't buy this if you have any Copper in play." />
+  <Card ID="109" Name="Hoard" Set="Prosperity" Type="Treasure" Cost="6" Rules="Worth 2 Coins.\n_____\nWhile this is in play, when you buy a Victory card, gain a Gold." />
   <Card ID="110" Name="Bank" Set="Prosperity" Type="Treasure" Cost="7" Rules="Worth ? Coins.\nWhen you play this, it`s worth 1 Coin per Treasure card you have in play (counting this)." />
   <Card ID="111" Name="Expand" Set="Prosperity" Type="Action" Cost="7" Rules="Trash a card from your hand. Gain a card costing up to 3 more than the trashed card." />
   <Card ID="112" Name="Forge" Set="Prosperity" Type="Action" Cost="7" Rules="Trash any number of cards from your hand. Gain a card with cost exactly equal to the total cost in coins of the trashed cards." />
   <Card ID="113" Name="King's Court" Set="Prosperity" Type="Action" Cost="7" Rules="You may choose an Action card in your hand. Play it three times." />
-  <Card ID="114" Name="Peddler" Set="Prosperity" Type="Action" Cost="8" Rules="+1 Card; +1 Action; +2 Coin\n----------\nDuring your Buy phase, this costs 2 less per Action card you have in play, but not less than 0." />
+  <Card ID="114" Name="Peddler" Set="Prosperity" Type="Action" Cost="8" Rules="+1 Card; +1 Action; +2 Coin\n_____\nDuring your Buy phase, this costs 2 less per Action card you have in play, but not less than 0." />
   <!--
   <Card ID="115" Name="Platinum" Set="Prosperity" Type="Treasure" Cost="9" Rules="5 Coins." />
   <Card ID="116" Name="Colony" Set="Prosperity" Type="Victory" Cost="11" Rules="10 {VP}." />
@@ -128,24 +128,53 @@
   <Card ID="117" Name="Bag of Gold" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Action\nGain a Gold, putting it on top of your deck.\n(This is not in the Supply.)"/>
   <Card ID="118" Name="Diadem" Set="Cornucopia" Type="Treasure Prize" Cost="0" Rules="Worth $2.\nWhen you play this, +$1 per unused Action you have (Action, not Action card).\n(This is not in the Supply.)"/>
   <Card ID="119" Name="Followers" Set="Cornucopia" Type="Action Attack Prize" Cost="0" Rules="+2 Cards\nGain an Estate. Each other player gains a Curse and discards down to 3 cards in hand.\n(This is not in the Supply.)"/>
-  <Card ID="120" Name="Princess" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Buy\n________________\nWhile this is in play, cards cost $2 less, but not less than $0.\n(This is not in the Supply.)"/>
+  <Card ID="120" Name="Princess" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Buy\n_____\nWhile this is in play, cards cost $2 less, but not less than $0.\n(This is not in the Supply.)"/>
   <Card ID="121" Name="Trusty Steed" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="Choose two: +2 Cards; or +2 Actions; or +$2; or gain 4 Silvers and put your deck into your discard pile.\n(This is not in the Supply.)"/>
   -->
   <Card ID="122" Name="Hamlet" Set="Cornucopia" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nYou may discard a card; If you do +1 Action.\nYou may discard a card; If you do +1 Buy"/>
   <Card ID="123" Name="Fortune Teller" Set="Cornucopia" Type="Action Attack" Cost="3" Rules="+2 Coin\nEach other player reveals cards from the top of his deck until he reveals a Victory of Curse card. He puts it on top and discards the other revealed cards."/>
   <Card ID="124" Name="Menagerie" Set="Cornucopia" Type="Action" Cost="3" Rules="+1 Action\nReveal your hand.\nIf there are no duplicate cards in it, +3 Cards.\nOtherwise, +1 Card."/>
   <Card ID="125" Name="Farming Village" Set="Cornucopia" Type="Action" Cost="4" Rules="+2 Actions\nReveal cards from the top of your deck until you reveal an Action or Treasure card. Put that card into your hand and discard the other cards."/>
-  <Card ID="126" Name="Horse Traders" Set="Cornucopia" Type="Action Reaction" Cost="4" Rules="+1 Buy\n+3 Coin\nDiscard 2 Cards\n________________\nWhen another player plays an Attack card, you may set this aside from your hand. If you do, then at the start of your next turn, +1 Card and return this to your hand."/>
+  <Card ID="126" Name="Horse Traders" Set="Cornucopia" Type="Action Reaction" Cost="4" Rules="+1 Buy\n+3 Coin\nDiscard 2 Cards\n_____\nWhen another player plays an Attack card, you may set this aside from your hand. If you do, then at the start of your next turn, +1 Card and return this to your hand."/>
   <Card ID="127" Name="Remake" Set="Cornucopia" Type="Action" Cost="4" Rules="Do this twice: Trash a card from your hand then gain a card costing exactly 1 more than the trashed card."/>
   <Card ID="128" Name="Tournament" Set="Cornucopia" Type="Action" Cost="4" Rules="+1 Action\nEach player may reveal a Province from his hand. If you do, discard it and gain a Prize (from the Prize pile) or a Duchy, putting it on top of your deck. If no-one else does, +1 Card +1 Coin."/>
-  <Card ID="129" Name="Young Witch" Set="Cornucopia" Type="Action Attack" Cost="4" Rules="+2 Cards\nDiscard 2 cards. Each other player may reveal a Bane card from his hand.\nIf he doesn’t, he gains a Curse.\n______________________\nSetup: Add an extra Kingdom card pile costing 2 or 3 to the Supply. Cards from that pile are Bane cards."/>
+  <Card ID="129" Name="Young Witch" Set="Cornucopia" Type="Action Attack" Cost="4" Rules="+2 Cards\nDiscard 2 cards. Each other player may reveal a Bane card from his hand.\nIf he doesn’t, he gains a Curse.\n_____\nSetup: Add an extra Kingdom card pile costing 2 or 3 to the Supply. Cards from that pile are Bane cards."/>
   <Card ID="130" Name="Harvest" Set="Cornucopia" Type="Action" Cost="5" Rules="Reveal the top 4 cards of your deck, then discard them. +1 Coin per differently named card revealed."/>
   <Card ID="131" Name="Horn of Plenty" Set="Cornucopia" Type="Treasure" Cost="5" Rules="0 Coins\nWhen you play this, gain a card costing up to 1 Coin per differently named card you have in play, counting this. If it’s a Victory card, trash this."/>
   <Card ID="132" Name="Hunting Party" Set="Cornucopia" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\nReveal your hand. Reveal cards from your deck until you reveal a card that isn’t in a duplicate of one in your hand and discard the rest."/>
   <Card ID="133" Name="Jester" Set="Cornucopia" Type="Action Attack" Cost="5" Rules="+2 Coins\nEach other player discards the top card of his deck. If it’s a Victory card he gains a Curse. Otherwise he gains a copy of the discarded card or you do, your choice."/>
   <Card ID="134" Name="Fairgrounds" Set="Cornucopia" Type="Victory" Cost="6" Rules="Worth 2 VP for every 5 differently named cards in your deck (rounded down)"/>
+  <!--Hinterlands-->
+  <Card ID="135" Name="Crossroads" Set="Hinterlands" Type="Action" Cost="2" Rules="Reveal your hand.\n+1 Card per Victory card revealed. If this is the first time you played a Crossroads this turn, +3 Actions.\n"/>
+  <Card ID="136" Name="Duchess" Set="Hinterlands" Type="Action" Cost="2" Rules="+2 Coins\nEach player (including you) looks at the top card of his deck, and discards it or puts it back.\n_____\nIn games using this, when you gain a Duchy, you may gain a Duchess.\n"/>
+  <Card ID="137" Name="Fool's Gold" Set="Hinterlands" Type="Treasure Reaction" Cost="2" Rules="If this is the first time you played a Fool's Gold this turn, this is worth 1 coin, otherwise it's worth 4 coins.\n_____\nWhen another player gains a Province, you may trash this from your hand. If you do, gain a Gold, putting it on your deck.\n"/>
+  <Card ID="138" Name="Develop" Set="Hinterlands" Type="Action" Cost="3" Rules="Trash a card from your hand. Gain a card costing exactly 1 coin more than it and a card costing exactly 1 less than it, in either order, putting them on top of your deck.\n"/>
+  <Card ID="139" Name="Oasis" Set="Hinterlands" Type="Action" Cost="3" Rules="+1 Card\n+1 Action\n+$1\nDiscard a card.\n"/>
+  <Card ID="140" Name="Oracle" Set="Hinterlands" Type="Action Attack" Cost="3" Rules="Each player (including you) reveals the top 2 cards of his deck, and you choose one: either he discards them, or he puts them back on top in an order he chooses.\n+2 Cards\n"/>
+  <Card ID="141" Name="Scheme" Set="Hinterlands" Type="Action" Cost="3" Rules="+1 Card\n+1 Action\nAt the start of Clean-up this turn, you may choose an Action card you have in play. If you discard it from play this turn, put it on your deck.\n"/>
+  <Card ID="142" Name="Tunnel" Set="Hinterlands" Type="Victory Reaction" Cost="3" Rules="2 VP [large shield]\n_____\nWhen you discard this other than during a Clean-up phase, you may reveal it. If you do, gain a Gold.\n"/>
+  <Card ID="143" Name="Jack of all Trades" Set="Hinterlands" Type="Action" Cost="4" Rules="Gain a Silver.\nLook at the top card of your deck; discard it or put it back.\nDraw until you have 5 cards in hand.\nYou may trash a card from your hand that is not a Treasure.\n"/>
+  <Card ID="144" Name="Noble Brigand" Set="Hinterlands" Type="Action Attack" Cost="4" Rules="+1 Coin\nWhen you buy this or play it, each other player reveals the top 2 cards of his deck, trashes a revealed Silver or Gold you choose, and discards the rest. If he didn't reveal a Treasure, he gains a Copper. You gain the trashed cards.\n"/>
+  <Card ID="145" Name="Nomad Camp" Set="Hinterlands" Type="Action" Cost="4" Rules="+1 Buy\n+2 Coins\n_____\nWhen you gain this, put it on top of your deck.\n"/>
+  <Card ID="146" Name="Silk Road" Set="Hinterlands" Type="Victory" Cost="4" Rules="Worth 1 VP for every 4 Victory cards in your deck (round down).\n"/>
+  <Card ID="147" Name="Spice Merchant" Set="Hinterlands" Type="Action" Cost="4" Rules="You may trash a Treasure from your hand. If you do, choose one:\n+2 Cards and +1 Action;\nor +$2 and +1 Buy.\n"/>
+  <Card ID="148" Name="Trader" Set="Hinterlands" Type="Action Reaction" Cost="4" Rules="Trash a card from your hand. Gain a number of Silvers equal to its cost in coins.\n_____\nWhen you would gain a card, you may reveal this from your hand. If you do, instead, gain a silver.\n"/>
+  <Card ID="149" Name="Cache" Set="Hinterlands" Type="Treasure" Cost="5" Rules="Worth 3 coins\n_____\nWhen you gain this, gain two Coppers.\n"/>
+  <Card ID="150" Name="Cartographer" Set="Hinterlands" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\nLook at the top 4 cards of your deck. Discard any number of them. Put the rest back on top in any order.\n"/>
+  <Card ID="151" Name="Embassy" Set="Hinterlands" Type="Action" Cost="5" Rules="+5 Cards\nDiscard 3 cards.\n_____\nWhen you gain this, each other player gains a Silver.\n"/>
+  <Card ID="152" Name="Haggler" Set="Hinterlands" Type="Action" Cost="5" Rules="+2 Coins\n_____\nWhile this is in play, when you buy a card, gain a card costing less than it that is not a Victory card.\n"/>
+  <Card ID="153" Name="Highway" Set="Hinterlands" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\n_____\nWhile this is in play, cards cost $1 less, but not less than $0.\n"/>
+  <Card ID="154" Name="Ill-Gotten Gains" Set="Hinterlands" Type="Treasure" Cost="5" Rules="Worth 1 Coin\nWhen you play this, you may gain a Copper, putting it into your hand.\n_____\nWhen you gain this, each other player gains a Curse.\n"/>
+  <Card ID="155" Name="Inn" Set="Hinterlands" Type="Action" Cost="5" Rules="+2 Cards\n+2 Actions\nDiscard 2 cards.\n_____\nWhen you gain this, look through your discard pile (including this), reveal any number of Action cards from it, and shuffle them into your deck.\n"/>
+  <Card ID="156" Name="Mandarin" Set="Hinterlands" Type="Action" Cost="5" Rules="+3 coins\nPut a card from your hand on top of your deck.\n_____\nWhen you gain this, put all Treasures you have in play on top of your deck in any order.\n"/>
+  <Card ID="157" Name="Margrave" Set="Hinterlands" Type="Action Attack" Cost="5" Rules="+3 Cards\n+1 Buy\nEach other player draws a card, then discards down to 3 cards in hand.\n"/>
+  <Card ID="158" Name="Stables" Set="Hinterlands" Type="Action" Cost="5" Rules="You may discard a Treasure. If you do, +3 Cards and +1 Action.\n"/>
+  <Card ID="159" Name="Border Village" Set="Hinterlands" Type="Action" Cost="6" Rules="+1 Card\n+2 Actions\n_____\nWhen you gain this, gain a card costing less than this.\n"/>
+  <Card ID="160" Name="Farmland" Set="Hinterlands" Type="Victory" Cost="6" Rules="2 VP\n_____\nWhen you buy this, trash a card from your hand. Gain a card costing exactly $2 more than the trashed card.\n"/>
   <!--Promo-->
-  <Card ID="135" Name="Black Market" Set="Promo" Type="Action" Cost="3" Rules="+2 Coins, Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.\n(Before the game, make a Black Market deck out of one copy of each Kingdom card not in the supply.)." />
-  <Card ID="136" Name="Envoy" Set="Promo" Type="Action" Cost="4" Rules="Reveal the top 5 cards of your deck. The player to your left chooses one for you to discard. Draw the rest." />
-  <Card ID="137" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck." />
+  <Card ID="161" Name="Black Market" Set="Promo" Type="Action" Cost="3" Rules="+2 Coins, Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.\n(Before the game, make a Black Market deck out of one copy of each Kingdom card no"/>
+  <Card ID="162" Name="Envoy" Set="Promo" Type="Action" Cost="4" Rules="Reveal the top 5 cards of your deck. The player to your left chooses one for you to discard. Draw the rest.\n"/>
+  <Card ID="163" Name="Walled Village" Set="Promo" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n_____\nAt the start of Clean-up, if you have this and no more than one other Action card in play, you may put this on top of your deck.\n"/>
+  <Card ID="164" Name="Gorvernor" Set="Promo" Type="Action" Cost="5" Rules="+1 Action\n\nChoose one; you get the version in parentheses: Each player gets +1 (+3) Cards; or each player gains a Silver (Gold); or each player may trash a card from his hand and gain a card costing exactly $1 ($2) more.\n"/>
+  <Card ID="165" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck.\n"/>
 </ArrayOfCard>
