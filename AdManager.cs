@@ -35,9 +35,6 @@ namespace Ben.Phone
 
         static AdManager()
         {
-            #if DEBUG
-            AdControl.TestMode = true;
-            #endif
 
             timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);           
@@ -45,32 +42,40 @@ namespace Ben.Phone
             CycleSeconds = 30;
 
             Ad = new AdControl();
-            Ad.RotationEnabled = false;
-            Ad.AdModel = AdModel.Contextual;
+            Ad.IsAutoCollapseEnabled = true;
+            Ad.IsAutoRefreshEnabled = true;
+            //Ad.AdModel = AdModel.Contextual;
             Ad.Width = 480;
             Ad.Height = 80;
         }
 
         private static void timer_Tick(object sender, EventArgs e)
         {
-            Ad.RequestNextAd();   
+            Ad.Refresh();
         }
 
         public static void Initialize(String applicationId, params String[] adUnits)
         {
-            #if DEBUG
-            applicationId = "test_client";
-            adUnits = new String[] { "Image480_80", "TextAd", "TextAd" };
-            #endif
+            // Always try to use real ads unless we're on the emulator
+            if (Microsoft.Devices.Environment.DeviceType == Microsoft.Devices.DeviceType.Emulator)
+            {
+                applicationId = "test_client";
+                adUnits = new String[] { "Image480_80", "Image480_80", "TextAd" };
+            }
+
+            if(String.IsNullOrEmpty(applicationId))
+            {
+                throw new ArgumentNullException("applicationId");
+            }
+
+            if (adUnits == null || adUnits.Length == 0)
+            {
+                throw new ArgumentNullException("adUnits");
+            }
 
             // Set the application id on the AdControl
             ApplicationId = applicationId;
 
-            // If no ad units were provided, just use the test ones
-            if(adUnits == null || adUnits.Length == 0)
-            {
-                adUnits = new String[] { "Image480_80", "TextAd", "TextAd" };
-            }
             AdUnits = adUnits.ToList();
 
             // The first add unit is considered the default, the remaining ad units 

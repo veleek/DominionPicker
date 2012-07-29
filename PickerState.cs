@@ -153,9 +153,21 @@ namespace Ben.Dominion
 
         public Picker picker { get; set; }
 
+        private bool isGenerating;
         public bool IsGenerating
         {
-            get { return picker.IsGenerating; }
+            get
+            {
+                return isGenerating;
+            }
+            set
+            {
+                if (value != isGenerating)
+                {
+                    isGenerating = value;
+                    NotifyPropertyChanged("IsGenerating");
+                }
+            }
         }
 
         private PickerSettings currentSettings;
@@ -201,7 +213,7 @@ namespace Ben.Dominion
                 if (value != result)
                 {
                     result = value;
-                    NotifyPropertyChanged("Result");
+                    //NotifyPropertyChanged("Result");
                 }
             }
         }
@@ -217,16 +229,7 @@ namespace Ben.Dominion
             this.FavoriteSets = new ObservableCollection<FavoriteSet>();
 
             this.picker = new Picker();
-            this.picker.PropertyChanged += new PropertyChangedEventHandler(picker_PropertyChanged);
             this.SortOrder = ResultSortOrder.Name;
-        }
-
-        void picker_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "IsGenerating")
-            {
-                NotifyPropertyChanged("IsGenerating");
-            }
         }
 
         public void SaveFavoriteSettings(String name)
@@ -259,8 +262,18 @@ namespace Ben.Dominion
             {
                 return false;
             }
-            this.Result = picker.GenerateCardList();
-            this.SortBy(SortOrder);
+
+            try
+            {
+                IsGenerating = true;
+
+                this.Result = picker.GenerateCardList();
+                this.SortBy(SortOrder);
+            }
+            finally
+            {
+                IsGenerating = false;
+            }
 
             return this.result != null;
         }

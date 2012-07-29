@@ -20,8 +20,7 @@
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="Generating card set..."
-                                 IsIndeterminate="True"
-                                 IsVisible="{Binding IsGenerating}"/>
+                                 IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
     
     <phone:PhoneApplicationPage.Resources>

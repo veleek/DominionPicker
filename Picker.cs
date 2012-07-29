@@ -9,28 +9,12 @@ using Ben.Utilities;
 
 namespace Ben.Dominion
 {
-    public class Picker : NotifyPropertyChangedBase
+    public class Picker
     {
         private List<Card> cardSet;
         public List<Card> pool;
         private Boolean isGenerating;
         private Boolean generationCanceled;
-
-        public Boolean IsGenerating
-        {
-            get
-            {
-                return isGenerating;
-            }
-            private set
-            {
-                if (value != isGenerating)
-                {
-                    isGenerating = value;
-                    NotifyPropertyChanged("IsGenerating");
-                }
-            }
-        }
 
         public Picker()
         {
@@ -72,7 +56,7 @@ namespace Ben.Dominion
 
             try
             {
-                IsGenerating = true;
+                isGenerating = true;
 
                 do
                 {
@@ -208,7 +192,7 @@ namespace Ben.Dominion
             }
             finally
             {
-                IsGenerating = false;
+                isGenerating = false;
             }
 
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
@@ -270,7 +254,7 @@ namespace Ben.Dominion
         {
             generationCanceled = true;
 
-            while (IsGenerating)
+            while (isGenerating)
             {
                 System.Threading.Thread.Sleep(100);
             }

@@ -65,6 +65,25 @@ namespace Ben.Dominion
         {
             // If it has, set the appropriate field and data context
             this.DataContext = this.CurrentState;
+
+            this.CurrentState.PropertyChanged += (s, e) =>
+            {
+                if (e.PropertyName == "IsGenerating")
+                {
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        try
+                        {
+                            SystemTray.ProgressIndicator.IsVisible = this.CurrentState.IsGenerating;
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString());
+                        }
+                    });
+                }
+            };
+        
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
