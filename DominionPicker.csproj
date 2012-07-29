@@ -127,7 +127,6 @@
     <Compile Include="..\Common\Data\Converters.cs">
       <Link>Utilites\Converters.cs</Link>
     </Compile>
-    <Compile Include="Thread.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
