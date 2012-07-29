@@ -48,19 +48,17 @@ namespace Ben.Dominion
 
             ResetButton = new ApplicationBarIconButton
             {
-                IconUri = new Uri("/Images/appbar.reset.png", UriKind.Relative),
+                IconUri = new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
                 Text = "reset",
             };
             ResetButton.Click += Reset_Click;
 
             AddFavoriteButton = new ApplicationBarIconButton
             {
-                IconUri = new Uri("/Images/appbar.favs.addto.png", UriKind.Relative),
+                IconUri = new Uri(@"\Images\appbar.favs.addto.png", UriKind.Relative),
                 Text = "save fav...",
             };
             AddFavoriteButton.Click += AddFavorite_Click;
-            
-            LoadState();
         }
 
         public void LoadState()
@@ -96,6 +94,8 @@ namespace Ben.Dominion
                 // come back here without exiting the app.
                 reviewRequestShown = true;
             }
+
+            this.NavigationService.Initialize();
         }
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
@@ -149,7 +149,7 @@ namespace Ben.Dominion
                         // Navigation has to happen on the UI thread, so ask the Dispatcher to do it
                         Dispatcher.BeginInvoke(() =>
                         {
-                            this.NavigationService.Navigate(new Uri("/ResultsViewer.xaml", UriKind.Relative));
+                            this.NavigationService.Navigate("/ResultsViewer.xaml");
                         });
                     }
                     else
@@ -234,7 +234,7 @@ namespace Ben.Dominion
                 this.CurrentState.CancelGeneration();
 
                 CurrentState.Result = (e.AddedItems[0] as FavoriteSet).Result;
-                this.NavigationService.Navigate(new Uri("/ResultsViewer.xaml", UriKind.Relative));
+                this.NavigationService.Navigate("/ResultsViewer.xaml");
 
                 // Clear the selection
                 FavoriteSetsListBox.SelectedItem = null;
@@ -291,7 +291,7 @@ namespace Ben.Dominion
 
         private void About_Click(object sender, EventArgs e)
         {
-			this.NavigationService.Navigate(new Uri("/AboutPage.xaml", UriKind.Relative));
+			this.NavigationService.Navigate("/AboutPage.xaml");
         }
 
         private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
@@ -311,6 +311,9 @@ namespace Ben.Dominion
             if (isNew)
             {
                 // Load the state
+                LoadState();
+
+                RootPivot.SelectedIndex = CurrentState.PivotIndex;
             }
 
             isNew = false;
@@ -383,6 +386,7 @@ namespace Ben.Dominion
 
         private void RootPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            this.CurrentState.PivotIndex = RootPivot.SelectedIndex;
             Boolean onMainPivot = RootPivot.SelectedIndex == 0;
 
             if (onMainPivot)
@@ -398,6 +402,11 @@ namespace Ben.Dominion
                 this.ApplicationBar.Buttons.Clear();
                 //this.ApplicationBar.Mode = ApplicationBarMode.Minimized;
             }
+        }
+
+        void FilterCards_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/CardFilterPage.xaml");
         }
     }
 }

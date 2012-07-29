@@ -92,9 +92,13 @@ namespace Ben.Dominion
         {
             if (!isNew)
             {
-                //MessageBox.Show("Was tombstoned");
+                // We're coming back from being paused
+                // so we don't need to load anything
             }
-            PickerState.Load();
+            else
+            {
+                PickerState.Load();
+            }
         }
 
         // Code to execute when the application is deactivated (sent to background)

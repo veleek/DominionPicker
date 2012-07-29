@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{33f9d727-3010-4191-a244-a2aa54816ce2}" Title="Dominion Picker" RuntimeType="Silverlight" Version="1.4.0.0" Genre="apps.normal" Author="Ben Randall" Description="A Dominon Set Randomizer for Windows Phone 7" Publisher="Ben Corp.">
+  <App xmlns="" ProductID="{33f9d727-3010-4191-a244-a2aa54816ce2}" Title="Dominion Picker" RuntimeType="Silverlight" Version="1.5.0.0" Genre="apps.normal" Author="Ben Randall" Description="A Dominon Set Randomizer for Windows Phone 7" Publisher="Ben Corp.">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

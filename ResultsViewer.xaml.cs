@@ -13,8 +13,19 @@ namespace Ben.Dominion
         {
             InitializeComponent();
 
-            this.Loaded += new RoutedEventHandler(ResultsViewer_Loaded);
             this.BackKeyPress += new EventHandler<CancelEventArgs>(ResultsViewer_BackKeyPress);
+
+            // This resolves the issue with the "The data necessary to complete 
+            // this operation is not yet available." exception.  We ignore the 
+            // card list items until after it's completed loading, at which point
+            // we enable the hit test again.
+            CardsList.IsHitTestVisible = false;
+            CardsList.Loaded += new RoutedEventHandler(CardsList_Loaded);
+        }
+
+        void CardsList_Loaded(object sender, RoutedEventArgs e)
+        {
+            CardsList.IsHitTestVisible = true;
         }
 
         void ResultsViewer_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
@@ -30,40 +41,18 @@ namespace Ben.Dominion
             }
         }
 
-        void ResultsViewer_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             this.DataContext = PickerState.Current;
             UpdateSortButton(PickerState.Current.SortOrder);
+
+            base.OnNavigatedTo(e);
         }
 
-        private void CardItem_Flick(object sender, FlickGestureEventArgs e)
+        private void CardItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            //if (AddFavoritePopup.IsOpen)
-            //{
-            //    return;
-            //}
-
-            //if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
-            //{
-            //    FrameworkElement element = sender as FrameworkElement;
-            //    if (element == null)
-            //    {
-            //        return;
-            //    }
-
-            //    PickerState.Current.ReplaceCard(element.DataContext as Card);
-            //}
-        }
-
-        private void CardItem_Tap(object sender, GestureEventArgs e)
-        {
-            if (AddFavoritePopup.IsOpen)
-            {
-                return;
-            }
-
             (App.Current as App).SelectedCard = sender.GetContext<Card>();
-            NavigationService.Navigate(new Uri("/CardInfo.xaml", UriKind.Relative));
+            NavigationService.Navigate("/CardInfo.xaml");
         }
 
         private void Refresh_Click(object sender, EventArgs e)
@@ -144,25 +133,21 @@ namespace Ben.Dominion
             PickerState.Current.SaveFavoriteCardSet(name);
         }
 
-        private void ScrollViewer_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-        }
-
         private void ScrollViewer_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
             var v = e.FinalVelocities.LinearVelocity;
             var m = v.GetMagnitude();
             var a = Math.Abs(v.X);
 
-            if (e.IsInertial && (a / m) > 0.8)
+            // If it's an intertal manipulation, and it's 80% in the X direction
+            // and the total manipulitation is greater than 400
+            if (e.IsInertial && (a / m) > 0.8 && m > 400)
             {
                 var scrollViewer = sender as System.Windows.Controls.ScrollViewer;
                 if (scrollViewer == null)
                 {
                     return;
                 }
-
-                //MessageBox.Show(String.Format("H: {0}, V: {1}", scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset));
 
                 PickerState.Current.ReplaceCard(scrollViewer.DataContext as Card);
             }

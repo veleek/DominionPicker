@@ -12,11 +12,9 @@ namespace Ben.Dominion
     public class Picker : NotifyPropertyChangedBase
     {
         private List<Card> cardSet;
-        private List<Card> pool;
+        public List<Card> pool;
         private Boolean isGenerating;
         private Boolean generationCanceled;
-
-        public static PickerSettings Settings { get { return PickerState.Current.CurrentSettings; } }
 
         public Boolean IsGenerating
         {
@@ -40,6 +38,20 @@ namespace Ben.Dominion
             pool = Cards.AllCards.OrderBy(c => Guid.NewGuid()).ToList();
         }
 
+        public List<Card> GetCardPool()
+        {
+            return GetCardPool(PickerState.Current.CurrentSettings);
+        }
+
+        public List<Card> GetCardPool(PickerSettings settings)
+        {
+            return Cards.AllCards.Where(c => !c.IsType(settings.FilteredTypes)) // Filter out all of the unwanted card types
+                                         //.Where(c => c.InSet(availableSets)) // Then filter to those in the available sets
+                                         .Where(c => settings.FilterPotions.IsEnabled ? !c.HasPotion : true)
+                                         .OrderBy(c => Guid.NewGuid()) // The order randomly
+                                         .ToList();
+        }
+
         public PickerResult GenerateCardList()
         {
             return GenerateCardList(PickerState.Current.CurrentSettings);
@@ -53,7 +65,7 @@ namespace Ben.Dominion
             Int32 creationAttempts = 0;
             Int32 minimumCardsPerSet = 0;
 
-            List<CardSet> availableSets = Settings.SelectedSets;
+            List<CardSet> availableSets = settings.SelectedSets;
             PickerResult result = new PickerResult();
 
             generationCanceled = false;
@@ -113,28 +125,28 @@ namespace Ben.Dominion
                     // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
 
                     // If there are any attacks and no defense, veto this set
-                    if (Settings.RequireDefense.IsEnabled && result.HasAttack && !result.HasReaction)
+                    if (settings.RequireDefense.IsEnabled && result.HasAttack && !result.HasReaction)
                     {
                         continue;
                     }
 
-                    if (Settings.RequireTrash.IsEnabled && !result.HasTrash)
+                    if (settings.RequireTrash.IsEnabled && !result.HasTrash)
                     {
                         continue;
                     }
 
-                    if (Settings.PlusActions.IsEnabled)
+                    if (settings.PlusActions.IsEnabled)
                     {
                         if (result.HasPlus2Action)
                         {
-                            if (Settings.PlusActions.Is("Prevent +2"))
+                            if (settings.PlusActions.Is("Prevent +2"))
                             {
                                 continue;
                             }
                         }
                         else
                         {
-                            if (Settings.PlusActions.Is("Require +2"))
+                            if (settings.PlusActions.Is("Require +2"))
                             {
                                 continue;
                             }
@@ -142,32 +154,32 @@ namespace Ben.Dominion
 
                         if (result.HasPlusAction)
                         {
-                            if (Settings.PlusActions.Is("Prevent"))
+                            if (settings.PlusActions.Is("Prevent"))
                             {
                                 continue;
                             }
                         }
                         else
                         {
-                            if (Settings.PlusActions.Is("Require"))
+                            if (settings.PlusActions.Is("Require"))
                             {
                                 continue;
                             }
                         }
                     }
 
-                    if (Settings.PlusBuys.IsEnabled)
+                    if (settings.PlusBuys.IsEnabled)
                     {
                         if (result.HasPlus2Buy)
                         {
-                            if (Settings.PlusBuys.Is("Prevent +2"))
+                            if (settings.PlusBuys.Is("Prevent +2"))
                             {
                                 continue;
                             }
                         }
                         else
                         {
-                            if (Settings.PlusBuys.Is("Require +2"))
+                            if (settings.PlusBuys.Is("Require +2"))
                             {
                                 continue;
                             }
@@ -175,14 +187,14 @@ namespace Ben.Dominion
 
                         if (result.HasPlusBuy)
                         {
-                            if (Settings.PlusBuys.Is("Prevent"))
+                            if (settings.PlusBuys.Is("Prevent"))
                             {
                                 continue;
                             }
                         }
                         else
                         {
-                            if (Settings.PlusBuys.Is("Require"))
+                            if (settings.PlusBuys.Is("Require"))
                             {
                                 continue;
                             }
@@ -208,7 +220,7 @@ namespace Ben.Dominion
         {
             PickerResult result = new PickerResult();
             Int32 creationAttempts = 0;
-            List<CardSet> availableSets = Settings.SelectedSets;
+            List<CardSet> availableSets = settings.SelectedSets;
 
             generationCanceled = false;
 
@@ -295,7 +307,8 @@ namespace Ben.Dominion
 
         public Card GetRandomCardOtherThan(IList<Card> cards)
         {
-            return pool.Where(c => !cards.Contains(c)).OrderBy(c => Guid.NewGuid()).FirstOrDefault();
+            var cardNames = cards.Select(c => c.Name);
+            return pool.Where(c => !cardNames.Contains(c.Name)).OrderBy(c => Guid.NewGuid()).FirstOrDefault();
         }
     }
 }

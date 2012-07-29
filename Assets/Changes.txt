@@ -24,3 +24,12 @@ Prepopulated favorites list with some settings and card sets from rules
 Clicking on a favorite will generate a set using those settings
 Cleaned up layout for options with lists.
 Replaced all the progress bars with system tray progress bars.
+
+Version 1.5
+Fixed some issues with fast app-switching stuff causing UI to get out of sync with actual settings
+Launching app returns you to the same pivot you were on when exiting (i.e. stays on favorites if you used it last)
+
+Version 1.6
+Added the ability to filter out specific cards completely
+Changed results view to use set icons instead of set names (configurable)
+View cards 

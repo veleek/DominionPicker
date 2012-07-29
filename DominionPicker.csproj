@@ -79,21 +79,27 @@
       <Link>Controls\MultiTemplateItemsControl.cs</Link>
     </Compile>
     <Compile Include="..\Common\Phone\MetroGridHelper.cs">
-      <Link>MetroGridHelper.cs</Link>
+      <Link>Utilites\MetroGridHelper.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\AppLog.cs">
-      <Link>AppLog.cs</Link>
+      <Link>Utilites\AppLog.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\FrameworkExtensions.cs">
-      <Link>FrameworkExtensions.cs</Link>
+      <Link>Utilites\FrameworkExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\GenericSerializer.cs">
-      <Link>GenericSerializer.cs</Link>
+      <Link>Utilites\GenericSerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utilities\NavigationServiceExtensions.cs">
+      <Link>Utilites\NavigationServiceExtensions.cs</Link>
     </Compile>
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdManager.cs" />
+    <Compile Include="CardFilterPage.xaml.cs">
+      <DependentUpon>CardFilterPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\AddFavoritePopupControl.xaml.cs">
       <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
     </Compile>
@@ -118,7 +124,10 @@
     <Compile Include="ResultsViewer.xaml.cs">
       <DependentUpon>ResultsViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\Common\Data\Converters.cs" />
+    <Compile Include="..\Common\Data\Converters.cs">
+      <Link>Utilites\Converters.cs</Link>
+    </Compile>
+    <Compile Include="Thread.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -128,6 +137,10 @@
     <Page Include="AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CardFilterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\AddFavoritePopupControl.xaml">
       <SubType>Designer</SubType>
@@ -171,6 +184,7 @@
     </Content>
     <Content Include="Assets\DominionPickerCards.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Images\appbar.favs.addto.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -203,6 +217,45 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\potion_small.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\alchemy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\blackmarket.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\promo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\cornucopia.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\base.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\envoy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\governor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\hinterlands.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\intrigue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\prosperity.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\seaside.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\stash.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\walledvillage.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\VP.png">

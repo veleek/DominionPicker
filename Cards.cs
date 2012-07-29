@@ -100,11 +100,23 @@ namespace Ben.Dominion
         {
             get
             {
-                List<Color> colors = GetColorsForType(Type);
+                return GetBrushForType(Type);
+            }
+        }
+
+        private static Dictionary<CardType, Brush> brushCache = new Dictionary<CardType, Brush>();
+
+        public static Brush GetBrushForType(CardType type)
+        {
+            Brush cardTypeBrush = null;
+
+            if (!brushCache.TryGetValue(type, out cardTypeBrush))
+            {
+                List<Color> colors = GetColorsForType(type);
 
                 if (colors.Count == 1)
                 {
-                    return new SolidColorBrush(colors[0]);
+                    cardTypeBrush = new SolidColorBrush(colors[0]);
                 }
                 else
                 {
@@ -123,10 +135,13 @@ namespace Ben.Dominion
                     grad.GradientStops.Add(new GradientStop { Color = second, Offset = 0.80 });
                     grad.GradientStops.Add(new GradientStop { Color = second, Offset = 1.0 });
 
-                    return grad;
-
+                    cardTypeBrush = grad;
                 }
+
+                brushCache[type] = cardTypeBrush;
             }
+
+            return cardTypeBrush;
         }
 
         public static List<Color> GetColorsForType(CardType type)

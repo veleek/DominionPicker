@@ -12,16 +12,6 @@ using System.Windows.Shapes;
 
 namespace Ben.Dominion
 {
-    public class FavoriteEventArgs : EventArgs
-    {
-        public String FavoriteName { get; set; }
-
-        public FavoriteEventArgs(String favoriteName)
-        {
-            this.FavoriteName = favoriteName;
-        }
-    }
-
     public partial class AddFavoritePopupControl : UserControl
     {        
         public event EventHandler<FavoriteEventArgs> SaveFavorite;
@@ -108,6 +98,16 @@ namespace Ben.Dominion
             // actually been dismissed, so we don't accidentally capture touch 
             // events on stuff underneath it.
             Dispatcher.BeginInvoke(() => { this.IsOpen = false; });
+        }
+    }
+
+    public class FavoriteEventArgs : EventArgs
+    {
+        public String FavoriteName { get; set; }
+
+        public FavoriteEventArgs(String favoriteName)
+        {
+            this.FavoriteName = favoriteName;
         }
     }
 }

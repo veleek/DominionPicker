@@ -151,9 +151,9 @@ namespace Ben.Dominion
 
         #endregion Statics
 
-        private Picker picker { get; set; }
+        public Picker picker { get; set; }
 
-        public Boolean IsGenerating
+        public bool IsGenerating
         {
             get { return picker.IsGenerating; }
         }
@@ -207,6 +207,8 @@ namespace Ben.Dominion
         }
 
         public ResultSortOrder SortOrder { get; set; }
+
+        public int PivotIndex { get; set; }
 
         public PickerState()
         {
@@ -270,9 +272,19 @@ namespace Ben.Dominion
                 return;
             }
 
-            Int32 index = Result.Cards.IndexOf(c);
-            Result.Cards.Remove(c);
+            int index = -1;
+            for (int i = 0; i < Result.Cards.Count; i++)
+            {
+                if (Result.Cards[i].Name == c.Name)
+                {
+                    index = i;
+                    break;
+                }
+            }
 
+            if (index == -1)
+                System.Diagnostics.Debugger.Break();
+            Result.Cards.RemoveAt(index);
             Result.Cards.Insert(index, picker.GetRandomCardOtherThan(Result.Cards));
         }
 
