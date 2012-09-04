@@ -195,10 +195,21 @@ namespace Ben.Dominion
         /// <summary>
         /// A saved list of favorite settings
         /// </summary>
+        /// <remarks>
+        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be 
+        /// actually changing the collection instances in this class, so don't bother with 
+        /// NotifyPropertyChanged stuff on this class.
+        /// </remarks>
         public ObservableCollection<FavoriteSetting> FavoriteSettings { get; set; }
+
         /// <summary>
         /// A saved list of favorite sets
         /// </summary>
+        /// <remarks>
+        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be 
+        /// actually changing the collection instances in this class, so don't bother with 
+        /// NotifyPropertyChanged stuff on this class.
+        /// </remarks>
         public ObservableCollection<FavoriteSet> FavoriteSets { get; set; }
 
         private PickerResult result;
@@ -213,7 +224,7 @@ namespace Ben.Dominion
                 if (value != result)
                 {
                     result = value;
-                    //NotifyPropertyChanged("Result");
+                    NotifyPropertyChanged("Result");
                 }
             }
         }
