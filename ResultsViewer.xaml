@@ -139,17 +139,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,6,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,6,0,6">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
-            
-            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="Swipe a card to replace.  Tap for info." />
         </StackPanel>
+
+        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,6,12,0">
+            Swipe to Replace<LineBreak/>Tap for Info
+        </TextBlock> 
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
-                <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}"
-                              ItemTemplate="{StaticResource CardItemTemplate}"/>
+                <StackPanel>
+                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}"
+                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
+                    <TextBlock Text="Additional Cards" 
+                               Visibility="{Binding Result.AdditionalCards.Count, Converter={StaticResource IsValidToVisibilityConverter}}" 
+                               Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding Result.AdditionalCards}"
+                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
+                </StackPanel>
             </ScrollViewer>
         </Grid>
 

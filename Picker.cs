@@ -6,34 +6,25 @@ using System.Collections.ObjectModel;
 using System.Xml.Serialization;
 using System.Text.RegularExpressions;
 using Ben.Utilities;
+using System.Diagnostics;
 
 namespace Ben.Dominion
 {
+    /// <summary>
+    /// Contains all the logic required to generate a set of cards from the full card pool
+    /// </summary>
     public class Picker
     {
         private List<Card> cardSet;
         public List<Card> pool;
         private Boolean isGenerating;
         private Boolean generationCanceled;
+        private Random random = new Random();
 
         public Picker()
         {
             // For ease of use, just initialize the card pool to all the cards
-            pool = Cards.AllCards.OrderBy(c => Guid.NewGuid()).ToList();
-        }
-
-        public List<Card> GetCardPool()
-        {
-            return GetCardPool(PickerState.Current.CurrentSettings);
-        }
-
-        public List<Card> GetCardPool(PickerSettings settings)
-        {
-            return Cards.AllCards.Where(c => !c.IsType(settings.FilteredTypes)) // Filter out all of the unwanted card types
-                                         //.Where(c => c.InSet(availableSets)) // Then filter to those in the available sets
-                                         .Where(c => settings.FilterPotions.IsEnabled ? !c.HasPotion : true)
-                                         .OrderBy(c => Guid.NewGuid()) // The order randomly
-                                         .ToList();
+            pool = Cards.PickableCards.OrderBy(c => Guid.NewGuid()).ToList();
         }
 
         public PickerResult GenerateCardList()
@@ -68,6 +59,8 @@ namespace Ben.Dominion
 
                     creationAttempts++;
 
+                    result.AdditionalCards = new ObservableCollection<Card>();
+
                     // Create an empty result set
                     cardSet = new List<Card>();
 
@@ -78,10 +71,11 @@ namespace Ben.Dominion
                         availableSets = availableSets.OrderBy(s => Guid.NewGuid()).Take(maxSets).ToList();
                     }
 
-                    pool = Cards.AllCards.Where(c => !c.IsType(settings.FilteredTypes)) // Filter out all of the unwanted card types
+                    pool = Cards.PickableCards.Where(c => !c.IsType(settings.FilteredTypes)) // Filter out all of the unwanted card types
                                          .Where(c => c.InSet(availableSets)) // Then filter to those in the available sets
                                          .Where(c => settings.FilterPotions.IsEnabled ? !c.HasPotion : true)
-                                         .OrderBy(c => Guid.NewGuid()) // The order randomly
+                                         .Where(c => !settings.FilteredCardIds.Contains(c.ID)) // Only grab the cards that aren't filtered
+                                         .OrderBy(c => Guid.NewGuid()) // Then order randomly
                                          .ToList();
 
                     if (settings.MinimumCardsPerSet.IsEnabled)
@@ -99,93 +93,174 @@ namespace Ben.Dominion
                     // Put the cards in the result to get access to all the properties we want
                     result.Cards = cardSet.ToObservableCollection();
 
-                    if (cardSet.Count < 10)
+                    // If we have less than 11 cards, there are no other possible sets to generate
+                    // so don't look at any of the options just use this set
+                    if (cardSet.Count >= 10)
                     {
-                        // We've taken all the cards we can so just return 
-                        // what we've got
-                        break;
-                    }
+                        // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
 
-                    // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
-
-                    // If there are any attacks and no defense, veto this set
-                    if (settings.RequireDefense.IsEnabled && result.HasAttack && !result.HasReaction)
-                    {
-                        continue;
-                    }
-
-                    if (settings.RequireTrash.IsEnabled && !result.HasTrash)
-                    {
-                        continue;
-                    }
-
-                    if (settings.PlusActions.IsEnabled)
-                    {
-                        if (result.HasPlus2Action)
+                        // If there are any attacks and no defense, veto this set
+                        if (settings.RequireDefense.IsEnabled && result.HasAttack && !result.HasReaction)
                         {
-                            if (settings.PlusActions.Is("Prevent +2"))
+                            continue;
+                        }
+
+                        if (settings.RequireTrash.IsEnabled && !result.HasTrash)
+                        {
+                            continue;
+                        }
+
+                        if (settings.PlusActions.IsEnabled)
+                        {
+                            if (result.HasPlus2Action)
                             {
-                                continue;
+                                if (settings.PlusActions.Is("Prevent +2"))
+                                {
+                                    continue;
+                                }
                             }
+                            else
+                            {
+                                if (settings.PlusActions.Is("Require +2"))
+                                {
+                                    continue;
+                                }
+                            }
+
+                            if (result.HasPlusAction)
+                            {
+                                if (settings.PlusActions.Is("Prevent"))
+                                {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if (settings.PlusActions.Is("Require"))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+
+                        if (settings.PlusBuys.IsEnabled)
+                        {
+                            if (result.HasPlus2Buy)
+                            {
+                                if (settings.PlusBuys.Is("Prevent +2"))
+                                {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if (settings.PlusBuys.Is("Require +2"))
+                                {
+                                    continue;
+                                }
+                            }
+
+                            if (result.HasPlusBuy)
+                            {
+                                if (settings.PlusBuys.Is("Prevent"))
+                                {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                if (settings.PlusBuys.Is("Require"))
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+
+                    if (settings.PickPlatinumColony.IsEnabled)
+                    {
+                        // Pick a random card from the pool
+                        Card colonyPlatinumCard = result.Cards[random.Next(result.Cards.Count)];
+
+                        // If it's a prosperty card then we use Colony and Platinum
+                        if (colonyPlatinumCard.Set == CardSet.Prosperity)
+                        {
+                            // 70% of the time we just use both
+                            if (random.NextDouble() > 0.7)
+                            {
+                                result.AdditionalCards.Add(Card.FromName("Platinum"));
+                                result.AdditionalCards.Add(Card.FromName("Colony"));
+                            }
+                            else
+                            {
+                                // Otherwise randomly pick one of them.
+                                switch (random.Next(2))
+                                {
+                                    case 0:
+                                        result.AdditionalCards.Add(Card.FromName("Platinum"));
+                                        break;
+                                    case 1:
+                                        result.AdditionalCards.Add(Card.FromName("Colony"));
+                                        break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (settings.PickSheltersOrEstates.IsEnabled)
+                    {
+                        Card shelterEstateCard = result.Cards[random.Next(result.Cards.Count)];
+
+                        if (shelterEstateCard.InSet(CardSet.DarkAges))
+                        {
+                            Debug.WriteLine("Adding shelters...");
+                            foreach (var shelter in Cards.AllCards.Where(c => c.IsType(CardType.Shelter)))
+                            {
+                                result.AdditionalCards.Add(shelter);
+                            }
+                        }
+                    }
+
+                    if(result.HasCardType(CardType.Looter))
+                    {
+                        Debug.WriteLine("Adding ruins...");
+                        //foreach(var ruin in Cards.AllCards.Where(c => c.IsType(CardType.Ruins)))
+                        //{
+                        //    result.AdditionalCards.Add(ruin);
+                        //}
+                        result.AdditionalCards.Add(Card.FromName("Ruins"));
+                    }
+
+                    if (result.HasCard("Young Witch"))
+                    {
+                        Card bane = pool.FirstOrDefault(c => c.Cost == "2" || c.Cost == "3");
+                        if (bane == null)
+                        {
+                            Debug.WriteLine("No suitable bane card in the set of cards.");
                         }
                         else
                         {
-                            if (settings.PlusActions.Is("Require +2"))
-                            {
-                                continue;
-                            }
-                        }
-
-                        if (result.HasPlusAction)
-                        {
-                            if (settings.PlusActions.Is("Prevent"))
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            if (settings.PlusActions.Is("Require"))
-                            {
-                                continue;
-                            }
+                            Debug.WriteLine("Selected {0} as bane card.", bane.Name);
+                            result.AdditionalCards.Add(bane);
                         }
                     }
 
-                    if (settings.PlusBuys.IsEnabled)
+                    if(result.HasCard("Hermit"))
                     {
-                        if (result.HasPlus2Buy)
-                        {
-                            if (settings.PlusBuys.Is("Prevent +2"))
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            if (settings.PlusBuys.Is("Require +2"))
-                            {
-                                continue;
-                            }
-                        }
-
-                        if (result.HasPlusBuy)
-                        {
-                            if (settings.PlusBuys.Is("Prevent"))
-                            {
-                                continue;
-                            }
-                        }
-                        else
-                        {
-                            if (settings.PlusBuys.Is("Require"))
-                            {
-                                continue;
-                            }
-                        }
+                        result.AdditionalCards.Add(Card.FromName("Madman"));
                     }
 
-                    // We passed all the checks, so return the set
+                    if (result.HasCard("Urchin"))
+                    {
+                        result.AdditionalCards.Add(Card.FromName("Mercenary"));
+                    }
+
+                    if (result.AdditionalCards.Count > 0)
+                    {
+                        string additionalCards = result.AdditionalCards.Select(c => c.Name).Aggregate((a, b) => a + ", " + b);
+                        Debug.WriteLine("Additional Cards({0}): {1}", result.AdditionalCards.Count, additionalCards);
+                    }
+
                     break;
                 }
                 while (true);

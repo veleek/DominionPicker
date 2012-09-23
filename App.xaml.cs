@@ -175,6 +175,7 @@ namespace Ben.Dominion
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
+                System.Diagnostics.Debug.WriteLine("New version detected. Deleting settings");
                 // This is a new run or an update, so let's clear the saved state
                 PickerState.ClearSavedState();
                 // Save the current app version

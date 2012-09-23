@@ -15,8 +15,13 @@ namespace Ben.Dominion
         private static Regex twoBuyRegex = new Regex(@"\+[2-9] Buys");
         private static Regex trashRegex = new Regex(@"Trash(?! this)");
 
+        public PickerResult()
+        {
+            AdditionalCards = new ObservableCollection<Card>();
+        }
+
         private ObservableCollection<Card> cards = null;
-        public ObservableCollection<Card> Cards 
+        public ObservableCollection<Card> Cards
         {
             get { return cards; }
             set
@@ -28,13 +33,34 @@ namespace Ben.Dominion
                 }
             }
         }
-        public Boolean RequireCurses { get; set; }
-        public Boolean RequireProvinceAndPlatinum { get; set; }
-        public Boolean RequirePrizes { get; set; }
+
+        private ObservableCollection<Card> additionalCards = null;
+        public ObservableCollection<Card> AdditionalCards
+        {
+            get { return additionalCards; }
+            set
+            {
+                if (additionalCards != value)
+                {
+                    additionalCards = value;
+                    NotifyPropertyChanged("AdditionalCards");
+                }
+            }
+        }
 
         public Boolean HasCardType(CardType type)
         {
             return Cards.Any(c => c.IsType(type));
+        }
+
+        public Boolean HasCard(Card card)
+        {
+            return Cards.Contains(card);
+        }
+
+        public Boolean HasCard(String name)
+        {
+            return HasCard(Card.FromName(name));
         }
 
         public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }
@@ -59,7 +85,7 @@ namespace Ben.Dominion
         public static PickerResult FromList(IEnumerable<Int32> cardIds)
         {
             PickerResult result = new PickerResult();
-            result.Cards = cardIds.Select(id => Ben.Dominion.Cards.Lookup[id]).ToObservableCollection();
+            result.Cards = cardIds.Select(id => Card.FromId(id)).ToObservableCollection();
             return result;
         }
     }

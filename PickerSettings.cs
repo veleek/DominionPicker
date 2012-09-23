@@ -8,6 +8,11 @@ namespace Ben.Dominion
 {
     public class PickerSettings
     {
+        public PickerSettings()
+        {
+
+        }
+
         public static PickerSettings DefaultSettings
         {
             get
@@ -35,6 +40,9 @@ namespace Ben.Dominion
                 settings.FilterTreasure = new BooleanPickerOption("Filter Treasure Cards");
                 settings.FilterVictory = new BooleanPickerOption("Filter Victory Cards");
 
+                settings.PickPlatinumColony = new BooleanPickerOption("Pick if Platinum and Colony are used", true);
+                settings.PickSheltersOrEstates = new BooleanPickerOption("Pick if Shelters or Estates are used", true);
+
                 return settings;
             }
         }
@@ -48,6 +56,39 @@ namespace Ben.Dominion
             get
             {
                 return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
+            }
+        }
+
+        private List<Card> filteredCards;
+        [XmlIgnore]
+        public List<Card> FilteredCards
+        {
+            get
+            {
+                if (filteredCards == null)
+                {
+                    filteredCards = FilteredCardIds.Select(cid => Cards.Lookup[cid]).ToList();
+                }
+
+                return filteredCards;
+            }
+            set
+            {
+                FilteredCardIds = value.Select(c => c.ID).ToList();
+            }
+        }
+
+        private List<Int32> filteredCardIds;
+        public List<Int32> FilteredCardIds
+        {
+            get
+            {
+                return (filteredCardIds = filteredCardIds ?? new List<Int32>());
+            }
+            set
+            {
+                filteredCardIds = value;
+                filteredCards = null;
             }
         }
 
@@ -100,6 +141,9 @@ namespace Ben.Dominion
         public BooleanPickerOption FilterTreasure { get; set; }
         public BooleanPickerOption FilterVictory { get; set; }
 
+        public BooleanPickerOption PickPlatinumColony { get; set; }
+        public BooleanPickerOption PickSheltersOrEstates { get; set; }
+
         private List<PickerOption> allOptions = null;
         [XmlIgnore]
         [IgnoreDataMember]
@@ -116,14 +160,16 @@ namespace Ben.Dominion
                         RequireTrash,
                         PlusBuys,
                         PlusActions,
+                        PickPlatinumColony,
+                        PickSheltersOrEstates,
                         //PlusCoins,
-                        FilterPotions,
-                        FilterAction,
-                        FilterAttack,
-                        FilterDuration,
-                        FilterReaction,
-                        FilterTreasure,
-                        FilterVictory,
+                        //FilterPotions,
+                        //FilterAction,
+                        //FilterAttack,
+                        //FilterDuration,
+                        //FilterReaction,
+                        //FilterTreasure,
+                        //FilterVictory,
                     };
                 }
 
@@ -131,26 +177,29 @@ namespace Ben.Dominion
             }
         }
 
-        public PickerSettings() { }
-
         public PickerSettings Clone()
         {
             PickerSettings clone = new PickerSettings();
-            clone.Sets = this.Sets.Select(s => new SetSelector(s.Set, s.IsSelected)).ToList();
-            clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone<ListPickerOption<Int32>>();
-            clone.RequireDefense = this.RequireDefense.Clone<BooleanPickerOption>();
-            clone.RequireTrash = this.RequireTrash.Clone<BooleanPickerOption>();
-            clone.PlusBuys = this.PlusBuys.Clone<PolicyOption>();
-            clone.PlusActions = this.PlusActions.Clone<PolicyOption>();
-            clone.PlusCoins = this.PlusCoins.Clone<PolicyOption>();
+            clone.Sets = Cards.AllSets.Select(s => new SetSelector(s, this.SelectedSets.Contains(s))).ToList();
+            //clone.Sets = this.Sets.Select(s => new SetSelector(s.Set, s.IsSelected)).ToList();
+            clone.MinimumCardsPerSet = this.MinimumCardsPerSet.Clone();
+            clone.RequireDefense = this.RequireDefense.Clone();
+            clone.RequireTrash = this.RequireTrash.Clone();
+            clone.PlusBuys = this.PlusBuys.Clone();
+            clone.PlusActions = this.PlusActions.Clone();
+            clone.PlusCoins = this.PlusCoins.Clone();
 
-            clone.FilterPotions = this.FilterPotions.Clone<BooleanPickerOption>();
-            clone.FilterAction = this.FilterAction.Clone<BooleanPickerOption>();
-            clone.FilterAttack = this.FilterAttack.Clone<BooleanPickerOption>();
-            clone.FilterDuration = this.FilterDuration.Clone<BooleanPickerOption>();
-            clone.FilterReaction = this.FilterReaction.Clone<BooleanPickerOption>();
-            clone.FilterTreasure = this.FilterTreasure.Clone<BooleanPickerOption>();
-            clone.FilterVictory = this.FilterVictory.Clone<BooleanPickerOption>();
+            clone.FilterPotions = this.FilterPotions.Clone();
+            clone.FilterAction = this.FilterAction.Clone();
+            clone.FilterAttack = this.FilterAttack.Clone();
+            clone.FilterDuration = this.FilterDuration.Clone();
+            clone.FilterReaction = this.FilterReaction.Clone();
+            clone.FilterTreasure = this.FilterTreasure.Clone();
+            clone.FilterVictory = this.FilterVictory.Clone();
+
+            clone.PickPlatinumColony = this.PickPlatinumColony.Clone();
+            clone.PickSheltersOrEstates = this.PickPlatinumColony.Clone();
+            clone.FilteredCardIds = new List<int>(this.FilteredCardIds);
 
             return clone;
         }

@@ -88,6 +88,11 @@
         <controls:Pivot Title="Dominion Picker" x:Name="RootPivot"
                         Grid.Row="1" Margin="0,-10, 0, 0"
                         SelectionChanged="RootPivot_SelectionChanged">
+            <controls:Pivot.TitleTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </controls:Pivot.TitleTemplate>
             <controls:PivotItem Header="create" Margin="6,0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -275,7 +280,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Reset Favorites" Click="ClearFavorites_Click"/>
-                <!--<shell:ApplicationBarMenuItem Text="Filter Specific Cards" Click="FilterCards_Click" />-->
+                <shell:ApplicationBarMenuItem Text="Filter Specific Cards" Click="FilterCards_Click" />
                 <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click" x:Name="Unlock"/>
                 <!--<shell:ApplicationBarMenuItem Text="√ Sample Button" />
                 <shell:ApplicationBarMenuItem Text="  Sample Button" />

@@ -42,9 +42,8 @@ namespace Ben.Phone
             CycleSeconds = 30;
 
             Ad = new AdControl();
+            Ad.IsAutoRefreshEnabled = false;
             Ad.IsAutoCollapseEnabled = true;
-            Ad.IsAutoRefreshEnabled = true;
-            //Ad.AdModel = AdModel.Contextual;
             Ad.Width = 480;
             Ad.Height = 80;
         }

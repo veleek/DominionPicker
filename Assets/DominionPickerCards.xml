@@ -114,23 +114,20 @@
   <Card ID="107" Name="Goons" Set="Prosperity" Type="Action Attack" Cost="6" Rules="+1 Buy\n+2 Coins\nEach other player discards down to 3 cards in hand.\n_____\nWhile this is in play, when you buy a card, +1 {VP}." />
   <Card ID="108" Name="Grand Market" Set="Prosperity" Type="Action" Cost="6" Rules="+1 Card\n+1 Action\n+1 Buy\n+2 Coins\n_____\nYou can't buy this if you have any Copper in play." />
   <Card ID="109" Name="Hoard" Set="Prosperity" Type="Treasure" Cost="6" Rules="Worth 2 Coins.\n_____\nWhile this is in play, when you buy a Victory card, gain a Gold." />
-  <Card ID="110" Name="Bank" Set="Prosperity" Type="Treasure" Cost="7" Rules="Worth ? Coins.\nWhen you play this, it`s worth 1 Coin per Treasure card you have in play (counting this)." />
+  <Card ID="110" Name="Bank" Set="Prosperity" Type="Treasure" Cost="7" Rules="Worth ? Coins.\nWhen you play this, it's worth 1 Coin per Treasure card you have in play (counting this)." />
   <Card ID="111" Name="Expand" Set="Prosperity" Type="Action" Cost="7" Rules="Trash a card from your hand. Gain a card costing up to 3 more than the trashed card." />
   <Card ID="112" Name="Forge" Set="Prosperity" Type="Action" Cost="7" Rules="Trash any number of cards from your hand. Gain a card with cost exactly equal to the total cost in coins of the trashed cards." />
   <Card ID="113" Name="King's Court" Set="Prosperity" Type="Action" Cost="7" Rules="You may choose an Action card in your hand. Play it three times." />
   <Card ID="114" Name="Peddler" Set="Prosperity" Type="Action" Cost="8" Rules="+1 Card; +1 Action; +2 Coin\n_____\nDuring your Buy phase, this costs 2 less per Action card you have in play, but not less than 0." />
-  <!--
+  
   <Card ID="115" Name="Platinum" Set="Prosperity" Type="Treasure" Cost="9" Rules="5 Coins." />
   <Card ID="116" Name="Colony" Set="Prosperity" Type="Victory" Cost="11" Rules="10 {VP}." />
-  -->
   <!--Cornucopia-->
-  <!--
   <Card ID="117" Name="Bag of Gold" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Action\nGain a Gold, putting it on top of your deck.\n(This is not in the Supply.)"/>
   <Card ID="118" Name="Diadem" Set="Cornucopia" Type="Treasure Prize" Cost="0" Rules="Worth $2.\nWhen you play this, +$1 per unused Action you have (Action, not Action card).\n(This is not in the Supply.)"/>
   <Card ID="119" Name="Followers" Set="Cornucopia" Type="Action Attack Prize" Cost="0" Rules="+2 Cards\nGain an Estate. Each other player gains a Curse and discards down to 3 cards in hand.\n(This is not in the Supply.)"/>
   <Card ID="120" Name="Princess" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="+1 Buy\n_____\nWhile this is in play, cards cost $2 less, but not less than $0.\n(This is not in the Supply.)"/>
   <Card ID="121" Name="Trusty Steed" Set="Cornucopia" Type="Action Prize" Cost="0" Rules="Choose two: +2 Cards; or +2 Actions; or +$2; or gain 4 Silvers and put your deck into your discard pile.\n(This is not in the Supply.)"/>
-  -->
   <Card ID="122" Name="Hamlet" Set="Cornucopia" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nYou may discard a card; If you do +1 Action.\nYou may discard a card; If you do +1 Buy"/>
   <Card ID="123" Name="Fortune Teller" Set="Cornucopia" Type="Action Attack" Cost="3" Rules="+2 Coin\nEach other player reveals cards from the top of his deck until he reveals a Victory of Curse card. He puts it on top and discards the other revealed cards."/>
   <Card ID="124" Name="Menagerie" Set="Cornucopia" Type="Action" Cost="3" Rules="+1 Action\nReveal your hand.\nIf there are no duplicate cards in it, +3 Cards.\nOtherwise, +1 Card."/>
@@ -175,6 +172,64 @@
   <Card ID="161" Name="Black Market" Set="Promo" Type="Action" Cost="3" Rules="+2 Coins, Reveal the top 3 cards of the Black Market deck. You may buy one of them immediately. Put the unbought cards on the bottom of the Black Market deck in any order.\n(Before the game, make a Black Market deck out of one copy of each Kingdom card no"/>
   <Card ID="162" Name="Envoy" Set="Promo" Type="Action" Cost="4" Rules="Reveal the top 5 cards of your deck. The player to your left chooses one for you to discard. Draw the rest.\n"/>
   <Card ID="163" Name="Walled Village" Set="Promo" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n_____\nAt the start of Clean-up, if you have this and no more than one other Action card in play, you may put this on top of your deck.\n"/>
-  <Card ID="164" Name="Gorvernor" Set="Promo" Type="Action" Cost="5" Rules="+1 Action\n\nChoose one; you get the version in parentheses: Each player gets +1 (+3) Cards; or each player gains a Silver (Gold); or each player may trash a card from his hand and gain a card costing exactly $1 ($2) more.\n"/>
+  <Card ID="164" Name="Gorvernor" Set="Promo" Type="Action" Cost="5" Rules="+1 Action\nChoose one; you get the version in parentheses: Each player gets +1 (+3) Cards; or each player gains a Silver (Gold); or each player may trash a card from his hand and gain a card costing exactly $1 ($2) more.\n"/>
   <Card ID="165" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck.\n"/>
+  <!--Dark Ages-->
+  <Card ID="166" Name="Abandoned Mine" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="+1 Coin"/>
+  <Card ID="167" Name="Altar" Set="DarkAges" Type="Action" Cost="6" Rules="Trash a card from your hand. Gain a card costing up to 5 Coins."/>
+  <Card ID="168" Name="Armory" Set="DarkAges" Type="Action" Cost="4"/>
+  <Card ID="169" Name="Band of Misfits" Set="DarkAges" Type="Action" Cost="5" Rules="Play this as if it were an Action card in the Supply costing less than it that you choose.\nThis is that card until it leaves play."/>
+  <Card ID="170" Name="Bandit Camp" Set="DarkAges" Type="Action" Cost="5" Rules="+1 Card\n+2 Actions\nGain a Spoils from the Spoils pile."/>
+  <Card ID="171" Name="Beggar" Set="DarkAges" Type="Action Reaction" Cost="2"/>
+  <Card ID="172" Name="Catacombs" Set="DarkAges" Type="Action" Cost="5"/>
+  <Card ID="173" Name="Count" Set="DarkAges" Type="Action" Cost="5" Rules="Choose one: Discard 2 cards; or put a card from your hand on top of your deck; or gain a Copper.\nChoose one: +3 Coins; or trash your hand; or gain a Duchy."/>
+  <Card ID="174" Name="Counterfeit" Set="DarkAges" Type="Treasure" Cost="5"/>
+  <Card ID="175" Name="Cultist" Set="DarkAges" Type="Action Attack Looter" Cost="5" Rules="+2 Cards\nEach other player gains a Ruins. You may play a Cultist from your hand.\n_____\nWhen you trash this, +3 Cards."/>
+  <Card ID="176" Name="Death Cart" Set="DarkAges" Type="Action Looter" Cost="4"/>
+  <Card ID="177" Name="Dame Anna" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="178" Name="Dame Josephine" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="179" Name="Dame Molly" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="180" Name="Dame Natalie" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="181" Name="Dame Sylvia" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="182" Name="Feodum" Set="DarkAges" Type="Victory" Cost="4" Rules="Worth 1 Victory for every 3 Silvers in your deck (round down).\n_____\nWhen you trash this, gain 3 Silvers."/>
+  <Card ID="183" Name="Forager" Set="DarkAges" Type="Action" Cost="3"/>
+  <Card ID="184" Name="Fortress" Set="DarkAges" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n_____\nWhen you trash this, put it into your hand."/>
+  <Card ID="185" Name="Graverobber" Set="DarkAges" Type="Action" Cost="5" Rules="Choose one: Gain a card from the trash costing from 3 Coins to 6 Coins, putting it on top of your deck; or trash an Action card from your hand and gain a card costing up to 3 Coins more than it."/>
+  <Card ID="186" Name="Hermit" Set="DarkAges" Type="Action" Cost="3" Rules="Look through your discard pile. You may trash a card from your discard pile or hand that is not a Treasure. Gain a card costing up to 3 Coins.\n_____\nWhen you discard this from play, if you did not buy any cards this turn, trash this and gain a Madman from the Madman pile."/>
+  <Card ID="187" Name="Hovel" Set="DarkAges" Type="Reaction Shelter" Cost="1" Rules="When you buy a Victory card, you may trash this from your hand.\n_____\n(This card is not in the supply.)"/>
+  <Card ID="188" Name="Hunting Grounds" Set="DarkAges" Type="Action" Cost="6"/>
+  <Card ID="189" Name="Ironmonger" Set="DarkAges" Type="Action" Cost="4" Rules="+1 Card\n+1 Action\nReveal the top card of your deck; you may discard it. Either way, if it is an…\nAction card, +1 Action\nTreasure card, +1 Coin\nVictory card, +1 Card"/>
+  <Card ID="190" Name="Junk Dealer" Set="DarkAges" Type="Action" Cost="5"/>
+  <Card ID="191" Name="Knights" Set="DarkAges" Type="Action Attack Knight" Cost="5" Rules="Shuffle the Knight pile before each game with it. Keep it face down except for the top card, which is the only one that can be bought or gained."/>
+  <Card ID="192" Name="Madman" Set="DarkAges" Type="Action" Cost="0*" Rules="+2 Actions\nReturn this to the Madman pile. If you do, +1 Card per card in your hand.\n(This card is not in the supply.)"/>
+  <Card ID="193" Name="Marauder" Set="DarkAges" Type="Action Attack Looter" Cost="4"/>
+  <Card ID="194" Name="Market Square" Set="DarkAges" Type="Action Reaction" Cost="3"/>
+  <Card ID="195" Name="Mercenary" Set="DarkAges" Type="Action Attack" Cost="0*"/>
+  <Card ID="196" Name="Mystic" Set="DarkAges" Type="Action" Cost="5"/>
+  <Card ID="197" Name="Necropolis" Set="DarkAges" Type="Action Shelter" Cost="1" Rules="+2 Actions\n_____\n(This card is not in the supply.)"/>
+  <Card ID="198" Name="Overgrown Estate" Set="DarkAges" Type="Victory Shelter" Cost="1" Rules="0 Victory\n_____\nWhen you trash this, +1 Card.\n_____\n(This card is not in the supply.)"/>
+  <Card ID="199" Name="Pillage" Set="DarkAges" Type="Action Attack" Cost="5" Rules="Trash this. Each other player with 5 or more cards in hand reveals his hand and discards a card that you choose.\nGain 2 Spoils from the Spoils pile."/>
+  <Card ID="200" Name="Poor House" Set="DarkAges" Type="Action" Cost="1" Rules="+4 Coins\nReveal your hand. -1 Coin per Treasure card in your hand, to a minimum of 0 Coins."/>
+  <Card ID="201" Name="Procession" Set="DarkAges" Type="Action" Cost="4" Rules="You may play an Action card from your hand twice. Trash it. Gain an Action card costing exactly 1 Coin more than it."/>
+  <Card ID="202" Name="Rats" Set="DarkAges" Type="Action" Cost="4" Rules="+1 Card\n+1 Action\nGain a Rats. Trash a card from your hand other than a Rats (or reveal a hand of all Rats).\n_____\nWhen you trash this, +1 Card."/>
+  <Card ID="203" Name="Rebuild" Set="DarkAges" Type="Action" Cost="5"/>
+  <Card ID="204" Name="Rogue" Set="DarkAges" Type="Action Attack" Cost="5"/>
+  <Card ID="205" Name="Ruined Library" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="+1 Card"/>
+  <Card ID="206" Name="Ruined Market" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="+1 Buy"/>
+  <Card ID="207" Name="Ruined Village" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="+1 Action"/>
+  <Card ID="208" Name="Ruins" Set="DarkAges" Type="Ruins" Cost="0" Rules="If any Kingdom card has the type Looter, add the Ruins pile to this game.  Shuffle the Ruins cards, then count 10 per player after the first.  Put the pile face down with the top card face up.  "/>
+  <Card ID="209" Name="Sage" Set="DarkAges" Type="Action" Cost="3" Rules="+1 Action\nReveal cards from the top of your deck until you reveal one costing 3 Coins or more. Put that card into your hand and discard the rest."/>
+  <Card ID="210" Name="Scavenger" Set="DarkAges" Type="Action" Cost="5" Rules="+1 Coins\nYou may put your deck into your discard pile. Look through your discard pile and put one card from it on top of your deck."/>
+  <Card ID="211" Name="Sir Bailey" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="212" Name="Sir Destry" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="213" Name="Sir Martin" Set="DarkAges" Type="Action Attack Knight" Cost="4"/>
+  <Card ID="214" Name="Sir Michael" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="215" Name="Sir Vander" Set="DarkAges" Type="Action Attack Knight" Cost="5"/>
+  <Card ID="216" Name="Spoils" Set="DarkAges" Type="Treasure" Cost="0*" Rules="3 Coins\nWhen you play this, return it to the Spoils pile.\n(This is not in the supply.)"/>
+  <Card ID="217" Name="Squire" Set="DarkAges" Type="Action" Cost="2" Rules="+1 Coin\nChoose one: +2 Actions; or +2 Buys; or gain a Silver.\n_____\n"/>
+  <Card ID="218" Name="Storeroom" Set="DarkAges" Type="Action" Cost="3"/>
+  <Card ID="219" Name="Survivors" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="Look at the top 2 cards of your deck. Discard them or put them back in any order."/>
+  <Card ID="220" Name="Urchin" Set="DarkAges" Type="Action Attack" Cost="3"/>
+  <Card ID="221" Name="Vagrant" Set="DarkAges" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nReveal the top card of your deck. If it's a Curse, Ruins, Shelter, or Victory card, put it into your hand."/>
+  <Card ID="222" Name="Wandering Minstrel" Set="DarkAges" Type="Action" Cost="4"/>
 </ArrayOfCard>

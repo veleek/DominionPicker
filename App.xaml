@@ -13,6 +13,7 @@
         <localData:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <localData:StringConverter x:Key="StringConverter" />
         <localData:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
+        <localData:DebugConverter x:Key="DebugConverter" />
 
         <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
         <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">

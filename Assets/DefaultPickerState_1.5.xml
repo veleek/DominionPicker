@@ -9,16 +9,14 @@
       <SetSelector Set="Prosperity" IsSelected="true" />
       <SetSelector Set="Cornucopia" IsSelected="true" />
       <SetSelector Set="Hinterlands" IsSelected="true" />
-      <SetSelector Set="DarkAges" IsSelected="true" />
       <SetSelector Set="Promo" IsSelected="false" />
     </Sets>
-    <FilteredCardIds />
     <MinimumCardsPerSet>
       <Name>Minimum cards per set</Name>
       <Notes />
-      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
-      <IsEnabled>false</IsEnabled>
-      <SelectedValue>3</SelectedValue>
+      <OptionValue xsi:type="xsd:boolean">true</OptionValue>
+      <IsEnabled>true</IsEnabled>
+      <SelectedValue>5</SelectedValue>
       <ValidValues>
         <int>2</int>
         <int>3</int>
@@ -35,8 +33,8 @@ require a defense card</Name>
       <IsEnabled>false</IsEnabled>
     </RequireDefense>
     <RequireTrash>
-      <Name>Require a card that lets you
-trash other cards</Name>
+      <Name>Require a card that lets
+you trash other cards</Name>
       <Notes />
       <OptionValue xsi:type="xsd:boolean">false</OptionValue>
       <IsEnabled>false</IsEnabled>
@@ -122,18 +120,6 @@ trash other cards</Name>
       <OptionValue xsi:type="xsd:boolean">false</OptionValue>
       <IsEnabled>false</IsEnabled>
     </FilterVictory>
-    <PickPlatinumColony>
-      <Name>Pick if Platinum and Colony are used</Name>
-      <Notes />
-      <OptionValue xsi:type="xsd:boolean">true</OptionValue>
-      <IsEnabled>true</IsEnabled>
-    </PickPlatinumColony>
-    <PickSheltersOrEstates>
-      <Name>Pick if Shelters or Estates are used</Name>
-      <Notes />
-      <OptionValue xsi:type="xsd:boolean">true</OptionValue>
-      <IsEnabled>true</IsEnabled>
-    </PickSheltersOrEstates>
   </CurrentSettings>
   <FavoriteSettings>
     <FavoriteSetting>
@@ -147,7 +133,6 @@ trash other cards</Name>
           <SetSelector Set="Prosperity" IsSelected="true" />
           <SetSelector Set="Cornucopia" IsSelected="true" />
           <SetSelector Set="Hinterlands" IsSelected="true" />
-          <SetSelector Set="DarkAges" IsSelected="true" />
           <SetSelector Set="Promo" IsSelected="false" />
         </Sets>
         <MinimumCardsPerSet>
@@ -412,5 +397,22 @@ trash other cards</Name>
       <Value>1,18,20,16,17,88,84,89,82,10</Value>
     </FavoriteSet>
   </FavoriteSets>
+  <Result>
+    <Cards>
+      <Card ID="8" Name="Bureaucrat" Set="Base" Type="Attack Action" Cost="4" Rules="Gain a silver card; put it on top of your deck.\nEach other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards)." />
+      <Card ID="51" Name="Embargo" Set="Seaside" Type="Action" Cost="2" Rules="+2 Coins\nTrash this card. Put an Embargo token on top of a Supply pile. - When a player buys a card, he gains a Curse card per Embargo token on that pile." />
+      <Card ID="9" Name="Feast" Set="Base" Type="Action" Cost="4" Rules="Trash this card. Gain a card costing up to 5 Coins." />
+      <Card ID="57" Name="Fishing Village" Set="Seaside" Type="Duration Action" Cost="3" Rules="+2 Actions\n+1 Coin\nAt the start of your next turn:\n+1 Action\n+1 Coin." />
+      <Card ID="12" Name="Moneylender" Set="Base" Type="Action" Cost="4" Rules="Trash a Copper from your hand.\nIf you do, +3 Coins." />
+      <Card ID="73" Name="Outpost" Set="Seaside" Type="Duration Action" Cost="5" Rules="You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns." />
+      <Card ID="17" Name="Throne Room" Set="Base" Type="Action" Cost="4" Rules="Choose an Action card in your hand.\nPlay it twice." />
+      <Card ID="68" Name="Treasure Map" Set="Seaside" Type="Action" Cost="4" Rules="Trash this and another copy of Treasure Map from your hand. If you do trash two Treasure Maps, gain 4 Gold cards, putting them on top of your deck." />
+      <Card ID="76" Name="Wharf" Set="Seaside" Type="Duration Action" Cost="5" Rules="Now and at the start of your next turn:\n+2 Cards\n+1 Buy" />
+      <Card ID="24" Name="Witch" Set="Base" Type="Attack Action" Cost="5" Rules="+2 Cards\nEach other player gains a Curse card." />
+    </Cards>
+    <RequireCurses>false</RequireCurses>
+    <RequireProvinceAndPlatinum>false</RequireProvinceAndPlatinum>
+    <RequirePrizes>false</RequirePrizes>
+  </Result>
   <SortOrder>Name</SortOrder>
 </PickerState>

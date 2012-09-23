@@ -1,192 +1,12 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media;
-using System.Xml.Serialization;
+using System.Collections.ObjectModel;
 using System.IO.IsolatedStorage;
-using System.IO;
-using System.Windows.Resources;
+using System.Linq;
 using Ben.Utilities;
 
 namespace Ben.Dominion
 {
-    public enum CardSet
-    {
-        None,
-        Base,
-        Intrigue,
-        Seaside,
-        Alchemy,
-        Prosperity,
-        Cornucopia,
-        Hinterlands,
-        Promo,
-    }
-
-    [Flags]
-    public enum CardType
-    {
-        None = 0x00,
-        Treasure = 0x01,
-        Victory = 0x02,
-        Curse = 0x04,
-        Action = 0x08,
-        Reaction = 0x10,
-        Attack = 0x20,
-        Duration = 0x40,
-        Prize = 0x80,
-    }
-
-    public class Card
-    {
-        [XmlAttribute]
-        public Int32 ID { get; set; }
-        [XmlAttribute]
-        public String Name { get; set; }
-        [XmlAttribute]
-        public CardSet Set { get; set; }
-        [XmlAttribute]
-        public CardType Type { get; set; }
-        [XmlAttribute]
-        public String Cost { get; set; }
-        [XmlAttribute]
-        public String Rules { get; set; }
-
-        [XmlIgnore]
-        public Boolean HasPotion { get { return Cost.Contains('p'); } }
-        [XmlIgnore]
-        public String CoinCost { get { return Cost.Trim('p'); } }
-
-        public String SetPrefix
-        {
-            get { return Set.ToString().Substring(0, 4); }
-        }
-
-        public String FormattedRules
-        {
-            get { return Rules.Replace("\\n", "\n"); }
-        }
-
-        public Card() { }
-
-        public Card(String name, CardType type)
-        {
-            this.Name = name;
-            this.Type = type;
-        }
-
-        public Boolean InSet(CardSet set)
-        {
-            return set == this.Set;
-        }
-
-        public Boolean InSet(IEnumerable<CardSet> sets)
-        {
-            return sets.Contains(this.Set);
-        }
-
-        public Boolean IsType(CardType cardType)
-        {
-            return (this.Type & cardType) != CardType.None;
-        }
-
-        public override string ToString()
-        {
-            return String.Format("{0} - {1} ({2}): {3}", Name, Type, Set, Cost);
-        }
-        
-        public Brush BackgroundColor
-        {
-            get
-            {
-                return GetBrushForType(Type);
-            }
-        }
-
-        private static Dictionary<CardType, Brush> brushCache = new Dictionary<CardType, Brush>();
-
-        public static Brush GetBrushForType(CardType type)
-        {
-            Brush cardTypeBrush = null;
-
-            if (!brushCache.TryGetValue(type, out cardTypeBrush))
-            {
-                List<Color> colors = GetColorsForType(type);
-
-                if (colors.Count == 1)
-                {
-                    cardTypeBrush = new SolidColorBrush(colors[0]);
-                }
-                else
-                {
-                    LinearGradientBrush grad = new LinearGradientBrush();
-                    grad.StartPoint = new Point(0.5, 0);
-                    grad.EndPoint = new Point(0.5, 1);
-                    //Double offsetStep = 1.0 / (colors.Count - 1);
-                    //Double offset = 0.0;
-
-                    Color first = colors[0];
-                    Color second = colors[1];
-
-                    grad.GradientStops.Add(new GradientStop { Color = first, Offset = 0 });
-                    grad.GradientStops.Add(new GradientStop { Color = first, Offset = 0.20 });
-
-                    grad.GradientStops.Add(new GradientStop { Color = second, Offset = 0.80 });
-                    grad.GradientStops.Add(new GradientStop { Color = second, Offset = 1.0 });
-
-                    cardTypeBrush = grad;
-                }
-
-                brushCache[type] = cardTypeBrush;
-            }
-
-            return cardTypeBrush;
-        }
-
-        public static List<Color> GetColorsForType(CardType type)
-        {
-            List<Color> colors = new List<Color>();
-
-            for (int i = 0; i < 7; i++)
-            {
-                CardType typeToCheck = (CardType)(1 << i);
-
-                if ((type & typeToCheck) != CardType.None)
-                {
-                    colors.Add(GetColorForType(typeToCheck));
-                }
-            }
-
-            return colors;
-        }
-
-        public static Color GetColorForType(CardType type)
-        {
-            switch (type)
-            {
-                case CardType.Treasure:
-                    return Color.FromArgb(255, 235, 180, 15);
-                case CardType.Victory:
-                    return Color.FromArgb(255, 97, 121, 57);
-                case CardType.Curse:
-                    return Color.FromArgb(255, 123, 65, 141);
-                case CardType.Attack:
-                    return Color.FromArgb(255, 255, 60, 60);
-                case CardType.Reaction:
-                    return Color.FromArgb(255, 68, 113, 181);
-                case CardType.Duration:
-                    return Color.FromArgb(255, 251, 141, 78);
-                case CardType.Action:
-                    return Color.FromArgb(255, 160, 155, 165);
-                case CardType.Prize:
-                    return Color.FromArgb(255, 153, 217, 234);
-                default:
-                    return Colors.Black;
-            }
-        }
-    }
-
     public static class Cards
     {
         public static readonly String PickerCardsFileName = "./Assets/DominionPickerCards.xml";
@@ -204,6 +24,7 @@ namespace Ben.Dominion
                     CardSet.Prosperity,
                     CardSet.Cornucopia,
                     CardSet.Hinterlands,
+                    CardSet.DarkAges,
                     CardSet.Promo,
                 };
             }
@@ -215,14 +36,18 @@ namespace Ben.Dominion
             {
                 return new List<CardType>
                 {
+                    CardType.Action,
+                    CardType.Attack,
+                    CardType.Curse,
+                    CardType.Duration,
+                    CardType.Knight,
+                    CardType.Looter,
+                    CardType.Prize,
+                    CardType.Reaction,
+                    CardType.Ruins,
+                    CardType.Shelter,
                     CardType.Treasure,
                     CardType.Victory,
-                    CardType.Curse,
-                    CardType.Action,
-                    CardType.Reaction,
-                    CardType.Attack,
-                    CardType.Duration,
-                    CardType.Prize,
                 };
             }
         }
@@ -238,16 +63,73 @@ namespace Ben.Dominion
             return cardsBySet[set];
         }
 
-        private static List<Card> allCards = null;
-        public static List<Card> AllCards 
+        private static ReadOnlyCollection<Card> allCards = null;
+        public static ReadOnlyCollection<Card> AllCards 
         {
             get
             {
                 if (allCards == null)
                 {
-                    allCards = Load();
+                    allCards = new ReadOnlyCollection<Card>(Load());
                 }
                 return allCards;
+            }
+        }
+
+        public static ReadOnlyCollection<String> NonPickableCards
+        {
+            get
+            {
+                return new ReadOnlyCollection<string>(
+                    new List<string>
+                    {
+                        "Platinum",
+                        "Colony",
+                        "Bag of Gold",
+                        "Diadem",
+                        "Followers",
+                        "Princess",
+                        "Trusty Steed",
+                        "Spoils",
+                        "Madman",
+                        "Mercenary",
+                        "Hovel",
+                        "Necropolis",
+                        "Ruins",
+                        "Overgrown Estate",
+                        "Abandoned Mine",
+                        "Ruined Library",
+                        "Ruined Market",
+                        "Ruined Village",
+                        "Survivors",
+                        "Dame Anna",
+                        "Dame Josephine",
+                        "Dame Molly",
+                        "Dame Natalie",
+                        "Dame Sylvia",
+                        "Sir Bailey",
+                        "Sir Destry",
+                        "Sir Martin",
+                        "Sir Michael",
+                        "Sir Vander",
+                    }
+                );
+            }
+        }
+
+        private static ReadOnlyCollection<Card> pickableCards = null;
+        public static ReadOnlyCollection<Card> PickableCards
+        {
+            get
+            {
+                if (pickableCards == null)
+                {
+                    pickableCards = new ReadOnlyCollection<Card>(
+                        AllCards.Where(c => !NonPickableCards.Contains(c.Name)).ToList()
+                    );
+                }
+
+                return pickableCards;
             }
         }
 
@@ -264,6 +146,19 @@ namespace Ben.Dominion
             }
         }
 
+        private static Dictionary<string, Card> nameLookup = null;
+        public static Dictionary<string, Card> NameLookup
+        {
+            get
+            {
+                if (nameLookup == null)
+                {
+                    nameLookup = AllCards.ToDictionary(c => c.Name, StringComparer.OrdinalIgnoreCase);
+                }
+                return nameLookup;
+            }
+        }
+
         public static List<Card> Load()
         {
             using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
@@ -274,12 +169,11 @@ namespace Ben.Dominion
 
         public static void Save()
         {
-            List<Card> cards = AllCards;
             using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 using (IsolatedStorageFileStream stream = store.CreateFile(PickerCardsFileName))
                 {
-                    String xml = GenericXmlSerializer.Serialize(cards);
+                    String xml = GenericXmlSerializer.Serialize(AllCards);
                     Console.WriteLine(xml);
                 }
             }

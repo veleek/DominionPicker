@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using System.Windows.Threading;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
+using System.Diagnostics;
 
 namespace Ben.Dominion
 {
@@ -66,6 +67,7 @@ namespace Ben.Dominion
             DateTime start = DateTime.UtcNow;
             try
             {
+                Debug.WriteLine("Loading picker state...");
                 if (UseIsolatedStorage)
                 {
                     if (state == null)
@@ -85,12 +87,20 @@ namespace Ben.Dominion
             }
             catch(IsolatedStorageException)
             {
+                Debug.WriteLine("IsolatedStorageException while loading Picker State.");
                 // Just ignore the exception
             }
 
             if (state == null)
             {
+                Debug.WriteLine("Using default picker state");
                 state = PickerState.Default;
+            }
+            else
+            {
+                // TODO: This is a bit of a hack to enable 'updating' to a newer version of the 
+                // settings which will include all of sets so they don't have to reset their settings
+                state.CurrentSettings = state.CurrentSettings.Clone();
             }
 
             TimeSpan elapsedTime = DateTime.UtcNow - start;
@@ -100,12 +110,11 @@ namespace Ben.Dominion
 
         public static void Save()
         {
-            DateTime start = DateTime.UtcNow;
-
             if (current != null)
             {
                 try
                 {
+                    Debug.WriteLine("Saving picker state...");
                     if (UseIsolatedStorage)
                     {
                         using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
@@ -119,12 +128,10 @@ namespace Ben.Dominion
                 }
                 catch(IsolatedStorageException e)
                 {
+                    Debug.WriteLine("There was an issue trying to save the picker state.");
                     com.mtiks.winmobile.mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
                 }
             }
-
-            TimeSpan elapsedTime = DateTime.UtcNow - start;
-            AppLog.Instance.Log(String.Format("Loaded State: {0}ms", elapsedTime.TotalMilliseconds));
         }
 
         /// <summary>
@@ -145,8 +152,8 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException) { }
 
-            // Then reload (or recreate it)
-            Load();
+            // The clear out the current state, it will get reloaded when it needs to.
+            current = null;
         }
 
         #endregion Statics

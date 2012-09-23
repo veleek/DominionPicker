@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Runtime.Serialization;
 using Ben.Controls;
+using System.Xml.Serialization;
 
 namespace Ben.Dominion
 {
@@ -37,22 +38,7 @@ namespace Ben.Dominion
             this.Notes = "";
         }
 
-        //public virtual Boolean SatisfiedBy(IEnumerable<Card> cardList)
-        //{
-        //    if (SatisfactionDelegate != null)
-        //    {
-        //        return SatisfactionDelegate(cardList);
-        //    }
-        //    return true;
-        //}
-        //public Func<IEnumerable<Card>, Boolean> SatisfactionDelegate;
-
-        public virtual PickerOption Clone()
-        {
-            return this.Clone<PickerOption>();
-        }
-
-        public T Clone<T>()
+        public T GenericClone<T>()
             where T : PickerOption
         {
             T clone = this.MemberwiseClone() as T;
@@ -98,6 +84,25 @@ namespace Ben.Dominion
 		{
 			return this.Name.GetHashCode() ^ this.OptionValue.GetHashCode() ^ this.Notes.GetHashCode();
 		}
+    }
+
+    public static class PickerOptionExtensions
+    {
+        /// <summary>
+        /// By creating this method as an extension method, we have an implicitly defined
+        /// type parameter which allows us to call the clone method on a sub-class and 
+        /// return an object of the same type without requiring us to explicitly declare
+        /// the object type.  Additionally, allows us to call Clone on a null instance and
+        /// not get a null reference exception.
+        /// </summary>
+        /// <typeparam name="TPickerOption">The type of the picker option to clone</typeparam>
+        /// <param name="pickerOption">The picker option to clone</param>
+        /// <returns>A strongly typed clone of the given picker</returns>
+        public static TPickerOption Clone<TPickerOption>(this TPickerOption pickerOption)
+            where TPickerOption : PickerOption
+        {
+            return pickerOption != null ? pickerOption.GenericClone<TPickerOption>() : null;
+        }
     }
     
     public class BooleanPickerOption : PickerOption 

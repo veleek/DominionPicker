@@ -97,6 +97,7 @@
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdManager.cs" />
+    <Compile Include="Card.cs" />
     <Compile Include="CardFilterPage.xaml.cs">
       <DependentUpon>CardFilterPage.xaml</DependentUpon>
     </Compile>
@@ -159,11 +160,21 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\DefaultPickerState_1.5.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\DefaultPickerState.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Assets\Dominican-SmallCaps.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Toolkit.Content\ApplicationBar.Check.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\AppManifest.xml" />
@@ -222,6 +233,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SetIcons\blackmarket.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\darkages.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SetIcons\promo.png">
