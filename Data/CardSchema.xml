@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCards>
+  <Card Name="Name" Set="Set"/>
+  <!--<Card Name="Name" Set="Set" Type="Type" Cost="Cost" en="en" de="de" fr="fr" nl="nl" es="es" it="it" pl="pl" fi="fi" cz="cz" />-->
+</ArrayOfCards>
