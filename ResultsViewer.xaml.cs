@@ -152,5 +152,15 @@ namespace Ben.Dominion
                 PickerState.Current.ReplaceCard(scrollViewer.DataContext as Card);
             }
         }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/AboutPage.xaml");
+        }
+
+        private void CardLookup_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/CardLookupPage.xaml");
+        }
     }
 }

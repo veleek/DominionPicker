@@ -1,0 +1,8 @@
+﻿<dp:Card xmlns:dp="clr-namespace:Ben.Dominion" 
+         Name="Sample Card" 
+         Cost="1P" 
+         Set="Prosperity" 
+         ID="100" 
+         Type="Action, Attack, Knight" 
+         Rules="+1 Card\n+2 Coins\nWhen you gain this, trash a card.\n______\n(This is not in the supply.)">
+</dp:Card>

@@ -177,6 +177,16 @@ namespace Ben.Dominion
                         }
                     }
 
+                    // Select the bane card first so that it appears close to Young Witch
+                    if (result.HasCard("Young Witch"))
+                    {
+                        Card bane = pool.FirstOrDefault(c => c.Cost == "2" || c.Cost == "3");
+                        if (bane != null)
+                        {
+                            result.AdditionalCards.Add(bane);
+                        }
+                    }
+
                     if (settings.PickPlatinumColony.IsEnabled)
                     {
                         // Pick a random card from the pool
@@ -186,7 +196,7 @@ namespace Ben.Dominion
                         if (colonyPlatinumCard.Set == CardSet.Prosperity)
                         {
                             // 70% of the time we just use both
-                            if (random.NextDouble() > 0.7)
+                            if (random.NextDouble() <= 0.7)
                             {
                                 result.AdditionalCards.Add(Card.FromName("Platinum"));
                                 result.AdditionalCards.Add(Card.FromName("Colony"));
@@ -214,35 +224,25 @@ namespace Ben.Dominion
                         if (shelterEstateCard.InSet(CardSet.DarkAges))
                         {
                             Debug.WriteLine("Adding shelters...");
-                            foreach (var shelter in Cards.AllCards.Where(c => c.IsType(CardType.Shelter)))
-                            {
-                                result.AdditionalCards.Add(shelter);
-                            }
+                            result.AdditionalCards.Add(Card.FromName("Shelters"));
+                            //foreach (var shelter in Cards.AllCards.Where(c => c.IsType(CardType.Shelter)))
+                            //{
+                            //    result.AdditionalCards.Add(shelter);
+                            //}
                         }
                     }
 
                     if(result.HasCardType(CardType.Looter))
                     {
                         Debug.WriteLine("Adding ruins...");
-                        //foreach(var ruin in Cards.AllCards.Where(c => c.IsType(CardType.Ruins)))
-                        //{
-                        //    result.AdditionalCards.Add(ruin);
-                        //}
                         result.AdditionalCards.Add(Card.FromName("Ruins"));
                     }
 
-                    if (result.HasCard("Young Witch"))
+
+
+                    if (result.HasCard("Bandit Camp") || result.HasCard("Marauder"))
                     {
-                        Card bane = pool.FirstOrDefault(c => c.Cost == "2" || c.Cost == "3");
-                        if (bane == null)
-                        {
-                            Debug.WriteLine("No suitable bane card in the set of cards.");
-                        }
-                        else
-                        {
-                            Debug.WriteLine("Selected {0} as bane card.", bane.Name);
-                            result.AdditionalCards.Add(bane);
-                        }
+                        result.AdditionalCards.Add(Card.FromName("Spoils"));
                     }
 
                     if(result.HasCard("Hermit"))
@@ -253,12 +253,6 @@ namespace Ben.Dominion
                     if (result.HasCard("Urchin"))
                     {
                         result.AdditionalCards.Add(Card.FromName("Mercenary"));
-                    }
-
-                    if (result.AdditionalCards.Count > 0)
-                    {
-                        string additionalCards = result.AdditionalCards.Select(c => c.Name).Aggregate((a, b) => a + ", " + b);
-                        Debug.WriteLine("Additional Cards({0}): {1}", result.AdditionalCards.Count, additionalCards);
                     }
 
                     break;

@@ -1,14 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
-using Microsoft.Phone.Controls;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Ben.Utilities;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using System.ComponentModel;
-using System.Windows.Media;
-using System.Windows.Data;
-using Ben.Phone;
 
 namespace Ben.Dominion
 {
@@ -119,7 +117,7 @@ namespace Ben.Dominion
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
         {
-            AdManager.UnloadAd(AdContainer);
+            //AdManager.UnloadAd(AdContainer);
         }
 
         private void MainPage_BackKeyPress(object sender, CancelEventArgs e)
@@ -308,11 +306,6 @@ namespace Ben.Dominion
             }
         }
 
-        private void About_Click(object sender, EventArgs e)
-        {
-			this.NavigationService.Navigate("/AboutPage.xaml");
-        }
-
         private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
         {
             MarketplaceReviewTask review = new MarketplaceReviewTask();
@@ -365,7 +358,6 @@ namespace Ben.Dominion
             // page for the name dialog.
             Dispatcher.BeginInvoke(() => { ShowAddFavoritePopup(); });
         }
-
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
@@ -426,6 +418,16 @@ namespace Ben.Dominion
         void FilterCards_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate("/CardFilterPage.xaml");
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/AboutPage.xaml");
+        }
+
+        private void CardLookup_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/TestPage.xaml");
         }
     }
 }

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+using System.Windows.Data;
+using Ben.Data;
+using Ben.Utilities;
 using Microsoft.Phone.Controls;
-using System.Collections.ObjectModel;
 
 namespace Ben.Dominion
 {
@@ -157,6 +154,14 @@ namespace Ben.Dominion
             CardsList.ItemsSource = cards;
         }
 
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource vc = new CollectionViewSource()
+            {
+                
+            };
+        }
+
         private void ResetFilteredCards_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("This will clear all cards you have previously chosen to filter.  Do you want to continue?", "Warning!", MessageBoxButton.OKCancel);
@@ -172,20 +177,9 @@ namespace Ben.Dominion
             ResetListFilter();
         }
 
-        /// <summary>
-        /// A simple key value pair to joins a specific card with a filtered status 
-        /// that can be used for data binding a check box.
-        /// </summary>
-        public class CardSelector
+        private void About_Click(object sender, EventArgs e)
         {
-            public CardSelector(Card card, bool selected)
-            {
-                this.Card = card;
-                this.Selected = selected;
-            }
-
-            public Card Card { get; set; }
-            public bool Selected { get; set; }
+            this.NavigationService.Navigate("/AboutPage.xaml");
         }
 
         /// <summary>
@@ -198,45 +192,22 @@ namespace Ben.Dominion
             {
             }
         }
+    }
 
-        /// <summary>
-        /// Implementation of the generic grouping interface that can be used for binding
-        /// grouped elements to a LongListSelector in a meaningful way.
-        /// </summary>
-        /// <typeparam name="TKey"></typeparam>
-        /// <typeparam name="TElement"></typeparam>
-        public class Grouping<TKey, TElement> : IGrouping<TKey, TElement>
+    /// <summary>
+    /// A simple key value pair to joins a specific card with a filtered status 
+    /// that can be used for data binding a check box.
+    /// </summary>
+    public class CardSelector
+    {
+        public CardSelector() { }
+        public CardSelector(Card card, bool selected)
         {
-            public Grouping(TKey key, IEnumerable<TElement> elements)
-            {
-                this.Key = key;
-                this.Elements = elements;
-            }
-
-            public TKey Key { get; private set; }
-            public IEnumerable<TElement> Elements { get; private set; }
-
-            public override bool Equals(object obj)
-            {
-                var otherGroup = obj as Grouping<TKey, TElement>;
-
-                return (otherGroup != null) && (otherGroup.Key.Equals(this.Key));
-            }
-
-            public override int GetHashCode()
-            {
-                return this.Key.GetHashCode();
-            }
-
-            public IEnumerator<TElement> GetEnumerator()
-            {
-                return Elements.GetEnumerator();
-            }
-
-            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-            {
-                return this.GetEnumerator();
-            }
+            this.Card = card;
+            this.Selected = selected;
         }
+
+        public Card Card { get; set; }
+        public bool Selected { get; set; }
     }
 }

@@ -4,16 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:local="clr-namespace:Ben.Dominion"
-    xmlns:localData="clr-namespace:Ben.Data"
+    xmlns:data="clr-namespace:Ben.Data"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:media="clr-namespace:System.Windows.Media;assembly=System.Windows">
     
     <Application.Resources>
-        <localData:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <localData:StringConverter x:Key="StringConverter" />
-        <localData:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
-        <localData:DebugConverter x:Key="DebugConverter" />
+        <data:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <data:StringConverter x:Key="StringConverter" />
+        <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
+        <data:DebugConverter x:Key="DebugConverter" />
+        <data:ImageConverter x:Key="ImageConverter" />
 
         <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
         <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">

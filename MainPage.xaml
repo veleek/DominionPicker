@@ -10,7 +10,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Ben.Dominion"
     xmlns:localControls="clr-namespace:Ben.Controls"
-    xmlns:ad="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -280,11 +279,8 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Reset Favorites" Click="ClearFavorites_Click"/>
-                <shell:ApplicationBarMenuItem Text="Filter Specific Cards" Click="FilterCards_Click" />
-                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click" x:Name="Unlock"/>
-                <!--<shell:ApplicationBarMenuItem Text="√ Sample Button" />
-                <shell:ApplicationBarMenuItem Text="  Sample Button" />
-                <shell:ApplicationBarMenuItem Text="Sample Button" />-->
+                <shell:ApplicationBarMenuItem Text="Card Filter" Click="FilterCards_Click" />
+                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

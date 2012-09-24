@@ -55,9 +55,9 @@ namespace Ben.Dominion
         public String Rules { get; set; }
 
         [XmlIgnore]
-        public Boolean HasPotion { get { return Cost.Contains('p'); } }
+        public Boolean HasPotion { get { return Cost.ToLower().Contains('p'); } }
         [XmlIgnore]
-        public String CoinCost { get { return Cost.Trim('p'); } }
+        public String CoinCost { get { return Cost.ToLower().Trim('p'); } }
 
         public String SetPrefix
         {

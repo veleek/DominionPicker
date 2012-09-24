@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Windows.Data;
+using Ben.Data;
 using Ben.Utilities;
 
 namespace Ben.Dominion
@@ -83,25 +86,37 @@ namespace Ben.Dominion
                 return new ReadOnlyCollection<string>(
                     new List<string>
                     {
+                        // Prosperity Treasures and Victorys
                         "Platinum",
                         "Colony",
+
+                        // Prizes
                         "Bag of Gold",
                         "Diadem",
                         "Followers",
                         "Princess",
                         "Trusty Steed",
+
+                        // Dark Ages, non-Supply Cards
                         "Spoils",
                         "Madman",
                         "Mercenary",
+
+                        // Shelters
+                        "Shelters",
                         "Hovel",
                         "Necropolis",
-                        "Ruins",
                         "Overgrown Estate",
+                        
+                        // Ruins
+                        "Ruins",
                         "Abandoned Mine",
                         "Ruined Library",
                         "Ruined Market",
                         "Ruined Village",
                         "Survivors",
+                        
+                        // Knights
                         "Dame Anna",
                         "Dame Josephine",
                         "Dame Molly",
@@ -178,5 +193,35 @@ namespace Ben.Dominion
                 }
             }
         }
+
+        private static GroupedCollectionViewSource<CardSet> cardsViewSource;
+        public static GroupedCollectionViewSource<CardSet> CardsViewSource
+        {
+            get
+            {
+                if (cardsViewSource == null)
+                {
+                    cardsViewSource = new GroupedCollectionViewSource<CardSet>
+                    {
+                        GroupDescriptions =
+                        {
+                            new PropertyGroupDescription("Card.Set"),
+                        },
+                        SortDescriptions =
+                        {
+                            new SortDescription("Card.Set", ListSortDirection.Ascending),
+                            new SortDescription("Card.Name", ListSortDirection.Ascending),
+                        },
+                        Source = Cards.AllCards.Select(c => new CardSelector(c, false)).ToList()
+                    };
+                }
+
+                return cardsViewSource;
+            }
+        }
     }
+
+    public class CardList : List<Card> { }
+
+    public class CardSelectorList : List<CardSelector> { }
 }

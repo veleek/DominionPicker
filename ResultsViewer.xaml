@@ -173,6 +173,8 @@
             <shell:ApplicationBarIconButton x:Name="AppBarSortButton" IconUri="/Images/appbar.sort.name.png" Text="sort by name" Click="Sort_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="save" Click="AddFavorite_Click"/>
             <shell:ApplicationBar.MenuItems>
+                <!--<shell:ApplicationBarMenuItem Text="Card Lookup" Click="CardLookup_Click" />-->
+                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

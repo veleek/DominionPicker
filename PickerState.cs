@@ -303,6 +303,12 @@ namespace Ben.Dominion
                 return;
             }
 
+            Card replacement = picker.GetRandomCardOtherThan(Result.Cards);
+            if (replacement == null)
+            {
+                return;
+            }
+
             int index = -1;
             for (int i = 0; i < Result.Cards.Count; i++)
             {

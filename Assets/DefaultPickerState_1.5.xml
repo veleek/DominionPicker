@@ -150,19 +150,15 @@ you trash other cards</Name>
           </ValidValues>
         </MinimumCardsPerSet>
         <RequireDefense>
-          <Name>
-            If there's an attack,
-            require a defense card
-          </Name>
+          <Name>If there's an attack,
+require a defense card</Name>
           <Notes />
           <OptionValue xsi:type="xsd:boolean">false</OptionValue>
           <IsEnabled>false</IsEnabled>
         </RequireDefense>
         <RequireTrash>
-          <Name>
-            Require a card that lets you
-            trash other cards
-          </Name>
+          <Name>Require a card that lets
+you trash other cards</Name>
           <Notes />
           <OptionValue xsi:type="xsd:boolean">false</OptionValue>
           <IsEnabled>false</IsEnabled>
@@ -278,19 +274,15 @@ you trash other cards</Name>
           </ValidValues>
         </MinimumCardsPerSet>
         <RequireDefense>
-          <Name>
-            If there's an attack,
-            require a defense card
-          </Name>
+          <Name>If there's an attack,
+require a defense card</Name>
           <Notes />
           <OptionValue xsi:type="xsd:boolean">true</OptionValue>
           <IsEnabled>true</IsEnabled>
         </RequireDefense>
         <RequireTrash>
-          <Name>
-            Require a card that lets you
-            trash other cards
-          </Name>
+          <Name>Require a card that lets you
+trash other cards</Name>
           <Notes />
           <OptionValue xsi:type="xsd:boolean">false</OptionValue>
           <IsEnabled>false</IsEnabled>

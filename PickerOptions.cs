@@ -99,9 +99,9 @@ namespace Ben.Dominion
         /// <param name="pickerOption">The picker option to clone</param>
         /// <returns>A strongly typed clone of the given picker</returns>
         public static TPickerOption Clone<TPickerOption>(this TPickerOption pickerOption)
-            where TPickerOption : PickerOption
+            where TPickerOption : PickerOption, new()
         {
-            return pickerOption != null ? pickerOption.GenericClone<TPickerOption>() : null;
+            return pickerOption != null ? pickerOption.GenericClone<TPickerOption>() : new TPickerOption();
         }
     }
     

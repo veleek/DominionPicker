@@ -92,11 +92,12 @@
                                     Margin="12,0,0,0"/>
                             <Rectangle Height="12" />
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Twitter:"/>
-                                <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="http://twitter.com/veleek" 
-                                        Tag="http://twitter.com/veleek"
-                                        Click="WebsiteButton_Click"/>
+                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
+                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                                           Foreground="{StaticResource PhoneAccentBrush}"
+                                           Margin="0"
+                                           x:Name="VersionTextBlock" 
+                                           Text="1.0.0.0"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Feedback:"/>
@@ -105,13 +106,13 @@
                                         Click="EmailButton_Click"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
-                                           Foreground="{StaticResource PhoneAccentBrush}"
-                                           Margin="0"
-                                           x:Name="VersionTextBlock" 
-                                           Text="1.0.0.0"/>
+                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Donate:"/>
+                                <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Support the development with Paypal" 
+                                        Tag="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=WPDominionPicker&amp;currency_code=USD"
+                                        Click="WebsiteButton_Click"/>
                             </StackPanel>
+
                             <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
                                 This app allows to easily select a randomized set of cards for a game of Dominion.  The available options allow you to filter in or out certain cards as you desire.  All comments and suggestions are appreciated and can be directed to the email address above.
                             </TextBlock>

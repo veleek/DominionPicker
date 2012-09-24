@@ -1,23 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Microsoft.Advertising.Mobile.UI;
-using Microsoft.Phone.Marketplace;
-using Ben.Phone;
-using com.mtiks.winmobile;
-using System.Reflection;
 using System.IO.IsolatedStorage;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Navigation;
+using com.mtiks.winmobile;
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Marketplace;
+using Microsoft.Phone.Shell;
 
 namespace Ben.Dominion
 {
@@ -31,7 +20,7 @@ namespace Ben.Dominion
         
         public Card SelectedCard { get; set; }
 
-        public static readonly String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
+        //public static readonly String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
         public static readonly String MtiksApplicationId = "166ff6d5917b9569d549eec40";
 
         private LicenseInformation license = new LicenseInformation();
@@ -159,7 +148,7 @@ namespace Ben.Dominion
             // Handle navigation failures
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
-            AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
+            //AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
             mtiks.Instance.Start(MtiksApplicationId, Assembly.GetExecutingAssembly());
 
             // Increment the launch count and save it back
@@ -175,9 +164,12 @@ namespace Ben.Dominion
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
-                System.Diagnostics.Debug.WriteLine("New version detected. Deleting settings");
+                System.Diagnostics.Debug.WriteLine("New version detected. Updating settings");
                 // This is a new run or an update, so let's clear the saved state
-                PickerState.ClearSavedState();
+                //PickerState.ClearSavedState();
+                PickerState.Load();
+                PickerState.Current.CurrentSettings = PickerState.Current.CurrentSettings.Clone();
+
                 // Save the current app version
                 IsolatedStorageSettings.ApplicationSettings["AppVersion"] = currentAppVersion;
             }
