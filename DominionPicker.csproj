@@ -53,10 +53,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Coding4Fun.Phone.Controls">
+      <HintPath>..\External\Coding4FunToolkit\Coding4Fun.Phone.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.Phone, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit">
+      <HintPath>..\External\SilverlightToolkit\WindowsPhone\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Interop, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework" />
     <Reference Include="mtiks">
@@ -87,6 +92,12 @@
     <Compile Include="..\Common\Utilities\GenericSerializer.cs">
       <Link>Utilites\GenericSerializer.cs</Link>
     </Compile>
+    <Compile Include="..\Common\Utilities\GroupedCollectionViewSource.cs">
+      <Link>Utilites\GroupedCollectionViewSource.cs</Link>
+    </Compile>
+    <Compile Include="..\Common\Utilities\Grouping.cs">
+      <Link>Utilites\Grouping.cs</Link>
+    </Compile>
     <Compile Include="..\Common\Utilities\NavigationServiceExtensions.cs">
       <Link>Utilites\NavigationServiceExtensions.cs</Link>
     </Compile>
@@ -96,9 +107,6 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardFilterPage.xaml.cs">
       <DependentUpon>CardFilterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CardLookupPage.xaml.cs">
-      <DependentUpon>CardLookupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AddFavoritePopupControl.xaml.cs">
       <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
@@ -112,8 +120,6 @@
     <Compile Include="Cards.cs" />
     <Compile Include="Favorites.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="GroupedCollectionViewSource.cs" />
-    <Compile Include="Grouping.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -129,6 +135,7 @@
     <Compile Include="..\Common\Data\Converters.cs">
       <Link>Utilites\Converters.cs</Link>
     </Compile>
+    <Compile Include="SampleData\SampleDataHelpers.cs" />
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
@@ -142,20 +149,19 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <DesignDataWithDesignTimeCreatableTypes Include="Assets\CardSampleData.xaml">
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\CardSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignDataWithDesignTimeCreatableTypes>
-    <DesignDataWithDesignTimeCreatableTypes Include="Assets\CardCollectionSampleData.xaml">
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\CardCollectionSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignDataWithDesignTimeCreatableTypes>
-    <DesignDataWithDesignTimeCreatableTypes Include="Assets\CardSelectorCollectionSampleData.xaml">
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\CardSelectorCollectionSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignDataWithDesignTimeCreatableTypes>
+    <DesignData Include="SampleData\PickerResultSampleData.xaml">
+      <SubType>Designer</SubType>
+    </DesignData>
     <Page Include="CardFilterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CardLookupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,10 +198,22 @@
     <Content Include="Assets\Dominican-SmallCaps.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\actionicon.cancel.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\appbar.questionmark.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Toolkit.Content\ApplicationBar.Check.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\OptimusPrincepsSemiBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\ANTQUAB.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\AppManifest.xml" />

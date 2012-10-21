@@ -59,9 +59,21 @@ namespace Ben.Dominion
         [XmlIgnore]
         public String CoinCost { get { return Cost.ToLower().Trim('p'); } }
 
+        private string setString;
+        private string SetString
+        {
+            get { return setString ?? (setString = Set.ToString()); }
+        }
+
+        private string typeString;
+        private string TypeString
+        {
+            get { return typeString ?? (typeString = Type.ToString()); }
+        }
+
         public String SetPrefix
         {
-            get { return Set.ToString().Substring(0, 4); }
+            get { return SetString.Substring(0, 4); }
         }
 
         public String FormattedRules
@@ -91,6 +103,31 @@ namespace Ben.Dominion
         public Boolean IsType(CardType cardType)
         {
             return (this.Type & cardType) != CardType.None;
+        }
+
+        public Boolean ContainsText(String filter)
+        {
+            // Check to see if this card contains each of the words in the filter
+            return filter.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).All(ContainsWord);
+        }
+
+        /// <summary>
+        /// Determines if a card contains a specific word in it's name, set, type, or rules
+        /// </summary>
+        /// <param name="filterWord"></param>
+        /// <returns></returns>
+        protected Boolean ContainsWord(String filterWord)
+        {
+            return FindSubstring(this.Name, filterWord)
+                || FindSubstring(this.SetString, filterWord) 
+                || FindSubstring(this.TypeString, filterWord) 
+                || FindSubstring(this.Rules, filterWord)
+            ;
+        }
+
+        private Boolean FindSubstring(String value, String substring)
+        {
+            return value.IndexOf(substring, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         public override string ToString()
@@ -168,9 +205,9 @@ namespace Ben.Dominion
             switch (type)
             {
                 case CardType.Treasure:
-                    return Color.FromArgb(255, 235, 180, 15);
+                    return Color.FromArgb(255, 235, 180, 15); // #EBB40F
                 case CardType.Victory:
-                    return Color.FromArgb(255, 97, 121, 57);
+                    return Color.FromArgb(255, 97, 121, 57); // #617939
                 case CardType.Curse:
                     return Color.FromArgb(255, 123, 65, 141);
                 case CardType.Attack:
@@ -184,11 +221,11 @@ namespace Ben.Dominion
                 case CardType.Action:
                 case CardType.Knight:
                 case CardType.Looter:
-                    return Color.FromArgb(255, 160, 155, 165);
+                    return Color.FromArgb(255, 160, 155, 165); // #A09BA5
                 case CardType.Prize:
                     return Color.FromArgb(255, 153, 217, 234);
                 case CardType.Ruins:
-                    return Color.FromArgb(244, 188, 128, 16);
+                    return Color.FromArgb(244, 188, 128, 16); // #BC8010
                 default:
                     return Colors.Black;
             }

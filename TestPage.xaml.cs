@@ -26,16 +26,6 @@ namespace Ben.Dominion
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             CardsList.IsFlatList = false;
-            CardsList.ItemsSource = Cards.CardsViewSource.GroupedView;
-
-            var c = Cards.CardsViewSource.View.Groups[0] as CollectionViewGroup;
-            var g = c;
-            var h = g.ItemCount;
-            Cards.CardsViewSource.View.Filter = i => (i as CardSelector).Card.Name.StartsWith("A");
-            var g2 = (Cards.CardsViewSource.View.Groups[0] as CollectionViewGroup);
-            var h2 = g2.ItemCount;
-            var h3 = g.ItemCount;
-            Debug.WriteLine(h + " " + h2 + " " + h3);
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)
@@ -45,12 +35,6 @@ namespace Ben.Dominion
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var text = SearchTextBox.Text;
-            Cards.CardsViewSource.View.Filter = x =>
-            {
-                return (x as CardSelector).Card.Name.Contains(text);
-            };
-
-            CardsList.ItemsSource = Cards.CardsViewSource.GroupedView;
         }
     }
 }

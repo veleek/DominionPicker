@@ -74,6 +74,11 @@ namespace Ben.Dominion
 
         public override string ToString()
         {
+            if (Cards == null)
+            {
+                return "Cards is Null";
+            }
+
             return Cards.Select(c => c.Set).Distinct().Select(s => s.ToString().Substring(0, 4)).Aggregate((a, b) => a + ", " + b);
         }
 

@@ -8,6 +8,8 @@ using System.Windows.Data;
 using Ben.Data;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
+using System.ComponentModel;
+using System.Threading;
 
 namespace Ben.Dominion
 {
@@ -24,40 +26,37 @@ namespace Ben.Dominion
             CardType.Looter,
         };
 
+        private const string FilteredCardsSeachFilter = "<filtered>";
+
         private CardSelector[] cardSelectors;
+        private List<CardGrouping> cardSelectorGroups;
+        private List<CardGrouping> filteredCardSelectorGroups;
+        private Dictionary<CardSet, CardGrouping> filteredGroupsMap;
+        private BackgroundWorker filterWorker;
+        private string currentFilter;
+        private Queue<CardSelector> changedCards = new Queue<CardSelector>();
 
         public CardFilterPage()
         {
             InitializeComponent();
 
+            filterWorker = new BackgroundWorker();
+            filterWorker.WorkerSupportsCancellation = true;
+            filterWorker.DoWork += new DoWorkEventHandler(filterWorker_DoWork);
+
             // Generate 'card selectors' for each card.  A card selector is just an object
             // that pairs a boolean value that indicates whether a card is filtered or not
             // with a specific card and it can be used to databind with.
-            cardSelectors = Cards.PickableCards
+            cardSelectors = Cards.AllCards // Cards.PickableCards
                 .OrderBy(c => c.Name).OrderBy(c => c.Set)
                 .Select(c => new CardSelector(c, false))
                 .ToArray();
 
-            // Initialize the filter stuff
-            SetFilter.ItemsSource = Cards.AllSets;
-            SetFilter.SummaryForSelectedItemsDelegate = list =>
-            {
-                if (list == null || list.Count == 0)
-                {
-                    return "All Sets";
-                }
-                return list.Cast<CardSet>().Select(s => s.ToString()).Aggregate((a, b) => a + ", " + b);
-            };
+            cardSelectorGroups = cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
+            filteredCardSelectorGroups = cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
+            filteredGroupsMap = filteredCardSelectorGroups.ToDictionary(g => g.Key);
 
-            TypeFilter.ItemsSource = FilterTypes;
-            TypeFilter.SummaryForSelectedItemsDelegate = list =>
-            {
-                if (list == null || list.Count == 0)
-                {
-                    return "All Types";
-                }
-                return list.Cast<CardType>().Select(s => s.ToString()).Aggregate((a, b) => a + ", " + b);
-            };
+            CardsList.ItemsSource = filteredCardSelectorGroups;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -72,28 +71,6 @@ namespace Ben.Dominion
             PickerState.Current.CurrentSettings.FilteredCards = cardSelectors.Where(fc => fc.Selected).Select(c => c.Card).ToList();
         }
 
-        private void Filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            UpdateCardsList();
-            RootPivot.SelectedIndex = 0;
-        }
-
-        /// <summary>
-        /// Resets the list filters so that all cards are being shown in the card list.  
-        /// This has nothing to do with actually excluding cards from the selection process.
-        /// </summary>
-        private void ResetListFilter()
-        {
-            // A little heavy handed, but it works
-            SetFilter.SetValue(ListPicker.SelectedItemsProperty, new ObservableCollection<object>());
-            TypeFilter.SetValue(ListPicker.SelectedItemsProperty, new ObservableCollection<object>());
-            
-            // The following method does not work because for some reason 
-            // the selection changed handler doesn't get called when you 
-            // modify the collection manually
-            //SetFilter.SelectedItems.Clear();
-        }
-
         /// <summary>
         /// Reset the list of filtered cards
         /// </summary>
@@ -102,6 +79,8 @@ namespace Ben.Dominion
             PickerState.Current.CurrentSettings.FilteredCardIds = null;
 
             LoadFilteredCards();
+
+            ClearFilter();
         }
 
         /// <summary>
@@ -116,50 +95,258 @@ namespace Ben.Dominion
             {
                 cardSelector.Selected = filteredCards.Contains(cardSelector.Card);
             }
-
-            UpdateCardsList();
         }
 
         /// <summary>
-        /// Filters the list of all the selectors down to the ones specified by the list filters
-        /// and groups them appropriately and then add them to the long list selector
+        /// BackgroundWorker function to perform filtering on all of the cards based
+        /// on the current search filter.
         /// </summary>
-        private void UpdateCardsList()
+        /// <param name="sender">The background worker that requested the filtering</param>
+        /// <param name="e">BackgroundWorker event args (unused)</param>
+        /// <remarks>
+        /// Actually filtering the cards is relatively expensive, so all that work is done
+        /// on the background worker and the filtered state is saved on the selectors, then
+        /// the dispatcher is invoked to actually filter the cards from the long list 
+        /// selector (add/remove from groups) since that needs to happen on the UI thread.
+        /// </remarks>
+        void filterWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            IEnumerable<CardSet> selectedSets = null;
-            CardType selectedTypes = CardType.None;
-
-            if (SetFilter.SelectedItems == null || SetFilter.SelectedItems.Count == 0)
+            if (currentFilter == String.Empty)
             {
-                selectedSets = Cards.AllSets;
+                foreach (var card in cardSelectors)
+                {
+                    if (card.Filter(false))
+                    {
+                        changedCards.Enqueue(card);
+                    }
+                }
+            }
+            else if (currentFilter == FilteredCardsSeachFilter)
+            {
+                foreach (var card in cardSelectors)
+                {
+                    if (card.Filter(!card.Selected))
+                    {
+                        changedCards.Enqueue(card);
+                    }
+                }    
             }
             else
             {
-                selectedSets = SetFilter.SelectedItems.Cast<CardSet>().ToList();
+                foreach (var card in cardSelectors)
+                {
+                    // Cancel the filtering if we need to
+                    if (filterWorker.CancellationPending)
+                    {
+                        return;
+                    }
+
+                    if (card.Filter(!card.Card.ContainsText(currentFilter)))
+                    {
+                        changedCards.Enqueue(card);
+                    }
+                }
             }
 
-            if (TypeFilter.SelectedItems == null || TypeFilter.SelectedItems.Count == 0)
+            if (!filterWorker.CancellationPending)
             {
-                selectedTypes = FilterTypes.Aggregate((a,b) => a | b);
+                UpdateCardsList();
             }
-            else
-            {
-                selectedTypes = TypeFilter.SelectedItems.Cast<CardType>().Aggregate((a, b) => a | b);
-            }
-
-            var cards = cardSelectors
-                .Where(c => c.Card.InSet(selectedSets) && c.Card.IsType(selectedTypes))
-                .GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards));
-
-            CardsList.ItemsSource = cards;
         }
 
+        private void FilterCardsList(String newFilter)
+        {
+            if (newFilter == currentFilter && newFilter != String.Empty)
+            {
+                return;
+            }
+
+            if (filterWorker.IsBusy)
+            {
+                filterWorker.CancelAsync();
+
+                while (filterWorker.IsBusy)
+                {
+                }
+            }
+
+            currentFilter = newFilter;
+
+            filterWorker.RunWorkerAsync();
+        }
+
+        private void ClearFilter()
+        {
+            if (SearchTextBox.Text == String.Empty)
+            {
+                // Manually filter on empty
+                FilterCardsList(String.Empty);
+            }
+            else
+            {
+                SearchTextBox.Text = String.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Invokes a call on the UI thread to go through the cards and add/remove
+        /// filtered cards from the LongListSelector as appropriate.
+        /// </summary>
+        /// <remarks>
+        /// It would be nice to only loop through cards that were changed, but there's
+        /// not an easy way to manage the actual indexes of the cards without manually
+        /// implementing the observable collection and 
+        /// </remarks>
+        private void UpdateCardsList()
+        {
+            //UpdateCardsListMin();
+            //return;
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                for (int i = 0; i < cardSelectorGroups.Count; i++)
+                {
+                    var baseGroup = cardSelectorGroups[i];
+                    var filteredGroup = filteredCardSelectorGroups[i];
+
+                    int index = 0;
+                    // We have to loop through every card in the group
+                    // so that we have an index for the next visible card
+                    // otherwise we don't know where in the list to add the 
+                    // item 
+                    foreach (var c in baseGroup)
+                    {
+                        if (filterWorker.CancellationPending)
+                        {
+                            return;
+                        }
+
+                        bool shouldBeVisible = !c.Filtered;
+                        bool isVisible = filteredGroup.Contains(c);
+
+                        if (shouldBeVisible)
+                        {
+                            if (!isVisible)
+                            {
+                                filteredGroup.Insert(index, c);
+                            }
+                            index++;
+                        }
+                        else
+                        {
+                            if (isVisible)
+                            {
+                                filteredGroup.Remove(c);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        private void UpdateCardsListMin()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                while (changedCards.Count > 0)
+                {
+                    var card = changedCards.Dequeue();
+                    var group = filteredGroupsMap[card.Card.Set];
+
+                    if (card.Filtered)
+                    {
+                        group.Remove(card);
+                    }
+                    else
+                    {
+                        group.SortedInsert(card);
+                    }
+                }
+            });
+        }
+        
+        private void UpdateCardsList2()
+        {
+            String filterText = SearchTextBox.Text;
+
+            for (int i = 0; i < cardSelectorGroups.Count; i++)
+            {
+                var baseGroup = cardSelectorGroups[i];
+                var filteredGroup = filteredCardSelectorGroups[i];
+
+                int index = 0;
+                foreach (var c in baseGroup)
+                {
+                    bool shouldBeVisible = c.Card.Name.IndexOf(filterText, StringComparison.OrdinalIgnoreCase) >= 0;
+                    /*
+                    c.Card.InSet(selectedSets) && c.Card.IsType(selectedTypes) 
+                    && c.Card.Name.IndexOf(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0
+                    && c.Card.Rules.IndexOf(SearchTextBox.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                     */
+
+                    bool isVisible = filteredGroup.Contains(c);
+
+                    if (shouldBeVisible)
+                    {
+                        if (!isVisible)
+                        {
+                            filteredGroup.Insert(index, c);
+                        }
+                        index++;
+                    }
+                    else
+                    {
+                        if (isVisible)
+                        {
+                            filteredGroup.Remove(c);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// An event handler to listen for changes to the search box text and dynamically filter the cards list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            CollectionViewSource vc = new CollectionViewSource()
+            FilterCardsList(SearchTextBox.Text);
+        }
+
+        /// <summary>
+        /// An event handler to listen for keys on the text box to handle closing the filter if you press enter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchTextBox_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
             {
-                
-            };
+                CardsList.Focus();
+            }
+        }
+
+        /// <summary>
+        /// Called when the SearchBox action icon is tapped to clear the current search filter
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SearchTextBox_ActionIconTapped(object sender, EventArgs e)
+        {
+            ClearFilter();
+        }
+
+        /// <summary>
+        /// Called to show only the currently filtered cards in the list box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowFilteredCards_Click(object sender, EventArgs e)
+        {
+            FilterCardsList(FilteredCardsSeachFilter);
+            //SearchTextBox.Text = FilteredCardsSeachFilter;
         }
 
         private void ResetFilteredCards_Click(object sender, EventArgs e)
@@ -172,9 +359,10 @@ namespace Ben.Dominion
             }
         }
 
-        private void ResetListFilter_Click(object sender, EventArgs e)
+        private void CardItemDetails_Click(object sender, RoutedEventArgs e)
         {
-            ResetListFilter();
+            (App.Current as App).SelectedCard = sender.GetContext<CardSelector>().Card;
+            NavigationService.Navigate("/CardInfo.xaml");
         }
 
         private void About_Click(object sender, EventArgs e)
@@ -182,32 +370,30 @@ namespace Ben.Dominion
             this.NavigationService.Navigate("/AboutPage.xaml");
         }
 
-        /// <summary>
-        /// A grouping of card selectors by set
-        /// </summary>
-        public class CardGrouping : Grouping<CardSet, CardSelector>
+        private static GroupedCollectionViewSource<CardSet> cardsViewSource;
+        public static GroupedCollectionViewSource<CardSet> CardsViewSource
         {
-            public CardGrouping(CardSet key, IEnumerable<CardSelector> cards)
-                : base(key, cards)
+            get
             {
+                if (cardsViewSource == null)
+                {
+                    cardsViewSource = new GroupedCollectionViewSource<CardSet>
+                    {
+                        GroupDescriptions =
+                        {
+                            new PropertyGroupDescription("Card.Set"),
+                        },
+                        SortDescriptions =
+                        {
+                            new SortDescription("Card.Set", ListSortDirection.Ascending),
+                            new SortDescription("Card.Name", ListSortDirection.Ascending),
+                        },
+                        Source = Cards.AllCards.Select(c => new CardSelector(c, false)).ToList()
+                    };
+                }
+
+                return cardsViewSource;
             }
         }
-    }
-
-    /// <summary>
-    /// A simple key value pair to joins a specific card with a filtered status 
-    /// that can be used for data binding a check box.
-    /// </summary>
-    public class CardSelector
-    {
-        public CardSelector() { }
-        public CardSelector(Card card, bool selected)
-        {
-            this.Card = card;
-            this.Selected = selected;
-        }
-
-        public Card Card { get; set; }
-        public bool Selected { get; set; }
     }
 }

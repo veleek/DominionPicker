@@ -193,35 +193,65 @@ namespace Ben.Dominion
                 }
             }
         }
+    }
 
-        private static GroupedCollectionViewSource<CardSet> cardsViewSource;
-        public static GroupedCollectionViewSource<CardSet> CardsViewSource
+    /// <summary>
+    /// A grouping of card selectors by set
+    /// </summary>
+    public class CardGrouping : ObservableGrouping<CardSet, CardSelector>
+    {
+        public CardGrouping(CardSet key, IEnumerable<CardSelector> cards)
+            : base(key, cards)
         {
-            get
-            {
-                if (cardsViewSource == null)
-                {
-                    cardsViewSource = new GroupedCollectionViewSource<CardSet>
-                    {
-                        GroupDescriptions =
-                        {
-                            new PropertyGroupDescription("Card.Set"),
-                        },
-                        SortDescriptions =
-                        {
-                            new SortDescription("Card.Set", ListSortDirection.Ascending),
-                            new SortDescription("Card.Name", ListSortDirection.Ascending),
-                        },
-                        Source = Cards.AllCards.Select(c => new CardSelector(c, false)).ToList()
-                    };
-                }
+        }
 
-                return cardsViewSource;
+        public void SortedInsert(CardSelector card)
+        {
+            int i;
+            for (i = 0; i < this.Count; i++)
+            {
+                if (card.CompareTo(this[i]) < 0)
+                {
+                    break;
+                }
             }
+
+            this.Insert(i, card);
         }
     }
 
-    public class CardList : List<Card> { }
+    /// <summary>
+    /// A simple key value pair to joins a specific card with a filtered status 
+    /// that can be used for data binding a check box.
+    /// </summary>
+    public class CardSelector : IComparable<CardSelector>
+    {
+        public CardSelector() { }
+        public CardSelector(Card card, bool selected)
+        {
+            this.Card = card;
+            this.Selected = selected;
+        }
 
-    public class CardSelectorList : List<CardSelector> { }
+        public Card Card { get; set; }
+        public bool Selected { get; set; }
+        public bool Filtered { get; set; }
+
+        public bool Filter(bool filtered)
+        {
+            if (filtered == this.Filtered)
+            {
+                return false;
+            }
+
+            this.Filtered = filtered;
+            return true;
+        }
+
+        public int CompareTo(CardSelector other)
+        {
+            return String.CompareOrdinal(this.Card.Name, other.Card.Name);
+            //return this.Card.ID.CompareTo(other.Card.ID);
+        }
+    }
 }

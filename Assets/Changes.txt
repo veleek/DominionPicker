@@ -1,4 +1,13 @@
-﻿Version 1.6
+﻿Version 1.7
+Minor bug fixes to picker logic
+Added search box filtering and card details lookup in card filter
+Cleaned up alignment of stuff on the main page and card filter page
+Switched results view to use fonts that more closely match the actual card fonts
+Replaced set short names in results list with set icons
+Cleaned up card info view and made long titles scrollable
+--TODO: Add Black Market Deck
+
+Version 1.6
 Added support for Dark Ages cards
 Added the ability to filter out specific cards completely
 Cleaned up some redundant filter options now (filter specific card types mostly); this can be done with the filter page now

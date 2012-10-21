@@ -9,13 +9,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cm="clr-namespace:System.ComponentModel;assembly=System.Windows"
+    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls;assembly=Coding4Fun.Phone.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-
+	
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
@@ -112,6 +113,7 @@
                     </ItemsPanelTemplate>
                 </toolkit:LongListSelector.GroupItemsPanel>
             </toolkit:LongListSelector>
+            <c4f:RoundButton Grid.Row="1" ImageSource="/Images/appbar.questionmark.png"/>
         </Grid>
     </Grid>
  

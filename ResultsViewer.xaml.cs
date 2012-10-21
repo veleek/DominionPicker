@@ -153,14 +153,14 @@ namespace Ben.Dominion
             }
         }
 
+        private void FilterCards_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/CardFilterPage.xaml");
+        }
+
         private void About_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate("/AboutPage.xaml");
-        }
-
-        private void CardLookup_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate("/CardLookupPage.xaml");
         }
     }
 }

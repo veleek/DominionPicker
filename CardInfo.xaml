@@ -11,7 +11,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    d:DataContext="{d:DesignData Source=Assets/CardSampleData.xaml}"
+    d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}"
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -20,26 +20,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="card info" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
             <ScrollViewer>
                 <StackPanel>
-                    <Grid Margin="12,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto" MinWidth="6"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="./Images/coin.png" Grid.Column="0" Width="48" Height="48"/>
-                        <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="0,-10,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{StaticResource CardTitleTextStyle}" FontSize="43"/>
-                        <Image Source="./Images/potion_small.png" Height="52" Margin="6" Grid.Column="1" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" Grid.Column="2"/>
-                    </Grid>
+                    <ScrollViewer Margin="12,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Margin="0,0,6,0">
+                                <Image Source="./Images/coin.png" Width="48" Height="48"/>
+                                <TextBlock Text="{Binding CoinCost}" Style="{StaticResource CardCostTextStyle}" FontSize="36"/>
+                            </Grid>
+                            <Image Source="./Images/potion_small.png" Height="52" Margin="0,0,6,0" Grid.Column="1" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource CardNameTextStyle}" FontSize="47" Grid.Column="2" />
+                        </StackPanel>
+                    </ScrollViewer>
+
                     <TextBlock Text="set" Style="{StaticResource PhoneTextSubtleStyle}"/>
 
                     <Grid Margin="12,0,0,0">

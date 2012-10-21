@@ -23,10 +23,12 @@
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
-            <DataTemplate x:Key="ScrollItemTemplate">
+            <!--<DataTemplate x:Key="ScrollItemTemplate">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" 
                               VerticalScrollBarVisibility="Disabled"
-                              ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                              ManipulationCompleted="ScrollViewer_ManipulationCompleted"
+							  d:DesignWidth="480"
+							  d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
                     <Border Margin="2" Background="{Binding BackgroundColor}" 
                                         CornerRadius="5"
                                         BorderBrush="DarkGray" 
@@ -86,22 +88,22 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Image Source="./Images/coin.png" Grid.Column="0"
+                        <Image Source="/Images/coin.png" Grid.Column="0"
                                Width="60" Height="60" Margin="12,0"/>
                         <TextBlock Text="{Binding Cost}" Grid.Column="0" Margin="0,-5,0,5"
-                                    Foreground="Black" Style="{StaticResource CardTitleTextStyle}"
-                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   Foreground="Black" Style="{StaticResource CardTitleTextStyle}"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding SetPrefix}" Grid.Column="1"
-                                    FontStyle="{StaticResource PhoneTextSubtleStyle}"
-                                    TextAlignment="Right"
-                                    VerticalAlignment="Top"
-                                    Margin="0,-2,6,0" Foreground="White"/>
+                                   Style="{StaticResource PhoneTextSubtleStyle}"
+                                   TextAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   Margin="0,-2,6,0" Foreground="White"/>
                         <TextBlock Text="{Binding Name}" Grid.Column="1"
-                                    Style="{StaticResource CardTitleTextStyle}" 
-                                    Margin="3,2,12,0" Foreground="Black"/>
+                                   Style="{StaticResource CardTitleTextStyle}" 
+                                   Margin="3,2,12,0" Foreground="Black"/>
                         <TextBlock Text="{Binding Name}" Grid.Column="1"
-                                    Style="{StaticResource CardTitleTextStyle}" 
-                                    Margin="0,0,12,0" Foreground="White"/>
+                                   Style="{StaticResource CardTitleTextStyle}" 
+                                   Margin="0,0,12,0" Foreground="White"/>
 
                     </Grid>
                 </Border>
@@ -109,7 +111,9 @@
             <DataTemplate x:Key="CardItemTemplate">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible" 
                               VerticalScrollBarVisibility="Disabled"
-                              ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                              ManipulationCompleted="ScrollViewer_ManipulationCompleted"
+							  d:DesignWidth="480"
+							  d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
                     <Border Margin="2" 
                         Background="{Binding BackgroundColor}"
                         CornerRadius="5"
@@ -121,9 +125,9 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="./Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
+                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
                             <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,-5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
-                            <Image Source="./Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
                             <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,4,12,0" Style="{StaticResource CardTitleTextStyle}" Foreground="Black"/>
                             <TextBlock Text="{Binding Name}" Grid.Column="2" Style="{StaticResource CardTitleTextStyle}" Margin="0,0,12,0" Foreground="White"/>
                             <TextBlock Text="{Binding Set}" Grid.Column="3" Margin="0,2,6,0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" VerticalAlignment="Center" Foreground="Black"/>
@@ -131,6 +135,37 @@
                         </Grid>
                     </Border>
                 </ScrollViewer>
+            </DataTemplate>-->
+            <DataTemplate x:Key="NewCardItemTemplate">
+            	<ScrollViewer HorizontalScrollBarVisibility="Visible" 
+            		VerticalScrollBarVisibility="Disabled"
+            		ManipulationCompleted="ScrollViewer_ManipulationCompleted"
+            		d:DesignWidth="480"
+            		d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
+            		<Border Margin="2" 
+            			Background="{Binding BackgroundColor}"
+            			CornerRadius="5"
+            			Tap="CardItem_Tap">
+            			<Grid Margin="0,1">
+            				<Grid.ColumnDefinitions>
+            					<ColumnDefinition Width="Auto"/>
+            					<ColumnDefinition Width="Auto" MinWidth="6"/>
+            					<ColumnDefinition Width="*"/>
+            					<ColumnDefinition Width="Auto"/>
+            				</Grid.ColumnDefinitions>
+            				<Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
+            				<TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
+            				<Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
+            				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
+							<Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images\\SetIcons'}"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    Width="40"
+									Margin="5,5"/>
+            			</Grid>
+            		</Border>
+            	</ScrollViewer>
             </DataTemplate>
         </Grid.Resources>
         
@@ -139,25 +174,26 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,6,0,6">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="Results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,6,12,0">
+        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0">
             Swipe to Replace<LineBreak/>Tap for Info
         </TextBlock> 
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"
+              d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}">
             <ScrollViewer>
                 <StackPanel>
                     <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}"
-                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
+                                  ItemTemplate="{StaticResource NewCardItemTemplate}"/>
                     <TextBlock Text="Additional Cards" 
                                Visibility="{Binding Result.AdditionalCards.Count, Converter={StaticResource IsValidToVisibilityConverter}}" 
                                Style="{StaticResource PhoneTextSubtleStyle}"/>
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding Result.AdditionalCards}"
-                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
+                                  ItemTemplate="{StaticResource NewCardItemTemplate}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -173,7 +209,7 @@
             <shell:ApplicationBarIconButton x:Name="AppBarSortButton" IconUri="/Images/appbar.sort.name.png" Text="sort by name" Click="Sort_Click" />
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="save" Click="AddFavorite_Click"/>
             <shell:ApplicationBar.MenuItems>
-                <!--<shell:ApplicationBarMenuItem Text="Card Lookup" Click="CardLookup_Click" />-->
+                <shell:ApplicationBarMenuItem Text="Card Lookup/Filter" Click="FilterCards_Click" />
                 <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

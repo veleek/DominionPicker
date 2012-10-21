@@ -240,7 +240,7 @@ namespace Ben.Dominion
 
 
 
-                    if (result.HasCard("Bandit Camp") || result.HasCard("Marauder"))
+                    if (result.HasCard("Bandit Camp") || result.HasCard("Marauder") || result.HasCard("Pillage"))
                     {
                         result.AdditionalCards.Add(Card.FromName("Spoils"));
                     }

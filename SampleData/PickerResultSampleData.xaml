@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<PickerState xmlns="clr-namespace:Ben.Dominion" xmlns:p="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <PickerState.Result>
+        <PickerResult xmlns="clr-namespace:Ben.Dominion">
+            <PickerResult.Cards>
+                <Card Name="Archive" BackgroundColor="#A09BA5" CoinCost="0" Cost="5" Set="Base" ID="100" Type="Action, Attack" />
+				<Card Name="Sample B Card" BackgroundColor="#A09BA5" CoinCost="1" Cost="5" Set="Intrigue" ID="100" Type="Action, Attack" />
+				<Card Name="Sample C Card" BackgroundColor="#A09BA5" CoinCost="2" Cost="5" Set="Seaside" ID="100" Type="Action, Attack" />
+				<Card Name="Sample D Card" BackgroundColor="#A09BA5" CoinCost="3" Cost="5" Set="Alchemy" ID="100" Type="Action, Attack" />
+                <Card Name="Elephant Bones" CoinCost="4" Cost="5" Set="Prosperity" ID="100" Type="Action, Attack">
+                    <Card.BackgroundColor>
+                        <p:LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5, 1">
+                            <p:LinearGradientBrush.GradientStops>
+                                <p:GradientStop Color="#EBB40F" Offset="0"/>
+                                <p:GradientStop Color="#EBB40F" Offset="0.2"/>
+                                <p:GradientStop Color="#617939" Offset="0.8"/>
+                                <p:GradientStop Color="#617939" Offset="1"/>
+                            </p:LinearGradientBrush.GradientStops>
+                        </p:LinearGradientBrush>
+                    </Card.BackgroundColor>
+                </Card>
+                    <Card Name="Philosopher's Stone" BackgroundColor="#A09BA5" CoinCost="5" Cost="5" Set="Cornucopia" ID="100" Type="Action, Attack" HasPotion="True"/>
+				<Card Name="Scrying Pool" BackgroundColor="#A09BA5" CoinCost="6" Cost="5" Set="Hinterlands" ID="100" Type="Action, Attack" />
+                <Card Name="Silk Road" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
+                <Card Name="Bridge" BackgroundColor="#A09BA5" CoinCost="8" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
+                <Card Name="Moat" BackgroundColor="#BC8010" CoinCost="9" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" HasPotion="True"/>
+            </PickerResult.Cards>
+            <PickerResult.AdditionalCards>
+                <Card Name="Trader" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
+            </PickerResult.AdditionalCards>
+        </PickerResult>
+    </PickerState.Result>
+</PickerState>

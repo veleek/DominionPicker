@@ -15,11 +15,28 @@
         <data:DebugConverter x:Key="DebugConverter" />
         <data:ImageConverter x:Key="ImageConverter" />
 
-        <FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>
-        <Style x:Key="CardTitleTextStyle" TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="{StaticResource DominicanSC}"/>
+        <!--<FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>-->
+        <FontFamily x:Key="BookAntiquaBold">.\Assets\ANTQUAB.TTF#Book Antiqua</FontFamily>
+        <FontFamily x:Key="OptimusPrincepsSemiBold">.\Assets\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
+        
+        <!--<Style x:Key="CardTitleTextStyle" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource DominicanSC}"/>
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>-->
+        <Style x:Key="CardCostTextStyle" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource BookAntiquaBold}"/>
+        	<Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold" />
+        	<Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="Black" />
+        </Style>
+		<Style x:Key="CardNameTextStyle" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="{StaticResource OptimusPrincepsSemiBold}"/>
+        	<Setter Property="FontSize" Value="33"/>
+        	<Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
     </Application.Resources>
 
