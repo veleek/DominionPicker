@@ -158,7 +158,7 @@
             				<Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
             				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
             				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
-							<Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images\\SetIcons'}"
+							<Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                                     Grid.Column="2"
                                     HorizontalAlignment="Right"
                                     Width="40"

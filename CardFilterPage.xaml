@@ -65,7 +65,7 @@
                                        TextAlignment="Left" VerticalAlignment="Bottom" />
 
                                     <Border Background="{StaticResource PhoneForegroundBrush}"
-                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='Images\\SetIcons'}"
+                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                                             Grid.Column="2"
                                             Width="40"/>
                                 </Grid>
@@ -86,7 +86,7 @@
                                        TextAlignment="Left" VerticalAlignment="Bottom" />
 
                                     <Border Background="{StaticResource PhoneForegroundBrush}"
-                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='Images\\SetIcons'}"
+                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                                             Grid.Column="2"
                                             Width="40"/>
                                 </Grid>

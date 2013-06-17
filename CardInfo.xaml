@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -25,7 +26,10 @@
             <TextBlock x:Name="PageTitle" Text="card info" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0" >
+            <toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener Flick="CardInfo_Flick" />
+            </toolkit:GestureService.GestureListener>
             <ScrollViewer>
                 <StackPanel>
                     <ScrollViewer Margin="12,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
@@ -48,7 +52,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Background="{StaticResource PhoneForegroundBrush}"
-                            OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images\\SetIcons'}"
+                            OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                             Width="40" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Text="{Binding Set}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     </Grid>

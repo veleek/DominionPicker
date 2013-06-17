@@ -127,6 +127,7 @@
     <Compile Include="PickerOptions.cs" />
     <Compile Include="PickerResult.cs" />
     <Compile Include="PickerSettings.cs" />
+    <Compile Include="PickerSettings2.cs" />
     <Compile Include="PickerState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultsViewer.xaml.cs">

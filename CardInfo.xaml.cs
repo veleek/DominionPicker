@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using Microsoft.Phone.Controls;
 
 namespace Ben.Dominion
@@ -25,6 +15,23 @@ namespace Ben.Dominion
         void CardInfo_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = (App.Current as App).SelectedCard;
+        }
+
+        private void CardInfo_Flick(object sender, FlickGestureEventArgs e)
+        {
+            if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
+            {
+                int currentIndex = Cards.AllCards.IndexOf(this.DataContext as Card);
+                int nextIndex = e.HorizontalVelocity < 0 ? currentIndex + 1 : currentIndex - 1;
+
+                if (nextIndex < 0 || nextIndex >= Cards.AllCards.Count)
+                {
+                    return;
+                }
+
+                var nextCard = Cards.AllCards[nextIndex];
+                this.DataContext = nextCard;
+            }
         }
     }
 }

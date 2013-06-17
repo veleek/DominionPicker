@@ -139,7 +139,7 @@
 
             <controls:PivotItem Header="favorites" Margin="12,0">
                 <ScrollViewer Margin="0,0,0,0">
-                    <StackPanel>
+                    <StackPanel toolkit:TiltEffect.IsTiltEnabled="True">
                         <TextBlock Text="Card Randomizers"
                                    Margin="12,12,0,0"
                                    Style="{StaticResource PhoneTextExtraLargeStyle}"
@@ -154,6 +154,11 @@
                                  ItemsSource="{Binding FavoriteSettings}"
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  SelectionChanged="FavoriteSettingsListBox_SelectionChanged">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>
@@ -187,6 +192,11 @@
                         <ListBox x:Name="FavoriteSetsListBox" ItemsSource="{Binding FavoriteSets}" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  SelectionChanged="FavoriteSetsListBox_SelectionChanged">
+                            <ListBox.ItemContainerStyle>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                </Style>
+                            </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel>

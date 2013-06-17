@@ -198,7 +198,7 @@ namespace Ben.Dominion
             clone.FilterVictory = this.FilterVictory.Clone();
 
             clone.PickPlatinumColony = this.PickPlatinumColony.Clone();
-            clone.PickSheltersOrEstates = this.PickPlatinumColony.Clone();
+            clone.PickSheltersOrEstates = this.PickSheltersOrEstates.Clone();
             clone.FilteredCardIds = new List<int>(this.FilteredCardIds);
 
             return clone;
