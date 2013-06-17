@@ -28,6 +28,7 @@ namespace Ben.Dominion
                     CardSet.Cornucopia,
                     CardSet.Hinterlands,
                     CardSet.DarkAges,
+                    CardSet.Guilds,
                     CardSet.Promo,
                 };
             }
@@ -73,7 +74,7 @@ namespace Ben.Dominion
             {
                 if (allCards == null)
                 {
-                    allCards = new ReadOnlyCollection<Card>(Load());
+                    allCards = new ReadOnlyCollection<Card>(Load().OrderBy(c => c.SetPrefix + c.Name).ToList());
                 }
                 return allCards;
             }

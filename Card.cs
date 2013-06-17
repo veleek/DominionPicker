@@ -18,6 +18,7 @@ namespace Ben.Dominion
         Cornucopia,
         Hinterlands,
         DarkAges,
+        Guilds,
         Promo,
     }
 
