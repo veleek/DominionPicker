@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPicker", "DominionPicker.csproj", "{6AE8F7D0-02DA-4031-8C37-6470FE1A98D0}"
 EndProject
 Global

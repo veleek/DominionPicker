@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Diagnostics;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
@@ -197,6 +198,24 @@ namespace Ben.Dominion
                     NotifyPropertyChanged("CurrentSettings");
                 }
             }
+        }
+
+        private SettingsViewModel newSettings;
+        public SettingsViewModel NewSettings
+        {
+            get
+            {
+                if (newSettings == null)
+                {
+                    return newSettings;
+                }
+
+                newSettings = new SettingsViewModel();
+                newSettings.SelectedSets = this.CurrentSettings.SelectedSets;
+
+                return newSettings;
+            }
+            set { newSettings = value; }
         }
 
         /// <summary>

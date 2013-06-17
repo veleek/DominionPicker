@@ -22,60 +22,6 @@
         <shell:ProgressIndicator Text="Generating card set..."
                                  IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
-    
-    <phone:PhoneApplicationPage.Resources>
-        <ResourceDictionary>
-            <DataTemplate x:Key="BasicOptionTemplate">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding OptionValue, Converter={StaticResource StringConverter}}" />
-                </StackPanel>
-            </DataTemplate>
-
-            <DataTemplate x:Key="BooleanOptionTemplate">
-                <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}" Content="{Binding Name}" />
-            </DataTemplate>
-
-            <DataTemplate x:Key="ListOptionTemplate">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <CheckBox IsChecked="{Binding OptionValue, Mode=TwoWay}" 
-                              HorizontalContentAlignment="Stretch"
-                              VerticalAlignment="Top"
-                              Grid.Row="0" Grid.Column="0">
-                        <CheckBox.Content>
-                            <TextBlock Grid.Column="0"  Text="{Binding Name}" VerticalAlignment="Center"/>
-                        </CheckBox.Content>
-                    </CheckBox>
-
-                    <toolkit:ListPicker Grid.Row="0" Grid.Column="1" 
-                                        Margin="12,0"
-                                        ItemsSource="{Binding ValidValues}" 
-                                        SelectedItem="{Binding SelectedValue, Mode=TwoWay}" />
-
-                    <TextBlock Text="{Binding Notes}" 
-                               Grid.Row="1" Grid.ColumnSpan="2"
-                               Visibility="{Binding OptionValue, Converter={StaticResource BooleanToVisibilityConverter}}"
-                               Style="{StaticResource PhoneTextSubtleStyle}"
-                               TextAlignment="Center"/>
-                </Grid>
-            </DataTemplate>
-
-            <local:OptionTemplateSelector x:Key="OptionsTemplateSelector"
-                                          BasicOptionTemplate="{StaticResource BasicOptionTemplate}"
-                                          BooleanOptionTemplate="{StaticResource BooleanOptionTemplate}"
-                                          ListOptionTemplate="{StaticResource ListOptionTemplate}" />
-        </ResourceDictionary>
-    </phone:PhoneApplicationPage.Resources>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -89,22 +35,21 @@
                         Grid.Row="1" Margin="0,-10, 0, 0"
                         SelectionChanged="RootPivot_SelectionChanged">
             <controls:Pivot.TitleTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
+                <DataTemplate />
             </controls:Pivot.TitleTemplate>
-            <controls:PivotItem Header="create" Margin="12,0">
+
+            <controls:PivotItem Header="create" Margin="12,0" DataContext="{Binding NewSettings}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ScrollViewer x:Name="SettingsScrollViewer">
+                    <ScrollViewer Name="SettingsScrollViewer" Margin="0" Grid.Row="0">
                         <StackPanel>
                             <ItemsControl x:Name="SetsItemsControl"
-                                          ItemsSource="{Binding CurrentSettings.Sets}"
-                                          Margin="0">
+                                      ItemsSource="{Binding Sets}"
+                                      Margin="0">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <toolkit:WrapPanel />
@@ -113,9 +58,9 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Margin="0,-5,-5,-5"
-                                                  Grid.Column="0"
-                                                  Width="225"
-                                                  IsChecked="{Binding IsSelected, Mode=TwoWay}">
+                                              Grid.Column="0"
+                                              Width="225"
+                                              IsChecked="{Binding Enabled, Mode=TwoWay}">
                                             <CheckBox.Content>
                                                 <TextBlock Text="{Binding Set}" FontSize="24" />
                                             </CheckBox.Content>
@@ -124,12 +69,44 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
-                            <TextBlock Margin="12,0" Text="additional options" Style="{StaticResource PhoneTextSubtleStyle}" />
-                            <localControls:MultiTemplateItemsControl x:Name="OptionsItemsControl"
-                                                             TemplateSelector="{StaticResource OptionsTemplateSelector}"
-                                                             ItemsSource="{Binding CurrentSettings.AllOptions}"
-                                                             Margin="0">
-                            </localControls:MultiTemplateItemsControl>
+                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="additional options" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled}" Content="Minimum Cards Per Set:" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue}" Grid.Column="1" />
+                            </Grid>
+
+                            <CheckBox IsChecked="{Binding RequireDefense}" Content="If there's an attack, require a defense" />
+                            <CheckBox IsChecked="{Binding RequireTrash}" Content="Require a card that allows you to trash" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding PlusBuys.Enabled}" Content="Plus Buys:" Width="200" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue}" Grid.Column="1" />
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding PlusActions.Enabled}" Content="Plus Actions:" Width="200" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue}" Grid.Column="1" />
+                            </Grid>
+
+                            <CheckBox IsChecked="{Binding PickPlatinumColony}" Content="Pick if Platinum and Colony are used" />
+                            <CheckBox IsChecked="{Binding PickShelterOrEstate}" Content="Pick if Shelters or Estates are used" />
+                            <CheckBox IsChecked="{Binding ShowExtras}" Content="Show Required Mats and Tokens" />
                         </StackPanel>
                     </ScrollViewer>
 
