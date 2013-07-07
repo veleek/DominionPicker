@@ -34,7 +34,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox HorizontalContentAlignment="Stretch" IsChecked="{Binding Selected, Mode=TwoWay}">
+                                <CheckBox HorizontalContentAlignment="Stretch" VerticalAlignment="Center" IsChecked="{Binding Selected, Mode=TwoWay}">
                                     <CheckBox.Content>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                                     </CheckBox.Content>
                                 </CheckBox>
 
-                                <c4f:RoundButton BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Column="1" ImageSource="/Images/appbar.questionmark.png" Click="CardItemDetails_Click" />
+                                <c4f:RoundButton BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Column="1" ImageSource="/Images/appbar.questionmark.png" Click="CardItemDetails_Click" VerticalAlignment="Center" />
                             </Grid>
                         </DataTemplate>
 

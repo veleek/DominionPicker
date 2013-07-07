@@ -1,28 +1,31 @@
-﻿using Ben.Dominion.Models;
-using Ben.Utilities;
+﻿using Ben.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Ben.Dominion.ViewModels
+namespace Ben.Dominion
 {
     public class SettingsViewModel : NotifyPropertyChangedBase
     {
-        private ListOption<int> minimumCardsPerSet;
+        private ListOption<int> minimumCardsPerSet = new ListOption<int> { Enabled = true, OptionValue = 5 };
+        private List<SetOption> sets = Cards.AllSets.Select(s => new SetOption { Set = s, Enabled = s != CardSet.Promo }).ToList();
+        private CardList filteredCards = new CardList();
 
-        private bool requireDefense;
-        private bool requireTrash = true;
+        private bool requireDefense = false;
+        private bool requireTrash = false;
 
-        private PlusOption plusBuys;
-        private PlusOption plusActions;
+        private PlusOption plusBuys = new PlusOption() { Enabled = false, OptionValue = "Require" };
+        private PlusOption plusActions = new PlusOption() { Enabled = false, OptionValue = "Require" };
 
-        private bool showExtras;
-        private bool pickPlatinumColony;
-        private bool pickShelterOrEstate;
+        private bool pickPlatinumColony = true;
+        private bool pickShelterOrEstate = true;
+        private bool showExtras = true;
 
-        private List<SetOption> sets = Cards.AllSets.Select(s => new SetOption { Set = s }).ToList();
+        public SettingsViewModel()
+        {
+        }
 
         [XmlIgnore]
         public List<SetOption> Sets
@@ -31,30 +34,64 @@ namespace Ben.Dominion.ViewModels
             set { SetProperty(ref sets, value, "Sets"); }
         }
 
+        [XmlIgnore]
         public List<CardSet> SelectedSets
         {
-            get { return Sets.Select(s => s.Set).ToList(); }
+            get { return Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
             set
             {
                 foreach (var set in sets)
                 {
                     set.Enabled = value.Contains(set.Set);
                 }
+
+                NotifyPropertyChanged("Sets");
             }
         }
 
+        [XmlElement("SelectedSets")]
+        public string SelectedSetNames
+        {
+            get 
+            {
+                return string.Join(",", SelectedSets.Select(s => s.ToString()));
+            }
 
-        [XmlIgnore]
-        public List<PlusOptionValue> PlusOptionValues
+            set
+            {
+                foreach (var set in sets)
+                {
+                    set.Enabled = value.Contains(set.Set.ToString());
+                }
+
+                NotifyPropertyChanged("Sets");
+            }
+        }
+
+        public CardList FilteredCards
         {
             get
             {
-                return new List<PlusOptionValue>
+                return filteredCards;
+            }
+
+            set
+            {
+                this.SetProperty(ref filteredCards, value, "FilteredCards");
+            }
+        }
+        
+        [XmlIgnore]
+        public List<string> PlusOptionValues
+        {
+            get
+            {
+                return new List<string>
                 {
-                    PlusOptionValue.Require,
-                    PlusOptionValue.RequirePlus2,
-                    PlusOptionValue.Prevent,
-                    PlusOptionValue.PreventPlus2,
+                    "Require",
+                    "Require +2",
+                    "Prevent",
+                    "Prevent +2",
                 };
             }
         }
@@ -116,60 +153,10 @@ namespace Ben.Dominion.ViewModels
             set { SetProperty(ref pickShelterOrEstate, value, "PickShelterOrEstate"); }
         }
 
-        public class SetOption : NotifyPropertyChangedBase
+        public override string ToString()
         {
-            private CardSet set;
-            private string setName;
-            private bool enabled;
-
-            public bool Enabled
-            {
-                get { return enabled; }
-                set { SetProperty(ref enabled, value, "Enabled"); }
-            }
-
-            public CardSet Set
-            {
-                get { return set; }
-                set { SetProperty(ref set, value, "Set"); }
-            }
-
-            public string SetName
-            {
-                get { return setName; }
-                set { SetProperty(ref setName, value, "SetName"); }
-            }
-        }
-
-        public class ListOption<TOptionType> : NotifyPropertyChangedBase
-        {
-            private bool enabled;
-            private TOptionType optionValue;
-
-            public bool Enabled
-            {
-                get { return enabled; }
-                set { SetProperty(ref enabled, value, "Enabled"); }
-            }
-
-            [XmlText]
-            public TOptionType OptionValue
-            {
-                get { return optionValue; }
-                set { SetProperty(ref optionValue, value, "OptionValue"); }
-            }
-        }
-
-        public class PlusOption : ListOption<PlusOptionValue>
-        {
-        }
-
-        public enum PlusOptionValue
-        {
-            Require,
-            RequirePlus2,
-            Prevent,
-            PreventPlus2
+            return this.SelectedSets.Select(s => s.ToString().Substring(0, 4)).Aggregate((a, b) => a + ", " + b);
+            //return this.SelectedSetNames;
         }
     }
 }

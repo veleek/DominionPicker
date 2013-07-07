@@ -46,25 +46,46 @@ namespace Ben.Dominion
     }
 
     [DataContract]
-    public class FavoriteSetting : FavoriteThing<PickerSettings>
+    public class FavoriteSetting : FavoriteThing<SettingsViewModel>
     {
         public FavoriteSetting() { }
 
-        public FavoriteSetting(String name, PickerSettings value) : base(name, value) { }
+        public FavoriteSetting(String name, SettingsViewModel value) : base(name, value) { }
     }
 
     [DataContract]
-    public class FavoriteSet : FavoriteThing<String>
+    public class FavoriteSet : FavoriteThing<PickerResult>
+    {
+        public FavoriteSet() { }
+
+        public FavoriteSet(String name, PickerResult result)
+            : base(name, result)
+        { }
+    }
+
+    [DataContract]
+    public class OldFavoriteSetting : FavoriteThing<PickerSettings>
+    {
+        public OldFavoriteSetting() { }
+
+        public OldFavoriteSetting(String name, PickerSettings result)
+            : base(name, result)
+        {
+        }
+    }
+
+    [DataContract]
+    public class OldFavoriteSet : FavoriteThing<String>
     {
         public PickerResult Result
         {
             get { return PickerResult.FromList(Value.Split(',').Select(i => Int32.Parse(i))); }
         }
 
-        public FavoriteSet() { }
+        public OldFavoriteSet() { }
 
-        public FavoriteSet(String name, PickerResult result)
-            : base(name, result.ToList().Aggregate<int, string>("", (a,b) => a + "," + b).Trim(','))
+        public OldFavoriteSet(String name, PickerResult result)
+            : base(name, result.ToList().Aggregate<int, string>("", (a, b) => a + "," + b).Trim(','))
         { }
     }
 }

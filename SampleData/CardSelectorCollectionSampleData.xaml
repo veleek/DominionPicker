@@ -1,4 +1,4 @@
-﻿<CardSelectorList xmlns="clr-namespace:Ben.Dominion">
+﻿<SampleCardSelectorList xmlns="clr-namespace:Ben.Dominion">
     <CardSelector>
         <CardSelector.Card>
             <Card Name="AAAAA" Cost="1P" Set="Prosperity" ID="100" Type="Action, Attack" />
@@ -69,4 +69,4 @@
             <Card Name="MMMMM" Cost="1P" Set="Base" ID="205" Type="Action" />
         </CardSelector.Card>
     </CardSelector>
-</CardSelectorList>
+</SampleCardSelectorList>

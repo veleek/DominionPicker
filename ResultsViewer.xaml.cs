@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace Ben.Dominion
 {
@@ -37,14 +38,14 @@ namespace Ben.Dominion
             }
             else
             {
-                PickerState.Current.CancelGeneration();
+                MainViewModel.Instance.CancelGeneration();
             }
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            this.DataContext = PickerState.Current;
-            UpdateSortButton(PickerState.Current.SortOrder);
+            this.DataContext = MainViewModel.Instance;
+            UpdateSortButton(MainViewModel.Instance.Result.SortOrder);
 
             base.OnNavigatedTo(e);
         }
@@ -71,7 +72,7 @@ namespace Ben.Dominion
                 try
                 {
                     // If we fail to generate a set, we don't do anything
-                    PickerState.Current.GenerateCardList();
+                    MainViewModel.Instance.GenerateCardList();
                 }
                 finally
                 {
@@ -90,8 +91,8 @@ namespace Ben.Dominion
 
         private void Sort_Click(object sender, EventArgs e)
         {
-            ResultSortOrder sortOrder = NextSortOrder(PickerState.Current.SortOrder);
-            PickerState.Current.SortBy(sortOrder);
+            ResultSortOrder sortOrder = NextSortOrder(MainViewModel.Instance.Result.SortOrder);
+            MainViewModel.Instance.Result.Sort(sortOrder);
             UpdateSortButton(sortOrder);
         }
 
@@ -99,7 +100,7 @@ namespace Ben.Dominion
         {
             var sortButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
             String nextSort = NextSortOrder(sortOrder).ToString().ToLower();
-            sortButton.Text = "sort by " + nextSort;
+            sortButton.Text = "sort " + nextSort;
             sortButton.IconUri = new Uri("/images/appbar.sort." + nextSort + ".png", UriKind.Relative);
         }
 
@@ -130,11 +131,20 @@ namespace Ben.Dominion
 
         public void SaveFavoriteCardSet(String name)
         {
-            PickerState.Current.SaveFavoriteCardSet(name);
+            MainViewModel.Instance.SaveFavoriteCardSet(name);
         }
 
         private void ScrollViewer_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
+            var scrollViewer = sender as ScrollViewer;
+            if (scrollViewer == null)
+            {
+                return;
+            }
+
+            //var parent = scrollViewer.Parent as FrameworkElement;
+            //var parentParent = parent.Parent as FrameworkElement;
+
             var v = e.FinalVelocities.LinearVelocity;
             var m = v.GetMagnitude();
             var a = Math.Abs(v.X);
@@ -143,13 +153,7 @@ namespace Ben.Dominion
             // and the total manipulitation is greater than 400
             if (e.IsInertial && (a / m) > 0.8 && m > 400)
             {
-                var scrollViewer = sender as System.Windows.Controls.ScrollViewer;
-                if (scrollViewer == null)
-                {
-                    return;
-                }
-
-                PickerState.Current.ReplaceCard(scrollViewer.DataContext as Card);
+                MainViewModel.Instance.Result.Replace(scrollViewer.DataContext as Card);
             }
         }
 

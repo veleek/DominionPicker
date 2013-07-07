@@ -1,4 +1,4 @@
-﻿<CardList xmlns="clr-namespace:Ben.Dominion">
+﻿<SampleCardList xmlns="clr-namespace:Ben.Dominion">
     <Card Name="AAAAA" Cost="1P" Set="Prosperity" ID="100" Type="Action, Attack" />
     
     <Card Name="CCCCC" Cost="1P" Set="Prosperity" ID="102" Type="Action" />
@@ -15,4 +15,4 @@
     <Card Name="BBBBB" Cost="1P" Set="DarkAges" ID="101" Type="Action" />
     <Card Name="MMMMM" Cost="1P" Set="Base" ID="205" Type="Action" />
     
-</CardList>
+</SampleCardList>

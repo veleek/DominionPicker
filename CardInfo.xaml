@@ -21,7 +21,15 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+        <TextBlock Grid.Row="0" HorizontalAlignment="Right" Margin="12,0,12,6"
+                   TextAlignment="Right"
+                   Style="{StaticResource PhoneTextSubtleStyle}">
+            Swipe to view 
+            <LineBreak/>
+            other cards
+        </TextBlock>
+                   
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">            
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="card info" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>

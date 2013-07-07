@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls;assembly=Coding4Fun.Phone.Controls"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Ben.Dominion"
@@ -16,7 +16,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0">
+    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0"
+    DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}">
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="Generating card set..."
@@ -29,7 +30,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="AdContainer" Grid.Row="0"/>
+        <StackPanel x:Name="AdContainer" Grid.Row="0">
+        </StackPanel>
         
         <controls:Pivot Title="Dominion Picker" x:Name="RootPivot"
                         Grid.Row="1" Margin="0,-10, 0, 0"
@@ -38,7 +40,7 @@
                 <DataTemplate />
             </controls:Pivot.TitleTemplate>
 
-            <controls:PivotItem Header="create" Margin="12,0" DataContext="{Binding NewSettings}">
+            <controls:PivotItem Header="create" Margin="12,0" DataContext="{Binding Settings}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -77,12 +79,21 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled}" Content="Minimum Cards Per Set:" HorizontalContentAlignment="Right"/>
-                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue}" Grid.Column="1" />
+                                <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" Content="Minimum Cards Per Set:" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed" FullModeHeader="Minimum cards per set in result:">
+                                    <toolkit:ListPicker.FullModeItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock FontSize="40" Text="{Binding}" TextAlignment="Right" Width="40"/>
+                                                <TextBlock FontSize="40" Text=" Cards"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.FullModeItemTemplate>
+                                </toolkit:ListPicker>
                             </Grid>
-
-                            <CheckBox IsChecked="{Binding RequireDefense}" Content="If there's an attack, require a defense" />
-                            <CheckBox IsChecked="{Binding RequireTrash}" Content="Require a card that allows you to trash" />
+                            
+                            <CheckBox IsChecked="{Binding RequireDefense, Mode=TwoWay}" Content="If there's an attack, require a defense" />
+                            <CheckBox IsChecked="{Binding RequireTrash, Mode=TwoWay}" Content="Require a card that allows you to trash" />
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -90,8 +101,8 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusBuys.Enabled}" Content="Plus Buys:" Width="200" HorizontalContentAlignment="Right"/>
-                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue}" Grid.Column="1" />
+                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Content="Plus Buys:" Width="200" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
                             <Grid>
@@ -100,13 +111,13 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusActions.Enabled}" Content="Plus Actions:" Width="200" HorizontalContentAlignment="Right"/>
-                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue}" Grid.Column="1" />
+                                <CheckBox IsChecked="{Binding PlusActions.Enabled, Mode=TwoWay}" Content="Plus Actions:" Width="200" HorizontalContentAlignment="Right"/>
+                                <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
-                            <CheckBox IsChecked="{Binding PickPlatinumColony}" Content="Pick if Platinum and Colony are used" />
-                            <CheckBox IsChecked="{Binding PickShelterOrEstate}" Content="Pick if Shelters or Estates are used" />
-                            <CheckBox IsChecked="{Binding ShowExtras}" Content="Show Required Mats and Tokens" />
+                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}" Content="Pick if Platinum and Colony are used" />
+                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}" Content="Pick if Shelters or Estates are used" />
+                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" Content="Show Required Mats and Tokens" />
                         </StackPanel>
                     </ScrollViewer>
 
@@ -114,13 +125,16 @@
                 </Grid>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="favorites" Margin="12,0">
-                <ScrollViewer Margin="0,0,0,0">
+            <controls:PivotItem Header="favorites" Margin="12,0" DataContext="{Binding Favorites}">
+                <ScrollViewer Margin="0,0,0,0" x:Name="FavoritesScrollViewer">
                     <StackPanel toolkit:TiltEffect.IsTiltEnabled="True">
                         <TextBlock Text="Card Randomizers"
                                    Margin="12,12,0,0"
                                    Style="{StaticResource PhoneTextExtraLargeStyle}"
-                                   Foreground="{StaticResource PhoneSubtleBrush}"/>
+                                   Foreground="{StaticResource PhoneAccentBrush}"/>
+                        <TextBlock Text="Save your settings to quickly reuse them later."
+                                   Margin="12,0,0,0"
+                                   Style="{StaticResource PhoneTextSubtleStyle}"/>
                         <TextBlock Visibility="{Binding FavoriteSettings.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}"
                                    Style="{StaticResource PhoneTextSubtleStyle}"
                                    Margin="24,6,0,0"
@@ -159,12 +173,15 @@
                         <TextBlock Text="Card Sets"
                                    Margin="12,36,0,0" 
                                    Style="{StaticResource PhoneTextExtraLargeStyle}"
-                                   Foreground="{StaticResource PhoneSubtleBrush}"/>
+                                   Foreground="{StaticResource PhoneAccentBrush}"/>
+                        <TextBlock Text="Enjoy a set? Save it so you can try it again!"
+                                   Margin="12,0,0,0"
+                                   Style="{StaticResource PhoneTextSubtleStyle}"/>
                         <TextBlock Visibility="{Binding FavoriteSets.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}"
                                    Style="{StaticResource PhoneTextSubtleStyle}"
                                    Margin="24,6,0,0"
                                    TextWrapping="Wrap">
-                            No favorite sets saved yet.  Try using one of the randomizers above.
+                            No favorite sets saved yet.  Try using one of the randomizers above to create one.
                         </TextBlock>
                         <ListBox x:Name="FavoriteSetsListBox" ItemsSource="{Binding FavoriteSets}" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -185,7 +202,7 @@
                                         </toolkit:ContextMenuService.ContextMenu>
                                         <TextBlock Text="{Binding Name, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" 
                                                    Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                        <TextBlock Text="{Binding Result, Converter={StaticResource StringConverter}}" Margin="12,0,0,0"
+                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0"
                                                    Style="{StaticResource PhoneTextSubtleStyle}" />
                                     </StackPanel>
                                 </DataTemplate>

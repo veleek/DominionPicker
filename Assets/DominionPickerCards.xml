@@ -90,7 +90,7 @@
   <Card ID="84" Name="Familiar" Set="Alchemy" Type="Action Attack" Cost="3p" Rules="+1 Card\n+1 Action\nEach other player gains a curse." />
   <Card ID="85" Name="Philosopher's Stone" Set="Alchemy" Type="Treasure" Cost="3p" Rules="When you play this, count your deck and discard pile.\nWorth 1 Coin per 5 cards total between them (rounded down)." />
   <Card ID="86" Name="Golem" Set="Alchemy" Type="Action" Cost="4p" Rules="Reveal cards from your deck until you reveal 2 Action cards other than Golem Cards.\nDiscard the other cards, then play the Action cards in either order." />
-  <!--<Card ID="87" Name="Potion" Set="Alchemy" Type="Treasure" Cost="4" Rules="Worth 1 Potion." />-->
+  <Card ID="87" Name="Potion" Set="Alchemy" Type="Treasure" Cost="4" Rules="Worth 1 Potion." />
   <Card ID="88" Name="Apprentice" Set="Alchemy" Type="Action" Cost="5" Rules="+1 Action\nTrash a card from your hand.\n+1 Card per Coin it costs.\n+2 Cards if it has Potion in its cost." />
   <Card ID="89" Name="Possession" Set="Alchemy" Type="Action" Cost="6p" Rules="The player to your left takes an extra turn after this one, in which you can see all cards he can and make all decisions for him.\nAny cards he would gain on that turn, you gain instead; any cards of his that are trashed are set aside and returned to his discard pile at end of turn." />
   <!--Prosperity-->

@@ -1,11 +1,19 @@
-﻿Version 1.7
+﻿Version Not Yet Developed Yet
+TODO: Add Black Market Deck
+
+Version 1.8
+Added Guilds Expansion
+Switched to new view model to make saved settings files smaller
+Added the ability to show additional required mats and tokens
+Added links to rules documents links in help
+
+Version 1.7
 Minor bug fixes to picker logic
 Added search box filtering and card details lookup in card filter
 Cleaned up alignment of stuff on the main page and card filter page
 Switched results view to use fonts that more closely match the actual card fonts
 Replaced set short names in results list with set icons
 Cleaned up card info view and made long titles scrollable
---TODO: Add Black Market Deck
 
 Version 1.6
 Added support for Dark Ages cards

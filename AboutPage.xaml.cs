@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System.Windows.Resources;
 using System.IO;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {
@@ -100,15 +101,27 @@ namespace Ben.Dominion
 
         private void RateButton_Click(object sender, RoutedEventArgs e)
         {
-            MarketplaceReviewTask reviewTask = new MarketplaceReviewTask();
-            reviewTask.Show();
+            try
+            {
+                MarketplaceReviewTask reviewTask = new MarketplaceReviewTask();
+                reviewTask.Show();
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         private void BuyNowButton_Click(object sender, RoutedEventArgs e)
         {
-            MarketplaceDetailTask detailTask = new MarketplaceDetailTask();
-            detailTask.ContentType = MarketplaceContentType.Applications;
-            detailTask.Show();
+            try
+            {
+                MarketplaceDetailTask detailTask = new MarketplaceDetailTask();
+                detailTask.ContentType = MarketplaceContentType.Applications;
+                detailTask.Show();
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         private void WebsiteButton_Click(object sender, RoutedEventArgs e)

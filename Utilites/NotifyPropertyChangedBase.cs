@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Windows;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Ben.Utilities
 {
@@ -44,7 +45,8 @@ namespace Ben.Utilities
 
 			if (handler != null)
 			{
-				handler(this, new PropertyChangedEventArgs(propertyName));
+                DispatcherHelper.CheckBeginInvokeOnUI(
+                    () => handler(this, new PropertyChangedEventArgs(propertyName)));
 			}
 		}
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,8 +8,6 @@ using System.Windows.Data;
 using Ben.Data;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
-using System.ComponentModel;
-using System.Threading;
 
 namespace Ben.Dominion
 {
@@ -68,7 +66,7 @@ namespace Ben.Dominion
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
             // Saves the list of filtered cards into the settings
-            PickerState.Current.CurrentSettings.FilteredCards = cardSelectors.Where(fc => fc.Selected).Select(c => c.Card).ToList();
+            MainViewModel.Instance.Settings.FilteredCards = new CardList(cardSelectors.Where(fc => fc.Selected).Select(c => c.Card));
         }
 
         /// <summary>
@@ -76,7 +74,7 @@ namespace Ben.Dominion
         /// </summary>
         private void ResetFilteredCards()
         {
-            PickerState.Current.CurrentSettings.FilteredCardIds = null;
+            MainViewModel.Instance.Settings.FilteredCards = new CardList();
 
             LoadFilteredCards();
 
@@ -89,7 +87,7 @@ namespace Ben.Dominion
         /// </summary>
         private void LoadFilteredCards()
         {
-            var filteredCards = PickerState.Current.CurrentSettings.FilteredCards;
+            var filteredCards = MainViewModel.Instance.Settings.FilteredCards;
 
             foreach (var cardSelector in cardSelectors)
             {

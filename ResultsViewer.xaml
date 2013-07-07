@@ -23,119 +23,6 @@
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
-            <!--<DataTemplate x:Key="ScrollItemTemplate">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" 
-                              VerticalScrollBarVisibility="Disabled"
-                              ManipulationCompleted="ScrollViewer_ManipulationCompleted"
-							  d:DesignWidth="480"
-							  d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
-                    <Border Margin="2" Background="{Binding BackgroundColor}" 
-                                        CornerRadius="5"
-                                        BorderBrush="DarkGray" 
-                                        BorderThickness="0">
-                        <Grid Margin="0,1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" MinWidth="6"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="./Images/coin.png" Grid.Column="0"
-                                               Width="32" Height="32" Margin="12,0,6,0"/>
-                            <TextBlock Text="{Binding CoinCost}" 
-                                                   Grid.Column="0" Margin="5,-5,0,0"
-                                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                                   Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
-                            <Image Source="./Images/potion_small.png"
-                                               Height="30"
-                                               Grid.Column="1"
-                                               Margin="0,0,12,0"
-                                               Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Name}" 
-                                                   Grid.Column="2"
-                                                   Margin="2,4,12,0" 
-                                                   Style="{StaticResource CardTitleTextStyle}" 
-                                                   Foreground="Black"/>
-                            <TextBlock Text="{Binding Name}" 
-                                                   Grid.Column="2"
-                                                   Style="{StaticResource CardTitleTextStyle}" 
-                                                   Margin="0,0,12,0" 
-                                                   Foreground="White"/>
-                            <TextBlock Text="{Binding Set}"
-                                                   Grid.Column="3"
-                                                   Margin="0,2,6,0"
-                                                   Style="{StaticResource PhoneTextSubtleStyle}"
-                                                   TextAlignment="Right"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="Black"/>
-                            <TextBlock Text="{Binding Set}" 
-                                                   Grid.Column="3"
-                                                   Margin="0,0,8,0"                                                
-                                                   Style="{StaticResource PhoneTextSubtleStyle}"
-                                                   TextAlignment="Right"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="White"/>
-                        </Grid>
-                    </Border>
-                </ScrollViewer>
-            </DataTemplate>
-            <DataTemplate x:Key="LargeItemTemplate">
-                <Border Margin="6" Background="{Binding BackgroundColor}" CornerRadius="10"
-                                    BorderBrush="DarkGray" BorderThickness="2">
-                    <Grid Margin="0,5">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Image Source="/Images/coin.png" Grid.Column="0"
-                               Width="60" Height="60" Margin="12,0"/>
-                        <TextBlock Text="{Binding Cost}" Grid.Column="0" Margin="0,-5,0,5"
-                                   Foreground="Black" Style="{StaticResource CardTitleTextStyle}"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding SetPrefix}" Grid.Column="1"
-                                   Style="{StaticResource PhoneTextSubtleStyle}"
-                                   TextAlignment="Right"
-                                   VerticalAlignment="Top"
-                                   Margin="0,-2,6,0" Foreground="White"/>
-                        <TextBlock Text="{Binding Name}" Grid.Column="1"
-                                   Style="{StaticResource CardTitleTextStyle}" 
-                                   Margin="3,2,12,0" Foreground="Black"/>
-                        <TextBlock Text="{Binding Name}" Grid.Column="1"
-                                   Style="{StaticResource CardTitleTextStyle}" 
-                                   Margin="0,0,12,0" Foreground="White"/>
-
-                    </Grid>
-                </Border>
-            </DataTemplate>
-            <DataTemplate x:Key="CardItemTemplate">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible" 
-                              VerticalScrollBarVisibility="Disabled"
-                              ManipulationCompleted="ScrollViewer_ManipulationCompleted"
-							  d:DesignWidth="480"
-							  d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
-                    <Border Margin="2" 
-                        Background="{Binding BackgroundColor}"
-                        CornerRadius="5"
-                        Tap="CardItem_Tap">
-                        <Grid Margin="0,1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" MinWidth="6"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
-                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,-5,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" Style="{StaticResource CardTitleTextStyle}"/>
-                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,4,12,0" Style="{StaticResource CardTitleTextStyle}" Foreground="Black"/>
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Style="{StaticResource CardTitleTextStyle}" Margin="0,0,12,0" Foreground="White"/>
-                            <TextBlock Text="{Binding Set}" Grid.Column="3" Margin="0,2,6,0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" VerticalAlignment="Center" Foreground="Black"/>
-                            <TextBlock Text="{Binding Set}" Grid.Column="3" Margin="0,0,8,0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" VerticalAlignment="Center" Foreground="White"/>
-                        </Grid>
-                    </Border>
-                </ScrollViewer>
-            </DataTemplate>-->
             <DataTemplate x:Key="NewCardItemTemplate">
             	<ScrollViewer HorizontalScrollBarVisibility="Visible" 
             		VerticalScrollBarVisibility="Disabled"
@@ -167,6 +54,10 @@
             		</Border>
             	</ScrollViewer>
             </DataTemplate>
+            
+            <DataTemplate x:Key="AdditionalStuffTemplate">
+                <TextBlock Text="{Binding}" Margin="0,3" Style="{StaticResource CardNameTextStyle}"/>
+            </DataTemplate>
         </Grid.Resources>
         
         <Grid.RowDefinitions>
@@ -176,24 +67,27 @@
         
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
             <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="Results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0">
             Swipe to Replace<LineBreak/>Tap for Info
         </TextBlock> 
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"
-              d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <!--d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}"-->
             <ScrollViewer>
                 <StackPanel>
                     <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}"
                                   ItemTemplate="{StaticResource NewCardItemTemplate}"/>
-                    <TextBlock Text="Additional Cards" 
-                               Visibility="{Binding Result.AdditionalCards.Count, Converter={StaticResource IsValidToVisibilityConverter}}" 
+                    <TextBlock Text="additional cards, tokens, etc." 
+                               Margin="0,0,0,0"
+                               Visibility="{Binding Result.HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" 
                                Style="{StaticResource PhoneTextSubtleStyle}"/>
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding Result.AdditionalCards}"
                                   ItemTemplate="{StaticResource NewCardItemTemplate}"/>
+                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding Result.AdditionalStuff}"
+                                  ItemTemplate="{StaticResource AdditionalStuffTemplate}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>

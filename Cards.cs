@@ -87,6 +87,9 @@ namespace Ben.Dominion
                 return new ReadOnlyCollection<string>(
                     new List<string>
                     {
+                        // Alchemy Treasures
+                        "Potion",
+
                         // Prosperity Treasures and Victorys
                         "Platinum",
                         "Colony",
@@ -253,6 +256,24 @@ namespace Ben.Dominion
         {
             return String.CompareOrdinal(this.Card.Name, other.Card.Name);
             //return this.Card.ID.CompareTo(other.Card.ID);
+        }
+    }
+
+    public class CardNameComparer : Comparer<Card>, IEqualityComparer<Card>
+    {
+        public override int Compare(Card x, Card y)
+        {
+            return x.Name.CompareTo(y.Name);
+        }
+
+        public bool Equals(Card x, Card y)
+        {
+            return x.Name == y.Name;
+        }
+
+        public int GetHashCode(Card card)
+        {
+            return card.Name.GetHashCode();
         }
     }
 }

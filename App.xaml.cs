@@ -7,6 +7,8 @@ using com.mtiks.winmobile;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
+using System.IO;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {
@@ -34,6 +36,8 @@ namespace Ben.Dominion
         }
 
         private Boolean isNew = false;
+
+        public bool IsNewVersion { get; set; }
 
         /// <summary>
         /// Constructor for the Application object.
@@ -72,7 +76,26 @@ namespace Ben.Dominion
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            PickerState.Load();
+            var instance = MainViewModel.Instance;
+
+            var s = new PickerState
+            {
+                CurrentSettings = new PickerSettings(),
+                FavoriteSets =
+                {
+                    new OldFavoriteSet("Test", new PickerResult()),
+                },
+                FavoriteSettings =
+                {
+                    new OldFavoriteSetting("Sample", new PickerSettings()),
+                },
+            };
+            var ss = GenericContractSerializer.Serialize(s);
+
+            var oldState = PickerState.LoadDefault();
+            if (oldState != null)
+            {
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -86,7 +109,7 @@ namespace Ben.Dominion
             }
             else
             {
-                PickerState.Load();
+                var instance = MainViewModel.Instance;
             }
         }
 
@@ -95,7 +118,7 @@ namespace Ben.Dominion
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             isNew = false;
-            PickerState.Save();
+            MainViewModel.Instance.Save();
             mtiks.Instance.Stop();
         }
 
@@ -103,7 +126,7 @@ namespace Ben.Dominion
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            PickerState.Save();
+            MainViewModel.Instance.Save();
             mtiks.Instance.Stop();
         }
 
@@ -164,11 +187,9 @@ namespace Ben.Dominion
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
-                System.Diagnostics.Debug.WriteLine("New version detected. Updating settings");
-                // This is a new run or an update, so let's clear the saved state
-                //PickerState.ClearSavedState();
-                PickerState.Load();
-                PickerState.Current.CurrentSettings = PickerState.Current.CurrentSettings.Clone();
+                System.Diagnostics.Debug.WriteLine("New version detected");
+
+                this.IsNewVersion = true;
 
                 // Save the current app version
                 IsolatedStorageSettings.ApplicationSettings["AppVersion"] = currentAppVersion;

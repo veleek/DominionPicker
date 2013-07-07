@@ -22,6 +22,7 @@
                            TextWrapping="Wrap"
                            TextDecorations="Underline"
                            Margin="-0,0,0,0"
+                           FontSize="{TemplateBinding FontSize}"
                            Style="{StaticResource PhoneTextNormalStyle}" 
                            Foreground="{StaticResource PhoneAccentBrush}"/>
             </ControlTemplate>
@@ -89,7 +90,7 @@
                                     Content="http://www.benrandall.ca"
                                     Tag="http://www.benrandall.ca"
                                     Click="WebsiteButton_Click" 
-                                    Margin="12,0,0,0"/>
+                                    Margin="12,0,0,0" FontSize="20"/>
                             <Rectangle Height="12" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
@@ -103,14 +104,14 @@
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Feedback:"/>
                                 <Button Template="{StaticResource HyperlinkButtonTemplate}" 
                                         Content="randall.ben@gmail.com" 
-                                        Click="EmailButton_Click"/>
+                                        Click="EmailButton_Click" FontSize="20"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Donate:"/>
                                 <Button Template="{StaticResource HyperlinkButtonTemplate}" 
                                         Content="Support the development with Paypal" 
                                         Tag="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=WPDominionPicker&amp;currency_code=USD"
-                                        Click="WebsiteButton_Click"/>
+                                        Click="WebsiteButton_Click" FontSize="20"/>
                             </StackPanel>
 
                             <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
@@ -131,8 +132,9 @@
                             <Button Template="{StaticResource HyperlinkButtonTemplate}"
                                     Content="A+ Solitaire (on the WP7 Marketplace)"
                                     Tag="7627a3ef-da59-e011-854c-00237de2db9e"
-                                    Click="MarketplaceButton_Click" 
-                                    Margin="12,0,0,0"/>
+                                    Click="MarketplaceButton_Click"
+                                    FontSize="20"
+                                    Margin="12,-5,0,0"/>
 
 
                             <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
@@ -180,6 +182,77 @@
                 </ScrollViewer>
             </controls:PivotItem>
 
+            <controls:PivotItem Header="Rules">
+                <ScrollViewer>
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="Quick links to PDFs of the rules for each Dominion expansion available online."/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Dominion Rules" 
+                                        Tag="http://dominiongame.info/dominionrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Intrigue Rules" 
+                                        Tag="http://dominiongame.info/dominionintriguerules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Seaside Rules" 
+                                        Tag="http://dominiongame.info/dominionseasiderules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Alchemy Rules" 
+                                        Tag="http://dominiongame.info/dominionalchemyrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Prosperity Rules" 
+                                        Tag="http://dominiongame.info/dominionprosperityrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Cornucopia Rules" 
+                                        Tag="http://dominiongame.info/dominioncornucopiarules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Hinterlands Rules" 
+                                        Tag="http://dominiongame.info/dominionhinterlandsrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Dark Ages Rules" 
+                                        Tag="http://dominiongame.info/dominiondarkagesrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+
+                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
+                                        Content="Guilds Rules" 
+                                        Tag="http://dominiongame.info/dominionguildsrules.pdf"
+                                        Click="WebsiteButton_Click"
+                                        Margin="12,6,0,6"
+                                        FontSize="30"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:PivotItem>
+            
             <controls:PivotItem Header="Changes">
                 <ScrollViewer x:Name="ChangesScrollViewer" />
             </controls:PivotItem>

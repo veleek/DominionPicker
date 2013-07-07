@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Ben.Dominion
 {
-    public class CardList : List<Card> { }
+    public class SampleCardList : List<Card> { }
 
-    public class CardSelectorList : List<CardSelector> { }
+    public class SampleCardSelectorList : List<CardSelector> { }
 }

@@ -7,16 +7,17 @@ using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using GalaSoft.MvvmLight.Threading;
 
 namespace Ben.Dominion
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private PickerState CurrentState { get { return PickerState.Current; } }
         private ApplicationBarIconButton UnlockButton;
-        private Boolean reviewRequestShown = false;
-        private Boolean isNew = false;
-        private Object favoriteEdit = null;
+        private bool reviewRequestShown = false;
+        private bool updatePopupShown = false;
+        private bool isNew = false;
+        private object favoriteEdit = null;
 
         private ApplicationBarIconButton ResetButton;
         private ApplicationBarIconButton AddFavoriteButton;
@@ -59,12 +60,14 @@ namespace Ben.Dominion
             AddFavoriteButton.Click += AddFavorite_Click;
         }
 
+        public MainViewModel MainView
+        {
+            get { return MainViewModel.Instance; }
+        }
+
         public void LoadState()
         {
-            // If it has, set the appropriate field and data context
-            this.DataContext = this.CurrentState;
-
-            this.CurrentState.PropertyChanged += (s, e) =>
+            this.MainView.PropertyChanged += (s, e) =>
             {
                 if (e.PropertyName == "IsGenerating")
                 {
@@ -72,7 +75,7 @@ namespace Ben.Dominion
                     {
                         try
                         {
-                            SystemTray.ProgressIndicator.IsVisible = this.CurrentState.IsGenerating;
+                            SystemTray.ProgressIndicator.IsVisible = this.MainView.IsGenerating;
                         }
                         catch (Exception ex)
                         {
@@ -81,11 +84,14 @@ namespace Ben.Dominion
                     });
                 }
             };
-        
+
+            this.DataContext = this.MainView;
         }
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
+            DispatcherHelper.Initialize();
+
             //AdManager.LoadAd(AdContainer);
 
             //App app = App.Current as App;
@@ -104,7 +110,12 @@ namespace Ben.Dominion
             Int32 appLaunchCount = 0;
             System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
 
-            if (appLaunchCount == 10 && !reviewRequestShown)
+            if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
+            {
+                MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
+                updatePopupShown = true;
+            }
+            else if (appLaunchCount == 10 && !reviewRequestShown)
             {
                 RequestReviewPopup.Visibility = Visibility.Visible;
                 // This prevents us from showing the popup if they 
@@ -122,7 +133,7 @@ namespace Ben.Dominion
 
         private void MainPage_BackKeyPress(object sender, CancelEventArgs e)
         {
-            PickerState.Current.CancelGeneration();
+            MainViewModel.Instance.CancelGeneration();
             if (AddFavoritePopup.IsOpen)
             {
                 HideAddFavoritePopup();
@@ -137,7 +148,7 @@ namespace Ben.Dominion
 
         private void Create()
         {
-            if (this.CurrentState.IsGenerating)
+            if (this.MainView.IsGenerating)
             {
                 StopGeneration();
             }
@@ -161,7 +172,7 @@ namespace Ben.Dominion
             {
                 try
                 {
-                    if (this.CurrentState.GenerateCardList())
+                    if (this.MainView.GenerateCardList())
                     {
                         // Navigation has to happen on the UI thread, so ask the Dispatcher to do it
                         Dispatcher.BeginInvoke(() =>
@@ -194,7 +205,7 @@ namespace Ben.Dominion
         private void StopGeneration()
         {
             // Stop the generation 
-            this.CurrentState.CancelGeneration();
+            this.MainView.CancelGeneration();
 
             // Hide the progress bar and swap the button
             //SystemTray.ProgressIndicator.IsVisible = false;
@@ -203,7 +214,7 @@ namespace Ben.Dominion
 
         private void Reset_Click(object sender, EventArgs e)
         {
-            CurrentState.Reset();
+            MainView.Reset();
             SettingsScrollViewer.ScrollToVerticalOffset(0);
         }
 
@@ -235,8 +246,17 @@ namespace Ben.Dominion
         {
             if (e.AddedItems.Count > 0)
             {
-                // Load the settings
-                CurrentState.LoadSettings((e.AddedItems[0] as FavoriteSetting).Value);
+                // Make a copy of the settings, so we don't overwrite them
+                var newSettings = (e.AddedItems[0] as FavoriteSetting).Value;
+                newSettings = GenericXmlSerializer.Deserialize<SettingsViewModel>(GenericXmlSerializer.Serialize(newSettings));
+
+                // HACK: Currently the filtered cards is part of the settings instead of it's own
+                // property and/or view model thing, so we have to 'save' it when we load the 
+                // settings from the list otherwise we risk losing any cards they've filtered
+                // when they use a built in favorite settings.
+                newSettings.FilteredCards = MainView.Settings.FilteredCards;
+
+                MainView.Settings = newSettings;
                 FavoriteSettingsListBox.SelectedItem = null;
 
                 Create();
@@ -248,9 +268,9 @@ namespace Ben.Dominion
             if (e.AddedItems.Count > 0)
             {
                 // Just in case;
-                this.CurrentState.CancelGeneration();
+                this.MainView.CancelGeneration();
 
-                CurrentState.Result = (e.AddedItems[0] as FavoriteSet).Result;
+                this.MainView.Result = (e.AddedItems[0] as FavoriteSet).Value;
                 this.NavigationService.Navigate("/ResultsViewer.xaml");
 
                 // Clear the selection
@@ -286,7 +306,7 @@ namespace Ben.Dominion
 
         private void SaveFavoriteSettings(String name)
         {
-            CurrentState.SaveFavoriteSettings(name);
+            MainViewModel.Instance.SaveFavoriteSettings(name);
         }
 
         private void ClearFavorites_Click(object sender, EventArgs e)
@@ -295,14 +315,9 @@ namespace Ben.Dominion
 
             if (res == MessageBoxResult.OK)
             {
-                // Delete all the saved state on the disk
-                // and load the default everything
-                PickerState.ClearSavedState();
-                // Then load it back into the UI
-                LoadState();
-
-                RootPivot.SelectedIndex = 0;
-                SettingsScrollViewer.ScrollToVerticalOffset(0);
+                // Load up the defaults and clear out what we have 
+                MainViewModel.Instance.Favorites = MainViewModel.LoadDefault().Favorites;
+                FavoritesScrollViewer.ScrollToVerticalOffset(0);
             }
         }
 
@@ -325,7 +340,7 @@ namespace Ben.Dominion
                 // Load the state
                 LoadState();
 
-                RootPivot.SelectedIndex = CurrentState.PivotIndex;
+                RootPivot.SelectedIndex = MainView.PivotIndex;
             }
 
             isNew = false;
@@ -366,9 +381,16 @@ namespace Ben.Dominion
             FavoriteSetting favSetting = fe.DataContext as FavoriteSetting;
             if (favSetting != null)
             {
-                // Note that we don't call LoadSettings because we explicitly
-                // want to modify the settings if we select this option
-                CurrentState.CurrentSettings = favSetting.Value;
+                // Grab the settings object
+                var newSettings = favSetting.Value;
+
+                // HACK: Currently the filtered cards is part of the settings instead of it's own
+                // property and/or view model thing, so we have to 'save' it when we load the 
+                // settings from the list otherwise we risk losing any cards they've filtered
+                // when they use a built in favorite settings.
+                newSettings.FilteredCards = MainView.Settings.FilteredCards;
+
+                MainView.Settings = newSettings;
 
                 // Navigate back to the settings pivot and scroll to the top
                 RootPivot.SelectedIndex = 0;
@@ -383,21 +405,21 @@ namespace Ben.Dominion
             FavoriteSet favSet = fe.DataContext as FavoriteSet;
             if (favSet != null)
             {
-                CurrentState.FavoriteSets.Remove(favSet);
+                MainView.Favorites.FavoriteSets.Remove(favSet);
             }
             else
             {
                 FavoriteSetting favSetting = fe.DataContext as FavoriteSetting;
                 if (favSetting != null)
                 {
-                    CurrentState.FavoriteSettings.Remove(favSetting);
+                    MainView.Favorites.FavoriteSettings.Remove(favSetting);
                 }
             }
         }
 
         private void RootPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.CurrentState.PivotIndex = RootPivot.SelectedIndex;
+            this.MainView.PivotIndex = RootPivot.SelectedIndex;
             Boolean onMainPivot = RootPivot.SelectedIndex == 0;
 
             if (onMainPivot)
@@ -408,10 +430,7 @@ namespace Ben.Dominion
             }
             else
             {
-                //this.ApplicationBar.Buttons.Remove(ResetButton);
-                //this.ApplicationBar.Buttons.Remove(AddFavoriteButton);
                 this.ApplicationBar.Buttons.Clear();
-                //this.ApplicationBar.Mode = ApplicationBarMode.Minimized;
             }
         }
 
