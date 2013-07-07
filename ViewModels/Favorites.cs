@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Ben.Utilities;
+using System.Xml.Serialization;
 
 namespace Ben.Dominion
 {
@@ -63,7 +64,7 @@ namespace Ben.Dominion
         { }
     }
 
-    [DataContract]
+    [DataContract(Name = "FavoriteSetting")]
     public class OldFavoriteSetting : FavoriteThing<PickerSettings>
     {
         public OldFavoriteSetting() { }
@@ -74,7 +75,7 @@ namespace Ben.Dominion
         }
     }
 
-    [DataContract]
+    [DataContract(Name="FavoriteSet")]
     public class OldFavoriteSet : FavoriteThing<String>
     {
         public PickerResult Result

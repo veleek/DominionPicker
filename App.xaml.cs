@@ -77,25 +77,6 @@ namespace Ben.Dominion
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             var instance = MainViewModel.Instance;
-
-            var s = new PickerState
-            {
-                CurrentSettings = new PickerSettings(),
-                FavoriteSets =
-                {
-                    new OldFavoriteSet("Test", new PickerResult()),
-                },
-                FavoriteSettings =
-                {
-                    new OldFavoriteSetting("Sample", new PickerSettings()),
-                },
-            };
-            var ss = GenericContractSerializer.Serialize(s);
-
-            var oldState = PickerState.LoadDefault();
-            if (oldState != null)
-            {
-            }
         }
 
         // Code to execute when the application is activated (brought to foreground)

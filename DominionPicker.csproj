@@ -175,6 +175,10 @@
     <DesignData Include="SampleData\PickerResultSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignData>
+    <Content Include="Assets\OldPickerState.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Page Include="CardFilterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

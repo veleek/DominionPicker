@@ -27,7 +27,6 @@ namespace Ben.Dominion
         public MainViewModel()
         {
             Picker = new Picker();
-            string xml = GenericXmlSerializer.Serialize(settings);
         }
 
         public static MainViewModel Instance
@@ -169,7 +168,11 @@ namespace Ben.Dominion
                             {
                                 using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
                                 {
-                                    view = GenericXmlSerializer.Deserialize<MainViewModel>(stream);
+                                    XmlSerializer serializer = new XmlSerializer(typeof(MainViewModel));
+
+                                    view = serializer.Deserialize(stream) as MainViewModel;
+
+                                    //view = GenericXmlSerializer.Deserialize<MainViewModel>(stream);
                                     //view = GenericContractSerializer.Deserialize<MainViewModel>(stream);
                                 }
                             }

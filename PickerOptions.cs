@@ -109,7 +109,7 @@ namespace Ben.Dominion
     {
         public Boolean IsEnabled
         {
-            get { return (Boolean)OptionValue; }
+            get { return OptionValue == null ? false : (Boolean)OptionValue; }
             set { OptionValue = value; }
         }
     

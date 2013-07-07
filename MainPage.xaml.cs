@@ -112,7 +112,7 @@ namespace Ben.Dominion
 
             if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
             {
-                MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
+                //MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
                 updatePopupShown = true;
             }
             else if (appLaunchCount == 10 && !reviewRequestShown)
@@ -122,6 +122,9 @@ namespace Ben.Dominion
                 // come back here without exiting the app.
                 reviewRequestShown = true;
             }
+
+            // This will pickup any old settings and merge them in with the new settings model
+            PickerState.MergeWithNewState();
 
             this.NavigationService.Initialize();
         }
