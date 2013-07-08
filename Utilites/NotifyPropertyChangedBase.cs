@@ -50,15 +50,16 @@ namespace Ben.Utilities
 			}
 		}
 
-        protected void SetProperty<TProperty>(ref TProperty field, TProperty value, string propertyName)
+        protected bool SetProperty<TProperty>(ref TProperty field, TProperty value, string propertyName)
         {
             if (Equals(value, field))
             {
-                return;
+                return false;
             }
 
             field = value;
             OnPropertyChanged(propertyName);
+            return true;
         }
     }
 }

@@ -72,6 +72,14 @@ namespace Ben.Dominion
             get { return typeString ?? (typeString = Type.ToString()); }
         }
 
+        private string displayName;
+        [XmlIgnore]
+        public string DisplayName
+        {
+            get { return this.displayName ?? this.Name; }
+            set { this.displayName = value; }
+        }
+
         public String SetPrefix
         {
             get { return SetString.Substring(0, 4); }

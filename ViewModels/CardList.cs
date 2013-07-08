@@ -55,6 +55,30 @@ namespace Ben.Dominion
             }
         }
 
+        public Card Draw()
+        {
+            Card c = null;
+
+            if (this.Count > 0)
+            {
+                c = this[0];
+                this.RemoveAt(0);
+            }
+
+            return c;
+        }
+
+        public CardList Draw(int count)
+        {
+            CardList cards = new CardList();
+            for (int i = 0; i < count; i++)
+            {
+                cards.Add(this.Draw());
+            }
+
+            return cards;
+        }
+
         public XmlSchema GetSchema()
         {
             return null;

@@ -21,11 +21,17 @@ namespace Ben.Dominion
         private SettingsViewModel settings = new SettingsViewModel();
         private PickerResult result = new PickerResult();
         private FavoritesViewModel favorites = new FavoritesViewModel();
+        private BlackMarketViewModel blackMarket = new BlackMarketViewModel();
 
         private bool isGenerating;
 
         public MainViewModel()
         {
+            if (instance != null)
+            {
+                throw new ArgumentException("We should never create more than one instance of this class");
+            }
+
             Picker = new Picker();
         }
 
@@ -77,6 +83,12 @@ namespace Ben.Dominion
             {
                 SetProperty(ref favorites, value, "Favorites");
             }
+        }
+
+        public BlackMarketViewModel BlackMarket
+        {
+            get { return this.blackMarket; }
+            set { this.SetProperty(ref this.blackMarket, value, "BlackMarket"); }
         }
 
         [XmlIgnore]

@@ -7,6 +7,7 @@ namespace Ben.Dominion
     {
         private bool enabled;
         private CardSet set;
+        private CardSetViewModel setView;
 
         [XmlAttribute]
         public bool Enabled
@@ -19,7 +20,26 @@ namespace Ben.Dominion
         public CardSet Set
         {
             get { return set; }
-            set { SetProperty(ref set, value, "Set"); }
+            set 
+            {
+                if (SetProperty(ref set, value, "Set"))
+                {
+                    this.SetView = set;
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public CardSetViewModel SetView
+        {
+            get { return setView; }
+            set
+            {
+                if (SetProperty(ref setView, value, "SetView"))
+                {
+                    NotifyPropertyChanged("Set");
+                }
+            }
         }
 
         public override string ToString()

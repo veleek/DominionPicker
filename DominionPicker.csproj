@@ -17,7 +17,13 @@
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
+	fr-FR;en-US;es-ES
     </SupportedCultures>
+    <!--
+    <SupportedCultures>
+	zh-CN;zh-TW;cs-CZ;da-DK;nl-NL;en-GB;fi-FI;fr-FR;de-DE;el-GR;hu-HU;it-IT;ja-JP;ko-KR;nb-NO;pl-PL;pt-BR;pt-PT;ru-RU;es-ES;sv-SE;
+    </SupportedCultures>
+    -->
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>DominionPicker.xap</XapFilename>
@@ -104,6 +110,10 @@
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Content Include="Assets\DominionPickerCards.fr-FR.xml" />
+    <Compile Include="BlackMarketPage.xaml.cs">
+      <DependentUpon>BlackMarketPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Card.cs" />
     <Compile Include="CardFilterPage.xaml.cs">
       <DependentUpon>CardFilterPage.xaml</DependentUpon>
@@ -121,9 +131,28 @@
     <Compile Include="Controls\Swipable.xaml.cs">
       <DependentUpon>Swipable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DebugPage.xaml.cs">
+      <DependentUpon>DebugPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ImportExportPage.xaml.cs">
+      <DependentUpon>ImportExportPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MainModel.cs" />
     <Compile Include="PickerOptions.cs" />
     <Compile Include="PickerSettings.cs" />
     <Compile Include="PickerState.cs" />
+    <Compile Include="Resources\LocalizedStrings.cs" />
+    <Compile Include="Resources\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utilites\DesignHelper.cs" />
+    <Compile Include="Utilites\PerformanceHelper.cs" />
+    <Compile Include="ViewModels\BlackMarketViewModel.cs" />
+    <Compile Include="ViewModels\CardSetViewModel.cs" />
+    <Compile Include="ViewModels\CardTypeViewModel.cs" />
+    <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\Favorites.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -179,6 +208,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Page Include="BlackMarketPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CardFilterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -195,6 +228,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="DebugPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ImportExportPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -203,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\CardViewModelSampleData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </DesignDataWithDesignTimeCreatableTypes>
     <Page Include="TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -218,9 +263,7 @@
     <Content Include="Assets\DefaultPickerState_1.8.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Dominican-SmallCaps.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Assets\Dominican-SmallCaps.ttf" />
     <Content Include="Images\actionicon.cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -342,8 +385,18 @@
     </Content>
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Models\" />
+    <EmbeddedResource Include="Resources\Strings.de-DE.resx" />
+    <EmbeddedResource Include="Resources\Strings.en-US.resx" />
+    <EmbeddedResource Include="Resources\Strings.es-ES.resx">
+      <LastGenOutput>Strings.es-ES.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

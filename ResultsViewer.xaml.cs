@@ -24,6 +24,13 @@ namespace Ben.Dominion
             CardsList.Loaded += new RoutedEventHandler(CardsList_Loaded);
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            UpdateSortButton(MainViewModel.Instance.Result.SortOrder);
+
+            base.OnNavigatedTo(e);
+        }
+
         void CardsList_Loaded(object sender, RoutedEventArgs e)
         {
             CardsList.IsHitTestVisible = true;
@@ -40,14 +47,6 @@ namespace Ben.Dominion
             {
                 MainViewModel.Instance.CancelGeneration();
             }
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            this.DataContext = MainViewModel.Instance;
-            UpdateSortButton(MainViewModel.Instance.Result.SortOrder);
-
-            base.OnNavigatedTo(e);
         }
 
         private void CardItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -141,9 +140,6 @@ namespace Ben.Dominion
             {
                 return;
             }
-
-            //var parent = scrollViewer.Parent as FrameworkElement;
-            //var parentParent = parent.Parent as FrameworkElement;
 
             var v = e.FinalVelocities.LinearVelocity;
             var m = v.GetMagnitude();

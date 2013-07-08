@@ -5,6 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:data="clr-namespace:Ben.Data"
+    xmlns:local="clr-namespace:Ben.Dominion"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:media="clr-namespace:System.Windows.Media;assembly=System.Windows">
     
@@ -14,16 +15,11 @@
         <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
         <data:DebugConverter x:Key="DebugConverter" />
         <data:ImageConverter x:Key="ImageConverter" />
+        <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
-        <!--<FontFamily x:Key="DominicanSC">.\Assets\Dominican-SmallCaps.ttf#Dominican Small Caps</FontFamily>-->
         <FontFamily x:Key="BookAntiquaBold">.\Assets\ANTQUAB.TTF#Book Antiqua</FontFamily>
         <FontFamily x:Key="OptimusPrincepsSemiBold">.\Assets\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
         
-        <!--<Style x:Key="CardTitleTextStyle" TargetType="TextBlock">
-			<Setter Property="FontFamily" Value="{StaticResource DominicanSC}"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>-->
         <Style x:Key="CardCostTextStyle" TargetType="TextBlock">
 			<Setter Property="FontFamily" Value="{StaticResource BookAntiquaBold}"/>
         	<Setter Property="FontSize" Value="25"/>
@@ -38,6 +34,9 @@
         	<Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
+
+        <local:LocalizedResources x:Key="LocalizedResources" />
+        <local:MainViewModel x:Key="MainView" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

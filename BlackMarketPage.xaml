@@ -1,0 +1,136 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Ben.Dominion.BlackMarketPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    DataContext="{Binding Instance.BlackMarket, Source={StaticResource MainView}}">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <DataTemplate x:Key="CardItemTemplate">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" 
+            		          VerticalScrollBarVisibility="Disabled"
+            		          ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                    <Border Margin="2" 
+            			    Background="{Binding BackgroundColor}"
+            			    CornerRadius="5"
+                            Tap="CardItem_Tap">
+                        <Grid Margin="0,1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
+                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
+                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
+                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
+                            <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                                    Grid.Column="2"
+                                    HorizontalAlignment="Right"
+                                    Width="40"
+								    Margin="5,5"/>
+                        </Grid>
+                    </Border>
+                </ScrollViewer>
+            </DataTemplate>
+            <DataTemplate x:Key="CardItemTemplate2">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" 
+            		VerticalScrollBarVisibility="Disabled"
+            		ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                    <Border Margin="2" 
+            			    Background="{Binding BackgroundColor}"
+            			    CornerRadius="5"
+                            Tap="CardItem_Tap">
+                        <Grid Margin="0,1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Name}"/>
+                        </Grid>
+                    </Border>
+                </ScrollViewer>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
+            <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="black market" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Visibility="{Binding Selected, Converter={StaticResource IsValidToVisibilityConverter}}">
+                <TextBlock Text="selected" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <ContentPresenter Content="{Binding Selected}" ContentTemplate="{StaticResource CardItemTemplate}" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="1" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}}">
+                <TextBlock Text="hand" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <ScrollViewer Grid.Row="1">
+                    <ItemsControl ItemsSource="{Binding Hand}" ItemTemplate="{StaticResource CardItemTemplate}" />
+                </ScrollViewer>
+            </StackPanel>
+
+            <!-- True flips the result, so this is only visible when the Hand count is == 0 -->
+            <Button Click="DrawButton_Click" Grid.Row="4" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}">
+                <StackPanel Orientation="Vertical" >
+                    <TextBlock Text="Draw" TextAlignment="Center"/>
+                    <TextBlock Text="three cards from the black market deck" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" TextAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            
+            <!-- False leaves the result the same, so this is only visible when the Hand count is > 0 -->
+            <StackPanel Orientation="Vertical" Grid.Row="5" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=false}">
+                <TextBlock Text="tap a card to select it for purchase (optional)" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <TextBlock Text="swipe to remove from the black market deck permanantly, and replace it with an additional card" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,5,12,0"/>
+                <Button Click="DiscardButton_Click">
+                    <StackPanel Orientation="Vertical" >
+                        <TextBlock Text="Discard" TextAlignment="Center"/>
+                        <TextBlock Text="the rest after selecting one to buy" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" TextAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+ 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.reset.png" Text="reset" Click="Reset_Click"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="reset deck"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

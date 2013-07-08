@@ -7,12 +7,14 @@ using System.Linq;
 using System.Windows.Data;
 using Ben.Data;
 using Ben.Utilities;
+using System.Globalization;
 
 namespace Ben.Dominion
 {
     public static class Cards
     {
-        public static readonly String PickerCardsFileName = "./Assets/DominionPickerCards.xml";
+        public static readonly string PickerCardsFileName = "./Assets/DominionPickerCards.xml";
+        public static readonly string LocalizedCardsFileNameFormat = "./Assets/DominionPickerCards.{0}.xml";
 
         public static IEnumerable<CardSet> AllSets
         {
@@ -180,10 +182,46 @@ namespace Ben.Dominion
 
         public static List<Card> Load()
         {
-            using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
+            List<Card> cards = null;
+
+            var time = PerformanceHelper.Measure(() =>
             {
-                return GenericXmlSerializer.Deserialize<List<Card>>(stream);
-            }
+                using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
+                {
+                    cards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
+                }
+
+                // Check if we need to load another language.
+                var currentCultureName = CultureInfo.CurrentCulture.Name;
+                if (currentCultureName != "en-US")
+                {
+                    List<Card> localizedCards;
+                    string localizedFileName = string.Format(LocalizedCardsFileNameFormat, currentCultureName);
+                    using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(localizedFileName))
+                    {
+                        localizedCards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
+                    }
+
+                    if (localizedCards == null || localizedCards.Count == 0)
+                    {
+                        return;
+                    }
+
+                    var lookup = localizedCards.ToDictionary(c => c.ID);
+                    foreach (var card in cards)
+                    {
+                        Card c;
+                        if (lookup.TryGetValue(card.ID, out c))
+                        {
+                            card.DisplayName = c.Name;
+                        }
+                    }
+                }
+            }, 50);
+
+            System.Diagnostics.Debug.WriteLine("LoadTime: {0} ms", time);
+
+            return cards;
         }
 
         public static void Save()

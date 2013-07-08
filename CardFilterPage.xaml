@@ -42,7 +42,7 @@
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding Card.Name}"
+                                            <TextBlock Text="{Binding Card.DisplayName}"
                                                Style="{StaticResource PhoneTextLargeStyle}"/>
                                         </Grid>
                                     </CheckBox.Content>

@@ -14,7 +14,7 @@ namespace Ben.Dominion
 
         void CardInfo_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = (App.Current as App).SelectedCard;
+            this.DataContext = (CardViewModel)(App.Current as App).SelectedCard;
         }
 
         private void CardInfo_Flick(object sender, FlickGestureEventArgs e)

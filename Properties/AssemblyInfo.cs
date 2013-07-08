@@ -7,11 +7,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DominionPicker")]
-[assembly: AssemblyDescription("A Dominon Set Randomizer for Windows Phone 7")]
+[assembly: AssemblyDescription("A Dominon Set Randomizer for Windows Phone")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Corp.")]
 [assembly: AssemblyProduct("DominionPicker")]
-[assembly: AssemblyCopyright("Copyright ©2010-2012 Ben Randall")]
+[assembly: AssemblyCopyright("Copyright ©2010-2013 Ben Randall")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

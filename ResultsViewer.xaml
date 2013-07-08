@@ -12,6 +12,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
+    DataContext="{Binding Instance, Source={StaticResource MainView}}"
+    d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True"
     shell:SystemTray.Opacity="1">
@@ -23,36 +25,35 @@
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
-            <DataTemplate x:Key="NewCardItemTemplate">
-            	<ScrollViewer HorizontalScrollBarVisibility="Visible" 
+
+            <DataTemplate x:Key="CardItemTemplate">
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" 
             		VerticalScrollBarVisibility="Disabled"
-            		ManipulationCompleted="ScrollViewer_ManipulationCompleted"
-            		d:DesignWidth="480"
-            		d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}">
-            		<Border Margin="2" 
+            		ManipulationCompleted="ScrollViewer_ManipulationCompleted">
+                    <Border Margin="2" 
             			Background="{Binding BackgroundColor}"
             			CornerRadius="5"
             			Tap="CardItem_Tap">
-            			<Grid Margin="0,1">
-            				<Grid.ColumnDefinitions>
-            					<ColumnDefinition Width="Auto"/>
-            					<ColumnDefinition Width="Auto" MinWidth="6"/>
-            					<ColumnDefinition Width="*"/>
-            					<ColumnDefinition Width="Auto"/>
-            				</Grid.ColumnDefinitions>
-            				<Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
-            				<TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
-            				<Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
-            				<TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
-							<Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
-                                    Grid.Column="2"
-                                    HorizontalAlignment="Right"
-                                    Width="40"
-									Margin="5,5"/>
-            			</Grid>
-            		</Border>
-            	</ScrollViewer>
+                        <Grid Margin="0,1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
+                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
+                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
+                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
+                            <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                                Grid.Column="2"
+                                HorizontalAlignment="Right"
+                                Width="40"
+								Margin="5,5"/>
+                        </Grid>
+                    </Border>
+                </ScrollViewer>
             </DataTemplate>
             
             <DataTemplate x:Key="AdditionalStuffTemplate">
@@ -74,19 +75,19 @@
             Swipe to Replace<LineBreak/>Tap for Info
         </TextBlock> 
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <!--d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}"-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"
+              DataContext="{Binding Result}">
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Result.Cards}"
-                                  ItemTemplate="{StaticResource NewCardItemTemplate}"/>
+                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Cards}"
+                                  ItemTemplate="{StaticResource CardItemTemplate}" />
                     <TextBlock Text="additional cards, tokens, etc." 
                                Margin="0,0,0,0"
-                               Visibility="{Binding Result.HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" 
+                               Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" 
                                Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding Result.AdditionalCards}"
-                                  ItemTemplate="{StaticResource NewCardItemTemplate}"/>
-                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding Result.AdditionalStuff}"
+                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}"
+                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
+                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding AdditionalStuff}"
                                   ItemTemplate="{StaticResource AdditionalStuffTemplate}"/>
                 </StackPanel>
             </ScrollViewer>

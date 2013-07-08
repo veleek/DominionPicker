@@ -33,7 +33,6 @@ namespace Ben.Dominion
             DateTime start = DateTime.UtcNow;
             try
             {
-                Debug.WriteLine("Loading picker state...");
                 if (UseIsolatedStorage)
                 {
                     if (state == null)
@@ -42,6 +41,7 @@ namespace Ben.Dominion
                         {
                             if (store.FileExists(fileName))
                             {
+                                Debug.WriteLine("Loading picker state...");
                                 using (Stream stream = store.OpenFile(fileName, FileMode.Open))
                                 {
                                     state = GenericContractSerializer.Deserialize<PickerState>(stream);

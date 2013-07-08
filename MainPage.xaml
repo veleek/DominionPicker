@@ -24,7 +24,7 @@
                                  IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
 
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
@@ -64,7 +64,7 @@
                                               Width="225"
                                               IsChecked="{Binding Enabled, Mode=TwoWay}">
                                             <CheckBox.Content>
-                                                <TextBlock Text="{Binding Set}" FontSize="24" />
+                                                <TextBlock Text="{Binding SetView.DisplayName}" FontSize="24" />
                                             </CheckBox.Content>
                                         </CheckBox>
                                     </DataTemplate>
@@ -79,8 +79,11 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" Content="Minimum Cards Per Set:" HorizontalContentAlignment="Right"/>
-                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed" FullModeHeader="Minimum cards per set in result:">
+                                <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" HorizontalContentAlignment="Right">
+                                    <TextBlock Text="{Binding Strings.Settings_MinCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                                </CheckBox>
+                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed"
+                                                    FullModeHeader="{Binding Strings.Settings_MinCardsDescription, Source={StaticResource LocalizedResources}}">
                                     <toolkit:ListPicker.FullModeItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
@@ -92,8 +95,12 @@
                                 </toolkit:ListPicker>
                             </Grid>
                             
-                            <CheckBox IsChecked="{Binding RequireDefense, Mode=TwoWay}" Content="If there's an attack, require a defense" />
-                            <CheckBox IsChecked="{Binding RequireTrash, Mode=TwoWay}" Content="Require a card that allows you to trash" />
+                            <CheckBox IsChecked="{Binding RequireDefense, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Strings.Settings_RequireDefense, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding RequireTrash, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Strings.Settings_RequireTrash, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap"/>
+                            </CheckBox>
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -285,6 +292,7 @@
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Reset Favorites" Click="ClearFavorites_Click"/>
                 <shell:ApplicationBarMenuItem Text="Card Lookup/Filter" Click="FilterCards_Click" />
+                <shell:ApplicationBarMenuItem Text="Black Market Deck" Click="BlackMarket_Click" />
                 <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

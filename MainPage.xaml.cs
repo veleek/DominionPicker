@@ -429,7 +429,16 @@ namespace Ben.Dominion
             {
                 this.ApplicationBar.Buttons.Add(ResetButton);
                 this.ApplicationBar.Buttons.Add(AddFavoriteButton);
-                this.ApplicationBar.Mode = ApplicationBarMode.Default;
+
+                if (System.Diagnostics.Debugger.IsAttached)
+                {
+                    var debugMenu = new ApplicationBarMenuItem { Text = "Debug" };
+                    debugMenu.Click += (s, a) => this.NavigationService.Navigate("/DebugPage.xaml");
+
+                    this.ApplicationBar.MenuItems.Add(debugMenu);
+                }
+
+                //this.ApplicationBar.Mode = ApplicationBarMode.Default;
             }
             else
             {
@@ -437,7 +446,7 @@ namespace Ben.Dominion
             }
         }
 
-        void FilterCards_Click(object sender, EventArgs e)
+        private void FilterCards_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate("/CardFilterPage.xaml");
         }
@@ -450,6 +459,11 @@ namespace Ben.Dominion
         private void CardLookup_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate("/TestPage.xaml");
+        }
+
+        private void BlackMarket_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/BlackMarketPage.xaml");
         }
     }
 }

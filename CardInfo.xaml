@@ -12,7 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    d:DataContext="{d:DesignData Source=SampleData/CardSampleData.xaml}"
+    d:DataContext="{d:DesignData Source=SampleData/CardViewModelSampleData.xaml}"
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -44,10 +44,10 @@
                         <StackPanel Orientation="Horizontal">
                             <Grid Margin="0,0,6,0">
                                 <Image Source="./Images/coin.png" Width="48" Height="48"/>
-                                <TextBlock Text="{Binding CoinCost}" Style="{StaticResource CardCostTextStyle}" FontSize="36"/>
+                                <TextBlock Text="{Binding Card.CoinCost}" Style="{StaticResource CardCostTextStyle}" FontSize="36"/>
                             </Grid>
-                            <Image Source="./Images/potion_small.png" Height="52" Margin="0,0,6,0" Grid.Column="1" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Name}" Style="{StaticResource CardNameTextStyle}" FontSize="47" Grid.Column="2" />
+                            <Image Source="./Images/potion_small.png" Height="52" Margin="0,0,6,0" Grid.Column="1" Visibility="{Binding Card.HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding Card.DisplayName}" Style="{StaticResource CardNameTextStyle}" FontSize="47" Grid.Column="2" />
                         </StackPanel>
                     </ScrollViewer>
 
@@ -60,14 +60,14 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Background="{StaticResource PhoneForegroundBrush}"
-                            OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                            OpacityMask="{Binding Card.Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                             Width="40" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Set}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding SetView.DisplayName}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     </Grid>
                     <TextBlock Text="type" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock Text="{Binding Type}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    <TextBlock Text="{Binding TypeView.DisplayName}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     <TextBlock Text="rules" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock Text="{Binding FormattedRules}" Style="{StaticResource PhoneTextLargeStyle}" 
+                    <TextBlock Text="{Binding Card.FormattedRules}" Style="{StaticResource PhoneTextLargeStyle}" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
                 </StackPanel>
             </ScrollViewer>
