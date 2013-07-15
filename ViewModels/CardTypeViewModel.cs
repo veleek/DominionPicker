@@ -28,7 +28,7 @@ namespace Ben.Dominion
                 if (this.SetProperty(ref this.type, value, "Type"))
                 {
                     var typeNames = this.type.ToString().Split(SplitChars, StringSplitOptions.RemoveEmptyEntries);
-                    this.displayName = string.Join(", ", typeNames.Select(n => Strings.ResourceManager.GetString("Type_" + n) ?? "Resource Problem"));
+                    this.displayName = string.Join(", ", typeNames.Select(n => Strings.ResourceManager.GetString("Type_" + n, Strings.Culture) ?? "Resource Problem"));
                     this.NotifyPropertyChanged("DisplayName");
                 }
             }

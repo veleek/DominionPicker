@@ -139,6 +139,12 @@ namespace Ben.Dominion
             return value.IndexOf(substring, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
+        public void MergeFrom(Card c)
+        {
+            this.DisplayName = c.DisplayName ?? this.DisplayName;
+            this.Rules = c.Rules ?? this.Rules;
+        }
+
         public override string ToString()
         {
             return String.Format("{0} - {1} ({2}): {3}", Name, Type, Set, Cost);

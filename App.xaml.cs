@@ -46,6 +46,9 @@ namespace Ben.Dominion
         {
             isNew = true;
 
+            //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("en-US");
+            Ben.Dominion.Resources.Strings.Culture = Ben.Dominion.Models.ConfigurationModel.Instance.CurrentCulture;
+
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
 

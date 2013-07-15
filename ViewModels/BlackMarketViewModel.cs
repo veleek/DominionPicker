@@ -107,7 +107,7 @@ namespace Ben.Dominion
             }
 
             this.Deck = BaseBlackMarketCards.Except(supplyCards).OrderBy(c => Guid.NewGuid()).ToCardList();
-            this.Hand.Clear();
+            this.Hand = new CardList();
             this.Selected = null;
         }
 

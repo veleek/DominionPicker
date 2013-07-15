@@ -5,11 +5,14 @@ using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Controls;
+using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
     public partial class ResultsViewer : PhoneApplicationPage
     {
+        ApplicationBarIconButton SortButton;
+
         public ResultsViewer()
         {
             InitializeComponent();
@@ -22,6 +25,49 @@ namespace Ben.Dominion
             // we enable the hit test again.
             CardsList.IsHitTestVisible = false;
             CardsList.Loaded += new RoutedEventHandler(CardsList_Loaded);
+
+            var refreshButton = new ApplicationBarIconButton
+            {
+                IconUri = new Uri(@"/Images/appbar.refresh.png", UriKind.Relative),
+                Text = Strings.Results_Regenerate,
+            };
+            refreshButton.Click += Refresh_Click;
+            this.ApplicationBar.Buttons.Add(refreshButton);
+
+            SortButton = new ApplicationBarIconButton
+            {
+                IconUri = new Uri(@"/Images/appbar.sort.name.png", UriKind.Relative),
+                Text = Strings.Results_SortName,
+            };
+            SortButton.Click += Sort_Click;
+            this.ApplicationBar.Buttons.Add(SortButton);
+
+            var addFavorite = new ApplicationBarIconButton
+            {
+                IconUri = new Uri(@"/Images/appbar.favs.addto.png", UriKind.Relative),
+                Text = Strings.Results_Save,
+            };
+            addFavorite.Click += AddFavorite_Click;
+            this.ApplicationBar.Buttons.Add(addFavorite);
+
+            // Create all the menu items
+            var cardLookupMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_CardLookup };
+            cardLookupMenuItem.Click += CardLookup_Click;
+            this.ApplicationBar.MenuItems.Add(cardLookupMenuItem);
+
+            var blackMarketMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_BlackMarket };
+            blackMarketMenuItem.Click += BlackMarket_Click;
+            this.ApplicationBar.MenuItems.Add(blackMarketMenuItem);
+
+            /*
+            var settingsMenuItem = new ApplicationBarMenuItem { Text = Strings.MainPage_Settings };
+            settingsMenuItem.Click += Settings_Click;
+            this.ApplicationBar.MenuItems.Add(settingsMenuItem);
+            */
+
+            var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
+            aboutMenuItem.Click += About_Click;
+            this.ApplicationBar.MenuItems.Add(aboutMenuItem);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -97,10 +143,9 @@ namespace Ben.Dominion
 
         private void UpdateSortButton(ResultSortOrder sortOrder)
         {
-            var sortButton = ApplicationBar.Buttons[1] as ApplicationBarIconButton;
-            String nextSort = NextSortOrder(sortOrder).ToString().ToLower();
-            sortButton.Text = "sort " + nextSort;
-            sortButton.IconUri = new Uri("/images/appbar.sort." + nextSort + ".png", UriKind.Relative);
+            String nextSort = NextSortOrder(sortOrder).ToString();
+            this.SortButton.Text = Strings.ResourceManager.GetString("Results_Sort" + nextSort, Strings.Culture);
+            this.SortButton.IconUri = new Uri("/images/appbar.sort." + nextSort + ".png", UriKind.Relative);
         }
 
         public static ResultSortOrder NextSortOrder(ResultSortOrder sortOrder)
@@ -153,9 +198,14 @@ namespace Ben.Dominion
             }
         }
 
-        private void FilterCards_Click(object sender, EventArgs e)
+        private void CardLookup_Click(object sender, EventArgs e)
         {
             this.NavigationService.Navigate("/CardFilterPage.xaml");
+        }
+
+        private void BlackMarket_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/BlackMarketPage.xaml");
         }
 
         private void About_Click(object sender, EventArgs e)

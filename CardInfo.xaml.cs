@@ -21,7 +21,7 @@ namespace Ben.Dominion
         {
             if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
-                int currentIndex = Cards.AllCards.IndexOf(this.DataContext as Card);
+                int currentIndex = Cards.AllCards.IndexOf((this.DataContext as CardViewModel).Card);
                 int nextIndex = e.HorizontalVelocity < 0 ? currentIndex + 1 : currentIndex - 1;
 
                 if (nextIndex < 0 || nextIndex >= Cards.AllCards.Count)
@@ -30,7 +30,7 @@ namespace Ben.Dominion
                 }
 
                 var nextCard = Cards.AllCards[nextIndex];
-                this.DataContext = nextCard;
+                this.DataContext = (CardViewModel)nextCard;
             }
         }
     }

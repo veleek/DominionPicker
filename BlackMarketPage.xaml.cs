@@ -11,6 +11,13 @@ namespace Ben.Dominion
         public BlackMarketPage()
         {
             InitializeComponent();
+
+            this.Loaded += new RoutedEventHandler(BlackMarketPage_Loaded);
+        }
+
+        void BlackMarketPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            MainViewModel.Instance.BlackMarket.Reset();
         }
 
         private void DrawButton_Click(object sender, RoutedEventArgs e)

@@ -8,13 +8,13 @@ using System.Windows.Data;
 using Ben.Data;
 using Ben.Utilities;
 using System.Globalization;
+using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
     public static class Cards
     {
         public static readonly string PickerCardsFileName = "./Assets/DominionPickerCards.xml";
-        public static readonly string LocalizedCardsFileNameFormat = "./Assets/DominionPickerCards.{0}.xml";
 
         public static IEnumerable<CardSet> AllSets
         {
@@ -184,42 +184,35 @@ namespace Ben.Dominion
         {
             List<Card> cards = null;
 
-            var time = PerformanceHelper.Measure(() =>
+            using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
             {
-                using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
+                cards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
+            }
+
+            // Check if we need to load another language.
+            //string localizedFileName = Strings.ResourceManager.GetString("Application_LocalizedCardsFileName", MainModel.Instance.Configuration.CurrentCulture);
+            string localizedFileName = Strings.Application_LocalizedCardsFileName;
+            if (!string.IsNullOrWhiteSpace(localizedFileName))
+            {
+                List<Card> localizedCards;
+                using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(localizedFileName))
                 {
-                    cards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
+                    localizedCards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
                 }
 
-                // Check if we need to load another language.
-                var currentCultureName = CultureInfo.CurrentCulture.Name;
-                if (currentCultureName != "en-US")
+                if (localizedCards != null && localizedCards.Count > 0)
                 {
-                    List<Card> localizedCards;
-                    string localizedFileName = string.Format(LocalizedCardsFileNameFormat, currentCultureName);
-                    using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(localizedFileName))
-                    {
-                        localizedCards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
-                    }
-
-                    if (localizedCards == null || localizedCards.Count == 0)
-                    {
-                        return;
-                    }
-
                     var lookup = localizedCards.ToDictionary(c => c.ID);
                     foreach (var card in cards)
                     {
                         Card c;
                         if (lookup.TryGetValue(card.ID, out c))
                         {
-                            card.DisplayName = c.Name;
+                            card.MergeFrom(c);
                         }
                     }
                 }
-            }, 50);
-
-            System.Diagnostics.Debug.WriteLine("LoadTime: {0} ms", time);
+            }
 
             return cards;
         }

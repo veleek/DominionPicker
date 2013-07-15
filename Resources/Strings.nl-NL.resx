@@ -118,84 +118,57 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Assets/DominionPickerCards.de-DE.xml</value>
+    <value>./Assets/DominionPickerCards.nl-NL.xml</value>
   </data>
   <data name="Dominion_CoinToken" xml:space="preserve">
-    <value>Geldmarker</value>
+    <value>Goud fiche</value>
   </data>
   <data name="Dominion_EmargoToken" xml:space="preserve">
-    <value>Embargomarker</value>
+    <value>Embargo fiche</value>
   </data>
   <data name="Dominion_IslandMat" xml:space="preserve">
-    <value>Tableau Insel</value>
-  </data>
-  <data name="Dominion_Marker" xml:space="preserve">
-    <value>Marker</value>
-  </data>
-  <data name="Dominion_Mat" xml:space="preserve">
-    <value>Tableau</value>
+    <value>Eiland tableau</value>
   </data>
   <data name="Dominion_NativeVillageMat" xml:space="preserve">
-    <value>Tableau Eingeborenendorf</value>
+    <value>Inheems dorp tableau</value>
   </data>
   <data name="Dominion_PirateMat" xml:space="preserve">
-    <value>Tableau Piratenschiff</value>
+    <value>Piratenschip tableau</value>
   </data>
   <data name="Set_Alchemy" xml:space="preserve">
     <value>Alchemisten</value>
   </data>
   <data name="Set_Base" xml:space="preserve">
-    <value>Basisspiel</value>
-  </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Reiche Ernte</value>
-  </data>
-  <data name="Set_DarkAges" xml:space="preserve">
-    <value>Dark Ages</value>
-  </data>
-  <data name="Set_Hinterlands" xml:space="preserve">
-    <value>Hinterland</value>
+    <value>Basisspel</value>
   </data>
   <data name="Set_Intrigue" xml:space="preserve">
     <value>Intrige</value>
   </data>
   <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
+    <value>Promotie</value>
   </data>
   <data name="Set_Prosperity" xml:space="preserve">
-    <value>Blütezeit</value>
+    <value>Welvaart</value>
   </data>
   <data name="Set_Seaside" xml:space="preserve">
-    <value>Seaside</value>
+    <value>Hijs de Zeilen</value>
   </data>
   <data name="Type_Action" xml:space="preserve">
-    <value>Aktion</value>
+    <value>Actie</value>
   </data>
   <data name="Type_Attack" xml:space="preserve">
-    <value>Angriff</value>
+    <value>Aanval</value>
   </data>
   <data name="Type_Duration" xml:space="preserve">
-    <value>Dauer</value>
-  </data>
-  <data name="Type_Knight" xml:space="preserve">
-    <value>Ritter</value>
-  </data>
-  <data name="Type_Looter" xml:space="preserve">
-    <value>Plündern</value>
+    <value>Duurzaam</value>
   </data>
   <data name="Type_Reaction" xml:space="preserve">
-    <value>Reaktion</value>
-  </data>
-  <data name="Type_Ruins" xml:space="preserve">
-    <value>Ruine</value>
-  </data>
-  <data name="Type_Shelter" xml:space="preserve">
-    <value>Unterschlupf</value>
+    <value>Reactie</value>
   </data>
   <data name="Type_Treasure" xml:space="preserve">
     <value>Geld</value>
   </data>
   <data name="Type_Victory" xml:space="preserve">
-    <value>Punkte</value>
+    <value>Overwinning</value>
   </data>
 </root>

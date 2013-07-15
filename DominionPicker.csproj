@@ -17,11 +17,11 @@
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
-	fr-FR;en-US;es-ES
+        en-US;de-DE;fr-FR;nl-NL;es-ES;it-IT;pl-PL;fi-FI;cs-CZ
     </SupportedCultures>
     <!--
     <SupportedCultures>
-	zh-CN;zh-TW;cs-CZ;da-DK;nl-NL;en-GB;fi-FI;fr-FR;de-DE;el-GR;hu-HU;it-IT;ja-JP;ko-KR;nb-NO;pl-PL;pt-BR;pt-PT;ru-RU;es-ES;sv-SE;
+        zh-CN;zh-TW;da-DK;en-GB;el-GR;hu-HU;ja-JP;ko-KR;nb-NO;pt-BR;pt-PT;ru-RU;sv-SE;
     </SupportedCultures>
     -->
     <XapOutputs>true</XapOutputs>
@@ -110,6 +110,10 @@
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Content Include="Assets\DominionPickerCards.cs-CZ.xml" />
+    <Content Include="Assets\DominionPickerCards.de-DE.xml" />
+    <Content Include="Assets\DominionPickerCards.es-ES.xml" />
+    <Content Include="Assets\DominionPickerCards.fi-FI.xml" />
     <Content Include="Assets\DominionPickerCards.fr-FR.xml" />
     <Compile Include="BlackMarketPage.xaml.cs">
       <DependentUpon>BlackMarketPage.xaml</DependentUpon>
@@ -117,6 +121,9 @@
     <Compile Include="Card.cs" />
     <Compile Include="CardFilterPage.xaml.cs">
       <DependentUpon>CardFilterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigurationPage.xaml.cs">
+      <DependentUpon>ConfigurationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AddFavoritePopupControl.xaml.cs">
       <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
@@ -137,6 +144,7 @@
     <Compile Include="ImportExportPage.xaml.cs">
       <DependentUpon>ImportExportPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConfigurationModel.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="PickerOptions.cs" />
     <Compile Include="PickerSettings.cs" />
@@ -204,6 +212,9 @@
     <DesignData Include="SampleData\PickerResultSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignData>
+    <Content Include="Assets\DominionPickerCards.it-IT.xml" />
+    <Content Include="Assets\DominionPickerCards.nl-NL.xml" />
+    <Content Include="Assets\DominionPickerCards.pl-PL.xml" />
     <Content Include="Assets\OldPickerState.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -213,6 +224,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CardFilterPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConfigurationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -387,15 +402,28 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.cs-CZ.resx" />
+    <EmbeddedResource Include="Resources\Strings.fi-FI.resx">
+      <LastGenOutput>Strings.fi-FI.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.de-DE.resx" />
-    <EmbeddedResource Include="Resources\Strings.en-US.resx" />
     <EmbeddedResource Include="Resources\Strings.es-ES.resx">
       <LastGenOutput>Strings.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.fr-FR.resx" />
+    <EmbeddedResource Include="Resources\Strings.it-IT.resx" />
+    <EmbeddedResource Include="Resources\Strings.nl-NL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.pl-PL.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.ru-RU.resx">
+      <LastGenOutput>Strings.xx-XX.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

@@ -20,7 +20,7 @@
     DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}">
     
     <shell:SystemTray.ProgressIndicator>
-        <shell:ProgressIndicator Text="Generating card set..."
+        <shell:ProgressIndicator Text="{Binding Strings.MainPage_Generating, Source={StaticResource LocalizedResources}}"
                                  IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
 
@@ -32,15 +32,15 @@
 
         <StackPanel x:Name="AdContainer" Grid.Row="0">
         </StackPanel>
-        
-        <controls:Pivot Title="Dominion Picker" x:Name="RootPivot"
-                        Grid.Row="1" Margin="0,-10, 0, 0"
+
+        <controls:Pivot x:Name="RootPivot" Grid.Row="1" Margin="0,-10,0,0"
+                        Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}"
                         SelectionChanged="RootPivot_SelectionChanged">
             <controls:Pivot.TitleTemplate>
                 <DataTemplate />
             </controls:Pivot.TitleTemplate>
 
-            <controls:PivotItem Header="create" Margin="12,0" DataContext="{Binding Settings}">
+            <controls:PivotItem Header="{Binding Strings.MainPage_Create, Source={StaticResource LocalizedResources}}" Margin="12,0" DataContext="{Binding Settings}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -71,7 +71,7 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
 
-                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="additional options" />
+                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="{Binding Strings.Settings_AddnOptions, Source={StaticResource LocalizedResources}}" />
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -82,7 +82,7 @@
                                 <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" HorizontalContentAlignment="Right">
                                     <TextBlock Text="{Binding Strings.Settings_MinCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                                 </CheckBox>
-                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed"
+                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed" MinHeight="50"
                                                     FullModeHeader="{Binding Strings.Settings_MinCardsDescription, Source={StaticResource LocalizedResources}}">
                                     <toolkit:ListPicker.FullModeItemTemplate>
                                         <DataTemplate>
@@ -108,7 +108,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Content="Plus Buys:" Width="200" HorizontalContentAlignment="Right"/>
+                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Content="{Binding Strings.Settings_PlusBuys, Source={StaticResource LocalizedResources}}" Width="200" HorizontalContentAlignment="Right"/>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
@@ -118,38 +118,31 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusActions.Enabled, Mode=TwoWay}" Content="Plus Actions:" Width="200" HorizontalContentAlignment="Right"/>
+                                <CheckBox IsChecked="{Binding PlusActions.Enabled, Mode=TwoWay}" Content="{Binding Strings.Settings_PlusActions, Source={StaticResource LocalizedResources}}" Width="200" HorizontalContentAlignment="Right"/>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
-                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}" Content="Pick if Platinum and Colony are used" />
-                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}" Content="Pick if Shelters or Estates are used" />
-                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" Content="Show Required Mats and Tokens" />
+                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}" Content="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" />
+                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}" Content="{Binding Strings.Settings_PickShelterOrEstate, Source={StaticResource LocalizedResources}}" />
+                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" Content="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" />
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Button x:Name="CreateButton" Grid.Row="1" Content="Generate Set" Click="CreateButton_Click" Height="100"></Button>
+                    <Button x:Name="CreateButton" Grid.Row="1" Content="{Binding Strings.MainPage_GenerateButton, Source={StaticResource LocalizedResources}}" Click="CreateButton_Click" Height="100"></Button>
                 </Grid>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="favorites" Margin="12,0" DataContext="{Binding Favorites}">
+            <controls:PivotItem Header="{Binding Strings.MainPage_Favorites, Source={StaticResource LocalizedResources}}" Margin="12,0" DataContext="{Binding Favorites}">
                 <ScrollViewer Margin="0,0,0,0" x:Name="FavoritesScrollViewer">
                     <StackPanel toolkit:TiltEffect.IsTiltEnabled="True">
-                        <TextBlock Text="Card Randomizers"
-                                   Margin="12,12,0,0"
-                                   Style="{StaticResource PhoneTextExtraLargeStyle}"
-                                   Foreground="{StaticResource PhoneAccentBrush}"/>
-                        <TextBlock Text="Save your settings to quickly reuse them later."
-                                   Margin="12,0,0,0"
-                                   Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <TextBlock Text="{Binding Strings.Favorites_SettingsTitle, Source={StaticResource LocalizedResources}}"
+                                   Margin="12,12,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                        <TextBlock Text="{Binding Strings.Favorites_SettingsDesc, Source={StaticResource LocalizedResources}}"
+                                   Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/> 
                         <TextBlock Visibility="{Binding FavoriteSettings.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}"
-                                   Style="{StaticResource PhoneTextSubtleStyle}"
-                                   Margin="24,6,0,0"
-                                   TextWrapping="Wrap">
-                            No favorite randomizers saved yet. Check out the create page to add one.
+                                   Margin="12,6,0,0" TextWrapping="Wrap" Text="{Binding Strings.Favorites_NoSettings, Source={StaticResource LocalizedResources}}">
                         </TextBlock>
-                        <ListBox x:Name="FavoriteSettingsListBox" 
-                                 ItemsSource="{Binding FavoriteSettings}"
+                        <ListBox x:Name="FavoriteSettingsListBox" ItemsSource="{Binding FavoriteSettings}" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  SelectionChanged="FavoriteSettingsListBox_SelectionChanged">
                             <ListBox.ItemContainerStyle>
@@ -162,33 +155,23 @@
                                     <StackPanel>
                                         <toolkit:ContextMenuService.ContextMenu>
                                             <toolkit:ContextMenu x:Name="FavoritesContextMenu">
-                                                <toolkit:MenuItem x:Name="RenameButton" Header="rename" Tag="rename" Click="RenameButton_Click" />
-                                                <toolkit:MenuItem x:Name="EditButton" Header="edit" Tag="edit" Click="EditButton_Click" />
-                                                <toolkit:MenuItem x:Name="DeleteButton" Header="delete" Tag="delete" Click="DeleteButton_Click" />
+                                                <toolkit:MenuItem x:Name="RenameButton" Header="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" Tag="rename" Click="RenameButton_Click" />
+                                                <toolkit:MenuItem x:Name="EditButton" Header="{Binding Strings.Favorites_Edit, Source={StaticResource LocalizedResources}}" Tag="edit" Click="EditButton_Click" />
+                                                <toolkit:MenuItem x:Name="DeleteButton" Header="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" Tag="delete" Click="DeleteButton_Click" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
-                                        <TextBlock Text="{Binding Name, Converter={StaticResource StringConverter}}" 
-                                                   Margin="12,0,0,0" 
-                                                   Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" 
-                                                   Margin="12,0,0,0"
-                                                   Style="{StaticResource PhoneTextSubtleStyle}" />
+                                        <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
-                        <TextBlock Text="Card Sets"
-                                   Margin="12,36,0,0" 
-                                   Style="{StaticResource PhoneTextExtraLargeStyle}"
-                                   Foreground="{StaticResource PhoneAccentBrush}"/>
-                        <TextBlock Text="Enjoy a set? Save it so you can try it again!"
-                                   Margin="12,0,0,0"
-                                   Style="{StaticResource PhoneTextSubtleStyle}"/>
+                        <TextBlock Text="{Binding Strings.Favorites_SetsTitle, Source={StaticResource LocalizedResources}}"
+                                   Margin="12,36,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" Foreground="{StaticResource PhoneAccentBrush}"/>
+                        <TextBlock Text="{Binding Strings.Favorites_SetsDesc, Source={StaticResource LocalizedResources}}"
+                                   Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                         <TextBlock Visibility="{Binding FavoriteSets.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}"
-                                   Style="{StaticResource PhoneTextSubtleStyle}"
-                                   Margin="24,6,0,0"
-                                   TextWrapping="Wrap">
-                            No favorite sets saved yet.  Try using one of the randomizers above to create one.
+                                   Margin="12,6,0,0" TextWrapping="Wrap" Text="{Binding Strings.Favorites_NoSets, Source={StaticResource LocalizedResources}}">
                         </TextBlock>
                         <ListBox x:Name="FavoriteSetsListBox" ItemsSource="{Binding FavoriteSets}" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -203,14 +186,12 @@
                                     <StackPanel>
                                         <toolkit:ContextMenuService.ContextMenu>
                                             <toolkit:ContextMenu x:Name="FavoritesContextMenu">
-                                                <toolkit:MenuItem x:Name="RenameButton" Header="rename" Tag="rename" Click="RenameButton_Click" />
-                                                <toolkit:MenuItem x:Name="DeleteButton" Header="delete" Tag="delete" Click="DeleteButton_Click" />
+                                                <toolkit:MenuItem x:Name="RenameButton" Header="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" Tag="rename" Click="RenameButton_Click" />
+                                                <toolkit:MenuItem x:Name="DeleteButton" Header="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" Tag="delete" Click="DeleteButton_Click" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
-                                        <TextBlock Text="{Binding Name, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" 
-                                                   Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0"
-                                                   Style="{StaticResource PhoneTextSubtleStyle}" />
+                                        <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                        <TextBlock Text="{Binding Value}" Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -224,15 +205,8 @@
                                        Grid.Row="0" Grid.RowSpan="2"
                                        SaveFavorite="AddFavoritePopup_SaveFavorite"/>
         
-        <Border x:Name="RequestReviewPopup"
-                Grid.RowSpan="2"
-                Background="{StaticResource PhoneContrastBackgroundBrush}"
-                Visibility="Collapsed">
-            <Border Width="360" Height="200"
-                    Background="{StaticResource PhoneBackgroundBrush}"
-                    BorderBrush="{StaticResource PhoneBorderBrush}"
-                    BorderThickness="0"
-                    CornerRadius="5">
+        <Border x:Name="RequestReviewPopup" Grid.RowSpan="2" Background="{StaticResource PhoneContrastBackgroundBrush}" Visibility="Collapsed">
+            <Border Width="360" Height="200" Background="{StaticResource PhoneBackgroundBrush}" CornerRadius="0">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
@@ -245,31 +219,13 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBlock TextAlignment="Center"
-                               Grid.Row="0"
-                               Grid.ColumnSpan="2"
-                               TextWrapping="Wrap"
-                               VerticalAlignment="Center"
-                               Margin="0,12,0,0">
+                    <TextBlock TextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,12,0,0">
                         Hey!  You've used Dominion
                         <LineBreak />
                         Picker a few times now!
                         <LineBreak />
                         Want to leave a review?
                         <LineBreak />
-                        Don't worry, we won't ask you again.
-                    </TextBlock>
-
-                    
-                    <TextBlock TextAlignment="Center"
-                               Grid.ColumnSpan="2"
-                               Grid.Row="1"
-                               TextWrapping="Wrap"
-                               VerticalAlignment="Center"
-                               Margin="5,0"
-                               Visibility="Collapsed">
-                        Want to leave a review? 
-                        <LineBreak/>
                         Don't worry, we won't ask you again.
                     </TextBlock>
                     
@@ -288,13 +244,6 @@
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Reset Favorites" Click="ClearFavorites_Click"/>
-                <shell:ApplicationBarMenuItem Text="Card Lookup/Filter" Click="FilterCards_Click" />
-                <shell:ApplicationBarMenuItem Text="Black Market Deck" Click="BlackMarket_Click" />
-                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
+        <shell:ApplicationBar />
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

@@ -8,6 +8,8 @@ using System.Windows.Data;
 using Ben.Data;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
+using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
@@ -55,6 +57,18 @@ namespace Ben.Dominion
             filteredGroupsMap = filteredCardSelectorGroups.ToDictionary(g => g.Key);
 
             CardsList.ItemsSource = filteredCardSelectorGroups;
+
+            var resetFilteredMenuItem = new ApplicationBarMenuItem { Text = Strings.Lookup_ResetFiltered };
+            resetFilteredMenuItem.Click += ResetFilteredCards_Click;
+            this.ApplicationBar.MenuItems.Add(resetFilteredMenuItem);
+
+            var showFilteredMenuItem = new ApplicationBarMenuItem { Text = Strings.Lookup_ShowFiltered};
+            showFilteredMenuItem.Click += ShowFilteredCards_Click;
+            this.ApplicationBar.MenuItems.Add(showFilteredMenuItem);
+
+            var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
+            aboutMenuItem.Click += About_Click;
+            this.ApplicationBar.MenuItems.Add(aboutMenuItem);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

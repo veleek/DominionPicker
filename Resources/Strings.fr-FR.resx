@@ -117,14 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Extra_Mat" xml:space="preserve">
-    <value />
+  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
+    <value>./Assets/DominionPickerCards.fr-FR.xml</value>
   </data>
-  <data name="Extra_Token" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Result_ExtrasDesc" xml:space="preserve">
-    <value />
+  <data name="Settings_ShowExtras" xml:space="preserve">
+    <value>Montrer des jetons et des cartes supplémentaires requis</value>
   </data>
   <data name="Set_Alchemy" xml:space="preserve">
     <value>Alchimie</value>
@@ -163,33 +160,54 @@
     <value>Attaque</value>
   </data>
   <data name="Type_Curse" xml:space="preserve">
-    <value>Curse</value>
+    <value>Malédictions</value>
   </data>
   <data name="Type_Duration" xml:space="preserve">
     <value>Durée</value>
   </data>
   <data name="Type_Knight" xml:space="preserve">
-    <value>Knight</value>
+    <value>Chevalier</value>
   </data>
   <data name="Type_Looter" xml:space="preserve">
-    <value>Looter</value>
+    <value>Pilleur</value>
   </data>
   <data name="Type_Prize" xml:space="preserve">
-    <value>Prize</value>
+    <value>Prix</value>
   </data>
   <data name="Type_Reaction" xml:space="preserve">
     <value>Réaction</value>
   </data>
   <data name="Type_Ruins" xml:space="preserve">
-    <value>Ruins</value>
+    <value>Ruines</value>
   </data>
   <data name="Type_Shelter" xml:space="preserve">
-    <value>Shelter</value>
+    <value>Abri</value>
   </data>
   <data name="Type_Treasure" xml:space="preserve">
     <value>Trésor</value>
   </data>
   <data name="Type_Victory" xml:space="preserve">
     <value>Victoire</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>Jeton Pièce</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>Jeton Embargo</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>Plateau Ile</value>
+  </data>
+  <data name="Dominion_Marker" xml:space="preserve">
+    <value>Jeton</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>Plateau</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>Plateau Village indigène</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>Plateau Bateau pirate</value>
   </data>
 </root>

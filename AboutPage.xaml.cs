@@ -23,7 +23,6 @@ namespace Ben.Dominion
         {
             InitializeComponent();
 
-            this.Loaded += new RoutedEventHandler(AboutPage_Loaded);
             VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
             
             StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Assets/Changes.txt", UriKind.Relative));
@@ -80,16 +79,6 @@ namespace Ben.Dominion
             }
         }
 
-        void AboutPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            //App app = App.Current as App;
-
-            //if (app.IsTrial)
-            //{
-            //    BuyNowButton.Content = "Buy Now";
-            //}
-        }
-
         private void EmailButton_Click(object sender, RoutedEventArgs e)
         {
             EmailComposeTask emailComposeTask = new EmailComposeTask();
@@ -111,7 +100,7 @@ namespace Ben.Dominion
             }
         }
 
-        private void BuyNowButton_Click(object sender, RoutedEventArgs e)
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {

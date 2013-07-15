@@ -8,19 +8,20 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using GalaSoft.MvvmLight.Threading;
+using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private ApplicationBarIconButton UnlockButton;
         private bool reviewRequestShown = false;
         private bool updatePopupShown = false;
         private bool isNew = false;
         private object favoriteEdit = null;
 
-        private ApplicationBarIconButton ResetButton;
+        private ApplicationBarIconButton ResetSettingsButton;
         private ApplicationBarIconButton AddFavoriteButton;
+        private ApplicationBarIconButton ResetFavoritesButton;
 
         // Constructor
         public MainPage()
@@ -38,26 +39,45 @@ namespace Ben.Dominion
             this.Unloaded += new RoutedEventHandler(MainPage_Unloaded);
             this.BackKeyPress += new EventHandler<CancelEventArgs>(MainPage_BackKeyPress);
 
-            UnlockButton = new ApplicationBarIconButton
-            {
-                IconUri = new Uri("/Images/appbar.lock.png", UriKind.Relative),
-                Text = "lock",
-            };
-            UnlockButton.Click += UnlockButton_Click;
-
-            ResetButton = new ApplicationBarIconButton
+            ResetSettingsButton = new ApplicationBarIconButton
             {
                 IconUri = new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
-                Text = "reset",
+                Text = Strings.MainPage_Reset,
             };
-            ResetButton.Click += Reset_Click;
+            ResetSettingsButton.Click += ResetSettings_Click;
 
             AddFavoriteButton = new ApplicationBarIconButton
             {
                 IconUri = new Uri(@"\Images\appbar.favs.addto.png", UriKind.Relative),
-                Text = "save fav...",
+                Text = Strings.MainPage_Save,
             };
             AddFavoriteButton.Click += AddFavorite_Click;
+
+            ResetFavoritesButton = new ApplicationBarIconButton
+            {
+                IconUri = new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
+                Text = Strings.MainPage_Reset,
+            };
+            ResetFavoritesButton.Click += ResetFavorites_Click;
+
+            // Create all the menu items
+            var cardLookupMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_CardLookup };
+            cardLookupMenuItem.Click += CardLookup_Click;
+            this.ApplicationBar.MenuItems.Add(cardLookupMenuItem);
+
+            var blackMarketMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_BlackMarket };
+            blackMarketMenuItem.Click += BlackMarket_Click;
+            this.ApplicationBar.MenuItems.Add(blackMarketMenuItem);
+
+            /*
+            var settingsMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_Settings };
+            settingsMenuItem.Click += Settings_Click;
+            this.ApplicationBar.MenuItems.Add(settingsMenuItem);
+            */
+
+            var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
+            aboutMenuItem.Click += About_Click;
+            this.ApplicationBar.MenuItems.Add(aboutMenuItem);
         }
 
         public MainViewModel MainView
@@ -88,65 +108,18 @@ namespace Ben.Dominion
             this.DataContext = this.MainView;
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        public void ShowAddFavoritePopup()
         {
-            DispatcherHelper.Initialize();
-
-            //AdManager.LoadAd(AdContainer);
-
-            //App app = App.Current as App;
-            //if (app.IsTrial)
-            //{
-            //    this.ApplicationBar.Buttons.Add(UnlockButton);    
-            //}
-            //else
-            //{
-            //    if (this.ApplicationBar.Buttons.Contains(UnlockButton))
-            //    {
-            //        this.ApplicationBar.Buttons.Remove(UnlockButton);
-            //    }
-            //}
-
-            Int32 appLaunchCount = 0;
-            System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
-
-            if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
-            {
-                //MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
-                updatePopupShown = true;
-            }
-            else if (appLaunchCount == 10 && !reviewRequestShown)
-            {
-                RequestReviewPopup.Visibility = Visibility.Visible;
-                // This prevents us from showing the popup if they 
-                // come back here without exiting the app.
-                reviewRequestShown = true;
-            }
-
-            // This will pickup any old settings and merge them in with the new settings model
-            PickerState.MergeWithNewState();
-
-            this.NavigationService.Initialize();
+            AddFavoritePopup.IsOpen = true;
+            ResetSettingsButton.IsEnabled = false;
+            AddFavoriteButton.IsEnabled = false;
         }
 
-        private void MainPage_Unloaded(object sender, RoutedEventArgs e)
+        public void HideAddFavoritePopup()
         {
-            //AdManager.UnloadAd(AdContainer);
-        }
-
-        private void MainPage_BackKeyPress(object sender, CancelEventArgs e)
-        {
-            MainViewModel.Instance.CancelGeneration();
-            if (AddFavoritePopup.IsOpen)
-            {
-                HideAddFavoritePopup();
-                e.Cancel = true;
-            }
-        }
-
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {
-            Create();
+            AddFavoritePopup.IsOpen = false;
+            ResetSettingsButton.IsEnabled = true;
+            AddFavoriteButton.IsEnabled = true;
         }
 
         private void Create()
@@ -215,7 +188,113 @@ namespace Ben.Dominion
             CreateButton.Content = "Generate";
         }
 
-        private void Reset_Click(object sender, EventArgs e)
+        private void SaveFavoriteSettings(String name)
+        {
+            MainViewModel.Instance.SaveFavoriteSettings(name);
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (isNew)
+            {
+                // Load the state
+                LoadState();
+
+                RootPivot.SelectedIndex = MainView.PivotIndex;
+            }
+
+            isNew = false;
+            base.OnNavigatedTo(e);
+        }
+
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            DispatcherHelper.Initialize();
+
+            //AdManager.LoadAd(AdContainer);
+
+            //App app = App.Current as App;
+            //if (app.IsTrial)
+            //{
+            //    this.ApplicationBar.Buttons.Add(UnlockButton);    
+            //}
+            //else
+            //{
+            //    if (this.ApplicationBar.Buttons.Contains(UnlockButton))
+            //    {
+            //        this.ApplicationBar.Buttons.Remove(UnlockButton);
+            //    }
+            //}
+
+            Int32 appLaunchCount = 0;
+            System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
+
+            if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
+            {
+                //MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
+                updatePopupShown = true;
+            }
+            else if (appLaunchCount == 10 && !reviewRequestShown)
+            {
+                RequestReviewPopup.Visibility = Visibility.Visible;
+                // This prevents us from showing the popup if they 
+                // come back here without exiting the app.
+                reviewRequestShown = true;
+            }
+
+            // This will pickup any old settings and merge them in with the new settings model
+            PickerState.MergeWithNewState();
+
+            this.NavigationService.Initialize();
+        }
+
+        private void MainPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            //AdManager.UnloadAd(AdContainer);
+        }
+
+        private void MainPage_BackKeyPress(object sender, CancelEventArgs e)
+        {
+            MainViewModel.Instance.CancelGeneration();
+            if (AddFavoritePopup.IsOpen)
+            {
+                HideAddFavoritePopup();
+                e.Cancel = true;
+            }
+        }
+
+        private void RootPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.MainView.PivotIndex = RootPivot.SelectedIndex;
+
+            this.ApplicationBar.Buttons.Clear();
+
+            switch (RootPivot.SelectedIndex)
+            {
+                case 0:
+                    this.ApplicationBar.Buttons.Add(ResetSettingsButton);
+                    this.ApplicationBar.Buttons.Add(AddFavoriteButton);
+
+                    if (System.Diagnostics.Debugger.IsAttached)
+                    {
+                        var debugMenu = new ApplicationBarMenuItem { Text = "Debug" };
+                        debugMenu.Click += (s, a) => this.NavigationService.Navigate("/DebugPage.xaml");
+
+                        this.ApplicationBar.MenuItems.Add(debugMenu);
+                    }
+                    break;
+                case 1:
+                    this.ApplicationBar.Buttons.Add(ResetFavoritesButton);
+                    break;
+            }
+        }
+
+        private void CreateButton_Click(object sender, RoutedEventArgs e)
+        {
+            Create();
+        }
+        
+        private void ResetSettings_Click(object sender, EventArgs e)
         {
             MainView.Reset();
             SettingsScrollViewer.ScrollToVerticalOffset(0);
@@ -231,18 +310,48 @@ namespace Ben.Dominion
             }
         }
 
-        public void ShowAddFavoritePopup()
+        private void ResetFavorites_Click(object sender, EventArgs e)
         {
-            AddFavoritePopup.IsOpen = true;
-            ResetButton.IsEnabled = false;
-            AddFavoriteButton.IsEnabled = false;
+            MessageBoxResult res = MessageBox.Show("This will delete all your favorites and reset all the settings. \nAre you sure you want to continue?", "Warning", MessageBoxButton.OKCancel);
+
+            if (res == MessageBoxResult.OK)
+            {
+                // Load up the defaults and clear out what we have 
+                MainViewModel.Instance.Favorites = MainViewModel.LoadDefault().Favorites;
+                FavoritesScrollViewer.ScrollToVerticalOffset(0);
+            }
         }
 
-        public void HideAddFavoritePopup()
+        private void CardLookup_Click(object sender, EventArgs e)
         {
-            AddFavoritePopup.IsOpen = false;
-            ResetButton.IsEnabled = true;
-            AddFavoriteButton.IsEnabled = true;
+            this.NavigationService.Navigate("/CardFilterPage.xaml");
+        }
+
+        private void BlackMarket_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/BlackMarketPage.xaml");
+        }
+
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/ConfigurationPage.xaml");
+        }
+
+        private void About_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate("/AboutPage.xaml");
+        }
+
+        private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
+        {
+            MarketplaceReviewTask review = new MarketplaceReviewTask();
+            review.Show();
+            RequestReviewPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void RequestReviewCancel_Click(object sender, RoutedEventArgs e)
+        {
+            RequestReviewPopup.Visibility = Visibility.Collapsed;
         }
 
         private void FavoriteSettingsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -281,13 +390,6 @@ namespace Ben.Dominion
             }
         }
 
-        private void UnlockButton_Click(object sender, EventArgs e)
-        {
-            MarketplaceDetailTask detailTask = new MarketplaceDetailTask();
-            detailTask.ContentType = MarketplaceContentType.Applications;
-            detailTask.Show();
-        }
-
         private void AddFavoritePopup_SaveFavorite(object sender, FavoriteEventArgs e)
         {
             if (favoriteEdit == null)
@@ -305,49 +407,6 @@ namespace Ben.Dominion
             }
 
             HideAddFavoritePopup();
-        }
-
-        private void SaveFavoriteSettings(String name)
-        {
-            MainViewModel.Instance.SaveFavoriteSettings(name);
-        }
-
-        private void ClearFavorites_Click(object sender, EventArgs e)
-        {
-            MessageBoxResult res = MessageBox.Show("This will delete all your favorites and reset all the settings. \nAre you sure you want to continue?", "Warning", MessageBoxButton.OKCancel);
-
-            if (res == MessageBoxResult.OK)
-            {
-                // Load up the defaults and clear out what we have 
-                MainViewModel.Instance.Favorites = MainViewModel.LoadDefault().Favorites;
-                FavoritesScrollViewer.ScrollToVerticalOffset(0);
-            }
-        }
-
-        private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
-        {
-            MarketplaceReviewTask review = new MarketplaceReviewTask();
-            review.Show();
-            RequestReviewPopup.Visibility = Visibility.Collapsed;
-        }
-
-        private void RequestReviewCancel_Click(object sender, RoutedEventArgs e)
-        {
-            RequestReviewPopup.Visibility = Visibility.Collapsed;
-        }
-
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
-        {
-            if (isNew)
-            {
-                // Load the state
-                LoadState();
-
-                RootPivot.SelectedIndex = MainView.PivotIndex;
-            }
-
-            isNew = false;
-            base.OnNavigatedTo(e);
         }
 
         private void RenameButton_Click(object sender, RoutedEventArgs e)
@@ -418,52 +477,6 @@ namespace Ben.Dominion
                     MainView.Favorites.FavoriteSettings.Remove(favSetting);
                 }
             }
-        }
-
-        private void RootPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.MainView.PivotIndex = RootPivot.SelectedIndex;
-            Boolean onMainPivot = RootPivot.SelectedIndex == 0;
-
-            if (onMainPivot)
-            {
-                this.ApplicationBar.Buttons.Add(ResetButton);
-                this.ApplicationBar.Buttons.Add(AddFavoriteButton);
-
-                if (System.Diagnostics.Debugger.IsAttached)
-                {
-                    var debugMenu = new ApplicationBarMenuItem { Text = "Debug" };
-                    debugMenu.Click += (s, a) => this.NavigationService.Navigate("/DebugPage.xaml");
-
-                    this.ApplicationBar.MenuItems.Add(debugMenu);
-                }
-
-                //this.ApplicationBar.Mode = ApplicationBarMode.Default;
-            }
-            else
-            {
-                this.ApplicationBar.Buttons.Clear();
-            }
-        }
-
-        private void FilterCards_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate("/CardFilterPage.xaml");
-        }
-
-        private void About_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate("/AboutPage.xaml");
-        }
-
-        private void CardLookup_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate("/TestPage.xaml");
-        }
-
-        private void BlackMarket_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate("/BlackMarketPage.xaml");
         }
     }
 }

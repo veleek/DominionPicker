@@ -127,34 +127,34 @@
     <value>create</value>
   </data>
   <data name="MainPage_Favorites" xml:space="preserve">
-    <value>favvorites</value>
+    <value>favorites</value>
   </data>
-  <data name="MainPage_FavoriteSetsDescription" xml:space="preserve">
+  <data name="Favorites_SetsDesc" xml:space="preserve">
     <value>Enjoy a set? Save it so you can try it again!</value>
   </data>
-  <data name="MainPage_FavoriteSetsTitle" xml:space="preserve">
+  <data name="Favorites_SetsTitle" xml:space="preserve">
     <value>Card Sets</value>
   </data>
-  <data name="MainPage_FavoriteSettingsDescription" xml:space="preserve">
+  <data name="Favorites_SettingsDesc" xml:space="preserve">
     <value>Save your settings to quickly reuse them later.</value>
   </data>
-  <data name="MainPage_FavoriteSettingsTitle" xml:space="preserve">
+  <data name="Favorites_SettingsTitle" xml:space="preserve">
     <value>Card Randomizers</value>
   </data>
-  <data name="MainPage_NoFavoriteSets" xml:space="preserve">
+  <data name="Favorites_NoSets" xml:space="preserve">
     <value>No favorite sets saved yet. Try using one of the randomizers above to create one.</value>
   </data>
-  <data name="MainPage_NoFavoriteSettings" xml:space="preserve">
+  <data name="Favorites_NoSettings" xml:space="preserve">
     <value>No favorite randomizers saved yet.  Check out the create page to add one.</value>
   </data>
   <data name="Settings_MinCards" xml:space="preserve">
     <value>Minimum Cards Per Set:</value>
   </data>
   <data name="Settings_PickPlatinumColony" xml:space="preserve">
-    <value />
+    <value>Pick if Platinum and Colony are used</value>
   </data>
-  <data name="Settings_PickShelterEstate" xml:space="preserve">
-    <value />
+  <data name="Settings_PickShelterOrEstate" xml:space="preserve">
+    <value>Pick if Shelters or Estates are used</value>
   </data>
   <data name="Settings_PlusActions" xml:space="preserve">
     <value>Plus Actions:</value>
@@ -169,10 +169,13 @@
     <value>Require a card that allows you to trash</value>
   </data>
   <data name="Settings_ShowExtras" xml:space="preserve">
-    <value>Show Extras</value>
+    <value>Show Required Mats and Tokens</value>
   </data>
   <data name="Settings_MinCardsDescription" xml:space="preserve">
     <value>Minimum cards per set in result:</value>
+  </data>
+  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
+    <value />
   </data>
   <data name="Set_Alchemy" xml:space="preserve">
     <value>Alchemy</value>
@@ -239,5 +242,164 @@
   </data>
   <data name="Type_Victory" xml:space="preserve">
     <value>Victory</value>
+  </data>
+  <data name="Config_CardData" xml:space="preserve">
+    <value>Card Details</value>
+  </data>
+  <data name="Config_CardDataDesc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Config_LangDesc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Config_Language" xml:space="preserve">
+    <value>language</value>
+  </data>
+  <data name="Config_RulesText" xml:space="preserve">
+    <value>Rules Text</value>
+  </data>
+  <data name="Config_RulesTextDesc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="Config_UI" xml:space="preserve">
+    <value>User Interface</value>
+  </data>
+  <data name="Config_UIDesc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Favorites_Delete" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="Favorites_Edit" xml:space="preserve">
+    <value>edit</value>
+  </data>
+  <data name="Favorites_Rename" xml:space="preserve">
+    <value>rename</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Help/About</value>
+  </data>
+  <data name="Menu_BlackMarket" xml:space="preserve">
+    <value>Black Market Deck</value>
+  </data>
+  <data name="Menu_CardLookup" xml:space="preserve">
+    <value>Card Lookup/Filter</value>
+  </data>
+  <data name="MainPage_GenerateButton" xml:space="preserve">
+    <value>Generate Set</value>
+  </data>
+  <data name="MainPage_Generating" xml:space="preserve">
+    <value>Generating card set...</value>
+  </data>
+  <data name="MainPage_Reset" xml:space="preserve">
+    <value>reset</value>
+  </data>
+  <data name="MainPage_Save" xml:space="preserve">
+    <value>save...</value>
+  </data>
+  <data name="Settings_AddnOptions" xml:space="preserve">
+    <value>additional options</value>
+  </data>
+  <data name="Results_ExtrasDesc" xml:space="preserve">
+    <value>additional cards, tokens, etc.</value>
+  </data>
+  <data name="Results_Tips" xml:space="preserve">
+    <value>Swipe to Replace
+Tap for Info</value>
+  </data>
+  <data name="Results_Title" xml:space="preserve">
+    <value>results</value>
+  </data>
+  <data name="Info_Rules" xml:space="preserve">
+    <value>rules</value>
+  </data>
+  <data name="Info_Set" xml:space="preserve">
+    <value>set</value>
+  </data>
+  <data name="Info_Tips" xml:space="preserve">
+    <value>Swipe to view
+other cards</value>
+  </data>
+  <data name="Info_Title" xml:space="preserve">
+    <value>card info</value>
+  </data>
+  <data name="Info_Type" xml:space="preserve">
+    <value>type</value>
+  </data>
+  <data name="Results_Regenerate" xml:space="preserve">
+    <value>regenerate</value>
+  </data>
+  <data name="Results_Save" xml:space="preserve">
+    <value>save...</value>
+  </data>
+  <data name="Results_SortCost" xml:space="preserve">
+    <value>sort cost</value>
+  </data>
+  <data name="Results_SortName" xml:space="preserve">
+    <value>sort name</value>
+  </data>
+  <data name="Results_SortSet" xml:space="preserve">
+    <value>sort set</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>Coin Token</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>Emargo Token</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>Island Mat</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>Mat</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>Native Village Mat</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>Pirate Ship Mat</value>
+  </data>
+  <data name="Dominion_Token" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="Application_Settings" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="Lookup_ResetFiltered" xml:space="preserve">
+    <value>Reset Filtered Cards</value>
+  </data>
+  <data name="Lookup_SearchHint" xml:space="preserve">
+    <value>Filter by Name, Set, Type, Rules</value>
+  </data>
+  <data name="Lookup_ShowFiltered" xml:space="preserve">
+    <value>Show Filtered Cards</value>
+  </data>
+  <data name="Lookup_Tips" xml:space="preserve">
+    <value>Checked cards will
+never be picked</value>
+  </data>
+  <data name="Lookup_Title" xml:space="preserve">
+    <value>card list</value>
+  </data>
+  <data name="About_About" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="About_Changes" xml:space="preserve">
+    <value>changes</value>
+  </data>
+  <data name="About_Help" xml:space="preserve">
+    <value>help</value>
+  </data>
+  <data name="About_Rate" xml:space="preserve">
+    <value>rate/review</value>
+  </data>
+  <data name="About_Rules" xml:space="preserve">
+    <value>rules</value>
+  </data>
+  <data name="About_Update" xml:space="preserve">
+    <value>update</value>
   </data>
 </root>

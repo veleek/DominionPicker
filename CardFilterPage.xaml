@@ -19,12 +19,11 @@
     shell:SystemTray.Opacity="0.1">
 
     <Grid>
-        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,24,12,0">
-            checked cards will<LineBreak/>never be picked
-        </TextBlock>
-        
-        <controls:Pivot Title="Dominion Picker" x:Name="RootPivot" Margin="0,-10, 0, 0">
-            <controls:PivotItem Header="card list" Margin="0">
+        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0"
+                   Text="{Binding Strings.Lookup_Tips, Source={StaticResource LocalizedResources}}" />
+
+        <controls:Pivot Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" x:Name="RootPivot" Margin="0,-10, 0, 0">
+            <controls:PivotItem Header="{Binding Strings.Lookup_Title, Source={StaticResource LocalizedResources}}" Margin="0">
                 <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
                     <Grid.Resources>
                         <DataTemplate x:Key="CardItemTemplate">
@@ -100,7 +99,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Row="0" Visibility="Visible">
-                        <toolkit:PhoneTextBox x:Name="SearchTextBox" Hint="Filter By Name, Rules, Set, Type" 
+                        <toolkit:PhoneTextBox x:Name="SearchTextBox" Hint="{Binding Strings.Lookup_SearchHint, Source={StaticResource LocalizedResources}}" 
                                           ActionIcon="/Images/appbar.cancel.png" HidesActionItemWhenEmpty="False"
                                           TextChanged="SearchTextBox_TextChanged" KeyUp="SearchTextBox_KeyUp" ActionIconTapped="SearchTextBox_ActionIconTapped" />
                     </StackPanel>
@@ -128,13 +127,7 @@
     </Grid>
     
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Reset Filtered Cards" Click="ResetFilteredCards_Click" />
-                <shell:ApplicationBarMenuItem Text="Show Filtered Cards" Click="ShowFilteredCards_Click" />
-                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
+        <shell:ApplicationBar Mode="Minimized" />
     </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

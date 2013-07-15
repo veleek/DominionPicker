@@ -68,10 +68,8 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-        <controls:Pivot x:Name="RootPivot"
-                        Title="DominionPicker"
-                        Grid.Row="0">
-            <controls:PivotItem Header="About">
+        <controls:Pivot x:Name="RootPivot" Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Grid.Row="0">
+            <controls:PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
                 <Grid x:Name="ContentPanel" Grid.Row="1" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -88,7 +86,7 @@
                                        Text="by Ben Randall" />
                             <Button Template="{StaticResource HyperlinkButtonTemplate}"
                                     Content="http://www.benrandall.ca"
-                                    Tag="http://www.benrandall.ca"
+                                    Tag="http://www.veleek.com/DominionPicker"
                                     Click="WebsiteButton_Click" 
                                     Margin="12,0,0,0" FontSize="20"/>
                             <Rectangle Height="12" />
@@ -134,7 +132,7 @@
                                     Tag="7627a3ef-da59-e011-854c-00237de2db9e"
                                     Click="MarketplaceButton_Click"
                                     FontSize="20"
-                                    Margin="12,-5,0,0"/>
+                                    Margin="12,6"/>
 
 
                             <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
@@ -165,7 +163,7 @@
                 </Grid>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="Help">
+            <controls:PivotItem Header="{Binding Strings.About_Help, Source={StaticResource LocalizedResources}}" Margin="12,0">
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Sets"/>
@@ -182,7 +180,7 @@
                 </ScrollViewer>
             </controls:PivotItem>
 
-            <controls:PivotItem Header="Rules">
+            <controls:PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
                 <ScrollViewer>
                     <StackPanel>
                         <TextBlock Style="{StaticResource AboutContentStyle}" Text="Quick links to PDFs of the rules for each Dominion expansion available online."/>
@@ -252,8 +250,8 @@
                     </StackPanel>
                 </ScrollViewer>
             </controls:PivotItem>
-            
-            <controls:PivotItem Header="Changes">
+
+            <controls:PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
                 <ScrollViewer x:Name="ChangesScrollViewer" />
             </controls:PivotItem>
         </controls:Pivot>
@@ -269,8 +267,8 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="RateButton" Grid.Column="0" Content="Rate/Review" Click="RateButton_Click"/>
-            <Button x:Name="BuyNowButton" Grid.Column="1" Content="Update" Click="BuyNowButton_Click"/>
+            <Button x:Name="RateButton" Grid.Column="0" Content="{Binding Strings.About_Rate, Source={StaticResource LocalizedResources}}" Click="RateButton_Click"/>
+            <Button x:Name="BuyNowButton" Grid.Column="1" Content="{Binding Strings.About_Update, Source={StaticResource LocalizedResources}}" Click="UpdateButton_Click"/>
         </Grid>
 
         

@@ -44,8 +44,8 @@
                             <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
                             <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
                             <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
+                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
+                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
                             <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
                                 Grid.Column="2"
                                 HorizontalAlignment="Right"
@@ -67,28 +67,21 @@
         </Grid.RowDefinitions>
         
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
-            <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="results" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Strings.Results_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0">
-            Swipe to Replace<LineBreak/>Tap for Info
-        </TextBlock> 
+        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0" Text="{Binding Strings.Results_Tips, Source={StaticResource LocalizedResources}}" />
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"
-              DataContext="{Binding Result}">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" DataContext="{Binding Result}">
             <ScrollViewer>
                 <StackPanel>
-                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Cards}"
-                                  ItemTemplate="{StaticResource CardItemTemplate}" />
-                    <TextBlock Text="additional cards, tokens, etc." 
-                               Margin="0,0,0,0"
-                               Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" 
-                               Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}"
-                                  ItemTemplate="{StaticResource CardItemTemplate}"/>
-                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding AdditionalStuff}"
-                                  ItemTemplate="{StaticResource AdditionalStuffTemplate}"/>
+                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Cards}" ItemTemplate="{StaticResource CardItemTemplate}" />
+                    <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
+                               Margin="0,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}"
+                               Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
+                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}" ItemTemplate="{StaticResource CardItemTemplate}"/>
+                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding AdditionalStuff}" ItemTemplate="{StaticResource AdditionalStuffTemplate}"/>
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -99,15 +92,7 @@
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="AppBarRefreshButton" IconUri="/Images/appbar.refresh.png" Text="regenerate" Click="Refresh_Click"/>
-            <shell:ApplicationBarIconButton x:Name="AppBarSortButton" IconUri="/Images/appbar.sort.name.png" Text="sort by name" Click="Sort_Click" />
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.favs.addto.png" Text="save" Click="AddFavorite_Click"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="Card Lookup/Filter" Click="FilterCards_Click" />
-                <shell:ApplicationBarMenuItem Text="Help/About..." Click="About_Click"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
+        <shell:ApplicationBar />
     </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
