@@ -1,5 +1,5 @@
 ﻿Version 1.9
-Added localization support including most cards French, German, Spanish.
+Added localization support including most cards Czech, Dutch, Finnish (Suomi), French, German, Italian, Polish, Spanish.
 Added Black Market Deck
 
 Version 1.8.1

@@ -23,13 +23,12 @@ namespace Ben.Dominion
         {
             InitializeComponent();
             this.Loaded += new RoutedEventHandler(DebugPage_Loaded);
+            this.DataContext = AppLog.Instance;
         }
 
         void DebugPage_Loaded(object sender, RoutedEventArgs e)
         {
             AppLog.Instance.Log("Strings.Title: {0} Culture: {1}", Strings.Application_Title, Thread.CurrentThread.CurrentCulture.Name);
-
-            this.LogItemsList.ItemsSource = AppLog.Instance.Lines;
 
             this.CulturePicker.ItemsSource = new List<string>
             {
@@ -58,6 +57,7 @@ namespace Ben.Dominion
                 "es-ES",
                 "sv-SE",
             };
+
             this.CulturePicker.SelectedItem = CultureInfo.CurrentCulture.Name;
         }
 

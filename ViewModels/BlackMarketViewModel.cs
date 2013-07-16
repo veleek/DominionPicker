@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Ben.Utilities;
-using System;
-using System.IO.IsolatedStorage;
-using Ben.Utilites;
 
 namespace Ben.Dominion
 {

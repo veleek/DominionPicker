@@ -30,7 +30,7 @@
         </controls:PivotItem>
 
         <controls:PivotItem Header="log" Margin="12,0,0,0">
-            <ItemsControl x:Name="LogItemsList">
+            <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

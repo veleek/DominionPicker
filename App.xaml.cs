@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
+using Ben.Dominion.Resources;
+using Ben.Utilities;
 using com.mtiks.winmobile;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
-using System.IO;
-using Ben.Utilities;
 
 namespace Ben.Dominion
 {
@@ -46,9 +48,6 @@ namespace Ben.Dominion
         {
             isNew = true;
 
-            //System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("en-US");
-            Ben.Dominion.Resources.Strings.Culture = Ben.Dominion.Models.ConfigurationModel.Instance.CurrentCulture;
-
             // Global handler for uncaught exceptions. 
             UnhandledException += Application_UnhandledException;
 
@@ -66,6 +65,10 @@ namespace Ben.Dominion
                 //Application.Current.Host.Settings.EnableCacheVisualization = true;
 
                 //MetroGridHelper.IsVisible = true;
+
+                // Override the culture for localization testing
+                //Strings.Culture = Ben.Dominion.Models.ConfigurationModel.Instance.CurrentCulture;
+                //Strings.Culture = new CultureInfo("fr-CA");
             }
 
             // Standard Silverlight initialization
@@ -159,24 +162,16 @@ namespace Ben.Dominion
             mtiks.Instance.Start(MtiksApplicationId, Assembly.GetExecutingAssembly());
 
             // Increment the launch count and save it back
-            Int32 appLaunchCount = 0;
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
-            appLaunchCount++;
-            IsolatedStorageSettings.ApplicationSettings["AppLaunchCount"] = appLaunchCount;
+            Int32 appLaunchCount = IsolatedStorageSettings.ApplicationSettings.Increment("AppLaunchCount");
 
             // Check if we've updated since the last time we ran
             String currentAppVersion = Assembly.GetExecutingAssembly().FullName;
-            String appVersion = null;
-            IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppVersion", out appVersion);
+            String appVersion = IsolatedStorageSettings.ApplicationSettings.Replace("AppVersion", currentAppVersion);
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
-                System.Diagnostics.Debug.WriteLine("New version detected");
-
+                Debug.WriteLine("New version detected.  Original: {0}, Current: {1}", appVersion, currentAppVersion);
                 this.IsNewVersion = true;
-
-                // Save the current app version
-                IsolatedStorageSettings.ApplicationSettings["AppVersion"] = currentAppVersion;
             }
             
             // Ensure we don't initialize again

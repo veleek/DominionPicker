@@ -147,19 +147,4 @@ namespace Ben.Dominion.Models
             }
         }
     }
-
-    public static class IsolatedStorageSettingsExtensions
-    {
-        public static TValue TryGetOrDefault<TValue>(this IsolatedStorageSettings settings, string key)
-        {
-            TValue value;
-            return settings.TryGetValue(key, out value) ? value : default(TValue);
-        }
-
-        public static TValue TryGetOrDefault<TValue>(this IsolatedStorageSettings settings, string key, TValue defaultValue)
-        {
-            TValue value;
-            return settings.TryGetValue(key, out value) ? value : defaultValue;
-        }
-    }
 }

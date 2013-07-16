@@ -17,11 +17,11 @@
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
     <SupportedCultures>
-        en-US;de-DE;fr-FR;nl-NL;es-ES;it-IT;pl-PL;fi-FI;cs-CZ
+        en;de;fr;nl;es;it;pl;fi;cs
     </SupportedCultures>
     <!--
     <SupportedCultures>
-        zh-CN;zh-TW;da-DK;en-GB;el-GR;hu-HU;ja-JP;ko-KR;nb-NO;pt-BR;pt-PT;ru-RU;sv-SE;
+        en-US;de-DE;fr-FR;nl-NL;es-ES;it-IT;pl-PL;fi-FI;cs-CZ;zh-CN;zh-TW;da-DK;en-GB;el-GR;hu-HU;ja-JP;ko-KR;nb-NO;pt-BR;pt-PT;ru-RU;sv-SE;
     </SupportedCultures>
     -->
     <XapOutputs>true</XapOutputs>
@@ -87,34 +87,29 @@
       <Link>Controls\MultiTemplateItemsControl.cs</Link>
     </Compile>
     <Compile Include="..\Common\Phone\MetroGridHelper.cs">
-      <Link>Utilites\MetroGridHelper.cs</Link>
+      <Link>Utilities\MetroGridHelper.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\AppLog.cs">
-      <Link>Utilites\AppLog.cs</Link>
+      <Link>Utilities\AppLog.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\FrameworkExtensions.cs">
-      <Link>Utilites\FrameworkExtensions.cs</Link>
+      <Link>Utilities\FrameworkExtensions.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\GenericSerializer.cs">
-      <Link>Utilites\GenericSerializer.cs</Link>
+      <Link>Utilities\GenericSerializer.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\GroupedCollectionViewSource.cs">
-      <Link>Utilites\GroupedCollectionViewSource.cs</Link>
+      <Link>Utilities\GroupedCollectionViewSource.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\Grouping.cs">
-      <Link>Utilites\Grouping.cs</Link>
+      <Link>Utilities\Grouping.cs</Link>
     </Compile>
     <Compile Include="..\Common\Utilities\NavigationServiceExtensions.cs">
-      <Link>Utilites\NavigationServiceExtensions.cs</Link>
+      <Link>Utilities\NavigationServiceExtensions.cs</Link>
     </Compile>
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Content Include="Assets\DominionPickerCards.cs-CZ.xml" />
-    <Content Include="Assets\DominionPickerCards.de-DE.xml" />
-    <Content Include="Assets\DominionPickerCards.es-ES.xml" />
-    <Content Include="Assets\DominionPickerCards.fi-FI.xml" />
-    <Content Include="Assets\DominionPickerCards.fr-FR.xml" />
     <Compile Include="BlackMarketPage.xaml.cs">
       <DependentUpon>BlackMarketPage.xaml</DependentUpon>
     </Compile>
@@ -155,8 +150,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilites\DesignHelper.cs" />
-    <Compile Include="Utilites\PerformanceHelper.cs" />
+    <Compile Include="Utilities\CardListExtensions.cs" />
+    <Compile Include="Utilities\DesignHelper.cs" />
+    <Compile Include="Utilities\DispatcherHelper.cs" />
+    <Compile Include="Utilities\IsolatedStorageExtensions.cs" />
+    <Compile Include="Utilities\NotifyPropertyChangedBase.cs" />
+    <Compile Include="Utilities\PerformanceHelper.cs" />
+    <Compile Include="Utilities\TypeExtensions%27T.cs" />
     <Compile Include="ViewModels\BlackMarketViewModel.cs" />
     <Compile Include="ViewModels\CardSetViewModel.cs" />
     <Compile Include="ViewModels\CardTypeViewModel.cs" />
@@ -173,16 +173,12 @@
       <DependentUpon>ResultsViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="..\Common\Data\Converters.cs">
-      <Link>Utilites\Converters.cs</Link>
+      <Link>Utilities\Converters.cs</Link>
     </Compile>
     <Compile Include="SampleData\SampleDataHelpers.cs" />
     <Compile Include="TestPage.xaml.cs">
       <DependentUpon>TestPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utilites\CardListExtensions.cs" />
-    <Compile Include="Utilites\DispatcherHelper.cs" />
-    <Compile Include="Utilites\NotifyPropertyChangedBase.cs" />
-    <Compile Include="Utilites\TypeExtensions%27T.cs" />
     <Compile Include="ViewModels\CardList.cs" />
     <Compile Include="ViewModels\FavoritesViewModel.cs" />
     <Compile Include="ViewModels\ListOption.cs" />
@@ -212,9 +208,14 @@
     <DesignData Include="SampleData\PickerResultSampleData.xaml">
       <SubType>Designer</SubType>
     </DesignData>
-    <Content Include="Assets\DominionPickerCards.it-IT.xml" />
-    <Content Include="Assets\DominionPickerCards.nl-NL.xml" />
-    <Content Include="Assets\DominionPickerCards.pl-PL.xml" />
+    <Content Include="Assets\DominionPickerCards.cs.xml" />
+    <Content Include="Assets\DominionPickerCards.de.xml" />
+    <Content Include="Assets\DominionPickerCards.es.xml" />
+    <Content Include="Assets\DominionPickerCards.fi.xml" />
+    <Content Include="Assets\DominionPickerCards.fr.xml" />
+    <Content Include="Assets\DominionPickerCards.it.xml" />
+    <Content Include="Assets\DominionPickerCards.nl.xml" />
+    <Content Include="Assets\DominionPickerCards.pl.xml" />
     <Content Include="Assets\OldPickerState.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -402,27 +403,27 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Strings.cs-CZ.resx" />
-    <EmbeddedResource Include="Resources\Strings.fi-FI.resx">
+    <EmbeddedResource Include="Resources\Strings.cs.resx" />
+    <EmbeddedResource Include="Resources\Strings.fi.resx">
       <LastGenOutput>Strings.fi-FI.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.de-DE.resx" />
-    <EmbeddedResource Include="Resources\Strings.es-ES.resx">
+    <EmbeddedResource Include="Resources\Strings.de.resx" />
+    <EmbeddedResource Include="Resources\Strings.es.resx">
       <LastGenOutput>Strings.es-ES.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.fr-FR.resx" />
-    <EmbeddedResource Include="Resources\Strings.it-IT.resx" />
-    <EmbeddedResource Include="Resources\Strings.nl-NL.resx">
+    <EmbeddedResource Include="Resources\Strings.fr.resx" />
+    <EmbeddedResource Include="Resources\Strings.it.resx" />
+    <EmbeddedResource Include="Resources\Strings.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.pl-PL.resx">
+    <EmbeddedResource Include="Resources\Strings.pl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.ru-RU.resx">
+    <EmbeddedResource Include="Resources\Strings.ru.resx">
       <LastGenOutput>Strings.xx-XX.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>

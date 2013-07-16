@@ -75,14 +75,14 @@
 
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="130" />
                                 </Grid.ColumnDefinitions>
 
                                 <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" HorizontalContentAlignment="Right">
                                     <TextBlock Text="{Binding Strings.Settings_MinCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                                 </CheckBox>
-                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed" MinHeight="50"
+                                <toolkit:ListPicker ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" ExpansionMode="ExpansionAllowed" MinWidth="250"
                                                     FullModeHeader="{Binding Strings.Settings_MinCardsDescription, Source={StaticResource LocalizedResources}}">
                                     <toolkit:ListPicker.FullModeItemTemplate>
                                         <DataTemplate>
@@ -108,7 +108,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Content="{Binding Strings.Settings_PlusBuys, Source={StaticResource LocalizedResources}}" Width="200" HorizontalContentAlignment="Right"/>
+                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Width="220" HorizontalContentAlignment="Right">
+                                    <TextBlock Text="{Binding Strings.Settings_PlusBuys, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                                </CheckBox>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
@@ -118,13 +120,21 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusActions.Enabled, Mode=TwoWay}" Content="{Binding Strings.Settings_PlusActions, Source={StaticResource LocalizedResources}}" Width="200" HorizontalContentAlignment="Right"/>
+                                <CheckBox IsChecked="{Binding PlusActions.Enabled, Mode=TwoWay}" Width="220" HorizontalContentAlignment="Right">
+                                    <TextBlock Text="{Binding Strings.Settings_PlusActions, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                                </CheckBox>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
 
-                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}" Content="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" />
-                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}" Content="{Binding Strings.Settings_PickShelterOrEstate, Source={StaticResource LocalizedResources}}" />
-                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" Content="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" />
+                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Strings.Settings_PickShelterOrEstate, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                            </CheckBox>
+                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}">
+                                <TextBlock Text="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                            </CheckBox>
                         </StackPanel>
                     </ScrollViewer>
 

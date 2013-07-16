@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
 
-namespace Ben.Utilites
+namespace Ben.Utilities
 {
     public class DesignHelper
     {
