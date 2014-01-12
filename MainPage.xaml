@@ -40,7 +40,7 @@
                 <DataTemplate />
             </controls:Pivot.TitleTemplate>
 
-            <controls:PivotItem Header="{Binding Strings.MainPage_Create, Source={StaticResource LocalizedResources}}" Margin="12,0" DataContext="{Binding Settings}">
+            <controls:PivotItem x:Uid="MainPage_Create" Margin="12,0" DataContext="{Binding Settings}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>

@@ -12,6 +12,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
 
+
 namespace Ben.Dominion
 {
     public partial class App : Application
@@ -24,8 +25,9 @@ namespace Ben.Dominion
         
         public Card SelectedCard { get; set; }
 
-        //public static readonly String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
-        public static readonly String MtiksApplicationId = "166ff6d5917b9569d549eec40";
+        public const String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
+        public const String MtiksApplicationId = "166ff6d5917b9569d549eec40";
+        public const String BugSenseApiKey = "4d5d8cdd";
 
         private LicenseInformation license = new LicenseInformation();
         public Boolean IsTrial
@@ -48,8 +50,10 @@ namespace Ben.Dominion
         {
             isNew = true;
 
+            BugSense.BugSenseHandler.Instance.InitAndStartSession(this, BugSenseApiKey);
+
             // Global handler for uncaught exceptions. 
-            UnhandledException += Application_UnhandledException;
+            //UnhandledException += Application_UnhandledException;
 
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
