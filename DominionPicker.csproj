@@ -70,13 +70,15 @@
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.Phone, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Phone.Controls.Toolkit">
-      <HintPath>..\External\SilverlightToolkit\WindowsPhone\Bin\Debug\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=7.0.1.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\WPtoolkit.4.2013.08.16\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop, Version=7.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Xna.Framework" />
-    <Reference Include="mtiks">
-      <HintPath>..\External\mtiks\WP7\mtiks.dll</HintPath>
+    <Reference Include="mtiks, Version=0.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>External\mtiks\0.3.5.0\mtiks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -88,29 +90,21 @@
     <Reference Include="System.Xml.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Common\Controls\MultiTemplateItemsControl.cs">
-      <Link>Controls\MultiTemplateItemsControl.cs</Link>
+    <Compile Include="Controls\MultiTemplateItemsControl.cs">
     </Compile>
-    <Compile Include="..\Common\Phone\MetroGridHelper.cs">
-      <Link>Utilities\MetroGridHelper.cs</Link>
+    <Compile Include="Utilities\MetroGridHelper.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\AppLog.cs">
-      <Link>Utilities\AppLog.cs</Link>
+    <Compile Include="Utilities\AppLog.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\FrameworkExtensions.cs">
-      <Link>Utilities\FrameworkExtensions.cs</Link>
+    <Compile Include="Utilities\FrameworkExtensions.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\GenericSerializer.cs">
-      <Link>Utilities\GenericSerializer.cs</Link>
+    <Compile Include="Utilities\GenericSerializer.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\GroupedCollectionViewSource.cs">
-      <Link>Utilities\GroupedCollectionViewSource.cs</Link>
+    <Compile Include="Utilities\GroupedCollectionViewSource.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\Grouping.cs">
-      <Link>Utilities\Grouping.cs</Link>
+    <Compile Include="Utilities\Grouping.cs">
     </Compile>
-    <Compile Include="..\Common\Utilities\NavigationServiceExtensions.cs">
-      <Link>Utilities\NavigationServiceExtensions.cs</Link>
+    <Compile Include="Utilities\NavigationServiceExtensions.cs">
     </Compile>
     <Compile Include="AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -177,8 +171,7 @@
     <Compile Include="ResultsViewer.xaml.cs">
       <DependentUpon>ResultsViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="..\Common\Data\Converters.cs">
-      <Link>Utilities\Converters.cs</Link>
+    <Compile Include="Utilities\Converters.cs">
     </Compile>
     <Compile Include="SampleData\SampleDataHelpers.cs" />
     <Compile Include="TestPage.xaml.cs">
@@ -294,6 +287,7 @@
     <Content Include="Images\SetIcons\guilds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

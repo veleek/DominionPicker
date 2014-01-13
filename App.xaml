@@ -15,7 +15,7 @@
         <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
         <data:DebugConverter x:Key="DebugConverter" />
         <data:ImageConverter x:Key="ImageConverter" />
-        <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+        <!--<data:ColorToBrushConverter x:Key="ColorToBrushConverter" />-->
 
         <FontFamily x:Key="BookAntiquaBold">.\Assets\ANTQUAB.TTF#Book Antiqua</FontFamily>
         <FontFamily x:Key="OptimusPrincepsSemiBold">.\Assets\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
