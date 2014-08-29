@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -27,8 +26,9 @@ namespace Ben.Utilities
 
     public static class SerializerHelper
     {
-        private static Boolean LoadLocalTypes = true;
-        private static Assembly CurrentAssembly = Assembly.GetExecutingAssembly();
+        private const Boolean LoadLocalTypes = true;
+        private static readonly Assembly CurrentAssembly = Assembly.GetExecutingAssembly();
+        private static readonly List<string> BlacklistedTypes = new List<string> { "ConfigurationModel" };
 
         private static Type[] localTypes;
         public static Type[] LocalTypes 
@@ -43,7 +43,8 @@ namespace Ben.Utilities
                             .Where(t => t.IsPublic
                                         && !t.IsStatic()
                                         && !t.IsGenericTypeDefinition
-                                        && t.IsFullyDefinedInAssembly(CurrentAssembly))
+                                        && t.IsFullyDefinedInAssembly(CurrentAssembly)
+                                        && ! BlacklistedTypes.Contains(t.Name))
                             .ToArray();
                     }
                     else
@@ -61,15 +62,12 @@ namespace Ben.Utilities
     {
         public static string Serialize(Object o)
         {
-            String data = "";
-
             using (MemoryStream stream = new MemoryStream())
             {
                 Serialize(stream, o);
-                data = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+                String data = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+                return data;
             }
-
-            return data;
         }
 
         public static void Serialize(Stream stream, Object obj)
@@ -87,7 +85,7 @@ namespace Ben.Utilities
             }
             catch (SerializationException e)
             {
-                String msg = e.Message + Environment.NewLine + e.InnerException != null ? e.InnerException.Message : "";
+                String msg = e.Message + Environment.NewLine + (e.InnerException != null ? e.InnerException.Message : "");
                 MessageBox.Show(msg, "Serialize Exception", MessageBoxButton.OK);
             }
         }
@@ -158,15 +156,11 @@ namespace Ben.Utilities
 
         public static string Serialize<T>(T t)
         {
-            String data = "";
-
             using (MemoryStream stream = new MemoryStream())
             {
                 Serialize(stream, t);
-                data = Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
+                return Encoding.UTF8.GetString(stream.GetBuffer(), 0, (int)stream.Length);
             }
-
-            return data;
         }
 
         public static void Serialize<T>(Stream stream, T t)
@@ -211,23 +205,13 @@ namespace Ben.Utilities
         public static T Deserialize<T>(Stream stream)
             where T : class
         {
-            T t = null;
             if (stream == null)
             {
                 return null;
             }
 
-            try
-            {
-                var serializer = new DataContractSerializer(typeof(T), SerializerHelper.LocalTypes);
-                t = serializer.ReadObject(stream) as T;
-            }
-            catch (SerializationException)
-            {
-                //String msg = e.Message + Environment.NewLine + (e.InnerException != null ? e.InnerException.Message : "");
-                //MessageBox.Show(msg, "Serialize Exception", MessageBoxButton.OK);
-                throw;
-            }
+            var serializer = new DataContractSerializer(typeof(T), SerializerHelper.LocalTypes);
+            T t = serializer.ReadObject(stream) as T;
 
             return t;
         }

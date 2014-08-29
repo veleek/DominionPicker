@@ -28,21 +28,5 @@ namespace Ben.Dominion
                 return instance;
             }
         }
-
-        public Strings Strings
-        {
-            get
-            {
-                return new Strings();
-            }
-        }
-
-        public ConfigurationModel Configuration
-        {
-            get
-            {
-                return ConfigurationModel.Instance;
-            }
-        }
     }
 }

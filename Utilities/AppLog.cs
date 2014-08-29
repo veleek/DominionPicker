@@ -1,55 +1,41 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Media;
 
 namespace Ben.Utilities
 {
     public class AppLog : NotifyPropertyChangedBase
     {
-        private static AppLog instance = null;
+        private static AppLog instance;
 
         private ObservableCollection<LogLine> lines;
-        
+
         public AppLog()
         {
-            Clear();
+            this.Clear();
         }
 
         public static AppLog Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new AppLog();
-                }
-                return instance;
-
-            }
+            get { return instance ?? (instance = new AppLog()); }
         }
 
         public ObservableCollection<LogLine> Lines
         {
-            get { return lines; }
-            set { this.SetProperty(ref lines, value, "Lines"); }
+            get { return this.lines; }
+            set { this.SetProperty(ref this.lines, value, "Lines"); }
         }
 
         public void Clear()
         {
-            Lines = new ObservableCollection<LogLine>();
+            this.Lines = new ObservableCollection<LogLine>();
         }
 
         public void Log(String text)
         {
-            Lines.Add(new LogLine(text));
+            this.Lines.Add(new LogLine(text));
+            Debug.WriteLine("Info: " + text);
         }
 
         public void Log(string format, params object[] args)
@@ -59,7 +45,8 @@ namespace Ben.Utilities
 
         public void Error(String text)
         {
-            Lines.Add(new LogLine(text, LogLevel.Error));
+            this.Lines.Add(new LogLine(text, LogLevel.Error));
+            Debug.WriteLine("Error: " + text);
         }
     }
 
@@ -74,22 +61,26 @@ namespace Ben.Utilities
 
     public class LogLine
     {
-        public String Text { get; set; }
-        public LogLevel Level { get; set; }
-        public Color Color
+        public LogLine()
         {
-            get
-            {
-                return GetColorForLevel(Level);
-            }
         }
 
-        public LogLine() { }
-        public LogLine(String text) : this(text, LogLevel.Info) { }
+        public LogLine(String text) : this(text, LogLevel.Info)
+        {
+        }
+
         public LogLine(String text, LogLevel level)
         {
             this.Text = text;
             this.Level = level;
+        }
+
+        public String Text { get; set; }
+        public LogLevel Level { get; set; }
+
+        public Color Color
+        {
+            get { return GetColorForLevel(this.Level); }
         }
 
         public static Color GetColorForLevel(LogLevel level)

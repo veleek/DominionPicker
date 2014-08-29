@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Navigation;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
+using BugSense.Core.Model;
 using com.mtiks.winmobile;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
@@ -48,15 +49,13 @@ namespace Ben.Dominion
         /// </summary>
         public App()
         {
+            BugSense.BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
+
             isNew = true;
-
-            BugSense.BugSenseHandler.Instance.InitAndStartSession(this, BugSenseApiKey);
-
-            // Global handler for uncaught exceptions. 
-            //UnhandledException += Application_UnhandledException;
+            AppLog.Instance.Log("Launching: " + Assembly.GetExecutingAssembly().FullName);
 
             // Show graphics profiling information while debugging.
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters
                 //Application.Current.Host.Settings.EnableFrameRateCounter = true;
@@ -75,6 +74,9 @@ namespace Ben.Dominion
                 //Strings.Culture = new CultureInfo("fr-CA");
             }
 
+            var mainView = MainViewModel.Instance;
+            this.Resources.Add("MainView", mainView);
+
             // Standard Silverlight initialization
             InitializeComponent();
 
@@ -86,7 +88,6 @@ namespace Ben.Dominion
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            var instance = MainViewModel.Instance;
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -100,7 +101,6 @@ namespace Ben.Dominion
             }
             else
             {
-                var instance = MainViewModel.Instance;
             }
         }
 
@@ -124,23 +124,11 @@ namespace Ben.Dominion
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 // A navigation has failed; break into the debugger
-                System.Diagnostics.Debugger.Break();
+                Debugger.Break();
             }
-        }
-
-        // Code to execute on Unhandled Exceptions
-        private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
-        {
-            if (System.Diagnostics.Debugger.IsAttached)
-            {
-                // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
-            }
-
-            mtiks.Instance.AddException(e.ExceptionObject);
         }
 
         #region Phone application initialization
@@ -174,7 +162,7 @@ namespace Ben.Dominion
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
-                Debug.WriteLine("New version detected.  Original: {0}, Current: {1}", appVersion, currentAppVersion);
+                AppLog.Instance.Log("New version detected.  Original: {0}, Current: {1}", appVersion, currentAppVersion);
                 this.IsNewVersion = true;
             }
             

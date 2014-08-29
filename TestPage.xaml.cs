@@ -25,7 +25,7 @@ namespace Ben.Dominion
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            CardsList.IsFlatList = false;
+            //CardsList.IsFlatList = false;
         }
 
         private void ApplicationBarIconButton_Click(object sender, EventArgs e)

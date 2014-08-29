@@ -3,21 +3,17 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Ben.Utilities;
+using Microsoft.Phone.Controls;
 
 namespace Ben.Dominion
 {
-    public partial class BlackMarketPage : Microsoft.Phone.Controls.PhoneApplicationPage
+    public partial class BlackMarketPage : PhoneApplicationPage
     {
         public BlackMarketPage()
         {
             InitializeComponent();
 
-            this.Loaded += new RoutedEventHandler(BlackMarketPage_Loaded);
-        }
-
-        void BlackMarketPage_Loaded(object sender, RoutedEventArgs e)
-        {
-            MainViewModel.Instance.BlackMarket.Reset();
+            this.Loaded += (s, e) => MainViewModel.Instance.BlackMarket.Reset();
         }
 
         private void DrawButton_Click(object sender, RoutedEventArgs e)
@@ -30,23 +26,24 @@ namespace Ben.Dominion
             MainViewModel.Instance.BlackMarket.Discard();
         }
 
-        private void Reset_Click(object sender, System.EventArgs e)
+        private void Reset_Click(object sender, EventArgs e)
         {
             MainViewModel.Instance.BlackMarket.Reset();
         }
 
         private void ScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            var card = sender.GetContext<Card>();
+            ScrollContentPresenter contentPresenter = sender as ScrollContentPresenter;
+            if (contentPresenter == null)
+            {
+                return;
+            }
+
+            var scrollViewer = contentPresenter.ScrollOwner;
+            var card = scrollViewer.GetContext<Card>();
 
             if (card != null && MainViewModel.Instance.BlackMarket.Hand.Contains(card))
             {
-                var scrollViewer = sender as ScrollViewer;
-                if (scrollViewer == null)
-                {
-                    return;
-                }
-
                 var v = e.FinalVelocities.LinearVelocity;
                 var m = v.GetMagnitude();
                 var a = Math.Abs(v.X);
@@ -61,7 +58,7 @@ namespace Ben.Dominion
             }
         }
 
-        private void CardItem_Tap(object sender, GestureEventArgs e)
+        private void CardItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             var card = sender.GetContext<Card>();
             MainViewModel.Instance.BlackMarket.Pick(card);

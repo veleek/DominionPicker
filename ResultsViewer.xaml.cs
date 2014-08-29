@@ -11,20 +11,20 @@ namespace Ben.Dominion
 {
     public partial class ResultsViewer : PhoneApplicationPage
     {
-        ApplicationBarIconButton SortButton;
+        private readonly ApplicationBarIconButton SortButton;
 
         public ResultsViewer()
         {
             InitializeComponent();
 
-            this.BackKeyPress += new EventHandler<CancelEventArgs>(ResultsViewer_BackKeyPress);
+            this.BackKeyPress += this.ResultsViewer_BackKeyPress;
 
             // This resolves the issue with the "The data necessary to complete 
             // this operation is not yet available." exception.  We ignore the 
             // card list items until after it's completed loading, at which point
             // we enable the hit test again.
             CardsList.IsHitTestVisible = false;
-            CardsList.Loaded += new RoutedEventHandler(CardsList_Loaded);
+            CardsList.Loaded += this.CardsList_Loaded;
 
             var refreshButton = new ApplicationBarIconButton
             {
@@ -82,7 +82,7 @@ namespace Ben.Dominion
             CardsList.IsHitTestVisible = true;
         }
 
-        void ResultsViewer_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        void ResultsViewer_BackKeyPress(object sender, CancelEventArgs e)
         {
             if (AddFavoritePopup.IsOpen)
             {
@@ -180,11 +180,13 @@ namespace Ben.Dominion
 
         private void ScrollViewer_ManipulationCompleted(object sender, System.Windows.Input.ManipulationCompletedEventArgs e)
         {
-            var scrollViewer = sender as ScrollViewer;
-            if (scrollViewer == null)
+            ScrollContentPresenter contentPresenter = sender as ScrollContentPresenter;
+            if (contentPresenter == null)
             {
                 return;
             }
+
+            var scrollViewer = contentPresenter.ScrollOwner;
 
             var v = e.FinalVelocities.LinearVelocity;
             var m = v.GetMagnitude();

@@ -123,7 +123,7 @@ you trash other cards</Name>
   </CurrentSettings>
   <FavoriteSettings>
     <FavoriteSetting>
-      <Name>All Sets - Pick 2</Name>
+      <Name>All Sets - Pick 2 (1.5)</Name>
       <Value>
         <Sets>
           <SetSelector Set="Base" IsSelected="true" />

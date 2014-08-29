@@ -15,17 +15,20 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-    <controls:Pivot Title="Dominion Picker" x:Name="RootPivot"
-                        Grid.Row="1" Margin="0,-10, 0, 0">
+    <controls:Pivot Title="Dominion Picker" x:Name="RootPivot" Margin="0,-10, 0, 0">
         <controls:Pivot.TitleTemplate>
             <DataTemplate />
         </controls:Pivot.TitleTemplate>
 
         <controls:PivotItem Header="create" Margin="12,0,0,0">
             <StackPanel>
-                <TextBlock Text="{Binding Strings.Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
+                <TextBlock Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}" />
                 <TextBlock Text="current culture" Style="{StaticResource PhoneTextSubtleStyle}" />
                 <toolkit:ListPicker x:Name="CulturePicker" SelectionChanged="CulturePicker_SelectionChanged" />
+                <Button x:Name="Save15" Content="Save Picker State 1.5" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerState_1.5.xml"/>
+                <Button x:Name="Save17" Content="Save Picker State 1.7" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerState_1.7.xml"/>
+                <Button x:Name="Save18" Content="Save Picker State 1.8" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.8.xml,PickerView.xml"/>
+                <Button x:Name="Save19" Content="Save Picker State 1.9" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.9.xml,PickerView.xml"/>
             </StackPanel>
         </controls:PivotItem>
 
@@ -33,10 +36,10 @@
             <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Level}" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}" />
-                            <TextBlock Text="{Binding Text}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}" />
-                        </StackPanel>
+                        <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">
+                            <Run Text="{Binding Level}" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"></Run>
+                            <Run Text="{Binding Text}"></Run>
+                        </TextBlock>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -45,8 +48,8 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="Button 2"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
                 <shell:ApplicationBarMenuItem Text="MenuItem 2"/>

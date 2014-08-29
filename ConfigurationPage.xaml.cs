@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
+﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using Ben.Dominion.Models;
+using Microsoft.Phone.Controls;
 
 namespace Ben.Dominion
 {
@@ -18,11 +10,11 @@ namespace Ben.Dominion
     {
         public ConfigurationPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            this.DataContext = MainModel.Instance.Configuration;
+            this.DataContext = ConfigurationModel.Instance;
 
-            CulturesListPicker.ItemsSource = new List<CultureInfo>
+            this.CulturesListPicker.ItemsSource = new List<CultureInfo>
             {
                 //null,
                 new CultureInfo("cs-CZ"),

@@ -6,11 +6,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
-    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Ben.Dominion"
-    xmlns:localControls="clr-namespace:Ben.Controls"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -109,7 +107,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Width="220" HorizontalContentAlignment="Right">
+                                <CheckBox IsChecked="{Binding PlusBuys.Enabled, Mode=TwoWay}" Width="220" HorizontalContentAlignment="Right" VerticalAlignment="Stretch">
                                     <TextBlock Text="{Binding Strings.Settings_PlusBuys, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                                 </CheckBox>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusBuys.OptionValue, Mode=TwoWay}" Grid.Column="1" />
@@ -214,9 +212,9 @@
 
         <local:AddFavoritePopupControl x:Name="AddFavoritePopup"
                                        Grid.Row="0" Grid.RowSpan="2"
-                                       SaveFavorite="AddFavoritePopup_SaveFavorite"/>
+                                       SaveFavorite="AddFavoritePopup_SaveFavorite" d:IsLocked="True"/>
         
-        <Border x:Name="RequestReviewPopup" Grid.RowSpan="2" Background="{StaticResource PhoneContrastBackgroundBrush}" Visibility="Collapsed">
+        <Border x:Name="RequestReviewPopup" Grid.RowSpan="2" Background="{StaticResource PhoneContrastBackgroundBrush}" Visibility="Collapsed" d:IsLocked="True">
             <Border Width="360" Height="200" Background="{StaticResource PhoneBackgroundBrush}" CornerRadius="0">
                 <Grid>
                     <Grid.RowDefinitions>

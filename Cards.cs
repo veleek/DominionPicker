@@ -202,11 +202,14 @@ namespace Ben.Dominion
 
                 if (localizedCards != null && localizedCards.Count > 0)
                 {
-                    var lookup = localizedCards.ToDictionary(c => c.ID);
+                    var localizeLookup = localizedCards.ToDictionary(c => c.ID);
+
+                    // Loop through each card in the current set, and merge the localized
+                    // version ontop if we have it.
                     foreach (var card in cards)
                     {
                         Card c;
-                        if (lookup.TryGetValue(card.ID, out c))
+                        if (localizeLookup.TryGetValue(card.ID, out c))
                         {
                             card.MergeFrom(c);
                         }
@@ -287,6 +290,17 @@ namespace Ben.Dominion
         {
             return String.CompareOrdinal(this.Card.Name, other.Card.Name);
             //return this.Card.ID.CompareTo(other.Card.ID);
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return string.Format("[{0}] {1}", Selected ? "X" : "_", Card);
         }
     }
 

@@ -174,6 +174,7 @@
   <Card ID="163" Name="Walled Village" Set="Promo" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n_____\nAt the start of Clean-up, if you have this and no more than one other Action card in play, you may put this on top of your deck.\n"/>
   <Card ID="164" Name="Governor" Set="Promo" Type="Action" Cost="5" Rules="+1 Action\nChoose one; you get the version in parentheses: Each player gets +1 (+3) Cards; or each player gains a Silver (Gold); or each player may trash a card from his hand and gain a card costing exactly $1 ($2) more.\n"/>
   <Card ID="165" Name="Stash" Set="Promo" Type="Treasure" Cost="5" Rules="Worth 2 Coins. When you shuffle, you may put this anywhere in your deck.\n"/>
+  <Card ID="237" Name="Prince" Set="Promo" Type="Action" Cost="8" Rules="You may set this aside. If you do, set aside an Action card from your hand costing up to $4. At the start of each of your turns, play that Action, setting it aside again when you discard it from play. (Stop playing it if you fail to set it aside on a turn you play it.)" />
   <!--Dark Ages-->
   <Card ID="166" Name="Abandoned Mine" Set="DarkAges" Type="Action Ruins" Cost="0" Rules="+1 Coin"/>
   <Card ID="167" Name="Altar" Set="DarkAges" Type="Action" Cost="6" Rules="Trash a card from your hand. Gain a card costing up to 5 Coins."/>
@@ -233,7 +234,7 @@
   <Card ID="221" Name="Vagrant" Set="DarkAges" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nReveal the top card of your deck. If it's a Curse, Ruins, Shelter, or Victory card, put it into your hand."/>
   <Card ID="222" Name="Wandering Minstrel" Set="DarkAges" Type="Action" Cost="4" Rules="+1 Card\n+1 Action\nReveal the top 3 cards from your deck.  Put the Actions back on top in any order and discard the rest."/>
   <Card ID="223" Name="Shelters" Set="DarkAges" Type="Shelter" Cost="1" Rules="The Shelter cards replace starting Estates.  Each player's starting deck is seven Coppers, a Hovel, a Necropolis, and an Overgrown Estate." />
-  <!--Dark Ages-->
+  <!--Guilds-->
   <Card ID="224" Name="Advisor" Set="Guilds" Type="Action" Cost="4" Rules="+1 Action\nReveal the top 3 cards of your deck.  Teh player to your left chooses one of them.  Discard that card.  Put the other cards into your hand."/>
   <Card ID="225" Name="Baker" Set="Guilds" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\nTake a Coin token.\n_____\nSetup: Each player takes a Coin token."/>
   <Card ID="226" Name="Butcher" Set="Guilds" Type="Action" Cost="5" Rules="Take 2 Coin tokens.  You may trash a card from your hand and then pay any number of Coin tokens.  If you did trash a card, gain a card with a cost of up to the cost of the trashed card plus the number of Coin tokens you paid."/>

@@ -63,6 +63,9 @@ namespace Ben.Dominion
                         "Ruined Market",
                         "Ruined Village",
                         "Survivors",
+
+                        // Black Market, Obivously...
+                        "Black Market",
                     };
 
                     baseBlackMarketCards = new ReadOnlyCollection<Card>(

@@ -30,7 +30,7 @@ namespace Ben.Dominion
 
             List<CardSet> availableSets = settings.SelectedSets;
             Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
-            Int32 maxSets = (Int32)Math.Floor(count / minimumCardsPerSet);
+            Int32 maxSets = (Int32)Math.Floor((double)count / minimumCardsPerSet);
 
             PickerResult result = new PickerResult();
 
@@ -135,13 +135,12 @@ namespace Ben.Dominion
             List<Card> cardSet = new List<Card>();
 
             // This is the number of cards to generate in the set
-            Int32 count = 10;
-            Int32 minimumCardsPerSet = 0;
-            
+            const int count = 10;
+
             if (settings.MinimumCardsPerSet.Enabled)
             {
-                minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
-                Int32 maxSets = (Int32)Math.Floor(count / minimumCardsPerSet);
+                Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
+                Int32 maxSets = (Int32)Math.Floor((double)count / minimumCardsPerSet);
                 availableSets = availableSets.OrderBy(s => Guid.NewGuid()).Take(maxSets).ToList();
             }
 

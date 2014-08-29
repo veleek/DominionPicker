@@ -1,26 +1,52 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Windows;
-using Ben.Utilities;
-using Microsoft.Phone.Shell;
-using System.Windows.Threading;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using System.Diagnostics;
 using System.Xml.Serialization;
+using Ben.Utilities;
+using com.mtiks.winmobile;
+using Microsoft.Xna.Framework;
 
 namespace Ben.Dominion
 {
+    [XmlRoot(Namespace = "")]
     public class PickerState : NotifyPropertyChangedBase
     {
         public static readonly String PickerStateFileName = "PickerState.xml";
 
         //private static Boolean Loaded = false;
         private static Boolean UseIsolatedStorage = true;
+
+        public PickerState()
+        {
+            //this.Favorites = new ObservableCollection<PickerFavorite>();
+            this.FavoriteSettings = new ObservableCollection<OldFavoriteSetting>();
+            this.FavoriteSets = new ObservableCollection<OldFavoriteSet>();
+        }
+
+        public PickerSettings CurrentSettings { get; set; }
+
+        /// <summary>
+        /// A saved list of favorite settings
+        /// </summary>
+        /// <remarks>
+        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be
+        /// actually changing the collection instances in this class, so don't bother with
+        /// NotifyPropertyChanged stuff on this class.
+        /// </remarks>
+        public ObservableCollection<OldFavoriteSetting> FavoriteSettings { get; set; }
+
+        /// <summary>
+        /// A saved list of favorite sets
+        /// </summary>
+        /// <remarks>
+        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be
+        /// actually changing the collection instances in this class, so don't bother with
+        /// NotifyPropertyChanged stuff on this class.
+        /// </remarks>
+        public ObservableCollection<OldFavoriteSet> FavoriteSets { get; set; }
 
         public static PickerState Load()
         {
@@ -41,7 +67,7 @@ namespace Ben.Dominion
                         {
                             if (store.FileExists(fileName))
                             {
-                                Debug.WriteLine("Loading picker state...");
+                                AppLog.Instance.Log("Loading picker state...");
                                 using (Stream stream = store.OpenFile(fileName, FileMode.Open))
                                 {
                                     state = GenericContractSerializer.Deserialize<PickerState>(stream);
@@ -51,9 +77,14 @@ namespace Ben.Dominion
                     }
                 }
             }
-            catch(IsolatedStorageException)
+            catch (IsolatedStorageException)
             {
-                Debug.WriteLine("IsolatedStorageException while loading Picker State.");
+                AppLog.Instance.Error("IsolatedStorageException while loading Picker State.");
+                // Just ignore the exception
+            }
+            catch (Exception e)
+            {
+                AppLog.Instance.Error("Unable to load old picker state. " + e);
                 // Just ignore the exception
             }
 
@@ -66,36 +97,36 @@ namespace Ben.Dominion
             DateTime start = DateTime.UtcNow;
             try
             {
-                Debug.WriteLine("Loading picker state...");
+                AppLog.Instance.Log("Loading picker state...");
                 if (UseIsolatedStorage)
                 {
                     if (state == null)
                     {
-                        using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/DefaultPickerState_1.7.xml"))
+                        using (Stream stream = TitleContainer.OpenStream("./Assets/DefaultPickerState_1.7.xml"))
                         {
                             Type[] extraTypes = new[]
                             {
-                                typeof(OldFavoriteSet),
-                                typeof(OldFavoriteSetting),
-                                typeof(PickerOption),
-                                typeof(ListPickerOption),
-                                typeof(BooleanPickerOption),
+                                typeof (OldFavoriteSet),
+                                typeof (OldFavoriteSetting),
+                                typeof (PickerOption),
+                                typeof (ListPickerOption),
+                                typeof (BooleanPickerOption),
                             };
 
                             XmlAttributeOverrides overrides = new XmlAttributeOverrides();
-                            overrides.Add(typeof(OldFavoriteSet), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSet") });
-                            overrides.Add(typeof(OldFavoriteSetting), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSetting") });
+                            overrides.Add(typeof (OldFavoriteSet), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSet") });
+                            overrides.Add(typeof (OldFavoriteSetting), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSetting") });
 
-                            XmlSerializer serializer = new XmlSerializer(typeof(PickerState), overrides, extraTypes, null, null);
+                            XmlSerializer serializer = new XmlSerializer(typeof (PickerState), overrides, extraTypes, null, null);
 
-                            state =  serializer.Deserialize(stream) as PickerState;
+                            state = serializer.Deserialize(stream) as PickerState;
                         }
                     }
                 }
             }
             catch (IsolatedStorageException)
             {
-                Debug.WriteLine("IsolatedStorageException while loading Picker State.");
+                AppLog.Instance.Error("IsolatedStorageException while loading Picker State.");
                 // Just ignore the exception
             }
 
@@ -106,7 +137,7 @@ namespace Ben.Dominion
         {
             try
             {
-                Debug.WriteLine("Saving picker state...");
+                AppLog.Instance.Log("Saving picker state...");
                 if (UseIsolatedStorage)
                 {
                     using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
@@ -120,21 +151,21 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException e)
             {
-                Debug.WriteLine("There was an issue trying to save the picker state.");
-                com.mtiks.winmobile.mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
+                AppLog.Instance.Error("There was an issue trying to save the picker state.");
+                mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
             }
         }
 
         public static void SaveDefault()
         {
             string data;
-            using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/OldPickerState.xml"))
+            using (Stream stream = TitleContainer.OpenStream("./Assets/OldPickerState.xml"))
             {
                 StreamReader reader = new StreamReader(stream);
                 data = reader.ReadToEnd();
             }
 
-            using(var store = IsolatedStorageFile.GetUserStoreForApplication())
+            using (var store = IsolatedStorageFile.GetUserStoreForApplication())
             {
                 using (var file = store.OpenFile(PickerStateFileName, FileMode.Create))
                 {
@@ -161,95 +192,68 @@ namespace Ben.Dominion
                     }
                 }
             }
-            catch (IsolatedStorageException) { }
+            catch (IsolatedStorageException)
+            {
+            }
         }
 
         public static void MergeWithNewState()
         {
-            //PickerState.SaveDefault();
-
-            var oldState = PickerState.Load();
-            if (oldState != null)
+            var oldState = Load();
+            if (oldState == null)
             {
-                // There is an old save file, so let's merge the settings
-                foreach (var oldSetting in oldState.FavoriteSettings)
-                {
-                    try
-                    {
-                        if (!MainViewModel.Instance.Favorites.FavoriteSettings.Any(f => f.Name == oldSetting.Name))
-                        {
-                            PickerSettings oldSettings = oldSetting.Value;
-                            SettingsViewModel newSettings = new SettingsViewModel
-                            {
-                                SelectedSets = oldSettings.SelectedSets,
-                                MinimumCardsPerSet = new ListOption<int> { Enabled = oldSettings.MinimumCardsPerSet.IsEnabled, OptionValue = oldSettings.MinimumCardsPerSet.SelectedValue },
-                                RequireDefense = oldSettings.RequireDefense.IsEnabled,
-                                RequireTrash = oldSettings.RequireTrash.IsEnabled,
-                                PlusActions = new PlusOption { Enabled = oldSettings.PlusActions.IsEnabled, OptionValue = oldSettings.PlusActions.SelectedValue },
-                                PlusBuys = new PlusOption { Enabled = oldSettings.PlusBuys.IsEnabled, OptionValue = oldSettings.PlusBuys.SelectedValue },
-                                PickPlatinumColony = oldSettings.PickPlatinumColony.IsEnabled,
-                                PickShelterOrEstate = oldSettings.PickSheltersOrEstates.IsEnabled,
-                                ShowExtras = true,
-                            };
-
-                            FavoriteSetting newSetting = new FavoriteSetting(oldSetting.Name, newSettings);
-                            MainViewModel.Instance.Favorites.FavoriteSettings.Add(newSetting);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        AppLog.Instance.Error(string.Format("There was an issue loading favorite setting {0}.\r\n{1}", oldSetting.Name, e));
-                    }
-                }
-
-                foreach (var oldSet in oldState.FavoriteSets)
-                {
-                    try
-                    {
-                        FavoriteSet newSet = new FavoriteSet(oldSet.Name, oldSet.Result);
-
-                        if (!MainViewModel.Instance.Favorites.FavoriteSets.Any(s => newSet.Value.Cards.All(c => s.Value.Cards.Names.Contains(c.Name))))
-                        {
-                            MainViewModel.Instance.Favorites.FavoriteSets.Add(newSet);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        AppLog.Instance.Error(string.Format("There was an issue loading favorite set {0}.\r\n{1}", oldSet.Name, e));
-                    }
-                }
-
-                ClearSavedState();
+                return;
             }
-        }
+            
+            // There is an old save file, so let's merge the settings
+            foreach (var oldSetting in oldState.FavoriteSettings)
+            {
+                try
+                {
+                    if (MainViewModel.Instance.Favorites.FavoriteSettings.All(f => f.Name != oldSetting.Name))
+                    {
+                        PickerSettings oldSettings = oldSetting.Value;
+                        SettingsViewModel newSettings = new SettingsViewModel
+                        {
+                            SelectedSets = oldSettings.SelectedSets,
+                            MinimumCardsPerSet = new ListOption<int> { Enabled = oldSettings.MinimumCardsPerSet.IsEnabled, OptionValue = oldSettings.MinimumCardsPerSet.SelectedValue },
+                            RequireDefense = oldSettings.RequireDefense.IsEnabled,
+                            RequireTrash = oldSettings.RequireTrash.IsEnabled,
+                            PlusActions = new PlusOption { Enabled = oldSettings.PlusActions.IsEnabled, OptionValue = oldSettings.PlusActions.SelectedValue },
+                            PlusBuys = new PlusOption { Enabled = oldSettings.PlusBuys.IsEnabled, OptionValue = oldSettings.PlusBuys.SelectedValue },
+                            PickPlatinumColony = oldSettings.PickPlatinumColony.IsEnabled,
+                            PickShelterOrEstate = oldSettings.PickSheltersOrEstates.IsEnabled,
+                            ShowExtras = true,
+                        };
 
-        public PickerSettings CurrentSettings { get; set; }
+                        FavoriteSetting newSetting = new FavoriteSetting(oldSetting.Name, newSettings);
+                        MainViewModel.Instance.Favorites.FavoriteSettings.Add(newSetting);
+                    }
+                }
+                catch (Exception e)
+                {
+                    AppLog.Instance.Error(string.Format("There was an issue loading favorite setting {0}.\r\n{1}", oldSetting.Name, e));
+                }
+            }
 
-        /// <summary>
-        /// A saved list of favorite settings
-        /// </summary>
-        /// <remarks>
-        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be 
-        /// actually changing the collection instances in this class, so don't bother with 
-        /// NotifyPropertyChanged stuff on this class.
-        /// </remarks>
-        public ObservableCollection<OldFavoriteSetting> FavoriteSettings { get; set; }
+            foreach (var oldSet in oldState.FavoriteSets)
+            {
+                try
+                {
+                    FavoriteSet newSet = new FavoriteSet(oldSet.Name, oldSet.Result);
 
-        /// <summary>
-        /// A saved list of favorite sets
-        /// </summary>
-        /// <remarks>
-        /// Observable collection implements INotifyPropertyChanged, and we shouldn't be 
-        /// actually changing the collection instances in this class, so don't bother with 
-        /// NotifyPropertyChanged stuff on this class.
-        /// </remarks>
-        public ObservableCollection<OldFavoriteSet> FavoriteSets { get; set; }
+                    if (!MainViewModel.Instance.Favorites.FavoriteSets.Any(s => newSet.Value.Cards.All(c => s.Value.Cards.Names.Contains(c.Name))))
+                    {
+                        MainViewModel.Instance.Favorites.FavoriteSets.Add(newSet);
+                    }
+                }
+                catch (Exception e)
+                {
+                    AppLog.Instance.Error(string.Format("There was an issue loading favorite set {0}.\r\n{1}", oldSet.Name, e));
+                }
+            }
 
-        public PickerState()
-        {
-            //this.Favorites = new ObservableCollection<PickerFavorite>();
-            this.FavoriteSettings = new ObservableCollection<OldFavoriteSetting>();
-            this.FavoriteSets = new ObservableCollection<OldFavoriteSet>();
+            ClearSavedState();
         }
     }
 }

@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.IO.IsolatedStorage;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Ben.Utilities;
-using System.Globalization;
-using System.Threading;
 using Ben.Dominion.Resources;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {
-    public partial class DebugPage : PhoneApplicationPage
+    public partial class DebugPage
     {
         public DebugPage()
         {
-            InitializeComponent();
-            this.Loaded += new RoutedEventHandler(DebugPage_Loaded);
+            this.InitializeComponent();
+            this.Loaded += this.DebugPage_Loaded;
             this.DataContext = AppLog.Instance;
         }
 
-        void DebugPage_Loaded(object sender, RoutedEventArgs e)
+        private void DebugPage_Loaded(object sender, RoutedEventArgs e)
         {
             AppLog.Instance.Log("Strings.Title: {0} Culture: {1}", Strings.Application_Title, Thread.CurrentThread.CurrentCulture.Name);
 
@@ -63,7 +56,7 @@ namespace Ben.Dominion
 
         private void CulturePicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string cul = CulturePicker.SelectedItem as string;
+            string cul = this.CulturePicker.SelectedItem as string;
 
             if (cul == null)
             {
@@ -100,6 +93,23 @@ namespace Ben.Dominion
              */
 
             AppLog.Instance.Log("Strings.Title: {0} Culture: {1}", Strings.Application_Title, Thread.CurrentThread.CurrentCulture.Name);
+        }
+
+        private void SavePickerState_OnClick(object sender, RoutedEventArgs e)
+        {
+            string tag = sender.GetTag<string>();
+            string[] tagParts = tag.Split(',');
+
+            using (var savedStateStream = Microsoft.Xna.Framework.TitleContainer.OpenStream(tagParts[0]))
+            {
+                using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                {
+                    using (Stream currentStateStream = store.OpenFile(tagParts.Length > 1 ? tagParts[1] : "PickerState.xml", FileMode.Create))
+                    {
+                        savedStateStream.CopyTo(currentStateStream);
+                    }
+                }
+            }
         }
     }
 }

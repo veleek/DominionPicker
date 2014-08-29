@@ -99,20 +99,18 @@
             
             <TextBox x:Name="SearchTextBox" TextChanged="SearchTextBox_TextChanged" />
 
-            <toolkit:LongListSelector x:Name="CardsList"
+            <phone:LongListSelector x:Name="CardsList"
                                       Grid.Row="1"
-                                      DisplayAllGroups="True"
                                       HorizontalAlignment="Stretch"
                                       HorizontalContentAlignment="Stretch"
                                       GroupHeaderTemplate="{StaticResource CardSetGroupHeaderTemplate}"
-                                      GroupItemTemplate="{StaticResource CardSetGroupHeaderTemplate}"
                                       ItemTemplate="{StaticResource CardItemTemplate}">
-                <toolkit:LongListSelector.GroupItemsPanel>
+                <!--<phone:LongListSelector.GroupItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel HorizontalAlignment="Stretch" Width="480"/>
                     </ItemsPanelTemplate>
-                </toolkit:LongListSelector.GroupItemsPanel>
-            </toolkit:LongListSelector>
+                </phone:LongListSelector.GroupItemsPanel>-->
+            </phone:LongListSelector>
             <c4f:RoundButton Grid.Row="1" ImageSource="/Images/appbar.questionmark.png"/>
         </Grid>
     </Grid>

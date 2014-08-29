@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
-<MainViewModel xmlns="clr-namespace:Ben.Dominion" xmlns:p="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+<MainViewModel xmlns="clr-namespace:Ben.Dominion" xmlns:p="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:system="clr-namespace:System;assembly=mscorlib">
     <MainViewModel.Result>
         <PickerResult xmlns="clr-namespace:Ben.Dominion">
             <PickerResult.Cards>
@@ -31,7 +32,7 @@
                 <Card Name="Trader" DisplayName="L_Trader" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
             </PickerResult.AdditionalCards>
             <PickerResult.AdditionalStuff>
-                Victory Point Tokens
+                <system:String>Victory Point Tokens</system:String>
             </PickerResult.AdditionalStuff>
             <PickerResult.HasExtras>true</PickerResult.HasExtras>
         </PickerResult>

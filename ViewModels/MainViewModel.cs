@@ -1,9 +1,5 @@
 ﻿using Ben.Utilities;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.IO;
 using System.Runtime.Serialization;
@@ -27,10 +23,10 @@ namespace Ben.Dominion
 
         public MainViewModel()
         {
-            if (instance != null)
-            {
-                throw new ArgumentException("We should never create more than one instance of this class");
-            }
+            //if (instance != null)
+            //{
+            //    throw new ArgumentException("We should never create more than one instance of this class");
+            //}
 
             Picker = new Picker();
         }
@@ -111,7 +107,7 @@ namespace Ben.Dominion
         /// </summary>
         public static MainViewModel LoadDefault()
         {
-            using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/DefaultPickerState_1.8.xml"))
+            using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/DefaultPickerView.xml"))
             {
                 return GenericXmlSerializer.Deserialize<MainViewModel>(stream);
             }
@@ -132,10 +128,10 @@ namespace Ben.Dominion
             {
                 this.IsGenerating = true;
 
-                var result = Picker.GenerateCardList(this.Settings);
+                var cardList = Picker.GenerateCardList(this.Settings);
                 // Save the current sort order
-                result.Sort(this.Result != null ? this.Result.SortOrder : ResultSortOrder.Name);
-                this.Result = result;
+                cardList.Sort(this.Result != null ? this.Result.SortOrder : ResultSortOrder.Name);
+                this.Result = cardList;
             }
             finally
             {
@@ -169,7 +165,7 @@ namespace Ben.Dominion
             DateTime start = DateTime.UtcNow;
             try
             {
-                Debug.WriteLine("Loading picker view...");
+                AppLog.Instance.Log("Loading picker view...");
                 if (UseIsolatedStorage)
                 {
                     if (view == null)
@@ -180,7 +176,7 @@ namespace Ben.Dominion
                             {
                                 using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
                                 {
-                                    XmlSerializer serializer = new XmlSerializer(typeof(MainViewModel));
+                                    XmlSerializer serializer = new XmlSerializer(typeof (MainViewModel));
 
                                     view = serializer.Deserialize(stream) as MainViewModel;
 
@@ -194,19 +190,24 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException ise)
             {
-                Debug.WriteLine("IsolatedStorageException while loading Picker view model.");
-                Debug.WriteLine(ise.ToString());
+                AppLog.Instance.Error("IsolatedStorageException while loading Picker view model.");
+                AppLog.Instance.Error(ise.ToString());
                 // Just ignore the exception
             }
             catch (SerializationException se)
             {
-                Debug.WriteLine("Unable to deserialize saved state");
-                Debug.WriteLine(se.ToString());
+                AppLog.Instance.Error("Unable to deserialize saved state");
+                AppLog.Instance.Error(se.ToString());
+            }
+            catch (InvalidOperationException ioe)
+            {
+                AppLog.Instance.Error("MainViewModel was likely empty");
+                AppLog.Instance.Error(ioe.ToString());
             }
 
             if (view == null)
             {
-                Debug.WriteLine("Using default picker view model");
+                AppLog.Instance.Log("Using default picker view model");
                 view = LoadDefault();
             }
             else
@@ -225,7 +226,7 @@ namespace Ben.Dominion
         {
             try
             {
-                Debug.WriteLine("Saving picker state...");
+                AppLog.Instance.Error("Saving picker state...");
                 if (UseIsolatedStorage)
                 {
                     using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
@@ -240,7 +241,7 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException e)
             {
-                Debug.WriteLine("There was an issue trying to save the picker state.");
+                AppLog.Instance.Error("There was an issue trying to save the picker state.");
                 com.mtiks.winmobile.mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
             }
         }
@@ -252,7 +253,7 @@ namespace Ben.Dominion
 
         internal void ClearSavedState()
         {
-            Debug.WriteLine("Clearing out all saved state");
+            AppLog.Instance.Log("Clearing out all saved state");
             if (UseIsolatedStorage)
             {
                 using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())

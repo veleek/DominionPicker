@@ -57,6 +57,8 @@ namespace Ben.Data
     /// <typeparam name="TElement">The type of the values in each group</typeparam>
     public class ObservableGrouping<TKey, TElement> : ObservableCollection<TElement>, IGrouping<TKey, TElement>
     {
+        protected ObservableGrouping() { }
+
         public ObservableGrouping(TKey key, IEnumerable<TElement> elements)
             : base(elements)
         {
@@ -79,6 +81,17 @@ namespace Ben.Data
         public override int GetHashCode()
         {
             return this.Key.GetHashCode();
+        }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override string ToString()
+        {
+            return this.Key.ToString();
         }
     }
 }

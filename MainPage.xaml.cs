@@ -14,14 +14,14 @@ namespace Ben.Dominion
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private bool reviewRequestShown = false;
-        private bool updatePopupShown = false;
-        private bool isNew = false;
-        private object favoriteEdit = null;
+        private readonly ApplicationBarIconButton resetSettingsButton;
+        private readonly ApplicationBarIconButton addFavoriteButton;
+        private readonly ApplicationBarIconButton resetFavoritesButton;
 
-        private ApplicationBarIconButton ResetSettingsButton;
-        private ApplicationBarIconButton AddFavoriteButton;
-        private ApplicationBarIconButton ResetFavoritesButton;
+        private bool reviewRequestShown;
+        private bool updatePopupShown;
+        private bool isNew;
+        private object favoriteEdit;
 
         // Constructor
         public MainPage()
@@ -35,30 +35,30 @@ namespace Ben.Dominion
             backgroundBrush.Color = backgroundColor;
 
             // Set the data context of the listbox control to the sample data
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
-            this.Unloaded += new RoutedEventHandler(MainPage_Unloaded);
-            this.BackKeyPress += new EventHandler<CancelEventArgs>(MainPage_BackKeyPress);
+            this.Loaded += this.MainPage_Loaded;
+            this.Unloaded += this.MainPage_Unloaded;
+            this.BackKeyPress += this.MainPage_BackKeyPress;
 
-            ResetSettingsButton = new ApplicationBarIconButton
+            this.resetSettingsButton = new ApplicationBarIconButton
             {
                 IconUri = new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
                 Text = Strings.MainPage_Reset,
             };
-            ResetSettingsButton.Click += ResetSettings_Click;
+            this.resetSettingsButton.Click += ResetSettings_Click;
 
-            AddFavoriteButton = new ApplicationBarIconButton
+            this.addFavoriteButton = new ApplicationBarIconButton
             {
                 IconUri = new Uri(@"\Images\appbar.favs.addto.png", UriKind.Relative),
                 Text = Strings.MainPage_Save,
             };
-            AddFavoriteButton.Click += AddFavorite_Click;
+            this.addFavoriteButton.Click += AddFavorite_Click;
 
-            ResetFavoritesButton = new ApplicationBarIconButton
+            this.resetFavoritesButton = new ApplicationBarIconButton
             {
                 IconUri = new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
                 Text = Strings.MainPage_Reset,
             };
-            ResetFavoritesButton.Click += ResetFavorites_Click;
+            this.resetFavoritesButton.Click += ResetFavorites_Click;
 
             // Create all the menu items
             var cardLookupMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_CardLookup };
@@ -78,6 +78,14 @@ namespace Ben.Dominion
             var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
             aboutMenuItem.Click += About_Click;
             this.ApplicationBar.MenuItems.Add(aboutMenuItem);
+
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                var debugMenu = new ApplicationBarMenuItem { Text = "Debug" };
+                debugMenu.Click += (s, a) => this.NavigationService.Navigate("/DebugPage.xaml");
+
+                this.ApplicationBar.MenuItems.Add(debugMenu);
+            }
         }
 
         public MainViewModel MainView
@@ -111,15 +119,15 @@ namespace Ben.Dominion
         public void ShowAddFavoritePopup()
         {
             AddFavoritePopup.IsOpen = true;
-            ResetSettingsButton.IsEnabled = false;
-            AddFavoriteButton.IsEnabled = false;
+            this.resetSettingsButton.IsEnabled = false;
+            this.addFavoriteButton.IsEnabled = false;
         }
 
         public void HideAddFavoritePopup()
         {
             AddFavoritePopup.IsOpen = false;
-            ResetSettingsButton.IsEnabled = true;
-            AddFavoriteButton.IsEnabled = true;
+            this.resetSettingsButton.IsEnabled = true;
+            this.addFavoriteButton.IsEnabled = true;
         }
 
         private void Create()
@@ -151,27 +159,18 @@ namespace Ben.Dominion
                     if (this.MainView.GenerateCardList())
                     {
                         // Navigation has to happen on the UI thread, so ask the Dispatcher to do it
-                        Dispatcher.BeginInvoke(() =>
-                        {
-                            this.NavigationService.Navigate("/ResultsViewer.xaml");
-                        });
+                        Dispatcher.BeginInvoke(() => this.NavigationService.Navigate("/ResultsViewer.xaml"));
                     }
                     else
                     {
-                        //Dispatcher.BeginInvoke(() =>
-                        //{
-                        //    MessageBox.Show("Whoops! We couldn't generate a set with those options.");
-                        //});
+                        Dispatcher.BeginInvoke(() => MessageBox.Show("Whoops! We couldn't generate a set with those options."));
                     }
                 }
                 finally
                 {
                     // And finally when everything is done, ask the UI thread to reenable
                     // the buttons and hide the progress bar
-                    Dispatcher.BeginInvoke(() =>
-                    {
-                        StopGeneration();
-                    });
+                    Dispatcher.BeginInvoke(this.StopGeneration);
                 }
             };
 
@@ -213,25 +212,12 @@ namespace Ben.Dominion
 
             //AdManager.LoadAd(AdContainer);
 
-            //App app = App.Current as App;
-            //if (app.IsTrial)
-            //{
-            //    this.ApplicationBar.Buttons.Add(UnlockButton);    
-            //}
-            //else
-            //{
-            //    if (this.ApplicationBar.Buttons.Contains(UnlockButton))
-            //    {
-            //        this.ApplicationBar.Buttons.Remove(UnlockButton);
-            //    }
-            //}
-
             Int32 appLaunchCount = 0;
             System.IO.IsolatedStorage.IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
 
             if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
             {
-                //MessageBox.Show("Some stuff was changed around in this last update as some initial work to allow you to backup and restore your settings and favorites.  But right now your old favorites aren't automatically updated so they'll be missing for the time being.  They're still there, you just can't see them.\nI'll try to get them back in the next update soon.",  "Sorry!", MessageBoxButton.OK);
+                MessageBox.Show("Support for different languages was added in this release.  I will be adding an option to manually select a language soon!  Sorry if you have an English set of cards but you're seeing your non-english names.",  "Localization Support", MessageBoxButton.OK);
                 updatePopupShown = true;
             }
             else if (appLaunchCount == 10 && !reviewRequestShown)
@@ -272,19 +258,11 @@ namespace Ben.Dominion
             switch (RootPivot.SelectedIndex)
             {
                 case 0:
-                    this.ApplicationBar.Buttons.Add(ResetSettingsButton);
-                    this.ApplicationBar.Buttons.Add(AddFavoriteButton);
-
-                    if (System.Diagnostics.Debugger.IsAttached)
-                    {
-                        var debugMenu = new ApplicationBarMenuItem { Text = "Debug" };
-                        debugMenu.Click += (s, a) => this.NavigationService.Navigate("/DebugPage.xaml");
-
-                        this.ApplicationBar.MenuItems.Add(debugMenu);
-                    }
+                    this.ApplicationBar.Buttons.Add(this.resetSettingsButton);
+                    this.ApplicationBar.Buttons.Add(this.addFavoriteButton);
                     break;
                 case 1:
-                    this.ApplicationBar.Buttons.Add(ResetFavoritesButton);
+                    this.ApplicationBar.Buttons.Add(this.resetFavoritesButton);
                     break;
             }
         }
