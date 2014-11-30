@@ -27,6 +27,9 @@ namespace Ben.Dominion
         public MainPage()
         {
             InitializeComponent();
+
+            DispatcherHelper.Initialize();
+
             isNew = true;
 
             SolidColorBrush backgroundBrush = RequestReviewPopup.Background as SolidColorBrush;
@@ -69,11 +72,9 @@ namespace Ben.Dominion
             blackMarketMenuItem.Click += BlackMarket_Click;
             this.ApplicationBar.MenuItems.Add(blackMarketMenuItem);
 
-            /*
             var settingsMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_Settings };
             settingsMenuItem.Click += Settings_Click;
             this.ApplicationBar.MenuItems.Add(settingsMenuItem);
-            */
 
             var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
             aboutMenuItem.Click += About_Click;
@@ -208,8 +209,6 @@ namespace Ben.Dominion
 
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            DispatcherHelper.Initialize();
-
             //AdManager.LoadAd(AdContainer);
 
             Int32 appLaunchCount = 0;
@@ -217,7 +216,7 @@ namespace Ben.Dominion
 
             if ((App.Current as App).IsNewVersion && appLaunchCount > 1 && !updatePopupShown)
             {
-                MessageBox.Show("Support for different languages was added in this release.  I will be adding an option to manually select a language soon!  Sorry if you have an English set of cards but you're seeing your non-english names.",  "Localization Support", MessageBoxButton.OK);
+                //MessageBox.Show("Support for different languages was added in this release.  I will be adding an option to manually select a language soon!  Sorry if you have an English set of cards but you're seeing your non-english names.",  "Localization Support", MessageBoxButton.OK);
                 updatePopupShown = true;
             }
             else if (appLaunchCount == 10 && !reviewRequestShown)

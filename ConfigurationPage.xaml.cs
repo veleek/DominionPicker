@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Ben.Dominion.Models;
@@ -14,7 +15,7 @@ namespace Ben.Dominion
 
             this.DataContext = ConfigurationModel.Instance;
 
-            this.CulturesListPicker.ItemsSource = new List<CultureInfo>
+            var supportedCultures = new List<CultureInfo>
             {
                 //null,
                 new CultureInfo("cs-CZ"),
@@ -26,9 +27,14 @@ namespace Ben.Dominion
                 new CultureInfo("it-IT"),
                 new CultureInfo("nl-NL"),
                 new CultureInfo("pl-PL"),
-                // THIS IS NOT A REAL CULTURE JUST THE LOCALIZATION TEST
-                new CultureInfo("ru-RU"),
-            }.OrderBy(c => c.DisplayName);
+            };
+
+            #if DEBUG
+            // THIS IS NOT A REAL CULTURE JUST THE LOCALIZATION TEST
+            supportedCultures.Add(new CultureInfo("ru-RU"));
+            #endif
+
+            this.CulturesListPicker.ItemsSource = supportedCultures.OrderBy(c => c.TwoLetterISOLanguageName, StringComparer.InvariantCultureIgnoreCase);
         }
     }
 }

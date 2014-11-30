@@ -26,7 +26,7 @@ namespace Ben.Utilities
 
     public static class SerializerHelper
     {
-        private const Boolean LoadLocalTypes = true;
+        public static Boolean LoadLocalTypes = true;
         private static readonly Assembly CurrentAssembly = Assembly.GetExecutingAssembly();
         private static readonly List<string> BlacklistedTypes = new List<string> { "ConfigurationModel" };
 

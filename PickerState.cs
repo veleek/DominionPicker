@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Xml.Serialization;
 using Ben.Utilities;
-using com.mtiks.winmobile;
 using Microsoft.Xna.Framework;
 
 namespace Ben.Dominion
@@ -151,8 +149,7 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException e)
             {
-                AppLog.Instance.Error("There was an issue trying to save the picker state.");
-                mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
+                AppLog.Instance.Error("Unable to save picker state", e);
             }
         }
 

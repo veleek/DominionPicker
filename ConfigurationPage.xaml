@@ -31,14 +31,14 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
                 <StackPanel>
-                    <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="Swap Language" />
+                    <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="Language Options" />
 
-                    <toolkit:ListPicker x:Name="CulturesListPicker" Header="language" ItemsSource="{Binding SupportedCultures}"
+                    <toolkit:ListPicker x:Name="CulturesListPicker" ItemsSource="{Binding SupportedCultures}" Header="language"
                                         SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Border CornerRadius="4" Background="{StaticResource PhoneAccentBrush}" MinWidth="40">
+                                    <Border CornerRadius="4" Background="{StaticResource PhoneAccentBrush}" MinWidth="40" MinHeight="40"  Margin="6">
                                         <TextBlock Text="{Binding TwoLetterISOLanguageName}" Foreground="WhiteSmoke" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" TextAlignment="Center"/>
                                     </Border>
                                     <TextBlock Text="{Binding NativeName}" VerticalAlignment="Center" />
@@ -48,7 +48,7 @@
                         <toolkit:ListPicker.FullModeItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Border CornerRadius="4" Background="{StaticResource PhoneAccentBrush}" MinWidth="40">
+                                    <Border CornerRadius="4" Background="{StaticResource PhoneAccentBrush}" MinWidth="40" MinHeight="40"  Margin="6">
                                         <TextBlock Text="{Binding TwoLetterISOLanguageName}" Foreground="WhiteSmoke" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" TextAlignment="Center"/>
                                     </Border>
                                     <TextBlock Text="{Binding NativeName}" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" />
@@ -60,21 +60,21 @@
                     <TextBlock Text="Setting this will override the language used by Dominion Picker only and will not change the current system language.&#x0D;&#x0A;You must restart for this to take effect."
                                Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
 
-                    <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}">
+                    <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
                         <StackPanel>
                             <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="User Interface"/>
-                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="This includes stuff like the titles, picker settings, descriptions and more" TextWrapping="Wrap" />
+                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="This includes page titles, picker settings, descriptions, etc." TextWrapping="Wrap" />
                         </StackPanel>
                     </CheckBox>
 
-                    <CheckBox IsChecked="{Binding LocalizeCardData, Mode=TwoWay}">
+                    <CheckBox IsChecked="{Binding LocalizeCardData, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
                         <StackPanel>
                             <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Card Details"/>
                             <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="The card names, types, and sets" TextWrapping="Wrap" />
                         </StackPanel>
                     </CheckBox>
 
-                    <CheckBox IsChecked="{Binding LocalizeRulesText, Mode=TwoWay}">
+                    <CheckBox IsChecked="{Binding LocalizeRulesText, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
                         <StackPanel>
                             <TextBlock Style="{StaticResource PhoneTextLargeStyle}" Text="Rules Text"/>
                             <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="The descriptive rules text on the card." TextWrapping="Wrap" />
@@ -84,17 +84,5 @@
             </ScrollViewer>
         </Grid>
     </Grid>
- 
-    <!--Sample code showing usage of ApplicationBar-->
-    <!--<phone:PhoneApplicationPage.ApplicationBar>
-        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
-                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
-            </shell:ApplicationBar.MenuItems>
-        </shell:ApplicationBar>
-    </phone:PhoneApplicationPage.ApplicationBar>-->
-
+    
 </phone:PhoneApplicationPage>

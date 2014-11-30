@@ -5,10 +5,11 @@ using System.IO.IsolatedStorage;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
+using Ben.Dominion.Models;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
 using BugSense.Core.Model;
-using com.mtiks.winmobile;
+using GalaSoft.MvvmLight.Threading;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
@@ -49,6 +50,7 @@ namespace Ben.Dominion
         /// </summary>
         public App()
         {
+            this.Startup += null;
             BugSense.BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
 
             isNew = true;
@@ -74,6 +76,10 @@ namespace Ben.Dominion
                 //Strings.Culture = new CultureInfo("fr-CA");
             }
 
+            // Make sure the configuration has been initialized first
+            var config = ConfigurationModel.Instance;
+
+            // Then load the main view model
             var mainView = MainViewModel.Instance;
             this.Resources.Add("MainView", mainView);
 
@@ -104,13 +110,15 @@ namespace Ben.Dominion
             }
         }
 
+
+
+
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
             isNew = false;
             MainViewModel.Instance.Save();
-            mtiks.Instance.Stop();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
@@ -118,7 +126,6 @@ namespace Ben.Dominion
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
             MainViewModel.Instance.Save();
-            mtiks.Instance.Stop();
         }
 
         // Code to execute if a navigation fails
@@ -151,8 +158,7 @@ namespace Ben.Dominion
             RootFrame.NavigationFailed += RootFrame_NavigationFailed;
 
             //AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
-            mtiks.Instance.Start(MtiksApplicationId, Assembly.GetExecutingAssembly());
-
+            
             // Increment the launch count and save it back
             Int32 appLaunchCount = IsolatedStorageSettings.ApplicationSettings.Increment("AppLaunchCount");
 
@@ -182,5 +188,10 @@ namespace Ben.Dominion
         }
 
         #endregion
+
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            DispatcherHelper.Initialize();
+        }
     }
 }

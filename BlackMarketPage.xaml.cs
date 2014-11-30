@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Ben.Utilities;
+using GalaSoft.MvvmLight.Threading;
 using Microsoft.Phone.Controls;
 
 namespace Ben.Dominion
@@ -13,7 +14,11 @@ namespace Ben.Dominion
         {
             InitializeComponent();
 
-            this.Loaded += (s, e) => MainViewModel.Instance.BlackMarket.Reset();
+            this.Loaded += (s, e) =>
+            {
+                DispatcherHelper.Initialize();
+                MainViewModel.Instance.BlackMarket.Reset();
+            };
         }
 
         private void DrawButton_Click(object sender, RoutedEventArgs e)

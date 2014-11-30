@@ -5,11 +5,11 @@ namespace Ben.Utilities
 {
     public static class NavigationServiceExtensions
     {
-        private static bool isInitalized = false;
+        private static bool isInitalized;
 
         public static void Initialize(this NavigationService navigationService)
         {
-            navigationService.Navigated += new NavigatedEventHandler(navigationService_Navigated);
+            navigationService.Navigated += navigationService_Navigated;
             isInitalized = true;
         }
 
@@ -34,8 +34,21 @@ namespace Ben.Utilities
             }
 
             IsNavigating = true;
-            Uri navUri = new Uri(pageUri, UriKind.Relative);
-            navigationService.Navigate(navUri);
+
+            try
+            {
+                Uri navUri = new Uri(pageUri, UriKind.Relative);
+                navigationService.Navigate(navUri);
+            }
+            catch(InvalidOperationException ioe)
+            {
+                IsNavigating = false;
+
+                // Occasionally we can get an exception here where navigation will fail
+                // if the app is no longer in the foreground for some reason.  Just ignore it.
+                BugSense.BugSenseHandler.Instance.LogEvent(string.Format("Caught navigation exception: {0}", ioe.Message));
+            }
+
         }
     }
 }

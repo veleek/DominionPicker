@@ -30,6 +30,11 @@ namespace Ben.Dominion.Models
                     {
                         Strings.Culture = instance.CurrentCulture;
                     }
+
+                    if (instance.LocalizeCardData)
+                    {
+                        CardDataStrings.Culture = instance.CurrentCulture;
+                    }
                 }
                 return instance;
             }
@@ -67,7 +72,7 @@ namespace Ben.Dominion.Models
         {
             get
             {
-                if (overrideCulture == CultureInfo.InvariantCulture)
+                if (Equals(this.overrideCulture, CultureInfo.InvariantCulture))
                 {
                     string cultureName = OverrideCultureName;
 

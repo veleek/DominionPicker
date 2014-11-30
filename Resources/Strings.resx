@@ -402,4 +402,7 @@ never be picked</value>
   <data name="About_Update" xml:space="preserve">
     <value>update</value>
   </data>
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

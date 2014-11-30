@@ -139,10 +139,14 @@ namespace Ben.Dominion
             return value.IndexOf(substring, StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
-        public void MergeFrom(Card c)
+        public void MergeFrom(Card c, bool mergeRules = true)
         {
             this.DisplayName = c.DisplayName ?? this.DisplayName;
-            this.Rules = c.Rules ?? this.Rules;
+
+            if (mergeRules)
+            {
+                this.Rules = c.Rules ?? this.Rules;
+            }
         }
 
         public override string ToString()

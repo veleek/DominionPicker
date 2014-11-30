@@ -1,20 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
+using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Windows.Data;
 using Ben.Data;
-using Ben.Utilities;
-using System.Globalization;
+using Ben.Dominion.Models;
 using Ben.Dominion.Resources;
+using Ben.Utilities;
+using Microsoft.Xna.Framework;
 
 namespace Ben.Dominion
 {
     public static class Cards
     {
         public static readonly string PickerCardsFileName = "./Assets/DominionPickerCards.xml";
+
+        private static readonly Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
+
+        private static ReadOnlyCollection<Card> allCards = null;
+        private static ReadOnlyCollection<Card> pickableCards = null;
+        private static Dictionary<Int32, Card> lookup = null;
+        private static Dictionary<string, Card> nameLookup = null;
 
         public static IEnumerable<CardSet> AllSets
         {
@@ -58,19 +65,7 @@ namespace Ben.Dominion
             }
         }
 
-        private static Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
-        public static List<Card> GetSet(CardSet set)
-        {
-            if (!cardsBySet.ContainsKey(set))
-            {
-                cardsBySet[set] = AllCards.Where(c => c.Set == set).ToList();
-            }
-
-            return cardsBySet[set];
-        }
-
-        private static ReadOnlyCollection<Card> allCards = null;
-        public static ReadOnlyCollection<Card> AllCards 
+        public static ReadOnlyCollection<Card> AllCards
         {
             get
             {
@@ -138,7 +133,6 @@ namespace Ben.Dominion
             }
         }
 
-        private static ReadOnlyCollection<Card> pickableCards = null;
         public static ReadOnlyCollection<Card> PickableCards
         {
             get
@@ -154,7 +148,6 @@ namespace Ben.Dominion
             }
         }
 
-        private static Dictionary<Int32, Card> lookup = null;
         public static Dictionary<Int32, Card> Lookup
         {
             get
@@ -167,7 +160,6 @@ namespace Ben.Dominion
             }
         }
 
-        private static Dictionary<string, Card> nameLookup = null;
         public static Dictionary<string, Card> NameLookup
         {
             get
@@ -180,22 +172,30 @@ namespace Ben.Dominion
             }
         }
 
+        public static List<Card> GetSet(CardSet set)
+        {
+            if (!cardsBySet.ContainsKey(set))
+            {
+                cardsBySet[set] = AllCards.Where(c => c.Set == set).ToList();
+            }
+
+            return cardsBySet[set];
+        }
+
         public static List<Card> Load()
         {
-            List<Card> cards = null;
+            List<Card> cards;
 
-            using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(PickerCardsFileName))
+            using (var stream = TitleContainer.OpenStream(PickerCardsFileName))
             {
                 cards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
             }
 
-            // Check if we need to load another language.
-            //string localizedFileName = Strings.ResourceManager.GetString("Application_LocalizedCardsFileName", MainModel.Instance.Configuration.CurrentCulture);
-            string localizedFileName = Strings.Application_LocalizedCardsFileName;
+            string localizedFileName = CardDataStrings.Application_LocalizedCardsFileName;
             if (!string.IsNullOrWhiteSpace(localizedFileName))
             {
                 List<Card> localizedCards;
-                using (var stream = Microsoft.Xna.Framework.TitleContainer.OpenStream(localizedFileName))
+                using (var stream = TitleContainer.OpenStream(localizedFileName))
                 {
                     localizedCards = GenericXmlSerializer.Deserialize<List<Card>>(stream);
                 }
@@ -204,6 +204,8 @@ namespace Ben.Dominion
                 {
                     var localizeLookup = localizedCards.ToDictionary(c => c.ID);
 
+                    bool mergeRulesText = ConfigurationModel.Instance.LocalizeRulesText;
+
                     // Loop through each card in the current set, and merge the localized
                     // version ontop if we have it.
                     foreach (var card in cards)
@@ -211,7 +213,7 @@ namespace Ben.Dominion
                         Card c;
                         if (localizeLookup.TryGetValue(card.ID, out c))
                         {
-                            card.MergeFrom(c);
+                            card.MergeFrom(c, mergeRulesText);
                         }
                     }
                 }
@@ -259,12 +261,15 @@ namespace Ben.Dominion
     }
 
     /// <summary>
-    /// A simple key value pair to joins a specific card with a filtered status 
+    /// A simple key value pair to joins a specific card with a filtered status
     /// that can be used for data binding a check box.
     /// </summary>
     public class CardSelector : IComparable<CardSelector>
     {
-        public CardSelector() { }
+        public CardSelector()
+        {
+        }
+
         public CardSelector(Card card, bool selected)
         {
             this.Card = card;
@@ -274,6 +279,11 @@ namespace Ben.Dominion
         public Card Card { get; set; }
         public bool Selected { get; set; }
         public bool Filtered { get; set; }
+
+        public int CompareTo(CardSelector other)
+        {
+            return String.CompareOrdinal(this.Card.Name, other.Card.Name);
+        }
 
         public bool Filter(bool filtered)
         {
@@ -286,12 +296,6 @@ namespace Ben.Dominion
             return true;
         }
 
-        public int CompareTo(CardSelector other)
-        {
-            return String.CompareOrdinal(this.Card.Name, other.Card.Name);
-            //return this.Card.ID.CompareTo(other.Card.ID);
-        }
-
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
@@ -300,17 +304,12 @@ namespace Ben.Dominion
         /// </returns>
         public override string ToString()
         {
-            return string.Format("[{0}] {1}", Selected ? "X" : "_", Card);
+            return string.Format("[{0}] {1}", this.Selected ? "X" : "_", this.Card);
         }
     }
 
     public class CardNameComparer : Comparer<Card>, IEqualityComparer<Card>
     {
-        public override int Compare(Card x, Card y)
-        {
-            return x.Name.CompareTo(y.Name);
-        }
-
         public bool Equals(Card x, Card y)
         {
             return x.Name == y.Name;
@@ -319,6 +318,21 @@ namespace Ben.Dominion
         public int GetHashCode(Card card)
         {
             return card.Name.GetHashCode();
+        }
+
+        public override int Compare(Card x, Card y)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+
+            return String.Compare(x.Name, y.Name, StringComparison.Ordinal);
         }
     }
 }

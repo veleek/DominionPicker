@@ -58,7 +58,6 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Margin="0,-5,-5,-5"
-                                              Grid.Column="0"
                                               Width="225"
                                               IsChecked="{Binding Enabled, Mode=TwoWay}">
                                             <CheckBox.Content>

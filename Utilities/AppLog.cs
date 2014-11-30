@@ -48,6 +48,12 @@ namespace Ben.Utilities
             this.Lines.Add(new LogLine(text, LogLevel.Error));
             Debug.WriteLine("Error: " + text);
         }
+
+        public void Error(String error, Exception exception)
+        {
+            this.Error(error);
+            BugSense.BugSenseHandler.Instance.LogException(exception, "Message", error);
+        }
     }
 
     public enum LogLevel

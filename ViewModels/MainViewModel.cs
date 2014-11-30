@@ -241,8 +241,7 @@ namespace Ben.Dominion
             }
             catch (IsolatedStorageException e)
             {
-                AppLog.Instance.Error("There was an issue trying to save the picker state.");
-                com.mtiks.winmobile.mtiks.Instance.AddException(new IOException("Unable to save picker state", e));
+                AppLog.Instance.Error("Unable to save picker state.", e);
             }
         }
 

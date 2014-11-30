@@ -82,9 +82,9 @@ namespace Ben.Data
         {
             Double baseValue = 0;
 
-            Thickness thickness = (Thickness)value;
-            if (thickness != null)
+            if (value is Thickness)
             {
+                Thickness thickness = (Thickness)value;
                 // Assuming a uniform thickness so just take the first value
                 baseValue = thickness.Left;
             }

@@ -4,7 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:data="clr-namespace:Ben.Data"
-    xmlns:local="clr-namespace:Ben.Dominion">
+    xmlns:local="clr-namespace:Ben.Dominion"
+    Startup="App_OnStartup">
 
     <Application.Resources>
         <data:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
