@@ -23,12 +23,11 @@
                                  IsIndeterminate="True" />
     </shell:SystemTray.ProgressIndicator>
     
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot" Background="Transparent">        
         <Grid.Resources>
-
             <DataTemplate x:Key="CardItemTemplate">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                              VerticalScrollBarVisibility="Disabled">
+                                VerticalScrollBarVisibility="Disabled">
                     <ScrollViewer.Style>
                         <Style TargetType="ScrollViewer">
                             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
@@ -90,10 +89,6 @@
                         </Grid>
                     </Border>
                 </ScrollViewer>
-            </DataTemplate>
-            
-            <DataTemplate x:Key="AdditionalStuffTemplate">
-                <TextBlock Text="{Binding}" Margin="0,3" Style="{StaticResource CardNameTextStyle}"/>
             </DataTemplate>
         </Grid.Resources>
         

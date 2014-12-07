@@ -120,4 +120,34 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value />
   </data>
+  <data name="Set_Alchemy" xml:space="preserve">
+    <value>Alchemy</value>
+  </data>
+  <data name="Set_Base" xml:space="preserve">
+    <value>Base</value>
+  </data>
+  <data name="Set_Cornucopia" xml:space="preserve">
+    <value>Cornucopia</value>
+  </data>
+  <data name="Set_DarkAges" xml:space="preserve">
+    <value>Dark Ages</value>
+  </data>
+  <data name="Set_Guilds" xml:space="preserve">
+    <value>Guilds</value>
+  </data>
+  <data name="Set_Hinterlands" xml:space="preserve">
+    <value>Hinterlands</value>
+  </data>
+  <data name="Set_Intrigue" xml:space="preserve">
+    <value>Intrigue</value>
+  </data>
+  <data name="Set_Promo" xml:space="preserve">
+    <value>Promo</value>
+  </data>
+  <data name="Set_Prosperity" xml:space="preserve">
+    <value>Prosperity</value>
+  </data>
+  <data name="Set_Seaside" xml:space="preserve">
+    <value>Seaside</value>
+  </data>
 </root>

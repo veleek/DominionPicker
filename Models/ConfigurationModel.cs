@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO.IsolatedStorage;
-using Ben.Utilities;
 using Ben.Dominion.Resources;
+using Ben.Utilities;
 
 namespace Ben.Dominion.Models
 {
@@ -15,8 +11,8 @@ namespace Ben.Dominion.Models
     public class ConfigurationModel : NotifyPropertyChangedBase
     {
         public const string ConfigurationModelFilePath = "Configuration.xml";
-
         private static ConfigurationModel instance;
+        private CultureInfo overrideCulture = CultureInfo.InvariantCulture;
 
         public static ConfigurationModel Instance
         {
@@ -24,7 +20,7 @@ namespace Ben.Dominion.Models
             {
                 if (instance == null)
                 {
-                    instance = ConfigurationModel.Load();
+                    instance = Load();
 
                     if (instance.LocalizeUI)
                     {
@@ -40,29 +36,11 @@ namespace Ben.Dominion.Models
             }
         }
 
-        private static ConfigurationModel Load()
-        {
-            return Load(ConfigurationModelFilePath);
-        }
-
-        private static ConfigurationModel Load(string path)
-        {
-            return new ConfigurationModel();
-        }
-
-        private CultureInfo overrideCulture = CultureInfo.InvariantCulture;
-
         public CultureInfo CurrentCulture
         {
-            get
-            {
-                return OverrideCulture ?? CultureInfo.CurrentCulture;
-            }
+            get { return this.OverrideCulture ?? CultureInfo.CurrentCulture; }
 
-            set
-            {
-                this.OverrideCulture = value;
-            }
+            set { this.OverrideCulture = value; }
         }
 
         /// <summary>
@@ -74,12 +52,12 @@ namespace Ben.Dominion.Models
             {
                 if (Equals(this.overrideCulture, CultureInfo.InvariantCulture))
                 {
-                    string cultureName = OverrideCultureName;
+                    var cultureName = this.OverrideCultureName;
 
-                    overrideCulture = cultureName != null ? new CultureInfo(cultureName) : null;
+                    this.overrideCulture = cultureName != null ? new CultureInfo(cultureName) : null;
                 }
 
-                return overrideCulture;
+                return this.overrideCulture;
             }
 
             set
@@ -89,7 +67,7 @@ namespace Ben.Dominion.Models
                     value = null;
                 }
 
-                OverrideCultureName = value != null ? value.Name : null;
+                this.OverrideCultureName = value != null ? value.Name : null;
                 this.NotifyPropertyChanged("OverrideCulture");
                 this.NotifyPropertyChanged("CurrentCulture");
             }
@@ -99,23 +77,22 @@ namespace Ben.Dominion.Models
         {
             get
             {
-                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault<string>("Application_OverrideCultureName");
+                return
+                    IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault<string>(
+                        "Application_OverrideCultureName");
             }
 
             set
             {
                 IsolatedStorageSettings.ApplicationSettings["Application_OverrideCultureName"] = value;
-                overrideCulture = CultureInfo.InvariantCulture;
+                this.overrideCulture = CultureInfo.InvariantCulture;
                 this.NotifyPropertyChanged("OverrideCultureName");
             }
         }
 
         public bool LocalizeUI
         {
-            get
-            {
-                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_LocalizeUI", true);
-            }
+            get { return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_LocalizeUI", true); }
 
             set
             {
@@ -150,6 +127,16 @@ namespace Ben.Dominion.Models
                 IsolatedStorageSettings.ApplicationSettings["Application_LocalizeRulesText"] = value;
                 this.NotifyPropertyChanged("LocalizeRulesText");
             }
+        }
+
+        private static ConfigurationModel Load()
+        {
+            return Load(ConfigurationModelFilePath);
+        }
+
+        private static ConfigurationModel Load(string path)
+        {
+            return new ConfigurationModel();
         }
     }
 }

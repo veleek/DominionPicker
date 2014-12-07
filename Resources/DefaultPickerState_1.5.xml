@@ -1,0 +1,410 @@
+﻿<?xml version="1.0"?>
+<PickerState xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CurrentSettings>
+    <Sets>
+      <SetSelector Set="Base" IsSelected="true" />
+      <SetSelector Set="Intrigue" IsSelected="true" />
+      <SetSelector Set="Seaside" IsSelected="true" />
+      <SetSelector Set="Alchemy" IsSelected="true" />
+      <SetSelector Set="Prosperity" IsSelected="true" />
+      <SetSelector Set="Cornucopia" IsSelected="true" />
+      <SetSelector Set="Hinterlands" IsSelected="true" />
+      <SetSelector Set="Promo" IsSelected="false" />
+    </Sets>
+    <MinimumCardsPerSet>
+      <Name>Minimum cards per set</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">true</OptionValue>
+      <IsEnabled>true</IsEnabled>
+      <SelectedValue>5</SelectedValue>
+      <ValidValues>
+        <int>2</int>
+        <int>3</int>
+        <int>4</int>
+        <int>5</int>
+        <int>10</int>
+      </ValidValues>
+    </MinimumCardsPerSet>
+    <RequireDefense>
+      <Name>If there's an attack,
+require a defense card</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </RequireDefense>
+    <RequireTrash>
+      <Name>Require a card that lets
+you trash other cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </RequireTrash>
+    <PlusBuys>
+      <Name>+Buys Policy</Name>
+      <Notes>This may take a bit longer</Notes>
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+      <SelectedValue>Require</SelectedValue>
+      <ValidValues>
+        <string>Require</string>
+        <string>Require +2</string>
+        <string>Prevent</string>
+        <string>Prevent +2</string>
+      </ValidValues>
+    </PlusBuys>
+    <PlusActions>
+      <Name>+Actions Policy</Name>
+      <Notes>This may take a bit longer</Notes>
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+      <SelectedValue>Require</SelectedValue>
+      <ValidValues>
+        <string>Require</string>
+        <string>Require +2</string>
+        <string>Prevent</string>
+        <string>Prevent +2</string>
+      </ValidValues>
+    </PlusActions>
+    <PlusCoins>
+      <Name>+Coins Policy</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+      <SelectedValue>Require</SelectedValue>
+      <ValidValues>
+        <string>Require</string>
+        <string>Require +2</string>
+        <string>Prevent</string>
+        <string>Prevent +2</string>
+      </ValidValues>
+    </PlusCoins>
+    <FilterPotions>
+      <Name>Filter Cards that Cost Potions</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterPotions>
+    <FilterAction>
+      <Name>Filter Action Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterAction>
+    <FilterAttack>
+      <Name>Filter Attack Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterAttack>
+    <FilterDuration>
+      <Name>Filter Duration Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterDuration>
+    <FilterReaction>
+      <Name>Filter Reaction Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterReaction>
+    <FilterTreasure>
+      <Name>Filter Treasure Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterTreasure>
+    <FilterVictory>
+      <Name>Filter Victory Cards</Name>
+      <Notes />
+      <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+      <IsEnabled>false</IsEnabled>
+    </FilterVictory>
+  </CurrentSettings>
+  <FavoriteSettings>
+    <FavoriteSetting>
+      <Name>All Sets - Pick 2 (1.5)</Name>
+      <Value>
+        <Sets>
+          <SetSelector Set="Base" IsSelected="true" />
+          <SetSelector Set="Intrigue" IsSelected="true" />
+          <SetSelector Set="Seaside" IsSelected="true" />
+          <SetSelector Set="Alchemy" IsSelected="true" />
+          <SetSelector Set="Prosperity" IsSelected="true" />
+          <SetSelector Set="Cornucopia" IsSelected="true" />
+          <SetSelector Set="Hinterlands" IsSelected="true" />
+          <SetSelector Set="Promo" IsSelected="false" />
+        </Sets>
+        <MinimumCardsPerSet>
+          <Name>Minimum cards per set</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">true</OptionValue>
+          <IsEnabled>true</IsEnabled>
+          <SelectedValue>5</SelectedValue>
+          <ValidValues>
+            <int>2</int>
+            <int>3</int>
+            <int>4</int>
+            <int>5</int>
+            <int>10</int>
+          </ValidValues>
+        </MinimumCardsPerSet>
+        <RequireDefense>
+          <Name>If there's an attack,
+require a defense card</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </RequireDefense>
+        <RequireTrash>
+          <Name>Require a card that lets
+you trash other cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </RequireTrash>
+        <PlusBuys>
+          <Name>+Buys Policy</Name>
+          <Notes>This may take a bit longer</Notes>
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusBuys>
+        <PlusActions>
+          <Name>+Actions Policy</Name>
+          <Notes>This may take a bit longer</Notes>
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusActions>
+        <PlusCoins>
+          <Name>+Coins Policy</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusCoins>
+        <FilterPotions>
+          <Name>Filter Cards that Cost Potions</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterPotions>
+        <FilterAction>
+          <Name>Filter Action Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterAction>
+        <FilterAttack>
+          <Name>Filter Attack Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterAttack>
+        <FilterDuration>
+          <Name>Filter Duration Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterDuration>
+        <FilterReaction>
+          <Name>Filter Reaction Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterReaction>
+        <FilterTreasure>
+          <Name>Filter Treasure Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterTreasure>
+        <FilterVictory>
+          <Name>Filter Victory Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterVictory>
+      </Value>
+    </FavoriteSetting>
+    <FavoriteSetting>
+      <Name>Simple Base &amp; Intrigue</Name>
+      <Value>
+        <Sets>
+          <SetSelector Set="Base" IsSelected="true" />
+          <SetSelector Set="Intrigue" IsSelected="true" />
+          <SetSelector Set="Seaside" IsSelected="false" />
+          <SetSelector Set="Alchemy" IsSelected="false" />
+          <SetSelector Set="Prosperity" IsSelected="false" />
+          <SetSelector Set="Cornucopia" IsSelected="false" />
+          <SetSelector Set="Hinterlands" IsSelected="false" />
+          <SetSelector Set="Promo" IsSelected="false" />
+        </Sets>
+        <MinimumCardsPerSet>
+          <Name>Minimum cards per set</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>5</SelectedValue>
+          <ValidValues>
+            <int>2</int>
+            <int>3</int>
+            <int>4</int>
+            <int>5</int>
+            <int>10</int>
+          </ValidValues>
+        </MinimumCardsPerSet>
+        <RequireDefense>
+          <Name>If there's an attack,
+require a defense card</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">true</OptionValue>
+          <IsEnabled>true</IsEnabled>
+        </RequireDefense>
+        <RequireTrash>
+          <Name>Require a card that lets you
+trash other cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </RequireTrash>
+        <PlusBuys>
+          <Name>+Buys Policy</Name>
+          <Notes>This may take a bit longer</Notes>
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusBuys>
+        <PlusActions>
+          <Name>+Actions Policy</Name>
+          <Notes>This may take a bit longer</Notes>
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusActions>
+        <PlusCoins>
+          <Name>+Coins Policy</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+          <SelectedValue>Require</SelectedValue>
+          <ValidValues>
+            <string>Require</string>
+            <string>Require +2</string>
+            <string>Prevent</string>
+            <string>Prevent +2</string>
+          </ValidValues>
+        </PlusCoins>
+        <FilterPotions>
+          <Name>Filter Cards that Cost Potions</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterPotions>
+        <FilterAction>
+          <Name>Filter Action Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterAction>
+        <FilterAttack>
+          <Name>Filter Attack Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterAttack>
+        <FilterDuration>
+          <Name>Filter Duration Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterDuration>
+        <FilterReaction>
+          <Name>Filter Reaction Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterReaction>
+        <FilterTreasure>
+          <Name>Filter Treasure Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterTreasure>
+        <FilterVictory>
+          <Name>Filter Victory Cards</Name>
+          <Notes />
+          <OptionValue xsi:type="xsd:boolean">false</OptionValue>
+          <IsEnabled>false</IsEnabled>
+        </FilterVictory>
+      </Value>
+    </FavoriteSetting>
+  </FavoriteSettings>
+  <FavoriteSets>
+    <FavoriteSet>
+      <Name>Big Money</Name>
+      <Value>4,8,25,2,9,12,17,20,22,23</Value>
+    </FavoriteSet>
+    <FavoriteSet>
+      <Name>Secret Schemes</Name>
+      <Value>37,49,39,27,44,31,32,33,46,47</Value>
+    </FavoriteSet>
+    <FavoriteSet>
+      <Name>High Seas</Name>
+      <Value>69,61,51,70,52,63,58,65,59,76</Value>
+    </FavoriteSet>
+    <FavoriteSet>
+      <Name>Forbidden Arts</Name>
+      <Value>1,18,20,16,17,88,84,89,82,10</Value>
+    </FavoriteSet>
+  </FavoriteSets>
+  <Result>
+    <Cards>
+      <Card ID="8" Name="Bureaucrat" Set="Base" Type="Attack Action" Cost="4" Rules="Gain a silver card; put it on top of your deck.\nEach other player reveals a Victory card from his hand and puts it on his deck (or reveals a hand with no Victory cards)." />
+      <Card ID="51" Name="Embargo" Set="Seaside" Type="Action" Cost="2" Rules="+2 Coins\nTrash this card. Put an Embargo token on top of a Supply pile. - When a player buys a card, he gains a Curse card per Embargo token on that pile." />
+      <Card ID="9" Name="Feast" Set="Base" Type="Action" Cost="4" Rules="Trash this card. Gain a card costing up to 5 Coins." />
+      <Card ID="57" Name="Fishing Village" Set="Seaside" Type="Duration Action" Cost="3" Rules="+2 Actions\n+1 Coin\nAt the start of your next turn:\n+1 Action\n+1 Coin." />
+      <Card ID="12" Name="Moneylender" Set="Base" Type="Action" Cost="4" Rules="Trash a Copper from your hand.\nIf you do, +3 Coins." />
+      <Card ID="73" Name="Outpost" Set="Seaside" Type="Duration Action" Cost="5" Rules="You only draw 3 cards (instead of 5) in this turn's Clean-up phase. Take an extra turn after this one. This can't cause you to take more than two consecutive turns." />
+      <Card ID="17" Name="Throne Room" Set="Base" Type="Action" Cost="4" Rules="Choose an Action card in your hand.\nPlay it twice." />
+      <Card ID="68" Name="Treasure Map" Set="Seaside" Type="Action" Cost="4" Rules="Trash this and another copy of Treasure Map from your hand. If you do trash two Treasure Maps, gain 4 Gold cards, putting them on top of your deck." />
+      <Card ID="76" Name="Wharf" Set="Seaside" Type="Duration Action" Cost="5" Rules="Now and at the start of your next turn:\n+2 Cards\n+1 Buy" />
+      <Card ID="24" Name="Witch" Set="Base" Type="Attack Action" Cost="5" Rules="+2 Cards\nEach other player gains a Curse card." />
+    </Cards>
+    <RequireCurses>false</RequireCurses>
+    <RequireProvinceAndPlatinum>false</RequireProvinceAndPlatinum>
+    <RequirePrizes>false</RequirePrizes>
+  </Result>
+  <SortOrder>Name</SortOrder>
+</PickerState>

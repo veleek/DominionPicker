@@ -118,36 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Resources/DominionPickerCards.fr.xml</value>
+    <value>./Resources/DominionPickerCards.it.xml</value>
   </data>
   <data name="Set_Alchemy" xml:space="preserve">
-    <value>Alchimie</value>
+    <value>Alchemia</value>
   </data>
   <data name="Set_Base" xml:space="preserve">
-    <value>Jeu de base</value>
+    <value>Set Base</value>
   </data>
   <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Abondance</value>
-  </data>
-  <data name="Set_DarkAges" xml:space="preserve">
-    <value>Age des Ténèbres</value>
-  </data>
-  <data name="Set_Guilds" xml:space="preserve">
-    <value>Guildes</value>
-  </data>
-  <data name="Set_Hinterlands" xml:space="preserve">
-    <value>L'Arrière-pays</value>
+    <value>Cornucopia</value>
   </data>
   <data name="Set_Intrigue" xml:space="preserve">
-    <value>L'Intrigue</value>
+    <value>Intrigo</value>
   </data>
   <data name="Set_Promo" xml:space="preserve">
     <value>Promo</value>
   </data>
   <data name="Set_Prosperity" xml:space="preserve">
-    <value>Prospérité</value>
+    <value>Prosperità</value>
   </data>
   <data name="Set_Seaside" xml:space="preserve">
-    <value>Rivages</value>
+    <value>Seaside</value>
   </data>
 </root>

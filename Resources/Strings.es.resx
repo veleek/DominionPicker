@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Assets/DominionPickerCards.es.xml</value>
+    <value>./Resources/DominionPickerCards.es.xml</value>
   </data>
   <data name="Dominion_CoinToken" xml:space="preserve">
     <value>Marcador de Moneda</value>
@@ -140,27 +140,6 @@
   </data>
   <data name="Dominion_Token" xml:space="preserve">
     <value>Marcador</value>
-  </data>
-  <data name="Set_Alchemy" xml:space="preserve">
-    <value>Alquimia</value>
-  </data>
-  <data name="Set_Base" xml:space="preserve">
-    <value>Básico</value>
-  </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Cornucopia</value>
-  </data>
-  <data name="Set_Intrigue" xml:space="preserve">
-    <value>Intriga</value>
-  </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
-  </data>
-  <data name="Set_Prosperity" xml:space="preserve">
-    <value>Prosperidad</value>
-  </data>
-  <data name="Set_Seaside" xml:space="preserve">
-    <value>Terramar</value>
   </data>
   <data name="Type_Action" xml:space="preserve">
     <value>Acción</value>

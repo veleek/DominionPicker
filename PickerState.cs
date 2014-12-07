@@ -100,7 +100,7 @@ namespace Ben.Dominion
                 {
                     if (state == null)
                     {
-                        using (Stream stream = TitleContainer.OpenStream("./Assets/DefaultPickerState_1.7.xml"))
+                        using (Stream stream = TitleContainer.OpenStream("./Resources/DefaultPickerState_1.7.xml"))
                         {
                             Type[] extraTypes = new[]
                             {
@@ -156,7 +156,7 @@ namespace Ben.Dominion
         public static void SaveDefault()
         {
             string data;
-            using (Stream stream = TitleContainer.OpenStream("./Assets/OldPickerState.xml"))
+            using (Stream stream = TitleContainer.OpenStream("./Resources/OldPickerState.xml"))
             {
                 StreamReader reader = new StreamReader(stream);
                 data = reader.ReadToEnd();

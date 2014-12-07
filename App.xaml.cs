@@ -1,59 +1,37 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
 using Ben.Dominion.Models;
-using Ben.Dominion.Resources;
 using Ben.Utilities;
+using BugSense;
 using BugSense.Core.Model;
 using GalaSoft.MvvmLight.Threading;
+using GoogleAnalytics;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
-
 
 namespace Ben.Dominion
 {
     public partial class App : Application
     {
-        /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
-        public PhoneApplicationFrame RootFrame { get; private set; }
-        
-        public Card SelectedCard { get; set; }
-
         public const String AdApplicationId = "a7ac8297-9d02-405b-9dca-4d702cf50997";
         public const String MtiksApplicationId = "166ff6d5917b9569d549eec40";
         public const String BugSenseApiKey = "4d5d8cdd";
-
-        private LicenseInformation license = new LicenseInformation();
-        public Boolean IsTrial
-        {
-            get
-            {
-                //return true;
-                return license.IsTrial();
-            }
-        }
-
-        private Boolean isNew = false;
-
-        public bool IsNewVersion { get; set; }
+        private Boolean isNew;
+        private readonly LicenseInformation license = new LicenseInformation();
 
         /// <summary>
-        /// Constructor for the Application object.
+        /// Create a new instance of <see cref="App"/>
         /// </summary>
         public App()
         {
-            this.Startup += null;
-            BugSense.BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
 
-            isNew = true;
+            this.isNew = true;
             AppLog.Instance.Log("Launching: " + Assembly.GetExecutingAssembly().FullName);
 
             // Show graphics profiling information while debugging.
@@ -76,48 +54,59 @@ namespace Ben.Dominion
                 //Strings.Culture = new CultureInfo("fr-CA");
             }
 
-            // Make sure the configuration has been initialized first
-            var config = ConfigurationModel.Instance;
-
-            // Then load the main view model
-            var mainView = MainViewModel.Instance;
-            this.Resources.Add("MainView", mainView);
-
             // Standard Silverlight initialization
-            InitializeComponent();
+            this.InitializeComponent();
 
             // Phone-specific initialization
-            InitializePhoneApplication();
+            this.InitializePhoneApplication();
         }
+
+        /// <summary>
+        ///     Provides easy access to the root frame of the Phone Application.
+        /// </summary>
+        /// <returns>The root frame of the Phone Application.</returns>
+        public PhoneApplicationFrame RootFrame { get; private set; }
+
+        public Card SelectedCard { get; set; }
+
+        public Boolean IsTrial
+        {
+            get
+            {
+                //return true;
+                return this.license.IsTrial();
+            }
+        }
+
+        public bool IsNewVersion { get; set; }
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            // Increment the launch count and save it back
+            var appLaunchCount = IsolatedStorageSettings.ApplicationSettings.Increment("AppLaunchCount");
+            EasyTracker.GetTracker().SendEvent("app", "launch", null, appLaunchCount);
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            if (!isNew)
+            if (!this.isNew)
             {
                 // We're coming back from being paused
                 // so we don't need to load anything
             }
-            else
-            {
-            }
+
+            EasyTracker.GetTracker().SendEvent("app", "activate", null, 0);
         }
-
-
-
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            isNew = false;
+            this.isNew = false;
             MainViewModel.Instance.Save();
         }
 
@@ -138,60 +127,67 @@ namespace Ben.Dominion
             }
         }
 
+        private void App_OnStartup(object sender, StartupEventArgs e)
+        {
+            DispatcherHelper.Initialize();
+        }
+
         #region Phone application initialization
 
         // Avoid double-initialization
-        private bool phoneApplicationInitialized = false;
+        private bool phoneApplicationInitialized;
 
         // Do not add any additional code to this method
         private void InitializePhoneApplication()
         {
-            if (phoneApplicationInitialized)
+            if (this.phoneApplicationInitialized)
+            {
                 return;
+            }
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new PhoneApplicationFrame();
-            RootFrame.Navigated += CompleteInitializePhoneApplication;
+            this.RootFrame = new PhoneApplicationFrame();
+            this.RootFrame.Navigated += this.CompleteInitializePhoneApplication;
 
             // Handle navigation failures
-            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+            this.RootFrame.NavigationFailed += this.RootFrame_NavigationFailed;
 
             //AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
-            
-            // Increment the launch count and save it back
-            Int32 appLaunchCount = IsolatedStorageSettings.ApplicationSettings.Increment("AppLaunchCount");
+
+            // Make sure the configuration has been initialized first
+            var config = ConfigurationModel.Instance;
+
+            // Then load the main view model
+            this.Resources.Add("MainView", MainViewModel.Instance);
 
             // Check if we've updated since the last time we ran
-            String currentAppVersion = Assembly.GetExecutingAssembly().FullName;
-            String appVersion = IsolatedStorageSettings.ApplicationSettings.Replace("AppVersion", currentAppVersion);
+            var currentAppVersion = Assembly.GetExecutingAssembly().FullName;
+            var appVersion = IsolatedStorageSettings.ApplicationSettings.Replace("AppVersion", currentAppVersion);
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
                 AppLog.Instance.Log("New version detected.  Original: {0}, Current: {1}", appVersion, currentAppVersion);
                 this.IsNewVersion = true;
             }
-            
+
             // Ensure we don't initialize again
-            phoneApplicationInitialized = true;
+            this.phoneApplicationInitialized = true;
         }
 
         // Do not add any additional code to this method
         private void CompleteInitializePhoneApplication(object sender, NavigationEventArgs e)
         {
             // Set the root visual to allow the application to render
-            if (RootVisual != RootFrame)
-                RootVisual = RootFrame;
+            if (this.RootVisual != this.RootFrame)
+            {
+                this.RootVisual = this.RootFrame;
+            }
 
             // Remove this handler since it is no longer needed
-            RootFrame.Navigated -= CompleteInitializePhoneApplication;
+            this.RootFrame.Navigated -= this.CompleteInitializePhoneApplication;
         }
 
         #endregion
-
-        private void App_OnStartup(object sender, StartupEventArgs e)
-        {
-            DispatcherHelper.Initialize();
-        }
     }
 }

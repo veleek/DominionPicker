@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Media;
+using GoogleAnalytics;
 
 namespace Ben.Utilities
 {
@@ -53,6 +54,7 @@ namespace Ben.Utilities
         {
             this.Error(error);
             BugSense.BugSenseHandler.Instance.LogException(exception, "Message", error);
+            EasyTracker.GetTracker().SendException(exception.ToString(), false);
         }
     }
 

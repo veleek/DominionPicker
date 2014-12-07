@@ -15,8 +15,8 @@
         <data:ImageConverter x:Key="ImageConverter" />
         <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
-        <FontFamily x:Key="BookAntiquaBold">.\Assets\ANTQUAB.TTF#Book Antiqua</FontFamily>
-        <FontFamily x:Key="OptimusPrincepsSemiBold">.\Assets\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
+        <FontFamily x:Key="BookAntiquaBold">.\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
+        <FontFamily x:Key="OptimusPrincepsSemiBold">.\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
 
         <Style x:Key="CardCostTextStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource BookAntiquaBold}"/>
@@ -32,6 +32,10 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
+
+        <DataTemplate x:Key="AdditionalStuffTemplate">
+            <TextBlock Text="{Binding}" Margin="0,3" Style="{StaticResource CardNameTextStyle}"/>
+        </DataTemplate>
 
         <local:LocalizedResources x:Key="LocalizedResources" />
 

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Assets/DominionPickerCards.cs.xml</value>
+    <value>./Resources/DominionPickerCards.cs.xml</value>
   </data>
   <data name="Dominion_CoinToken" xml:space="preserve">
     <value>Žeton mince</value>
@@ -140,21 +140,6 @@
   </data>
   <data name="Dominion_Token" xml:space="preserve">
     <value>Žeton</value>
-  </data>
-  <data name="Set_Base" xml:space="preserve">
-    <value>Základní sada</value>
-  </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Roh hojnosti</value>
-  </data>
-  <data name="Set_Intrigue" xml:space="preserve">
-    <value>Intriky</value>
-  </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Promo karty</value>
-  </data>
-  <data name="Set_Seaside" xml:space="preserve">
-    <value>Pobřeží</value>
   </data>
   <data name="Type_Action" xml:space="preserve">
     <value>Akce</value>

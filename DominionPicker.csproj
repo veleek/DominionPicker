@@ -118,10 +118,10 @@
       <HintPath>packages\Coding4Fun.Toolkit.Controls.2.0.7\lib\windowsphone8\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalytics">
-      <HintPath>packages\GoogleAnalyticsSDK.1.2.12\lib\windowsphone8\GoogleAnalytics.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsSDK.1.2.13\lib\windowsphone8\GoogleAnalytics.dll</HintPath>
     </Reference>
     <Reference Include="GoogleAnalytics.Core">
-      <HintPath>packages\GoogleAnalyticsSDK.1.2.12\lib\windowsphone8\GoogleAnalytics.Core.dll</HintPath>
+      <HintPath>packages\GoogleAnalyticsSDK.1.2.13\lib\windowsphone8\GoogleAnalytics.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
@@ -155,6 +155,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CardDataStrings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\ApplicationBarHelper.cs" />
     <Compile Include="Utilities\MetroGridHelper.cs">
     </Compile>
     <Compile Include="Utilities\AppLog.cs">
@@ -255,14 +256,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Content Include="analytics.xml" />
-    <Content Include="Assets\DefaultPickerView.xml">
+    <Content Include="analytics.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Resources\DefaultPickerView.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\DefaultPickerView_1.9.xml">
+    <Content Include="Resources\DefaultPickerView_1.9.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="BugSense\BugSense - SDK License Agreement.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Page Include="AboutPage.xaml">
@@ -291,15 +293,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </DesignData>
-    <Content Include="Assets\DominionPickerCards.cs.xml" />
-    <Content Include="Assets\DominionPickerCards.de.xml" />
-    <Content Include="Assets\DominionPickerCards.es.xml" />
-    <Content Include="Assets\DominionPickerCards.fi.xml" />
-    <Content Include="Assets\DominionPickerCards.fr.xml" />
-    <Content Include="Assets\DominionPickerCards.it.xml" />
-    <Content Include="Assets\DominionPickerCards.nl.xml" />
-    <Content Include="Assets\DominionPickerCards.pl.xml" />
-    <Content Include="Assets\OldPickerState.xml">
+    <Content Include="Resources\DominionPickerCards.cs.xml" />
+    <Content Include="Resources\DominionPickerCards.de.xml" />
+    <Content Include="Resources\DominionPickerCards.es.xml" />
+    <Content Include="Resources\DominionPickerCards.fi.xml" />
+    <Content Include="Resources\DominionPickerCards.fr.xml" />
+    <Content Include="Resources\DominionPickerCards.it.xml" />
+    <Content Include="Resources\DominionPickerCards.nl.xml" />
+    <Content Include="Resources\DominionPickerCards.pl.xml" />
+    <Content Include="Resources\OldPickerState.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -381,18 +383,18 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\DefaultPickerState_1.5.xml">
+    <Content Include="Resources\DefaultPickerState_1.5.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\DefaultPickerState_1.7.xml">
+    <Content Include="Resources\DefaultPickerState_1.7.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\DefaultPickerView_1.8.xml">
+    <Content Include="Resources\DefaultPickerView_1.8.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Dominican-SmallCaps.ttf" />
+    <Content Include="Resources\Dominican-SmallCaps.ttf" />
     <Content Include="Images\actionicon.cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -402,10 +404,10 @@
     <Content Include="Images\SetIcons\guilds.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\OptimusPrincepsSemiBold.ttf">
+    <Content Include="Resources\OptimusPrincepsSemiBold.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\ANTQUAB.TTF">
+    <Content Include="Resources\ANTQUAB.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="analytics.xsd">
@@ -426,10 +428,10 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Changes.txt">
+    <Content Include="Resources\Changes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\DominionPickerCards.xml">
+    <Content Include="Resources\DominionPickerCards.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
@@ -526,23 +528,40 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\CardDataStrings.cs.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.de.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.es.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.fi.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.it.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.nl.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.pl.resx" />
     <EmbeddedResource Include="Resources\CardDataStrings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CardDataStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Strings.cs.resx" />
+    <EmbeddedResource Include="Resources\Strings.cs.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.fi.resx">
       <LastGenOutput>Strings.fi-FI.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.es.resx">
       <LastGenOutput>Strings.es-ES.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\CardDataStrings.fr.resx" />
-    <EmbeddedResource Include="Resources\Strings.fr.resx" />
-    <EmbeddedResource Include="Resources\Strings.it.resx" />
+    <EmbeddedResource Include="Resources\CardDataStrings.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Strings.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>

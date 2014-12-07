@@ -118,36 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Resources/DominionPickerCards.fr.xml</value>
-  </data>
-  <data name="Set_Alchemy" xml:space="preserve">
-    <value>Alchimie</value>
+    <value>./Resources/DominionPickerCards.pl.xml</value>
   </data>
   <data name="Set_Base" xml:space="preserve">
-    <value>Jeu de base</value>
+    <value>Zestaw podstawowy</value>
   </data>
   <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Abondance</value>
-  </data>
-  <data name="Set_DarkAges" xml:space="preserve">
-    <value>Age des Ténèbres</value>
-  </data>
-  <data name="Set_Guilds" xml:space="preserve">
-    <value>Guildes</value>
-  </data>
-  <data name="Set_Hinterlands" xml:space="preserve">
-    <value>L'Arrière-pays</value>
+    <value>Róg Obfitości</value>
   </data>
   <data name="Set_Intrigue" xml:space="preserve">
-    <value>L'Intrigue</value>
+    <value>Intryga</value>
   </data>
   <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
+    <value>Karty promocyjne</value>
   </data>
-  <data name="Set_Prosperity" xml:space="preserve">
-    <value>Prospérité</value>
+  <data name="Type_Action" xml:space="preserve">
+    <value>Akcja</value>
   </data>
-  <data name="Set_Seaside" xml:space="preserve">
-    <value>Rivages</value>
+  <data name="Type_Attack" xml:space="preserve">
+    <value>Atak</value>
+  </data>
+  <data name="Type_Reaction" xml:space="preserve">
+    <value>Reakcja</value>
+  </data>
+  <data name="Type_Treasure" xml:space="preserve">
+    <value>Skarb</value>
+  </data>
+  <data name="Type_Victory" xml:space="preserve">
+    <value>Zwycięstwo</value>
   </data>
 </root>

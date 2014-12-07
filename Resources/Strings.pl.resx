@@ -118,19 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Assets/DominionPickerCards.pl.xml</value>
-  </data>
-  <data name="Set_Base" xml:space="preserve">
-    <value>Zestaw podstawowy</value>
-  </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Róg Obfitości</value>
-  </data>
-  <data name="Set_Intrigue" xml:space="preserve">
-    <value>Intryga</value>
-  </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Karty promocyjne</value>
+    <value>./Resources/DominionPickerCards.pl.xml</value>
   </data>
   <data name="Type_Action" xml:space="preserve">
     <value>Akcja</value>

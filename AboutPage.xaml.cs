@@ -25,7 +25,7 @@ namespace Ben.Dominion
 
             VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
             
-            StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Assets/Changes.txt", UriKind.Relative));
+            StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Resources/Changes.txt", UriKind.Relative));
             if (sri != null)
             {
                 StackPanel changes = new StackPanel();

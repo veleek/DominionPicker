@@ -14,7 +14,7 @@ namespace Ben.Dominion
 {
     public static class Cards
     {
-        public static readonly string PickerCardsFileName = "./Assets/DominionPickerCards.xml";
+        public static readonly string PickerCardsFileName = "./Resources/DominionPickerCards.xml";
 
         private static readonly Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
 

@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Navigation;
+using GoogleAnalytics;
 
 namespace Ben.Utilities
 {
@@ -9,23 +10,24 @@ namespace Ben.Utilities
 
         public static void Initialize(this NavigationService navigationService)
         {
-            navigationService.Navigated += navigationService_Navigated;
-            isInitalized = true;
+            if (!isInitalized)
+            {
+                navigationService.Navigated += navigationService_Navigated;
+                isInitalized = true;
+            }
         }
 
         static void navigationService_Navigated(object sender, NavigationEventArgs e)
         {
             IsNavigating = false;
+            EasyTracker.GetTracker().SendView(e.Uri.ToString());
         }
 
         public static bool IsNavigating { get; private set; }
 
         public static void Navigate(this NavigationService navigationService, String pageUri)
         {
-            if (!isInitalized)
-            {
-                Initialize(navigationService);
-            }
+            Initialize(navigationService);
 
             if(IsNavigating)
             {
@@ -46,7 +48,7 @@ namespace Ben.Utilities
 
                 // Occasionally we can get an exception here where navigation will fail
                 // if the app is no longer in the foreground for some reason.  Just ignore it.
-                BugSense.BugSenseHandler.Instance.LogEvent(string.Format("Caught navigation exception: {0}", ioe.Message));
+                AppLog.Instance.Error("Caught navigation exception", ioe);
             }
 
         }

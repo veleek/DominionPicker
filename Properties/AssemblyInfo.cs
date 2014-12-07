@@ -11,7 +11,7 @@ using System.Resources;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Ben Corp.")]
 [assembly: AssemblyProduct("DominionPicker")]
-[assembly: AssemblyCopyright("Copyright ©2010-2013 Ben Randall")]
+[assembly: AssemblyCopyright("Copyright ©2010-2015 Ben Randall")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Resources;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.9.*")]
-[assembly: AssemblyFileVersion("1.9.3.0")]
+[assembly: AssemblyVersion("2.0.*")]
+[assembly: AssemblyFileVersion("2.0.0.0")]
 [assembly: NeutralResourcesLanguageAttribute("en")]

@@ -6,6 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -18,7 +19,7 @@
         <Grid.Resources>
             <DataTemplate x:Key="CardItemTemplate">
                 <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                              VerticalScrollBarVisibility="Disabled">
+                            VerticalScrollBarVisibility="Disabled">
                     <ScrollViewer.Style>
                         <Style TargetType="ScrollViewer">
                             <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
@@ -57,37 +58,32 @@
                         </Style>
                     </ScrollViewer.Style>
                     <Border Margin="2"
-                            Background="{Binding BackgroundColor}"
-                            CornerRadius="5"
-                            Tap="CardItem_Tap">
+                        Background="{Binding BackgroundColor}"
+                        CornerRadius="5"
+                        Tap="CardItem_Tap">
                         <Grid Margin="0,1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" MinWidth="6" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" MinWidth="6"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0" />
-                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0"
-                                       Style="{StaticResource CardCostTextStyle}" />
-                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0"
-                                   Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="2,6,12,0"
-                                       Style="{StaticResource CardNameTextStyle}" Foreground="Black" />
-                            <TextBlock Text="{Binding Name}" Grid.Column="2" Margin="0,3,12,0"
-                                       Style="{StaticResource CardNameTextStyle}" Foreground="White" />
-                            <Border
-                                Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
-                                Grid.Column="2"
-                                HorizontalAlignment="Right"
-                                Width="40"
-                                Margin="5,5" />
+                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
+                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
+                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
+                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
+                            <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                            Grid.Column="2"
+                            HorizontalAlignment="Right"
+                            Width="40"
+                            Margin="5,5"/>
                         </Grid>
                     </Border>
                 </ScrollViewer>
             </DataTemplate>
         </Grid.Resources>
-
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

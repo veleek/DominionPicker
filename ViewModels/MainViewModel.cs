@@ -107,7 +107,7 @@ namespace Ben.Dominion
         /// </summary>
         public static MainViewModel LoadDefault()
         {
-            using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Assets/DefaultPickerView.xml"))
+            using (Stream stream = Microsoft.Xna.Framework.TitleContainer.OpenStream("./Resources/DefaultPickerView.xml"))
             {
                 return GenericXmlSerializer.Deserialize<MainViewModel>(stream);
             }
