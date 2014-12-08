@@ -1,7 +1,21 @@
 ﻿Version 2.0
 Switching to two digit versions so that published version will be the same as actually assembly version in app.
-Republishing app to get around issue with app not appearing on many phones.
-Fixed 'localization' so that all languages should work again.
+Push to version 2.0 to resolve issue with app not appearing in app list.
+Added Google Analytics.
+Fixed localization stuff for all other languages.
+Fixed localized card names on Black Market page.
+Fixed localized sort orders.
+
+Version 1.9.3 Change Notes:
+Removed support for localization because app was revoked from marketplace because not the entire application was localized.  The language of various portions of the UI and the cards can still be localized from the settings menu. 
+
+Version 1.9.2 Change Notes:
+
+Updated for Windows Phone 8
+Added localization support including most cards Czech, Dutch, Finnish (Suomi), French, German, Italian, Polish, Spanish.
+Added Black Market Deck.
+Added Prince promo card.
+Lots of background updates.
 
 Version 1.9.3
 Removed support for localization based on phone region because app was revoked from marketplace because not the entire application was localized.  
