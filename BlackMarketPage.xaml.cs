@@ -5,6 +5,7 @@ using System.Windows.Input;
 using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Phone.Controls;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Ben.Dominion
 {
@@ -12,7 +13,7 @@ namespace Ben.Dominion
     {
         public BlackMarketPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.Loaded += (s, e) =>
             {
@@ -38,20 +39,20 @@ namespace Ben.Dominion
 
         private void ScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            ScrollContentPresenter contentPresenter = sender as ScrollContentPresenter;
+            var contentPresenter = sender as ScrollContentPresenter;
             if (contentPresenter == null)
             {
                 return;
             }
 
-            var scrollViewer = contentPresenter.ScrollOwner;
-            var card = scrollViewer.GetContext<Card>();
+            ScrollViewer scrollViewer = contentPresenter.ScrollOwner;
+            Card card = scrollViewer.GetContext<Card>();
 
             if (card != null && MainViewModel.Instance.BlackMarket.Hand.Contains(card))
             {
-                var v = e.FinalVelocities.LinearVelocity;
-                var m = v.GetMagnitude();
-                var a = Math.Abs(v.X);
+                Point v = e.FinalVelocities.LinearVelocity;
+                double m = v.GetMagnitude();
+                double a = Math.Abs(v.X);
 
                 // If it's an intertal manipulation, and it's 80% in the X direction
                 // and the total manipulitation is greater than 400
@@ -59,11 +60,10 @@ namespace Ben.Dominion
                 {
                     MainViewModel.Instance.BlackMarket.Replace(card);
                 }
-                
             }
         }
 
-        private void CardItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void CardItem_Tap(object sender, GestureEventArgs e)
         {
             var card = sender.GetContext<Card>();
             MainViewModel.Instance.BlackMarket.Pick(card);

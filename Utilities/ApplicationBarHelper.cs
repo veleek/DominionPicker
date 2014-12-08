@@ -16,6 +16,11 @@ namespace Ben.Dominion.Utilities
             return menuItem;
         }
 
+        public static ApplicationBarIconButton CreateIconButton(string text, string iconPath, EventHandler clickHandler)
+        {
+            return CreateIconButton(text, new Uri(iconPath, UriKind.Relative), clickHandler);
+        }
+
         public static ApplicationBarIconButton CreateIconButton(string text, Uri iconUri, EventHandler clickHandler)
         {
             var iconButton = new ApplicationBarIconButton
@@ -35,6 +40,12 @@ namespace Ben.Dominion.Utilities
         public static void AddMenuItem(this IApplicationBar appBar, string text, EventHandler handler)
         {
             appBar.MenuItems.Add(ApplicationBarHelper.CreateMenuItem(text, handler));
+        }
+
+        public static void AddIconButton(this IApplicationBar appBar, string text, string iconPath,
+            EventHandler clickHandler)
+        {
+            appBar.Buttons.Add(ApplicationBarHelper.CreateIconButton(text, iconPath, clickHandler));
         }
     }
 }

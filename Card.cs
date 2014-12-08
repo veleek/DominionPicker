@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
+using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
@@ -258,6 +260,14 @@ namespace Ben.Dominion
         public static Card FromId(Int32 id)
         {
             return Cards.Lookup[id];
+        }
+    }
+
+    public class AlphabeticalCardComparer : IComparer<Card>
+    {
+        public int Compare(Card x, Card y)
+        {
+            return String.Compare(x.DisplayName, y.DisplayName, CardDataStrings.Culture, CompareOptions.IgnoreCase);
         }
     }
 }

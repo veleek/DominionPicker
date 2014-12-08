@@ -61,6 +61,11 @@ namespace Ben.Dominion
             this.InitializePhoneApplication();
         }
 
+        public static App Instance
+        {
+            get { return Application.Current as App; }
+        }
+
         /// <summary>
         ///     Provides easy access to the root frame of the Phone Application.
         /// </summary>

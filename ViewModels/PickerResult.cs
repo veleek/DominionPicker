@@ -144,11 +144,11 @@ namespace Ben.Dominion
                     // This makes the most sense because it's probably 
                     // being used by someone who has the cards in the 
                     // original set boxes
-                    Cards = Cards.OrderBy(c => c.Set + "," + c.Name).ToCardList();
+                    Cards = Cards.OrderBy(c => c.Set + "," + c.DisplayName).ToCardList();
                     break;
                 case ResultSortOrder.Name:
                 default:
-                    Cards = Cards.OrderBy(c => c.Name).ToCardList();
+                    Cards = Cards.OrderBy(c => c.DisplayName).ToCardList();
                     // Orders them randomly, not used
                     ////Cards = Cards.OrderBy(c => Guid.NewGuid()).ToCardList();
                     break;

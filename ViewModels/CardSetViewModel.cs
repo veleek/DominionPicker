@@ -1,4 +1,5 @@
-﻿using Ben.Dominion.Resources;
+﻿using System.Xml.Serialization;
+using Ben.Dominion.Resources;
 using Ben.Utilities;
 
 namespace Ben.Dominion
@@ -30,6 +31,7 @@ namespace Ben.Dominion
             }
         }
 
+        [XmlIgnore]
         public string DisplayName { get; private set; }
 
         public static implicit operator CardSetViewModel(CardSet set)

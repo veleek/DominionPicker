@@ -67,17 +67,17 @@ namespace Ben.Dominion
             // Create all the app bar buttons as well.
             this.resetSettingsButton = ApplicationBarHelper.CreateIconButton(
                 Strings.MainPage_Reset,
-                new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
+                @"\Images\appbar.reset.png",
                 this.ResetSettings_Click);
 
             this.addFavoriteButton = ApplicationBarHelper.CreateIconButton(
                 Strings.MainPage_Save,
-                new Uri(@"\Images\appbar.favs.addto.png", UriKind.Relative),
+                @"\Images\appbar.favs.addto.png",
                 this.AddFavorite_Click);
 
             this.resetFavoritesButton = ApplicationBarHelper.CreateIconButton(
                 Strings.MainPage_Reset,
-                new Uri(@"\Images\appbar.reset.png", UriKind.Relative),
+                @"\Images\appbar.reset.png",
                 this.ResetFavorites_Click);
         }
 
