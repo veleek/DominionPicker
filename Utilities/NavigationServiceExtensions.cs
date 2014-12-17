@@ -17,10 +17,14 @@ namespace Ben.Utilities
             }
         }
 
-        static void navigationService_Navigated(object sender, NavigationEventArgs e)
+        private static void navigationService_Navigated(object sender, NavigationEventArgs e)
         {
             IsNavigating = false;
-            EasyTracker.GetTracker().SendView(e.Uri.ToString());
+
+            if (!e.Uri.IsAbsoluteUri || e.Uri.AbsoluteUri != "app://external/")
+            {
+                EasyTracker.GetTracker().SendView(e.Uri.ToString());
+            }
         }
 
         public static bool IsNavigating { get; private set; }
@@ -29,7 +33,7 @@ namespace Ben.Utilities
         {
             Initialize(navigationService);
 
-            if(IsNavigating)
+            if (IsNavigating)
             {
                 // Just ignore multiple navigation requests for now
                 return;
@@ -42,7 +46,7 @@ namespace Ben.Utilities
                 Uri navUri = new Uri(pageUri, UriKind.Relative);
                 navigationService.Navigate(navUri);
             }
-            catch(InvalidOperationException ioe)
+            catch (InvalidOperationException ioe)
             {
                 IsNavigating = false;
 
@@ -50,7 +54,6 @@ namespace Ben.Utilities
                 // if the app is no longer in the foreground for some reason.  Just ignore it.
                 AppLog.Instance.Error("Caught navigation exception", ioe);
             }
-
         }
     }
 }

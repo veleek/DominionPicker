@@ -156,9 +156,14 @@
   <Card ID="158" Name="Stallungen" />
   <Card ID="159" Name="Grenzdorf" />
   <Card ID="160" Name="Fruchtbares Land" />
+  
+  <!-- Promo -->
   <Card ID="161" Name="Schwarzmarkt" />
   <Card ID="162" Name="Gesandter" />
   <Card ID="165" Name="Geldversteck" />
+  <Card ID="237" Name="Prinz" />
+  
+  <!-- Dark Ages -->
   <Card ID="166" Name="Verlassene Min" Rules="+1 Geld" />
   <Card ID="167" Name="Altar" Rules="Eintsorge eine Karte\naus deiner Hand.\nNimm dir eine Karte,\ndie bis zu 5 kostet." />
   <Card ID="168" Name="Waffenkammer" Rules="Nimm dir eine Karte,\ndie bis zu 4 kostet.\nLege diese Karte sofort auf\ndeinen Nachziehstapel." />
@@ -184,6 +189,7 @@
   <Card ID="188" Name="Jagdgründe" Rules="+4 Karten\n_____\nWenn du diese Karte entsorgst:\nNimm dir ein Herzogtum\noder 3 Anwesen." />
   <Card ID="189" Name="Eisenhändler" Rules="+1 Karte\n+1 Aktion\nDecke die oberste Karte von deinem\nNachziehstapel auf. Ist es eine .\nAktionskarte: +1 Aktion\nGeldkarte: +1 Geld\nPunktekarte: +1Karte\nLege die aufgedeckten Karten ab oder\nzurück auf deinen Nachziehstapel." />
   <Card ID="190" Name="Schrotthändler" Rules="+1 Karte\n+1 Auktion\n+1 Geld\n\nEntsorge eine Karte aus deiner Hand" />
+  <Card ID="191" Name="Ritter" />
   <Card ID="192" Name="Verrückter" Rules="+2 Aktionen\n\nLege diese Karte zurück auf den\nVerrückten-Stapel.\nWenn du das machst:+1 Karte pro\nKarte, die du auf der Hand hast.\n(Der Verrückten-Stapel ist nicht Teil\ndes Vorrats.)" />
   <Card ID="193" Name="Marodeur" Rules="Nimm dir eine Karte\nvom Beute-Stapel.\nJeder Mitspieler muss sich eine\nRuinen-Karte nehmen." />
   <Card ID="194" Name="Marktplatz" Rules="+1 Karte\n+1 Aktion\n+1 Kauf\n_____\nWenn du eine Karte entsorgst, darfst\ndu diesen Marktplatz aus deiner\nHand ablegen. Wenn du das machst:\nNimm dir ein Gold." />
@@ -200,6 +206,7 @@
   <Card ID="205" Name="Zerstörte Bibliothek" Rules="+1 Karte" />
   <Card ID="206" Name="Zerstörter Markt" Rules="+1 Kauf" />
   <Card ID="207" Name="Zerstörtes Dorf" Rules="+1 Aktion" />
+  <Card ID="208" Name="Ruinen" />
   <Card ID="209" Name="Weiser" Rules="+1 Aktion\n\nDecke so lange Karten von deinem\nNachziehstapel auf, bis eine Karte\noffen liegt, die mintestens 3\nkostet. Nimm diese Karte auf die\nHand. Lege die übrigen aufgedeck-\nten Karten ab." />
   <Card ID="210" Name="Lumpensammler" Rules="+2 Geld\nDu darfst sofort deinen kompletten\nNachziehstapel ablegen.\nSieh dir deinen Ablagestapel durch\nund lege eine Karte daraus verdeckt\noben auf deinen Nachziehstapel." />
   <Card ID="211" Name="Sir Bailey" Rules="+1 Karte\n+1 Aktion\nJeder Mitspieler muss die obersten\nbeiden Karten von seinem Nach-\nziehstapel aufdecken, eine davon\nentsorgen, die 3 bis 6 kostet\nund die übrigen aufgedeckten Karten\nablegen. Wenn dadurch ein Ritter\nentsorgt wird, entsorge Sir Bailey." />
@@ -214,5 +221,20 @@
   <Card ID="220" Name="Gassenjunge" Rules="+1 Karte\n+1 Aktion\nJeder Mitspieler muss Karten ablegen, bis\ner nur noch 4 Karten auf der Hand hat.\n_____\nWenn diese Karte im Spiel ist und du eine\nandere Angriffskarte auslegst, darfst du\ndiesen Gassenjungen entsorgen. Wenn du\ndas machst: Nimm dir einen Söldner." />
   <Card ID="221" Name="Landstreicher" Rules="+1 Karte\n+1 Aktion\n\nDecke die oberste Karte von deinem\nNachziehstapel auf. Wenn es ein\nFluch, eine Ruine, ein Unterschlupf\noder eine Punktekarte ist: Nimm die\naufgedeckte Karte auf die Hand." />
   <Card ID="222" Name="Barde" Rules="+1 Karte\n+2 Aktionen\nDecke die obersten 3 Karten von\ndeinem Nachziehstapel auf. Lege\naufgedeckte Aktionskarten in belie-\nbiger Reihenfolge zurück auf den\nNachziehstapel. Lege die übrigen\naufgedeckten Karten ab." />
-
+  <Card ID="223" Name="Unterschlüpfe" />
+  
+  <!-- Guilds -->
+  <Card ID="224" Name="Berater" />
+  <Card ID="225" Name="Bäcker" />
+  <Card ID="226" Name="Metzger" />
+  <Card ID="227" Name="Leuchtenmacher" />
+  <Card ID="228" Name="Arzt" />
+  <Card ID="229" Name="Herold" />
+  <Card ID="230" Name="Wandergeselle" />
+  <Card ID="231" Name="Meisterstück" />
+  <Card ID="232" Name="Kaufmannsgilde" />
+  <Card ID="233" Name="Platz" />
+  <Card ID="234" Name="Wahrsager" />
+  <Card ID="235" Name="Steinmetz" />
+  <Card ID="236" Name="Steuereintreiber" /> 
 </ArrayOfCard>

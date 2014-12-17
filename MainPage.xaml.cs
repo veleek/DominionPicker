@@ -34,11 +34,6 @@ namespace Ben.Dominion
 
             DispatcherHelper.Initialize();
 
-            // We want to track that MainPage was navigated to and the NavigationService
-            // has not been setup to handle that yet, so we'll just manually send the event
-            // here.
-            EasyTracker.GetTracker().SendView("/MainPage.xaml");
-
             this.isNew = true;
 
             var backgroundBrush = this.RequestReviewPopup.Background as SolidColorBrush;
@@ -195,6 +190,9 @@ namespace Ben.Dominion
 
                 this.RootPivot.SelectedIndex = this.MainView.PivotIndex;
 
+                // We want to track that MainPage was navigated to and the NavigationService
+                // has not been setup to handle that yet, so we'll just manually send the event
+                // here.
                 EasyTracker.GetTracker().SendView(e.Uri.ToString());
             }
 
