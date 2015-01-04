@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="en" />
+  <Languages xmlns="">
+    <!--<Language code="cs" />
+    <Language code="de" />-->
+    <Language code="en" />
+    <!--<Language code="es" />
+    <Language code="fi" />
+    <Language code="fr" />
+    <Language code="it" />
+    <Language code="nl" />
+    <Language code="pl" />-->
+  </Languages>
+  <App xmlns="" ProductID="{33f9d727-3010-4191-a244-a2aa54816ce2}" Title="Dominion Picker" RuntimeType="Silverlight" Version="2.0.0.0" Genre="apps.normal" Author="Ben Randall" Description="A Dominon Kingdom Card Randomizer" Publisher="Ben Corp." PublisherID="{b0838bbe-433c-43df-a0c3-f23c011b1868}">
+    <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="DominionPickerToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsResource="false" IsRelative="true">Background.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsResource="false" IsRelative="true">Background.png</BackgroundImageURI>
+          <Title>Dominion Picker</Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>false</HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <Extensions>
+      <Protocol Name="dominionpicker" NavUriFragment="encodedLaunchUri=%s" TaskID="_default"/>
+    </Extensions>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
+</Deployment>
