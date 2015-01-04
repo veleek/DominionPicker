@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="DominionPickerLauncher.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DominionPickerLauncher"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer Margin="12,0">
+        <StackPanel>
+            <TextBlock Text="Launcher" Style="{StaticResource HeaderTextBlockStyle}"/>
+            <TextBlock Text="for" Style="{StaticResource SubheaderTextBlockStyle}"></TextBlock>
+            <TextBlock Text="Dominion Picker" TextWrapping="WrapWholeWords" Style="{StaticResource HeaderTextBlockStyle}" Foreground="{ThemeResource PhoneAccentBrush}"/>
+
+            <TextBlock Margin="0,12,0,6" TextWrapping="WrapWholeWords" FontSize="{ThemeResource TextStyleLargeFontSize}">
+                This application is intended to be used only by users of Dominion Picker who are currently unable to launch the app due to an issue with the Windws Phone store.
+
+            </TextBlock>
+            <TextBlock Margin="0,6" TextWrapping="WrapWholeWords" FontSize="{ThemeResource TextStyleLargeFontSize}">
+                You do not appear to have Dominion Picker installed yet, so you should be able to install it and launch it directly without needing this application.
+            </TextBlock>
+
+            <Button x:Name="DownloadButton" HorizontalAlignment="Stretch" Margin="12,0" Padding="0,24" Content="Download Dominion Picker" Click="DownloadButton_OnClick" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
+  <Identity Name="138458E7997D1.DominionPickerLauncherBeta" Publisher="CN=D33EB068-0180-47D4-8C3D-69151BBD4EFA" Version="1.1.0.6" />
+  <mp:PhoneIdentity PhoneProductId="bf2b367f-0924-4879-9f80-508caedf6e0f" PhonePublisherId="b0838bbe-433c-43df-a0c3-f23c011b1868" />
+  <Properties>
+    <DisplayName>Dominion Picker Launcher Beta</DisplayName>
+    <PublisherDisplayName>Ben Corp.</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.3.1</OSMinVersion>
+    <OSMaxVersionTested>6.3.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="DominionPickerLauncher.App">
+      <m3:VisualElements DisplayName="Dominion Picker Launcher" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="A helper application to launch Dominion Picker for those users who are missing the application from their app list due to an issue with the Windows Phone Marketplace." ForegroundText="light" BackgroundColor="transparent">
+        <m3:DefaultTile Square71x71Logo="Assets\Square71x71Logo.png">
+          <m3:ShowNameOnTiles>
+            <m3:ShowOn Tile="square150x150Logo" />
+          </m3:ShowNameOnTiles>
+        </m3:DefaultTile>
+        <m3:SplashScreen Image="Assets\SplashScreen.jpg" />
+      </m3:VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+  </Capabilities>
+</Package>
