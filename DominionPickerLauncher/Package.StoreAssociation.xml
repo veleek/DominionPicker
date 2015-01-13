@@ -193,5 +193,11 @@
     <MainPackageIdentityName>138458E7997D1.DominionPicker</MainPackageIdentityName>
     <MainPackageIdentityName>138458E7997D1.DominionPickerLauncher</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=f42f2851-a767-43ec-8ad5-dec70fbe05c7" />
+  <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=f42f2851-a767-43ec-8ad5-dec70fbe05c7">
+    <PackageInfo>
+      <OsMinVersion>6.3.0.0</OsMinVersion>
+      <PackageArchitecture>neutral</PackageArchitecture>
+      <PackageMaxArchitectureVersion>1.1.0.6</PackageMaxArchitectureVersion>
+    </PackageInfo>
+  </PackageInfoList>
 </StoreAssociation>

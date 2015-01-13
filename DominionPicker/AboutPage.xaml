@@ -81,7 +81,7 @@
                         <StackPanel>
                             <TextBlock Style="{StaticResource AboutHeaderStyle}"
                                        Foreground="{StaticResource PhoneAccentBrush}"
-                                       Text="Dominion Picker" />
+                                       Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" />
                             <TextBlock Style="{StaticResource AboutHeaderStyle}"
                                        Text="by Ben Randall" />
                             <Button Template="{StaticResource HyperlinkButtonTemplate}"

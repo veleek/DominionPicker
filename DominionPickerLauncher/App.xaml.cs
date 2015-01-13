@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Phone.Management.Deployment;
-using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -32,23 +23,6 @@ namespace DominionPickerLauncher
             this.Resuming += this.OnResuming;
         }
 
-        private void OnResuming(object sender, object o)
-        {
-            // Check to see if Dominion Picker is installed
-            if (InstallationManager.FindPackagesForCurrentPublisher().Any(p => p.Id.Name == "Dominion Picker"))
-            {
-                // Then just launch it using our registered URI
-                var launcherTask = Launcher.LaunchUriAsync(new Uri("dominionpicker:DominionPickerLauncher")).AsTask();
-                launcherTask.Wait();
-
-                if (launcherTask.Status == TaskStatus.RanToCompletion)
-                {
-                    // We successfully launched the app
-                    App.Current.Exit();
-                }
-            }
-        }
-
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used when the application is launched to open a specific file, to display
@@ -57,19 +31,9 @@ namespace DominionPickerLauncher
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            // Check to see if Dominion Picker is installed
-            if (InstallationManager.FindPackagesForCurrentPublisher().Any(p => p.Id.Name == "Dominion Picker"))
-            {
-                // Then just launch it using our registered URI
-                var launcherTask = Launcher.LaunchUriAsync(new Uri("dominionpicker:DominionPickerLauncher")).AsTask();
-                launcherTask.Wait();
-
-                if (launcherTask.Status == TaskStatus.RanToCompletion)
-                {
-                    // We successfully launched the app
-                    App.Current.Exit();
-                }
-            }
+            // Don't bother checking if it's installed.  If it's registered, it'll work.  
+            // Otherwise it'll fail and we'll show the UI.
+            PickerLauncher.TryLaunch(true);
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -110,6 +74,11 @@ namespace DominionPickerLauncher
 
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        private void OnResuming(object sender, object o)
+        {
+            PickerLauncher.CheckAndLaunch();
         }
     }
 }

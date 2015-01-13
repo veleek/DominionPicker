@@ -158,5 +158,59 @@ namespace Ben.Dominion.Resources {
                 return ResourceManager.GetString("Set_Seaside", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string Type_Action {
+            get {
+                return ResourceManager.GetString("Type_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attaque.
+        /// </summary>
+        public static string Type_Attack {
+            get {
+                return ResourceManager.GetString("Type_Attack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Durée.
+        /// </summary>
+        public static string Type_Duration {
+            get {
+                return ResourceManager.GetString("Type_Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Réaction.
+        /// </summary>
+        public static string Type_Reaction {
+            get {
+                return ResourceManager.GetString("Type_Reaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trésor.
+        /// </summary>
+        public static string Type_Treasure {
+            get {
+                return ResourceManager.GetString("Type_Treasure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Victoire.
+        /// </summary>
+        public static string Type_Victory {
+            get {
+                return ResourceManager.GetString("Type_Victory", resourceCulture);
+            }
+        }
     }
 }

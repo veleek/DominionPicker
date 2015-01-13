@@ -142,6 +142,15 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to black market.
+        /// </summary>
+        public static string BlackMarket_Title {
+            get {
+                return ResourceManager.GetString("BlackMarket_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card Details.
         /// </summary>
         public static string Config_CardData {

@@ -141,4 +141,22 @@
   <data name="Set_Seaside" xml:space="preserve">
     <value>Seaside</value>
   </data>
+  <data name="Type_Action" xml:space="preserve">
+    <value>Azione</value>
+  </data>
+  <data name="Type_Attack" xml:space="preserve">
+    <value>Attacco</value>
+  </data>
+  <data name="Type_Duration" xml:space="preserve">
+    <value>Durata</value>
+  </data>
+  <data name="Type_Reaction" xml:space="preserve">
+    <value>Vittoria</value>
+  </data>
+  <data name="Type_Treasure" xml:space="preserve">
+    <value>Reazione</value>
+  </data>
+  <data name="Type_Victory" xml:space="preserve">
+    <value>Tesoro</value>
+  </data>
 </root>

@@ -141,4 +141,22 @@
   <data name="Set_Seaside" xml:space="preserve">
     <value>Terramar</value>
   </data>
+  <data name="Type_Action" xml:space="preserve">
+    <value>Acción</value>
+  </data>
+  <data name="Type_Attack" xml:space="preserve">
+    <value>Ataque</value>
+  </data>
+  <data name="Type_Duration" xml:space="preserve">
+    <value>Duración</value>
+  </data>
+  <data name="Type_Reaction" xml:space="preserve">
+    <value>Reacción</value>
+  </data>
+  <data name="Type_Treasure" xml:space="preserve">
+    <value>Tesoro</value>
+  </data>
+  <data name="Type_Victory" xml:space="preserve">
+    <value>Victoria</value>
+  </data>
 </root>
