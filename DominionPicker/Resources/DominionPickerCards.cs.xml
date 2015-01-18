@@ -1,4 +1,93 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfCard>
-
+  <Card ID="1" Name="Sklepení" />
+  <Card ID="2" Name="Kaple" />
+  <Card ID="3" Name="Hradní příkop" />
+  <Card ID="4" Name="Kancléř" />
+  <Card ID="5" Name="Vesnice" />
+  <Card ID="6" Name="Dřevorubec" />
+  <Card ID="7" Name="Dílna" />
+  <Card ID="8" Name="Úředník" />
+  <Card ID="9" Name="Hostina" />
+  <Card ID="10" Name="Zahrady" />
+  <Card ID="11" Name="Milice" />
+  <Card ID="12" Name="Lichvář" />
+  <Card ID="13" Name="Přestavba" />
+  <Card ID="14" Name="Kovárna" />
+  <Card ID="15" Name="Špion" />
+  <Card ID="16" Name="Zloděj" />
+  <Card ID="17" Name="Trůnní sál" />
+  <Card ID="18" Name="Zasedání rady" />
+  <Card ID="19" Name="Jarmark" />
+  <Card ID="20" Name="Laboratoř" />
+  <Card ID="21" Name="Knihovna" />
+  <Card ID="22" Name="Trh" />
+  <Card ID="23" Name="Důl" />
+  <Card ID="24" Name="Čarodějnice" />
+  <Card ID="25" Name="Dobrodruh" />
+  <Card ID="26" Name="Hradní nádvoří" />
+  <Card ID="27" Name="Pěšák" />
+  <Card ID="28" Name="Tajemná komnata" />
+  <Card ID="29" Name="Velký sál" />
+  <Card ID="30" Name="Maškary" />
+  <Card ID="31" Name="Chudinská čtvrť" />
+  <Card ID="32" Name="Správce" />
+  <Card ID="33" Name="Podvodník" />
+  <Card ID="34" Name="Studna přání" />
+  <Card ID="35" Name="Baron" />
+  <Card ID="36" Name="Most" />
+  <Card ID="37" Name="Spiklenec" />
+  <Card ID="38" Name="Měditepec" />
+  <Card ID="39" Name="Hutě" />
+  <Card ID="40" Name="Důlní osada" />
+  <Card ID="41" Name="Zvěd" />
+  <Card ID="42" Name="Vévoda" />
+  <Card ID="43" Name="Služebník" />
+  <Card ID="44" Name="Sabotér" />
+  <Card ID="45" Name="Žalářník" />
+  <Card ID="46" Name="Obchodní místo" />
+  <Card ID="47" Name="Dar poddaných" />
+  <Card ID="48" Name="Pokrok" />
+  <Card ID="49" Name="Harém" />
+  <Card ID="50" Name="Šlechtici" />
+  <Card ID="51" Name="Embargo" />
+  <Card ID="52" Name="Přístav" />
+  <Card ID="53" Name="Maják" />
+  <Card ID="54" Name="Domorodá vesnice" />
+  <Card ID="55" Name="Lovec perel" />
+  <Card ID="56" Name="Velvyslanec" />
+  <Card ID="57" Name="Rybářská vesnice" />
+  <Card ID="58" Name="Strážní koš" />
+  <Card ID="59" Name="Pašeráci" />
+  <Card ID="60" Name="Skladiště" />
+  <Card ID="61" Name="Karavana" />
+  <Card ID="62" Name="Kapsář" />
+  <Card ID="63" Name="Ostrov" />
+  <Card ID="64" Name="Navigátor" />
+  <Card ID="65" Name="Pirátská loď" />
+  <Card ID="66" Name="Zachránce" />
+  <Card ID="67" Name="Mořská čarodějnice" />
+  <Card ID="68" Name="Mapa pokladu" />
+  <Card ID="69" Name="Bazar" />
+  <Card ID="70" Name="Objevitel" />
+  <Card ID="71" Name="Loď duchů" />
+  <Card ID="72" Name="Obchodní loď" />
+  <Card ID="73" Name="Strážnice" />
+  <Card ID="74" Name="Taktik" />
+  <Card ID="75" Name="Pokladnice" />
+  <Card ID="76" Name="Loděnice" />
+  <Card ID="122" Name="Osada" />
+  <Card ID="123" Name="Věštkyně" />
+  <Card ID="124" Name="Zvěřinec" />
+  <Card ID="125" Name="Selský dvůr" />
+  <Card ID="126" Name="Konští handlíři" />
+  <Card ID="127" Name="Nové provedení" />
+  <Card ID="128" Name="Turnaj" />
+  <Card ID="129" Name="Mladá čarodějka" />
+  <Card ID="130" Name="Sklizeň" />
+  <Card ID="131" Name="Roh hojnosti" />
+  <Card ID="132" Name="Lovci" />
+  <Card ID="133" Name="Šašek" />
+  <Card ID="134" Name="Tržiště" />
+  <Card ID="161" Name="Černý trh" />
 </ArrayOfCard>

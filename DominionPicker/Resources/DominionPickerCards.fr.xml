@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfCard>
   <Card ID="1" Name="Cave" />
   <Card ID="2" Name="Chapelle" />
@@ -158,4 +158,10 @@
   <Card ID="161" Name="Marché noir" />
   <Card ID="162" Name="Délégué" />
   <Card ID="165" Name="Cachette" />
+  <Card ID="238" Name="Cuivre" />
+  <Card ID="239" Name="Malédiction" />
+  <Card ID="240" Name="Domaine" />
+  <Card ID="241" Name="Argent" />
+  <Card ID="242" Name="Duché" />
+  <Card ID="243" Name="Province" />
 </ArrayOfCard>

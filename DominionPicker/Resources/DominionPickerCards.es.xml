@@ -1,4 +1,137 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ArrayOfCard>
-  
+  <Card ID="1" Name="Sótano" />
+  <Card ID="2" Name="Capilla" />
+  <Card ID="3" Name="Foso" />
+  <Card ID="4" Name="Canciller" />
+  <Card ID="5" Name="Aldea" />
+  <Card ID="6" Name="Leñadores" />
+  <Card ID="7" Name="Taller" />
+  <Card ID="8" Name="Burócrata" />
+  <Card ID="9" Name="Banquete" />
+  <Card ID="10" Name="Jardines" />
+  <Card ID="11" Name="Milicia" />
+  <Card ID="12" Name="Prestamista" />
+  <Card ID="13" Name="Remodelar" />
+  <Card ID="14" Name="Herrería" />
+  <Card ID="15" Name="Espía" />
+  <Card ID="16" Name="Ladrón" />
+  <Card ID="17" Name="Salon del Trono" />
+  <Card ID="18" Name="Sala del Consejo" />
+  <Card ID="19" Name="Festival" />
+  <Card ID="20" Name="Laboratorio" />
+  <Card ID="21" Name="Biblioteca" />
+  <Card ID="22" Name="Mercado" />
+  <Card ID="23" Name="Mina" />
+  <Card ID="24" Name="Bruja" />
+  <Card ID="25" Name="Aventurero" />
+  <Card ID="26" Name="Patio" />
+  <Card ID="27" Name="Peón" />
+  <Card ID="28" Name="Cámara Secreta" />
+  <Card ID="29" Name="Gran Sala" />
+  <Card ID="30" Name="Mascarada" />
+  <Card ID="31" Name="Chabolas" />
+  <Card ID="32" Name="Mayordomo" />
+  <Card ID="33" Name="Embaucador" />
+  <Card ID="34" Name="Pozo de los Deseos" />
+  <Card ID="35" Name="Barón" />
+  <Card ID="36" Name="Puente" />
+  <Card ID="37" Name="Conspirador" />
+  <Card ID="38" Name="Artesano del Cobre" />
+  <Card ID="39" Name="Fundición" />
+  <Card ID="40" Name="Aldea Minera" />
+  <Card ID="41" Name="Explorador" />
+  <Card ID="42" Name="Duque" />
+  <Card ID="43" Name="Esbirro" />
+  <Card ID="44" Name="Saboteador" />
+  <Card ID="45" Name="Torturador" />
+  <Card ID="46" Name="Puesto Comercial" />
+  <Card ID="47" Name="Tributo" />
+  <Card ID="48" Name="Mejora" />
+  <Card ID="49" Name="Harén" />
+  <Card ID="50" Name="Nobles" />
+  <Card ID="51" Name="Embargo" />
+  <Card ID="52" Name="Puerto" />
+  <Card ID="53" Name="Faro" />
+  <Card ID="54" Name="Poblado Indígena" />
+  <Card ID="55" Name="Pescador de Perlas" />
+  <Card ID="56" Name="Embajador" />
+  <Card ID="57" Name="Pueblo de Pescadores" />
+  <Card ID="58" Name="Vigia" />
+  <Card ID="59" Name="Contrabandistas" />
+  <Card ID="60" Name="Almacén" />
+  <Card ID="61" Name="Caravana" />
+  <Card ID="62" Name="Ratero" />
+  <Card ID="63" Name="Isla" />
+  <Card ID="64" Name="Navegante" />
+  <Card ID="65" Name="Barco Pirata" />
+  <Card ID="66" Name="Rescatador" />
+  <Card ID="67" Name="Bruja del Mar" />
+  <Card ID="68" Name="Mapa del Tesoro" />
+  <Card ID="69" Name="Bazar" />
+  <Card ID="70" Name="Exploradora" />
+  <Card ID="71" Name="Barco Fantasma" />
+  <Card ID="72" Name="Barco Mercante" />
+  <Card ID="73" Name="Puesto Avanzado" />
+  <Card ID="74" Name="Estratega" />
+  <Card ID="75" Name="Tesorería" />
+  <Card ID="76" Name="Muelle" />
+  <Card ID="77" Name="Transmutar" />
+  <Card ID="78" Name="Viñedo" />
+  <Card ID="79" Name="Boticario" />
+  <Card ID="80" Name="Herbalista" />
+  <Card ID="81" Name="Hidromancia" />
+  <Card ID="82" Name="Universidad" />
+  <Card ID="83" Name="Alquimista" />
+  <Card ID="84" Name="Familiar" />
+  <Card ID="85" Name="Piedra Filosofal" />
+  <Card ID="86" Name="Golem" />
+  <Card ID="87" Name="Poción" />
+  <Card ID="88" Name="Aprendiz" />
+  <Card ID="89" Name="Posesión" />
+  <Card ID="90" Name="Préstamo" />
+  <Card ID="91" Name="Ruta Comercial" />
+  <Card ID="92" Name="Atalaya" />
+  <Card ID="93" Name="Obispo" />
+  <Card ID="94" Name="Monumento" />
+  <Card ID="95" Name="Cantera" />
+  <Card ID="96" Name="Talismán" />
+  <Card ID="97" Name="Pueblo de Trabajadores" />
+  <Card ID="98" Name="Ciudad" />
+  <Card ID="99" Name="Contrabando" />
+  <Card ID="100" Name="Casa de Cuentas" />
+  <Card ID="101" Name="Acuñador" />
+  <Card ID="102" Name="Charlatán" />
+  <Card ID="103" Name="Chusma" />
+  <Card ID="104" Name="Sello Real" />
+  <Card ID="105" Name="Cripta" />
+  <Card ID="106" Name="Especulación" />
+  <Card ID="107" Name="Matones" />
+  <Card ID="108" Name="Gran Mercado" />
+  <Card ID="109" Name="Tesoro Escondido" />
+  <Card ID="110" Name="Banco" />
+  <Card ID="111" Name="Expansión" />
+  <Card ID="112" Name="Forja" />
+  <Card ID="113" Name="Corte Real" />
+  <Card ID="114" Name="Buhonero" />
+  <Card ID="115" Name="Platino" />
+  <Card ID="116" Name="Colonia" />
+  <Card ID="122" Name="Caserío" />
+  <Card ID="123" Name="Adivinadora" />
+  <Card ID="124" Name="Colección de Animales" />
+  <Card ID="125" Name="Poblado Agrícola" />
+  <Card ID="126" Name="Tratantes de Caballos" />
+  <Card ID="127" Name="Reconstrucción" />
+  <Card ID="128" Name="Torneo" />
+  <Card ID="129" Name="Bruja Joven" />
+  <Card ID="130" Name="Cosecha" />
+  <Card ID="131" Name="Cornucopia" />
+  <Card ID="132" Name="Cacería" />
+  <Card ID="133" Name="Bufón" />
+  <Card ID="134" Name="Recinto Ferial" />
+  <Card ID="161" Name="Mercado Negro" />
+  <Card ID="162" Name="Enviado" />
+  <Card ID="163" Name="Aldea Amurallada" />
+  <Card ID="164" Name="Gobernador" />
+  <Card ID="165" Name="Alijo" />
 </ArrayOfCard>
