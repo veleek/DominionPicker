@@ -219,8 +219,9 @@
   <data name="Config_CardDataDesc" xml:space="preserve">
     <value />
   </data>
-  <data name="Config_LangDesc" xml:space="preserve">
-    <value />
+  <data name="Config_LanguageDescription" xml:space="preserve">
+    <value>Setting this will override the language used by Dominion Picker only and will not change the current system language.
+You must restart for this to take effect.</value>
   </data>
   <data name="Config_Language" xml:space="preserve">
     <value>language</value>
@@ -377,5 +378,17 @@ never be picked</value>
   </data>
   <data name="BlackMarket_Title" xml:space="preserve">
     <value>black market</value>
+  </data>
+  <data name="Config_HiddenSets" xml:space="preserve">
+    <value>hidden sets</value>
+  </data>
+  <data name="Config_HiddenSetsDescription" xml:space="preserve">
+    <value>Select any sets that you don't own or prefer not to use to hide them from the set selection list on the main page.</value>
+  </data>
+  <data name="Config_LanguageOptions" xml:space="preserve">
+    <value>Language Options</value>
+  </data>
+  <data name="Config_PickerOptions" xml:space="preserve">
+    <value>Picker Options</value>
   </data>
 </root>

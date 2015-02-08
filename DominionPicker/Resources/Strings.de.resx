@@ -213,19 +213,20 @@
     <comment>I think in this context the word is the best choice. There is no real translation for Card Randomizer, my word means"random generator".</comment>
   </data>
   <data name="Info_Rules" xml:space="preserve">
-    <value>Regeln</value>
+    <value>regeln</value>
   </data>
   <data name="Info_Set" xml:space="preserve">
-    <value>Set</value>
+    <value>set</value>
   </data>
   <data name="Info_Tips" xml:space="preserve">
-    <value>Für weitere Karten\neinfach wischen</value>
+    <value>Für weitere Karten
+einfach wischen</value>
   </data>
   <data name="Info_Title" xml:space="preserve">
-    <value>Karteninformationen</value>
+    <value>informationen</value>
   </data>
   <data name="Info_Type" xml:space="preserve">
-    <value>Typ</value>
+    <value>typ</value>
   </data>
   <data name="Lookup_ResetFiltered" xml:space="preserve">
     <value>gefilterte Karten zurücksetzen</value>
@@ -237,7 +238,8 @@
     <value>gefilterte Karten anzeigen</value>
   </data>
   <data name="Lookup_Tips" xml:space="preserve">
-    <value>angekreuzte Karten</value>
+    <value>angekreuzte Karten
+werden nie ausgewählt</value>
   </data>
   <data name="Lookup_Title" xml:space="preserve">
     <value>Kartenliste</value>
@@ -282,22 +284,23 @@
     <value>neu erzeugen</value>
   </data>
   <data name="Results_Save" xml:space="preserve">
-    <value>Speichern…</value>
+    <value>speichern…</value>
   </data>
   <data name="Results_SortCost" xml:space="preserve">
-    <value>nach Kosten sortieren</value>
+    <value>nach kosten</value>
   </data>
   <data name="Results_SortName" xml:space="preserve">
-    <value>nach Alphabet sortieren</value>
+    <value>nach alphabet</value>
   </data>
   <data name="Results_SortSet" xml:space="preserve">
-    <value>Nach Set sortieren</value>
+    <value>nach set</value>
   </data>
   <data name="Results_Tips" xml:space="preserve">
-    <value>Wischen um Karte auszutauschen\nDrücken for weitere Informationen</value>
+    <value>Wischen um Karte auszutauschen
+Drücken for weitere Informationen</value>
   </data>
   <data name="Results_Title" xml:space="preserve">
-    <value>Ergebnis</value>
+    <value>ergebnis</value>
   </data>
   <data name="Settings_AddnOptions" xml:space="preserve">
     <value>weitere Optionen</value>
@@ -359,9 +362,6 @@
   </data>
   <data name="Set_Seaside" xml:space="preserve">
     <value>Seaside</value>
-  </data>
-  <data name="String" xml:space="preserve">
-    <value>werden nie ausgewählt</value>
   </data>
   <data name="Type_Action" xml:space="preserve">
     <value>Aktion</value>

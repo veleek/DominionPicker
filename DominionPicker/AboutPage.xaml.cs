@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
-using System.Windows.Resources;
-using System.IO;
-using Ben.Utilities;
 
 namespace Ben.Dominion
 {
@@ -21,10 +13,10 @@ namespace Ben.Dominion
     {
         public AboutPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
-            
+            this.VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
+
             StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Resources/Changes.txt", UriKind.Relative));
             if (sri != null)
             {
@@ -55,7 +47,7 @@ namespace Ben.Dominion
                                 {
                                     TextWrapping = TextWrapping.Wrap,
                                     Text = line,
-                                    Style = (Style)Application.Current.Resources["PhoneTextNormalStyle"],
+                                    Style = (Style) Application.Current.Resources["PhoneTextNormalStyle"],
                                 };
                             }
                             else
@@ -63,7 +55,7 @@ namespace Ben.Dominion
                                 fe = new ContentPresenter
                                 {
                                     HorizontalAlignment = HorizontalAlignment.Stretch,
-                                    ContentTemplate = (DataTemplate)LayoutRoot.Resources["BulletedItem"],
+                                    ContentTemplate = (DataTemplate) this.LayoutRoot.Resources["BulletedItem"],
                                     Content = line,
                                 };
                             }
@@ -71,11 +63,10 @@ namespace Ben.Dominion
                             lastWasEmpty = false;
                             changes.Children.Add(fe);
                         }
-                    }
-                    while (line != null);
+                    } while (line != null);
                 }
 
-                ChangesScrollViewer.Content = changes;
+                this.ChangesScrollViewer.Content = changes;
             }
         }
 
@@ -133,7 +124,6 @@ namespace Ben.Dominion
             dt.ContentType = MarketplaceContentType.Applications;
 
             dt.Show();
-
         }
     }
 }

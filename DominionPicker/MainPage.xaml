@@ -125,8 +125,9 @@
                             </Grid>
 
                             <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}">
-                                <TextBlock Text="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
+                                <TextBlock Text="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap"/>
                             </CheckBox>
+                            
                             <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}">
                                 <TextBlock Text="{Binding Strings.Settings_PickShelterOrEstate, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                             </CheckBox>

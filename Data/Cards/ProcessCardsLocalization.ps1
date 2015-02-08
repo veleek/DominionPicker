@@ -22,7 +22,7 @@ function GenerateCardsXml($Language = $null, [string[]]$Properties)
 
     for($i = 0; $i -lt $cardCount; $i++)
     {
-        Write-Progress -Activity "Generating file $fileName" -Status "Adding Card" -CurrentOperation "Card $i of $cardCount" -PercentComplete (($i / $cardCount) * 100) -ParentId 10
+        Write-Progress -Activity "Generating file $fileName" -Status "Adding Cards" -CurrentOperation "Card $i of $cardCount" -PercentComplete (($i / $cardCount) * 100) -ParentId 10
 
         $row = 2+$i
         $values = $Properties | % { 
@@ -92,7 +92,7 @@ cd 'C:\code\vso\veleek\Dominion Picker\Data\Cards'
 if(!$cards -or ($xl -and $xl.Visible -eq $false))
 {
     $xl = New-Object -ComObject "Excel.Application"
-    $xl.Visible = $true
+    #$xl.Visible = $true
 
     $cardInfoPath = (Resolve-Path .\DominionPickerData.xlsx).Path
     $cardsDoc = $xl.Workbooks.Open($cardInfoPath)
@@ -111,7 +111,7 @@ while($cards.Cells[$row,1].Formula)
 
 "Found $cardCount Cards"
 
-Write-Progress -Activity "Generating Localized Card Files" -CurrentOperation "Generating EN (default) Cards List" -Id 10
+Write-Progress -Activity "Generating Localized Card Files" -Status "Generating EN (default) Cards List" -Id 10 -PercentComplete 1
 
 # Make the default language file
 GenerateCardsXml -Properties "ID","Name","Set","Type","Cost","Rules"
@@ -120,7 +120,7 @@ $langCount = 0
 $lang | % { 
     $langCount++
     $progress = (($langCount/($lang.Count+1))*100)
-    Write-Progress -Activity "Generating Localized Card Files" -CurrentOperation "Generating $_ Cards List" -Id 10 -PercentComplete $progress
+    Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
     GenerateCardsXml -Language $_ -Properties "ID","Name_$_","Rules_$_"
 }
 

@@ -29,6 +29,36 @@
                 <Button x:Name="Save17" Content="Save Picker State 1.7" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerState_1.7.xml"/>
                 <Button x:Name="Save18" Content="Save Picker State 1.8" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.8.xml,PickerView.xml"/>
                 <Button x:Name="Save19" Content="Save Picker State 1.9" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.9.xml,PickerView.xml"/>
+                
+                <RichTextBox LineHeight="40" TextAlignment="Center" FontFamily="Times New Roman" Margin="70,0" FontSize="22">
+                    <Paragraph TextAlignment="Center" LineHeight="27" LineStackingStrategy="BlockLineHeight">
+                        <Run>Choose two: +1 Card; +1 Action; +1 Buy; +</Run>
+                        <Span>
+                            <InlineUIContainer>
+                                <Grid Margin="2,0,0,-8">
+                                    <Image Source="/Images/coin_extrasmall.png" Stretch="None" Margin="0,-16" />
+                                    <TextBlock LineHeight="30" Margin="0,2,0,0" Style="{StaticResource CardCostTextStyle}" >1</TextBlock>
+                                </Grid>
+                            </InlineUIContainer>
+                        </Span>
+                        <Run>.</Run>
+                        <LineBreak/>
+                        <Run>(The choices must be different.)</Run>        
+
+                        <LineBreak/>
+                        <LineBreak/>
+                        <Span FontWeight="Bold">
+                            +2
+                            <InlineUIContainer>
+                                <Grid Margin="0,0,0,-6">
+                                    <Image Source="/Images/VP_extrasmall.png" Stretch="UniformToFill" Width="25"></Image>
+                                </Grid>
+                            </InlineUIContainer>
+                        </Span>
+                        <LineBreak/>
+                        <Run>Trash this and gain a gold.</Run>                        
+                    </Paragraph>
+                </RichTextBox>
             </StackPanel>
         </controls:PivotItem>
 

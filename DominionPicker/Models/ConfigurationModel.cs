@@ -1,5 +1,8 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO.IsolatedStorage;
+using System.Linq;
+using System.Xml.Serialization;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
 
@@ -13,6 +16,7 @@ namespace Ben.Dominion.Models
         public const string ConfigurationModelFilePath = "Configuration.xml";
         private static ConfigurationModel instance;
         private CultureInfo overrideCulture = CultureInfo.InvariantCulture;
+        private List<SetOption> sets = Cards.AllSets.Select(s => new SetOption {Set = s, Enabled = false}).ToList();
 
         public static ConfigurationModel Instance
         {
@@ -35,6 +39,30 @@ namespace Ben.Dominion.Models
                 return instance;
             }
         }
+
+        [XmlIgnore]
+        public List<SetOption> HiddenSets
+        {
+            get { return this.sets; }
+            set { this.SetProperty(ref this.sets, value, "Sets"); }
+        }
+
+        [XmlElement("HiddenSets")]
+        public string HiddenSetNames
+        {
+            get { return string.Join(",", this.HiddenSets.Select(s => s.ToString())); }
+
+            set
+            {
+                foreach (var set in this.sets)
+                {
+                    set.Enabled = value.Contains(set.Set.ToString());
+                }
+
+                this.NotifyPropertyChanged("HiddenSets");
+            }
+        }
+
 
         public CultureInfo CurrentCulture
         {
@@ -62,7 +90,7 @@ namespace Ben.Dominion.Models
 
             set
             {
-                if (value == CultureInfo.CurrentCulture)
+                if (Equals(value, CultureInfo.CurrentCulture))
                 {
                     value = null;
                 }

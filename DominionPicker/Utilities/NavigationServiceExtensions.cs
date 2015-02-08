@@ -4,15 +4,22 @@ using GoogleAnalytics;
 
 namespace Ben.Utilities
 {
-    public static class NavigationServiceExtensions
+    public static class NavigationServiceHelper
     {
+        private static NavigationService cachedNavigationService;
         private static bool isInitalized;
 
         public static void Initialize(this NavigationService navigationService)
         {
+            if (cachedNavigationService != null && navigationService != cachedNavigationService)
+            {
+                throw new ArgumentException("Uh oh! We have multiple instances of NavigationService");    
+            }
+
             if (!isInitalized)
             {
-                navigationService.Navigated += navigationService_Navigated;
+                cachedNavigationService = navigationService;
+                cachedNavigationService.Navigated += navigationService_Navigated;
                 isInitalized = true;
             }
         }
@@ -54,6 +61,11 @@ namespace Ben.Utilities
                 // if the app is no longer in the foreground for some reason.  Just ignore it.
                 AppLog.Instance.Error("Caught navigation exception", ioe);
             }
+        }
+
+        public static void Navigate(String pageUri)
+        {
+            cachedNavigationService.Navigate(pageUri);   
         }
     }
 }

@@ -351,6 +351,11 @@ namespace Ben.Dominion
                 result.AdditionalCards.Add(Card.FromName("Potion"));
             }
 
+            if (result.Cards.Any(c => c.ContainsText("Curse card")))
+            {
+                result.AdditionalCards.Add(Card.FromName("Curse"));
+            }
+
             if (settings.ShowExtras)
             {
                 // New check for additional 'stuff' like mats and tokens
@@ -380,6 +385,16 @@ namespace Ben.Dominion
                 if (result.HasCard("Trade Route"))
                 {
                     additionalStuff.Add("Trade Route Mat");
+                }
+                
+                if (result.HasCard("Baker") ||
+                    result.HasCard("Butcher") ||
+                    result.HasCard("Candlestick Maker") ||
+                    result.HasCard("Merchant Guild") ||
+                    result.HasCard("Plaza") ||
+                    result.HasCard("Candlestick Maker") ||
+                    result.HasCard("Trade Route"))
+                {
                     additionalStuff.Add("Coin Tokens");
                 }
 

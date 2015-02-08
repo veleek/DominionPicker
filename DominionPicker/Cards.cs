@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using Ben.Data;
@@ -84,6 +83,15 @@ namespace Ben.Dominion
                 return new ReadOnlyCollection<string>(
                     new List<string>
                     {
+                        // Base Cards
+                        "Copper",
+                        "Silver",
+                        "Gold",
+                        "Estate",
+                        "Duchy",
+                        "Province",
+                        "Curse",
+
                         // Alchemy Treasures
                         "Potion",
 

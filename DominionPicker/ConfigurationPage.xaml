@@ -23,17 +23,27 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,00,0,6">
-            <TextBlock x:Name="ApplicationTitle" Text="Dominion Picker" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Strings.Config_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <ScrollViewer>
                 <StackPanel>
-                    <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="Language Options" />
+                    <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_PickerOptions, Source={StaticResource LocalizedResources}}" />
+                    
+                    <toolkit:ListPicker x:Name="HiddenSets"
+                                        Header="{Binding Strings.Config_HiddenSets, Source={StaticResource LocalizedResources}}"
+                                        ItemsSource="{Binding HiddenSets, Mode=TwoWay}"
+                                        SelectionMode="Multiple"/>
+                    
+                    <TextBlock Text="{Binding Strings.Config_HiddenSetsDescription, Source={StaticResource LocalizedResources}}"
+                               Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
+                    
+                    <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" />
 
-                    <toolkit:ListPicker x:Name="CulturesListPicker" ItemsSource="{Binding SupportedCultures}" Header="language"
+                    <toolkit:ListPicker x:Name="CulturesListPicker" ItemsSource="{Binding SupportedCultures}" Header="{Binding Strings.Config_Language, Source={StaticResource LocalizedResources}}"
                                         SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
@@ -57,7 +67,7 @@
                         </toolkit:ListPicker.FullModeItemTemplate>
                     </toolkit:ListPicker>
 
-                    <TextBlock Text="Setting this will override the language used by Dominion Picker only and will not change the current system language.&#x0D;&#x0A;You must restart for this to take effect."
+                    <TextBlock Text="{Binding Strings.Config_LanguageDescription, Source={StaticResource LocalizedResources}}"
                                Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
 
                     <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
