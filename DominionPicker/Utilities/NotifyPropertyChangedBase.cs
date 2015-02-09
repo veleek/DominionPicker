@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Windows;
 using GalaSoft.MvvmLight.Threading;
@@ -14,7 +13,7 @@ namespace Ben.Utilities
 
         protected void NotifyPropertyChanged(String property)
         {
-            var propertyChanged = PropertyChanged;
+            var propertyChanged = this.PropertyChanged;
             if (propertyChanged != null)
             {
                 // So basically INotifyPropertyChanged is used (in general) to notify the UI that
@@ -40,15 +39,15 @@ namespace Ben.Utilities
         }
 
         protected virtual void OnPropertyChanged(string propertyName)
-		{
-			var handler = PropertyChanged;
+        {
+            var handler = this.PropertyChanged;
 
-			if (handler != null)
-			{
+            if (handler != null)
+            {
                 DispatcherHelper.CheckBeginInvokeOnUI(
                     () => handler(this, new PropertyChangedEventArgs(propertyName)));
-			}
-		}
+            }
+        }
 
         protected bool SetProperty<TProperty>(ref TProperty field, TProperty value, string propertyName)
         {
@@ -58,7 +57,7 @@ namespace Ben.Utilities
             }
 
             field = value;
-            OnPropertyChanged(propertyName);
+            this.OnPropertyChanged(propertyName);
             return true;
         }
     }

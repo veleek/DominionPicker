@@ -35,7 +35,7 @@ namespace Ben.Data
 
         public IEnumerator<TElement> GetEnumerator()
         {
-            return Elements.GetEnumerator();
+            return this.Elements.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()

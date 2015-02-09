@@ -16,12 +16,12 @@ namespace Ben.Data
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             String valueString = "<null>";
-            if(value != null)
+            if (value != null)
             {
                 IFormattable formattableValue = value as IFormattable;
-                if(formattableValue != null)
+                if (formattableValue != null)
                 {
-                    valueString = formattableValue.ToString((string)parameter, null);
+                    valueString = formattableValue.ToString((string) parameter, null);
                 }
                 else
                 {
@@ -44,7 +44,7 @@ namespace Ben.Data
         {
             String format = parameter as String ?? "{0}";
 
-            return String.Format(format, value);            
+            return String.Format(format, value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -62,11 +62,11 @@ namespace Ben.Data
             Double scaledValue = baseValue * scalar;
 
             object result = null;
-            if (targetType == typeof(Thickness))
+            if (targetType == typeof (Thickness))
             {
                 result = new Thickness(scaledValue);
             }
-            else if (targetType == typeof(CornerRadius))
+            else if (targetType == typeof (CornerRadius))
             {
                 result = new CornerRadius(scaledValue);
             }
@@ -84,7 +84,7 @@ namespace Ben.Data
 
             if (value is Thickness)
             {
-                Thickness thickness = (Thickness)value;
+                Thickness thickness = (Thickness) value;
                 // Assuming a uniform thickness so just take the first value
                 baseValue = thickness.Left;
             }
@@ -114,7 +114,7 @@ namespace Ben.Data
                 IFormattable formattableValue = value as IFormattable;
                 if (formattableValue != null)
                 {
-                    valueString = formattableValue.ToString((string)parameter, null);
+                    valueString = formattableValue.ToString((string) parameter, null);
                 }
                 else
                 {
@@ -133,18 +133,18 @@ namespace Ben.Data
 
     public class BooleanToVisibilityConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (DesignerProperties.IsInDesignTool)
             {
                 return Visibility.Visible;
             }
 
-            Boolean toVisibility = targetType == typeof(Visibility);
+            Boolean toVisibility = targetType == typeof (Visibility);
 
             if (value == null)
             {
-                return toVisibility? (object)Visibility.Collapsed : (object)0.0;
+                return toVisibility ? (object) Visibility.Collapsed : (object) 0.0;
             }
 
             bool visibile = false;
@@ -156,7 +156,10 @@ namespace Ben.Data
                 bool.TryParse(parameter.ToString(), out reverse);
             }
 
-            if (reverse) { visibile = !visibile; }
+            if (reverse)
+            {
+                visibile = !visibile;
+            }
 
             if (toVisibility)
             {
@@ -168,15 +171,15 @@ namespace Ben.Data
             }
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType == typeof(Visibility))
+            if (targetType == typeof (Visibility))
             {
                 Visibility visibility = Visibility.Collapsed;
 
                 try
                 {
-                    visibility = (Visibility)value;
+                    visibility = (Visibility) value;
                 }
                 catch (InvalidCastException)
                 {
@@ -209,7 +212,10 @@ namespace Ben.Data
                 bool.TryParse(parameter.ToString(), out reverse);
             }
 
-            if (reverse) { visibile = !visibile; }
+            if (reverse)
+            {
+                visibile = !visibile;
+            }
 
             return visibile ? 1.0 : 0.0;
         }
@@ -220,7 +226,7 @@ namespace Ben.Data
 
             try
             {
-                opacity = (double)value;
+                opacity = (double) value;
             }
             catch (InvalidCastException)
             {
@@ -244,12 +250,14 @@ namespace Ben.Data
             }
             else
             {
-                Object defaultValue = value != null && value.GetType().IsValueType ? Activator.CreateInstance(value.GetType()) : null;
+                Object defaultValue = value != null && value.GetType().IsValueType
+                    ? Activator.CreateInstance(value.GetType())
+                    : null;
                 // If the value is not equal to the default value (null or zero usually), then should be true
-                valid = !Object.Equals(value, defaultValue);
+                valid = !Equals(value, defaultValue);
             }
 
-            if (parameter != null && ((string)parameter).ToLower() == "true")
+            if (parameter != null && ((string) parameter).ToLower() == "true")
             {
                 valid = !valid;
             }
@@ -267,7 +275,7 @@ namespace Ben.Data
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            bool valid = (bool)base.Convert(value, targetType, parameter, culture);
+            bool valid = (bool) base.Convert(value, targetType, parameter, culture);
 
             return valid ? Visibility.Visible : Visibility.Collapsed;
         }
@@ -289,13 +297,17 @@ namespace Ben.Data
             {
                 typeName = typeName.TrimEnd('*');
                 Type allowedType = Type.GetType(typeName);
+
+                if (allowedType == null)
+                {
+                    throw new ArgumentException(@"Unable to find type " + typeName, "parameter");
+                }
+
                 return allowedType.IsInstanceOfType(value);
             }
-            else
-            {
-                // If it's not specific then, the type names should match exactly
-                return value.GetType().Name == (string)parameter;
-            }
+
+            // If it's not specific then, the type names should match exactly
+            return value.GetType().Name == (string) parameter;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -306,13 +318,13 @@ namespace Ben.Data
 
     public class TypeToVisibilityConverter : IValueConverter
     {
-        IsTypeConverter typeConverter = new IsTypeConverter();
-        BooleanToVisibilityConverter boolConverter = new BooleanToVisibilityConverter();
+        private static readonly IsTypeConverter TypeConverter = new IsTypeConverter();
+        private static readonly BooleanToVisibilityConverter BoolConverter = new BooleanToVisibilityConverter();
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Boolean b = (Boolean)typeConverter.Convert(value, targetType, parameter, culture);
-            return boolConverter.Convert(b, typeof(Visibility), null, culture);
+            Boolean b = (Boolean) TypeConverter.Convert(value, targetType, parameter, culture);
+            return BoolConverter.Convert(b, typeof (Visibility), null, culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -338,7 +350,7 @@ namespace Ben.Data
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (targetType != typeof(Brush))
+            if (targetType != typeof (Brush))
             {
                 //throw new NotSupportedException("BrushTransparencyConverter is unable to convert to type " + targetType);
             }
@@ -354,7 +366,7 @@ namespace Ben.Data
                 }
 
                 Color c = brush.Color;
-                c.A = (byte)(Byte.MaxValue * alpha);
+                c.A = (byte) (Byte.MaxValue * alpha);
 
                 brush.Color = c;
             }
@@ -384,7 +396,7 @@ namespace Ben.Data
                 throw new InvalidOperationException();
             }
 
-            Color c = (Color)value;
+            Color c = (Color) value;
 
             return new SolidColorBrush(c);
         }
@@ -405,30 +417,6 @@ namespace Ben.Data
     /// <summary> 
     /// Caches the "enum objects" for the lifetime of the application. 
     /// </summary> 
-    internal static class EnumValueCache
-    {
-        private static readonly IDictionary<Type, object[]> Cache = new Dictionary<Type, object[]>();
-
-        public static object[] GetValues(Type type)
-        {
-            if (!type.IsEnum)
-            {
-                throw new ArgumentException("Type '" + type.Name + "' is not an enum");
-            }
-
-            object[] values;
-            if (!Cache.TryGetValue(type, out values))
-            {
-                values = type.GetFields()
-                .Where(f => f.IsLiteral)
-                .Select(f => f.GetValue(null))
-                .ToArray();
-                Cache[type] = values;
-            }
-            return values;
-        }
-    }
-
     /// <summary> 
     /// Takes an enum object and returns a collection of valid values for that object
     /// </summary> 
@@ -444,9 +432,9 @@ namespace Ben.Data
             {
                 Object[] values = EnumValueCache.GetValues(value.GetType());
 
-                if(parameter != null)
+                if (parameter != null)
                 {
-                    if((String)parameter == "True")
+                    if ((String) parameter == "True")
                     {
                         Object[] newValues = new Object[values.Length - 1];
                         Array.Copy(values, 1, newValues, 0, newValues.Length);
@@ -462,6 +450,30 @@ namespace Ben.Data
         {
             throw new InvalidOperationException("Unable to convert enum values collection into an enum value");
         }
+
+        private static class EnumValueCache
+        {
+            private static readonly IDictionary<Type, object[]> Cache = new Dictionary<Type, object[]>();
+
+            public static object[] GetValues(Type type)
+            {
+                if (!type.IsEnum)
+                {
+                    throw new ArgumentException("Type '" + type.Name + "' is not an enum");
+                }
+
+                object[] values;
+                if (!Cache.TryGetValue(type, out values))
+                {
+                    values = type.GetFields()
+                        .Where(f => f.IsLiteral)
+                        .Select(f => f.GetValue(null))
+                        .ToArray();
+                    Cache[type] = values;
+                }
+                return values;
+            }
+        }
     }
 
     /// <summary>
@@ -473,8 +485,8 @@ namespace Ben.Data
 
         public ImageConverter()
         {
-            Extension = ".png";
-            BasePath = @".\";
+            this.Extension = ".png";
+            this.BasePath = @".\";
         }
 
         public string Extension { get; set; }
@@ -500,13 +512,13 @@ namespace Ben.Data
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            String path = BasePath;
+            String path = this.BasePath;
             if (parameter != null)
             {
                 path = Path.Combine(path, parameter.ToString());
             }
 
-            String fileName = value.ToString() + Extension;
+            String fileName = value.ToString() + this.Extension;
             String fullPath = Path.Combine(path, fileName);
 
             return GetBrush(fullPath);
@@ -535,11 +547,10 @@ namespace Ben.Data
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             System.Diagnostics.Debug.WriteLine(
-                "DebugConverter::ConvertBack - Value: {0} ({1}), TargetType: {2}, Parameter: {3}", 
+                "DebugConverter::ConvertBack - Value: {0} ({1}), TargetType: {2}, Parameter: {3}",
                 value, (value ?? new object()).GetType(), targetType, parameter);
 
             return value;
         }
     }
-
 }

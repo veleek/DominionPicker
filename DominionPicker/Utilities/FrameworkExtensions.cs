@@ -36,6 +36,11 @@ namespace Ben.Utilities
             return t;
         }
 
+        public static TResource GetResource<TResource>(this FrameworkElement element, object key)
+        {
+            return (TResource)element.Resources[key];
+        }
+
         public static ObservableCollection<TSource> ToObservableCollection<TSource>(this IEnumerable<TSource> source)
         {
             ObservableCollection<TSource> collection = new ObservableCollection<TSource>();
