@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using Ben.Dominion.Resources;
 using Ben.Dominion.Utilities;
 using Ben.Utilities;
@@ -79,8 +78,15 @@ namespace Ben.Dominion
 
         private void CardItem_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            App.Instance.SelectedCard = sender.GetContext<Card>();
+            DominionCardControl cardControl = sender as DominionCardControl;
+            App.Instance.SelectedCard = cardControl.Card;
             this.NavigationService.Navigate("/CardInfo.xaml");
+        }
+
+        private void CardItem_Swipe(object sender, EventArgs e)
+        {
+            DominionCardControl cardControl = sender as DominionCardControl;
+            MainViewModel.Instance.Result.Replace(cardControl.Card);
         }
 
         private void Refresh_Click(object sender, EventArgs e)
@@ -158,29 +164,6 @@ namespace Ben.Dominion
         public void SaveFavoriteCardSet(String name)
         {
             MainViewModel.Instance.SaveFavoriteCardSet(name);
-        }
-
-        private void ScrollViewer_ManipulationCompleted(object sender,
-            System.Windows.Input.ManipulationCompletedEventArgs e)
-        {
-            var contentPresenter = sender as ScrollContentPresenter;
-            if (contentPresenter == null)
-            {
-                return;
-            }
-
-            ScrollViewer scrollViewer = contentPresenter.ScrollOwner;
-
-            Point v = e.FinalVelocities.LinearVelocity;
-            double m = v.GetMagnitude();
-            double a = Math.Abs(v.X);
-
-            // If it's an intertal manipulation, and it's 80% in the X direction
-            // and the total manipulitation is greater than 400
-            if (e.IsInertial && (a / m) > 0.8 && m > 400)
-            {
-                MainViewModel.Instance.Result.Replace(scrollViewer.DataContext as Card);
-            }
         }
 
         private void CardLookup_Click(object sender, EventArgs e)

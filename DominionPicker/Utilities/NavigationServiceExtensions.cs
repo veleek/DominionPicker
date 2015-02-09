@@ -50,7 +50,7 @@ namespace Ben.Utilities
 
             try
             {
-                Uri navUri = new Uri(pageUri, UriKind.Relative);
+                Uri navUri = new Uri("/Views" + pageUri, UriKind.Relative);
                 navigationService.Navigate(navUri);
             }
             catch (InvalidOperationException ioe)

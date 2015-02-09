@@ -4,32 +4,34 @@
     <MainViewModel.Result>
         <PickerResult xmlns="clr-namespace:Ben.Dominion">
             <PickerResult.Cards>
-                <Card Name="Archive" DisplayName="L_Archive" BackgroundColor="#A09BA5" CoinCost="0" Cost="5" Set="Base" ID="100" Type="Action, Attack" />
-                <Card Name="Sample B Card" DisplayName="L_Sample B Card" BackgroundColor="#A09BA5" CoinCost="1" Cost="5" Set="Intrigue" ID="100" Type="Action, Attack" />
-                <Card Name="Sample C Card" DisplayName="L_Sample C Card" BackgroundColor="#A09BA5" CoinCost="2" Cost="5" Set="Seaside" ID="100" Type="Action, Attack" />
-                <Card Name="Sample D Card" DisplayName="L_Sample D Card" BackgroundColor="#A09BA5" CoinCost="3" Cost="5" Set="Alchemy" ID="100" Type="Action, Attack" />
-                <Card Name="Elephant Bones" DisplayName="L_Elephant Bones" CoinCost="4" Cost="5" Set="Prosperity" ID="100" Type="Action, Attack">
+                <Card Name="Archive" DisplayName="Archive" BackgroundColor="#A09BA5" CoinCost="0" Cost="5" Set="Base" ID="100" Type="Action, Attack" />
+                <Card Name="Sample B Card" DisplayName="Sample B Card" CoinCost="1" Cost="5" Set="Intrigue" ID="100" Type="Action, Attack">
                     <Card.BackgroundColor>
                         <p:LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5, 1">
                             <p:LinearGradientBrush.GradientStops>
-                                <p:GradientStop Color="#EBB40F" Offset="0"/>
-                                <p:GradientStop Color="#EBB40F" Offset="0.2"/>
-                                <p:GradientStop Color="#617939" Offset="0.8"/>
-                                <p:GradientStop Color="#617939" Offset="1"/>
+                                <p:GradientStop Color="#A09BA5" Offset="0.2"/>
+                                <p:GradientStop Color="#FF3C3C" Offset="0.8"/>
                             </p:LinearGradientBrush.GradientStops>
                         </p:LinearGradientBrush>
                     </Card.BackgroundColor>
                 </Card>
-                <Card Name="Philosopher's Stone" DisplayName="L_Philosopher's Stone" BackgroundColor="#A09BA5" CoinCost="5" Cost="5" Set="Cornucopia" ID="100" Type="Action, Attack" HasPotion="True"/>
-                <!--
-                <Card Name="Scrying Pool" DisplayName="L_Scrying Pool"BackgroundColor="#A09BA5" CoinCost="6" Cost="5" Set="Hinterlands" ID="100" Type="Action, Attack" />
-                <Card Name="Silk Road" DisplayName="L_Silk Road"BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
-                <Card Name="Bridge" DisplayName="L_Bridge"BackgroundColor="#A09BA5" CoinCost="8" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
-                <Card Name="Moat" DisplayName="L_Moat"BackgroundColor="#BC8010" CoinCost="9" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" HasPotion="True"/> 
-                -->
+                <Card Name="Sample C Card" DisplayName="Sample C Card" BackgroundColor="#A09BA5" CoinCost="2" Cost="5" Set="Seaside" ID="100" Type="Action, Attack" />
+                <Card Name="Sample D Card" DisplayName="Sample D Card" BackgroundColor="#A09BA5" CoinCost="3" Cost="5" Set="Alchemy" ID="100" Type="Action, Attack" />
+                <Card Name="Elephant Bones" DisplayName="Elephant Bones" CoinCost="4" Cost="5" Set="Prosperity" ID="100" Type="Action, Attack">
+                    <Card.BackgroundColor>
+                        <p:LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5, 1">
+                            <p:LinearGradientBrush.GradientStops>
+                                <p:GradientStop Color="#EBB40F" Offset="0.2"/>
+                                <p:GradientStop Color="#617939" Offset="0.8"/>
+                            </p:LinearGradientBrush.GradientStops>
+                        </p:LinearGradientBrush>
+                    </Card.BackgroundColor>
+                </Card>
+                <Card Name="Philosopher's Stone" DisplayName="Philosopher's Stone" BackgroundColor="#A09BA5" CoinCost="5" Cost="5" Set="Cornucopia" ID="100" Type="Action, Attack" HasPotion="True"/>
             </PickerResult.Cards>
             <PickerResult.AdditionalCards>
-                <Card Name="Trader" DisplayName="L_Trader" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
+                <Card Name="Trader" DisplayName="Trader" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
+                <Card Name="Curse" DisplayName="Curse" BackgroundColor="#7B418D" CoinCost="0" HasPotion="false"  Set="DarkAges" ID="100" Type="Action, Attack" />
             </PickerResult.AdditionalCards>
             <PickerResult.AdditionalStuff>
                 <system:String>Victory Point Tokens</system:String>

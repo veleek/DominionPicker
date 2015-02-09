@@ -7,14 +7,36 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:Ben.Dominion"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     d:DataContext="{d:DesignData Source=SampleData/CardViewModelSampleData.xaml}"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
 
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SwivelTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SwivelTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SwivelTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SwivelTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -35,15 +57,8 @@
             </toolkit:GestureService.GestureListener>
             <ScrollViewer>
                 <StackPanel>
-                    <ScrollViewer Margin="12,0,0,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                        <StackPanel Orientation="Horizontal">
-                            <Grid Margin="0,0,6,0">
-                                <Image Source="./Images/coin.png" Width="48" Height="48"/>
-                                <TextBlock Text="{Binding Card.CoinCost}" Style="{StaticResource CardCostTextStyle}" FontSize="36"/>
-                            </Grid>
-                            <Image Source="./Images/potion_small.png" Height="52" Margin="0,0,6,0" Grid.Column="1" Visibility="{Binding Card.HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding Card.DisplayName}" Style="{StaticResource CardNameTextStyle}" FontSize="47" Grid.Column="2" />
-                        </StackPanel>
+                    <ScrollViewer Margin="12,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <local:DominionCardControl DataContext="{Binding Card}"></local:DominionCardControl>
                     </ScrollViewer>
 
                     <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
@@ -55,7 +70,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Background="{StaticResource PhoneForegroundBrush}"
-                            OpacityMask="{Binding Card.Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                            OpacityMask="{Binding Card.Set, Converter={StaticResource ImageConverter}, ConverterParameter='/Images/SetIcons'}"
                             Width="40" HorizontalAlignment="Left"/>
                         <TextBlock Grid.Column="1" Text="{Binding SetView.DisplayName}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     </Grid>

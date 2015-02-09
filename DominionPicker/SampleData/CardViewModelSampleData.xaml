@@ -1,7 +1,7 @@
 ﻿<CardViewModel xmlns="clr-namespace:Ben.Dominion" >
     <CardViewModel.Card>
         <Card Name="Sample Card" 
-              Cost="1P" 
+              Cost="3+" 
               Set="Base" 
               ID="100" 
               Type="Action, Attack, Knight" 

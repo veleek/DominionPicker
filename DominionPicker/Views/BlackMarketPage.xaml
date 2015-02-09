@@ -8,13 +8,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    xmlns:local="clr-namespace:Ben.Dominion"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True"
-    DataContext="{Binding Instance.BlackMarket, Source={StaticResource MainView}}">
+    shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0"
+    DataContext="{Binding Instance.BlackMarket, Source={StaticResource MainView}}"
+    d:DataContext="{d:DesignData Source=SampleData/BlackMarketSampleData.xaml}">
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -22,90 +24,22 @@
                 <toolkit:SwivelTransition Mode="ForwardIn" />
             </toolkit:NavigationInTransition.Forward>
             <toolkit:NavigationInTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideUpFadeIn"/>
+                <toolkit:SwivelTransition Mode="BackwardIn"/>
             </toolkit:NavigationInTransition.Backward>
         </toolkit:NavigationInTransition>
     </toolkit:TransitionService.NavigationInTransition>
     <toolkit:TransitionService.NavigationOutTransition>
         <toolkit:NavigationOutTransition>
             <toolkit:NavigationOutTransition.Forward>
-                <toolkit:SlideTransition Mode="SlideDownFadeOut" />
+                <toolkit:SwivelTransition Mode="ForwardOut" />
             </toolkit:NavigationOutTransition.Forward>
             <toolkit:NavigationOutTransition.Backward>
-                <toolkit:SlideTransition Mode="SlideUpFadeOut" />
+                <toolkit:SwivelTransition Mode="BackwardOut" />
             </toolkit:NavigationOutTransition.Backward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.Resources>
-            <DataTemplate x:Key="CardItemTemplate">
-                <ScrollViewer HorizontalScrollBarVisibility="Visible"
-                            VerticalScrollBarVisibility="Disabled">
-                    <ScrollViewer.Style>
-                        <Style TargetType="ScrollViewer">
-                            <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-                            <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
-                            <Setter Property="Background" Value="Transparent"/>
-                            <Setter Property="Padding" Value="0"/>
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="BorderBrush" Value="Transparent"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="ScrollViewer">
-                                        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
-                                            <VisualStateManager.VisualStateGroups>
-                                                <VisualStateGroup x:Name="ScrollStates">
-                                                    <VisualStateGroup.Transitions>
-                                                        <VisualTransition GeneratedDuration="00:00:00.5"/>
-                                                    </VisualStateGroup.Transitions>
-                                                    <VisualState x:Name="Scrolling">
-                                                        <Storyboard>
-                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar"/>
-                                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar"/>
-                                                        </Storyboard>
-                                                    </VisualState>
-                                                    <VisualState x:Name="NotScrolling"/>
-                                                </VisualStateGroup>
-                                            </VisualStateManager.VisualStateGroups>
-                                            <Grid Margin="{TemplateBinding Padding}">
-                                                <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ManipulationCompleted="ScrollViewer_ManipulationCompleted"/>
-                                                <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5"/>
-                                                <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto"/>
-                                            </Grid>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </ScrollViewer.Style>
-                    <Border Margin="2"
-                        Background="{Binding BackgroundColor}"
-                        CornerRadius="5"
-                        Tap="CardItem_Tap">
-                        <Grid Margin="0,1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto" MinWidth="6"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0"/>
-                            <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}"/>
-                            <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black"/>
-                            <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White"/>
-                            <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
-                            Grid.Column="2"
-                            HorizontalAlignment="Right"
-                            Width="40"
-                            Margin="5,5"/>
-                        </Grid>
-                    </Border>
-                </ScrollViewer>
-            </DataTemplate>
-        </Grid.Resources>
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -135,15 +69,27 @@
 
             <StackPanel Grid.Row="0"
                         Visibility="{Binding Selected, Converter={StaticResource IsValidToVisibilityConverter}}">
-                <TextBlock Text="selected" Style="{StaticResource PhoneTextSubtleStyle}" />
-                <ContentPresenter Content="{Binding Selected}" ContentTemplate="{StaticResource CardItemTemplate}" />
+                <TextBlock Text="selected" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0"/>
+                <ContentPresenter Content="{Binding Selected}" >
+                    <ContentPresenter.ContentTemplate>
+                        <DataTemplate>
+                            <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe" />
+                        </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                </ContentPresenter>
             </StackPanel>
 
             <StackPanel Grid.Row="1"
                         Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}}">
-                <TextBlock Text="hand" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <TextBlock Text="hand" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0" />
                 <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding Hand}" ItemTemplate="{StaticResource CardItemTemplate}" />
+                    <ItemsControl ItemsSource="{Binding Hand}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </ScrollViewer>
             </StackPanel>
 

@@ -71,7 +71,18 @@ namespace Ben.Dominion
         [XmlIgnore]
         public String CoinCost
         {
-            get { return this.Cost.Contains('+') ? " " + this.Cost.Replace('+', '\x207A') : this.Cost.Trim('p'); }
+            get
+            {
+                // Remove the P from the cost;
+                string coinCost = this.Cost.Trim('p').ToLower();
+                if (coinCost.Contains('+'))
+                {
+                    // Replace the + (e.g. 3+) with a superscript plus character
+                    coinCost = " " + this.Cost.Replace('+', '\x207A');
+                }
+
+                return coinCost;
+            }
         }
 
         private string setString;

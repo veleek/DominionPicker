@@ -1,8 +1,8 @@
 ﻿<Card xmlns="clr-namespace:Ben.Dominion" 
          Name="Sample Card" 
-         Cost="1P" 
+         Cost="0*" 
          Set="Base" 
          ID="100" 
-         Type="Action, Attack, Knight" 
+         Type="Reaction, Victory" 
          Rules="+1 Card\n+2 Coins\nWhen you gain this, trash a card.\n______\n(This is not in the supply.)">
 </Card>

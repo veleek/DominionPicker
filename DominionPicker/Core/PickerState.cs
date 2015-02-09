@@ -54,22 +54,18 @@ namespace Ben.Dominion
         public static PickerState Load(string fileName)
         {
             PickerState state = null;
-            DateTime start = DateTime.UtcNow;
             try
             {
                 if (UseIsolatedStorage)
                 {
-                    if (state == null)
+                    using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
                     {
-                        using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
+                        if (store.FileExists(fileName))
                         {
-                            if (store.FileExists(fileName))
+                            AppLog.Instance.Log("Loading picker state...");
+                            using (Stream stream = store.OpenFile(fileName, FileMode.Open))
                             {
-                                AppLog.Instance.Log("Loading picker state...");
-                                using (Stream stream = store.OpenFile(fileName, FileMode.Open))
-                                {
-                                    state = GenericContractSerializer.Deserialize<PickerState>(stream);
-                                }
+                                state = GenericContractSerializer.Deserialize<PickerState>(stream);
                             }
                         }
                     }
@@ -92,33 +88,29 @@ namespace Ben.Dominion
         public static PickerState LoadDefault()
         {
             PickerState state = null;
-            DateTime start = DateTime.UtcNow;
             try
             {
                 AppLog.Instance.Log("Loading picker state...");
                 if (UseIsolatedStorage)
                 {
-                    if (state == null)
+                    using (Stream stream = TitleContainer.OpenStream("./Resources/DefaultPickerState_1.7.xml"))
                     {
-                        using (Stream stream = TitleContainer.OpenStream("./Resources/DefaultPickerState_1.7.xml"))
+                        Type[] extraTypes = new[]
                         {
-                            Type[] extraTypes = new[]
-                            {
-                                typeof (OldFavoriteSet),
-                                typeof (OldFavoriteSetting),
-                                typeof (PickerOption),
-                                typeof (ListPickerOption),
-                                typeof (BooleanPickerOption),
-                            };
+                            typeof (OldFavoriteSet),
+                            typeof (OldFavoriteSetting),
+                            typeof (PickerOption),
+                            typeof (ListPickerOption),
+                            typeof (BooleanPickerOption),
+                        };
 
-                            XmlAttributeOverrides overrides = new XmlAttributeOverrides();
-                            overrides.Add(typeof (OldFavoriteSet), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSet") });
-                            overrides.Add(typeof (OldFavoriteSetting), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSetting") });
+                        XmlAttributeOverrides overrides = new XmlAttributeOverrides();
+                        overrides.Add(typeof (OldFavoriteSet), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSet") });
+                        overrides.Add(typeof (OldFavoriteSetting), new XmlAttributes { XmlRoot = new XmlRootAttribute("FavoriteSetting") });
 
-                            XmlSerializer serializer = new XmlSerializer(typeof (PickerState), overrides, extraTypes, null, null);
+                        XmlSerializer serializer = new XmlSerializer(typeof (PickerState), overrides, extraTypes, null, null);
 
-                            state = serializer.Deserialize(stream) as PickerState;
-                        }
+                        state = serializer.Deserialize(stream) as PickerState;
                     }
                 }
             }

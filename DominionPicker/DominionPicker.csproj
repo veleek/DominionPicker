@@ -146,6 +146,9 @@
     <Reference Include="System.Windows.Interactivity" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DominionCardControl.xaml.cs">
+      <DependentUpon>DominionCardControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MultiTemplateItemsControl.cs">
     </Compile>
     <Compile Include="Resources\CardDataStrings.Designer.cs">
@@ -191,8 +194,8 @@
       <DependentUpon>CardInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Cards.cs" />
-    <Compile Include="Controls\Swipable.xaml.cs">
-      <DependentUpon>Swipable.xaml</DependentUpon>
+    <Compile Include="Controls\Swipeable.xaml.cs">
+      <DependentUpon>Swipeable.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DebugPage.xaml.cs">
       <DependentUpon>DebugPage.xaml</DependentUpon>
@@ -266,6 +269,14 @@
     </Content>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    <Page Include="Controls\DominionCardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\BlackMarketSampleData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignDataWithDesignTimeCreatableTypes>
     <Page Include="Views\AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
@@ -334,7 +345,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\Swipable.xaml">
+    <Page Include="Controls\Swipeable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <Generator>MSBuild:Compile</Generator>

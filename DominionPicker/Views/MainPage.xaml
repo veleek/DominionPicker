@@ -14,13 +14,34 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" shell:SystemTray.Opacity="0"
+    shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0"
     DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}">
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="{Binding Strings.MainPage_Generating, Source={StaticResource LocalizedResources}}"
                                  IsIndeterminate="True"/>
     </shell:SystemTray.ProgressIndicator>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SwivelTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SwivelTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
 
     <Grid x:Name="LayoutRoot" Background="Transparent">        
         <Grid.RowDefinitions>

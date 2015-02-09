@@ -74,15 +74,6 @@ namespace Ben.Dominion
 
         public Card SelectedCard { get; set; }
 
-        public Boolean IsTrial
-        {
-            get
-            {
-                //return true;
-                return this.license.IsTrial();
-            }
-        }
-
         public bool IsNewVersion { get; set; }
 
         // Code to execute when the application is launching (eg, from Start)
@@ -166,7 +157,7 @@ namespace Ben.Dominion
                     new UriMapping
                     {
                         Uri = new Uri("/Protocol", UriKind.Relative),
-                        MappedUri = new Uri("/MainPage.xaml", UriKind.Relative),
+                        MappedUri = new Uri("/Views/MainPage.xaml", UriKind.Relative),
                     }
                 }
             };

@@ -15,8 +15,8 @@
         <data:ImageConverter x:Key="ImageConverter" />
         <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 
-        <FontFamily x:Key="BookAntiquaBold">.\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
-        <FontFamily x:Key="OptimusPrincepsSemiBold">.\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
+        <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
+        <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
 
         <Style x:Key="CardCostTextStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="{StaticResource BookAntiquaBold}"/>
@@ -32,10 +32,6 @@
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
-
-        <DataTemplate x:Key="AdditionalStuffTemplate">
-            <TextBlock Text="{Binding}" Margin="0,3" Style="{StaticResource CardNameTextStyle}"/>
-        </DataTemplate>
 
         <local:LocalizedResources x:Key="LocalizedResources" />
 
@@ -97,7 +93,9 @@
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="Padding" Value="0"/>
         </Style>
-        <!-- The default CheckBox style top aligns the actual checker, I don't want this -->
+
+        <!-- The default CheckBox style top aligns the actual checker, I don't want this so define this style to use the
+             proper alignment for the actual check box based on the bound value. -->
         <Style BasedOn="{StaticResource PhoneRadioButtonCheckBoxBase}" TargetType="CheckBox">
             <Setter Property="Template">
                 <Setter.Value>

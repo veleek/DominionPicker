@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Ben.Controls.Swipable"
+﻿<UserControl x:Class="Ben.Controls.Swipeable"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,16 +7,16 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    d:DesignHeight="480" d:DesignWidth="480">
+    d:DesignHeight="80" d:DesignWidth="480">
 
     <Border BorderThickness="3" BorderBrush="Firebrick" MinWidth="10" MinHeight="10">
         <Grid x:Name="LayoutRoot">
             <Grid.RenderTransform>
-                <CompositeTransform x:Name="SwipeTransform" TranslateX="30" Rotation="12" />
+                <CompositeTransform x:Name="SwipeTransform" />
             </Grid.RenderTransform>
-            <CheckBox Content="Sample" />
-            <ContentPresenter x:Name="SwipableContent">
-            </ContentPresenter>
+            <CheckBox>
+                <ContentPresenter x:Name="SwipableContent" />
+            </CheckBox>
         </Grid>
     </Border>
 </UserControl>

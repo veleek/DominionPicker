@@ -14,128 +14,131 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="False"
-    shell:SystemTray.Opacity="0.1">
+    shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
 
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:SwivelTransition Mode="ForwardIn" />
+            </toolkit:NavigationInTransition.Forward>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:SwivelTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:SwivelTransition Mode="ForwardOut" />
+            </toolkit:NavigationOutTransition.Forward>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:SwivelTransition Mode="BackwardOut" />
+            </toolkit:NavigationOutTransition.Backward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+    
     <Grid>
-        <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0"
-                   Text="{Binding Strings.Lookup_Tips, Source={StaticResource LocalizedResources}}" />
+        <Grid.Resources>
 
-        <controls:Pivot Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" x:Name="RootPivot" Margin="0,-10, 0, 0">
-            <controls:PivotItem Header="{Binding Strings.Lookup_Title, Source={StaticResource LocalizedResources}}" Margin="0">
-                <Grid x:Name="ContentPanel" Margin="12,0">
-                    <Grid.Resources>
-                       
-                        <DataTemplate x:Key="CardItemTemplate">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+            <DataTemplate x:Key="CardItemTemplate">
+                <Grid Margin="12,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                                <CheckBox HorizontalContentAlignment="Stretch"
-                                          IsChecked="{Binding Selected, Mode=TwoWay}">
-                                    <TextBlock Text="{Binding Card.DisplayName}" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}"/>
-                                </CheckBox>
+                    <CheckBox HorizontalContentAlignment="Stretch"
+                              IsChecked="{Binding Selected, Mode=TwoWay}">
+                        <TextBlock Text="{Binding Card.DisplayName}" 
+                                   VerticalAlignment="Center" 
+                                   Style="{StaticResource PhoneTextLargeStyle}"/>
+                    </CheckBox>
 
-                                <c4f:RoundButton BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Column="1" ImageSource="/Images/appbar.questionmark.png" Click="CardItemDetails_Click" VerticalAlignment="Center" />
-                            </Grid>
-                        </DataTemplate>
+                    <c4f:RoundButton BorderBrush="{StaticResource PhoneForegroundBrush}" Grid.Column="1" ImageSource="/Images/appbar.questionmark.png" Click="CardItemDetails_Click" VerticalAlignment="Center" />
+                </Grid>
+            </DataTemplate>
 
-                        <DataTemplate x:Key="CardSetGroupHeaderTemplate">
-                            <Border Background="{StaticResource PhoneAccentBrush}" Margin="{StaticResource PhoneTouchTargetOverhang}" Padding="{StaticResource PhoneTouchTargetOverhang}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+            <DataTemplate x:Key="CardSetGroupHeaderTemplate">
+                <Border Background="{StaticResource PhoneAccentBrush}"
+                        Margin="{StaticResource PhoneTouchTargetOverhang}" 
+                        Padding="{StaticResource PhoneTouchTargetOverhang}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" 
+                        <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" 
                                        Style="{StaticResource PhoneTextLargeStyle}"
                                        TextAlignment="Left" VerticalAlignment="Bottom" />
 
-                                    <Border Background="{StaticResource PhoneForegroundBrush}"
-                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
+                        <Border Background="{StaticResource PhoneForegroundBrush}"
+                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='/Images/SetIcons'}"
                                             Grid.Column="1"
                                             Width="40"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
+                    </Grid>
+                </Border>
+            </DataTemplate>
 
-                        <DataTemplate x:Key="CardSetGroupItemTemplate">
-                            <Border Background="{StaticResource PhoneAccentBrush}" Margin="{StaticResource PhoneTouchTargetOverhang}" Padding="{StaticResource PhoneTouchTargetOverhang}"
-                                HorizontalAlignment="Stretch">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+            <Style x:Name="CardSetJumpListStyle" TargetType="phone:LongListSelector">
+                <Setter Property="ItemTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <Border Background="{StaticResource PhoneAccentBrush}" 
+                                        Margin="{StaticResource PhoneTouchTargetOverhang}" 
+                                        Padding="{StaticResource PhoneTouchTargetOverhang}"
+                                        HorizontalAlignment="Stretch">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" 
-                                       Style="{StaticResource PhoneTextLargeStyle}"
-                                       TextAlignment="Left" VerticalAlignment="Bottom" />
+                                        <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" Style="{StaticResource PhoneTextLargeStyle}" TextAlignment="Left" VerticalAlignment="Bottom" />
 
-                                    <Border Background="{StaticResource PhoneForegroundBrush}"
-                                            OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}"
-                                            Grid.Column="2"
-                                            Width="40"/>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </Grid.Resources>
+                                        <Border Background="{StaticResource PhoneForegroundBrush}" OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}" Grid.Column="1" Width="40"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+            </Style>
+        </Grid.Resources>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Strings.Lookup_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+        
+        <TextBlock x:Name="TipText" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right"
+                   Text="{Binding Strings.Lookup_Tips, Source={StaticResource LocalizedResources}}" />
+        
+        <toolkit:PhoneTextBox x:Name="SearchTextBox" Grid.Row="1" Margin="0,0,12,0"
+                Hint="{Binding Strings.Lookup_SearchHint, Source={StaticResource LocalizedResources}}"
+                ActionIcon="/Images/actionicon.cancel.png" HidesActionItemWhenEmpty="True"
+                TextChanged="SearchTextBox_TextChanged" 
+                KeyUp="SearchTextBox_KeyUp" 
+                ActionIconTapped="SearchTextBox_ActionIconTapped"/>
 
-                    <StackPanel Orientation="Vertical" Grid.Row="0" Visibility="Visible">
-                        <toolkit:PhoneTextBox x:Name="SearchTextBox" Hint="{Binding Strings.Lookup_SearchHint, Source={StaticResource LocalizedResources}}" 
-                                          ActionIcon="/Images/actionicon.cancel.png" HidesActionItemWhenEmpty="False"
-                                          TextChanged="SearchTextBox_TextChanged" KeyUp="SearchTextBox_KeyUp" ActionIconTapped="SearchTextBox_ActionIconTapped" />
-                    </StackPanel>
-
-                    <phone:LongListSelector x:Name="CardsList"
-                                            Grid.Row="1"
-                                            LayoutMode="List"
-                                            IsGroupingEnabled="True"
-                                            HideEmptyGroups="True"
-                                            HorizontalAlignment="Stretch"
-                                            HorizontalContentAlignment="Stretch"
-                                            GroupHeaderTemplate="{StaticResource CardSetGroupHeaderTemplate}"
-                                            ItemTemplate="{StaticResource CardItemTemplate}"
-                                            d:DataContext="{d:DesignData Source=SampleData/GroupedCardSelectorSampleData.xaml}"
-                                            ItemsSource="{Binding}">
-                        <phone:LongListSelector.JumpListStyle>
-                            <Style TargetType="phone:LongListSelector">
-                                <Setter Property="ItemTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <Border Background="{StaticResource PhoneAccentBrush}" 
-                                                    Margin="{StaticResource PhoneTouchTargetOverhang}" 
-                                                    Padding="{StaticResource PhoneTouchTargetOverhang}"
-                                                    HorizontalAlignment="Stretch">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*" />
-                                                        <ColumnDefinition Width="Auto" />
-                                                    </Grid.ColumnDefinitions>
-
-                                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" Style="{StaticResource PhoneTextLargeStyle}" TextAlignment="Left" VerticalAlignment="Bottom" />
-
-                                                    <Border Background="{StaticResource PhoneForegroundBrush}" OpacityMask="{Binding Key, Converter={StaticResource ImageConverter}, ConverterParameter='./Images/SetIcons'}" Grid.Column="1" Width="40"/>
-                                                </Grid>
-                                            </Border>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </phone:LongListSelector.JumpListStyle>
-                    </phone:LongListSelector>
-                </Grid>
-            </controls:PivotItem>
-
-        </controls:Pivot>
+        <phone:LongListSelector x:Name="CardsList"
+                                Grid.Row="2"
+                                Margin="0,0,0,0"
+                                LayoutMode="List"
+                                IsGroupingEnabled="True"
+                                HideEmptyGroups="True"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Stretch"
+                                GroupHeaderTemplate="{StaticResource CardSetGroupHeaderTemplate}"
+                                ItemTemplate="{StaticResource CardItemTemplate}"
+                                JumpListStyle="{StaticResource CardSetJumpListStyle}"
+                                d:DataContext="{d:DesignData Source=SampleData/GroupedCardSelectorSampleData.xaml}"
+                                ItemsSource="{Binding}" />
     </Grid>
     
     <phone:PhoneApplicationPage.ApplicationBar>
