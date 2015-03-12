@@ -1,8 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
+using System.Windows.Data;
+using Windows.UI.Core;
 using Ben.Dominion.Resources;
 using Ben.Dominion.Utilities;
+using Ben.Dominion.Views;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
@@ -53,7 +57,7 @@ namespace Ben.Dominion
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            this.UpdateSortButton(MainViewModel.Instance.Result.SortOrder);
+            this.UpdateSorting(MainViewModel.Instance.Result.SortOrder);
 
             base.OnNavigatedTo(e);
         }
@@ -80,7 +84,7 @@ namespace Ben.Dominion
         {
             DominionCardControl cardControl = sender as DominionCardControl;
             App.Instance.SelectedCard = cardControl.Card;
-            this.NavigationService.Navigate("/CardInfo.xaml");
+            PickerView.CardInfo.Go();
         }
 
         private void CardItem_Swipe(object sender, EventArgs e)
@@ -91,64 +95,82 @@ namespace Ben.Dominion
 
         private void Refresh_Click(object sender, EventArgs e)
         {
-            // Start and show the progress bar, disable the create button
-            SystemTray.ProgressIndicator.IsVisible = true;
-            ApplicationBarIconButton refreshButton = sender as ApplicationBarIconButton;
-            refreshButton.IsEnabled = false;
-
-            // We don't want the generation to happen on the UI thread.
-            // A background worker will enable stuff to continue (e.g.
-            // quit the app) while the generation is happening.
-            BackgroundWorker generateWorker = new BackgroundWorker();
-            generateWorker.DoWork += (backgroundSender, backgroundArgs) =>
+            ApplicationBarIconButton refreshButton = (ApplicationBarIconButton)sender;
+            
+            try
             {
-                try
-                {
-                    // If we fail to generate a set, we don't do anything
-                    MainViewModel.Instance.GenerateCardList();
-                }
-                finally
-                {
-                    // And finally when everything is done, ask the UI thread to reenable
-                    // the buttons and hide the progress bar
-                    this.Dispatcher.BeginInvoke(() =>
-                    {
-                        refreshButton.IsEnabled = true;
-                        SystemTray.ProgressIndicator.IsVisible = false;
-                    });
-                }
-            };
+                // Start and show the progress bar, disable the create button
+                SystemTray.ProgressIndicator.IsVisible = true;
 
-            generateWorker.RunWorkerAsync();
+                refreshButton.IsEnabled = false;
+
+                // We don't want the generation to happen on the UI thread.
+                // A background worker will enable stuff to continue (e.g.
+                // quit the app) while the generation is happening.
+                BackgroundWorker generateWorker = new BackgroundWorker();
+                generateWorker.DoWork += (backgroundSender, backgroundArgs) =>
+                {
+                    try
+                    {
+                        // If we fail to generate a set, we don't do anything
+                        MainViewModel.Instance.GenerateCardList();
+                    }
+                    finally
+                    {
+                        // And finally when everything is done, ask the UI thread to reenable
+                        // the buttons and hide the progress bar
+                        this.Dispatcher.BeginInvoke(() =>
+                        {
+                            refreshButton.IsEnabled = true;
+                            SystemTray.ProgressIndicator.IsVisible = false;
+                        });
+                    }
+                };
+
+                generateWorker.RunWorkerAsync();
+            }
+            catch (Exception)
+            {
+                // If there's a failure, we need to re-enable the buttons.
+                refreshButton.IsEnabled = true;
+                SystemTray.ProgressIndicator.IsVisible = false;
+                throw;
+            }
         }
 
         private void Sort_Click(object sender, EventArgs e)
         {
-            ResultSortOrder sortOrder = NextSortOrder(MainViewModel.Instance.Result.SortOrder);
-            MainViewModel.Instance.Result.Sort(sortOrder);
-            this.UpdateSortButton(sortOrder);
+            // Set the sort order to the next sort order
+            MainViewModel.Instance.Result.SortOrder = MainViewModel.Instance.Result.SortOrder.Next();
+
+            // Then update the view.
+            this.UpdateSorting(MainViewModel.Instance.Result.SortOrder);
         }
 
-        private void UpdateSortButton(ResultSortOrder sortOrder)
+        private void UpdateSorting(ResultSortOrder sortOrder)
         {
-            String nextSort = NextSortOrder(sortOrder).ToString();
+            this.ResultsViewSource.SortDescriptions.Clear();
+
+            if (sortOrder != ResultSortOrder.Name)
+            {
+                this.ResultsViewSource.SortDescriptions.Add(
+                    new SortDescription(
+                        sortOrder.ToString(),
+                        ListSortDirection.Ascending)
+                    );
+            }
+
+            // We always sort by DisplayName after we sort by whatever sort property we have.
+            this.ResultsViewSource.SortDescriptions.Add(
+                new SortDescription(
+                    "DisplayName",
+                    ListSortDirection.Ascending)
+                );
+
+            // The sort button will display the next sort order option
+            String nextSort = sortOrder.Next().ToString();
             this.SortButton.Text = Strings.ResourceManager.GetString("Results_Sort" + nextSort, Strings.Culture);
             this.SortButton.IconUri = new Uri("/images/appbar.sort." + nextSort + ".png", UriKind.Relative);
-        }
-
-        public static ResultSortOrder NextSortOrder(ResultSortOrder sortOrder)
-        {
-            switch (sortOrder)
-            {
-                case ResultSortOrder.Name:
-                    return ResultSortOrder.Cost;
-                case ResultSortOrder.Cost:
-                    return ResultSortOrder.Set;
-                case ResultSortOrder.Set:
-                    return ResultSortOrder.Name;
-                default:
-                    return ResultSortOrder.Name;
-            }
         }
 
         private void AddFavorite_Click(object sender, EventArgs e)
@@ -168,22 +190,22 @@ namespace Ben.Dominion
 
         private void CardLookup_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/CardFilterPage.xaml");
+            PickerView.CardFilter.Go();
         }
 
         private void BlackMarket_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/BlackMarketPage.xaml");
+            PickerView.BlackMarket.Go();
         }
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/ConfigurationPage.xaml");
+            PickerView.Settings.Go();
         }
 
         private void About_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/AboutPage.xaml");
+            PickerView.About.Go();
         }
     }
 }

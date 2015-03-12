@@ -391,4 +391,7 @@ never be picked</value>
   <data name="Config_PickerOptions" xml:space="preserve">
     <value>Picker Options</value>
   </data>
+  <data name="About_RulesDescription" xml:space="preserve">
+    <value>Quick links to PDFs of the rules for each Dominion expansion available online.</value>
+  </data>
 </root>

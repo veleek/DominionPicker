@@ -60,23 +60,29 @@
                     </Paragraph>
                 </RichTextBox>
                 
-                <local:Swipeable>
-                    <Button Content="Sample"></Button>
-                </local:Swipeable>
+                <local:SwipeableBase Padding="10" VerticalAlignment="Center">
+                    <StackPanel Width="800">
+                        <TextBlock Text="Hello World" FontWeight="Bold" FontSize="40" TextAlignment="Center" />
+                        <TextBlock Text="This is some sample swipeable content" Foreground="{StaticResource PhoneSubtleBrush}" />
+                    </StackPanel>
+                </local:SwipeableBase>
             </StackPanel>
         </controls:PivotItem>
 
         <controls:PivotItem Header="log" Margin="12,0,0,0">
-            <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">
+            <ScrollViewer>
+                <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">
                             <Run Text="{Binding Level}" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"></Run>
+                            <Run Text=":"></Run>
                             <Run Text="{Binding Text}"></Run>
-                        </TextBlock>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                            </TextBlock>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
         </controls:PivotItem>
     </controls:Pivot>
 

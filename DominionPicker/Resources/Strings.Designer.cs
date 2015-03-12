@@ -106,6 +106,15 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Quick links to PDFs of the rules for each Dominion expansion available online..
+        /// </summary>
+        public static string About_RulesDescription {
+            get {
+                return ResourceManager.GetString("About_RulesDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to update.
         /// </summary>
         public static string About_Update {

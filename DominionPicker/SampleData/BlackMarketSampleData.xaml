@@ -9,8 +9,8 @@
          Rules="+1 Card\n+2 Coins\nWhen you gain this, trash a card.\n______\n(This is not in the supply.)"/>
     </BlackMarketViewModel.Selected>
     <BlackMarketViewModel.Hand>
-        <Card Name="AAAAA" Cost="5" Set="Prosperity" ID="100" Type="Action, Attack" />
         <Card Name="CCCCC" Cost="2" Set="Guilds" ID="102" Type="Action" />
+        <Card Name="AAAAA" Cost="5" Set="Prosperity" ID="100" Type="Action, Attack" />
         <Card Name="DDDDD" Cost="3*" Set="Base" ID="202" Type="Action" />
     </BlackMarketViewModel.Hand>
 </BlackMarketViewModel>

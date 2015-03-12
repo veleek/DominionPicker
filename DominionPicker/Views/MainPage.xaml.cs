@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 using Ben.Dominion.Resources;
 using Ben.Dominion.Utilities;
+using Ben.Dominion.Views;
 using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 using GoogleAnalytics;
@@ -20,7 +21,6 @@ namespace Ben.Dominion
     public partial class MainPage : PhoneApplicationPage
     {
         private object favoriteEdit;
-        private bool isNew;
         private bool reviewRequestShown;
         private bool updatePopupShown;
         private readonly ApplicationBarIconButton addFavoriteButton;
@@ -33,8 +33,6 @@ namespace Ben.Dominion
             this.InitializeComponent();
 
             DispatcherHelper.Initialize();
-
-            this.isNew = true;
 
             var backgroundBrush = this.RequestReviewPopup.Background as SolidColorBrush;
             var backgroundColor = backgroundBrush.Color;
@@ -54,9 +52,7 @@ namespace Ben.Dominion
 
             if (Debugger.IsAttached)
             {
-                this.ApplicationBar.AddMenuItem("Debug",
-                    (s, a) => this.NavigationService.Navigate("/DebugPage.xaml")
-                );
+                this.ApplicationBar.AddMenuItem("Debug", (s, a) => NavigationServiceHelper.Navigate(PickerView.Debug));
             }
 
             // Create all the app bar buttons as well.
@@ -95,7 +91,7 @@ namespace Ben.Dominion
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.ToString());
+                            AppLog.Instance.Error("An error occurred while attempting to show the progress indicator", ex);
                         }
                     });
                 }
@@ -147,7 +143,7 @@ namespace Ben.Dominion
                     if (this.MainView.GenerateCardList())
                     {
                         // Navigation has to happen on the UI thread, so ask the Dispatcher to do it
-                        this.Dispatcher.BeginInvoke(() => this.NavigationService.Navigate("/ResultsViewer.xaml"));
+                        this.Dispatcher.BeginInvoke(() => NavigationServiceHelper.Navigate(PickerView.Results));
                     }
                     else
                     {
@@ -183,7 +179,7 @@ namespace Ben.Dominion
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (this.isNew)
+            if (e.NavigationMode == NavigationMode.New)
             {
                 // Load the state
                 this.LoadState();
@@ -194,9 +190,11 @@ namespace Ben.Dominion
                 // has not been setup to handle that yet, so we'll just manually send the event
                 // here.
                 EasyTracker.GetTracker().SendView(e.Uri.ToString());
+
+                // Handle any voice commands
+
             }
 
-            this.isNew = false;
             base.OnNavigatedTo(e);
         }
 
@@ -223,8 +221,6 @@ namespace Ben.Dominion
 
             // This will pickup any old settings and merge them in with the new settings model
             PickerState.MergeWithNewState();
-
-            this.NavigationService.Initialize();
         }
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)
@@ -298,22 +294,22 @@ namespace Ben.Dominion
 
         private void CardLookup_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/CardFilterPage.xaml");
+            NavigationServiceHelper.Navigate(PickerView.CardFilter);
         }
 
         private void BlackMarket_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/BlackMarketPage.xaml");
+            NavigationServiceHelper.Navigate(PickerView.BlackMarket);
         }
 
         private void Settings_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/ConfigurationPage.xaml");
+            NavigationServiceHelper.Navigate(PickerView.Settings);
         }
 
         private void About_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/AboutPage.xaml");
+            NavigationServiceHelper.Navigate(PickerView.About);
         }
 
         private void RequestReviewOk_Click(object sender, RoutedEventArgs e)
@@ -358,7 +354,7 @@ namespace Ben.Dominion
                 this.MainView.CancelGeneration();
 
                 this.MainView.Result = (e.AddedItems[0] as FavoriteSet).Value;
-                this.NavigationService.Navigate("/ResultsViewer.xaml");
+                NavigationServiceHelper.Navigate(PickerView.Results);
 
                 // Clear the selection
                 this.FavoriteSetsListBox.SelectedItem = null;

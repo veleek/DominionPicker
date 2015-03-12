@@ -9,6 +9,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System.Windows"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -40,6 +41,14 @@
     </toolkit:TransitionService.NavigationOutTransition>
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <CollectionViewSource x:Key="HandViewSource" Source="{Binding Hand}">
+                <CollectionViewSource.SortDescriptions>
+                    <componentModel:SortDescription PropertyName="DisplayName" />
+                </CollectionViewSource.SortDescriptions>
+            </CollectionViewSource>
+        </Grid.Resources>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -83,7 +92,7 @@
                         Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}}">
                 <TextBlock Text="hand" Style="{StaticResource PhoneTextSubtleStyle}" Margin="0" />
                 <ScrollViewer>
-                    <ItemsControl ItemsSource="{Binding Hand}">
+                    <ItemsControl ItemsSource="{Binding Source={StaticResource HandViewSource}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap"/>

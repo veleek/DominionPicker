@@ -225,7 +225,7 @@ namespace Ben.Dominion
         {
             try
             {
-                AppLog.Instance.Error("Saving picker state...");
+                AppLog.Instance.Log("Saving picker state...");
                 if (UseIsolatedStorage)
                 {
                     using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())

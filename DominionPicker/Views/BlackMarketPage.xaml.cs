@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Phone.Controls;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace Ben.Dominion
 {
@@ -19,9 +21,9 @@ namespace Ben.Dominion
             };
         }
 
-        private void DrawButton_Click(object sender, RoutedEventArgs e)
+        private async void DrawButton_Click(object sender, RoutedEventArgs e)
         {
-            MainViewModel.Instance.BlackMarket.Draw();
+            await Task.Run(() => MainViewModel.Instance.BlackMarket.Draw());
         }
 
         private void DiscardButton_Click(object sender, RoutedEventArgs e)
@@ -34,7 +36,7 @@ namespace Ben.Dominion
             MainViewModel.Instance.BlackMarket.Reset();
         }
 
-        private void CardItem_Tap(object sender, GestureEventArgs e)
+        private void CardItem_Tap(object sender, GestureEventArgs gestureEventArgs)
         {
             var card = sender.GetContext<Card>();
             MainViewModel.Instance.BlackMarket.Pick(card);

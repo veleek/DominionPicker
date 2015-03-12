@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
+using Windows.Phone.Speech.VoiceCommands;
 using Ben.Dominion.Models;
+using Ben.Dominion.Views;
 using Ben.Utilities;
 using BugSense;
 using BugSense.Core.Model;
@@ -29,8 +33,6 @@ namespace Ben.Dominion
         /// </summary>
         public App()
         {
-            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
-
             this.isNew = true;
             AppLog.Instance.Log("Launching: " + Assembly.GetExecutingAssembly().FullName);
 
@@ -78,11 +80,27 @@ namespace Ben.Dominion
 
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
-        private void Application_Launching(object sender, LaunchingEventArgs e)
+        private async void Application_Launching(object sender, LaunchingEventArgs e)
         {
             // Increment the launch count and save it back
             var appLaunchCount = IsolatedStorageSettings.ApplicationSettings.Increment("AppLaunchCount");
             EasyTracker.GetTracker().SendEvent("app", "launch", null, appLaunchCount);
+
+            try
+            {
+                await VoiceCommandService.InstallCommandSetsFromFileAsync(new Uri("ms-appx:///DominionVCD.xml"));
+            }
+            catch (Exception)
+            {
+                // If the user has not accepted the Speech Privacy Policy, then this 
+                // will throw an exception, but we can ignore it.  Just log a note of it.
+                if (appLaunchCount == 1)
+                {
+                    
+                }
+
+                EasyTracker.GetTracker().SendEvent("voice", "disabled", null, 0);
+            }
         }
 
         // Code to execute when the application is activated (brought to foreground)
@@ -144,8 +162,14 @@ namespace Ben.Dominion
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
             this.RootFrame = new TransitionFrame();
+            // CompleteInitializePhoneApplication handles setting the RootVisual
             this.RootFrame.Navigated += this.CompleteInitializePhoneApplication;
 
+            // Handle navigation failures
+            this.RootFrame.NavigationFailed += this.RootFrame_NavigationFailed;
+
+            // Initilaize the BugSense Handler
+            BugSenseHandler.Instance.InitAndStartSession(new ExceptionManager(Current), this.RootFrame, BugSenseApiKey);
 
             // Add a UriMapper to handler Dominion Launcher.  Anything that comes from an external request
             // (i.e. Dominion Picker Launcher) will just get sent directly to the main page.  Nothing else
@@ -162,8 +186,9 @@ namespace Ben.Dominion
                 }
             };
 
-            // Handle navigation failures
-            this.RootFrame.NavigationFailed += this.RootFrame_NavigationFailed;
+            // Make sure to initialize the Navigation Service
+            NavigationServiceHelper.Initialize(this.RootFrame);
+            PickerViews.RegisterAll();
 
             //AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
 

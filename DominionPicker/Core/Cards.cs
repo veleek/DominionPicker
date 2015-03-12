@@ -315,32 +315,4 @@ namespace Ben.Dominion
             return string.Format("[{0}] {1}", this.Selected ? "X" : "_", this.Card);
         }
     }
-
-    public class CardNameComparer : Comparer<Card>, IEqualityComparer<Card>
-    {
-        public bool Equals(Card x, Card y)
-        {
-            return x.Name == y.Name;
-        }
-
-        public int GetHashCode(Card card)
-        {
-            return card.Name.GetHashCode();
-        }
-
-        public override int Compare(Card x, Card y)
-        {
-            if (x == null)
-            {
-                throw new ArgumentNullException("x");
-            }
-
-            if (y == null)
-            {
-                throw new ArgumentNullException("y");
-            }
-
-            return String.Compare(x.Name, y.Name, StringComparison.Ordinal);
-        }
-    }
 }

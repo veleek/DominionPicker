@@ -1,11 +1,20 @@
 ﻿using System;
 using System.IO;
+using System.IO.IsolatedStorage;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Resources;
 using System.Windows.Shapes;
+using Windows.Storage;
+using Windows.Storage.Search;
+using Windows.System;
+using Ben.Utilities;
+using Microsoft.Phone.BackgroundTransfer;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using Path = System.IO.Path;
 
 namespace Ben.Dominion
 {
@@ -104,14 +113,66 @@ namespace Ben.Dominion
             }
         }
 
-        private void WebsiteButton_Click(object sender, RoutedEventArgs e)
+        private async void WebsiteButton_Click(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
-            String url = b.Tag as String;
 
-            WebBrowserTask browserTask = new WebBrowserTask();
-            browserTask.Uri = new Uri(url);
-            browserTask.Show();
+            try
+            {
+                Button b = sender as Button;
+                
+                IStorageFile rulesFile = await this.GetRulesFile(b.GetTag<string>());
+                if (await Launcher.LaunchFileAsync(rulesFile))
+                {
+                    AppLog.Instance.Log("Opened Rules PDF " + rulesFile.Name);
+                }
+            }
+            catch (Exception ex)
+            {
+                AppLog.Instance.Error("Failed to load Rules PDF", ex);
+            }
+        }
+
+        private async Task<IStorageFile> GetRulesFile(string url)
+        {
+            if (url == null)
+            {
+                throw new ArgumentNullException("url");
+            }
+
+            String fileName = Path.GetFileName(url);
+
+            if (fileName == null)
+            {
+                throw new ArgumentException("Invalid URL provided for rules PDF.");
+            }
+
+            var folder = ApplicationData.Current.LocalFolder;
+            IStorageFile file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+            var properties = await file.GetBasicPropertiesAsync();
+
+            if (properties.Size == 0)
+            {
+                AppLog.Instance.Debug("Unable to find rules PDF for {0}. Downloading from {1}", fileName, url);
+                // The file wasn't found so let's download the file.
+                using (HttpClient client = new HttpClient())
+                {
+                    Stream rulesFileStream = await client.GetStreamAsync(url);
+
+                    using (var storageFileStream = await file.OpenStreamForWriteAsync())
+                    {
+                        await rulesFileStream.CopyToAsync(storageFileStream);
+
+                        AppLog.Instance.Debug("Finished downloading rules file.");
+                    }
+                }
+            }
+            else
+            {
+                AppLog.Instance.Debug("Rules PDF {0} already exists locally.");
+                //var f = new BackgroundTransferRequest(new Uri(url), );
+            }
+
+            return file;
         }
 
         private void MarketplaceButton_Click(object sender, RoutedEventArgs e)

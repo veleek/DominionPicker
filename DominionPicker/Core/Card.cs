@@ -295,4 +295,32 @@ namespace Ben.Dominion
             return String.Compare(x.DisplayName, y.DisplayName, CardDataStrings.Culture, CompareOptions.IgnoreCase);
         }
     }
+
+    public class CardIdComparer : IComparer<Card>, IEqualityComparer<Card>
+    {
+        public bool Equals(Card x, Card y)
+        {
+            return x.ID == y.ID;
+        }
+
+        public int GetHashCode(Card card)
+        {
+            return card.ID.GetHashCode();
+        }
+
+        public int Compare(Card x, Card y)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("x");
+            }
+
+            if (y == null)
+            {
+                throw new ArgumentNullException("y");
+            }
+
+            return x.ID.CompareTo(y.ID);
+        }
+    }
 }

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
 using Ben.Utilities;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace Ben.Dominion
 {
@@ -52,7 +53,13 @@ namespace Ben.Dominion
         public ResultSortOrder SortOrder
         {
             get { return sortOrder; }
-            set { this.SetProperty(ref sortOrder, value, "SortOrder"); }
+            set
+            {
+                if (this.SetProperty(ref this.sortOrder, value, "SortOrder"))
+                {
+                    this.NotifyPropertyChanged("SortProperty");
+                }
+            }
         }
 
         public Boolean HasCardType(CardType type)

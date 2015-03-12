@@ -36,7 +36,7 @@ namespace Ben.Utilities
         public void Log(String text)
         {
             this.Lines.Add(new LogLine(text));
-            Debug.WriteLine("Info: " + text);
+            System.Diagnostics.Debug.WriteLine("Info: " + text);
         }
 
         public void Log(string format, params object[] args)
@@ -44,10 +44,20 @@ namespace Ben.Utilities
             this.Log(string.Format(format, args));
         }
 
+        public void Debug(string format, params object[] args)
+        {
+            this.Debug(string.Format(format, args));
+        }
+
+        public void Debug(string message)
+        {
+            this.Lines.Add(new LogLine(message, LogLevel.Debug));
+        }
+
         public void Error(String text)
         {
             this.Lines.Add(new LogLine(text, LogLevel.Error));
-            Debug.WriteLine("Error: " + text);
+            System.Diagnostics.Debug.WriteLine("Error: " + text);
         }
 
         public void Error(String error, Exception exception)
@@ -96,7 +106,7 @@ namespace Ben.Utilities
             switch (level)
             {
                 case LogLevel.Debug:
-                    return Colors.DarkGray;
+                    return Colors.LightGray;
                 case LogLevel.Info:
                     return Colors.Gray;
                 case LogLevel.Warning:

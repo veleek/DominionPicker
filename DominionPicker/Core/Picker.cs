@@ -102,8 +102,6 @@ namespace Ben.Dominion
                     // 4. Add any additional cards/tokens/etc. that we might need
                     this.AddAdditionalCards(settings, result);
 
-                    result.Sort(sortOrder);
-
                     break;
                 } while (true);
             }

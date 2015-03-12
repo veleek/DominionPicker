@@ -6,10 +6,11 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using Ben.Data;
+using Ben.Dominion.Resources;
+using Ben.Dominion.Views;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Ben.Dominion.Resources;
 
 namespace Ben.Dominion
 {
@@ -28,59 +29,62 @@ namespace Ben.Dominion
 
         private const string FilteredCardsSeachFilter = "<filtered>";
 
-        private CardSelector[] cardSelectors;
-        private List<CardGrouping> cardSelectorGroups;
-        private List<CardGrouping> filteredCardSelectorGroups;
-        private Dictionary<CardSet, CardGrouping> filteredGroupsMap;
-        private BackgroundWorker filterWorker;
+        private readonly CardSelector[] cardSelectors;
+        private readonly List<CardGrouping> cardSelectorGroups;
+        private readonly List<CardGrouping> filteredCardSelectorGroups;
+        private readonly Dictionary<CardSet, CardGrouping> filteredGroupsMap;
+        private readonly BackgroundWorker filterWorker;
+        private readonly Queue<CardSelector> changedCards = new Queue<CardSelector>();
         private string currentFilter;
-        private Queue<CardSelector> changedCards = new Queue<CardSelector>();
 
         public CardFilterPage()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            filterWorker = new BackgroundWorker();
-            filterWorker.WorkerSupportsCancellation = true;
-            filterWorker.DoWork += new DoWorkEventHandler(filterWorker_DoWork);
+            this.filterWorker = new BackgroundWorker();
+            this.filterWorker.WorkerSupportsCancellation = true;
+            this.filterWorker.DoWork += new DoWorkEventHandler(this.filterWorker_DoWork);
 
             // Generate 'card selectors' for each card.  A card selector is just an object
             // that pairs a boolean value that indicates whether a card is filtered or not
             // with a specific card and it can be used to databind with.
-            cardSelectors = Cards.AllCards // Cards.PickableCards
-                .OrderBy(c => c.Name).OrderBy(c => c.Set)
+            this.cardSelectors = Cards.AllCards // Cards.PickableCards
+                .OrderBy(c => c.Name).ThenBy(c => c.Set)
                 .Select(c => new CardSelector(c, false))
                 .ToArray();
 
-            cardSelectorGroups = cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
-            filteredCardSelectorGroups = cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
-            filteredGroupsMap = filteredCardSelectorGroups.ToDictionary(g => g.Key);
+            this.cardSelectorGroups =
+                this.cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
+            this.filteredCardSelectorGroups =
+                this.cardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards)).ToList();
+            this.filteredGroupsMap = this.filteredCardSelectorGroups.ToDictionary(g => g.Key);
 
-            CardsList.ItemsSource = filteredCardSelectorGroups;
+            this.CardsList.ItemsSource = this.filteredCardSelectorGroups;
 
-            var resetFilteredMenuItem = new ApplicationBarMenuItem { Text = Strings.Lookup_ResetFiltered };
-            resetFilteredMenuItem.Click += ResetFilteredCards_Click;
+            var resetFilteredMenuItem = new ApplicationBarMenuItem {Text = Strings.Lookup_ResetFiltered};
+            resetFilteredMenuItem.Click += this.ResetFilteredCards_Click;
             this.ApplicationBar.MenuItems.Add(resetFilteredMenuItem);
 
-            var showFilteredMenuItem = new ApplicationBarMenuItem { Text = Strings.Lookup_ShowFiltered};
-            showFilteredMenuItem.Click += ShowFilteredCards_Click;
+            var showFilteredMenuItem = new ApplicationBarMenuItem {Text = Strings.Lookup_ShowFiltered};
+            showFilteredMenuItem.Click += this.ShowFilteredCards_Click;
             this.ApplicationBar.MenuItems.Add(showFilteredMenuItem);
 
-            var aboutMenuItem = new ApplicationBarMenuItem { Text = Strings.Menu_About };
-            aboutMenuItem.Click += About_Click;
+            var aboutMenuItem = new ApplicationBarMenuItem {Text = Strings.Menu_About};
+            aboutMenuItem.Click += this.About_Click;
             this.ApplicationBar.MenuItems.Add(aboutMenuItem);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             // Set all the selected values by loading the filtered cards
-            LoadFilteredCards();
+            this.LoadFilteredCards();
         }
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
             // Saves the list of filtered cards into the settings
-            MainViewModel.Instance.Settings.FilteredCards = new CardList(cardSelectors.Where(fc => fc.Selected).Select(c => c.Card));
+            MainViewModel.Instance.Settings.FilteredCards =
+                new CardList(this.cardSelectors.Where(fc => fc.Selected).Select(c => c.Card));
         }
 
         /// <summary>
@@ -90,9 +94,9 @@ namespace Ben.Dominion
         {
             MainViewModel.Instance.Settings.FilteredCards = new CardList();
 
-            LoadFilteredCards();
+            this.LoadFilteredCards();
 
-            ClearFilter();
+            this.ClearFilter();
         }
 
         /// <summary>
@@ -103,7 +107,7 @@ namespace Ben.Dominion
         {
             var filteredCards = MainViewModel.Instance.Settings.FilteredCards;
 
-            foreach (var cardSelector in cardSelectors)
+            foreach (var cardSelector in this.cardSelectors)
             {
                 cardSelector.Selected = filteredCards.Contains(cardSelector.Card);
             }
@@ -121,82 +125,82 @@ namespace Ben.Dominion
         /// the dispatcher is invoked to actually filter the cards from the long list 
         /// selector (add/remove from groups) since that needs to happen on the UI thread.
         /// </remarks>
-        void filterWorker_DoWork(object sender, DoWorkEventArgs e)
+        private void filterWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (currentFilter == String.Empty)
+            if (this.currentFilter == String.Empty)
             {
-                foreach (var card in cardSelectors)
+                foreach (var card in this.cardSelectors)
                 {
                     if (card.Filter(false))
                     {
-                        changedCards.Enqueue(card);
+                        this.changedCards.Enqueue(card);
                     }
                 }
             }
-            else if (currentFilter == FilteredCardsSeachFilter)
+            else if (this.currentFilter == FilteredCardsSeachFilter)
             {
-                foreach (var card in cardSelectors)
+                foreach (var card in this.cardSelectors)
                 {
                     if (card.Filter(!card.Selected))
                     {
-                        changedCards.Enqueue(card);
+                        this.changedCards.Enqueue(card);
                     }
-                }    
+                }
             }
             else
             {
-                foreach (var card in cardSelectors)
+                foreach (var card in this.cardSelectors)
                 {
                     // Cancel the filtering if we need to
-                    if (filterWorker.CancellationPending)
+                    if (this.filterWorker.CancellationPending)
                     {
                         return;
                     }
 
-                    if (card.Filter(!card.Card.ContainsText(currentFilter)))
+                    if (card.Filter(!card.Card.ContainsText(this.currentFilter)))
                     {
-                        changedCards.Enqueue(card);
+                        this.changedCards.Enqueue(card);
                     }
                 }
             }
 
-            if (!filterWorker.CancellationPending)
+            if (!this.filterWorker.CancellationPending)
             {
-                UpdateCardsList();
+                this.UpdateCardsList();
             }
         }
 
         private void FilterCardsList(String newFilter)
         {
-            if (newFilter == currentFilter && newFilter != String.Empty)
+            if (newFilter == this.currentFilter && newFilter != String.Empty)
             {
                 return;
             }
 
-            if (filterWorker.IsBusy)
+            if (this.filterWorker.IsBusy)
             {
-                filterWorker.CancelAsync();
+                this.filterWorker.CancelAsync();
 
-                while (filterWorker.IsBusy)
+                while (this.filterWorker.IsBusy)
                 {
                 }
             }
 
-            currentFilter = newFilter;
+            this.currentFilter = newFilter;
 
-            filterWorker.RunWorkerAsync();
+            this.filterWorker.RunWorkerAsync();
         }
 
         private void ClearFilter()
         {
-            if (SearchTextBox.Text == String.Empty)
+            if (this.SearchTextBox.Text == String.Empty)
             {
                 // Manually filter on empty
-                FilterCardsList(String.Empty);
+                this.FilterCardsList(String.Empty);
             }
             else
             {
-                SearchTextBox.Text = String.Empty;
+                this.SearchTextBox.Text = String.Empty;
             }
         }
 
@@ -214,12 +218,12 @@ namespace Ben.Dominion
             //UpdateCardsListMin();
             //return;
 
-            Dispatcher.BeginInvoke(() =>
+            this.Dispatcher.BeginInvoke(() =>
             {
-                for (int i = 0; i < cardSelectorGroups.Count; i++)
+                for (int i = 0; i < this.cardSelectorGroups.Count; i++)
                 {
-                    var baseGroup = cardSelectorGroups[i];
-                    var filteredGroup = filteredCardSelectorGroups[i];
+                    var baseGroup = this.cardSelectorGroups[i];
+                    var filteredGroup = this.filteredCardSelectorGroups[i];
 
                     int index = 0;
                     // We have to loop through every card in the group
@@ -228,7 +232,7 @@ namespace Ben.Dominion
                     // item 
                     foreach (var c in baseGroup)
                     {
-                        if (filterWorker.CancellationPending)
+                        if (this.filterWorker.CancellationPending)
                         {
                             return;
                         }
@@ -258,12 +262,12 @@ namespace Ben.Dominion
 
         private void UpdateCardsListMin()
         {
-            Dispatcher.BeginInvoke(() =>
+            this.Dispatcher.BeginInvoke(() =>
             {
-                while (changedCards.Count > 0)
+                while (this.changedCards.Count > 0)
                 {
-                    var card = changedCards.Dequeue();
-                    var group = filteredGroupsMap[card.Card.Set];
+                    var card = this.changedCards.Dequeue();
+                    var group = this.filteredGroupsMap[card.Card.Set];
 
                     if (card.Filtered)
                     {
@@ -276,15 +280,15 @@ namespace Ben.Dominion
                 }
             });
         }
-        
+
         private void UpdateCardsList2()
         {
-            String filterText = SearchTextBox.Text;
+            String filterText = this.SearchTextBox.Text;
 
-            for (int i = 0; i < cardSelectorGroups.Count; i++)
+            for (int i = 0; i < this.cardSelectorGroups.Count; i++)
             {
-                var baseGroup = cardSelectorGroups[i];
-                var filteredGroup = filteredCardSelectorGroups[i];
+                var baseGroup = this.cardSelectorGroups[i];
+                var filteredGroup = this.filteredCardSelectorGroups[i];
 
                 int index = 0;
                 foreach (var c in baseGroup)
@@ -324,7 +328,7 @@ namespace Ben.Dominion
         /// <param name="e"></param>
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            FilterCardsList(SearchTextBox.Text);
+            this.FilterCardsList(this.SearchTextBox.Text);
         }
 
         /// <summary>
@@ -336,7 +340,7 @@ namespace Ben.Dominion
         {
             if (e.Key == System.Windows.Input.Key.Enter)
             {
-                CardsList.Focus();
+                this.CardsList.Focus();
             }
         }
 
@@ -347,7 +351,7 @@ namespace Ben.Dominion
         /// <param name="e"></param>
         private void SearchTextBox_ActionIconTapped(object sender, EventArgs e)
         {
-            ClearFilter();
+            this.ClearFilter();
         }
 
         /// <summary>
@@ -357,32 +361,36 @@ namespace Ben.Dominion
         /// <param name="e"></param>
         private void ShowFilteredCards_Click(object sender, EventArgs e)
         {
-            FilterCardsList(FilteredCardsSeachFilter);
+            this.FilterCardsList(FilteredCardsSeachFilter);
             //SearchTextBox.Text = FilteredCardsSeachFilter;
         }
 
         private void ResetFilteredCards_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show("This will clear all cards you have previously chosen to filter.  Do you want to continue?", "Warning!", MessageBoxButton.OKCancel);
+            var result =
+                MessageBox.Show(
+                    "This will clear all cards you have previously chosen to filter.  Do you want to continue?",
+                    "Warning!", MessageBoxButton.OKCancel);
 
             if (result == MessageBoxResult.OK)
             {
-                ResetFilteredCards();
+                this.ResetFilteredCards();
             }
         }
 
         private void CardItemDetails_Click(object sender, RoutedEventArgs e)
         {
-            (App.Current as App).SelectedCard = sender.GetContext<CardSelector>().Card;
-            NavigationService.Navigate("/CardInfo.xaml");
+            (Application.Current as App).SelectedCard = sender.GetContext<CardSelector>().Card;
+            PickerView.CardInfo.Go();
         }
 
         private void About_Click(object sender, EventArgs e)
         {
-            this.NavigationService.Navigate("/AboutPage.xaml");
+            PickerView.About.Go();
         }
 
         private static GroupedCollectionViewSource<CardSet> cardsViewSource;
+
         public static GroupedCollectionViewSource<CardSet> CardsViewSource
         {
             get
