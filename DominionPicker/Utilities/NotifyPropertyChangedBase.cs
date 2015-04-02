@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization;
 using System.Windows;
 using GalaSoft.MvvmLight.Threading;
@@ -54,7 +55,7 @@ namespace Ben.Utilities
             }
         }
 
-        protected bool SetProperty<TProperty>(ref TProperty field, TProperty value, string propertyName)
+        protected bool SetProperty<TProperty>(ref TProperty field, TProperty value, [CallerMemberName]string propertyName = null)
         {
             if (Equals(value, field))
             {

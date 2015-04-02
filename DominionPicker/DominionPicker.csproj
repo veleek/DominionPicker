@@ -151,6 +151,9 @@
     </Compile>
     <Compile Include="Controls\MultiTemplateItemsControl.cs">
     </Compile>
+    <Compile Include="Controls\RulesInfoControl.xaml.cs">
+      <DependentUpon>RulesInfoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SwipeableBase.cs" />
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -158,6 +161,7 @@
       <DependentUpon>CardDataStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ApplicationBarHelper.cs" />
+    <Compile Include="Utilities\AsyncLazy.cs" />
     <Compile Include="Utilities\MetroGridHelper.cs">
     </Compile>
     <Compile Include="Utilities\AppLog.cs">
@@ -172,6 +176,7 @@
     </Compile>
     <Compile Include="Utilities\NavigationServiceExtensions.cs">
     </Compile>
+    <Compile Include="Utilities\XamlHelpers.cs" />
     <Compile Include="ViewModels\PickerResult.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -260,6 +265,7 @@
     <Content Include="Images\coin_extrasmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\SetIcons\base.png" />
     <Content Include="Images\VP_extrasmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -269,6 +275,10 @@
     <Content Include="Resources\DefaultPickerView_1.9.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\RulesInfoSampleData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </DesignDataWithDesignTimeCreatableTypes>
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="DominionVCD.xml">
@@ -286,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
+    <Page Include="Controls\RulesInfoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
@@ -495,9 +509,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SetIcons\cornucopia.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\SetIcons\base.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SetIcons\envoy.png">

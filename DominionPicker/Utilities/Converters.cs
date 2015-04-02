@@ -518,7 +518,7 @@ namespace Ben.Data
                 path = Path.Combine(path, parameter.ToString());
             }
 
-            String fileName = value.ToString() + this.Extension;
+            String fileName = value + this.Extension;
             String fullPath = Path.Combine(path, fileName);
 
             return GetBrush(fullPath);

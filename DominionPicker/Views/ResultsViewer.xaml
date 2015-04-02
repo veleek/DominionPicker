@@ -81,7 +81,7 @@
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe"/>
+                                <local:DominionCardControl Header="Extra Card" Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe"/>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

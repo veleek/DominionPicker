@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="Ben.Dominion.Controls.RulesInfoControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    x:Name="Root"
+    d:DesignHeight="86" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot" Tap="LayoutRoot_OnTap" DataContext="{Binding RulesInfo, ElementName=Root}"
+          d:DataContext="{d:DesignData Source=../SampleData/RulesInfoSampleData.xaml}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Background="{StaticResource PhoneForegroundBrush}"
+                OpacityMask="{Binding Set.Set, Converter={StaticResource ImageConverter}, ConverterParameter='../Images/SetIcons'}"
+                Width="60" 
+                Height="70"
+                Margin="0,6"
+                VerticalAlignment="Top"
+                Grid.RowSpan="2"/>
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding Header}" Style="{StaticResource PhoneTextLargeStyle}"/>
+            <ProgressBar x:Name="DownloadProgress" 
+                         Visibility="{Binding Downloading, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                         Value="{Binding Progress}"
+                         Margin="0,6,0,0"/>
+            <TextBlock Text="{Binding Status}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

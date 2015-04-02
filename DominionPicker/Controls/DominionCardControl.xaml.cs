@@ -11,15 +11,14 @@ namespace Ben.Dominion
         public static readonly DependencyProperty CardProperty =
             DependencyProperty.Register("Card", typeof (Card), typeof (DominionCardControl), new PropertyMetadata(null));
 
-        // Using a DependencyProperty as the backing store for ShowSetIcon.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ShowSetIconProperty =
-            DependencyProperty.Register("ShowSetIcon", typeof (bool), typeof (DominionCardControl),
-                new PropertyMetadata(true));
+            DependencyProperty.Register("ShowSetIcon", typeof (bool), typeof (DominionCardControl), new PropertyMetadata(true));
 
-        // Using a DependencyProperty as the backing store for IsSwipeEnabled.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty IsSwipeEnabledProperty =
-            DependencyProperty.Register("IsSwipeEnabled", typeof (bool), typeof (DominionCardControl),
-                new PropertyMetadata(true));
+            DependencyProperty.Register("IsSwipeEnabled", typeof (bool), typeof (DominionCardControl), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty HeaderProperty =
+            DependencyProperty.Register("Header", typeof(string), typeof(DominionCardControl), new PropertyMetadata(null));
 
         public DominionCardControl()
         {
@@ -32,6 +31,12 @@ namespace Ben.Dominion
         {
             get { return (Card) this.GetValue(CardProperty); }
             set { this.SetValue(CardProperty, value); }
+        }
+
+        public string Header
+        {
+            get { return (string)this.GetValue(HeaderProperty); }
+            set { this.SetValue(HeaderProperty, value); }
         }
 
         public bool IsSwipeEnabled
