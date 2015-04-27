@@ -129,7 +129,7 @@ namespace Ben.Dominion
                 this.IsGenerating = true;
 
                 // Save the sort order from the current result if there is one.
-                ResultSortOrder sortOrder = this.Result != null ? this.Result.SortOrder : ResultSortOrder.Name;
+                ResultSortOrder sortOrder = this.Result?.SortOrder ?? ResultSortOrder.Name;
                 this.Result = this.Picker.GenerateCardList(this.Settings, sortOrder);
             }
             finally

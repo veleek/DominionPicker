@@ -37,6 +37,7 @@ namespace Ben.Dominion
                     CardSet.Hinterlands,
                     CardSet.DarkAges,
                     CardSet.Guilds,
+                    CardSet.Adventures,
                     CardSet.Promo,
                 };
             }
@@ -116,7 +117,7 @@ namespace Ben.Dominion
                         "Hovel",
                         "Necropolis",
                         "Overgrown Estate",
-                        
+
                         // Ruins
                         "Ruins",
                         "Abandoned Mine",
@@ -124,7 +125,7 @@ namespace Ben.Dominion
                         "Ruined Market",
                         "Ruined Village",
                         "Survivors",
-                        
+
                         // Knights
                         "Dame Anna",
                         "Dame Josephine",
@@ -136,8 +137,40 @@ namespace Ben.Dominion
                         "Sir Martin",
                         "Sir Michael",
                         "Sir Vander",
+
+                        // Traveller Upgrade Cards
+                        "Champion",
+                        "Disciple",
+                        "Fugitive",
+                        "Hero",
+                        "Soldier",
+                        "Teacher",
+                        "Treasure Hunter",
+                        "Warrior",
+
+                        // Events
+                        "Alms",
+                        "Borrow",
+                        "Quest",
+                        "Save",
+                        "Scouting Party",
+                        "Travelling Fair",
+                        "Bonfire",
+                        "Expedition",
+                        "Ferry",
+                        "Plan",
+                        "Mission",
+                        "Pilgrimage",
+                        "Ball",
+                        "Raid",
+                        "Seaway",
+                        "Trade",
+                        "Lost Arts",
+                        "Training",
+                        "Inheritance",
+                        "Pathfinding",
                     }
-                );
+                    );
             }
         }
 

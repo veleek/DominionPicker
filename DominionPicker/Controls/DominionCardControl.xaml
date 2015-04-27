@@ -56,8 +56,8 @@
             </Style>
         </ScrollViewer.Style>
         <StackPanel>
-            <TextBlock Text="{Binding Header, ElementName=CardControl}" 
-                       Visibility="{Binding Header, ElementName=CardControl, Converter={StaticResource IsValidToVisibilityConverter}}"
+            <TextBlock Text="{Binding Label}" 
+                       Visibility="{Binding Label, Converter={StaticResource IsValidToVisibilityConverter}}"
                        Style="{StaticResource PhoneTextSubtleStyle}"
                        Margin="0"/>
             <Border Margin="2"

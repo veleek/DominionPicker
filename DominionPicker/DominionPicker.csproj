@@ -177,6 +177,7 @@
     <Compile Include="Utilities\NavigationServiceExtensions.cs">
     </Compile>
     <Compile Include="Utilities\XamlHelpers.cs" />
+    <Compile Include="ViewModels\CardLookupViewModel.cs" />
     <Compile Include="ViewModels\PickerResult.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -263,6 +264,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Images\coin_extrasmall.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\SetIcons\Adventures.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\SetIcons\base.png" />
@@ -440,7 +444,6 @@
     <None Include="analytics.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="DominionPicker_2015_02_15_01_05_22.sap" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -112,6 +112,7 @@ namespace Ben.Dominion
 
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
 
+            result.SortOrder = sortOrder != ResultSortOrder.None ? sortOrder : ResultSortOrder.Name;
             return result;
         }
 
@@ -274,10 +275,17 @@ namespace Ben.Dominion
             // Select the bane card first so that it appears close to Young Witch
             if (result.HasCard("Young Witch"))
             {
+                
+                // TODO: There is a bug where a bane card doesn't get selected occasionally.
+                // This likely occurs when the 'pool' of cards doesn't contain any cost 2-3 cards.
+
                 Card bane = result.Pool.FirstOrDefault(c => c.Cost == "2" || c.Cost == "3");
+
                 if (bane != null)
                 {
-                    bane.Move(result.Pool, result.AdditionalCards);
+                    result.Pool.Remove(bane);
+                    // Todo: Localize this string
+                    result.AdditionalCards.Add(bane.WithLabel("bane"));
                 }
             }
 
@@ -320,7 +328,7 @@ namespace Ben.Dominion
 
                 if (shelterEstateCard.InSet(CardSet.DarkAges))
                 {
-                    result.AdditionalCards.Add(Card.FromName("Shelters"));
+                    result.AdditionalCards.Add(Card.FromName("Shelters").WithLabel("selected because of Dark Ages"));
                 }
             }
 
@@ -329,19 +337,37 @@ namespace Ben.Dominion
                 result.AdditionalCards.Add(Card.FromName("Ruins"));
             }
 
-            if (result.HasCard("Bandit Camp") || result.HasCard("Marauder") || result.HasCard("Pillage"))
+            // Is this any better, or should we prefer being explicit.
+            if(result.Cards.Any(c => c.ContainsText("Spoils")))
+            //if (result.HasCard("Bandit Camp") || result.HasCard("Marauder") || result.HasCard("Pillage"))
             {
                 result.AdditionalCards.Add(Card.FromName("Spoils"));
             }
 
             if (result.HasCard("Hermit"))
             {
-                result.AdditionalCards.Add(Card.FromName("Madman"));
+                result.AdditionalCards.Add(Card.FromName("Madman").WithLabel("required by Hermit"));
             }
 
             if (result.HasCard("Urchin"))
             {
-                result.AdditionalCards.Add(Card.FromName("Mercenary"));
+                result.AdditionalCards.Add(Card.FromName("Mercenary").WithLabel("required by Mercenary"));
+            }
+
+            if (result.HasCard("Page"))
+            {
+                result.AdditionalCards.Add(Card.FromName("Treasure Hunter").WithLabel("required by Page"));
+                result.AdditionalCards.Add(Card.FromName("Warrior").WithLabel("required by Page"));
+                result.AdditionalCards.Add(Card.FromName("Hero").WithLabel("required by Page"));
+                result.AdditionalCards.Add(Card.FromName("Champion").WithLabel("required by Page"));
+            }
+
+            if (result.HasCard("Peasant"))
+            {
+                result.AdditionalCards.Add(Card.FromName("Soldier").WithLabel("required by Peasant"));
+                result.AdditionalCards.Add(Card.FromName("Fugitive").WithLabel("required by Peasant"));
+                result.AdditionalCards.Add(Card.FromName("Disciple").WithLabel("required by Peasant"));
+                result.AdditionalCards.Add(Card.FromName("Teacher").WithLabel("required by Peasant"));
             }
 
             if (result.Cards.Any(c => c.HasPotion))
@@ -349,14 +375,17 @@ namespace Ben.Dominion
                 result.AdditionalCards.Add(Card.FromName("Potion"));
             }
 
-            if (result.Cards.Any(c => c.ContainsText("Curse card")))
+            var requireCurse = result.Cards.Where(c => c.ContainsText("Curse")).ToArray();
+            if (requireCurse.Any())
             {
-                result.AdditionalCards.Add(Card.FromName("Curse"));
+                var curse = Card.FromName("Curse").Clone();
+                curse.Label = string.Format("required by {0}", string.Join(", ", requireCurse.Select(c => c.DisplayName)));
+                result.AdditionalCards.Add(curse);
             }
 
             if (settings.ShowExtras)
             {
-                // New check for additional 'stuff' like mats and tokens
+                // Now check for additional 'stuff' like mats and tokens
                 List<string> additionalStuff = new List<string>();
 
                 if (result.HasCard("Native Village"))
@@ -372,7 +401,6 @@ namespace Ben.Dominion
                 if (result.HasCard("Pirate Ship"))
                 {
                     additionalStuff.Add("Pirate Ship Mat");
-                    additionalStuff.Add("Coin Tokens");
                 }
 
                 if (result.HasCard("Embargo"))
@@ -389,14 +417,14 @@ namespace Ben.Dominion
                     result.HasCard("Butcher") ||
                     result.HasCard("Candlestick Maker") ||
                     result.HasCard("Merchant Guild") ||
+                    result.HasCard("Pirate Ship") ||
                     result.HasCard("Plaza") ||
-                    result.HasCard("Candlestick Maker") ||
                     result.HasCard("Trade Route"))
                 {
                     additionalStuff.Add("Coin Tokens");
                 }
 
-                if (result.Cards.Any(c => c.Rules.Contains("{VP}")))
+                if (result.HasCard(c => c.ContainsText("{VP}")))
                 {
                     additionalStuff.Add("Victory Point Tokens");
                 }

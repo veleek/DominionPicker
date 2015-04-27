@@ -21,6 +21,7 @@ namespace Ben.Dominion
         Hinterlands,
         DarkAges,
         Guilds,
+        Adventures,
         Promo,
     }
 
@@ -40,10 +41,28 @@ namespace Ben.Dominion
         Shelter = 0x0200,
         Looter = 0x0400,
         Knight = 0x0800,
+        Reserve = 0x1000,
+        Traveller = 0x2000,
+        Event = 0x3000,
     }
 
     public class Card
     {
+        private string setString;
+        private string typeString;
+        private string displayName;
+
+        public Card()
+        {
+        }
+
+        public Card(String name, CardType type)
+        {
+            this.Name = name;
+            this.Type = type;
+            this.Cost = "0";
+        }
+
         [XmlAttribute]
         public Int32 ID { get; set; }
 
@@ -61,6 +80,9 @@ namespace Ben.Dominion
 
         [XmlAttribute]
         public String Rules { get; set; }
+
+        [XmlIgnore]
+        public string Label { get; set; }
 
         [XmlIgnore]
         public Boolean HasPotion
@@ -85,21 +107,15 @@ namespace Ben.Dominion
             }
         }
 
-        private string setString;
-
         private string SetString
         {
             get { return this.setString ?? (this.setString = this.Set.ToString()); }
         }
 
-        private string typeString;
-
         private string TypeString
         {
             get { return this.typeString ?? (this.typeString = this.Type.ToString()); }
         }
-
-        private string displayName;
 
         [XmlIgnore]
         public string DisplayName
@@ -116,17 +132,6 @@ namespace Ben.Dominion
         public String FormattedRules
         {
             get { return (this.Rules ?? "").Replace("\\n", "\n"); }
-        }
-
-        public Card()
-        {
-        }
-
-        public Card(String name, CardType type)
-        {
-            this.Name = name;
-            this.Type = type;
-            this.Cost = "0";
         }
 
         public Boolean InSet(CardSet set)
@@ -158,9 +163,10 @@ namespace Ben.Dominion
         protected Boolean ContainsWord(String filterWord)
         {
             return this.FindSubstring(this.Name, filterWord)
+                   || this.FindSubstring(this.DisplayName, filterWord)
                    || this.FindSubstring(this.SetString, filterWord)
                    || this.FindSubstring(this.TypeString, filterWord)
-                   || this.FindSubstring(this.Rules, filterWord)
+                   || (this.Rules != null && this.FindSubstring(this.Rules, filterWord))
                 ;
         }
 
@@ -179,11 +185,29 @@ namespace Ben.Dominion
             }
         }
 
+        public Card Clone(string label = null)
+        {
+            return this.MemberwiseClone() as Card;
+        }
+
+        public Card WithLabel(string label)
+        {
+            if (label == null)
+            {
+                throw new ArgumentNullException("label");
+            }
+
+            Card clone = this.Clone();
+            clone.Label = label;
+            return clone;
+        }
+
         public override string ToString()
         {
             return String.Format("{0} - {1} ({2}): {3}", this.Name, this.Type, this.Set, this.Cost);
         }
 
+        [XmlIgnore]
         public Brush BackgroundColor
         {
             get { return GetBrushForType(this.Type); }
@@ -233,14 +257,15 @@ namespace Ben.Dominion
         {
             List<Color> colors = new List<Color>();
 
-            for (int i = 0; i < 12; i++)
+            CardType typeToCheck = (CardType) (1);
+            while(Enum.IsDefined(typeof(CardType), typeToCheck))
             {
-                CardType typeToCheck = (CardType) (1 << i);
-
                 if ((type & typeToCheck) != CardType.None)
                 {
                     colors.Add(GetColorForType(typeToCheck));
                 }
+
+                typeToCheck = (CardType)((int)typeToCheck << 1);
             }
 
             return colors;
@@ -267,11 +292,15 @@ namespace Ben.Dominion
                 case CardType.Action:
                 case CardType.Knight:
                 case CardType.Looter:
+                case CardType.Traveller:
+                case CardType.Event:
                     return Color.FromArgb(255, 160, 155, 165); // #A09BA5
                 case CardType.Prize:
                     return Color.FromArgb(255, 153, 217, 234);
                 case CardType.Ruins:
-                    return Color.FromArgb(244, 188, 128, 16); // #BC8010
+                    return Color.FromArgb(255, 188, 128, 16); // #BC8010
+                case CardType.Reserve:
+                    return Color.FromArgb(255, 190, 165, 100);
                 default:
                     return Colors.Black;
             }
@@ -296,7 +325,7 @@ namespace Ben.Dominion
         }
     }
 
-    public class CardIdComparer : IComparer<Card>, IEqualityComparer<Card>
+    public class CardIdComparer : Comparer<Card>, IEqualityComparer<Card>
     {
         public bool Equals(Card x, Card y)
         {
@@ -308,7 +337,7 @@ namespace Ben.Dominion
             return card.ID.GetHashCode();
         }
 
-        public int Compare(Card x, Card y)
+        public override int Compare(Card x, Card y)
         {
             if (x == null)
             {

@@ -40,8 +40,8 @@ namespace Ben.Dominion
 
         public CardList AdditionalCards
         {
-            get { return additionalCards; }
-            set { this.SetProperty(ref additionalCards, value, "AdditionalCards"); }
+            get { return this.additionalCards; }
+            set { this.SetProperty(ref this.additionalCards, value, "AdditionalCards"); }
         }
 
         public List<String> AdditionalStuff
@@ -52,7 +52,7 @@ namespace Ben.Dominion
 
         public ResultSortOrder SortOrder
         {
-            get { return sortOrder; }
+            get { return this.sortOrder; }
             set
             {
                 if (this.SetProperty(ref this.sortOrder, value, "SortOrder"))
@@ -64,16 +64,22 @@ namespace Ben.Dominion
 
         public Boolean HasCardType(CardType type)
         {
-            return Cards.Any(c => c.IsType(type));
+            return this.HasCard(c => c.IsType(type));
         }
 
         public Boolean HasCard(Card card)
         {
-            return Cards.Contains(card);
+            return this.Cards.Contains(card, CardIdComparer.Default as CardIdComparer) || 
+                this.AdditionalCards.Contains(card, CardIdComparer.Default as CardIdComparer);
         }
         public Boolean HasCard(String name)
         {
-            return HasCard(Card.FromName(name));
+            return this.HasCard(Card.FromName(name));
+        }
+
+        public Boolean HasCard(Func<Card, bool> predicate)
+        {
+            return this.Cards.Any(predicate) || this.AdditionalCards.Any(predicate);
         }
 
         public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }

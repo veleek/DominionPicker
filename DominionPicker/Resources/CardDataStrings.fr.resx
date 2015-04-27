@@ -157,15 +157,15 @@
     <value>Attaque</value>
   </data>
   <data name="Type_Duration" xml:space="preserve">
-    <value>Duration</value>
+    <value>Durée</value>
   </data>
   <data name="Type_Reaction" xml:space="preserve">
-    <value>Dur</value>
+    <value>Réaction</value>
   </data>
   <data name="Type_Treasure" xml:space="preserve">
-    <value>Treasure</value>
+    <value>Trésor</value>
   </data>
   <data name="Type_Victory" xml:space="preserve">
-    <value>Victory</value>
+    <value>Victoire</value>
   </data>
 </root>

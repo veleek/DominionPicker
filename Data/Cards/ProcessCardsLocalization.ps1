@@ -89,9 +89,12 @@ function GetColumnForValue($Value)
 
 cd 'C:\code\vso\veleek\Dominion Picker\Data\Cards'
 
-if(!$cards -or ($xl -and $xl.Visible -eq $false))
+
+if(!(Test-Path variable:\cards) -or ((Test-Path variable:\xl) -and $xl.Visible -eq $false))
 {
+    "Creating Excel Instance"
     $xl = New-Object -ComObject "Excel.Application"
+    $xl.ScreenUpdating = $false
     #$xl.Visible = $true
 
     $cardInfoPath = (Resolve-Path .\DominionPickerData.xlsx).Path
