@@ -123,42 +123,6 @@
   <data name="Settings_ShowExtras" xml:space="preserve">
     <value>Montrer des jetons et des cartes supplémentaires requis</value>
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
-    <value>Attaque</value>
-  </data>
-  <data name="Type_Curse" xml:space="preserve">
-    <value>Malédictions</value>
-  </data>
-  <data name="Type_Duration" xml:space="preserve">
-    <value>Durée</value>
-  </data>
-  <data name="Type_Knight" xml:space="preserve">
-    <value>Chevalier</value>
-  </data>
-  <data name="Type_Looter" xml:space="preserve">
-    <value>Pilleur</value>
-  </data>
-  <data name="Type_Prize" xml:space="preserve">
-    <value>Prix</value>
-  </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Réaction</value>
-  </data>
-  <data name="Type_Ruins" xml:space="preserve">
-    <value>Ruines</value>
-  </data>
-  <data name="Type_Shelter" xml:space="preserve">
-    <value>Abri</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
-    <value>Trésor</value>
-  </data>
-  <data name="Type_Victory" xml:space="preserve">
-    <value>Victoire</value>
-  </data>
   <data name="Dominion_CoinToken" xml:space="preserve">
     <value>Jeton Pièce</value>
   </data>

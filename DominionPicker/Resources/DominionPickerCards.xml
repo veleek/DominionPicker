@@ -258,61 +258,61 @@
   <Card ID="244" Name="Province" Set="Base" Type="Victory" Cost="8" Rules="6 {VP}." />
   <!-- Adventures -->
   <Card ID="245" Name="Alms" Set="Adventures" Type="Event" Cost="0" Rules="Once per turn: If you have no Treasures in play, gain a card costing up to $4." />
-  <Card ID="246" Name="Amulet" Set="Adventures" Type="Action Duration" Cost="3" Rules="Now and at the start of your next turn, choose one: +Coin1.png; or trash a card from your hand; or gain a Silver." />
-  <Card ID="247" Name="Artificer" Set="Adventures" Type="Action" Cost="5" Rules="+1 Action\n+1 Card\n+Coin1.png\nDiscard any number of cards. You may gain a card costing exactly Coin1.png per card discarded, putting it on top of your deck." />
-  <Card ID="248" Name="Ball" Set="Adventures" Type="Event" Cost="5" Rules="Take your -Coin1.png token. Gain 2 cards each costing up to Coin4.png." />
+  <Card ID="246" Name="Amulet" Set="Adventures" Type="Action Duration" Cost="3" Rules="Now and at the start of your next turn, choose one: +$1; or trash a card from your hand; or gain a Silver." />
+  <Card ID="247" Name="Artificer" Set="Adventures" Type="Action" Cost="5" Rules="+1 Action\n+1 Card\n+$1\nDiscard any number of cards. You may gain a card costing exactly $1 per card discarded, putting it on top of your deck." />
+  <Card ID="248" Name="Ball" Set="Adventures" Type="Event" Cost="5" Rules="Take your -$1 token. Gain 2 cards each costing up to $4." />
   <Card ID="249" Name="Bonfire" Set="Adventures" Type="Event" Cost="3" Rules="Trash up to 2 cards you have in play." />
-  <Card ID="250" Name="Borrow" Set="Adventures" Type="Event" Cost="0" Rules="+1 Buy\nOnce per turn: If your -1 Card token isn't on your deck, put it there and +Coin1.png." />
-  <Card ID="251" Name="Bridge Troll" Set="Adventures" Type="Action Attack Duration" Cost="5" Rules="Each other player takes his -Coin1.png token. Now and at the start of your next turn:\n+1 Buy\n_____\nWhile this is in play, cards cost Coin1.png less on your turns, but not less than Coin0.png." />
-  <Card ID="252" Name="Caravan Guard" Set="Adventures" Type="Action Duration Reaction" Cost="3" Rules="+1 Card\n+1 Action\nAt the start of your next turn, +Coin1.png\nWhen another player plays an Attack card, you may play this from your hand. (+1 Action has no effect if it's not your turn.)" />
+  <Card ID="250" Name="Borrow" Set="Adventures" Type="Event" Cost="0" Rules="+1 Buy\nOnce per turn: If your -1 Card token isn't on your deck, put it there and +$1." />
+  <Card ID="251" Name="Bridge Troll" Set="Adventures" Type="Action Attack Duration" Cost="5" Rules="Each other player takes his -$1 token. Now and at the start of your next turn:\n+1 Buy\n_____\nWhile this is in play, cards cost $1 less on your turns, but not less than $0." />
+  <Card ID="252" Name="Caravan Guard" Set="Adventures" Type="Action Duration Reaction" Cost="3" Rules="+1 Card\n+1 Action\nAt the start of your next turn, +$1\nWhen another player plays an Attack card, you may play this from your hand. (+1 Action has no effect if it's not your turn.)" />
   <Card ID="253" Name="Champion" Set="Adventures" Type="Action Duration" Cost="6" Rules="+1 Action\nFor the rest of the game, when another player plays an Attack, it doesn't affect you, and when you play an Action, +1 Action.\n(This stays in play. This is not in the Supply.)" />
-  <Card ID="254" Name="Coin of the Realm" Set="Adventures" Type="Treasure Reserve" Cost="2" Rules="Coin1.png\nWhen you play this, put it on your Tavern mat.\nDirectly after resolving an Action, you may call this, for +2 Actions." />
+  <Card ID="254" Name="Coin of the Realm" Set="Adventures" Type="Treasure Reserve" Cost="2" Rules="$1\nWhen you play this, put it on your Tavern mat.\nDirectly after resolving an Action, you may call this, for +2 Actions." />
   <Card ID="255" Name="Disciple" Set="Adventures" Type="Action Traveller" Cost="5" Rules="You may play an Action card from your hand twice. Gain a copy of it.\nWhen you discard this from play, you may exchange it for a Teacher.\n(This is not in the Supply)" />
-  <Card ID="256" Name="Distant Lands" Set="Adventures" Type="Action Reserve Victory" Cost="5" Rules="Put this on your Tavern mat.\nWorth 4 VP.png if on your Tavern mat at the end of the game (otherwise worth 0 VP.png)." />
+  <Card ID="256" Name="Distant Lands" Set="Adventures" Type="Action Reserve Victory" Cost="5" Rules="Put this on your Tavern mat.\nWorth 4 {VP} if on your Tavern mat at the end of the game (otherwise worth 0 {VP})." />
   <Card ID="257" Name="Dungeon" Set="Adventures" Type="Action Duration" Cost="3" Rules="+1 Action\nNow and at the start of your next turn: +2 Cards, then discard 2 cards." />
-  <Card ID="258" Name="Duplicate" Set="Adventures" Type="Action Reserve" Cost="4" Rules="Put this on your Tavern mat.\n_____\nWhen you gain a card costing up to Coin6.png, you may call this, to gain a copy of that card." />
+  <Card ID="258" Name="Duplicate" Set="Adventures" Type="Action Reserve" Cost="4" Rules="Put this on your Tavern mat.\n_____\nWhen you gain a card costing up to $6, you may call this, to gain a copy of that card." />
   <Card ID="259" Name="Expedition" Set="Adventures" Type="Event" Cost="3" Rules="Draw 2 extra cards for your next hand." />
-  <Card ID="260" Name="Ferry" Set="Adventures" Type="Event" Cost="3" Rules="Move your -Coin2.png cost token to an Action Supply pile (cards from that pile cost Coin2.png less on your turns, but not less than Coin0.png." />
+  <Card ID="260" Name="Ferry" Set="Adventures" Type="Event" Cost="3" Rules="Move your -$2 cost token to an Action Supply pile (cards from that pile cost $2 less on your turns, but not less than $0." />
   <Card ID="261" Name="Fugitive" Set="Adventures" Type="Action Traveller" Cost="4" Rules="+2 Cards\n+1 Action\nDiscard a card.\n_____\nWhen you discard this from play, you may exchange it for a Disciple.\n(This is not in the Supply)" />
-  <Card ID="262" Name="Gear" Set="Adventures" Type="Action Duration" Cost="3" />
-  <Card ID="263" Name="Giant" Set="Adventures" Type="Action Attack" Cost="5" />
-  <Card ID="264" Name="Guide" Set="Adventures" Type="Action Reserve" Cost="3" />
-  <Card ID="265" Name="Haunted Woods" Set="Adventures" Type="Action Attack Duration" Cost="5" />
-  <Card ID="266" Name="Hero" Set="Adventures" Type="Action Traveller" Cost="5" />
-  <Card ID="267" Name="Hireling" Set="Adventures" Type="Action Duration" Cost="6" />
-  <Card ID="268" Name="Inheritance" Set="Adventures" Type="Event" Cost="7" />
-  <Card ID="269" Name="Lost Arts" Set="Adventures" Type="Event" Cost="6" />
-  <Card ID="270" Name="Lost City" Set="Adventures" Type="Action" Cost="5" />
-  <Card ID="271" Name="Magpie" Set="Adventures" Type="Action" Cost="4" />
-  <Card ID="272" Name="Messenger" Set="Adventures" Type="Action" Cost="4" />
-  <Card ID="273" Name="Miser" Set="Adventures" Type="Action" Cost="4" />
-  <Card ID="274" Name="Mission" Set="Adventures" Type="Event" Cost="4" />
-  <Card ID="275" Name="Page" Set="Adventures" Type="Action Traveller" Cost="2" />
-  <Card ID="276" Name="Pathfinding" Set="Adventures" Type="Event" Cost="8" />
-  <Card ID="277" Name="Peasant" Set="Adventures" Type="Action Traveller" Cost="2" />
-  <Card ID="278" Name="Pilgrimage" Set="Adventures" Type="Event" Cost="4" />
-  <Card ID="279" Name="Plan" Set="Adventures" Type="Event" Cost="3" />
-  <Card ID="280" Name="Port" Set="Adventures" Type="Action" Cost="4" />
-  <Card ID="281" Name="Quest" Set="Adventures" Type="Event" Cost="0" />
-  <Card ID="282" Name="Raid" Set="Adventures" Type="Event" Cost="5" />
-  <Card ID="283" Name="Ranger" Set="Adventures" Type="Action" Cost="4" />
-  <Card ID="284" Name="Ratcatcher" Set="Adventures" Type="Action Reserve" Cost="2" />
-  <Card ID="285" Name="Raze" Set="Adventures" Type="Action" Cost="2" />
-  <Card ID="286" Name="Relic" Set="Adventures" Type="Treasure Attack" Cost="5" />
-  <Card ID="287" Name="Royal Carriage" Set="Adventures" Type="Action Reserve" Cost="5" />
-  <Card ID="288" Name="Save" Set="Adventures" Type="Event" Cost="1" />
-  <Card ID="289" Name="Scouting Party" Set="Adventures" Type="Event" Cost="2" />
-  <Card ID="290" Name="Seaway" Set="Adventures" Type="Event" Cost="5" />
-  <Card ID="291" Name="Soldier" Set="Adventures" Type="Action Attack Traveller" Cost="3" />
-  <Card ID="292" Name="Storyteller" Set="Adventures" Type="Action" Cost="5" />
-  <Card ID="293" Name="Swamp Hag" Set="Adventures" Type="Action Attack Duration" Cost="5" />
-  <Card ID="294" Name="Teacher" Set="Adventures" Type="Action Reserve" Cost="6" />
-  <Card ID="295" Name="Trade" Set="Adventures" Type="Event" Cost="5" />
-  <Card ID="296" Name="Training" Set="Adventures" Type="Event" Cost="6" />
-  <Card ID="297" Name="Transmogrify" Set="Adventures" Type="Action Reserve" Cost="4" />
-  <Card ID="298" Name="Travelling Fair" Set="Adventures" Type="Event" Cost="2" />
-  <Card ID="299" Name="Treasure Hunter" Set="Adventures" Type="Action Traveller" Cost="3" />
-  <Card ID="300" Name="Treasure Trove" Set="Adventures" Type="Treasure" Cost="5" />
-  <Card ID="301" Name="Warrior" Set="Adventures" Type="Action Attack Traveller" Cost="4" />
-  <Card ID="302" Name="Wine Merchant" Set="Adventures" Type="Action Reserve" Cost="5" />
+  <Card ID="262" Name="Gear" Set="Adventures" Type="Action Duration" Cost="3" Rules="+2 Cards\nSet aside up to 2 cards from your hand face down. At the start of your next turn, put them into your hand." />
+  <Card ID="263" Name="Giant" Set="Adventures" Type="Action Attack" Cost="5" Rules="Turn your Journey token over (it starts face up). If it's face down, +$1. If it's face up, +$5, and each other player reveals the top card of his deck, trashes it if it costs from $3 to $6, and otherwise discards it and gains a Curse." />
+  <Card ID="264" Name="Guide" Set="Adventures" Type="Action Reserve" Cost="3" Rules="+1 Card\n+1 Action\nPut this on your Tavern mat.\n_____\nAt the start of your turn, you may call this, to discard your hand and draw 5 cards." />
+  <Card ID="265" Name="Haunted Woods" Set="Adventures" Type="Action Attack Duration" Cost="5" Rules="Until you next turn, when any other player buys a card, he puts his hand on top of his deck in any order.\nAt the start of your next turn:\n+3 Cards" />
+  <Card ID="266" Name="Hero" Set="Adventures" Type="Action Traveller" Cost="5" Rules="+$2\nGain a Treasure.\n_____\nWhen you discard this from play, you may exchange it for a Champion.\n(This is not in the Supply)" />
+  <Card ID="267" Name="Hireling" Set="Adventures" Type="Action Duration" Cost="6" Rules="At the start of each of your turns for the rest of the game:\n+1 Card\n(This stays in play)" />
+  <Card ID="268" Name="Inheritance" Set="Adventures" Type="Event" Cost="7" Rules="Once per game: Set aside a non-Victory Action card from the Supply costing up to $4. Move your Estate token to it (your Estates gain the abilities and types of that card)." />
+  <Card ID="269" Name="Lost Arts" Set="Adventures" Type="Event" Cost="6" Rules="Move your +1 Action token to an Action Supply pile (when you play a card from that pile, you first get +1 Action)." />
+  <Card ID="270" Name="Lost City" Set="Adventures" Type="Action" Cost="5" Rules="+2 Cards\n+2 Actions\n_____\nWhen you gain this, each other player draws a card." />
+  <Card ID="271" Name="Magpie" Set="Adventures" Type="Action" Cost="4" Rules="+1 Card\n+1 Action\nReveal the top card of your deck. If it's a Treasure, put it into your hand. If it's an Action or Victory card, gain a Magpie." />
+  <Card ID="272" Name="Messenger" Set="Adventures" Type="Action" Cost="4" Rules="+1 Buy\n+$2\nYou may put your deck into your discard pile.\n_____\nWhen this is your first buy in a turn, gain a card costing up to $4, and each other player gains a copy of it." />
+  <Card ID="273" Name="Miser" Set="Adventures" Type="Action" Cost="4" Rules="Choose one: Put a Copper from your hand onto your Tavern mat; or +$1 per Copper on your Tavern mat." />
+  <Card ID="274" Name="Mission" Set="Adventures" Type="Event" Cost="4" Rules="Once per turn: If the previous turn wasn't yours, take another turn after this one, in which you can't buy cards." />
+  <Card ID="275" Name="Page" Set="Adventures" Type="Action Traveller" Cost="2" Rules="+1 Card\n+1 Action\n_____\nWhen you discard this from play, you may exchange it for a Treasure Hunter" />
+  <Card ID="276" Name="Pathfinding" Set="Adventures" Type="Event" Cost="8" Rules="Move your +1 Card token to an Action Supply pile (when you play a card from that pile, you first get +1 Card)." />
+  <Card ID="277" Name="Peasant" Set="Adventures" Type="Action Traveller" Cost="2" Rules="+1 Buy\n+$1\n_____\nWhen you discard this from play, you may exchange it for a Soldier." />
+  <Card ID="278" Name="Pilgrimage" Set="Adventures" Type="Event" Cost="4" Rules="Once per turn: Turn your Journey token over (it starts face up); then if it's face up, choose up to 3 differently named cards you have in play and gain a copy of each." />
+  <Card ID="279" Name="Plan" Set="Adventures" Type="Event" Cost="3" Rules="Move your Trashing token to an Action Supply pile (when you buy a card from that pile, you may trash a card from your hand.)" />
+  <Card ID="280" Name="Port" Set="Adventures" Type="Action" Cost="4" Rules="+1 Card\n+2 Actions\n_____\nWhen you buy this, gain another Port." />
+  <Card ID="281" Name="Quest" Set="Adventures" Type="Event" Cost="0" Rules="You may discard an Attack, two Curses, or six cards. If you do, gain a Gold." />
+  <Card ID="282" Name="Raid" Set="Adventures" Type="Event" Cost="5" Rules="Gain a Silver per Silver you have in play. Each other player puts his -1 Card token on his deck." />
+  <Card ID="283" Name="Ranger" Set="Adventures" Type="Action" Cost="4" Rules="+1 Buy\nTurn your Journey token over (it starts face up). If it's face up, +5 Cards." />
+  <Card ID="284" Name="Ratcatcher" Set="Adventures" Type="Action Reserve" Cost="2" Rules="+1 Card\n+1 Action\nPut this on your Tavern mat.\nAt the start of your turn, you may call this to trash a card from your hand." />
+  <Card ID="285" Name="Raze" Set="Adventures" Type="Action" Cost="2" Rules="+1 Action\nTrash this or a card from your hand. Look at a number of cards from the top of your deck equal to the cost in $_ of the trashed card. Put one into your hand and discard the rest." />
+  <Card ID="286" Name="Relic" Set="Adventures" Type="Treasure Attack" Cost="5" Rules="$2\nWhen you play this, each other player puts his -1 Card token on his deck." />
+  <Card ID="287" Name="Royal Carriage" Set="Adventures" Type="Action Reserve" Cost="5" Rules="+1 Action\nPut this on your Tavern mat.\n_____\nDirectly after resolving an Action, if it's still in play, you may call this, to replay that Action." />
+  <Card ID="288" Name="Save" Set="Adventures" Type="Event" Cost="1" Rules="+1 Buy\nOnce per turn: Set aside a card from your hand, and put it into your hand at end of turn (after drawing)." />
+  <Card ID="289" Name="Scouting Party" Set="Adventures" Type="Event" Cost="2" Rules="+1 Buy\nLook at the top 5 cards of your deck. Discard 3 of them and put the rest back on top of your deck in any order." />
+  <Card ID="290" Name="Seaway" Set="Adventures" Type="Event" Cost="5" Rules="Gain an Action card costing up to $4. Move your +1 Buy token to its pile (when you play a card from that pile, you first get +1 Buy)." />
+  <Card ID="291" Name="Soldier" Set="Adventures" Type="Action Attack Traveller" Cost="3" Rules="+$2\n+$1 per other Attack you have in play. Each other player with 4 or more cards in hand discards a card.\n_____\nWhen you discard this from play, you may exchange it for a Fugitive.\n(This is not in the Supply)" />
+  <Card ID="292" Name="Storyteller" Set="Adventures" Type="Action" Cost="5" Rules="+1 Action\n+1 $1\nPlay up to 3 Treasures from your hand. Pay all of your $_; +1 Card per $_ paid." />
+  <Card ID="293" Name="Swamp Hag" Set="Adventures" Type="Action Attack Duration" Cost="5" Rules="Until your next turn, when any other player buys a card, he gains a Curse.\nAt the start of your next turn:\n+$3" />
+  <Card ID="294" Name="Teacher" Set="Adventures" Type="Action Reserve" Cost="6" Rules="Put this on your Tavern mat.\n_____\nAt the start of your turn, you may call this, to move your +1 Card, +1 Action, +1 Buy, or +$1 token to an Action Supply pile you have no token on (when you play a card from that pile you first get that bonus).\n(This is not in the Supply)" />
+  <Card ID="295" Name="Trade" Set="Adventures" Type="Event" Cost="5" Rules="Trash up to 2 cards from your hand.\nGain a Silver per card you trashed." />
+  <Card ID="296" Name="Training" Set="Adventures" Type="Event" Cost="6" Rules="Move your +$1 token to an Action Supply pile (when you play a card from that pile, you first get +$1)." />
+  <Card ID="297" Name="Transmogrify" Set="Adventures" Type="Action Reserve" Cost="4" Rules="+1 Action\nPut this on your Tavern mat.\n_____\nAt the start of your turn, you may call this, to trash a card from your hand, gain a card costing up to $1 more than it, and put that card into your hand." />
+  <Card ID="298" Name="Travelling Fair" Set="Adventures" Type="Event" Cost="2" Rules="+2 Buys\nWhen you gain a card this turn, you may put it on top of your deck." />
+  <Card ID="299" Name="Treasure Hunter" Set="Adventures" Type="Action Traveller" Cost="3" Rules="+1 Action\n+$1\nGain a Silver per card the player to your right gained in his last turn.\n_____\nWhen you discard this from play, you may exchange it for a Warrior.\n(This is not in the Supply)" />
+  <Card ID="300" Name="Treasure Trove" Set="Adventures" Type="Treasure" Cost="5" Rules="$2\nWhen you play this, gain a Gold and a Copper." />
+  <Card ID="301" Name="Warrior" Set="Adventures" Type="Action Attack Traveller" Cost="4" Rules="+2 Cards\nFor each Traveller you have in play (including this) each other player discards the top card of his deck and trashes it if it costs $3 or $4.\n_____\nWhen you discard this from play, you may exchange it for a Hero.\n(This is not in the Supply)" />
+  <Card ID="302" Name="Wine Merchant" Set="Adventures" Type="Action Reserve" Cost="5" Rules="+1 Buy\n+$4\nPut this on your Tavern mat.\n_____\nAt the end of your Buy phase, if you have at least $2 unspent, you may discard this from your Tavern mat." />
 </ArrayOfCard>

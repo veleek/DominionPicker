@@ -177,42 +177,6 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value />
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
-    <value>Attack</value>
-  </data>
-  <data name="Type_Curse" xml:space="preserve">
-    <value>Curse</value>
-  </data>
-  <data name="Type_Duration" xml:space="preserve">
-    <value>Duration</value>
-  </data>
-  <data name="Type_Knight" xml:space="preserve">
-    <value>Knight</value>
-  </data>
-  <data name="Type_Looter" xml:space="preserve">
-    <value>Looter</value>
-  </data>
-  <data name="Type_Prize" xml:space="preserve">
-    <value>Prize</value>
-  </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Reaction</value>
-  </data>
-  <data name="Type_Ruins" xml:space="preserve">
-    <value>Ruins</value>
-  </data>
-  <data name="Type_Shelter" xml:space="preserve">
-    <value>Shelter</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
-    <value>Treasure</value>
-  </data>
-  <data name="Type_Victory" xml:space="preserve">
-    <value>Victory</value>
-  </data>
   <data name="Config_CardData" xml:space="preserve">
     <value>Card Details</value>
   </data>
@@ -379,11 +343,11 @@ never be picked</value>
   <data name="BlackMarket_Title" xml:space="preserve">
     <value>black market</value>
   </data>
-  <data name="Config_HiddenSets" xml:space="preserve">
-    <value>hidden sets</value>
+  <data name="Config_OwnedSets" xml:space="preserve">
+    <value>sets that I own</value>
   </data>
-  <data name="Config_HiddenSetsDescription" xml:space="preserve">
-    <value>Select any sets that you don't own or prefer not to use to hide them from the set selection list on the main page.</value>
+  <data name="Config_OwnedSetsDescription" xml:space="preserve">
+    <value>Specify which sets you own and would like to be able to pick from.  Sets not included here will never be used during selection or for any additional reasons such as the Black Market deck.</value>
   </data>
   <data name="Config_LanguageOptions" xml:space="preserve">
     <value>Language Options</value>
@@ -392,6 +356,6 @@ never be picked</value>
     <value>Picker Options</value>
   </data>
   <data name="About_RulesDescription" xml:space="preserve">
-    <value>Quick links to PDFs of the rules for each Dominion expansion available online.</value>
+    <value>Download PDFs of the full versions of the Dominion Rules for each set.  The files are saved locally for quick access any time later.</value>
   </data>
 </root>

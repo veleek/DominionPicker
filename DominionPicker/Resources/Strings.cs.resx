@@ -141,25 +141,4 @@
   <data name="Dominion_Token" xml:space="preserve">
     <value>Žeton</value>
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Akce</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
-    <value>Útok</value>
-  </data>
-  <data name="Type_Curse" xml:space="preserve">
-    <value>Curse</value>
-  </data>
-  <data name="Type_Duration" xml:space="preserve">
-    <value>Duration</value>
-  </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Reakce</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
-    <value>Peníze</value>
-  </data>
-  <data name="Type_Victory" xml:space="preserve">
-    <value>Vítězné body</value>
-  </data>
 </root>
