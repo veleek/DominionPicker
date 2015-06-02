@@ -282,11 +282,21 @@
                                                              Style="{TemplateBinding ProgressBarStyle}"
                                                              Margin="0,4,12,4"
                                                              />
-                                                            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
-                                                           Margin="13,0,0,6"
-                                                           Visibility="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
-                                                           Text="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}}">
-                                                            </TextBlock>
+															<StackPanel Orientation="Horizontal">
+																<TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+																	   Margin="13,0,0,6"
+																	   Visibility="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
+																	   Text="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}}" />
+																<TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+																	   Margin="13,0,0,6"
+																	   Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
+																	   Text=" - " />
+																<TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+																	   Margin="13,0,0,6"
+																	   Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
+																	   Text="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}}" />
+															</StackPanel>
+                                                            
                                                         </StackPanel>
                                                     </Grid>
                                                 </Border>
@@ -296,83 +306,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-
-
-                        <local:RulesInfoControl Margin="12,6,0,0">
-                            <local:RulesInfoControl.RulesInfo>
-                                <local:RulesInfoViewModel>
-                                    <local:RulesInfoViewModel.Set>
-                                        <dominion:CardSetViewModel Set="Cornucopia">
-                                        </dominion:CardSetViewModel>
-                                    </local:RulesInfoViewModel.Set>
-                                </local:RulesInfoViewModel>
-                            </local:RulesInfoControl.RulesInfo>
-                        </local:RulesInfoControl>
-                        
-                        <TextBlock Text="Sample Text" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-                        
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Dominion Rules" 
-                                        Tag="http://dominiongame.info/dominionrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Intrigue Rules" 
-                                        Tag="http://dominiongame.info/dominionintriguerules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Seaside Rules" 
-                                        Tag="http://dominiongame.info/dominionseasiderules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Alchemy Rules" 
-                                        Tag="http://dominiongame.info/dominionalchemyrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Prosperity Rules" 
-                                        Tag="http://dominiongame.info/dominionprosperityrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Cornucopia Rules" 
-                                        Tag="http://dominiongame.info/dominioncornucopiarules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Hinterlands Rules" 
-                                        Tag="http://dominiongame.info/dominionhinterlandsrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Dark Ages Rules" 
-                                        Tag="http://dominiongame.info/dominiondarkagesrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
-
-                        <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Guilds Rules" 
-                                        Tag="http://dominiongame.info/dominionguildsrules.pdf"
-                                        Click="WebsiteButton_Click"
-                                        Margin="12,6,0,6"
-                                        FontSize="30"/>
+                      
                     </StackPanel>
                 </ScrollViewer>
             </controls:PivotItem>

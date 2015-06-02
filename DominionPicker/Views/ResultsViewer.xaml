@@ -9,12 +9,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System.Windows"
+    xmlns:controls="clr-namespace:Ben.Controls"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     DataContext="{Binding Instance, Source={StaticResource MainView}}"
-    d:DataContext="{d:DesignData Source=SampleData/PickerResultSampleData.xaml}"
+    d:DataContext="{d:DesignData Source=../SampleData/PickerResultSampleData.xaml}"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
 
@@ -76,7 +78,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
-                               Margin="0,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}"
+                               Margin="0,0,0,0" Style="{StaticResource PhoneTextAccentStyle}"
                                Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}">
                         <ItemsControl.ItemTemplate>

@@ -273,12 +273,11 @@
     <Content Include="Images\VP_extrasmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\DefaultPickerView_2.2.xml" />
     <Content Include="Resources\DefaultPickerView.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\DefaultPickerView_1.9.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\DefaultPickerView_1.9.xml" />
     <DesignDataWithDesignTimeCreatableTypes Include="SampleData\RulesInfoSampleData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -304,6 +303,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\ConfigurationViewModelSample.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </DesignDataWithDesignTimeCreatableTypes>
     <Page Include="Views\AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>
       <SubType>Designer</SubType>
@@ -416,15 +419,11 @@
   <ItemGroup>
     <Content Include="Resources\DefaultPickerState_1.5.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\DefaultPickerState_1.7.xml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\DefaultPickerView_1.8.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\DefaultPickerView_1.8.xml" />
     <Content Include="Resources\Dominican-SmallCaps.ttf" />
     <Content Include="Images\actionicon.cancel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

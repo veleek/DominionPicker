@@ -235,6 +235,12 @@ namespace Ben.Dominion
                     //Double offsetStep = 1.0 / (colors.Count - 1);
                     //Double offset = 0.0;
 
+                    if (colors.Count > 2)
+                    {
+                        colors.Remove(Color.FromArgb(255, 160, 155, 165));
+                    }
+
+
                     Color first = colors[0];
                     Color second = colors[1];
 
@@ -262,7 +268,15 @@ namespace Ben.Dominion
             {
                 if ((type & typeToCheck) != CardType.None)
                 {
-                    colors.Add(GetColorForType(typeToCheck));
+                    // If it's an action and also a Reserve/Duration/Reaction, 
+                    // then don't add the action color
+                    //if (typeToCheck != CardType.Action || 
+                    //    !(type.HasFlag(CardType.Reaction) && 
+                    //      type.HasFlag(CardType.Duration) &&
+                    //      type.HasFlag(CardType.Reserve)))
+                    {
+                        colors.Add(GetColorForType(typeToCheck));
+                    }
                 }
 
                 typeToCheck = (CardType)((int)typeToCheck << 1);

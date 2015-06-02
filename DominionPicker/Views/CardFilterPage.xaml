@@ -138,7 +138,7 @@
                                 GroupHeaderTemplate="{StaticResource CardSetGroupHeaderTemplate}"
                                 ItemTemplate="{StaticResource CardItemTemplate}"
                                 JumpListStyle="{StaticResource CardSetJumpListStyle}"
-                                d:DataContext="{d:DesignData Source=SampleData/GroupedCardSelectorSampleData.xaml}"
+                                d:DataContext="{d:DesignData Source=../SampleData/GroupedCardSelectorSampleData.xaml}"
                                 ItemsSource="{Binding FilteredCardSelectorGroups}" />
     </Grid>
     

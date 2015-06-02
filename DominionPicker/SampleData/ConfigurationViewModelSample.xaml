@@ -1,0 +1,3 @@
+﻿<ConfigurationModel xmlns="clr-namespace:Ben.Dominion.Models" xmlns:d="clr-namespace:Ben.Dominion">
+  <ConfigurationModel.OwnedSetNames>Adventures, Guilds, Propserity, Cornucopia</ConfigurationModel.OwnedSetNames>
+</ConfigurationModel>

@@ -15,6 +15,22 @@ namespace Ben.Dominion
 
             this.DataContext = ConfigurationModel.Instance;
 
+	        this.OwnedSets.SummaryForSelectedItemsDelegate = list =>
+	        {
+		        if (list == null || list.Count == 0)
+		        {
+			        return "None";
+		        }
+
+		        if (list.Count == Cards.AllSets.Count)
+		        {
+			        return "Everything";
+		        }
+
+		        var setNames = list.Cast<CardSetViewModel>().Select(s => s.DisplayName);
+		        return string.Join(", ", setNames);
+	        };
+
             var supportedCultures = new List<CultureInfo>
             {
                 //null,

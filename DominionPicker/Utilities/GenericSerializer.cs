@@ -83,15 +83,13 @@ namespace Ben.Utilities
 
             try
             {
-                XmlSerializer s = new XmlSerializer(obj.GetType(), SerializerHelper.LocalTypes);
-
+                XmlSerializer s = new XmlSerializer(obj.GetType());
                 s.Serialize(stream, obj);
             }
-            catch (SerializationException e)
+            catch (Exception e)
             {
-                String msg = e.Message + Environment.NewLine +
-                             (e.InnerException != null ? e.InnerException.Message : "");
-                MessageBox.Show(msg, "Serialize Exception", MessageBoxButton.OK);
+                AppLog.Instance.Error(string.Format("Failed to serialize {0}", obj.GetType()), e);
+                throw;
             }
         }
 

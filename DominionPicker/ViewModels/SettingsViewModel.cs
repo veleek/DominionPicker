@@ -1,162 +1,147 @@
-﻿using Ben.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Serialization;
+using Ben.Dominion.Models;
+using Ben.Utilities;
 
 namespace Ben.Dominion
 {
-    public class SettingsViewModel : NotifyPropertyChangedBase
-    {
-        private ListOption<int> minimumCardsPerSet = new ListOption<int> { Enabled = true, OptionValue = 5 };
-        private List<SetOption> sets = Cards.AllSets.Select(s => new SetOption { Set = s, Enabled = s != CardSet.Promo }).ToList();
-        private CardList filteredCards = new CardList();
+	public class SettingsViewModel : NotifyPropertyChangedBase
+	{
+		private ListOption<int> minimumCardsPerSet = new ListOption<int> {Enabled = true, OptionValue = 5};
 
-        private bool requireDefense = false;
-        private bool requireTrash = false;
+		private List<SetOption> sets =
+			ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption {Set = s.Set, Enabled = s.Set != CardSet.Promo}).ToList();
 
-        private PlusOption plusBuys = new PlusOption() { Enabled = false, OptionValue = "Require" };
-        private PlusOption plusActions = new PlusOption() { Enabled = false, OptionValue = "Require" };
+		private CardList filteredCards = new CardList();
 
-        private bool pickPlatinumColony = true;
-        private bool pickShelterOrEstate = true;
-        private bool showExtras = true;
+		private bool requireDefense;
+		private bool requireTrash;
 
-        public SettingsViewModel()
-        {
-        }
+		private PlusOption plusBuys = new PlusOption() {Enabled = false, OptionValue = "Require"};
+		private PlusOption plusActions = new PlusOption() {Enabled = false, OptionValue = "Require"};
 
-        [XmlIgnore]
-        public List<SetOption> Sets
-        {
-            get { return sets; }
-            set { SetProperty(ref sets, value, "Sets"); }
-        }
+		private bool pickPlatinumColony = true;
+		private bool pickShelterOrEstate = true;
+		private bool showExtras = true;
 
-        [XmlIgnore]
-        public List<CardSet> SelectedSets
-        {
-            get { return Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
-            set
-            {
-                foreach (var set in sets)
-                {
-                    set.Enabled = value.Contains(set.Set);
-                }
+		[XmlIgnore]
+		public List<SetOption> Sets
+		{
+			get { return this.sets; }
+			set { this.SetProperty(ref this.sets, value); }
+		}
 
-                NotifyPropertyChanged("Sets");
-            }
-        }
+		[XmlIgnore]
+		public List<CardSet> SelectedSets
+		{
+			get { return this.Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
+			set
+			{
+				foreach (var set in this.sets)
+				{
+					set.Enabled = value.Contains(set.Set);
+				}
 
-        [XmlElement("SelectedSets")]
-        public string SelectedSetNames
-        {
-            get 
-            {
-                return string.Join(",", SelectedSets.Select(s => s.ToString()));
-            }
+				this.NotifyPropertyChanged("Sets");
+			}
+		}
 
-            set
-            {
-                foreach (var set in sets)
-                {
-                    set.Enabled = value.Contains(set.Set.ToString());
-                }
+		[XmlElement("SelectedSets")]
+		public string SelectedSetNames
+		{
+			get { return string.Join(",", this.SelectedSets.Select(s => s.ToString())); }
 
-                NotifyPropertyChanged("Sets");
-            }
-        }
+			set
+			{
+				foreach (var set in this.sets)
+				{
+					set.Enabled = value.Contains(set.Set.ToString());
+				}
 
-        public CardList FilteredCards
-        {
-            get
-            {
-                return filteredCards;
-            }
+				this.NotifyPropertyChanged("Sets");
+			}
+		}
 
-            set
-            {
-                this.SetProperty(ref filteredCards, value, "FilteredCards");
-            }
-        }
-        
-        [XmlIgnore]
-        public List<string> PlusOptionValues
-        {
-            get
-            {
-                return new List<string>
-                {
-                    "Require",
-                    "Require +2",
-                    "Prevent",
-                    "Prevent +2",
-                };
-            }
-        }
+		public CardList FilteredCards
+		{
+			get { return this.filteredCards; }
 
-        [XmlIgnore]
-        public int[] MinimumCardsPerSetValues
-        {
-            get
-            {
-                return new[] { 1, 2, 3, 4, 5, 10 }; 
-            }
-        }
+			set { this.SetProperty(ref this.filteredCards, value); }
+		}
 
-        public ListOption<int> MinimumCardsPerSet
-        {
-            get { return minimumCardsPerSet; }
-            set { SetProperty(ref minimumCardsPerSet, value, "MinimumCardsPerSet"); }
-        }
+		[XmlIgnore]
+		public List<string> PlusOptionValues
+		{
+			get
+			{
+				return new List<string>
+				{
+					"Require",
+					"Require +2",
+					"Prevent",
+					"Prevent +2",
+				};
+			}
+		}
 
-        public bool RequireDefense
-        {
-            get { return requireDefense; }
-            set { SetProperty(ref requireDefense, value, "RequireDefense"); }
-        }
+		[XmlIgnore]
+		public int[] MinimumCardsPerSetValues
+		{
+			get { return new[] {1, 2, 3, 4, 5, 10}; }
+		}
 
-        public bool RequireTrash
-        {
-            get { return requireTrash; }
-            set { SetProperty(ref requireTrash, value, "RequireTrash"); }
-        }
+		public ListOption<int> MinimumCardsPerSet
+		{
+			get { return this.minimumCardsPerSet; }
+			set { this.SetProperty(ref this.minimumCardsPerSet, value); }
+		}
 
-        public PlusOption PlusBuys
-        {
-            get { return plusBuys; }
-            set { SetProperty(ref plusBuys, value, "PlusBuys"); }
-        }
+		public bool RequireDefense
+		{
+			get { return this.requireDefense; }
+			set { this.SetProperty(ref this.requireDefense, value); }
+		}
 
-        public PlusOption PlusActions
-        {
-            get { return plusActions; }
-            set { SetProperty(ref plusActions, value, "PlusActions"); }
-        }
+		public bool RequireTrash
+		{
+			get { return this.requireTrash; }
+			set { this.SetProperty(ref this.requireTrash, value); }
+		}
 
-        public bool ShowExtras
-        {
-            get { return showExtras; }
-            set { SetProperty(ref showExtras, value, "ShowExtras"); }
-        }
+		public PlusOption PlusBuys
+		{
+			get { return this.plusBuys; }
+			set { this.SetProperty(ref this.plusBuys, value); }
+		}
 
-        public bool PickPlatinumColony
-        {
-            get { return pickPlatinumColony; }
-            set { SetProperty(ref pickPlatinumColony, value, "PickPlatinumColony"); }
-        }
+		public PlusOption PlusActions
+		{
+			get { return this.plusActions; }
+			set { this.SetProperty(ref this.plusActions, value); }
+		}
 
-        public bool PickShelterOrEstate
-        {
-            get { return pickShelterOrEstate; }
-            set { SetProperty(ref pickShelterOrEstate, value, "PickShelterOrEstate"); }
-        }
+		public bool ShowExtras
+		{
+			get { return this.showExtras; }
+			set { this.SetProperty(ref this.showExtras, value); }
+		}
 
-        public override string ToString()
-        {
-            return this.SelectedSets.Select(s => s.ToString().Substring(0, 4)).Aggregate((a, b) => a + ", " + b);
-            //return this.SelectedSetNames;
-        }
-    }
+		public bool PickPlatinumColony
+		{
+			get { return this.pickPlatinumColony; }
+			set { this.SetProperty(ref this.pickPlatinumColony, value); }
+		}
+
+		public bool PickShelterOrEstate
+		{
+			get { return this.pickShelterOrEstate; }
+			set { this.SetProperty(ref this.pickShelterOrEstate, value); }
+		}
+
+		public override string ToString()
+		{
+			return this.SelectedSets.Select(s => s.ToString().Substring(0, 4)).Aggregate((a, b) => a + ", " + b);
+		}
+	}
 }

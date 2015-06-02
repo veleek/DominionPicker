@@ -1,28 +1,60 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Ben.Controls
 {
-    public class DataTemplateSelector
+    public interface IDataTemplateSelector
     {
-        public virtual DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            return null;
-        }
+	    DataTemplate SelectTemplate(object item, DependencyObject container);
     }
+
+	public class DataTemplateMapSelector : IDataTemplateSelector
+	{
+		public DataTemplateMapSelector()
+		{
+			this.DataTemplateMap = new Dictionary<Type, DataTemplate>();
+		}
+
+		public DataTemplateMapSelector(Dictionary<Type, DataTemplate> dataTemplateMap)
+		{
+			this.DataTemplateMap = dataTemplateMap;
+		}
+
+		public Dictionary<Type, DataTemplate> DataTemplateMap { get; }
+
+		public DataTemplate SelectTemplate(object item, DependencyObject container)
+		{
+			if (item == null)
+			{
+				throw new ArgumentNullException("item");
+			}
+
+			Type t = item.GetType();
+			DataTemplate dataTemplate;
+			if (!this.DataTemplateMap.TryGetValue(t, out dataTemplate))
+			{
+				throw new ArgumentException("No DataTemplate defined for Type " + t);
+			}
+
+			return dataTemplate;
+		}
+
+	}
 
     public class MultiTemplateItemsControl : ItemsControl
     {
-        public DataTemplateSelector TemplateSelector
+        public IDataTemplateSelector TemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(TemplateSelectorProperty); }
+            get { return (IDataTemplateSelector)GetValue(TemplateSelectorProperty); }
             set { SetValue(TemplateSelectorProperty, value); }
         }
 
         public static readonly DependencyProperty TemplateSelectorProperty =
             DependencyProperty.Register(
                 "TemplateSelector",
-                typeof(DataTemplateSelector),
+                typeof(IDataTemplateSelector),
                 typeof(MultiTemplateItemsControl),
                 new PropertyMetadata(new PropertyChangedCallback(OnTemplateChanged)));
 
@@ -45,16 +77,16 @@ namespace Ben.Controls
 
     public class MultiTemplateContentControl : ContentControl
     {
-        public DataTemplateSelector TemplateSelector
+        public IDataTemplateSelector TemplateSelector
         {
-            get { return (DataTemplateSelector)GetValue(TemplateSelectorProperty); }
+            get { return (IDataTemplateSelector)GetValue(TemplateSelectorProperty); }
             set { SetValue(TemplateSelectorProperty, value); }
         }
 
         public static readonly DependencyProperty TemplateSelectorProperty =
             DependencyProperty.Register(
                 "TemplateSelector",
-                typeof(DataTemplateSelector),
+                typeof(IDataTemplateSelector),
                 typeof(MultiTemplateContentControl),
                 new PropertyMetadata(new PropertyChangedCallback(OnTemplateChanged)));
 

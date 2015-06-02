@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -14,11 +15,14 @@ namespace Ben.Dominion.Models
     public class ConfigurationModel : NotifyPropertyChangedBase
     {
         public const string ConfigurationModelFilePath = "Configuration.xml";
+
+		private static readonly IEnumerable<CardSetViewModel> allSets = Cards.AllSets.Select(s => (CardSetViewModel)s).ToList();
+
         private static ConfigurationModel instance;
         private CultureInfo overrideCulture = CultureInfo.InvariantCulture;
-        private List<SetOption> sets = Cards.AllSets.Select(s => new SetOption {Set = s, Enabled = false}).ToList();
+	    private List<CardSetViewModel> ownedSets = allSets.ToList();
 
-        public static ConfigurationModel Instance
+	    public static ConfigurationModel Instance
         {
             get
             {
@@ -40,29 +44,29 @@ namespace Ben.Dominion.Models
             }
         }
 
-        [XmlIgnore]
-        public List<SetOption> HiddenSets
+	    /// <summary>
+	    /// Convenience accessor to allow binding to the set of all cards.
+	    /// </summary>
+	    [XmlIgnore]
+	    public IEnumerable<CardSetViewModel> AllSets => allSets;
+
+	    [XmlIgnore]
+        public List<CardSetViewModel> OwnedSets
         {
-            get { return this.sets; }
-            set { this.SetProperty(ref this.sets, value, "Sets"); }
+            get { return this.ownedSets; }
+            set { this.SetProperty(ref this.ownedSets, value); }
         }
 
-        [XmlElement("HiddenSets")]
-        public string HiddenSetNames
+        [XmlElement("OwnedSets")]
+        public string OwnedSetNames
         {
-            get { return string.Join(",", this.HiddenSets.Select(s => s.ToString())); }
+            get { return string.Join(",", this.OwnedSets.Select(s => s.ToString())); }
 
             set
             {
-                foreach (var set in this.sets)
-                {
-                    set.Enabled = value.Contains(set.Set.ToString());
-                }
-
-                this.NotifyPropertyChanged("HiddenSets");
+				this.OwnedSets = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => (CardSetViewModel)(CardSet)Enum.Parse(typeof(CardSet), s, true)).ToList();
             }
         }
-
 
         public CultureInfo CurrentCulture
         {
@@ -164,7 +168,15 @@ namespace Ben.Dominion.Models
 
         private static ConfigurationModel Load(string path)
         {
-            return new ConfigurationModel();
+	        try
+	        {
+		        return new ConfigurationModel();
+	        }
+	        catch (Exception e)
+	        {
+		        Console.WriteLine(e);
+		        return null;
+	        }
         }
     }
 }

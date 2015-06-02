@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Runtime.Serialization;
-using System.Collections.Generic;
 using Ben.Utilities;
-using System.Xml.Serialization;
 
 namespace Ben.Dominion
 {
@@ -23,13 +12,13 @@ namespace Ben.Dominion
         [DataMember]
         public String Name
         {
-            get { return name; }
+            get { return this.name; }
             set
             {
                 if (value != null)
                 {
-                    name = value;
-                    NotifyPropertyChanged("Name");
+	                this.name = value;
+	                this.NotifyPropertyChanged("Name");
                 }
             }
         }
@@ -80,7 +69,7 @@ namespace Ben.Dominion
     {
         public PickerResult Result
         {
-            get { return PickerResult.FromList(Value.Split(',').Select(i => Int32.Parse(i))); }
+            get { return PickerResult.FromList(this.Value.Split(',').Select(i => Int32.Parse(i))); }
         }
 
         public OldFavoriteSet() { }

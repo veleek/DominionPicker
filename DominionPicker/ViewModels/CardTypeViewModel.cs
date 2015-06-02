@@ -9,9 +9,8 @@ namespace Ben.Dominion
     {
         private static readonly char[] SplitChars = new char[] { ',', ' '};
         private CardType type;
-        private string displayName;
 
-        public CardTypeViewModel()
+	    public CardTypeViewModel()
         {
         }
 
@@ -28,21 +27,15 @@ namespace Ben.Dominion
                 if (this.SetProperty(ref this.type, value, "Type"))
                 {
                     var typeNames = this.type.ToString().Split(SplitChars, StringSplitOptions.RemoveEmptyEntries);
-                    this.displayName = string.Join(", ", typeNames.Select(n => CardDataStrings.ResourceManager.GetString("Type_" + n, Strings.Culture) ?? "Resource Problem"));
+                    this.DisplayName = string.Join(", ", typeNames.Select(n => CardDataStrings.ResourceManager.GetString("Type_" + n, Strings.Culture) ?? "Resource Problem"));
                     this.NotifyPropertyChanged("DisplayName");
                 }
             }
         }
 
-        public string DisplayName
-        {
-            get 
-            {
-                return displayName;
-            }
-        }
+        public string DisplayName { get; private set; }
 
-        public static implicit operator CardTypeViewModel(CardType type)
+	    public static implicit operator CardTypeViewModel(CardType type)
         {
             return new CardTypeViewModel(type);
         }

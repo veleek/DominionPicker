@@ -10,22 +10,22 @@ namespace Ben.Dominion
 {
     public class PickerResult : NotifyPropertyChangedBase
     {
-        private static Regex actionRegex = new Regex(@"\+[1-9] Action");
-        private static Regex twoActionRegex = new Regex(@"\+[2-9] Actions");
-        private static Regex buyRegex = new Regex(@"\+[1-9] Buy");
-        private static Regex twoBuyRegex = new Regex(@"\+[2-9] Buys");
-        private static Regex trashRegex = new Regex(@"Trash(?! this)");
+        private static readonly Regex actionRegex = new Regex(@"\+[1-9] Action");
+        private static readonly Regex twoActionRegex = new Regex(@"\+[2-9] Actions");
+        private static readonly Regex buyRegex = new Regex(@"\+[1-9] Buy");
+        private static readonly Regex twoBuyRegex = new Regex(@"\+[2-9] Buys");
+        private static readonly Regex trashRegex = new Regex(@"Trash(?! this)");
 
         private CardList pool = null;
         private CardList cards = null;
-        private CardList additionalCards = null;
+        private CardList additionalCards = new CardList();
         private List<string> additionalStuff = null;
         private ResultSortOrder sortOrder;
 
         public PickerResult()
         {
         }
-
+        
         public CardList Pool
         {
             get { return pool; }
@@ -41,7 +41,7 @@ namespace Ben.Dominion
         public CardList AdditionalCards
         {
             get { return this.additionalCards; }
-            set { this.SetProperty(ref this.additionalCards, value, "AdditionalCards"); }
+            set { this.SetProperty(ref this.additionalCards, value ?? new CardList(), "AdditionalCards"); }
         }
 
         public List<String> AdditionalStuff
@@ -82,7 +82,17 @@ namespace Ben.Dominion
             return this.Cards.Any(predicate) || this.AdditionalCards.Any(predicate);
         }
 
-        public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }
+	    public IEnumerable<Card> CardsOfType(CardType type)
+	    {
+		    return this.CardsWhere(c => c.IsType(type));
+	    }
+
+		public IEnumerable<Card> CardsWhere(Func<Card, bool> predicate)
+		{
+			return this.Cards.Where(predicate).Union(this.AdditionalCards.Where(predicate));
+		}
+
+		public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }
         public Boolean HasReaction { get { return HasCardType(CardType.Reaction); } }
 
         public Boolean HasTrash { get { return Cards.Any(c => trashRegex.IsMatch(c.Rules)); } }

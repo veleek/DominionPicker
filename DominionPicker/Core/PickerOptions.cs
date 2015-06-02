@@ -168,13 +168,13 @@ namespace Ben.Dominion
         public PolicyOption(String name) : base(name, PolicyOptions) {}
     }
 
-    public class OptionTemplateSelector : DataTemplateSelector
+    public class OptionTemplateSelector : IDataTemplateSelector
     {
         public DataTemplate BasicOptionTemplate { get; set; }
         public DataTemplate BooleanOptionTemplate { get; set; }
         public DataTemplate ListOptionTemplate { get; set; }
 
-        public override DataTemplate SelectTemplate(object item, DependencyObject container)
+        public DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             PickerOption o = item as PickerOption;
 

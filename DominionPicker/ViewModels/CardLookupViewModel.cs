@@ -26,8 +26,7 @@ namespace Ben.Dominion.ViewModels
 
         public CardLookupViewModel()
         {
-            this.filterWorker = new BackgroundWorker();
-            this.filterWorker.WorkerSupportsCancellation = true;
+            this.filterWorker = new BackgroundWorker { WorkerSupportsCancellation = true };
             this.filterWorker.DoWork += this.filterWorker_DoWork;
 
             // Generate 'card selectors' for each card.  A card selector is just an object
@@ -42,7 +41,13 @@ namespace Ben.Dominion.ViewModels
                 .GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards))
                 .OrderBy(g => g.Key)
                 .ToList();
-            this.FilteredCardSelectorGroups = this.cardSelectorGroups.ToList();
+            // Note, this is is a duplicate of the previous because we want to construct an 
+            // explicitly separate set of CardGroupings so that we can modify one while using
+            // the others as part of our filtering process.
+            this.FilteredCardSelectorGroups = this.CardSelectors
+                .GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards))
+                .OrderBy(g => g.Key)
+                .ToList();
             this.filteredGroupsMap = this.FilteredCardSelectorGroups.ToDictionary(g => g.Key);
 
         }
@@ -118,6 +123,28 @@ namespace Ben.Dominion.ViewModels
             MainViewModel.Instance.Settings.FilteredCards = this.FilteredCards;
         }
 
+
+        public void FilterCardsList(String newFilter)
+        {
+            if (newFilter == this.currentFilter && newFilter != String.Empty)
+            {
+                return;
+            }
+
+            if (this.filterWorker.IsBusy)
+            {
+                this.filterWorker.CancelAsync();
+
+                while (this.filterWorker.IsBusy)
+                {
+                }
+            }
+
+            this.currentFilter = newFilter;
+
+            this.filterWorker.RunWorkerAsync();
+        }
+
         /// <summary>
         /// BackgroundWorker function to perform filtering on all of the cards based
         /// on the current search filter.
@@ -173,27 +200,6 @@ namespace Ben.Dominion.ViewModels
             {
                 this.UpdateCardsList();
             }
-        }
-
-        public void FilterCardsList(String newFilter)
-        {
-            if (newFilter == this.currentFilter && newFilter != String.Empty)
-            {
-                return;
-            }
-
-            if (this.filterWorker.IsBusy)
-            {
-                this.filterWorker.CancelAsync();
-
-                while (this.filterWorker.IsBusy)
-                {
-                }
-            }
-
-            this.currentFilter = newFilter;
-
-            this.filterWorker.RunWorkerAsync();
         }
 
         /// <summary>

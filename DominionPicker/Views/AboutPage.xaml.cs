@@ -32,17 +32,57 @@ namespace Ben.Dominion
 
             this.RulesInfo.ItemsSource = new[]
             {
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionrules.pdf", "Dominion Rules"), IconPath = "../Images/SetIcons/base.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionintriguerules.pdf", "Intrigue Rules"), IconPath = "../Images/SetIcons/Intrigue.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionseasiderules.pdf", "Seaside Rules"), IconPath = "../Images/SetIcons/Seaside.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionalchemyrules.pdf", "Alchemy Rules"), IconPath = "../Images/SetIcons/Alchemy.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionprosperityrules.pdf", "Prosperity Rules"), IconPath = "../Images/SetIcons/Prosperity.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominioncornucopiarules.pdf", "Cornucopia Rules"), IconPath = "../Images/SetIcons/Cornucopia.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionhinterlandsrules.pdf", "Hinterlands Rules"), IconPath = "../Images/SetIcons/Hinterlands.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominiondarkagesrules.pdf", "Dark Ages Rules"), IconPath = "../Images/SetIcons/DarkAges.png"},
-                new { Monitor = new DownloadingTransferMonitor("http://dominiongame.info/dominionguildsrules.pdf", "Guilds Rules"), IconPath = "../Images/SetIcons/Guilds.png"},
+				new RulesInfoItem(CardSet.Base),
+				new RulesInfoItem(CardSet.Intrigue),
+				new RulesInfoItem(CardSet.Seaside),
+				new RulesInfoItem(CardSet.Alchemy),
+				new RulesInfoItem(CardSet.Prosperity),
+				new RulesInfoItem(CardSet.Cornucopia),
+				new RulesInfoItem(CardSet.Hinterlands),
+				new RulesInfoItem(CardSet.DarkAges),
+				new RulesInfoItem(CardSet.Guilds),
+				new RulesInfoItem(CardSet.Adventures),
             };
         }
+
+	    public class RulesInfoItem
+	    {
+
+		    public RulesInfoItem(CardSet set)
+		    {
+			    string rulesUrl;
+			    switch (set)
+			    {
+				    case CardSet.Base:
+					    rulesUrl = "http://riograndegames.com/getFile.php?id=348";
+                        break;
+				    case CardSet.Intrigue:
+				    case CardSet.Seaside:
+				    case CardSet.Alchemy:
+				    case CardSet.Prosperity:
+				    case CardSet.Cornucopia:
+				    case CardSet.Hinterlands:
+				    case CardSet.DarkAges:
+				    case CardSet.Guilds:
+					    rulesUrl = string.Format("http://dominiongame.info/dominion{0}rules.pdf", set);
+					    break;
+				    case CardSet.Adventures:
+					    rulesUrl = "http://riograndegames.com/getFile.php?id=1907";
+                        break;
+				    default:
+					    throw new ArgumentOutOfRangeException("set");
+			    }
+
+			    this.Monitor = new DownloadingTransferMonitor(
+				    rulesUrl,
+					string.Format("Dominion{0}Rules.pdf", set),
+					((CardSetViewModel)set).DisplayName);
+			    this.IconPath = string.Format("../Images/SetIcons/{0}.png", set);
+		    }
+
+			public DownloadingTransferMonitor Monitor { get; set; }
+		    public string IconPath { get; set; } 
+	    }
 
         private async void DominionTransferControl_OnTap(object sender, GestureEventArgs e)
         {
@@ -134,15 +174,15 @@ namespace Ben.Dominion
         {
         }
 
-        public DownloadingTransferMonitor(string requestUri, string name)
-            : this(CreateBackgroundTransferRequest(requestUri), name)
+        public DownloadingTransferMonitor(string requestUri, string localUri, string name)
+            : this(CreateBackgroundTransferRequest(requestUri, localUri), name)
         {
         }
 
-        private static BackgroundTransferRequest CreateBackgroundTransferRequest(string requestPath)
+        private static BackgroundTransferRequest CreateBackgroundTransferRequest(string requestPath, string localPath)
         {
             Uri requestUri = new Uri(requestPath);
-            string downloadPath = Path.Combine("shared/transfers", Path.GetFileName(requestPath));
+            string downloadPath = Path.Combine("shared/transfers", localPath);
             Uri downloadUri = new Uri(downloadPath, UriKind.RelativeOrAbsolute);
             var request = new BackgroundTransferRequest(requestUri, downloadUri) {TransferPreferences = TransferPreferences.AllowCellularAndBattery};
 

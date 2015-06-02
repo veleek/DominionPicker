@@ -12,6 +12,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+	d:DataContext="{d:DesignData Source=../SampleData/ConfigurationViewModelSample.xaml}"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -50,13 +51,24 @@
             <ScrollViewer>
                 <StackPanel>
                     <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_PickerOptions, Source={StaticResource LocalizedResources}}" />
+
+					<toolkit:ListPicker x:Name="OwnedSets"
+                                        Header="{Binding Strings.Config_OwnedSets, Source={StaticResource LocalizedResources}}"
+                                        ItemsSource="{Binding AllSets}"
+                                        SelectionMode="Multiple"
+										SelectedItems="{Binding OwnedSets}"
+										IsEnabled="false">
+						<toolkit:ListPicker.FullModeItemTemplate>
+							<DataTemplate>
+								<TextBlock Text="{Binding DisplayName}" 
+										   VerticalAlignment="Center" 
+										   Style="{StaticResource PhoneTextLargeStyle}"/>
+							</DataTemplate>
+						</toolkit:ListPicker.FullModeItemTemplate>
+						
+					</toolkit:ListPicker>
                     
-                    <toolkit:ListPicker x:Name="HiddenSets"
-                                        Header="{Binding Strings.Config_HiddenSets, Source={StaticResource LocalizedResources}}"
-                                        ItemsSource="{Binding HiddenSets, Mode=TwoWay}"
-                                        SelectionMode="Multiple"/>
-                    
-                    <TextBlock Text="{Binding Strings.Config_HiddenSetsDescription, Source={StaticResource LocalizedResources}}"
+                    <TextBlock Text="{Binding Strings.Config_OwnedSetsDescription, Source={StaticResource LocalizedResources}}"
                                Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
                     
                     <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" />

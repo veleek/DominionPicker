@@ -15,54 +15,68 @@ namespace Ben.Dominion
     {
         public static readonly string PickerCardsFileName = "./Resources/DominionPickerCards.xml";
 
-        private static readonly Dictionary<CardSet, List<Card>> cardsBySet = new Dictionary<CardSet, List<Card>>();
+        private static ReadOnlyCollection<Card> allCards;
+		private static ReadOnlyCollection<CardSet> allSets;
+	    private static ReadOnlyCollection<CardType> allTypes;
+		private static ReadOnlyCollection<Card> pickableCards;
+        private static Dictionary<Int32, Card> lookup;
+        private static Dictionary<string, Card> nameLookup;
 
-        private static ReadOnlyCollection<Card> allCards = null;
-        private static ReadOnlyCollection<Card> pickableCards = null;
-        private static Dictionary<Int32, Card> lookup = null;
-        private static Dictionary<string, Card> nameLookup = null;
 
-        public static IEnumerable<CardSet> AllSets
+	    public static ReadOnlyCollection<CardSet> AllSets
+	    {
+		    get
+		    {
+			    if (allSets == null)
+			    {
+				    allSets = new ReadOnlyCollection<CardSet>(
+					    new List<CardSet>
+					    {
+						    CardSet.Base,
+						    CardSet.Intrigue,
+						    CardSet.Seaside,
+						    CardSet.Alchemy,
+						    CardSet.Prosperity,
+						    CardSet.Cornucopia,
+						    CardSet.Hinterlands,
+						    CardSet.DarkAges,
+						    CardSet.Guilds,
+						    CardSet.Adventures,
+						    CardSet.Promo,
+					    }
+					);
+			    }
+			    return allSets;
+		    }
+	    }
+
+	    public static ReadOnlyCollection<CardType> AllTypes
         {
-            get
-            {
-                return new List<CardSet>
-                {
-                    CardSet.Base,
-                    CardSet.Intrigue,
-                    CardSet.Seaside,
-                    CardSet.Alchemy,
-                    CardSet.Prosperity,
-                    CardSet.Cornucopia,
-                    CardSet.Hinterlands,
-                    CardSet.DarkAges,
-                    CardSet.Guilds,
-                    CardSet.Adventures,
-                    CardSet.Promo,
-                };
-            }
-        }
+		    get
+		    {
+			    if (allTypes == null)
+			    {
+				    allTypes = new ReadOnlyCollection<CardType>(
+					    new List<CardType>
+					    {
+						    CardType.Action,
+						    CardType.Attack,
+						    CardType.Curse,
+						    CardType.Duration,
+						    CardType.Knight,
+						    CardType.Looter,
+						    CardType.Prize,
+						    CardType.Reaction,
+						    CardType.Ruins,
+						    CardType.Shelter,
+						    CardType.Treasure,
+						    CardType.Victory,
+					    }
+					);
+			    }
 
-        public static IEnumerable<CardType> AllTypes
-        {
-            get
-            {
-                return new List<CardType>
-                {
-                    CardType.Action,
-                    CardType.Attack,
-                    CardType.Curse,
-                    CardType.Duration,
-                    CardType.Knight,
-                    CardType.Looter,
-                    CardType.Prize,
-                    CardType.Reaction,
-                    CardType.Ruins,
-                    CardType.Shelter,
-                    CardType.Treasure,
-                    CardType.Victory,
-                };
-            }
+			    return allTypes;
+		    }
         }
 
         public static ReadOnlyCollection<Card> AllCards
@@ -71,7 +85,7 @@ namespace Ben.Dominion
             {
                 if (allCards == null)
                 {
-                    allCards = new ReadOnlyCollection<Card>(Load().OrderBy(c => c.SetPrefix + c.Name).ToList());
+                    allCards = new ReadOnlyCollection<Card>(Load().OrderBy(c => c.Set).ThenBy(c => c.Name).ToList());
                 }
                 return allCards;
             }
@@ -213,16 +227,6 @@ namespace Ben.Dominion
             }
         }
 
-        public static List<Card> GetSet(CardSet set)
-        {
-            if (!cardsBySet.ContainsKey(set))
-            {
-                cardsBySet[set] = AllCards.Where(c => c.Set == set).ToList();
-            }
-
-            return cardsBySet[set];
-        }
-
         public static List<Card> Load()
         {
             List<Card> cards;
@@ -261,18 +265,6 @@ namespace Ben.Dominion
             }
 
             return cards;
-        }
-
-        public static void Save()
-        {
-            using (IsolatedStorageFile store = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                using (IsolatedStorageFileStream stream = store.CreateFile(PickerCardsFileName))
-                {
-                    String xml = GenericXmlSerializer.Serialize(AllCards);
-                    Console.WriteLine(xml);
-                }
-            }
         }
     }
 

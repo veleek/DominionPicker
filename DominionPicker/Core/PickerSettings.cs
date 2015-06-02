@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using Ben.Dominion.Models;
 
 namespace Ben.Dominion
 {
     public class PickerSettings
     {
+        private List<SetSelector> sets;
+
         public PickerSettings()
         {
 
@@ -19,7 +22,7 @@ namespace Ben.Dominion
             {
                 PickerSettings settings = new PickerSettings();
 
-                settings.Sets = Cards.AllSets.Select(s => new SetSelector(s)).ToList();
+                settings.Sets = ConfigurationModel.Instance.OwnedSets.Select(s => new SetSelector(s.Set)).ToList();
                 // Easy way to deselect the 'promo' card set
                 settings.Sets.Single(s => s.Set == CardSet.Promo).IsSelected = false;
 
@@ -47,7 +50,15 @@ namespace Ben.Dominion
             }
         }
 
-        public List<SetSelector> Sets { get; set; }
+        public List<SetSelector> Sets
+        {
+            get { return this.sets; }
+            set
+            {
+                var ownedSets = ConfigurationModel.Instance.OwnedSets;
+                this.sets = value.Where(s => ownedSets.Contains(s.Set)).ToList();
+            }
+        }
 
         [XmlIgnore]
         [IgnoreDataMember]
@@ -55,7 +66,7 @@ namespace Ben.Dominion
         {
             get
             {
-                return Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
+                return this.Sets.Where(s => s.IsSelected).Select(s => s.Set).ToList();
             }
         }
 
@@ -65,16 +76,16 @@ namespace Ben.Dominion
         {
             get
             {
-                if (filteredCards == null)
+                if (this.filteredCards == null)
                 {
-                    filteredCards = FilteredCardIds.Select(cid => Cards.Lookup[cid]).ToList();
+	                this.filteredCards = this.FilteredCardIds.Select(cid => Cards.Lookup[cid]).ToList();
                 }
 
-                return filteredCards;
+                return this.filteredCards;
             }
             set
             {
-                FilteredCardIds = value.Select(c => c.ID).ToList();
+	            this.FilteredCardIds = value.Select(c => c.ID).ToList();
             }
         }
 
@@ -83,12 +94,12 @@ namespace Ben.Dominion
         {
             get
             {
-                return (filteredCardIds = filteredCardIds ?? new List<Int32>());
+                return (this.filteredCardIds = this.filteredCardIds ?? new List<Int32>());
             }
             set
             {
-                filteredCardIds = value;
-                filteredCards = null;
+	            this.filteredCardIds = value;
+	            this.filteredCards = null;
             }
         }
 
@@ -98,12 +109,12 @@ namespace Ben.Dominion
             {
                 CardType selectedTypes = CardType.None;
 
-                if (!FilterAction.IsEnabled) { selectedTypes |= CardType.Action; }
-                if (!FilterAttack.IsEnabled) { selectedTypes |= CardType.Attack; }
-                if (!FilterDuration.IsEnabled) { selectedTypes |= CardType.Duration; }
-                if (!FilterReaction.IsEnabled) { selectedTypes |= CardType.Reaction; }
-                if (!FilterTreasure.IsEnabled) { selectedTypes |= CardType.Treasure; }
-                if (!FilterVictory.IsEnabled) { selectedTypes |= CardType.Victory; }
+                if (!this.FilterAction.IsEnabled) { selectedTypes |= CardType.Action; }
+                if (!this.FilterAttack.IsEnabled) { selectedTypes |= CardType.Attack; }
+                if (!this.FilterDuration.IsEnabled) { selectedTypes |= CardType.Duration; }
+                if (!this.FilterReaction.IsEnabled) { selectedTypes |= CardType.Reaction; }
+                if (!this.FilterTreasure.IsEnabled) { selectedTypes |= CardType.Treasure; }
+                if (!this.FilterVictory.IsEnabled) { selectedTypes |= CardType.Victory; }
 
                 return selectedTypes;
             }
@@ -115,12 +126,12 @@ namespace Ben.Dominion
             {
                 CardType filteredTypes = CardType.None;
 
-                if (FilterAction.IsEnabled) { filteredTypes |= CardType.Action; }
-                if (FilterAttack.IsEnabled) { filteredTypes |= CardType.Attack; }
-                if (FilterDuration.IsEnabled) { filteredTypes |= CardType.Duration; }
-                if (FilterReaction.IsEnabled) { filteredTypes |= CardType.Reaction; }
-                if (FilterTreasure.IsEnabled) { filteredTypes |= CardType.Treasure; }
-                if (FilterVictory.IsEnabled) { filteredTypes |= CardType.Victory; }
+                if (this.FilterAction.IsEnabled) { filteredTypes |= CardType.Action; }
+                if (this.FilterAttack.IsEnabled) { filteredTypes |= CardType.Attack; }
+                if (this.FilterDuration.IsEnabled) { filteredTypes |= CardType.Duration; }
+                if (this.FilterReaction.IsEnabled) { filteredTypes |= CardType.Reaction; }
+                if (this.FilterTreasure.IsEnabled) { filteredTypes |= CardType.Treasure; }
+                if (this.FilterVictory.IsEnabled) { filteredTypes |= CardType.Victory; }
 
                 return filteredTypes;
             }
@@ -151,17 +162,11 @@ namespace Ben.Dominion
         {
             get
             {
-                if (allOptions == null)
+                if (this.allOptions == null)
                 {
-                    allOptions = new List<PickerOption> 
-                    { 
-                        MinimumCardsPerSet,
-                        RequireDefense,
-                        RequireTrash,
-                        PlusBuys,
-                        PlusActions,
-                        PickPlatinumColony,
-                        PickSheltersOrEstates,
+	                this.allOptions = new List<PickerOption> 
+                    {
+	                    this.MinimumCardsPerSet, this.RequireDefense, this.RequireTrash, this.PlusBuys, this.PlusActions, this.PickPlatinumColony, this.PickSheltersOrEstates,
                         //PlusCoins,
                         //FilterPotions,
                         //FilterAction,
@@ -173,7 +178,7 @@ namespace Ben.Dominion
                     };
                 }
 
-                return allOptions;
+                return this.allOptions;
             }
         }
 
@@ -206,7 +211,7 @@ namespace Ben.Dominion
 
         public override string ToString()
         {
-            return SelectedSets.Select(s => s.ToString().Substring(0,4)).Aggregate((a, b) => a + ", " + b);
+            return this.SelectedSets.Select(s => s.ToString().Substring(0,4)).Aggregate((a, b) => a + ", " + b);
         }
     }
 
@@ -227,7 +232,7 @@ namespace Ben.Dominion
 
         public override string ToString()
         {
-            return String.Format("{0} - {1}", Set, IsSelected);
+            return String.Format("{0} - {1}", this.Set, this.IsSelected);
         }
     }
 }

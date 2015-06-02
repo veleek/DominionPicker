@@ -175,6 +175,10 @@ namespace Ben.Dominion
                             {
                                 using (Stream stream = store.OpenFile(PickerStateFileName, FileMode.Open))
                                 {
+                                    StreamReader reader = new StreamReader(stream);
+                                    var content = reader.ReadToEnd();
+                                    stream.Position = 0;
+
                                     XmlSerializer serializer = new XmlSerializer(typeof (MainViewModel));
 
                                     view = serializer.Deserialize(stream) as MainViewModel;

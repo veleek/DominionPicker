@@ -1,4 +1,8 @@
-﻿Version 2.0
+﻿Version 2.2
+Added support for Adventures
+Rules PDFs are now downloaded and cached locally
+
+Version 2.0
 Switching to two digit versions so that published version will be the same as actually assembly version in app.
 Push to version 2.0 to resolve issue with app not appearing in app list.
 Added Google Analytics.

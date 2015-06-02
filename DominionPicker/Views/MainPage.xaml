@@ -190,8 +190,8 @@
                                                 <toolkit:MenuItem x:Name="DeleteButton" Header="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" Tag="delete" Click="DeleteButton_Click" />
                                             </toolkit:ContextMenu>
                                         </toolkit:ContextMenuService.ContextMenu>
-                                        <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                                        <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}" TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
