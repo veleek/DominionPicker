@@ -79,11 +79,9 @@ namespace Ben.Dominion.Controls
             });
         }
 
-        public CardSetViewModel Set { get; set; }
+        public CardSet Set { get; set; }
 
         public string RulesUri { get; }
-
-        public string Header => this.Set.DisplayName + " Rules";
 
         public string Status
         {

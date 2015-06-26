@@ -27,7 +27,7 @@ namespace Ben.Dominion
 			        return "Everything";
 		        }
 
-		        var setNames = list.Cast<CardSetViewModel>().Select(s => s.DisplayName);
+		        var setNames = list.Cast<CardSet>().Select(s => s.Localize().Substring(0,3));
 		        return string.Join(", ", setNames);
 	        };
 

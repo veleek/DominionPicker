@@ -60,12 +60,18 @@
 										IsEnabled="false">
 						<toolkit:ListPicker.FullModeItemTemplate>
 							<DataTemplate>
-								<TextBlock Text="{Binding DisplayName}" 
+								<TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" 
 										   VerticalAlignment="Center" 
 										   Style="{StaticResource PhoneTextLargeStyle}"/>
 							</DataTemplate>
 						</toolkit:ListPicker.FullModeItemTemplate>
-						
+                        <toolkit:ListPicker.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" 
+										   VerticalAlignment="Center" 
+										   Style="{StaticResource PhoneTextLargeStyle}"/>
+                            </DataTemplate>
+                        </toolkit:ListPicker.ItemTemplate>
 					</toolkit:ListPicker>
                     
                     <TextBlock Text="{Binding Strings.Config_OwnedSetsDescription, Source={StaticResource LocalizedResources}}"

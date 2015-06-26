@@ -11,7 +11,7 @@ namespace Ben.Dominion
 		private ListOption<int> minimumCardsPerSet = new ListOption<int> {Enabled = true, OptionValue = 5};
 
 		private List<SetOption> sets =
-			ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption {Set = s.Set, Enabled = s.Set != CardSet.Promo}).ToList();
+			ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption {Set = s, Enabled = s != CardSet.Promo}).ToList();
 
 		private CardList filteredCards = new CardList();
 

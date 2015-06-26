@@ -22,7 +22,7 @@ namespace Ben.Dominion
             {
                 PickerSettings settings = new PickerSettings();
 
-                settings.Sets = ConfigurationModel.Instance.OwnedSets.Select(s => new SetSelector(s.Set)).ToList();
+                settings.Sets = ConfigurationModel.Instance.OwnedSets.Select(s => new SetSelector(s)).ToList();
                 // Easy way to deselect the 'promo' card set
                 settings.Sets.Single(s => s.Set == CardSet.Promo).IsSelected = false;
 

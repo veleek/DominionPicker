@@ -19,14 +19,17 @@
         </Grid.ColumnDefinitions>
 
         <Border Background="{StaticResource PhoneForegroundBrush}"
-                OpacityMask="{Binding Set.Set, Converter={StaticResource ImageConverter}, ConverterParameter='../Images/SetIcons'}"
+                OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='../Images/SetIcons'}"
                 Width="60" 
                 Height="70"
                 Margin="0,6"
                 VerticalAlignment="Top"
                 Grid.RowSpan="2"/>
         <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding Header}" Style="{StaticResource PhoneTextLargeStyle}"/>
+            <TextBlock Style="{StaticResource PhoneTextLargeStyle}">
+                <Run Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" />
+                <Run Text=" Rules" />
+            </TextBlock>
             <ProgressBar x:Name="DownloadProgress" 
                          Visibility="{Binding Downloading, Converter={StaticResource BooleanToVisibilityConverter}}" 
                          Value="{Binding Progress}"

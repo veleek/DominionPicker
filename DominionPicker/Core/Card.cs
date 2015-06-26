@@ -10,22 +10,6 @@ using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
-    public enum CardSet
-    {
-        None,
-        Base,
-        Intrigue,
-        Seaside,
-        Alchemy,
-        Prosperity,
-        Cornucopia,
-        Hinterlands,
-        DarkAges,
-        Guilds,
-        Adventures,
-        Promo,
-    }
-
     [Flags]
     public enum CardType
     {

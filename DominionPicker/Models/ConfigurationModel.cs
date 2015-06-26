@@ -16,11 +16,9 @@ namespace Ben.Dominion.Models
     {
         public const string ConfigurationModelFilePath = "Configuration.xml";
 
-		private static readonly IEnumerable<CardSetViewModel> allSets = Cards.AllSets.Select(s => (CardSetViewModel)s).ToList();
-
         private static ConfigurationModel instance;
         private CultureInfo overrideCulture = CultureInfo.InvariantCulture;
-	    private List<CardSetViewModel> ownedSets = allSets.ToList();
+	    private List<CardSet> ownedSets = Cards.AllSets.ToList();
 
 	    public static ConfigurationModel Instance
         {
@@ -48,10 +46,10 @@ namespace Ben.Dominion.Models
 	    /// Convenience accessor to allow binding to the set of all cards.
 	    /// </summary>
 	    [XmlIgnore]
-	    public IEnumerable<CardSetViewModel> AllSets => allSets;
+	    public IEnumerable<CardSet> AllSets => Cards.AllSets;
 
 	    [XmlIgnore]
-        public List<CardSetViewModel> OwnedSets
+        public List<CardSet> OwnedSets
         {
             get { return this.ownedSets; }
             set { this.SetProperty(ref this.ownedSets, value); }
@@ -64,7 +62,7 @@ namespace Ben.Dominion.Models
 
             set
             {
-				this.OwnedSets = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => (CardSetViewModel)(CardSet)Enum.Parse(typeof(CardSet), s, true)).ToList();
+				this.OwnedSets = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => (CardSet)Enum.Parse(typeof(CardSet), s, true)).ToList();
             }
         }
 

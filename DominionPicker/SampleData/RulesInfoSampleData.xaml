@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <RulesInfoViewModel xmlns="clr-namespace:Ben.Dominion.Controls" 
-           xmlns:p="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-           xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:p="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:Ben.Dominion"
-           Status="Tap to download"
-           Progress="75"
-           Downloading="false">
-    <RulesInfoViewModel.Set>
-        <local:CardSetViewModel Set="DarkAges"/>
-    </RulesInfoViewModel.Set>
+                    Status="Tap to download"
+                    Progress="75"
+                    Downloading="false"
+                    Set="DarkAges">
 </RulesInfoViewModel>

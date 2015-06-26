@@ -14,14 +14,14 @@ namespace Ben.Dominion
 
         void CardInfo_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = (CardViewModel)(App.Current as App).SelectedCard;
+            this.DataContext = App.Instance.SelectedCard;
         }
 
         private void CardInfo_Flick(object sender, FlickGestureEventArgs e)
         {
             if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
-                int currentIndex = Cards.AllCards.IndexOf((this.DataContext as CardViewModel).Card);
+                int currentIndex = Cards.AllCards.IndexOf(this.DataContext as Card);
                 int nextIndex = e.HorizontalVelocity < 0 ? currentIndex + 1 : currentIndex - 1;
 
                 if (nextIndex < 0 || nextIndex >= Cards.AllCards.Count)
@@ -30,7 +30,7 @@ namespace Ben.Dominion
                 }
 
                 var nextCard = Cards.AllCards[nextIndex];
-                this.DataContext = (CardViewModel)nextCard;
+                this.DataContext = nextCard;
             }
         }
     }

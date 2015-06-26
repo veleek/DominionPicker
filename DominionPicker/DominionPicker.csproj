@@ -130,6 +130,7 @@
       <DependentUpon>RulesInfoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SwipeableBase.cs" />
+    <Compile Include="Core\CardSet.cs" />
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -199,9 +200,6 @@
     <Compile Include="Utilities\IsolatedStorageExtensions.cs" />
     <Compile Include="Utilities\NotifyPropertyChangedBase.cs" />
     <Compile Include="ViewModels\BlackMarketViewModel.cs" />
-    <Compile Include="ViewModels\CardSetViewModel.cs" />
-    <Compile Include="ViewModels\CardTypeViewModel.cs" />
-    <Compile Include="ViewModels\CardViewModel.cs" />
     <Compile Include="ViewModels\Favorites.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
@@ -375,12 +373,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\CardViewModelSampleData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </DesignDataWithDesignTimeCreatableTypes>
     <DesignDataWithDesignTimeCreatableTypes Include="SampleData\GroupedCardSelectorSampleData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
