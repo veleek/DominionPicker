@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,28 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Resources/DominionPickerCards.it.xml</value>
+  <data name="CardSet_Alchemy" xml:space="preserve">
+    <value>L_CardSet_Alchemy</value>
   </data>
-  <data name="Dominion_CoinToken" xml:space="preserve">
-    <value>Segnalino Moneta</value>
+  <data name="CardSet_Base" xml:space="preserve">
+    <value>L_CardSet_Base</value>
   </data>
-  <data name="Dominion_EmargoToken" xml:space="preserve">
-    <value>Segnalino Embargo</value>
+  <data name="CardSet_Cornucopia" xml:space="preserve">
+    <value>L_CardSet_Cornucopia</value>
   </data>
-  <data name="Dominion_IslandMat" xml:space="preserve">
-    <value>Tassello Isola</value>
+  <data name="CardSet_DarkAges" xml:space="preserve">
+    <value>L_CardSet_DarkAges</value>
   </data>
-  <data name="Dominion_Mat" xml:space="preserve">
-    <value>Tassello</value>
+  <data name="CardSet_Guilds" xml:space="preserve">
+    <value>L_CardSet_Guilds</value>
   </data>
-  <data name="Dominion_NativeVillageMat" xml:space="preserve">
-    <value>Tassello Villaggio Indigeno</value>
+  <data name="CardSet_Hinterlands" xml:space="preserve">
+    <value>L_CardSet_Hinterlands</value>
   </data>
-  <data name="Dominion_PirateMat" xml:space="preserve">
-    <value>Tassello Nave Pirata</value>
+  <data name="CardSet_Intrigue" xml:space="preserve">
+    <value>L_CardSet_Intrigue</value>
   </data>
-  <data name="Dominion_Token" xml:space="preserve">
-    <value>Segnalino</value>
+  <data name="CardSet_Promo" xml:space="preserve">
+    <value>L_CardSet_Promo</value>
+  </data>
+  <data name="CardSet_Prosperity" xml:space="preserve">
+    <value>L_CardSet_Prosperity</value>
+  </data>
+  <data name="CardSet_Seaside" xml:space="preserve">
+    <value>L_CardSet_Seaside</value>
+  </data>
+  <data name="CardType_Action" xml:space="preserve">
+    <value>L_CardType_Action</value>
+  </data>
+  <data name="CardType_Attack" xml:space="preserve">
+    <value>L_CardType_Attack</value>
+  </data>
+  <data name="CardType_Curse" xml:space="preserve">
+    <value>L_CardType_Curse</value>
+  </data>
+  <data name="CardType_Duration" xml:space="preserve">
+    <value>L_CardType_Duration</value>
+  </data>
+  <data name="CardType_Knight" xml:space="preserve">
+    <value>L_CardType_Knight</value>
+  </data>
+  <data name="CardType_Looter" xml:space="preserve">
+    <value>L_CardType_Looter</value>
+  </data>
+  <data name="CardType_Prize" xml:space="preserve">
+    <value>L_CardType_Prize</value>
+  </data>
+  <data name="CardType_Reaction" xml:space="preserve">
+    <value>L_CardType_Reaction</value>
+  </data>
+  <data name="CardType_Ruins" xml:space="preserve">
+    <value>L_CardType_Ruins</value>
+  </data>
+  <data name="CardType_Shelter" xml:space="preserve">
+    <value>L_CardType_Shelter</value>
+  </data>
+  <data name="CardType_Treasure" xml:space="preserve">
+    <value>L_CardType_Treasure</value>
+  </data>
+  <data name="CardType_Victory" xml:space="preserve">
+    <value>L_CardType_Victory</value>
   </data>
 </root>

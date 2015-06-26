@@ -34,7 +34,7 @@ namespace Ben.Dominion
         public static Card GetRandomCardExcept(this IEnumerable<Card> pool, IEnumerable<Card> others)
         {
             // Get all the cards in the pool other than the ones in the list randomly ordered
-            var cards = pool.Except(others, new CardIdComparer());
+            var cards = pool.Except(others, CardIdComparer.Default);
 
             return cards.GetRandomCard();
         }

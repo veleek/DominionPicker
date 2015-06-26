@@ -1,6 +1,8 @@
 ﻿Version 2.2
 Added support for Adventures
 Rules PDFs are now downloaded and cached locally
+Added tags on additional cards in output to see why they are selected.
+Bug fixes for various additional cards not getting added (e.g. Curses)
 
 Version 2.0
 Switching to two digit versions so that published version will be the same as actually assembly version in app.

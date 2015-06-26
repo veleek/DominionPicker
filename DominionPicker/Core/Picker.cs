@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Ben.Dominion.ViewModels;
 using Ben.Utilities;
+using Ben.Data;
 
 namespace Ben.Dominion
 {
@@ -74,18 +76,43 @@ namespace Ben.Dominion
 
                         if (settings.MinimumCardsPerSet.Enabled)
                         {
-                            foreach (CardSet set in availableSets)
+                            int breakPoint = minimumCardsPerSet + 1;
+
+                            int actualMaxSets = maxSets;
+                            for (int i = 0; i < actualMaxSets-1; i++)
                             {
-                                // Get the minimum cards reqd. from each set
-                                result.Pool.Where(c => c.InSet(set)).Take(minimumCardsPerSet).Move(result.Pool, cardSet);
+                                result.Pool.Take(breakPoint).Move(result.Pool, cardSet);
+
+                                // Get the number of sets that have more cards than the break point
+                                // For each sets that has more cards than the break, we have to subtract 
+                                // one from the maximum number of allowable sets.
+                                var setsOverBreak = cardSet.GroupBy(c => c.Set).Where(g => g.Count() > minimumCardsPerSet).Select(g => g.Key);
+                                int numSetsOverBreak = setsOverBreak.Count();
+                                actualMaxSets = maxSets - numSetsOverBreak;
+
+                                // We have more 'available sets' than our maximum number of sets, so remove some
+                                while (actualMaxSets < availableSets.Count)
+                                {
+                                    //  Pick a random set that we haven't selected yet.
+                                    var setToRemove = availableSets.Where(s => !setsOverBreak.Contains(s)).OrderBy(s => Guid.NewGuid()).First();
+                                    availableSets.Remove(setToRemove);
+                                }
                             }
+
+                            //foreach (CardSet set in availableSets)
+                            //{
+                            //    // Get the minimum cards reqd. from each set
+                            //    result.Pool.Where(c => c.InSet(set)).Take(minimumCardsPerSet).Move(result.Pool, cardSet);
+                            //}
                         }
 
                         // Then fill up the card set with random cards
                         result.Pool.Take(10 - cardSet.Count).Move(result.Pool, cardSet);
 
+                        CardGroup kingdomCard = new CardGroup(CardGroupType.KingdomCard);
+
                         // Put the cards in the result to get access to all the properties we want
-                        result.Cards = cardSet.ToCardList();
+                        result.Cards = cardSet.Select(c => c.WithGroup(kingdomCard)).ToCardList();
                     }
 
                     // 3. Verify the validity of the set, if it's not valid, generate another
@@ -283,8 +310,7 @@ namespace Ben.Dominion
                 if (bane != null)
                 {
                     result.Pool.Remove(bane);
-                    // Todo: Localize this string
-                    result.AdditionalCards.Add(bane.WithLabel("bane for Young Witch"));
+                    result.Cards.Add(bane.WithGroup(new CardGroup(CardGroupType.BaneRequired, Card.FromName("Young Witch"))));
                 }
                 else
                 {
@@ -303,11 +329,15 @@ namespace Ben.Dominion
                 // If it's a prosperty card then we use Colony and Platinum
                 if (colonyPlatinumCard.Set == CardSet.Prosperity)
                 {
+                    CardGroup prosperityGroup = new CardGroup(CardGroupType.SelectedProsperity);
+                    Card colony = Card.FromName("Colony").WithGroup(prosperityGroup);
+                    Card platinum = Card.FromName("Platinum").WithGroup(prosperityGroup);
+
                     // 70% of the time we just use both
                     if (random.NextDouble() <= 0.7)
                     {
-                        result.AdditionalCards.Add(Card.FromName("Platinum").WithLabel("selected because of Prosperity"));
-                        result.AdditionalCards.Add(Card.FromName("Colony"));
+                        result.Cards.Add(platinum);
+                        result.Cards.Add(colony);
                     }
                     else
                     {
@@ -315,10 +345,10 @@ namespace Ben.Dominion
                         switch (random.Next(2))
                         {
                             case 0:
-                                result.AdditionalCards.Add(Card.FromName("Platinum").WithLabel("selected because of Prosperity"));
+                                result.Cards.Add(platinum);
                                 break;
                             case 1:
-                                result.AdditionalCards.Add(Card.FromName("Colony").WithLabel("selected because of Prosperity"));
+                                result.Cards.Add(colony);
                                 break;
                         }
                     }
@@ -331,60 +361,63 @@ namespace Ben.Dominion
 
                 if (shelterEstateCard.InSet(CardSet.DarkAges))
                 {
-                    result.AdditionalCards.Add(Card.FromName("Shelters").WithLabel("selected because of Dark Ages"));
+                    result.Cards.Add(Card.FromName("Shelters").WithGroup(new CardGroup(CardGroupType.SelectedDarkAges)));
                 }
             }
 
 	        var requireLooter = result.CardsOfType(CardType.Looter).ToList();
             if (requireLooter.Any())
             {
-				result.AdditionalCards.Add(Card.FromName("Ruins").WithLabel("required by " + string.Join(",", requireLooter.Select(c => c.DisplayName))));
+				result.Cards.Add(Card.FromName("Ruins").WithGroup(new CardGroup(CardGroupType.OtherRequired, requireLooter)));
             }
 
+            var requireSpoils = result.Cards.Where(c => c.ContainsText("Spoils")).ToList();
             // Is this any better, or should we prefer being explicit.
-            if(result.Cards.Any(c => c.ContainsText("Spoils")))
-            //if (result.HasCard("Bandit Camp") || result.HasCard("Marauder") || result.HasCard("Pillage"))
+            // var requireSpoils = (result.HasCard("Bandit Camp") || result.HasCard("Marauder") || result.HasCard("Pillage"))
+            if (requireSpoils.Any())
             {
-                result.AdditionalCards.Add(Card.FromName("Spoils"));
+                result.Cards.Add(Card.FromName("Spoils").WithGroup(new CardGroup(CardGroupType.OtherRequired, requireSpoils)));
             }
 
             if (result.HasCard("Hermit"))
             {
-                result.AdditionalCards.Add(Card.FromName("Madman").WithLabel("required by Hermit"));
+                result.Cards.Add(Card.FromName("Madman").WithGroup(new CardGroup(CardGroupType.OtherRequired, Card.FromName("Hermit"))));
             }
 
             if (result.HasCard("Urchin"))
             {
-                result.AdditionalCards.Add(Card.FromName("Mercenary").WithLabel("required by Mercenary"));
+                result.Cards.Add(Card.FromName("Mercenary").WithGroup(new CardGroup(CardGroupType.OtherRequired, Card.FromName("Urchin"))));
             }
 
             if (result.HasCard("Page"))
             {
-                result.AdditionalCards.Add(Card.FromName("Treasure Hunter").WithLabel("required by Page"));
-                result.AdditionalCards.Add(Card.FromName("Warrior"));
-                result.AdditionalCards.Add(Card.FromName("Hero"));
-                result.AdditionalCards.Add(Card.FromName("Champion"));
+                var pageGroup = new CardGroup(CardGroupType.OtherRequired, Card.FromName("Page"));
+                result.Cards.Add(Card.FromName("Treasure Hunter").WithGroup(pageGroup));
+                result.Cards.Add(Card.FromName("Warrior").WithGroup(pageGroup));
+                result.Cards.Add(Card.FromName("Hero").WithGroup(pageGroup));
+                result.Cards.Add(Card.FromName("Champion").WithGroup(pageGroup));
             }
 
 	        if (result.HasCard("Peasant"))
 	        {
-		        result.AdditionalCards.Add(Card.FromName("Soldier").WithLabel("required by Peasant"));
-		        result.AdditionalCards.Add(Card.FromName("Fugitive"));
-		        result.AdditionalCards.Add(Card.FromName("Disciple"));
-		        result.AdditionalCards.Add(Card.FromName("Teacher"));
-	        }
+                var peasantGroup = new CardGroup(CardGroupType.OtherRequired, Card.FromName("Peasant"));
+                result.Cards.Add(Card.FromName("Soldier").WithGroup(peasantGroup));
+		        result.Cards.Add(Card.FromName("Fugitive").WithGroup(peasantGroup));
+                result.Cards.Add(Card.FromName("Disciple").WithGroup(peasantGroup));
+                result.Cards.Add(Card.FromName("Teacher").WithGroup(peasantGroup));
+            }
 
-	        if (result.Cards.Any(c => c.HasPotion))
+            var requirePotion = result.Cards.Where(c => c.HasPotion).ToList();
+            if (requirePotion.Any())
             {
-                result.AdditionalCards.Add(Card.FromName("Potion"));
+                result.Cards.Add(Card.FromName("Potion").WithGroup(new CardGroup(CardGroupType.OtherRequired, requirePotion)));
             }
 
             var requireCurse = result.CardsWhere(c => c.ContainsText("Curse")).ToArray();
             if (requireCurse.Any())
             {
-                var curse = Card.FromName("Curse").Clone();
-                curse.Label = string.Format("required by {0}", string.Join(", ", requireCurse.Select(c => c.DisplayName)));
-                result.AdditionalCards.Add(curse);
+                var curse = Card.FromName("Curse");
+                result.Cards.Add(curse.WithGroup(new CardGroup(CardGroupType.OtherRequired, requireCurse)));
             }
 
             if (settings.ShowExtras)
@@ -440,6 +473,11 @@ namespace Ben.Dominion
 
                 result.AdditionalStuff = additionalStuff.Distinct().OrderBy(s => s).ToList();
             }
+
+            //result.GroupedResult = new List<CardLabelGrouping>
+            //{
+            //    new CardLabelGrouping(CardLabel.KingdomCard, result.Cards),
+            //};
         }
 
         /// <summary>

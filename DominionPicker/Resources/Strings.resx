@@ -358,4 +358,25 @@ never be picked</value>
   <data name="About_RulesDescription" xml:space="preserve">
     <value>Download PDFs of the full versions of the Dominion Rules for each set.  The files are saved locally for quick access any time later.</value>
   </data>
+  <data name="CardGroupType_KingdomCard" xml:space="preserve">
+    <value>kingdom cards</value>
+  </data>
+  <data name="CardGroupType_OtherRequired" xml:space="preserve">
+    <value>required by {0}</value>
+  </data>
+  <data name="Info_Wiki" xml:space="preserve">
+    <value>strategy wiki</value>
+  </data>
+  <data name="CardGroupType_BaneRequired" xml:space="preserve">
+    <value>bane for {0}</value>
+  </data>
+  <data name="CardGroupType_CurseRequired" xml:space="preserve">
+    <value>SHOULD NOT USE</value>
+  </data>
+  <data name="CardGroupType_SelectedDarkAges" xml:space="preserve">
+    <value>selected because you're using Dark Ages</value>
+  </data>
+  <data name="CardGroupType_SelectedProsperity" xml:space="preserve">
+    <value>selected because you're using Prosperity</value>
+  </data>
 </root>

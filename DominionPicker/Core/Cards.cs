@@ -271,9 +271,9 @@ namespace Ben.Dominion
     /// <summary>
     /// A grouping of card selectors by set
     /// </summary>
-    public class CardGrouping : ObservableGrouping<CardSet, CardSelector>
+    public class CardSetGrouping : ObservableGrouping<CardSet, CardSelector>
     {
-        public CardGrouping(CardSet key, IEnumerable<CardSelector> cards)
+        public CardSetGrouping(CardSet key, IEnumerable<CardSelector> cards)
             : base(key, cards)
         {
         }

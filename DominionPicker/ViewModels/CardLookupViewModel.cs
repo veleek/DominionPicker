@@ -19,8 +19,8 @@ namespace Ben.Dominion.ViewModels
 
         private readonly BackgroundWorker filterWorker;
         private readonly Queue<CardSelector> changedCards = new Queue<CardSelector>();
-        private readonly List<CardGrouping> cardSelectorGroups;
-        private readonly Dictionary<CardSet, CardGrouping> filteredGroupsMap;
+        private readonly List<CardSetGrouping> cardSelectorGroups;
+        private readonly Dictionary<CardSet, CardSetGrouping> filteredGroupsMap;
 
         private string currentFilter;
 
@@ -38,14 +38,14 @@ namespace Ben.Dominion.ViewModels
                 .ToArray();
 
             this.cardSelectorGroups = this.CardSelectors
-                .GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards))
+                .GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards))
                 .OrderBy(g => g.Key)
                 .ToList();
             // Note, this is is a duplicate of the previous because we want to construct an 
             // explicitly separate set of CardGroupings so that we can modify one while using
             // the others as part of our filtering process.
             this.FilteredCardSelectorGroups = this.CardSelectors
-                .GroupBy(c => c.Card.Set, (set, setCards) => new CardGrouping(set, setCards))
+                .GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards))
                 .OrderBy(g => g.Key)
                 .ToList();
             this.filteredGroupsMap = this.FilteredCardSelectorGroups.ToDictionary(g => g.Key);
@@ -56,7 +56,7 @@ namespace Ben.Dominion.ViewModels
 
         public CardSelector[] CardSelectors { get; }
 
-        public List<CardGrouping> FilteredCardSelectorGroups { get; }
+        public List<CardSetGrouping> FilteredCardSelectorGroups { get; }
 
         public CardList FilteredCards
         {

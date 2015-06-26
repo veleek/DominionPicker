@@ -120,52 +120,46 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value>./Resources/DominionPickerCards.fr.xml</value>
   </data>
-  <data name="Set_Alchemy" xml:space="preserve">
+  <data name="CardSet_Alchemy" xml:space="preserve">
     <value>Alchimie</value>
   </data>
-  <data name="Set_Base" xml:space="preserve">
+  <data name="CardSet_Base" xml:space="preserve">
     <value>Jeu de base</value>
   </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
+  <data name="CardSet_Cornucopia" xml:space="preserve">
     <value>Abondance</value>
   </data>
-  <data name="Set_DarkAges" xml:space="preserve">
-    <value>Age des Ténèbres</value>
+  <data name="CardSet_DarkAges" xml:space="preserve">
+    <value>Age des T?n?bres</value>
   </data>
-  <data name="Set_Guilds" xml:space="preserve">
+  <data name="CardSet_Guilds" xml:space="preserve">
     <value>Guildes</value>
   </data>
-  <data name="Set_Hinterlands" xml:space="preserve">
+  <data name="CardSet_Hinterlands" xml:space="preserve">
     <value>L'Arrière-pays</value>
   </data>
-  <data name="Set_Intrigue" xml:space="preserve">
+  <data name="CardSet_Intrigue" xml:space="preserve">
     <value>L'Intrigue</value>
   </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
-  </data>
-  <data name="Set_Prosperity" xml:space="preserve">
+  <data name="CardSet_Prosperity" xml:space="preserve">
     <value>Prospérité</value>
   </data>
-  <data name="Set_Seaside" xml:space="preserve">
+  <data name="CardSet_Seaside" xml:space="preserve">
     <value>Rivages</value>
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
+  <data name="CardType_Attack" xml:space="preserve">
     <value>Attaque</value>
   </data>
-  <data name="Type_Duration" xml:space="preserve">
+  <data name="CardType_Duration" xml:space="preserve">
     <value>Durée</value>
   </data>
-  <data name="Type_Reaction" xml:space="preserve">
+  <data name="CardType_Reaction" xml:space="preserve">
     <value>Réaction</value>
   </data>
-  <data name="Type_Treasure" xml:space="preserve">
+  <data name="CardType_Treasure" xml:space="preserve">
     <value>Trésor</value>
   </data>
-  <data name="Type_Victory" xml:space="preserve">
+  <data name="CardType_Victory" xml:space="preserve">
     <value>Victoire</value>
   </data>
 </root>

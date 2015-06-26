@@ -68,8 +68,57 @@
         <TextBlock Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0" Text="{Binding Strings.Results_Tips, Source={StaticResource LocalizedResources}}" />
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" DataContext="{Binding Result}">
+
             <ScrollViewer>
                 <StackPanel>
+                    <phone:LongListSelector x:Name="GroupedCardsList" 
+                                            LayoutMode="List"
+                                            IsGroupingEnabled="True"
+                                            HideEmptyGroups="True"
+                                            HorizontalAlignment="Stretch"
+                                            HorizontalContentAlignment="Stretch"
+                                            Margin="0,16"
+                                            ItemsSource="{Binding GroupedCards}">
+                        <phone:LongListSelector.GroupHeaderTemplate>
+                            <DataTemplate>
+                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringsLocalizer}}" 
+                                           Style="{StaticResource PhoneTextAccentStyle}" 
+                                           TextAlignment="Left"
+                                           Margin="0,3"/>
+                                </DataTemplate>
+                        </phone:LongListSelector.GroupHeaderTemplate>
+                        <phone:LongListSelector.ItemTemplate>
+                            <DataTemplate>
+                                <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe"/>
+                            </DataTemplate>
+                        </phone:LongListSelector.ItemTemplate>
+                        <phone:LongListSelector.JumpListStyle>
+                            <Style TargetType="phone:LongListSelector">
+                                <Setter Property="ItemTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate>
+                                            <Border Background="{StaticResource PhoneAccentBrush}" 
+                                                    Margin="{StaticResource PhoneTouchTargetOverhang}" 
+                                                    Padding="{StaticResource PhoneTouchTargetOverhang}"
+                                                    HorizontalAlignment="Stretch">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringConverter}}" Style="{StaticResource PhoneTextLargeStyle}" TextAlignment="Left" VerticalAlignment="Bottom" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </phone:LongListSelector.JumpListStyle>
+                    </phone:LongListSelector>
+                    
+                    <Border BorderThickness="5" BorderBrush="PowderBlue" Margin="3" />
+                    
                     <ItemsControl x:Name="CardsList" ItemsSource="{Binding Source={StaticResource ResultViewSource}}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -78,8 +127,8 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
-                               Margin="0,0,0,0" Style="{StaticResource PhoneTextAccentStyle}"
-                               Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
+                            Margin="0,0,0,0" Style="{StaticResource PhoneTextAccentStyle}"
+                            Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>

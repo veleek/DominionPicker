@@ -120,43 +120,34 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value>./Resources/DominionPickerCards.it.xml</value>
   </data>
-  <data name="Set_Alchemy" xml:space="preserve">
+  <data name="CardSet_Alchemy" xml:space="preserve">
     <value>Alchemia</value>
   </data>
-  <data name="Set_Base" xml:space="preserve">
+  <data name="CardSet_Base" xml:space="preserve">
     <value>Set Base</value>
   </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Cornucopia</value>
-  </data>
-  <data name="Set_Intrigue" xml:space="preserve">
+  <data name="CardSet_Intrigue" xml:space="preserve">
     <value>Intrigo</value>
   </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
-  </data>
-  <data name="Set_Prosperity" xml:space="preserve">
+  <data name="CardSet_Prosperity" xml:space="preserve">
     <value>Prosperità</value>
   </data>
-  <data name="Set_Seaside" xml:space="preserve">
-    <value>Seaside</value>
-  </data>
-  <data name="Type_Action" xml:space="preserve">
+  <data name="CardType_Action" xml:space="preserve">
     <value>Azione</value>
   </data>
-  <data name="Type_Attack" xml:space="preserve">
+  <data name="CardType_Attack" xml:space="preserve">
     <value>Attacco</value>
   </data>
-  <data name="Type_Duration" xml:space="preserve">
+  <data name="CardType_Duration" xml:space="preserve">
     <value>Durata</value>
   </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Vittoria</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
+  <data name="CardType_Reaction" xml:space="preserve">
     <value>Reazione</value>
   </data>
-  <data name="Type_Victory" xml:space="preserve">
+  <data name="CardType_Treasure" xml:space="preserve">
     <value>Tesoro</value>
+  </data>
+  <data name="CardType_Victory" xml:space="preserve">
+    <value>Vittoria</value>
   </data>
 </root>

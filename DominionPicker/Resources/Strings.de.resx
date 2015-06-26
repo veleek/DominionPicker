@@ -144,9 +144,6 @@
   <data name="Application_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
-  <data name="Application_Title" xml:space="preserve">
-    <value>Dominion Picker</value>
-  </data>
   <data name="Config_CardData" xml:space="preserve">
     <value>Kartendetails</value>
   </data>
@@ -215,9 +212,6 @@
   <data name="Info_Rules" xml:space="preserve">
     <value>regeln</value>
   </data>
-  <data name="Info_Set" xml:space="preserve">
-    <value>set</value>
-  </data>
   <data name="Info_Tips" xml:space="preserve">
     <value>Für weitere Karten
 einfach wischen</value>
@@ -268,14 +262,14 @@ werden nie ausgewählt</value>
   </data>
   <data name="Menu_About" xml:space="preserve">
     <value>Hilfe/Über</value>
-    <comment>Impressum or "Über" like in About_Help</comment>
+    <comment></comment>
   </data>
   <data name="Menu_BlackMarket" xml:space="preserve">
     <value>Schwarzmarkt Deck</value>
   </data>
   <data name="Menu_CardLookup" xml:space="preserve">
     <value>Liste aller Karten/Filter</value>
-    <comment>my translation means: "list of all cards/filter" , there is no good word for lookup in germany</comment>
+    <comment></comment>
   </data>
   <data name="Results_ExtrasDesc" xml:space="preserve">
     <value>benötigte Zusatzkarten, Spielmarken, usw.</value>
@@ -304,7 +298,7 @@ Drücken for weitere Informationen</value>
   </data>
   <data name="Settings_AddnOptions" xml:space="preserve">
     <value>weitere Optionen</value>
-    <comment>Duplicate of MainPage_AddnOptions</comment>
+    <comment></comment>
   </data>
   <data name="Settings_MinCards" xml:space="preserve">
     <value>Mindestanzahl an Karten pro Set:</value>
@@ -332,35 +326,5 @@ Drücken for weitere Informationen</value>
   </data>
   <data name="Settings_ShowExtras" xml:space="preserve">
     <value>Benötigte Zusatzkarten anzeigen</value>
-  </data>
-  <data name="Set_Alchemy" xml:space="preserve">
-    <value>Alchemisten</value>
-  </data>
-  <data name="Set_Base" xml:space="preserve">
-    <value>Basisspiel</value>
-  </data>
-  <data name="Set_Cornucopia" xml:space="preserve">
-    <value>Reiche Ernte</value>
-  </data>
-  <data name="Set_DarkAges" xml:space="preserve">
-    <value>Dark Ages</value>
-  </data>
-  <data name="Set_Guilds" xml:space="preserve">
-    <value>Die Gilden</value>
-  </data>
-  <data name="Set_Hinterlands" xml:space="preserve">
-    <value>Hinterland</value>
-  </data>
-  <data name="Set_Intrigue" xml:space="preserve">
-    <value>Die Intrige</value>
-  </data>
-  <data name="Set_Promo" xml:space="preserve">
-    <value>Promo</value>
-  </data>
-  <data name="Set_Prosperity" xml:space="preserve">
-    <value>Blütezeit</value>
-  </data>
-  <data name="Set_Seaside" xml:space="preserve">
-    <value>Seaside</value>
   </data>
 </root>

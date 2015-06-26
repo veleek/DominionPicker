@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Media;
 using System.Xml.Serialization;
 using Ben.Dominion.Resources;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
@@ -43,7 +44,7 @@ namespace Ben.Dominion
         Knight = 0x0800,
         Reserve = 0x1000,
         Traveller = 0x2000,
-        Event = 0x3000,
+        Event = 0x4000,
     }
 
     public class Card
@@ -85,6 +86,9 @@ namespace Ben.Dominion
         public string Label { get; set; }
 
         [XmlIgnore]
+        public CardGroup Group { get; set; }
+
+        [XmlIgnore]
         public Boolean HasPotion
         {
             get { return this.Cost.ToLower().Contains('p'); }
@@ -104,6 +108,15 @@ namespace Ben.Dominion
                 }
 
                 return coinCost;
+            }
+        }
+
+        [XmlIgnore]
+        public string StrategyPageUrl
+        {
+            get
+            {
+                return string.Format("http://wiki.dominionstrategy.com/index.php/{0}", this.Name.Replace(" ", "_"));
             }
         }
 
@@ -202,6 +215,18 @@ namespace Ben.Dominion
             return clone;
         }
 
+        public Card WithGroup(CardGroup group)
+        {
+            if(group == null)
+            {
+                throw new ArgumentNullException("group");
+            }
+
+            Card clone = this.Clone();
+            clone.Group = group;
+            return clone;
+        }
+
         public override string ToString()
         {
             return String.Format("{0} - {1} ({2}): {3}", this.Name, this.Type, this.Set, this.Cost);
@@ -266,17 +291,24 @@ namespace Ben.Dominion
             CardType typeToCheck = (CardType) (1);
             while(Enum.IsDefined(typeof(CardType), typeToCheck))
             {
-                if ((type & typeToCheck) != CardType.None)
+                switch (typeToCheck)
                 {
-                    // If it's an action and also a Reserve/Duration/Reaction, 
-                    // then don't add the action color
-                    //if (typeToCheck != CardType.Action || 
-                    //    !(type.HasFlag(CardType.Reaction) && 
-                    //      type.HasFlag(CardType.Duration) &&
-                    //      type.HasFlag(CardType.Reserve)))
-                    {
-                        colors.Add(GetColorForType(typeToCheck));
-                    }
+                    case CardType.Treasure:
+                    case CardType.Victory:
+                    case CardType.Curse:
+                    case CardType.Action:
+                    case CardType.Reaction:
+                    case CardType.Attack:
+                    case CardType.Duration:
+                    case CardType.Ruins:
+                    case CardType.Reserve:
+                    case CardType.Event:
+                    case CardType.Shelter:
+                        if (type.HasFlag(typeToCheck))
+                        {
+                            colors.Add(GetColorForType(typeToCheck));
+                        }
+                        break;
                 }
 
                 typeToCheck = (CardType)((int)typeToCheck << 1);
@@ -339,19 +371,19 @@ namespace Ben.Dominion
         }
     }
 
-    public class CardIdComparer : Comparer<Card>, IEqualityComparer<Card>
+    public class CardIdComparer : EqualityComparer<Card>
     {
-        public bool Equals(Card x, Card y)
+        public override bool Equals(Card x, Card y)
         {
             return x.ID == y.ID;
         }
 
-        public int GetHashCode(Card card)
+        public override int GetHashCode(Card card)
         {
             return card.ID.GetHashCode();
         }
 
-        public override int Compare(Card x, Card y)
+        public int Compare(Card x, Card y)
         {
             if (x == null)
             {

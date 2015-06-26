@@ -13,7 +13,7 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    d:DataContext="{d:DesignData Source=SampleData/CardViewModelSampleData.xaml}"
+    d:DataContext="{d:DesignData Source=../SampleData/CardViewModelSampleData.xaml}"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
 
     <toolkit:TransitionService.NavigationInTransition>
@@ -36,7 +36,7 @@
             </toolkit:NavigationOutTransition.Backward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -45,7 +45,7 @@
 
         <TextBlock Grid.Row="0" HorizontalAlignment="Right" Margin="12,0,12,6" TextAlignment="Right" Style="{StaticResource PhoneTextSubtleStyle}"
                    Text="{Binding Strings.Info_Tips, Source={StaticResource LocalizedResources}}" />
-                   
+
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="{Binding Strings.Info_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
@@ -72,13 +72,22 @@
                         <Border Background="{StaticResource PhoneForegroundBrush}"
                             OpacityMask="{Binding Card.Set, Converter={StaticResource ImageConverter}, ConverterParameter='/Images/SetIcons'}"
                             Width="40" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="1" Text="{Binding SetView.DisplayName}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Card.Set, Converter={StaticResource CardDataLocalizer}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     </Grid>
                     <TextBlock Text="{Binding Strings.Info_Type, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <TextBlock Text="{Binding TypeView.DisplayName}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                    <TextBlock Text="{Binding Card.Type}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     <TextBlock Text="{Binding Strings.Info_Rules, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                     <TextBlock Text="{Binding Card.FormattedRules}" Style="{StaticResource PhoneTextLargeStyle}" 
                                TextWrapping="Wrap" TextAlignment="Center"/>
+
+                    <TextBlock Text="{Binding Strings.Info_Wiki, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <HyperlinkButton Content="Dominion Strategy Wiki Page"
+                                     NavigateUri="{Binding Card.StrategyPageUrl}"
+                                     TargetName="StrategyWikiPage"
+                                     HorizontalContentAlignment="Left" 
+                                     FontSize="{StaticResource PhoneFontSizeLarge}" 
+                                     Foreground="{StaticResource PhoneAccentBrush}" />
+
                 </StackPanel>
             </ScrollViewer>
         </Grid>

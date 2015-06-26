@@ -10,6 +10,8 @@ using Ben.Dominion.Views;
 using Ben.Utilities;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Collections.Generic;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
@@ -22,12 +24,13 @@ namespace Ben.Dominion
             this.InitializeComponent();
 
             this.BackKeyPress += this.ResultsViewer_BackKeyPress;
+
             // This resolves the issue with the "The data necessary to complete 
             // this operation is not yet available." exception.  We ignore the 
             // card list items until after it's completed loading, at which point
             // we enable the hit test again.
             this.CardsList.IsHitTestVisible = false;
-            this.CardsList.Loaded += this.CardsList_Loaded;
+            this.CardsList.Loaded += (sender, args) => { this.CardsList.IsHitTestVisible = true; };
 
             var refreshButton = new ApplicationBarIconButton
             {
@@ -60,11 +63,6 @@ namespace Ben.Dominion
             this.UpdateSorting(MainViewModel.Instance.Result.SortOrder);
 
             base.OnNavigatedTo(e);
-        }
-
-        private void CardsList_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.CardsList.IsHitTestVisible = true;
         }
 
         private void ResultsViewer_BackKeyPress(object sender, CancelEventArgs e)

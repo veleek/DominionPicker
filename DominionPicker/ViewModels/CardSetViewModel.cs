@@ -26,7 +26,7 @@ namespace Ben.Dominion
                 if (this.SetProperty(ref this.set, value))
                 {
                     string setName = this.set.ToString();
-                    this.DisplayName = CardDataStrings.ResourceManager.GetString("Set_" + setName, Strings.Culture) ?? "Resource Problem";
+                    this.DisplayName = CardDataStrings.ResourceManager.GetString("CardSet_" + setName, Strings.Culture) ?? "Resource Problem";
                     this.NotifyPropertyChanged("DisplayName");
                 }
             }

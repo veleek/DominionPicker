@@ -135,22 +135,4 @@
   <data name="Dominion_PirateMat" xml:space="preserve">
     <value>Piratenschip tableau</value>
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Actie</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
-    <value>Aanval</value>
-  </data>
-  <data name="Type_Duration" xml:space="preserve">
-    <value>Duurzaam</value>
-  </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Reactie</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
-    <value>Geld</value>
-  </data>
-  <data name="Type_Victory" xml:space="preserve">
-    <value>Overwinning</value>
-  </data>
 </root>

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-using Ben.Utilities;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Xml.Serialization;
+using Ben.Utilities;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
@@ -29,37 +29,57 @@ namespace Ben.Dominion
         public CardList Pool
         {
             get { return pool; }
-            set { this.SetProperty(ref pool, value, "Pool"); }
+            set { this.SetProperty(ref pool, value); }
         }
 
         public CardList Cards
         {
             get { return cards; }
-            set { this.SetProperty(ref cards, value, "Cards"); }
+            set
+            {
+                if (this.SetProperty(ref cards, value))
+                {
+                    this.OnPropertyChanged("GroupedCards");
+                }
+            }
+        }
+
+        [XmlIgnore]
+        public List<CardGrouping<CardGroup>> GroupedCards
+        {
+            get
+            {
+                return this.cards
+                    .OrderBy(c => c.DisplayName)
+                    .GroupBy(
+                        c => c.Group,
+                        (g, cards) => new CardGrouping<CardGroup>(
+                            g ?? new CardGroup(CardGroupType.CurseRequired),
+                            new CardList(cards)
+                        )
+                    )
+                    .ToList();
+            }
         }
 
         public CardList AdditionalCards
         {
             get { return this.additionalCards; }
-            set { this.SetProperty(ref this.additionalCards, value ?? new CardList(), "AdditionalCards"); }
+            set { this.SetProperty(ref this.additionalCards, value ?? new CardList()); }
         }
 
         public List<String> AdditionalStuff
         {
             get { return additionalStuff; }
-            set { this.SetProperty(ref additionalStuff, value, "AdditionalStuff"); }
+            set { this.SetProperty(ref additionalStuff, value); }
         }
+
+        ////public List<CardLabelGrouping> GroupedResult { get; set; }
 
         public ResultSortOrder SortOrder
         {
             get { return this.sortOrder; }
-            set
-            {
-                if (this.SetProperty(ref this.sortOrder, value, "SortOrder"))
-                {
-                    this.NotifyPropertyChanged("SortProperty");
-                }
-            }
+            set { this.SetProperty(ref this.sortOrder, value); }
         }
 
         public Boolean HasCardType(CardType type)
@@ -69,8 +89,8 @@ namespace Ben.Dominion
 
         public Boolean HasCard(Card card)
         {
-            return this.Cards.Contains(card, CardIdComparer.Default as CardIdComparer) || 
-                this.AdditionalCards.Contains(card, CardIdComparer.Default as CardIdComparer);
+            return this.Cards.Contains(card, CardIdComparer.Default) || 
+                this.AdditionalCards.Contains(card, CardIdComparer.Default);
         }
         public Boolean HasCard(String name)
         {

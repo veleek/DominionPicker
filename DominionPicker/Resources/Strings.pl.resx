@@ -120,19 +120,4 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value>./Resources/DominionPickerCards.pl.xml</value>
   </data>
-  <data name="Type_Action" xml:space="preserve">
-    <value>Akcja</value>
-  </data>
-  <data name="Type_Attack" xml:space="preserve">
-    <value>Atak</value>
-  </data>
-  <data name="Type_Reaction" xml:space="preserve">
-    <value>Reakcja</value>
-  </data>
-  <data name="Type_Treasure" xml:space="preserve">
-    <value>Skarb</value>
-  </data>
-  <data name="Type_Victory" xml:space="preserve">
-    <value>Zwycięstwo</value>
-  </data>
 </root>

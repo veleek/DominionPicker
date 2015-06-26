@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System;
 
 namespace Ben.Data
 {
@@ -62,6 +63,11 @@ namespace Ben.Data
         public ObservableGrouping(TKey key, IEnumerable<TElement> elements)
             : base(elements)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
+
             this.Key = key;
         }
 

@@ -13,6 +13,7 @@ using Microsoft.Phone.BackgroundTransfer;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+using Ben.Data;
 
 namespace Ben.Dominion
 {
@@ -22,7 +23,11 @@ namespace Ben.Dominion
         {
             this.InitializeComponent();
 
-            this.VersionTextBlock.Text = this.GetType().Assembly.ToString().Split('=', ',')[2];
+            string version = this.GetType().Assembly.ToString().Split('=', ',')[2];
+#if DEBUG
+            version += " - DEBUG";
+#endif
+            this.VersionTextBlock.Text = version;
 
             StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Resources/Changes.txt", UriKind.Relative));
             if (sri != null)
@@ -73,10 +78,10 @@ namespace Ben.Dominion
 					    throw new ArgumentOutOfRangeException("set");
 			    }
 
-			    this.Monitor = new DownloadingTransferMonitor(
-				    rulesUrl,
-					string.Format("Dominion{0}Rules.pdf", set),
-					((CardSetViewModel)set).DisplayName);
+                this.Monitor = new DownloadingTransferMonitor(
+                    rulesUrl,
+                    string.Format("Dominion{0}Rules.pdf", set),
+                    Localized.CardData.GetLocalizedValue(set));
 			    this.IconPath = string.Format("../Images/SetIcons/{0}.png", set);
 		    }
 

@@ -160,6 +160,60 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to bane for {0}.
+        /// </summary>
+        public static string CardGroupType_BaneRequired {
+            get {
+                return ResourceManager.GetString("CardGroupType_BaneRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SHOULD NOT USE.
+        /// </summary>
+        public static string CardGroupType_CurseRequired {
+            get {
+                return ResourceManager.GetString("CardGroupType_CurseRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to kingdom cards.
+        /// </summary>
+        public static string CardGroupType_KingdomCard {
+            get {
+                return ResourceManager.GetString("CardGroupType_KingdomCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to required by {0}.
+        /// </summary>
+        public static string CardGroupType_OtherRequired {
+            get {
+                return ResourceManager.GetString("CardGroupType_OtherRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to selected because you&apos;re using Dark Ages.
+        /// </summary>
+        public static string CardGroupType_SelectedDarkAges {
+            get {
+                return ResourceManager.GetString("CardGroupType_SelectedDarkAges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to selected because you&apos;re using Prosperity.
+        /// </summary>
+        public static string CardGroupType_SelectedProsperity {
+            get {
+                return ResourceManager.GetString("CardGroupType_SelectedProsperity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card Details.
         /// </summary>
         public static string Config_CardData {
@@ -464,6 +518,15 @@ namespace Ben.Dominion.Resources {
         public static string Info_Type {
             get {
                 return ResourceManager.GetString("Info_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to strategy wiki.
+        /// </summary>
+        public static string Info_Wiki {
+            get {
+                return ResourceManager.GetString("Info_Wiki", resourceCulture);
             }
         }
         

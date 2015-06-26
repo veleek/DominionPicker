@@ -40,16 +40,6 @@
     
 	<Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
-            <ControlTemplate x:Key="HyperlinkButtonTemplate" TargetType="Button">
-                <TextBlock Text="{TemplateBinding Content}" 
-                           TextWrapping="Wrap"
-                           TextDecorations="Underline"
-                           Margin="-0,0,0,0"
-                           FontSize="{TemplateBinding FontSize}"
-                           Style="{StaticResource PhoneTextNormalStyle}" 
-                           Foreground="{StaticResource PhoneAccentBrush}"/>
-            </ControlTemplate>
-
             <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextLargeStyle}">
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
