@@ -29,8 +29,8 @@ namespace Ben.Dominion
             // this operation is not yet available." exception.  We ignore the 
             // card list items until after it's completed loading, at which point
             // we enable the hit test again.
-            this.CardsList.IsHitTestVisible = false;
-            this.CardsList.Loaded += (sender, args) => { this.CardsList.IsHitTestVisible = true; };
+            this.GroupedCardsList.IsHitTestVisible = false;
+            this.GroupedCardsList.Loaded += (sender, args) => { this.GroupedCardsList.IsHitTestVisible = true; };
 
             var refreshButton = new ApplicationBarIconButton
             {
@@ -147,6 +147,7 @@ namespace Ben.Dominion
 
         private void UpdateSorting(ResultSortOrder sortOrder)
         {
+            /*
             this.ResultsViewSource.SortDescriptions.Clear();
 
             if (sortOrder != ResultSortOrder.Name)
@@ -164,6 +165,7 @@ namespace Ben.Dominion
                     "DisplayName",
                     ListSortDirection.Ascending)
                 );
+            */
 
             // The sort button will display the next sort order option
             String nextSort = sortOrder.Next().ToString();

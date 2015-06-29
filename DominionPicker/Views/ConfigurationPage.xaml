@@ -14,6 +14,40 @@
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
 	d:DataContext="{d:DesignData Source=../SampleData/ConfigurationViewModelSample.xaml}"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
+    <phone:PhoneApplicationPage.Resources>
+        <Style x:Name="EnumOptionStyle" TargetType="toolkit:ListPicker">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" 
+                                   Foreground="{StaticResource PhoneAccentBrush}" 
+                                   FontWeight="Bold"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FullModeItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <StackPanel Margin="{StaticResource PhoneTouchTargetOverhang}">
+                            <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}}" 
+										       Style="{StaticResource PhoneTextLargeStyle}"
+                                               TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}, ConverterParameter=Description}"
+                                               Style="{StaticResource PhoneTextSubtleStyle}"
+                                               TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <ContentControl Content="{Binding Converter={StaticResource StringsLocalizer}}" HorizontalAlignment="Left" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </phone:PhoneApplicationPage.Resources>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -35,8 +69,9 @@
             </toolkit:NavigationOutTransition.Backward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -52,19 +87,26 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_PickerOptions, Source={StaticResource LocalizedResources}}" />
 
-					<toolkit:ListPicker x:Name="OwnedSets"
+                    <toolkit:ListPicker x:Name="OwnedSets"
                                         Header="{Binding Strings.Config_OwnedSets, Source={StaticResource LocalizedResources}}"
                                         ItemsSource="{Binding AllSets}"
                                         SelectionMode="Multiple"
-										SelectedItems="{Binding OwnedSets}"
-										IsEnabled="false">
-						<toolkit:ListPicker.FullModeItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" 
+										SelectedItems="{Binding OwnedSets, Mode=TwoWay}"
+										IsEnabled="true">
+                        <toolkit:ListPicker.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" 
+                                   Foreground="{StaticResource PhoneAccentBrush}" 
+                                   FontWeight="Bold"/>
+                            </DataTemplate>
+                        </toolkit:ListPicker.HeaderTemplate>
+                        <toolkit:ListPicker.FullModeItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" 
 										   VerticalAlignment="Center" 
 										   Style="{StaticResource PhoneTextLargeStyle}"/>
-							</DataTemplate>
-						</toolkit:ListPicker.FullModeItemTemplate>
+                            </DataTemplate>
+                        </toolkit:ListPicker.FullModeItemTemplate>
                         <toolkit:ListPicker.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" 
@@ -72,11 +114,33 @@
 										   Style="{StaticResource PhoneTextLargeStyle}"/>
                             </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
-					</toolkit:ListPicker>
-                    
+                    </toolkit:ListPicker>
+
                     <TextBlock Text="{Binding Strings.Config_OwnedSetsDescription, Source={StaticResource LocalizedResources}}"
                                Style="{StaticResource PhoneTextSubtleStyle}" TextWrapping="Wrap" />
-                    
+
+                    <toolkit:ListPicker x:Name="PlatinumColonyOption"
+                                        Header="{Binding Strings.Config_PlatinumColonyOption, Source={StaticResource LocalizedResources}}"
+                                        ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}}"
+                                        SelectedItem="{Binding PickPlatinumColony, Mode=TwoWay}"
+                                        ExpansionMode="FullScreenOnly"
+                                        Style="{StaticResource EnumOptionStyle}">
+                    </toolkit:ListPicker>
+
+                    <toolkit:ListPicker x:Name="SheltersOption"
+                                        Header="{Binding Strings.Config_SheltersOption, Source={StaticResource LocalizedResources}}"
+                                        ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}}"
+                                        SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}"
+                                        ExpansionMode="FullScreenOnly"
+                                        Style="{StaticResource EnumOptionStyle}">
+                    </toolkit:ListPicker>
+
+                    <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap"  />
+                        </StackPanel>
+                    </CheckBox>
+
                     <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" />
 
                     <toolkit:ListPicker x:Name="CulturesListPicker" ItemsSource="{Binding SupportedCultures}" Header="{Binding Strings.Config_Language, Source={StaticResource LocalizedResources}}"
@@ -89,7 +153,7 @@
                                     </Border>
                                     <TextBlock Text="{Binding NativeName}" VerticalAlignment="Center" />
                                 </StackPanel>
-                            </DataTemplate>                            
+                            </DataTemplate>
                         </toolkit:ListPicker.ItemTemplate>
                         <toolkit:ListPicker.FullModeItemTemplate>
                             <DataTemplate>
@@ -130,5 +194,5 @@
             </ScrollViewer>
         </Grid>
     </Grid>
-    
+
 </phone:PhoneApplicationPage>

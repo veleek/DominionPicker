@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -415,9 +414,6 @@ namespace Ben.Data
     }
 
     /// <summary> 
-    /// Caches the "enum objects" for the lifetime of the application. 
-    /// </summary> 
-    /// <summary> 
     /// Takes an enum object and returns a collection of valid values for that object
     /// </summary> 
     public class EnumValuesConverter : IValueConverter
@@ -430,49 +426,16 @@ namespace Ben.Data
             }
             else
             {
-                Object[] values = EnumValueCache.GetValues(value.GetType());
+                bool excludeDefault;
+                bool.TryParse(parameter as string, out excludeDefault);
 
-                if (parameter != null)
-                {
-                    if ((String) parameter == "True")
-                    {
-                        Object[] newValues = new Object[values.Length - 1];
-                        Array.Copy(values, 1, newValues, 0, newValues.Length);
-                        values = newValues;
-                    }
-                }
-
-                return values;
+                return EnumHelper.GetValues(value.GetType(), excludeDefault);
             }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new InvalidOperationException("Unable to convert enum values collection into an enum value");
-        }
-
-        private static class EnumValueCache
-        {
-            private static readonly IDictionary<Type, object[]> Cache = new Dictionary<Type, object[]>();
-
-            public static object[] GetValues(Type type)
-            {
-                if (!type.IsEnum)
-                {
-                    throw new ArgumentException("Type '" + type.Name + "' is not an enum");
-                }
-
-                object[] values;
-                if (!Cache.TryGetValue(type, out values))
-                {
-                    values = type.GetFields()
-                        .Where(f => f.IsLiteral)
-                        .Select(f => f.GetValue(null))
-                        .ToArray();
-                    Cache[type] = values;
-                }
-                return values;
-            }
         }
     }
 

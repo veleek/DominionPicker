@@ -15,12 +15,12 @@ namespace Ben.Data
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(targetType != typeof(String))
+            if(!targetType.IsAssignableFrom(typeof(String)))
             {
                 throw new ArgumentException(string.Format("Unable to convert to type {0}", targetType));
             }
 
-            return Localizer.GetLocalizedValue(value);
+            return Localizer.GetLocalizedValue(value, parameter as string,  culture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

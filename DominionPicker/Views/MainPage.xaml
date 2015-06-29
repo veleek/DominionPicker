@@ -15,7 +15,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0"
-    DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}">
+    DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}"
+    d:DataContext="{d:DesignData Source=../SampleData/MainViewSampleData.xaml}">
     
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator Text="{Binding Strings.MainPage_Generating, Source={StaticResource LocalizedResources}}"
@@ -58,8 +59,10 @@
             <controls:Pivot.TitleTemplate>
                 <DataTemplate />
             </controls:Pivot.TitleTemplate>
-
-            <controls:PivotItem Header="{Binding Strings.MainPage_Create, Source={StaticResource LocalizedResources}}" Margin="12,0" DataContext="{Binding Settings}">
+            
+            <controls:PivotItem Header="{Binding Strings.MainPage_Create, Source={StaticResource LocalizedResources}}" 
+                                Margin="12,0" 
+                                DataContext="{Binding Settings}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -69,8 +72,8 @@
                     <ScrollViewer Name="SettingsScrollViewer" Margin="0" Grid.Row="0">
                         <StackPanel>
                             <ItemsControl x:Name="SetsItemsControl"
-                                      ItemsSource="{Binding Sets}"
-                                      Margin="0">
+                                          ItemsSource="{Binding Sets}"
+                                          Margin="0">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <toolkit:WrapPanel />
@@ -79,10 +82,12 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <CheckBox Margin="0,-5,-5,-5"
-                                              Width="225"
-                                              IsChecked="{Binding Enabled, Mode=TwoWay}">
+                                                  Width="225"
+                                                  IsChecked="{Binding Enabled, Mode=TwoWay}"
+                                                  IsThreeState="True">
                                             <CheckBox.Content>
-                                                <TextBlock Text="{Binding SetView.DisplayName}" FontSize="24" />
+                                                <TextBlock Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" 
+                                                           FontSize="28" />
                                             </CheckBox.Content>
                                         </CheckBox>
                                     </DataTemplate>
@@ -144,17 +149,6 @@
                                 </CheckBox>
                                 <toolkit:ListPicker ItemsSource="{Binding PlusOptionValues}" SelectedItem="{Binding PlusActions.OptionValue, Mode=TwoWay}" Grid.Column="1" />
                             </Grid>
-
-                            <CheckBox IsChecked="{Binding PickPlatinumColony, Mode=TwoWay}">
-                                <TextBlock Text="{Binding Strings.Settings_PickPlatinumColony, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap"/>
-                            </CheckBox>
-                            
-                            <CheckBox IsChecked="{Binding PickShelterOrEstate, Mode=TwoWay}">
-                                <TextBlock Text="{Binding Strings.Settings_PickShelterOrEstate, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
-                            </CheckBox>
-                            <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}">
-                                <TextBlock Text="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
-                            </CheckBox>
                         </StackPanel>
                     </ScrollViewer>
 

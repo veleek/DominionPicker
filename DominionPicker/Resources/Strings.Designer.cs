@@ -287,6 +287,15 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pick Platinum and Colony.
+        /// </summary>
+        public static string Config_PlatinumColonyOption {
+            get {
+                return ResourceManager.GetString("Config_PlatinumColonyOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rules Text.
         /// </summary>
         public static string Config_RulesText {
@@ -301,6 +310,15 @@ namespace Ben.Dominion.Resources {
         public static string Config_RulesTextDesc {
             get {
                 return ResourceManager.GetString("Config_RulesTextDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pick Shelters or Estates.
+        /// </summary>
+        public static string Config_SheltersOption {
+            get {
+                return ResourceManager.GetString("Config_SheltersOption", resourceCulture);
             }
         }
         
@@ -676,6 +694,60 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Always use them.
+        /// </summary>
+        public static string PlatinumColonyOption_Always {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony..
+        /// </summary>
+        public static string PlatinumColonyOption_Always_Description {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Always_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never use them.
+        /// </summary>
+        public static string PlatinumColonyOption_Never {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never show Platinum and Colony in the list of required cards..
+        /// </summary>
+        public static string PlatinumColonyOption_Never_Description {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Never_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randomly select.
+        /// </summary>
+        public static string PlatinumColonyOption_Randomly {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Randomly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Prosperity, include Platinum/Colony..
+        /// </summary>
+        public static string PlatinumColonyOption_Randomly_Description {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_Randomly_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to additional cards, tokens, etc..
         /// </summary>
         public static string Results_ExtrasDesc {
@@ -835,6 +907,60 @@ namespace Ben.Dominion.Resources {
         public static string Settings_ShowExtras {
             get {
                 return ResourceManager.GetString("Settings_ShowExtras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always use them.
+        /// </summary>
+        public static string SheltersOption_Always {
+            get {
+                return ResourceManager.GetString("SheltersOption_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates..
+        /// </summary>
+        public static string SheltersOption_Always_Description {
+            get {
+                return ResourceManager.GetString("SheltersOption_Always_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never use them.
+        /// </summary>
+        public static string SheltersOption_Never {
+            get {
+                return ResourceManager.GetString("SheltersOption_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never select Shelters instead of Estates when using Dark Ages..
+        /// </summary>
+        public static string SheltersOption_Never_Description {
+            get {
+                return ResourceManager.GetString("SheltersOption_Never_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randomly select.
+        /// </summary>
+        public static string SheltersOption_Randomly {
+            get {
+                return ResourceManager.GetString("SheltersOption_Randomly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Dark Ages, include Platinum/Colony..
+        /// </summary>
+        public static string SheltersOption_Randomly_Description {
+            get {
+                return ResourceManager.GetString("SheltersOption_Randomly_Description", resourceCulture);
             }
         }
     }

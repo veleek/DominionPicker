@@ -16,6 +16,7 @@
         <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
         <data:StringsLocalizeConverter x:Key="StringsLocalizer"/>
         <data:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
+        <data:EnumValuesConverter x:Key="EnumValuesConverter" />
 
         <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
         <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>

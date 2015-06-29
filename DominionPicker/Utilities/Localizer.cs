@@ -19,10 +19,15 @@ namespace Ben.Data
 
         public string GetLocalizedValue(object value, params object[] args)
         {
-            return GetLocalizedValue(value, DefaultCulture, args);
+            return GetLocalizedValue(value, null, DefaultCulture, args);
         }
 
-        public string GetLocalizedValue(object value, CultureInfo culture, params object[] args)
+        public string GetLocalizedValue(object value, string suffix, params object[] args)
+        {
+            return GetLocalizedValue(value, suffix, DefaultCulture, args);
+        }
+
+        public string GetLocalizedValue(object value, string suffix, CultureInfo culture, params object[] args)
         {
             if (value == null)
             {
@@ -31,11 +36,12 @@ namespace Ben.Data
 
             ILocalizable localizableValue = value as ILocalizable;
             string localizedValue;
-            if (!localizedValueMap.TryGetValue(value, out localizedValue))
+
+            object valueKey = Tuple.Create(value, suffix);
+            if (!localizedValueMap.TryGetValue(valueKey, out localizedValue))
             {
                 string valueType = value.GetType().Name;
                 string valueName = value.ToString();
-                string localizedValueKey = string.Format("{0}_{1}", valueType, valueName);
 
                 Enum enumValue = value as Enum;
                 bool isFlags = enumValue != null && enumValue.GetType().GetCustomAttributes<FlagsAttribute>().Any();
@@ -60,10 +66,17 @@ namespace Ben.Data
                 }
                 else
                 {
+                    string localizedValueKey = string.Format("{0}_{1}", valueType, valueName);
+
+                    if(!string.IsNullOrWhiteSpace(suffix))
+                    {
+                        localizedValueKey = localizedValueKey + "_" + suffix;
+                    }
+
                     localizedValue = ResourceManager.GetString(localizedValueKey, culture ?? DefaultCulture ?? CultureInfo.InvariantCulture) ?? "!! Missing Resource for " + localizedValueKey + " !!";
                 }
 
-                localizedValueMap[value] = localizedValue;
+                localizedValueMap[valueKey] = localizedValue;
             }
 
             if (localizableValue != null)

@@ -13,14 +13,7 @@ namespace Ben.Dominion
         public String Name
         {
             get { return this.name; }
-            set
-            {
-                if (value != null)
-                {
-	                this.name = value;
-	                this.NotifyPropertyChanged("Name");
-                }
-            }
+            set { this.SetProperty(ref this.name, value); }
         }
 
         [DataMember]

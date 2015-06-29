@@ -35,7 +35,7 @@ namespace Ben.Dominion
 		[XmlIgnore]
 		public List<CardSet> SelectedSets
 		{
-			get { return this.Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
+			get { return this.Sets.Where(s => s != null && (bool)s.Enabled).Select(s => s.Set).ToList(); }
 			set
 			{
 				foreach (var set in this.sets)
@@ -43,7 +43,7 @@ namespace Ben.Dominion
 					set.Enabled = value.Contains(set.Set);
 				}
 
-				this.NotifyPropertyChanged("Sets");
+				this.OnPropertyChanged("Sets");
 			}
 		}
 
@@ -59,7 +59,7 @@ namespace Ben.Dominion
 					set.Enabled = value.Contains(set.Set.ToString());
 				}
 
-				this.NotifyPropertyChanged("Sets");
+				this.OnPropertyChanged("Sets");
 			}
 		}
 

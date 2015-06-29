@@ -94,11 +94,6 @@ namespace Ben.Dominion
             {
                 // If the user has not accepted the Speech Privacy Policy, then this 
                 // will throw an exception, but we can ignore it.  Just log a note of it.
-                if (appLaunchCount == 1)
-                {
-                    
-                }
-
                 EasyTracker.GetTracker().SendEvent("voice", "disabled", null, 0);
             }
         }

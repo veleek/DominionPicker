@@ -127,7 +127,8 @@ namespace Ben.Dominion
             }
 
             this.Hand.Clear();
-            this.NotifyPropertyChanged("Hand");
+            // TODO: This may be needed, but it's an observable collection so maybe not.
+            //this.OnPropertyChanged("Hand");
         }
 
         public void Pick(Card c)

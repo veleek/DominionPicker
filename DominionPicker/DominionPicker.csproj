@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Controls\SwipeableBase.cs" />
     <Compile Include="Core\CardSet.cs" />
+    <Compile Include="Models\CardSelectionEnums.cs" />
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -138,6 +139,7 @@
     </Compile>
     <Compile Include="Utilities\ApplicationBarHelper.cs" />
     <Compile Include="Utilities\AsyncLazy.cs" />
+    <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\LocalizeConverter.cs" />
     <Compile Include="Utilities\Localizer.cs" />
     <Compile Include="Utilities\MetroGridHelper.cs" />
@@ -274,6 +276,10 @@
     <DesignDataWithDesignTimeCreatableTypes Include="SampleData\ConfigurationViewModelSample.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </DesignDataWithDesignTimeCreatableTypes>
+    <DesignDataWithDesignTimeCreatableTypes Include="SampleData\MainViewSampleData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </DesignDataWithDesignTimeCreatableTypes>
     <Page Include="Views\AboutPage.xaml">
       <Generator>MSBuild:MarkupCompilePass1</Generator>

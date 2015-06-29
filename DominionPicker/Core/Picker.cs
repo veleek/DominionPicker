@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading;
 using Ben.Dominion.ViewModels;
 using Ben.Utilities;
-using Ben.Data;
+using Ben.Dominion.Models;
 
 namespace Ben.Dominion
 {
@@ -321,45 +321,28 @@ namespace Ben.Dominion
             // The rest of these cards are non-pickable cards so they don't need to be moved 
             // from the pool and can just be added directly.
 
-            if (settings.PickPlatinumColony)
+            if (ConfigurationModel.Instance.PickPlatinumColony != PlatinumColonyOption.Never)
             {
                 // Pick a random card from the pool
                 Card colonyPlatinumCard = result.Cards[random.Next(result.Cards.Count)];
 
                 // If it's a prosperty card then we use Colony and Platinum
-                if (colonyPlatinumCard.Set == CardSet.Prosperity)
+                if (ConfigurationModel.Instance.PickPlatinumColony == PlatinumColonyOption.Always || colonyPlatinumCard.InSet(CardSet.Prosperity))
                 {
                     CardGroup prosperityGroup = new CardGroup(CardGroupType.SelectedProsperity);
                     Card colony = Card.FromName("Colony").WithGroup(prosperityGroup);
                     Card platinum = Card.FromName("Platinum").WithGroup(prosperityGroup);
 
-                    // 70% of the time we just use both
-                    if (random.NextDouble() <= 0.7)
-                    {
-                        result.Cards.Add(platinum);
-                        result.Cards.Add(colony);
-                    }
-                    else
-                    {
-                        // Otherwise randomly pick one of them.
-                        switch (random.Next(2))
-                        {
-                            case 0:
-                                result.Cards.Add(platinum);
-                                break;
-                            case 1:
-                                result.Cards.Add(colony);
-                                break;
-                        }
-                    }
+                    result.Cards.Add(platinum);
+                    result.Cards.Add(colony);
                 }
             }
 
-            if (settings.PickShelterOrEstate)
+            if (ConfigurationModel.Instance.PickSheltersOrEstates != SheltersOption.Never)
             {
                 Card shelterEstateCard = result.Cards[random.Next(result.Cards.Count)];
 
-                if (shelterEstateCard.InSet(CardSet.DarkAges))
+                if (ConfigurationModel.Instance.PickSheltersOrEstates == SheltersOption.Always || shelterEstateCard.InSet(CardSet.DarkAges))
                 {
                     result.Cards.Add(Card.FromName("Shelters").WithGroup(new CardGroup(CardGroupType.SelectedDarkAges)));
                 }
@@ -420,7 +403,7 @@ namespace Ben.Dominion
                 result.Cards.Add(curse.WithGroup(new CardGroup(CardGroupType.OtherRequired, requireCurse)));
             }
 
-            if (settings.ShowExtras)
+            if (ConfigurationModel.Instance.ShowExtras)
             {
                 // Now check for additional 'stuff' like mats and tokens
                 List<string> additionalStuff = new List<string>();
@@ -466,18 +449,13 @@ namespace Ben.Dominion
                     additionalStuff.Add("Coin Tokens");
                 }
 
-                if (result.HasCard(c => c.ContainsText("{VP}")))
+                if (result.HasCard(c => !c.IsType(CardType.Victory) && c.ContainsText("{VP}")))
                 {
                     additionalStuff.Add("Victory Point Tokens");
                 }
 
                 result.AdditionalStuff = additionalStuff.Distinct().OrderBy(s => s).ToList();
             }
-
-            //result.GroupedResult = new List<CardLabelGrouping>
-            //{
-            //    new CardLabelGrouping(CardLabel.KingdomCard, result.Cards),
-            //};
         }
 
         /// <summary>

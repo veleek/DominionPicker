@@ -47,13 +47,6 @@
     </toolkit:TransitionService.NavigationOutTransition>
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.Resources>
-            <CollectionViewSource x:Key="ResultViewSource" x:Name="ResultsViewSource" Source="{Binding Result.Cards}">
-                <CollectionViewSource.SortDescriptions>
-                    <componentModel:SortDescription PropertyName="DisplayName" />
-                </CollectionViewSource.SortDescriptions>
-            </CollectionViewSource>
-        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -116,16 +109,8 @@
                             </Style>
                         </phone:LongListSelector.JumpListStyle>
                     </phone:LongListSelector>
-                    
-                    <Border BorderThickness="5" BorderBrush="PowderBlue" Margin="3" />
-                    
-                    <ItemsControl x:Name="CardsList" ItemsSource="{Binding Source={StaticResource ResultViewSource}}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                   
+
                     <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
                             Margin="0,0,0,0" Style="{StaticResource PhoneTextAccentStyle}"
                             Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />

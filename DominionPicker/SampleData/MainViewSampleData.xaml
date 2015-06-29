@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<MainViewModel xmlns="clr-namespace:Ben.Dominion">
+    <MainViewModel.Settings>
+        <SettingsViewModel>
+            <SettingsViewModel.Sets>
+                <SetOption Set="Base" Enabled="True"/>
+                <SetOption Set="Intrigue" Enabled="True"/>
+                <SetOption Set="Seaside" Enabled="True"/>
+                <SetOption Set="Alchemy" Enabled="False"/>
+                <SetOption Set="Prosperity" Enabled="False"/>
+                <SetOption Set="Cornucopia" Enabled="False"/>
+                <SetOption Set="DarkAges" Enabled="False"/>
+                <SetOption Set="Hinterlands" Enabled="False"/>
+            </SettingsViewModel.Sets>
+        </SettingsViewModel>
+    </MainViewModel.Settings>
+</MainViewModel>

@@ -15,6 +15,7 @@ using GoogleAnalytics;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
+using Ben.Dominion.Models;
 
 namespace Ben.Dominion
 {
@@ -202,12 +203,21 @@ namespace Ben.Dominion
             var appLaunchCount = 0;
             IsolatedStorageSettings.ApplicationSettings.TryGetValue("AppLaunchCount", out appLaunchCount);
 
-            if (((App) Application.Current).IsNewVersion && appLaunchCount > 1 && !this.updatePopupShown)
+            // If this is a new app version and we haven't done any one-time upgrade stuff
+            if (App.Instance.IsNewVersion && appLaunchCount > 1 && !this.updatePopupShown)
             {
-                //MessageBox.Show("Support for different languages was added in this release.  I will be adding an option to manually select a language soon!  Sorry if you have an English set of cards but you're seeing your non-english names.",  "Localization Support", MessageBoxButton.OK);
+                // This will pickup any old settings and merge them in with the new settings model
+                PickerState.MergeWithNewState();
+
+                // Move some settings from the picker settings into the config
+                ConfigurationModel.Instance.PickPlatinumColony = MainViewModel.Instance.Settings.PickPlatinumColony ? PlatinumColonyOption.Randomly : PlatinumColonyOption.Never;
+                ConfigurationModel.Instance.PickSheltersOrEstates = MainViewModel.Instance.Settings.PickShelterOrEstate ? SheltersOption.Randomly : SheltersOption.Never;
+                ConfigurationModel.Instance.ShowExtras = MainViewModel.Instance.Settings.ShowExtras;
+
                 this.updatePopupShown = true;
             }
-            else if (appLaunchCount == 10 && !this.reviewRequestShown)
+
+            if (appLaunchCount == 10 && !this.reviewRequestShown)
             {
                 this.RequestReviewPopup.Visibility = Visibility.Visible;
 
@@ -215,9 +225,6 @@ namespace Ben.Dominion
                 // come back here without exiting the app.
                 this.reviewRequestShown = true;
             }
-
-            // This will pickup any old settings and merge them in with the new settings model
-            PickerState.MergeWithNewState();
         }
 
         private void MainPage_Unloaded(object sender, RoutedEventArgs e)

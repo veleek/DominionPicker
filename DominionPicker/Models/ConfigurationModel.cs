@@ -98,8 +98,8 @@ namespace Ben.Dominion.Models
                 }
 
                 this.OverrideCultureName = value != null ? value.Name : null;
-                this.NotifyPropertyChanged("OverrideCulture");
-                this.NotifyPropertyChanged("CurrentCulture");
+                this.OnPropertyChanged();
+                this.OnPropertyChanged("CurrentCulture");
             }
         }
 
@@ -107,16 +107,14 @@ namespace Ben.Dominion.Models
         {
             get
             {
-                return
-                    IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault<string>(
-                        "Application_OverrideCultureName");
+                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault<string>("Application_OverrideCultureName");
             }
 
             set
             {
                 IsolatedStorageSettings.ApplicationSettings["Application_OverrideCultureName"] = value;
                 this.overrideCulture = CultureInfo.InvariantCulture;
-                this.NotifyPropertyChanged("OverrideCultureName");
+                this.OnPropertyChanged();
             }
         }
 
@@ -127,7 +125,7 @@ namespace Ben.Dominion.Models
             set
             {
                 IsolatedStorageSettings.ApplicationSettings["Application_LocalizeUI"] = value;
-                this.NotifyPropertyChanged("LocalizeUI");
+                this.OnPropertyChanged();
             }
         }
 
@@ -141,7 +139,7 @@ namespace Ben.Dominion.Models
             set
             {
                 IsolatedStorageSettings.ApplicationSettings["Application_LocalizeCardData"] = value;
-                this.NotifyPropertyChanged("LocalizeCardData");
+                this.OnPropertyChanged();
             }
         }
 
@@ -155,7 +153,58 @@ namespace Ben.Dominion.Models
             set
             {
                 IsolatedStorageSettings.ApplicationSettings["Application_LocalizeRulesText"] = value;
-                this.NotifyPropertyChanged("LocalizeRulesText");
+                this.OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating how to pick whether to include Platinums and Colonies.
+        /// </summary>
+        public PlatinumColonyOption PickPlatinumColony
+        {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_PickPlatinumColony", PlatinumColonyOption.Randomly);
+            }
+
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings["Application_PickPlatinumColony"] = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating how to pick whether to replace Estates with Shelters in the starting hands.
+        /// </summary>
+        public SheltersOption PickSheltersOrEstates
+        {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_PickSheltersOrEstates", SheltersOption.Randomly);
+            }
+
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings["Application_PickSheltersOrEstates"] = value;
+                this.OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not extra bits and pieces should be shown in the results list.
+        /// </summary>
+        public bool ShowExtras
+        {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_ShowExtras", true);
+            }
+
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings["Application_ShowExtras"] = value;
+                this.OnPropertyChanged();
             }
         }
 
