@@ -35,6 +35,7 @@ namespace Ben.Dominion
             Int32 creationAttempts = 0;
 
             List<CardSet> availableSets = settings.SelectedSets;
+            List<CardSet> pinnedSets = settings.Sets.Where(s => s.Enabled == null).Select(s => s.Set).ToList();
             Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
             Int32 maxSets = (Int32) Math.Floor((double) count / minimumCardsPerSet);
 
@@ -93,10 +94,23 @@ namespace Ben.Dominion
                                 // We have more 'available sets' than our maximum number of sets, so remove some
                                 while (actualMaxSets < availableSets.Count)
                                 {
-                                    //  Pick a random set that we haven't selected yet.
-                                    var setToRemove = availableSets.Where(s => !setsOverBreak.Contains(s)).OrderBy(s => Guid.NewGuid()).First();
+                                    
+                                    var setToRemove = availableSets
+                                        // Out of the sets that we havn't picked a card from
+                                        .Where(s => !setsOverBreak.Contains(s))
+                                        // And preferring the non-pinned sets first (true gets sorted to the end of the list)
+                                        .OrderBy(s => pinnedSets.Contains(s))
+                                        // And then order them randomly
+                                        .OrderBy(s => Guid.NewGuid())
+                                        // And pick one.
+                                        .First();
+
+                                    // Remove it from the list of available sets so we won't use it anymore.
                                     availableSets.Remove(setToRemove);
                                 }
+
+                                // Trim down the pool again to the remaining cards
+                                result.Pool = result.Pool.Where(c => c.InSet(availableSets)).ToCardList();
                             }
 
                             //foreach (CardSet set in availableSets)

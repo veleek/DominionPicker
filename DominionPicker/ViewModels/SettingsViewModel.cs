@@ -35,7 +35,7 @@ namespace Ben.Dominion
 		[XmlIgnore]
 		public List<CardSet> SelectedSets
 		{
-			get { return this.Sets.Where(s => s != null && (bool)s.Enabled).Select(s => s.Set).ToList(); }
+			get { return this.Sets.Where(s => s.Enabled == null || s.Enabled.Value).Select(s => s.Set).ToList(); }
 			set
 			{
 				foreach (var set in this.sets)

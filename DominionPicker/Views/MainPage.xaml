@@ -81,14 +81,9 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox Margin="0,-5,-5,-5"
-                                                  Width="225"
-                                                  IsChecked="{Binding Enabled, Mode=TwoWay}"
-                                                  IsThreeState="True">
-                                            <CheckBox.Content>
-                                                <TextBlock Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" 
-                                                           FontSize="28" />
-                                            </CheckBox.Content>
+                                        <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}"
+                                                  Content="{Binding Set, Converter={StaticResource CardDataLocalizer}}"
+                                                  Style="{StaticResource PinnableCheckBoxStyle}">
                                         </CheckBox>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>

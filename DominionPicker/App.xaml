@@ -182,6 +182,118 @@
             </Setter>
         </Style>
 
+        <!-- The default CheckBox style top aligns the actual checker, I don't want this so define this style to use the
+             proper alignment for the actual check box based on the bound value. -->
+        <Style x:Key="PinnableCheckBoxStyle" BasedOn="{StaticResource PhoneRadioButtonCheckBoxBase}" TargetType="CheckBox">
+            <Setter Property="IsThreeState" Value="True" />
+            <Setter Property="Margin" Value="0,-5,-5,-5" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="Width" Value="225" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid Background="Transparent" HorizontalAlignment="Left">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxPressedBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="CheckBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"/>
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="IndeterminateMark">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid Margin="{StaticResource PhoneTouchTargetLargeOverhang}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="32"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                    <Border x:Name="CheckBackground" 
+                                            BorderBrush="{TemplateBinding BorderBrush}" 
+                                            BorderThickness="{StaticResource PhoneBorderThickness}" 
+                                            Background="{TemplateBinding Background}" 
+                                            HorizontalAlignment="Left" VerticalAlignment="Center"
+                                            Width="32" Height="32" IsHitTestVisible="False" />
+                                    <Path x:Name="IndeterminateMark" 
+                                          
+                                          Data="F1 M 0,0 L -1.44,-5.12 C -2.4,-8.48 -7.52,-10.4 -14.72,-10.56 L -23.2,-23.84 -28.8,-43.2
+		                                        C -24.64,-46.08 -22.4,-49.12 -23.2,-51.68 L -24.64,-56.8 C -26.08,-61.76 -39.04,-62.4 -53.6,-58.4
+		                                         -68.32,-54.24 -79.04,-46.72 -77.6,-41.76 L -76.16,-36.64 C -75.36,-34.08 -71.84,-32.8 -66.88,-32.32
+		                                        L -61.44,-13.12 -61.6,2.72 C -67.68,6.72 -71.04,11.04 -70.08,14.4 L -68.64,19.52 C -66.88,25.44 -52.8,26.56 -36,22.88
+		                                        L -24,45.6 -25.92,20 C -9.6,14.4 1.76,5.92 0,0 z"
+                                          Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" 
+                                          FlowDirection="LeftToRight" 
+                                          HorizontalAlignment="Center" 
+                                          Height="25"
+                                          Margin="1,2,0,0"
+                                          IsHitTestVisible="False" 
+                                          Stretch="Uniform"
+                                          StrokeThickness="3" 
+                                          StrokeLineJoin="Round" 
+                                          Visibility="Collapsed" 
+                                          VerticalAlignment="Center" 
+                                          />
+                                    <Path x:Name="CheckMark" Data="M0,123 L39,93 L124,164 L256,18 L295,49 L124,240 z" Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" FlowDirection="LeftToRight" HorizontalAlignment="Center" Height="21" IsHitTestVisible="False" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Visibility="Collapsed" VerticalAlignment="Center" Width="23"/>
+                                </Grid>
+                                <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="12,0,0,0" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <ControlTemplate x:Key="HyperlinkButtonTemplate" TargetType="Button">
             <TextBlock Text="{TemplateBinding Content}" 
                        TextWrapping="Wrap"

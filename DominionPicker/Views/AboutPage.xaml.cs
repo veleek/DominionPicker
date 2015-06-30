@@ -158,11 +158,8 @@ namespace Ben.Dominion
 
         private void MarketplaceButton_Click(object sender, RoutedEventArgs e)
         {
-            Button b = sender as Button;
-            String tag = b.Tag as String;
-
             MarketplaceDetailTask dt = new MarketplaceDetailTask();
-            dt.ContentIdentifier = tag;
+            dt.ContentIdentifier = sender.GetTag<string>();
             dt.ContentType = MarketplaceContentType.Applications;
 
             dt.Show();

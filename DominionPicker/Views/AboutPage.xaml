@@ -126,8 +126,20 @@
                             </StackPanel>
 
                             <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
-                                This app allows to easily select a randomized set of cards for a game of Dominion.  The available options allow you to filter in or out certain cards as you desire.  All comments and suggestions are appreciated and can be directed to the email address above.
+                                This app allows to easily select a randomized set of cards for a game of Dominion.  All comments and suggestions are appreciated and can be directed to the email address above.
                             </TextBlock>
+
+                            <TextBlock Text="Looking for something completely unrelated?  Why not try out my solitaire game? :)"
+                                       TextWrapping="Wrap"
+                                       Margin="12,6"/>
+                            <HyperlinkButton Content="A+ Solitaire (on the WP7 Marketplace)" 
+                                             Foreground="{StaticResource PhoneAccentBrush}"
+                                             Click="MarketplaceButton_Click"
+                                             Tag="7627a3ef-da59-e011-854c-00237de2db9e"
+                                             HorizontalAlignment="Left"
+                                             Margin="0,0,0,12"/>
+
+                            <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" />
 
                             <StackPanel>
                                 <TextBlock Style="{StaticResource CopyrightStyle}">
@@ -137,16 +149,18 @@
                                 </TextBlock>
                             </StackPanel>
                             
-                            <TextBlock Text="Looking for something completely unrelated?  Why not try out my solitaire game? :)"
-                                       TextWrapping="Wrap"
-                                       Margin="12,6"/>
-                            <Button Template="{StaticResource HyperlinkButtonTemplate}"
-                                    Content="A+ Solitaire (on the WP7 Marketplace)"
-                                    Tag="7627a3ef-da59-e011-854c-00237de2db9e"
-                                    Click="MarketplaceButton_Click"
-                                    FontSize="20"
-                                    Margin="12,6"/>
-
+                            <RichTextBox TextWrapping="Wrap" TextAlignment="Center">
+                                <Paragraph>
+                                    <Run Text="Thumbtack by Aimeê Ferreira from" />
+                                    <InlineUIContainer>
+                                        <HyperlinkButton Content="the Noun Project" Margin="-12,0"
+                                                         TargetName="The Noun Project - Thumbtack"
+                                                         NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=23926"
+                                                         Foreground="{StaticResource PhoneAccentBrush}"/>
+                                    </InlineUIContainer>
+                                </Paragraph>
+                            </RichTextBox>
+                            
 
                             <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
                                 Microsoft Public License (Ms-PL)
