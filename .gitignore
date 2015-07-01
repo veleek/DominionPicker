@@ -10,3 +10,5 @@ packages
 *.suo
 *.sln.ide
 SubmissionInfo
+*.vs
+Data/Cards/DominionPickerCards*.xml
