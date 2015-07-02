@@ -125,7 +125,7 @@
                                         Click="WebsiteButton_Click" FontSize="20"/>
                             </StackPanel>
 
-                            <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
+                            <TextBlock Visibility="Collapsed" Style="{StaticResource AboutContentStyle}" Margin="12">
                                 This app allows to easily select a randomized set of cards for a game of Dominion.  All comments and suggestions are appreciated and can be directed to the email address above.
                             </TextBlock>
 
@@ -139,7 +139,19 @@
                                              HorizontalAlignment="Left"
                                              Margin="0,0,0,12"/>
 
-                            <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" />
+                            <TextBlock Text="Additional Help" Style="{StaticResource AboutHeaderStyle}" />
+                            
+                            <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to:" />
+                           
+                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
+                                            HorizontalAlignment="Left"
+                                            Content="James Lao - for telling me that the way that many of my ideas are stupid."/>
+
+                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
+                                            HorizontalAlignment="Left"
+                                            Content="Stephane Plante - for giving me new ideas to replace the ones James ruined."/>
+                                                        
+                            <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="12,12,0,0"/>
 
                             <StackPanel>
                                 <TextBlock Style="{StaticResource CopyrightStyle}">

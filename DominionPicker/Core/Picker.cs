@@ -34,9 +34,8 @@ namespace Ben.Dominion
             // Reperesents the number of times we've tried to find a set
             Int32 creationAttempts = 0;
 
-            List<CardSet> availableSets = settings.SelectedSets;
-            List<CardSet> pinnedSets = settings.Sets.Where(s => s.Enabled == null).Select(s => s.Set).ToList();
-            Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
+            List<CardSet> availableSets;
+            Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.Enabled ? settings.MinimumCardsPerSet.OptionValue : 1;
             Int32 maxSets = (Int32) Math.Floor((double) count / minimumCardsPerSet);
 
             PickerResult result = new PickerResult();
@@ -57,75 +56,49 @@ namespace Ben.Dominion
 
                     creationAttempts++;
 
-                    // 1. Initialize the card pool   
+                    // 1. Select the sets that are going to be in the result
                     {
-                        if (settings.MinimumCardsPerSet.Enabled)
+                        // Starting with the pinned sets take as many as we can
+                        availableSets = settings.Sets
+                            // If Enabled is null, then we are in the pinned state
+                            .Where(s => s.Enabled == null)
+                            .Select(s => s.Set)
+                            .OrderBy(s => Guid.NewGuid())
+                            .Take(maxSets)
+                            .ToList();
+
+                        // Fill in the remainder with random sets 
+                        for (int i = availableSets.Count; i < maxSets; i++)
                         {
-                            availableSets = availableSets.OrderBy(s => Guid.NewGuid()).Take(maxSets).ToList();
+                            availableSets.Add(settings.SelectedSets[random.Next(settings.SelectedSets.Count)]);
                         }
 
-                        // The minimum set of pre-filtering we should do.
+                        availableSets = availableSets.Distinct().ToList();
+                    }
+
+                    // 2. Initialize the card pool   
+                    {
                         result.Pool = Cards.PickableCards.Where(c => c.InSet(availableSets))
                             .Where(c => !settings.FilteredCards.Ids.Contains(c.ID))
                             .OrderBy(c => Guid.NewGuid())
                             .ToCardList();
                     }
 
-                    // 2. Generate a set of cards
+                    // 3. Generate a set of cards
                     {
                         List<Card> cardSet = new List<Card>();
 
-                        if (settings.MinimumCardsPerSet.Enabled)
+                        // For each of the sets in the result, take the minimum number of cards 
+                        foreach (var set in availableSets)
                         {
-                            int breakPoint = minimumCardsPerSet + 1;
-
-                            int actualMaxSets = maxSets;
-                            for (int i = 0; i < actualMaxSets-1; i++)
-                            {
-                                result.Pool.Take(breakPoint).Move(result.Pool, cardSet);
-
-                                // Get the number of sets that have more cards than the break point
-                                // For each sets that has more cards than the break, we have to subtract 
-                                // one from the maximum number of allowable sets.
-                                var setsOverBreak = cardSet.GroupBy(c => c.Set).Where(g => g.Count() > minimumCardsPerSet).Select(g => g.Key);
-                                int numSetsOverBreak = setsOverBreak.Count();
-                                actualMaxSets = maxSets - numSetsOverBreak;
-
-                                // We have more 'available sets' than our maximum number of sets, so remove some
-                                while (actualMaxSets < availableSets.Count)
-                                {
-                                    
-                                    var setToRemove = availableSets
-                                        // Out of the sets that we havn't picked a card from
-                                        .Where(s => !setsOverBreak.Contains(s))
-                                        // And preferring the non-pinned sets first (true gets sorted to the end of the list)
-                                        .OrderBy(s => pinnedSets.Contains(s))
-                                        // And then order them randomly
-                                        .OrderBy(s => Guid.NewGuid())
-                                        // And pick one.
-                                        .First();
-
-                                    // Remove it from the list of available sets so we won't use it anymore.
-                                    availableSets.Remove(setToRemove);
-                                }
-
-                                // Trim down the pool again to the remaining cards
-                                result.Pool = result.Pool.Where(c => c.InSet(availableSets)).ToCardList();
-                            }
-
-                            //foreach (CardSet set in availableSets)
-                            //{
-                            //    // Get the minimum cards reqd. from each set
-                            //    result.Pool.Where(c => c.InSet(set)).Take(minimumCardsPerSet).Move(result.Pool, cardSet);
-                            //}
+                            result.Pool.Where(c => c.InSet(set)).Take(minimumCardsPerSet).Move(result.Pool, cardSet);
                         }
-
+                        
                         // Then fill up the card set with random cards
                         result.Pool.Take(10 - cardSet.Count).Move(result.Pool, cardSet);
 
-                        CardGroup kingdomCard = new CardGroup(CardGroupType.KingdomCard);
-
                         // Put the cards in the result to get access to all the properties we want
+                        CardGroup kingdomCard = new CardGroup(CardGroupType.KingdomCard);
                         result.Cards = cardSet.Select(c => c.WithGroup(kingdomCard)).ToCardList();
                     }
 
@@ -154,61 +127,6 @@ namespace Ben.Dominion
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
 
             result.SortOrder = sortOrder != ResultSortOrder.None ? sortOrder : ResultSortOrder.Name;
-            return result;
-        }
-
-        /// <summary>
-        /// This is an experimental version of the card list generation in an attempt to 
-        /// be more efficient.  It is currently untested and non-functional
-        /// </summary>
-        /// <param name="settings"></param>
-        /// <returns></returns>
-        public PickerResult GenerateCardListNew(SettingsViewModel settings)
-        {
-            PickerResult result = new PickerResult();
-            Int32 creationAttempts = 0;
-            List<CardSet> availableSets = settings.SelectedSets;
-
-            this.generationCanceled = false;
-
-            // Allows fast fail
-            if (this.generationCanceled)
-            {
-                return null;
-            }
-
-            List<Card> cardSet = new List<Card>();
-
-            // This is the number of cards to generate in the set
-            const int count = 10;
-
-            if (settings.MinimumCardsPerSet.Enabled)
-            {
-                Int32 minimumCardsPerSet = settings.MinimumCardsPerSet.OptionValue;
-                Int32 maxSets = (Int32) Math.Floor((double) count / minimumCardsPerSet);
-                availableSets = availableSets.OrderBy(s => Guid.NewGuid()).Take(maxSets).ToList();
-            }
-
-
-            result.Pool =
-                Cards.AllCards.Where(c => c.InSet(availableSets)) // Then filter to those in the available sets
-                    .OrderBy(c => Guid.NewGuid()) // The order randomly
-                    .ToCardList();
-
-
-            /*
-            while (cardSet.Count < count)
-            {
-                // Pick a card
-                Card c = pool[0];
-            }
-             */
-
-
-            creationAttempts++;
-
-            AppLog.Instance.Log(String.Format("Generated card set"));
-
             return result;
         }
 

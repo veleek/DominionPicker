@@ -70,15 +70,16 @@
                                             HideEmptyGroups="True"
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Stretch"
-                                            Margin="0,16"
+                                            Margin="0"
                                             ItemsSource="{Binding GroupedCards}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>
-                                    <TextBlock Text="{Binding Key, Converter={StaticResource StringsLocalizer}}" 
+                                <TextBlock Text="{Binding Key, Converter={StaticResource StringsLocalizer}}" 
                                            Style="{StaticResource PhoneTextAccentStyle}" 
                                            TextAlignment="Left"
-                                           Margin="0,3"/>
-                                </DataTemplate>
+                                           TextWrapping="Wrap"
+                                           Margin="0,6,0,3"/>
+                            </DataTemplate>
                         </phone:LongListSelector.GroupHeaderTemplate>
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
@@ -109,10 +110,9 @@
                             </Style>
                         </phone:LongListSelector.JumpListStyle>
                     </phone:LongListSelector>
-                   
 
                     <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
-                            Margin="0,0,0,0" Style="{StaticResource PhoneTextAccentStyle}"
+                            Margin="0,6,0,3" Style="{StaticResource PhoneTextAccentStyle}"
                             Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
                     <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}">
                         <ItemsControl.ItemTemplate>

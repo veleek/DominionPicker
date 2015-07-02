@@ -49,15 +49,15 @@ namespace Ben.Dominion
         {
             get
             {
+                // TODO: Figure out the best way to order the cards within their individual 
+                // groups.  Maybe provide some sort of way for the user of this class to just
+                // pass in a SortOrder collection thingy to a CardGrouping that will sort it
                 return this.cards
                     .OrderBy(c => c.DisplayName)
                     .GroupBy(
                         c => c.Group,
-                        (g, cards) => new CardGrouping<CardGroup>(
-                            g ?? new CardGroup(CardGroupType.CurseRequired),
-                            new CardList(cards)
-                        )
-                    )
+                        (g, cards) => new CardGrouping<CardGroup>(g, new CardList(cards)))
+                    .OrderBy(g => g.Key.Type)
                     .ToList();
             }
         }
