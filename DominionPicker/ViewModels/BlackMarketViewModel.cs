@@ -156,7 +156,11 @@ namespace Ben.Dominion
 
         public void Replace(Card c)
         {
-            this.Hand[this.Hand.IndexOf(c)] = this.Deck.Draw();
+            int index = this.Hand.IndexOf(c);
+            if (index >= 0 && index < this.Hand.Count)
+            {
+                this.Hand[this.Hand.IndexOf(c)] = this.Deck.Draw();
+            }
         }
     }
 }

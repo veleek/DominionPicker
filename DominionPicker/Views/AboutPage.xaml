@@ -9,6 +9,7 @@
 	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:Ben.Dominion.Controls"
     xmlns:dominion="clr-namespace:Ben.Dominion"
+    xmlns:util="clr-namespace:Ben.Dominion.Utilities"
 	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
 	x:Class="Ben.Dominion.AboutPage"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -49,31 +50,17 @@
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
             </Style>
+            
+            <Style x:Key="AboutLinkStyle" TargetType="HyperlinkButton" >
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
 
             <Style x:Key="CopyrightStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
                 <Setter Property="TextWrapping" Value="Wrap"/>
                 <Setter Property="TextAlignment" Value="Center"/>
             </Style>
-
-            <DataTemplate x:Key="BulletedItem">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Ellipse Width="10" Height="10"
-                             Fill="{StaticResource PhoneForegroundBrush}"
-                             Margin="12,10,-4,0"
-                             VerticalAlignment="Top"
-                             Opacity=".8"/>
-                    <TextBlock Grid.Column="1"
-                               VerticalAlignment="Top"
-                               Style="{StaticResource PhoneTextNormalStyle}"
-                               TextWrapping="Wrap"
-                               Opacity="0.8"
-                               Text="{Binding}"/>
-                </Grid>
-            </DataTemplate>
         </Grid.Resources>
         
 		<Grid.RowDefinitions>
@@ -82,6 +69,12 @@
 		</Grid.RowDefinitions>
 
         <controls:Pivot x:Name="RootPivot" Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Grid.Row="0">
+            <controls:Pivot.TitleTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </controls:Pivot.TitleTemplate>
+            
             <controls:PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
                 <Grid x:Name="ContentPanel" Grid.Row="1" >
                     <Grid.RowDefinitions>
@@ -97,11 +90,11 @@
                                        Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" />
                             <TextBlock Style="{StaticResource AboutHeaderStyle}"
                                        Text="by Ben Randall" />
-                            <Button Template="{StaticResource HyperlinkButtonTemplate}"
-                                    Content="http://www.benrandall.ca"
-                                    Tag="http://www.veleek.com/DominionPicker"
-                                    Click="WebsiteButton_Click" 
-                                    Margin="12,0,0,0" FontSize="20"/>
+                            <HyperlinkButton Content="http://www.benrandall.ca" 
+                                             TargetName="Website"
+                                             NavigateUri="http://www.benrandall.ca"
+                                             Style="{StaticResource AboutLinkStyle}" />
+
                             <Rectangle Height="12" />
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
@@ -113,19 +106,22 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Feedback:"/>
-                                <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="randall.ben@gmail.com" 
-                                        Click="EmailButton_Click" FontSize="20"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Donate:"/>
-                                <Button Template="{StaticResource HyperlinkButtonTemplate}" 
-                                        Content="Support the development with Paypal" 
-                                        Tag="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=WPDominionPicker&amp;currency_code=USD"
-                                        Click="WebsiteButton_Click" FontSize="20"/>
+
+                                <HyperlinkButton Content="randall.ben@gmail.com" 
+                                             NavigateUri="mailto:randall.ben@gmail.com?Subject=Dominion+Picker+Feedback"
+                                             TargetName="EmailLink"
+                                             Style="{StaticResource AboutLinkStyle}"/>
                             </StackPanel>
 
-                            <TextBlock Visibility="Collapsed" Style="{StaticResource AboutContentStyle}" Margin="12">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Donate:"/>
+                                <HyperlinkButton Content="Support the development with Paypal" 
+                                                 NavigateUri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=Windows+Phone+Dominion+Picker&amp;currency_code=USD"
+                                                 TargetName="PaypalLink"
+                                                 Style="{StaticResource AboutLinkStyle}"/>
+                            </StackPanel>
+
+                            <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
                                 This app allows to easily select a randomized set of cards for a game of Dominion.  All comments and suggestions are appreciated and can be directed to the email address above.
                             </TextBlock>
 
@@ -133,19 +129,16 @@
                                        TextWrapping="Wrap"
                                        Margin="12,6"/>
                             <HyperlinkButton Content="A+ Solitaire (on the WP7 Marketplace)" 
-                                             Foreground="{StaticResource PhoneAccentBrush}"
                                              Click="MarketplaceButton_Click"
                                              Tag="7627a3ef-da59-e011-854c-00237de2db9e"
-                                             HorizontalAlignment="Left"
-                                             Margin="0,0,0,12"/>
+                                             Style="{StaticResource AboutLinkStyle}"/>
+                            <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
 
-                            <TextBlock Text="Additional Help" Style="{StaticResource AboutHeaderStyle}" />
-                            
-                            <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to:" />
+                            <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
                            
                             <ContentControl ContentTemplate="{StaticResource BulletedItem}"
                                             HorizontalAlignment="Left"
-                                            Content="James Lao - for telling me that the way that many of my ideas are stupid."/>
+                                            Content="James Lao - for telling me that many of my ideas are stupid."/>
 
                             <ContentControl ContentTemplate="{StaticResource BulletedItem}"
                                             HorizontalAlignment="Left"
@@ -208,11 +201,9 @@
                         <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Sets"/>
                         <TextBlock Style="{StaticResource AboutContentStyle}" Text="Filter cards to those from the selected sets"/>
                         <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Minimum card per set"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="Each set in the final list will have at least this many cards."/>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="+Actions/Buys/Cards Policy"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="This defines how cards with +Actions/+Buys/+Cards are filtered.  If require is selected, there will be at least on card of that type in the final list.  If prevent is selected, none of those cards will be in the final list.  The +2 options do the same for cards with +2 only."/>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Filter"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="The filter options remove all of the cards of the given type from the final set.  It's possible for this to filter the list down to fewer than 10 cards though."/>
+                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="Each set in the final list will have at least this many cards.  This does not force a specific number of sets so it will still be possible to get only a single set in the result.  Sets that are pinned are always included in the result."/>
+                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="+Actions/Buys Policy"/>
+                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="This defines how cards with +Actions/+Buys are filtered.  If require is selected, there will be at least on card of that type in the final list.  If prevent is selected, none of those cards will be in the final list.  The +2 options do the same for cards with +2 only."/>
                         <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Favorites"/>
                         <TextBlock Style="{StaticResource AboutContentStyle}" Text="From the create page, you can save the current randomizer settings as a favorite.  From the results page, you can save the card list as a favorite.  You can access these from the favorites pivot where you can also edit/rename/delete them using the context menu (tap and hold)."/>
                     </StackPanel>
@@ -328,7 +319,10 @@
             </controls:PivotItem>
 
             <controls:PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
-                <ScrollViewer x:Name="ChangesScrollViewer" />
+                <controls:PivotItem.Resources>
+                    <util:XamlConverter x:Key="XamlConverter" />
+                </controls:PivotItem.Resources>
+                <ScrollViewer x:Name="ChangesScrollViewer" Content="{Binding Source=./Resources/Changes.txt, Converter={StaticResource XamlConverter}}"/>
             </controls:PivotItem>
         </controls:Pivot>
 

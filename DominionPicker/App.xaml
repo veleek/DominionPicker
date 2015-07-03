@@ -293,16 +293,26 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <ControlTemplate x:Key="HyperlinkButtonTemplate" TargetType="Button">
-            <TextBlock Text="{TemplateBinding Content}" 
-                       TextWrapping="Wrap"
-                       TextDecorations="Underline"
-                       Margin="-0,0,0,0"
-                       FontSize="{TemplateBinding FontSize}"
-                       Style="{StaticResource PhoneTextNormalStyle}" 
-                       Foreground="{StaticResource PhoneAccentBrush}"/>
-        </ControlTemplate>
+
+        <DataTemplate x:Key="BulletedItem">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Ellipse Width="10" Height="10"
+                             Fill="{StaticResource PhoneForegroundBrush}"
+                             Margin="12,10,-4,0"
+                             VerticalAlignment="Top"
+                             Opacity=".8"/>
+                <TextBlock Grid.Column="1"
+                               VerticalAlignment="Top"
+                               Style="{StaticResource PhoneTextNormalStyle}"
+                               TextWrapping="Wrap"
+                               Opacity="0.8"
+                               Text="{Binding}"/>
+            </Grid>
+        </DataTemplate>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

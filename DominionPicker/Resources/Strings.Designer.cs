@@ -703,11 +703,29 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony..
+        ///   Looks up a localized string similar to Always show Platinum and Colony in the list of required cards..
         /// </summary>
         public static string PlatinumColonyOption_Always_Description {
             get {
                 return ResourceManager.GetString("PlatinumColonyOption_Always_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always when using Prosperity.
+        /// </summary>
+        public static string PlatinumColonyOption_AlwaysWithProsperity {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_AlwaysWithProsperity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony..
+        /// </summary>
+        public static string PlatinumColonyOption_AlwaysWithProsperity_Description {
+            get {
+                return ResourceManager.GetString("PlatinumColonyOption_AlwaysWithProsperity_Description", resourceCulture);
             }
         }
         
@@ -920,11 +938,29 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates..
+        ///   Looks up a localized string similar to Always use Shelters instead of Estates in your starting hand..
         /// </summary>
         public static string SheltersOption_Always_Description {
             get {
                 return ResourceManager.GetString("SheltersOption_Always_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always when using Dark Ages.
+        /// </summary>
+        public static string SheltersOption_AlwaysWithDarkAges {
+            get {
+                return ResourceManager.GetString("SheltersOption_AlwaysWithDarkAges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates..
+        /// </summary>
+        public static string SheltersOption_AlwaysWithDarkAges_Description {
+            get {
+                return ResourceManager.GetString("SheltersOption_AlwaysWithDarkAges_Description", resourceCulture);
             }
         }
         

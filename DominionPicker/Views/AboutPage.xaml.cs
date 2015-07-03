@@ -29,11 +29,6 @@ namespace Ben.Dominion
 #endif
             this.VersionTextBlock.Text = version;
 
-            StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Resources/Changes.txt", UriKind.Relative));
-            if (sri != null)
-            {
-                this.ChangesScrollViewer.Content = XamlHelpers.GenerateXamlFromText(sri.Stream, this.LayoutRoot.Resources);
-            }
 
             this.RulesInfo.ItemsSource = new[]
             {

@@ -114,7 +114,7 @@ namespace Ben.Dominion
 
 		public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }
         public Boolean HasReaction { get { return HasCardType(CardType.Reaction); } }
-
+        public Boolean HasReactionOrLighthouse {  get { return this.HasReaction || this.HasCard("Lighthouse"); } }
         public Boolean HasTrash { get { return Cards.Any(c => trashRegex.IsMatch(c.Rules)); } }
         public Boolean HasPlusAction { get { return Cards.Any(c => actionRegex.IsMatch(c.Rules)); } }
         public Boolean HasPlus2Action { get { return Cards.Any(c => twoActionRegex.IsMatch(c.Rules)); } }

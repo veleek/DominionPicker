@@ -123,4 +123,11 @@ namespace Ben.Data
             DefaultCulture = CardDataStrings.Culture,
         };
     }
+    
+    public interface ILocalizable
+    {
+        object[] LocalizedContext { get; }
+
+        string ToString(Localizer localizer);
+    }
 }

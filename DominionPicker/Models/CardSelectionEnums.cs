@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ben.Dominion.Models
+﻿namespace Ben.Dominion.Models
 {
     public enum PlatinumColonyOption
     {
@@ -18,9 +12,13 @@ namespace Ben.Dominion.Models
         /// </summary>
         Randomly,
         /// <summary>
-        /// If you are using any cards from Prosperity, always include Platinum and Colony
+        /// If you are using any cards from Prosperity, always include Platinum and Colony.
         /// </summary>
-        Always,
+        AlwaysWithPropsperity,
+        /// <summary>
+        /// Always show Platinum and Colony in the list of required cards.
+        /// </summary>
+        Always
     }
 
     public enum SheltersOption
@@ -35,8 +33,45 @@ namespace Ben.Dominion.Models
         /// </summary>
         Randomly,
         /// <summary>
-        /// If you are using any cards from Dark Ages, always use Shelters
+        /// If you are using any cards from Dark Ages, always use Shelters.
+        /// </summary>
+        AlwaysWithDarkAges,
+        /// <summary>
+        /// Always use Shelters instead of Estates.
         /// </summary>
         Always,
+    }
+
+    public enum Token
+    {
+        None,
+        Coin,
+        Victory,
+        Embargo,
+        Plus1Card,
+        Plus1Action,
+        Plus1Buy,
+        Plus1Coin,
+        Minus1Card,
+        Minus2Cost,
+        Minus1Coin,
+        Journey,
+        Trashing,
+        Estate,
+    }
+
+    public enum PlayerMat
+    {
+        None,
+        Island,
+        PirateShip,
+        TradeRoute,
+        NativeVillage,
+        Tavern,
+    }
+
+    public enum AdditionalThing
+    {
+        NoBaneAvailable,
     }
 }

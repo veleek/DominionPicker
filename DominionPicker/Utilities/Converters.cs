@@ -424,13 +424,15 @@ namespace Ben.Data
             {
                 return null;
             }
-            else
-            {
-                bool excludeDefault;
-                bool.TryParse(parameter as string, out excludeDefault);
 
-                return EnumHelper.GetValues(value.GetType(), excludeDefault);
-            }
+            bool excludeDefault;
+            bool.TryParse(parameter as string, out excludeDefault);
+
+            // If the provided object is a type, then just use that, otherwise
+            // we'll use the type of the value.
+            Type valueType = value as Type ?? value.GetType();
+
+            return EnumHelper.GetValues(valueType, excludeDefault);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

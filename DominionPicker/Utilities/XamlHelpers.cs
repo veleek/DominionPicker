@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Resources;
 using System.Windows.Shapes;
 
 namespace Ben.Dominion.Utilities
@@ -19,7 +18,7 @@ namespace Ben.Dominion.Utilities
         /// <param name="stream">The stream containing the text content to be converted</param>
         /// <param name="resources">A dictionary containing any custom resources used to generate the output</param>
         /// <returns>A FrameworkElement that can be added to the UI</returns>
-        public static FrameworkElement GenerateXamlFromText(Stream stream, ResourceDictionary resources)
+        public static FrameworkElement GenerateXamlFromText(Stream stream)
         {
             StackPanel container = new StackPanel();
 
@@ -56,7 +55,7 @@ namespace Ben.Dominion.Utilities
                             fe = new ContentPresenter
                             {
                                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                                ContentTemplate = (DataTemplate)resources["BulletedItem"],
+                                ContentTemplate = (DataTemplate)Application.Current.Resources["BulletedItem"],
                                 Content = line,
                             };
                         }
@@ -68,6 +67,27 @@ namespace Ben.Dominion.Utilities
             }
 
             return container;
+        }
+    }
+
+    public class XamlConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            string streamName = value.ToString();
+
+            StreamResourceInfo sri = Application.GetResourceStream(new Uri("./Resources/Changes.txt", UriKind.Relative));
+            if (sri == null)
+            {
+                return null;
+            }
+
+            return XamlHelpers.GenerateXamlFromText(sri.Stream);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new InvalidOperationException("Unable to convert XAML back into a text document");
         }
     }
 }

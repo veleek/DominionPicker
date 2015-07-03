@@ -142,7 +142,7 @@ namespace Ben.Dominion
             // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
 
             // If there are any attacks and no defense, veto this set
-            if (settings.RequireDefense && result.HasAttack && !result.HasReaction)
+            if (settings.RequireDefense && result.HasAttack && !result.HasReactionOrLighthouse)
             {
                 return false;
             }
@@ -246,7 +246,7 @@ namespace Ben.Dominion
                 }
                 else
                 {
-                    result.AdditionalStuff.Add("No cards available for Bane in selected sets");
+                    result.AdditionalStuff.Add("No card available for Bane in selected sets");
                 }
             }
 
@@ -328,7 +328,7 @@ namespace Ben.Dominion
                 result.Cards.Add(Card.FromName("Potion").WithGroup(new CardGroup(CardGroupType.OtherRequired, requirePotion)));
             }
 
-            var requireCurse = result.CardsWhere(c => c.ContainsText("Curse")).ToArray();
+            var requireCurse = result.CardsWhere(c => c.ContainsText("Curse")).ToList();
             if (requireCurse.Any())
             {
                 var curse = Card.FromName("Curse");

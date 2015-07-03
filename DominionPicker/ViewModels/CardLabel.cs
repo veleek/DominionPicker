@@ -1,15 +1,20 @@
 ﻿namespace Ben.Dominion.ViewModels
 {
-    using System;
+    using Data;
+    
     using System.Collections.Generic;
     using System.Linq;
-    using Ben.Data;
 
-    public interface ILocalizable
+    public enum CardGroupType
     {
-        object[] LocalizedContext { get; }
-
-        string ToString(Localizer localizer);
+        None,
+        KingdomCard,
+        BaneRequired,
+        OtherRequired,
+        PeasantUpgrade,
+        PageUpgrade,
+        SelectedProsperity,
+        SelectedDarkAges,
     }
 
     public class CardGroup : ILocalizable
@@ -58,26 +63,6 @@
 
                 return new object[] { string.Join(", ", Cards.Select(c => c.DisplayName)) };
             }
-        }
-    }
-
-    public enum CardGroupType
-    {
-        None,
-        KingdomCard,
-        BaneRequired,
-        OtherRequired,
-        PeasantUpgrade,
-        PageUpgrade,
-        SelectedProsperity,
-        SelectedDarkAges,
-    }
-
-    public class CardLabelGrouping : ObservableGrouping<CardGroupType, Card>
-    {
-        public CardLabelGrouping(CardGroupType key, CardList cards)
-            : base(key, cards)
-        {
         }
     }
 

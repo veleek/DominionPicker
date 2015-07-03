@@ -389,7 +389,7 @@ never be picked</value>
     <value>Always use them</value>
   </data>
   <data name="PlatinumColonyOption_Always_Description" xml:space="preserve">
-    <value>If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony.</value>
+    <value>Always show Platinum and Colony in the list of required cards.</value>
   </data>
   <data name="PlatinumColonyOption_Never" xml:space="preserve">
     <value>Never use them</value>
@@ -407,7 +407,7 @@ never be picked</value>
     <value>Always use them</value>
   </data>
   <data name="SheltersOption_Always_Description" xml:space="preserve">
-    <value>If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates.</value>
+    <value>Always use Shelters instead of Estates in your starting hand.</value>
   </data>
   <data name="SheltersOption_Never" xml:space="preserve">
     <value>Never use them</value>
@@ -420,5 +420,17 @@ never be picked</value>
   </data>
   <data name="SheltersOption_Randomly_Description" xml:space="preserve">
     <value>Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Dark Ages, include Platinum/Colony.</value>
+  </data>
+  <data name="PlatinumColonyOption_AlwaysWithProsperity" xml:space="preserve">
+    <value>Always when using Prosperity</value>
+  </data>
+  <data name="PlatinumColonyOption_AlwaysWithProsperity_Description" xml:space="preserve">
+    <value>If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony.</value>
+  </data>
+  <data name="SheltersOption_AlwaysWithDarkAges" xml:space="preserve">
+    <value>Always when using Dark Ages</value>
+  </data>
+  <data name="SheltersOption_AlwaysWithDarkAges_Description" xml:space="preserve">
+    <value>If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates.</value>
   </data>
 </root>

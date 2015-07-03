@@ -1,4 +1,12 @@
-﻿Version 2.2
+﻿Version 2.3
+Added Dominion Strategy Wiki link to Card Info page for a given card
+Added support for 'pinning' a set so that it is always included in the result.
+Updated Picker Result group so that all the cards in result have a 'reason' which indicates why they were included.  This allows the cards to be better grouped in output.
+Updated localization framework to make it much easier to localize complex stuff like 'reason' headers and removed a bunch of redundant code.
+Moved rules that don't usually change (like Platinum/Colony and Shelters) into the settings page and improved the UI to provide a description of the differences.
+Fixed set generation so that minimum cards per set option does not force a minimum number of sets (i.e. Min Cards Per Set = 5 always forced 2 sets).
+
+Version 2.2
 Added support for Adventures
 Rules PDFs are now downloaded and cached locally
 Added tags on additional cards in output to see why they are selected.
