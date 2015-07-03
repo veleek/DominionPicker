@@ -253,28 +253,45 @@ namespace Ben.Dominion
             // The rest of these cards are non-pickable cards so they don't need to be moved 
             // from the pool and can just be added directly.
 
-            if (ConfigurationModel.Instance.PickPlatinumColony != PlatinumColonyOption.Never)
             {
-                // Pick a random card from the pool
-                Card colonyPlatinumCard = result.Cards[random.Next(result.Cards.Count)];
+                bool usePlatinumColony = false;
+                switch (ConfigurationModel.Instance.PickPlatinumColony)
+                {
+                    case PlatinumColonyOption.Randomly:
+                        usePlatinumColony = result.Cards[random.Next(result.Cards.Count)].InSet(CardSet.Prosperity);
+                        break;
+                    case PlatinumColonyOption.AlwaysWithProsperity:
+                        usePlatinumColony = result.HasCard(c => c.InSet(CardSet.Prosperity));
+                        break;
+                    case PlatinumColonyOption.Always:
+                        usePlatinumColony = true;
+                        break;
+                }
 
-                // If it's a prosperty card then we use Colony and Platinum
-                if (ConfigurationModel.Instance.PickPlatinumColony == PlatinumColonyOption.Always || colonyPlatinumCard.InSet(CardSet.Prosperity))
+                if (usePlatinumColony)
                 {
                     CardGroup prosperityGroup = new CardGroup(CardGroupType.SelectedProsperity);
-                    Card colony = Card.FromName("Colony").WithGroup(prosperityGroup);
-                    Card platinum = Card.FromName("Platinum").WithGroup(prosperityGroup);
-
-                    result.Cards.Add(platinum);
-                    result.Cards.Add(colony);
+                    result.Cards.Add(Card.FromName("Platinum").WithGroup(prosperityGroup));
+                    result.Cards.Add(Card.FromName("Colony").WithGroup(prosperityGroup));
                 }
             }
 
-            if (ConfigurationModel.Instance.PickSheltersOrEstates != SheltersOption.Never)
             {
-                Card shelterEstateCard = result.Cards[random.Next(result.Cards.Count)];
+                bool useShelters = false;
+                switch (ConfigurationModel.Instance.PickSheltersOrEstates)
+                {
+                    case SheltersOption.Randomly:
+                        useShelters = result.Cards[random.Next(result.Cards.Count)].InSet(CardSet.DarkAges);
+                        break;
+                    case SheltersOption.AlwaysWithDarkAges:
+                        useShelters = result.HasCard(c => c.InSet(CardSet.Prosperity));
+                        break;
+                    case SheltersOption.Always:
+                        useShelters = true;
+                        break;
+                }
 
-                if (ConfigurationModel.Instance.PickSheltersOrEstates == SheltersOption.Always || shelterEstateCard.InSet(CardSet.DarkAges))
+                if (useShelters)
                 {
                     result.Cards.Add(Card.FromName("Shelters").WithGroup(new CardGroup(CardGroupType.SelectedDarkAges)));
                 }

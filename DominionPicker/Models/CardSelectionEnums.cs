@@ -14,7 +14,7 @@
         /// <summary>
         /// If you are using any cards from Prosperity, always include Platinum and Colony.
         /// </summary>
-        AlwaysWithPropsperity,
+        AlwaysWithProsperity,
         /// <summary>
         /// Always show Platinum and Colony in the list of required cards.
         /// </summary>

@@ -757,7 +757,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Prosperity, include Platinum/Colony..
+        ///   Looks up a localized string similar to Using the Prosperity rules, randomly select a card from the set of Kingdom cards and if that card is from Prosperity, include Platinum/Colony..
         /// </summary>
         public static string PlatinumColonyOption_Randomly_Description {
             get {
@@ -974,7 +974,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Never select Shelters instead of Estates when using Dark Ages..
+        ///   Looks up a localized string similar to Never use Shelters instead of Estates..
         /// </summary>
         public static string SheltersOption_Never_Description {
             get {
@@ -992,7 +992,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Dark Ages, include Platinum/Colony..
+        ///   Looks up a localized string similar to Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Dark Ages, use Shelters instead of Estates..
         /// </summary>
         public static string SheltersOption_Randomly_Description {
             get {
