@@ -120,6 +120,7 @@ namespace Ben.Dominion
                         "Followers",
                         "Princess",
                         "Trusty Steed",
+                        "Prizes",
 
                         // Dark Ages, non-Supply Cards
                         "Spoils",

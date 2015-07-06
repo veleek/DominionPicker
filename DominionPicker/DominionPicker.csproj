@@ -131,6 +131,7 @@
     </Compile>
     <Compile Include="Controls\SwipeableBase.cs" />
     <Compile Include="Core\CardSet.cs" />
+    <Compile Include="Core\CardType.cs" />
     <Compile Include="Models\CardSelectionEnums.cs" />
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>

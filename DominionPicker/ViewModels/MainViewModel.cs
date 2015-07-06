@@ -27,8 +27,6 @@ namespace Ben.Dominion
             //{
             //    throw new ArgumentException("We should never create more than one instance of this class");
             //}
-
-            Picker = new Picker();
         }
 
         public static MainViewModel Instance
@@ -38,9 +36,6 @@ namespace Ben.Dominion
                 return instance ?? (instance = Load());
             }
         }
-
-        [XmlIgnore]
-        public Picker Picker { get; set; }
 
         public SettingsViewModel Settings
         {
@@ -130,7 +125,7 @@ namespace Ben.Dominion
 
                 // Save the sort order from the current result if there is one.
                 ResultSortOrder sortOrder = this.Result?.SortOrder ?? ResultSortOrder.Name;
-                this.Result = this.Picker.GenerateCardList(this.Settings, sortOrder);
+                this.Result = Picker.GenerateCardList(this.Settings, sortOrder);
             }
             finally
             {

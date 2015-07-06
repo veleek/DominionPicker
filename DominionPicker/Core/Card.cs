@@ -10,27 +10,6 @@ using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
-    [Flags]
-    public enum CardType
-    {
-        None = 0x0000,
-        Treasure = 0x0001,
-        Victory = 0x0002,
-        Curse = 0x0004,
-        Action = 0x0008,
-        Reaction = 0x0010,
-        Attack = 0x0020,
-        Duration = 0x0040,
-        Prize = 0x0080,
-        Ruins = 0x0100,
-        Shelter = 0x0200,
-        Looter = 0x0400,
-        Knight = 0x0800,
-        Reserve = 0x1000,
-        Traveller = 0x2000,
-        Event = 0x4000,
-    }
-
     public class Card
     {
         private string setString;
@@ -288,6 +267,7 @@ namespace Ben.Dominion
                     case CardType.Reserve:
                     case CardType.Event:
                     case CardType.Shelter:
+                    case CardType.Prize:
                         if (type.HasFlag(typeToCheck))
                         {
                             colors.Add(GetColorForType(typeToCheck));
@@ -357,29 +337,34 @@ namespace Ben.Dominion
 
     public class CardIdComparer : EqualityComparer<Card>
     {
+        private static CardIdComparer defaultComparer;
+
+        public new static CardIdComparer Default
+        {
+            get
+            {
+                return defaultComparer ?? (defaultComparer = new CardIdComparer());
+            }
+        }
+
         public override bool Equals(Card x, Card y)
         {
+            if (x == null && y == null)
+            {
+                return true;
+            }
+
+            if (x == null ^ y == null)
+            {
+                return false;
+            }
+
             return x.ID == y.ID;
         }
 
         public override int GetHashCode(Card card)
         {
             return card.ID.GetHashCode();
-        }
-
-        public int Compare(Card x, Card y)
-        {
-            if (x == null)
-            {
-                throw new ArgumentNullException("x");
-            }
-
-            if (y == null)
-            {
-                throw new ArgumentNullException("y");
-            }
-
-            return x.ID.CompareTo(y.ID);
         }
     }
 }

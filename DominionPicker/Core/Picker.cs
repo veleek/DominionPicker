@@ -5,6 +5,7 @@ using System.Threading;
 using Ben.Dominion.ViewModels;
 using Ben.Utilities;
 using Ben.Dominion.Models;
+using GoogleAnalytics;
 
 namespace Ben.Dominion
 {
@@ -15,19 +16,10 @@ namespace Ben.Dominion
     {
         private static readonly Random random = new Random();
 
-        private Boolean isGenerating;
-        private Boolean generationCanceled;
+        private static bool isGenerating;
+        private static bool generationCanceled;
 
-        public Picker()
-        {
-        }
-
-        public PickerResult GenerateCardList(SettingsViewModel settings)
-        {
-            return this.GenerateCardList(settings, ResultSortOrder.Name);
-        }
-
-        public PickerResult GenerateCardList(SettingsViewModel settings, ResultSortOrder sortOrder)
+        public static PickerResult GenerateCardList(SettingsViewModel settings, ResultSortOrder sortOrder)
         {
             // This is the number of cards to generate in the set
             const Int32 count = 10;
@@ -40,16 +32,16 @@ namespace Ben.Dominion
 
             PickerResult result = new PickerResult();
 
-            this.generationCanceled = false;
+            generationCanceled = false;
 
             try
             {
-                this.isGenerating = true;
+                isGenerating = true;
 
                 do
                 {
                     // Allows fast fail
-                    if (this.generationCanceled)
+                    if (generationCanceled)
                     {
                         return null;
                     }
@@ -107,24 +99,25 @@ namespace Ben.Dominion
                     // so don't look at any of the options just use this set
                     if (result.Cards.Count >= 10)
                     {
-                        if (!this.CheckResultValidity(settings, result))
+                        if (!CheckResultValidity(settings, result))
                         {
                             continue;
                         }
                     }
 
                     // 4. Add any additional cards/tokens/etc. that we might need
-                    this.AddAdditionalCards(settings, result);
+                    AddAdditionalCards(settings, result);
 
                     break;
                 } while (true);
             }
             finally
             {
-                this.isGenerating = false;
+                isGenerating = false;
             }
 
             AppLog.Instance.Log(String.Format("Completed in {0} tries.", creationAttempts));
+            EasyTracker.GetTracker().SendEvent("Picker", "Generate Set", "Complete", creationAttempts);
 
             result.SortOrder = sortOrder != ResultSortOrder.None ? sortOrder : ResultSortOrder.Name;
             return result;
@@ -137,7 +130,7 @@ namespace Ben.Dominion
         /// <param name="settings">The settings used to determine if the result is valid</param>
         /// <param name="result">The result to check for validity</param>
         /// <returns>True if the cardset is valid based on the settings</returns>
-        public bool CheckResultValidity(SettingsViewModel settings, PickerResult result)
+        public static bool CheckResultValidity(SettingsViewModel settings, PickerResult result)
         {
             // Do other specific things, i.e. check if we need provinces and/or curses, or pick a bane card
 
@@ -227,9 +220,9 @@ namespace Ben.Dominion
         /// </summary>
         /// <param name="settings">The settings which define what additional cards to add</param>
         /// <param name="result">The result to add the additional cards to</param>
-        public void AddAdditionalCards(SettingsViewModel settings, PickerResult result)
+        public static void AddAdditionalCards(SettingsViewModel settings, PickerResult result)
         {
-            result.AdditionalCards = new CardList();
+            result.AdditionalStuff = new List<string>();
 
             if (result.HasCard("Young Witch"))
             {
@@ -297,6 +290,11 @@ namespace Ben.Dominion
                 }
             }
 
+            if(result.HasCard("Tournament"))
+            {
+                result.Cards.Add(Card.FromName("Prizes").WithGroup(new CardGroup(CardGroupType.OtherRequired, Card.FromName("Tournament"))));
+            }
+
 	        var requireLooter = result.CardsOfType(CardType.Looter).ToList();
             if (requireLooter.Any())
             {
@@ -354,37 +352,34 @@ namespace Ben.Dominion
 
             if (ConfigurationModel.Instance.ShowExtras)
             {
-                // Now check for additional 'stuff' like mats and tokens
-                List<string> additionalStuff = new List<string>();
-
                 if (result.HasCard("Native Village"))
                 {
-                    additionalStuff.Add("Native Village Mat");
+                    result.AdditionalStuff.Add("Native Village Mat");
                 }
 
                 if (result.HasCard("Island"))
                 {
-                    additionalStuff.Add("Island Mat");
+                    result.AdditionalStuff.Add("Island Mat");
                 }
 
                 if (result.HasCard("Pirate Ship"))
                 {
-                    additionalStuff.Add("Pirate Ship Mat");
+                    result.AdditionalStuff.Add("Pirate Ship Mat");
                 }
                 
                 if (result.HasCard("Trade Route"))
                 {
-                    additionalStuff.Add("Trade Route Mat");
+                    result.AdditionalStuff.Add("Trade Route Mat");
                 }
 
                 if (result.HasCardType(CardType.Reserve))
                 {
-                    additionalStuff.Add("Tavern Mat");
+                    result.AdditionalStuff.Add("Tavern Mat");
                 }
 
                 if (result.HasCard("Embargo"))
                 {
-                    additionalStuff.Add("Embargo Tokens");
+                    result.AdditionalStuff.Add("Embargo Tokens");
                 }
 
                 if (result.HasCard("Baker") ||
@@ -395,26 +390,26 @@ namespace Ben.Dominion
                     result.HasCard("Plaza") ||
                     result.HasCard("Trade Route"))
                 {
-                    additionalStuff.Add("Coin Tokens");
+                    result.AdditionalStuff.Add("Coin Tokens");
                 }
 
-                if (result.HasCard(c => !c.IsType(CardType.Victory) && c.ContainsText("{VP}")))
+                if (result.HasCard(c => !c.IsType(CardType.Victory | CardType.Curse) && c.ContainsText("{VP}")))
                 {
-                    additionalStuff.Add("Victory Point Tokens");
+                    result.AdditionalStuff.Add("Victory Point Tokens");
                 }
 
-                result.AdditionalStuff = additionalStuff.Distinct().OrderBy(s => s).ToList();
+                result.AdditionalStuff = result.AdditionalStuff.Distinct().OrderBy(s => s).ToList();
             }
         }
 
         /// <summary>
         /// Cancel the current generation loop
         /// </summary>
-        public void CancelGeneration()
+        public static void CancelGeneration()
         {
-            this.generationCanceled = true;
+            generationCanceled = true;
 
-            while (this.isGenerating)
+            while (isGenerating)
             {
                 Thread.Sleep(100);
             }

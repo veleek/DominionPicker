@@ -25,12 +25,10 @@ namespace DominionPickerTests
                 
             };
 
-            Picker picker = new Picker();
-
             Dictionary<int, int> counts = new Dictionary<int, int>();
             for (int i = 0; i < 1000; i++)
             {
-                var list = picker.GenerateCardList(settings);
+                var list = Picker.GenerateCardList(settings, ResultSortOrder.Name);
                 int setCount = list.Cards.GroupBy(c => c.Set).Count();
 
                 int timesOccurred = 0;
@@ -45,6 +43,25 @@ namespace DominionPickerTests
             }
 
             Assert.Fail("So I can see output");
+        }
+
+        [TestMethod]
+        public void PlazaRequiresCoinTokens()
+        {
+            var result = new PickerResult
+            {
+                Cards = new CardList
+                (
+                    new List<Card>
+                    {
+                        Card.FromName("Plaza"),
+                    }
+                )
+            };
+
+            Picker.AddAdditionalCards(new SettingsViewModel(), result);
+
+            Assert.IsTrue(result.AdditionalStuff.Contains("Coin tokens"), "Plaza requires Coin Tokens");
         }
     }
 }

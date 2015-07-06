@@ -315,4 +315,6 @@
   <Card ID="300" Name="Treasure Trove" Set="Adventures" Type="Treasure" Cost="5" Rules="$2\nWhen you play this, gain a Gold and a Copper." />
   <Card ID="301" Name="Warrior" Set="Adventures" Type="Action Attack Traveller" Cost="4" Rules="+2 Cards\nFor each Traveller you have in play (including this) each other player discards the top card of his deck and trashes it if it costs $3 or $4.\n_____\nWhen you discard this from play, you may exchange it for a Hero.\n(This is not in the Supply)" />
   <Card ID="302" Name="Wine Merchant" Set="Adventures" Type="Action Reserve" Cost="5" Rules="+1 Buy\n+$4\nPut this on your Tavern mat.\n_____\nAt the end of your Buy phase, if you have at least $2 unspent, you may discard this from your Tavern mat." />
+  <!-- Cornucopia -->
+  <Card ID="303" Name="Prizes" Set="Cornucopia" Type="Action Prize" Cost="*" Rules="Prizes are a set of five differently-named unique cards that are not part of the supply, but can be gained by playing Tournament.  They include Bag of Gold, Diadem, Followers, Princess, and Trusty Steed." />
 </ArrayOfCard>
