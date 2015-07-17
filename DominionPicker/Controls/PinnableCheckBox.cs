@@ -88,9 +88,8 @@ namespace Ben.Controls
 
         public override void OnApplyTemplate()
         {
+            this.ChangeVisualState(false);
             base.OnApplyTemplate();
-
-            var pinMark = this.GetTemplateChild("PinMark");
         }
     }
 }
