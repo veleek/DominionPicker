@@ -6,13 +6,13 @@
                 <SetOption Set="Base" Enabled="True"/>
                 <SetOption Set="Intrigue" Enabled="True"/>
                 <SetOption Set="Seaside" Enabled="True"/>
-                <SetOption Set="Alchemy" Enabled="False"/>
-                <SetOption Set="Prosperity"/>
+                <SetOption Set="Alchemy" Enabled="False" Required="True"/>
+                <SetOption Set="Prosperity" Enabled="True" Required="True"/>
                 <SetOption Set="Cornucopia" Enabled="False"/>
                 <SetOption Set="Hinterlands" Enabled="False"/>
                 <SetOption Set="DarkAges" Enabled="False"/>
                 <SetOption Set="Guilds" Enabled="False"/>
-                <SetOption Set="Adventures" />
+                <SetOption Set="Adventures" Enabled="True" Required="True" />
                 <SetOption Set="Promo" Enabled="False"/>
             </SettingsViewModel.Sets>
         </SettingsViewModel>

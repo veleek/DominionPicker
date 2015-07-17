@@ -35,7 +35,7 @@ namespace Ben.Dominion
 		[XmlIgnore]
 		public List<CardSet> SelectedSets
 		{
-			get { return this.Sets.Where(s => s.Enabled == null || s.Enabled.Value).Select(s => s.Set).ToList(); }
+			get { return this.Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
 			set
 			{
 				foreach (var set in this.sets)
@@ -62,6 +62,38 @@ namespace Ben.Dominion
 				this.OnPropertyChanged("Sets");
 			}
 		}
+
+        [XmlIgnore]
+        public List<CardSet> PinnedSets
+        {
+            get { return this.Sets.Where(s => s.Required).Select(s => s.Set).ToList(); }
+            set
+            {
+                foreach (var set in this.sets)
+                {
+                    set.Required = value.Contains(set.Set);
+                }
+
+                this.OnPropertyChanged("Sets");
+            }
+        }
+
+
+        [XmlElement("PinnedSets")]
+        public string PinnedSetNames
+        {
+            get { return string.Join(",", this.PinnedSets.Select(s => s.ToString())); }
+
+            set
+            {
+                foreach (var set in this.sets)
+                {
+                    set.Required = value.Contains(set.Set.ToString());
+                }
+
+                this.OnPropertyChanged("Sets");
+            }
+        }
 
 		public CardList FilteredCards
 		{

@@ -9,6 +9,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:localControls="clr-namespace:Ben.Controls"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -81,10 +82,16 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}"
-                                                  Content="{Binding Set, Converter={StaticResource CardDataLocalizer}}"
-                                                  Style="{StaticResource PinnableCheckBoxStyle}">
-                                        </CheckBox>
+                                        <StackPanel>
+                                            <localControls:PinnableCheckBox 
+                                                IsChecked="{Binding Enabled, Mode=TwoWay}"
+                                                Content="{Binding Set, Converter={StaticResource CardDataLocalizer}}"
+                                                IsPinned="{Binding Required, Mode=TwoWay}"
+                                                Margin="0,-5,-5,-5"
+                                                FontSize="28"
+                                                Width="225">
+                                            </localControls:PinnableCheckBox>
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

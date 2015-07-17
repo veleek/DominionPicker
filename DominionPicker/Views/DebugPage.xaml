@@ -29,7 +29,7 @@
                 <Button x:Name="Save17" Content="Save Picker State 1.7" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerState_1.7.xml"/>
                 <Button x:Name="Save18" Content="Save Picker State 1.8" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.8.xml,PickerView.xml"/>
                 <Button x:Name="Save19" Content="Save Picker State 1.9" Click="SavePickerState_OnClick" Tag="Assets/DefaultPickerView_1.9.xml,PickerView.xml"/>
-                
+
                 <RichTextBox LineHeight="40" TextAlignment="Center" FontFamily="Times New Roman" Margin="70,0" FontSize="22">
                     <Paragraph TextAlignment="Center" LineHeight="27" LineStackingStrategy="BlockLineHeight">
                         <Run>Choose two: +1 Card; +1 Action; +1 Buy; +</Run>
@@ -43,7 +43,7 @@
                         </Span>
                         <Run>.</Run>
                         <LineBreak/>
-                        <Run>(The choices must be different.)</Run>        
+                        <Run>(The choices must be different.)</Run>
 
                         <LineBreak/>
                         <LineBreak/>
@@ -51,15 +51,15 @@
                             +2
                             <InlineUIContainer>
                                 <Grid Margin="0,0,0,-6">
-                                    <Image Source="/Images/VP_extrasmall.png" Stretch="UniformToFill" Width="25"></Image>
+                                    <Image Source="/Images/VP_extrasmall.png" Stretch="UniformToFill" Width="25"/>
                                 </Grid>
                             </InlineUIContainer>
                         </Span>
                         <LineBreak/>
-                        <Run>Trash this and gain a gold.</Run>                        
+                        <Run>Trash this and gain a gold.</Run>
                     </Paragraph>
                 </RichTextBox>
-                
+
                 <local:SwipeableBase Padding="10" VerticalAlignment="Center">
                     <StackPanel Width="800">
                         <TextBlock Text="Hello World" FontWeight="Bold" FontSize="40" TextAlignment="Center" />
@@ -70,18 +70,186 @@
         </controls:PivotItem>
 
         <controls:PivotItem Header="log" Margin="12,0,0,0">
-            <ScrollViewer>
-                <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">
-                            <Run Text="{Binding Level}" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"></Run>
-                            <Run Text=":"></Run>
-                            <Run Text="{Binding Text}"></Run>
-                            </TextBlock>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+            <ScrollViewer Margin="0,-2,0,2">
+                <StackPanel>
+
+                    <local:PinnableCheckBox Content="Prosperity" IsChecked="True" IsPinned="True">
+                        <CheckBox.Template>
+                            <ControlTemplate TargetType="CheckBox">
+                                <Grid Background="Transparent" HorizontalAlignment="Left">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal"/>
+                                            <VisualState x:Name="MouseOver"/>
+                                            <VisualState x:Name="Pressed">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="CheckBackground">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneRadioCheckBoxPressedBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneButtonBasePressedForegroundBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="CheckBackground">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="CheckMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="IndeterminateMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentContainer">
+                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}"/>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="CheckStates">
+                                            <VisualState x:Name="Checked">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="CheckMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unchecked"/>
+                                            <VisualState x:Name="Indeterminate">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="IndeterminateMark">
+                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                            <DiscreteObjectKeyFrame.Value>
+                                                                <Visibility>Visible</Visibility>
+                                                            </DiscreteObjectKeyFrame.Value>
+                                                        </DiscreteObjectKeyFrame>
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="PinStates">
+                                            <VisualState x:Name="Pinned">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PinMark" To="1" Duration="0:0:0.1">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseOut" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(ViewBox.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PinMark" To="-8" Duration="0:0:0.3">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseOut" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(ViewBox.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PinMark" To="5" Duration="0:0:0.3">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseOut" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unpinned">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="PinMark" To="0" BeginTime="0:0:0.2" Duration="0:0:0.1">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseIn" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(ViewBox.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="PinMark" To="-28" Duration="0:0:0.3">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseIn" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                    <DoubleAnimation Storyboard.TargetProperty="(ViewBox.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="PinMark" To="-15" Duration="0:0:0.3">
+                                                        <DoubleAnimation.EasingFunction>
+                                                            <CubicEase EasingMode="EaseIn" />
+                                                        </DoubleAnimation.EasingFunction>
+                                                    </DoubleAnimation>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid Margin="{StaticResource PhoneTouchTargetLargeOverhang}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+                                            <Border x:Name="CheckBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{StaticResource PhoneBorderThickness}" Background="{TemplateBinding Background}" HorizontalAlignment="Left" Height="32" IsHitTestVisible="False" VerticalAlignment="Center" Width="32"/>
+                                            <Rectangle x:Name="IndeterminateMark" Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" HorizontalAlignment="Center" Height="16" IsHitTestVisible="False" Visibility="Collapsed" VerticalAlignment="Center" Width="16"/>
+                                            <Path x:Name="CheckMark" Data="M0,123 L39,93 L124,164 L256,18 L295,49 L124,240 z" Fill="{StaticResource PhoneRadioCheckBoxCheckBrush}" FlowDirection="LeftToRight" HorizontalAlignment="Center" Height="21" IsHitTestVisible="False" Stretch="Fill" StrokeThickness="3" StrokeLineJoin="Round" Visibility="Collapsed" VerticalAlignment="Center" Width="23"/>
+
+                                            <Viewbox Stretch="Uniform" 
+                                                     Margin="-8,0,0,-8" 
+                                                     Height="20"
+                                                     x:Name="PinMark"
+                                                     Opacity="0">
+                                                <Grid IsHitTestVisible="False">
+
+                                                    <Path Data="F1 M 0,0 L -3.84,-3.68 C -2.56,-4.96 -1.28,-6.24 0,-7.52 L 3.68,-3.68 11.2,3.84
+		                                                    14.88,7.52 16.8,13.28 11.2,11.36 7.36,7.52 z" 
+                                                          Stroke="{StaticResource PhoneBackgroundBrush}"
+                                                          StrokeThickness="5">
+                                                        <Path.RenderTransform>
+                                                            <TranslateTransform X="15" Y="40" />
+                                                        </Path.RenderTransform>
+                                                    </Path>
+                                                    <Path Data="F1 M 0,0 L -3.84,-3.68 C -2.56,-4.96 -1.28,-6.24 0,-7.52 L 3.68,-3.68 11.2,3.84
+		                                                    14.88,7.52 16.8,13.28 11.2,11.36 7.36,7.52 z" 
+                                                          Fill="{StaticResource PhoneForegroundBrush}">
+                                                        <Path.RenderTransform>
+                                                            <TranslateTransform X="15" Y="40" />
+                                                        </Path.RenderTransform>
+                                                    </Path>
+
+
+                                                    <Path Data="F1 M 0,0 L 0.64,2.4 C 1.28,4.32 1.6,6.08 1.6,7.84 L 13.44,19.68 C 15.84,19.36 18.72,19.52 21.28,20.32
+		                                                    L 23.68,20.96 0.16,44.64 -0.48,42.08 C -1.28,39.52 -1.44,36.96 -1.12,34.4 L -12.8,22.56
+		                                                    C -14.72,22.4 -16.48,22.08 -18.4,21.44 L -20.64,20.64 C -13.92,13.92 -6.24,6.24 0,0 z" 
+                                                          Stroke="{StaticResource PhoneBackgroundBrush}"
+                                                          StrokeThickness="5"
+                                                          StrokeLineJoin="Round"/>
+                                                    <Path Data="F1 M 0,0 L 0.64,2.4 C 1.28,4.32 1.6,6.08 1.6,7.84 L 13.44,19.68 C 15.84,19.36 18.72,19.52 21.28,20.32
+		                                                    L 23.68,20.96 0.16,44.64 -0.48,42.08 C -1.28,39.52 -1.44,36.96 -1.12,34.4 L -12.8,22.56
+		                                                    C -14.72,22.4 -16.48,22.08 -18.4,21.44 L -20.64,20.64 C -13.92,13.92 -6.24,6.24 0,0 z" 
+                                                          Fill="{StaticResource PhoneAccentBrush}"
+                                                          />
+                                                </Grid>
+
+                                                <Viewbox.RenderTransform>
+                                                    <CompositeTransform TranslateX="-28" TranslateY="-15" />
+                                                </Viewbox.RenderTransform>
+                                            </Viewbox>
+
+                                        </Grid>
+                                        <ContentControl x:Name="ContentContainer" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="12,0,0,0" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </CheckBox.Template>
+                    </local:PinnableCheckBox>
+
+                    <ItemsControl x:Name="LogItemsList" ItemsSource="{Binding Lines}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock TextWrapping="Wrap" Style="{StaticResource PhoneTextSmallStyle}">
+                                    <Run Text="{Binding Level}" Foreground="{Binding Color, Converter={StaticResource ColorToBrushConverter}}"/>
+                                    <Run Text=":"/>
+                                    <Run Text="{Binding Text}"/>
+                                </TextBlock>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                </StackPanel>
             </ScrollViewer>
         </controls:PivotItem>
     </controls:Pivot>

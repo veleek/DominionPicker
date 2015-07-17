@@ -126,6 +126,7 @@
       <DependentUpon>DominionCardControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\MultiTemplateItemsControl.cs" />
+    <Compile Include="Controls\PinnableCheckBox.cs" />
     <Compile Include="Controls\RulesInfoControl.xaml.cs">
       <DependentUpon>RulesInfoControl.xaml</DependentUpon>
     </Compile>

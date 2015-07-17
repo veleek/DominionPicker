@@ -53,7 +53,7 @@ namespace Ben.Dominion
                         // Starting with the pinned sets take as many as we can
                         availableSets = settings.Sets
                             // If Enabled is null, then we are in the pinned state
-                            .Where(s => s.Enabled == null)
+                            .Where(s => s.Required)
                             .Select(s => s.Set)
                             .OrderBy(s => Guid.NewGuid())
                             .Take(maxSets)
