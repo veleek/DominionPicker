@@ -920,6 +920,24 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show Basic Cards.
+        /// </summary>
+        public static string Settings_ShowBasicCards {
+            get {
+                return ResourceManager.GetString("Settings_ShowBasicCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup..
+        /// </summary>
+        public static string Settings_ShowBasicCards_Description {
+            get {
+                return ResourceManager.GetString("Settings_ShowBasicCards_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Required Mats and Tokens.
         /// </summary>
         public static string Settings_ShowExtras {

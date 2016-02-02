@@ -433,4 +433,10 @@ never be picked</value>
   <data name="SheltersOption_AlwaysWithDarkAges_Description" xml:space="preserve">
     <value>If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates.</value>
   </data>
+  <data name="Settings_ShowBasicCards" xml:space="preserve">
+    <value>Show Basic Cards</value>
+  </data>
+  <data name="Settings_ShowBasicCards_Description" xml:space="preserve">
+    <value>Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup.</value>
+  </data>
 </root>

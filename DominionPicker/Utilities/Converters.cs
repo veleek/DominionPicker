@@ -483,7 +483,11 @@ namespace Ben.Data
                 path = Path.Combine(path, parameter.ToString());
             }
 
-            String fileName = value + this.Extension;
+            String fileName = value.ToString();
+            if(!Path.HasExtension(fileName))
+            {
+                fileName += this.Extension;
+            }
             String fullPath = Path.Combine(path, fileName);
 
             return GetBrush(fullPath);

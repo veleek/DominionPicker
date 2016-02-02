@@ -6,6 +6,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
+using System.Runtime.CompilerServices;
 
 namespace Ben.Dominion.Models
 {
@@ -206,6 +207,34 @@ namespace Ben.Dominion.Models
                 IsolatedStorageSettings.ApplicationSettings["Application_ShowExtras"] = value;
                 this.OnPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether or not all the basic treasures and victory cards are shown and
+        /// the starting hand is created.
+        /// </summary>
+        public bool ShowBasicCards
+        {
+            get
+            {
+                return GetAppSetting(defaultValue: true);
+            }
+
+            set
+            {
+                this.SetAppSetting(value);
+            }
+        }
+
+        private TValue GetAppSetting<TValue>([CallerMemberName]string key = null, TValue defaultValue = default(TValue))
+        {
+            return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_" + key, defaultValue);
+        }
+
+        private void SetAppSetting<TValue>(TValue value, [CallerMemberName]string key = null)
+        {
+            IsolatedStorageSettings.ApplicationSettings["Application_" + key] = value;
+            this.OnPropertyChanged(key);
         }
 
         private static ConfigurationModel Load()

@@ -143,6 +143,10 @@
                             <ContentControl ContentTemplate="{StaticResource BulletedItem}"
                                             HorizontalAlignment="Left"
                                             Content="Stephane Plante - for giving me new ideas to replace the ones James ruined."/>
+                            
+                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
+                                            HorizontalAlignment="Left"
+                                            Content="Brian Chase - Because he asked to have his name here."/>
                                                         
                             <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="12,12,0,0"/>
 
@@ -165,6 +169,15 @@
                                     </InlineUIContainer>
                                 </Paragraph>
                             </RichTextBox>
+                            
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Card by Stephen JB Thomas from the Noun Project" />
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Flash Cards by Rohan Gupta from the Noun Project" />
+                            
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="from the Noun Project" />
+                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="from the Noun Project" />
+                            
+                            
                             
 
                             <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">

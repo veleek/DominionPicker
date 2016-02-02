@@ -306,7 +306,7 @@ namespace Ben.Dominion
                 case CardType.Event:
                     return Color.FromArgb(255, 160, 155, 165); // #A09BA5
                 case CardType.Prize:
-                    return Color.FromArgb(255, 153, 217, 234);
+                    return Color.FromArgb(255, 71, 135, 255); // #4787FF
                 case CardType.Ruins:
                     return Color.FromArgb(255, 188, 128, 16); // #BC8010
                 case CardType.Reserve:

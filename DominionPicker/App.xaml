@@ -201,6 +201,16 @@
                                Text="{Binding}"/>
             </Grid>
         </DataTemplate>
+        
+        <Style TargetType="TextBlock" x:Key="WrappingStyle">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <DataTemplate x:Key="WrappedTextBlockTemplate">
+            <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+        </DataTemplate>
+
+
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

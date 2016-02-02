@@ -18,7 +18,6 @@ namespace Ben.Dominion
 
         private CardList pool = null;
         private CardList cards = null;
-        private CardList additionalCards = new CardList();
         private List<string> additionalStuff = null;
         private ResultSortOrder sortOrder;
 
@@ -37,11 +36,27 @@ namespace Ben.Dominion
             get { return cards; }
             set
             {
+                var oldCards = cards;
                 if (this.SetProperty(ref cards, value))
                 {
+                    if (oldCards != null)
+                    {
+                        oldCards.CollectionChanged -= Cards_CollectionChanged;
+                    }
+
+                    if (cards != null)
+                    {
+                        cards.CollectionChanged += Cards_CollectionChanged;
+                    }
+
                     this.OnPropertyChanged("GroupedCards");
                 }
             }
+        }
+
+        private void Cards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            this.OnPropertyChanged("GroupedCards");
         }
 
         [XmlIgnore]
@@ -62,19 +77,11 @@ namespace Ben.Dominion
             }
         }
 
-        public CardList AdditionalCards
-        {
-            get { return this.additionalCards; }
-            set { this.SetProperty(ref this.additionalCards, value ?? new CardList()); }
-        }
-
         public List<String> AdditionalStuff
         {
             get { return additionalStuff; }
             set { this.SetProperty(ref additionalStuff, value); }
         }
-
-        ////public List<CardLabelGrouping> GroupedResult { get; set; }
 
         public ResultSortOrder SortOrder
         {
@@ -89,8 +96,7 @@ namespace Ben.Dominion
 
         public Boolean HasCard(Card card)
         {
-            return this.Cards.Contains(card, CardIdComparer.Default) || 
-                this.AdditionalCards.Contains(card, CardIdComparer.Default);
+            return this.Cards.Contains(card, CardIdComparer.Default);
         }
         public Boolean HasCard(String name)
         {
@@ -99,7 +105,7 @@ namespace Ben.Dominion
 
         public Boolean HasCard(Func<Card, bool> predicate)
         {
-            return this.Cards.Any(predicate) || this.AdditionalCards.Any(predicate);
+            return this.Cards.Any(predicate);
         }
 
 	    public IEnumerable<Card> CardsOfType(CardType type)
@@ -109,7 +115,7 @@ namespace Ben.Dominion
 
 		public IEnumerable<Card> CardsWhere(Func<Card, bool> predicate)
 		{
-			return this.Cards.Where(predicate).Union(this.AdditionalCards.Where(predicate));
+			return this.Cards.Where(predicate);
 		}
 
 		public Boolean HasAttack { get { return HasCardType(CardType.Attack); } }
@@ -121,7 +127,7 @@ namespace Ben.Dominion
         public Boolean HasPlusBuy { get { return Cards.Any(c => buyRegex.IsMatch(c.Rules)); } }
         public Boolean HasPlus2Buy { get { return Cards.Any(c => twoBuyRegex.IsMatch(c.Rules)); } }
 
-        public Boolean HasExtras { get { return (this.AdditionalCards != null && this.AdditionalCards.Count > 0) || (this.AdditionalStuff != null && this.AdditionalStuff.Count > 0); } }
+        public Boolean HasExtras { get { return this.AdditionalStuff != null && this.AdditionalStuff.Count > 0; } }
 
         public void Replace(Card target)
         {
@@ -161,6 +167,10 @@ namespace Ben.Dominion
 
             if (index == -1)
                 System.Diagnostics.Debugger.Break();
+
+            CardGroup group = target.Group;
+            target.Group = null;
+            replacement.Group = group;
 
             Pool.Remove(replacement);
             Pool.Add(target);

@@ -5,13 +5,7 @@ namespace Ben.Utilities
 {
     public static class IsolatedStorageExtensions
     {
-        public static TValue TryGetOrDefault<TValue>(this IsolatedStorageSettings settings, string key)
-        {
-            TValue value;
-            return settings.TryGetValue(key, out value) ? value : default(TValue);
-        }
-
-        public static TValue TryGetOrDefault<TValue>(this IsolatedStorageSettings settings, string key, TValue defaultValue)
+        public static TValue TryGetOrDefault<TValue>(this IsolatedStorageSettings settings, string key, TValue defaultValue = default(TValue))
         {
             TValue value;
             return settings.TryGetValue(key, out value) ? value : defaultValue;

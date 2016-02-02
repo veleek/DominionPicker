@@ -29,10 +29,6 @@
                 </Card>
                 <Card Name="Philosopher's Stone" DisplayName="Philosopher's Stone" BackgroundColor="#A09BA5" CoinCost="5" Cost="5" Set="Cornucopia" ID="100" Type="Action, Attack" HasPotion="True"/>
             </PickerResult.Cards>
-            <PickerResult.AdditionalCards>
-                <Card Name="Trader" DisplayName="Trader" BackgroundColor="#A09BA5" CoinCost="7" Cost="5" Set="DarkAges" ID="100" Type="Action, Attack" />
-                <Card Name="Curse" DisplayName="Curse" BackgroundColor="#7B418D" CoinCost="0" HasPotion="false"  Set="DarkAges" ID="100" Type="Action, Attack" />
-            </PickerResult.AdditionalCards>
             <PickerResult.AdditionalStuff>
                 <system:String>Victory Point Tokens</system:String>
             </PickerResult.AdditionalStuff>

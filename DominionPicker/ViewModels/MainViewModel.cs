@@ -4,6 +4,7 @@ using System.IO.IsolatedStorage;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
+using Ben.Dominion.Models;
 
 namespace Ben.Dominion
 {
@@ -81,6 +82,8 @@ namespace Ben.Dominion
             get { return this.blackMarket; }
             set { this.SetProperty(ref this.blackMarket, value, "BlackMarket"); }
         }
+
+        public ConfigurationModel Configuration => ConfigurationModel.Instance;
 
         [XmlIgnore]
         public bool IsGenerating

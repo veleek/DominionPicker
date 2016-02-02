@@ -11,11 +11,12 @@
     xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System.Windows"
     xmlns:controls="clr-namespace:Ben.Controls"
     xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:c4f="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    DataContext="{Binding Instance, Source={StaticResource MainView}}"
+    DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}"
     d:DataContext="{d:DesignData Source=../SampleData/PickerResultSampleData.xaml}"
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False" shell:SystemTray.Opacity="0">
@@ -24,7 +25,7 @@
         <shell:ProgressIndicator Text="Generating card set..." 
                                  IsIndeterminate="True" />
     </shell:SystemTray.ProgressIndicator>
-    
+
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Forward>
@@ -45,25 +46,142 @@
             </toolkit:NavigationOutTransition.Backward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
+
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
             <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="{Binding Strings.Results_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,-10" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
-        <TextBlock Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="0,0,12,0" Text="{Binding Strings.Results_Tips, Source={StaticResource LocalizedResources}}" />
+        <TextBlock Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}" TextAlignment="Right" Margin="10,0,2,0" Text="{Binding Strings.Results_Tips, Source={StaticResource LocalizedResources}}" />
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0" DataContext="{Binding Result}">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
 
-            <ScrollViewer>
+            <ScrollViewer Margin="0,0,12,0">
                 <StackPanel>
+                    <StackPanel>
+                        <!--Visibility="{Binding Configuration.ShowBasicCards, Converter={StaticResource BooleanToVisibilityConverter}}">-->
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Border Background="{StaticResource PhoneForegroundBrush}"
+                                    OpacityMask="{Binding Source=hand, Converter={StaticResource ImageConverter}, ConverterParameter='/Images'}"
+                                    Width="60"
+                                    Height="60"
+                                    HorizontalAlignment="Left"/>
+                            
+                            <Image Source="../Images/coin.png" Stretch="Uniform" Width="40" Margin="10,0" />
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel.Resources>
+                                <Style x:Key="RadioRoundButton" BasedOn="{StaticResource PhoneRadioButtonCheckBoxBase}" TargetType="RadioButton">
+                                    <Setter Property="Padding" Value="0" />
+                                    <Setter Property="FontSize" Value="28" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="IsEnabled" Value="True" />
+                                    <Setter Property="GroupName" Value="NumPlayers" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="RadioButton">
+                                                <Grid>
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup x:Name="CheckStates">
+                                                            <VisualState x:Name="Checked">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="ButtonBackground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneAccentBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="DisabledButtonBackground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneDisabledBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="StrokeThickness" Storyboard.TargetName="DisabledButtonRing">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="0" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="DisabledContent">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource PhoneChromeBrush}" />
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                            <VisualState x:Name="Unchecked" />
+                                                            <VisualState x:Name="Indeterminate" />
+                                                        </VisualStateGroup>
+                                                        <VisualStateGroup x:Name="CommonStates">
+                                                            <VisualState x:Name="Normal" />
+                                                            <VisualState x:Name="Disabled">
+                                                                <Storyboard>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBackground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                                            <DiscreteObjectKeyFrame.Value>
+                                                                                <Visibility>Collapsed</Visibility>
+                                                                            </DiscreteObjectKeyFrame.Value>
+                                                                        </DiscreteObjectKeyFrame>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledBackground">
+                                                                        <DiscreteObjectKeyFrame KeyTime="0">
+                                                                            <DiscreteObjectKeyFrame.Value>
+                                                                                <Visibility>Visible</Visibility>
+                                                                            </DiscreteObjectKeyFrame.Value>
+                                                                        </DiscreteObjectKeyFrame>
+                                                                    </ObjectAnimationUsingKeyFrames>
+                                                                </Storyboard>
+                                                            </VisualState>
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Border Name="EnabledBackground" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Padding="{TemplateBinding Padding}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Grid Width="70" Height="70">
+                                                                <Ellipse x:Name="ButtonBackground" Stroke="Transparent" Fill="{TemplateBinding Background}" Margin="10" />
+                                                                <Grid Name="ContentHost">
+                                                                    <ContentControl Name="EnabledContent" Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                                                        <Grid Name="EnabledHolder">
+                                                                            <ContentControl Name="ContentBody" Content="{TemplateBinding Content}" Margin="-1,-2,0,0" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                                                                        </Grid>
+                                                                    </ContentControl>
+                                                                </Grid>
+                                                                <Ellipse x:Name="ButtonRing" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="3" Fill="Transparent" Margin="10" />
+                                                            </Grid>
+                                                        </StackPanel>
+                                                    </Border>
+                                                    <Border Name="DisabledBackground" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Padding="{TemplateBinding Padding}" BorderThickness="0" BorderBrush="Transparent" Background="Transparent" Visibility="Collapsed">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Grid Width="70" Height="70">
+                                                                <Ellipse x:Name="DisabledButtonBackground" Stroke="Transparent" Margin="10" />
+                                                                <Grid Name="DisabledContentHost">
+                                                                    <ContentControl Name="DisabledContent" Foreground="{StaticResource PhoneDisabledBrush}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                                                                        <Grid Name="DisabledHolder">
+                                                                            <ContentControl Name="DisabledContentBody" Content="{TemplateBinding Content}" />
+                                                                        </Grid>
+                                                                    </ContentControl>
+                                                                </Grid>
+                                                                <Ellipse x:Name="DisabledButtonRing" Stroke="{StaticResource PhoneDisabledBrush}" StrokeThickness="3" Fill="Transparent" Margin="10" />
+                                                            </Grid>
+                                                        </StackPanel>
+                                                    </Border>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </StackPanel.Resources>
+                            <Border Background="{StaticResource PhoneForegroundBrush}"
+                                    OpacityMask="{Binding Source=players.png, Converter={StaticResource ImageConverter}, ConverterParameter='/Images'}"
+                                    Width="80"
+                                    Margin="0,-0,0,-10"
+                                    HorizontalAlignment="Left"/>
+                            <RadioButton GroupName="NumPlayers" Content="2" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click"/>
+                            <RadioButton GroupName="NumPlayers" Content="3" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click"/>
+                            <RadioButton GroupName="NumPlayers" Content="4" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click"/>
+                            <RadioButton GroupName="NumPlayers" Content="5" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click"/>
+                            <RadioButton GroupName="NumPlayers" Content="6" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+
                     <phone:LongListSelector x:Name="GroupedCardsList" 
                                             LayoutMode="List"
                                             IsGroupingEnabled="True"
@@ -71,7 +189,7 @@
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Stretch"
                                             Margin="0"
-                                            ItemsSource="{Binding GroupedCards}">
+                                            ItemsSource="{Binding Result.GroupedCards}">
                         <phone:LongListSelector.GroupHeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Key, Converter={StaticResource StringsLocalizer}}" 
@@ -113,15 +231,10 @@
 
                     <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" 
                             Margin="0,6,0,3" Style="{StaticResource PhoneTextAccentStyle}"
-                            Visibility="{Binding HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
-                    <ItemsControl x:Name="AdditionalCardsList" ItemsSource="{Binding AdditionalCards}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <local:DominionCardControl Card="{Binding}" Tap="CardItem_Tap" Swipe="CardItem_Swipe"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding AdditionalStuff}" Margin="12,3" FontFamily="{StaticResource OptimusPrincepsSemiBold}" FontSize="33"/>
+                            Visibility="{Binding Result.HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}" />
+                    <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding Result.AdditionalStuff}" Margin="12,3" FontFamily="{StaticResource OptimusPrincepsSemiBold}" FontSize="33"/>
+
+
                 </StackPanel>
             </ScrollViewer>
         </Grid>
@@ -129,7 +242,8 @@
         <local:AddFavoritePopupControl x:Name="AddFavoritePopup" 
                                        Grid.RowSpan="2"
                                        Grid.Row="0"
-                                       SaveFavorite="AddFavoritePopup_SaveFavorite"/>
+                                       SaveFavorite="AddFavoritePopup_SaveFavorite"
+                                       Visibility="Collapsed"/>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>

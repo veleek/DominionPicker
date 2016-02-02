@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Resources;
 using Windows.Storage;
 using Windows.System;
 using Ben.Dominion.Utilities;
@@ -32,57 +31,57 @@ namespace Ben.Dominion
 
             this.RulesInfo.ItemsSource = new[]
             {
-				new RulesInfoItem(CardSet.Base),
-				new RulesInfoItem(CardSet.Intrigue),
-				new RulesInfoItem(CardSet.Seaside),
-				new RulesInfoItem(CardSet.Alchemy),
-				new RulesInfoItem(CardSet.Prosperity),
-				new RulesInfoItem(CardSet.Cornucopia),
-				new RulesInfoItem(CardSet.Hinterlands),
-				new RulesInfoItem(CardSet.DarkAges),
-				new RulesInfoItem(CardSet.Guilds),
-				new RulesInfoItem(CardSet.Adventures),
+                new RulesInfoItem(CardSet.Base),
+                new RulesInfoItem(CardSet.Intrigue),
+                new RulesInfoItem(CardSet.Seaside),
+                new RulesInfoItem(CardSet.Alchemy),
+                new RulesInfoItem(CardSet.Prosperity),
+                new RulesInfoItem(CardSet.Cornucopia),
+                new RulesInfoItem(CardSet.Hinterlands),
+                new RulesInfoItem(CardSet.DarkAges),
+                new RulesInfoItem(CardSet.Guilds),
+                new RulesInfoItem(CardSet.Adventures),
             };
         }
 
-	    public class RulesInfoItem
-	    {
+        public class RulesInfoItem
+        {
 
-		    public RulesInfoItem(CardSet set)
-		    {
-			    string rulesUrl;
-			    switch (set)
-			    {
-				    case CardSet.Base:
-					    rulesUrl = "http://riograndegames.com/getFile.php?id=348";
+            public RulesInfoItem(CardSet set)
+            {
+                string rulesUrl;
+                switch (set)
+                {
+                    case CardSet.Base:
+                        rulesUrl = "http://riograndegames.com/getFile.php?id=348";
                         break;
-				    case CardSet.Intrigue:
-				    case CardSet.Seaside:
-				    case CardSet.Alchemy:
-				    case CardSet.Prosperity:
-				    case CardSet.Cornucopia:
-				    case CardSet.Hinterlands:
-				    case CardSet.DarkAges:
-				    case CardSet.Guilds:
-					    rulesUrl = string.Format("http://dominiongame.info/dominion{0}rules.pdf", set);
-					    break;
-				    case CardSet.Adventures:
-					    rulesUrl = "http://riograndegames.com/getFile.php?id=1907";
+                    case CardSet.Intrigue:
+                    case CardSet.Seaside:
+                    case CardSet.Alchemy:
+                    case CardSet.Prosperity:
+                    case CardSet.Cornucopia:
+                    case CardSet.Hinterlands:
+                    case CardSet.DarkAges:
+                    case CardSet.Guilds:
+                        rulesUrl = string.Format("http://dominiongame.info/dominion{0}rules.pdf", set);
                         break;
-				    default:
-					    throw new ArgumentOutOfRangeException("set");
-			    }
+                    case CardSet.Adventures:
+                        rulesUrl = "http://riograndegames.com/getFile.php?id=1907";
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("set");
+                }
 
                 this.Monitor = new DownloadingTransferMonitor(
                     rulesUrl,
                     string.Format("Dominion{0}Rules.pdf", set),
                     Localized.CardData.GetLocalizedValue(set));
-			    this.IconPath = string.Format("../Images/SetIcons/{0}.png", set);
-		    }
+                this.IconPath = string.Format("../Images/SetIcons/{0}.png", set);
+            }
 
-			public DownloadingTransferMonitor Monitor { get; set; }
-		    public string IconPath { get; set; } 
-	    }
+            public DownloadingTransferMonitor Monitor { get; set; }
+            public string IconPath { get; set; } 
+        }
 
         private async void DominionTransferControl_OnTap(object sender, GestureEventArgs e)
         {

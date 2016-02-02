@@ -12,6 +12,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.Generic;
 using Ben.Dominion.ViewModels;
+using System.Windows.Controls;
 
 namespace Ben.Dominion
 {
@@ -58,6 +59,8 @@ namespace Ben.Dominion
             this.ApplicationBar.AddMenuItem(Strings.Menu_About, this.About_Click);
         }
 
+        public MainViewModel MainView => MainViewModel.Instance;
+
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             this.UpdateSorting(MainViewModel.Instance.Result.SortOrder);
@@ -88,7 +91,11 @@ namespace Ben.Dominion
         private void CardItem_Swipe(object sender, EventArgs e)
         {
             DominionCardControl cardControl = sender as DominionCardControl;
-            MainViewModel.Instance.Result.Replace(cardControl.Card);
+
+            if (cardControl.Card.Group.Type == CardGroupType.KingdomCard)
+            {
+                MainViewModel.Instance.Result.Replace(cardControl.Card);
+            }
         }
 
         private void Refresh_Click(object sender, EventArgs e)
@@ -206,6 +213,20 @@ namespace Ben.Dominion
         private void About_Click(object sender, EventArgs e)
         {
             PickerView.About.Go();
+        }
+
+        private void PlayersButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton button = sender as RadioButton;
+            string player = button.Content.ToString();
+
+            switch (player)
+            {
+                case "2":
+                case "3":
+                default:
+                    break;
+            }
         }
     }
 }

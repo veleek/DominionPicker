@@ -135,11 +135,21 @@
                                         Style="{StaticResource EnumOptionStyle}">
                     </toolkit:ListPicker>
 
-                    <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}">
+                    <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" 
+                              ContentTemplate="{StaticResource WrappedTextBlockTemplate}" 
+                              Content="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}"/>
+                    
+                    <CheckBox IsChecked="{Binding ShowBasicCards, Mode=TwoWay}" >
                         <StackPanel>
-                            <TextBlock Text="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap"  />
+                            <TextBlock Text="{Binding Strings.Settings_ShowBasicCards, Source={StaticResource LocalizedResources}}"
+                                       TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Strings.Settings_ShowBasicCards_Description, Source={StaticResource LocalizedResources}}"
+                                       TextWrapping="Wrap" 
+                                       Style="{StaticResource PhoneTextSubtleStyle}" Margin="0"/>
+                                       
                         </StackPanel>
                     </CheckBox>
+
 
                     <TextBlock Style="{StaticResource PhoneTextExtraLargeStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" />
 
