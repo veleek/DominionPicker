@@ -116,7 +116,130 @@
   <Card ID="114" Name="Venter" />
   <Card ID="115" Name="Platina" />
   <Card ID="116" Name="Kolonie" />
+  <Card ID="117" Name="Zak met goud" />
+  <Card ID="118" Name="Tiara" />
+  <Card ID="119" Name="Volgelingen" />
+  <Card ID="120" Name="Prinses" />
+  <Card ID="121" Name="Trouwe ros" />
+  <Card ID="122" Name="Gehucht" />
+  <Card ID="123" Name="Waarzegster" />
+  <Card ID="124" Name="Menagerie" />
+  <Card ID="125" Name="Boerendorp" />
+  <Card ID="126" Name="Paardenhandelaars" />
+  <Card ID="127" Name="Nieuwe versie" />
+  <Card ID="128" Name="Toernooi" />
+  <Card ID="129" Name="Jonge heks" />
+  <Card ID="130" Name="Oogst" />
+  <Card ID="131" Name="Hoorn des overvloeds" />
+  <Card ID="132" Name="Jachtgezelschap" />
+  <Card ID="133" Name="Nar" />
+  <Card ID="134" Name="Kermisterrein" />
+  <Card ID="135" Name="Splitsing" />
+  <Card ID="136" Name="Hertogin" />
+  <Card ID="137" Name="Klatergoud" />
+  <Card ID="138" Name="Ontwikkelen" />
+  <Card ID="139" Name="Oase" />
+  <Card ID="140" Name="Orakel" />
+  <Card ID="141" Name="Gekonkel" />
+  <Card ID="142" Name="Tunnel" />
+  <Card ID="143" Name="Manusje-van-alles" />
+  <Card ID="144" Name="Nobele bandiet" />
+  <Card ID="145" Name="Nomadenkamp" />
+  <Card ID="146" Name="Zijderoute" />
+  <Card ID="147" Name="Specerijenkoopman" />
+  <Card ID="148" Name="Handelaar" />
+  <Card ID="149" Name="Bewaarplaats" />
+  <Card ID="150" Name="Cartograaf" />
+  <Card ID="151" Name="Ambassade" />
+  <Card ID="152" Name="Sjacheraar" />
+  <Card ID="153" Name="Hoofdweg" />
+  <Card ID="154" Name="Gestolen goed" />
+  <Card ID="155" Name="Herberg" />
+  <Card ID="156" Name="Mandarijn" />
+  <Card ID="157" Name="Markgraaf" />
+  <Card ID="158" Name="Stallen" />
+  <Card ID="159" Name="Grensdorp" />
+  <Card ID="160" Name="Landbouwgrond" />
   <Card ID="161" Name="Zwarte Markt" />
   <Card ID="162" Name="Gezant" />
   <Card ID="165" Name="Geldbuidel" />
+  <Card ID="166" Name="Verlaten mijn" />
+  <Card ID="167" Name="Altaar" />
+  <Card ID="168" Name="Wapenkamer" />
+  <Card ID="169" Name="Groep mislukkelingen" />
+  <Card ID="170" Name="Bandietenkamp" />
+  <Card ID="171" Name="Bedelaar" />
+  <Card ID="172" Name="Gewelven" />
+  <Card ID="173" Name="Graaf" />
+  <Card ID="174" Name="Vals geld" />
+  <Card ID="175" Name="Cultist" />
+  <Card ID="176" Name="Dodenkar" />
+  <Card ID="177" Name="Dame Anna" />
+  <Card ID="178" Name="Dame Josephine" />
+  <Card ID="179" Name="Dame Molly" />
+  <Card ID="180" Name="Dame Natalie" />
+  <Card ID="181" Name="Dame Sylvia" />
+  <Card ID="182" Name="Feodum" />
+  <Card ID="183" Name="Jager-verzamelaar" />
+  <Card ID="184" Name="Vesting" />
+  <Card ID="185" Name="Grafrover" />
+  <Card ID="186" Name="Kluizenaar" />
+  <Card ID="187" Name="Hutje" />
+  <Card ID="188" Name="Jachtvelden" />
+  <Card ID="189" Name="Metaalhandelaar" />
+  <Card ID="190" Name="Opkoper" />
+  <Card ID="191" Name="Ridders" />
+  <Card ID="192" Name="Krankzinnige" />
+  <Card ID="193" Name="Stroper" />
+  <Card ID="194" Name="Marktplein" />
+  <Card ID="195" Name="Huurling" />
+  <Card ID="196" Name="Toverfeeks" />
+  <Card ID="197" Name="Necropolis" />
+  <Card ID="198" Name="Verwilderd landgoed" />
+  <Card ID="199" Name="Plundering" />
+  <Card ID="200" Name="Armenhuis" />
+  <Card ID="201" Name="Optocht" />
+  <Card ID="202" Name="Ratten" />
+  <Card ID="203" Name="Wederopbouw" />
+  <Card ID="204" Name="Schurk" />
+  <Card ID="205" Name="Ingestorte bibliotheek" />
+  <Card ID="206" Name="Verwoeste markt" />
+  <Card ID="207" Name="Vernield dorp" />
+  <Card ID="208" Name="Ruïnes" />
+  <Card ID="209" Name="Wijgeer" />
+  <Card ID="210" Name="Scharrelaar" />
+  <Card ID="211" Name="Sir Bailey" />
+  <Card ID="212" Name="Sir Destry" />
+  <Card ID="213" Name="Sir Martin" />
+  <Card ID="214" Name="Sir Michael" />
+  <Card ID="215" Name="Sir Vander" />
+  <Card ID="216" Name="Buit" />
+  <Card ID="217" Name="Schipknaap" />
+  <Card ID="218" Name="Berghok" />
+  <Card ID="219" Name="Overlevenden" />
+  <Card ID="220" Name="Straatjongen" />
+  <Card ID="221" Name="Landloper" />
+  <Card ID="222" Name="Reizende minstreel" />
+  <Card ID="223" Name="Onderdak" />
+  <Card ID="224" Name="Adviseur" />
+  <Card ID="225" Name="Bakker" />
+  <Card ID="226" Name="Slager" />
+  <Card ID="227" Name="Kandelaarmaker" />
+  <Card ID="228" Name="Arts" />
+  <Card ID="229" Name="Heraut" />
+  <Card ID="230" Name="Gezel" />
+  <Card ID="231" Name="Meesterwerk" />
+  <Card ID="232" Name="Koopmansgilde" />
+  <Card ID="233" Name="Plaza" />
+  <Card ID="234" Name="Helderziende" />
+  <Card ID="235" Name="Steenhouwer" />
+  <Card ID="236" Name="Belastinginner" />
+  <Card ID="238" Name="Koper" />
+  <Card ID="239" Name="Vloek" />
+  <Card ID="240" Name="Landgoed" />
+  <Card ID="241" Name="Zilver" />
+  <Card ID="242" Name="Hertogdom" />
+  <Card ID="243" Name="Goud" />
+  <Card ID="244" Name="Provincie" />
+  <Card ID="303" Name="Prijzen" />
 </ArrayOfCard>
