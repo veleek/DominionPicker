@@ -295,10 +295,10 @@ namespace Ben.Dominion
                 result.Cards.Add(Card.FromName("Prizes").WithGroup(new CardGroup(CardGroupType.OtherRequired, Card.FromName("Tournament"))));
             }
 
-	        var requireLooter = result.CardsOfType(CardType.Looter).ToList();
+            var requireLooter = result.CardsOfType(CardType.Looter).ToList();
             if (requireLooter.Any())
             {
-				result.Cards.Add(Card.FromName("Ruins").WithGroup(new CardGroup(CardGroupType.OtherRequired, requireLooter)));
+                result.Cards.Add(Card.FromName("Ruins").WithGroup(new CardGroup(CardGroupType.OtherRequired, requireLooter)));
             }
 
             var requireSpoils = result.Cards.Where(c => c.ContainsText("Spoils")).ToList();
@@ -328,11 +328,11 @@ namespace Ben.Dominion
                 result.Cards.Add(Card.FromName("Champion").WithGroup(pageGroup));
             }
 
-	        if (result.HasCard("Peasant"))
-	        {
+            if (result.HasCard("Peasant"))
+            {
                 var peasantGroup = new CardGroup(CardGroupType.OtherRequired, Card.FromName("Peasant"));
                 result.Cards.Add(Card.FromName("Soldier").WithGroup(peasantGroup));
-		        result.Cards.Add(Card.FromName("Fugitive").WithGroup(peasantGroup));
+                result.Cards.Add(Card.FromName("Fugitive").WithGroup(peasantGroup));
                 result.Cards.Add(Card.FromName("Disciple").WithGroup(peasantGroup));
                 result.Cards.Add(Card.FromName("Teacher").WithGroup(peasantGroup));
             }
@@ -349,6 +349,43 @@ namespace Ben.Dominion
                 var curse = Card.FromName("Curse");
                 result.Cards.Add(curse.WithGroup(new CardGroup(CardGroupType.OtherRequired, requireCurse)));
             }
+
+            if(ConfigurationModel.Instance.PickEvents != EventsOption.Never)
+            {
+                bool hasEventsSet = result.HasCard(c => c.InSet(CardSet.Adventures) || c.InSet(CardSet.Empires));
+
+                int numberOfEvents = 0;
+                switch (ConfigurationModel.Instance.PickEvents)
+                {
+                    case EventsOption.Randomly:
+                        numberOfEvents = random.Next(0, 3);
+                        break;
+                    case EventsOption.RandomlyWithSet:
+                        if(hasEventsSet)
+                        {
+                            numberOfEvents = random.Next(0, 3);
+                        }
+                        break;
+                    case EventsOption.Always:
+                        numberOfEvents = 2;
+                        break;
+                    case EventsOption.AlwaysWithSet:
+                        if(hasEventsSet)
+                        {
+                            numberOfEvents = 2;
+                        }
+                        break;
+                }
+
+                if (numberOfEvents > 0)
+                {
+                    var eventsGroup = new CardGroup(CardGroupType.Events);
+                    var events = Cards.AllCards.Where(c => c.IsType(CardType.Event)).OrderBy(_ => Guid.NewGuid()).Take(numberOfEvents).Select(e => e.WithGroup(eventsGroup));
+
+                    result.Cards.AddRange(events);
+                }
+            }
+
 
             if (ConfigurationModel.Instance.ShowExtras)
             {

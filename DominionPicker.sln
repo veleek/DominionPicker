@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPicker", "DominionPicker\DominionPicker.csproj", "{6AE8F7D0-02DA-4031-8C37-6470FE1A98D0}"
 EndProject
@@ -12,6 +12,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1C469FFC-6BC9-4A8A-A248-FA26CDDB624D}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{24B022AE-37AC-4E1B-A060-CE56CB88CE03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cards", "Cards", "{B15C7027-271B-4D9B-A758-39109107236D}"
+	ProjectSection(SolutionItems) = preProject
+		Data\Cards\cardlist.ods = Data\Cards\cardlist.ods
+		Data\Cards\CardSchema.xml = Data\Cards\CardSchema.xml
+		commands.json = commands.json
+		Data\Cards\DominionPickerData.xlsx = Data\Cards\DominionPickerData.xlsx
+		Data\Cards\ProcessCardsLocalization.ps1 = Data\Cards\ProcessCardsLocalization.ps1
 	EndProjectSection
 EndProject
 Global
@@ -79,5 +90,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B15C7027-271B-4D9B-A758-39109107236D} = {24B022AE-37AC-4E1B-A060-CE56CB88CE03}
 	EndGlobalSection
 EndGlobal

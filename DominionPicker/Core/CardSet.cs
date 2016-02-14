@@ -20,6 +20,7 @@ namespace Ben.Dominion
         DarkAges,
         Guilds,
         Adventures,
+        Empires,
         Promo,
     }
     

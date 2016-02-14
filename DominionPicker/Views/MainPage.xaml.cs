@@ -214,7 +214,7 @@ namespace Ben.Dominion
                 ConfigurationModel.Instance.PickSheltersOrEstates = MainViewModel.Instance.Settings.PickShelterOrEstate ? SheltersOption.Randomly : SheltersOption.Never;
                 ConfigurationModel.Instance.ShowExtras = MainViewModel.Instance.Settings.ShowExtras;
 
-                this.updatePopupShown = true;
+                this.UpdatePopup.Visibility = Visibility.Visible;
             }
 
             if (appLaunchCount == 10 && !this.reviewRequestShown)
@@ -326,6 +326,12 @@ namespace Ben.Dominion
         private void RequestReviewCancel_Click(object sender, RoutedEventArgs e)
         {
             this.RequestReviewPopup.Visibility = Visibility.Collapsed;
+        }
+
+        private void UpdatePopupOk_Click(object sender, RoutedEventArgs e)
+        {
+            this.UpdatePopup.Visibility = Visibility.Collapsed;
+            this.updatePopupShown = true;
         }
 
         private void FavoriteSettingsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

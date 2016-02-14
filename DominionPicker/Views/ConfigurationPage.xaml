@@ -92,7 +92,7 @@
                                         ItemsSource="{Binding AllSets}"
                                         SelectionMode="Multiple"
 										SelectedItems="{Binding OwnedSets, Mode=TwoWay}"
-										IsEnabled="true">
+										IsEnabled="false">
                         <toolkit:ListPicker.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding}" 
@@ -133,6 +133,15 @@
                                         SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}"
                                         ExpansionMode="FullScreenOnly"
                                         Style="{StaticResource EnumOptionStyle}">
+                    </toolkit:ListPicker>
+
+                    <toolkit:ListPicker x:Name="EventsOption"
+                                        Header="{Binding Strings.Config_EventsOption, Source={StaticResource LocalizedResources}}"
+                                        ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}}"
+                                        SelectedItem="{Binding PickEvents, Mode=TwoWay}"
+                                        ExpansionMode="FullScreenOnly"
+                                        Style="{StaticResource EnumOptionStyle}">
+                        
                     </toolkit:ListPicker>
 
                     <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" 

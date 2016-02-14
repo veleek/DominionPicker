@@ -10,8 +10,7 @@ namespace Ben.Dominion
 	{
 		private ListOption<int> minimumCardsPerSet = new ListOption<int> {Enabled = true, OptionValue = 5};
 
-		private List<SetOption> sets =
-			ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption {Set = s, Enabled = s != CardSet.Promo}).ToList();
+        private List<SetOption> sets;
 
 		private CardList filteredCards = new CardList();
 
@@ -25,12 +24,31 @@ namespace Ben.Dominion
 		private bool pickShelterOrEstate = true;
 		private bool showExtras = true;
 
+        public SettingsViewModel()
+        {
+            ConfigurationModel.Instance.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == "OwnedSets")
+                {
+                    this.sets = null;
+                }
+            };
+        }
+
 		[XmlIgnore]
-		public List<SetOption> Sets
-		{
-			get { return this.sets; }
-			set { this.SetProperty(ref this.sets, value); }
-		}
+        public List<SetOption> Sets
+        {
+            get
+            {
+                if (this.sets == null)
+                {
+                    this.sets = ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption { Set = s, Enabled = s != CardSet.Promo }).ToList();
+                }
+
+                return this.sets;
+            }
+            set { this.SetProperty(ref this.sets, value); }
+        }
 
 		[XmlIgnore]
 		public List<CardSet> SelectedSets
@@ -38,7 +56,7 @@ namespace Ben.Dominion
 			get { return this.Sets.Where(s => s.Enabled).Select(s => s.Set).ToList(); }
 			set
 			{
-				foreach (var set in this.sets)
+				foreach (var set in this.Sets)
 				{
 					set.Enabled = value.Contains(set.Set);
 				}
@@ -54,7 +72,7 @@ namespace Ben.Dominion
 
 			set
 			{
-				foreach (var set in this.sets)
+				foreach (var set in this.Sets)
 				{
 					set.Enabled = value.Contains(set.Set.ToString());
 				}
@@ -69,7 +87,7 @@ namespace Ben.Dominion
             get { return this.Sets.Where(s => s.Required).Select(s => s.Set).ToList(); }
             set
             {
-                foreach (var set in this.sets)
+                foreach (var set in this.Sets)
                 {
                     set.Required = value.Contains(set.Set);
                 }
@@ -86,7 +104,7 @@ namespace Ben.Dominion
 
             set
             {
-                foreach (var set in this.sets)
+                foreach (var set in this.Sets)
                 {
                     set.Required = value.Contains(set.Set.ToString());
                 }

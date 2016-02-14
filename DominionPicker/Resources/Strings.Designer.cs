@@ -178,6 +178,15 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to events.
+        /// </summary>
+        public static string CardGroupType_Events {
+            get {
+                return ResourceManager.GetString("CardGroupType_Events", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to kingdom cards.
         /// </summary>
         public static string CardGroupType_KingdomCard {
@@ -228,6 +237,15 @@ namespace Ben.Dominion.Resources {
         public static string Config_CardDataDesc {
             get {
                 return ResourceManager.GetString("Config_CardDataDesc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to when to pick Events.
+        /// </summary>
+        public static string Config_EventsOption {
+            get {
+                return ResourceManager.GetString("Config_EventsOption", resourceCulture);
             }
         }
         
@@ -287,7 +305,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pick Platinum and Colony.
+        ///   Looks up a localized string similar to when to pick Platinum and Colony.
         /// </summary>
         public static string Config_PlatinumColonyOption {
             get {
@@ -314,7 +332,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pick Shelters or Estates.
+        ///   Looks up a localized string similar to when to pick Shelters or Estates.
         /// </summary>
         public static string Config_SheltersOption {
             get {
@@ -409,6 +427,96 @@ namespace Ben.Dominion.Resources {
         public static string Dominion_Token {
             get {
                 return ResourceManager.GetString("Dominion_Token", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always select Events.
+        /// </summary>
+        public static string EventsOption_Always {
+            get {
+                return ResourceManager.GetString("EventsOption_Always", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The result will always include two randomly selected Events..
+        /// </summary>
+        public static string EventsOption_Always_Description {
+            get {
+                return ResourceManager.GetString("EventsOption_Always_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always when using a set with Events.
+        /// </summary>
+        public static string EventsOption_AlwaysWithSet {
+            get {
+                return ResourceManager.GetString("EventsOption_AlwaysWithSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are using a set that contains Events, the result will always include two randomly selected Events..
+        /// </summary>
+        public static string EventsOption_AlwaysWithSet_Description {
+            get {
+                return ResourceManager.GetString("EventsOption_AlwaysWithSet_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never select events.
+        /// </summary>
+        public static string EventsOption_Never {
+            get {
+                return ResourceManager.GetString("EventsOption_Never", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Never select any Events..
+        /// </summary>
+        public static string EventsOption_Never_Description {
+            get {
+                return ResourceManager.GetString("EventsOption_Never_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randomly select .
+        /// </summary>
+        public static string EventsOption_Randomly {
+            get {
+                return ResourceManager.GetString("EventsOption_Randomly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The result will include between zero and two randomly selected Events..
+        /// </summary>
+        public static string EventsOption_Randomly_Description {
+            get {
+                return ResourceManager.GetString("EventsOption_Randomly_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Randomly when using a set with Events.
+        /// </summary>
+        public static string EventsOption_RandomlyWithSet {
+            get {
+                return ResourceManager.GetString("EventsOption_RandomlyWithSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you are using a set that contains Events, the result will include between zero and two randomly selected Events..
+        /// </summary>
+        public static string EventsOption_RandomlyWithSet_Description {
+            get {
+                return ResourceManager.GetString("EventsOption_RandomlyWithSet_Description", resourceCulture);
             }
         }
         

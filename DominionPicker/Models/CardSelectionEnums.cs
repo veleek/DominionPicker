@@ -24,7 +24,7 @@
     public enum SheltersOption
     {
         /// <summary>
-        /// Nevery select Shelters instead of Estates.
+        /// Never select Shelters instead of Estates.
         /// </summary>
         Never,
         /// <summary>
@@ -40,6 +40,35 @@
         /// Always use Shelters instead of Estates.
         /// </summary>
         Always,
+    }
+
+    /// <summary>
+    /// Options for determining whether or not to select event cards to be included in the set.
+    /// Note: Event cards will only be selected if you have indicated that you own any event cards.
+    /// </summary>
+    public enum EventsOption
+    {
+        /// <summary>
+        /// Never select any Events.
+        /// </summary>
+        Never,
+        /// <summary>
+        /// Randomly select between 0 and 2 Events.
+        /// </summary>
+        Randomly,
+        /// <summary>
+        /// Randomly select between 0 and 2 Events but only if using any cards from a set that
+        /// contains Events.
+        /// </summary>
+        RandomlyWithSet,
+        /// <summary>
+        /// Always select two Events.
+        /// </summary>
+        Always,
+        /// <summary>
+        /// Always select two Events but only if using any cards from a set that contains Events.
+        /// </summary>
+        AlwaysWithSet,
     }
 
     public enum Token

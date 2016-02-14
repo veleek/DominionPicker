@@ -27,8 +27,15 @@ namespace Ben.Dominion
 			        return "Everything";
 		        }
 
-		        var setNames = list.Cast<CardSet>().Select(s => s.Localize().Substring(0,3));
-		        return string.Join(", ", setNames);
+                if(list.Count == 1)
+                {
+                    return "1 set";
+                }
+
+                return string.Format("{0} sets", list.Count);
+
+		        //var setNames = list.Cast<CardSet>().Select(s => s.Localize().Substring(0,3));
+		        //return string.Join(", ", setNames);
 	        };
 
             var supportedCultures = new List<CultureInfo>

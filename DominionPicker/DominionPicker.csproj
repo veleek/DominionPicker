@@ -152,7 +152,7 @@
     <Compile Include="Utilities\Grouping.cs" />
     <Compile Include="Utilities\NavigationServiceExtensions.cs" />
     <Compile Include="Utilities\XamlHelpers.cs" />
-    <Compile Include="ViewModels\CardLabel.cs" />
+    <Compile Include="ViewModels\CardGroup.cs" />
     <Compile Include="ViewModels\CardLookupViewModel.cs" />
     <Compile Include="ViewModels\PickerResult.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">

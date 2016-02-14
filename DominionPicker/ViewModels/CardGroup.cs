@@ -15,6 +15,7 @@
         PageUpgrade,
         SelectedProsperity,
         SelectedDarkAges,
+        Events,
     }
 
     public class CardGroup : ILocalizable

@@ -184,6 +184,7 @@ namespace Ben.Dominion
                         "Training",
                         "Inheritance",
                         "Pathfinding",
+                        "Summon",
                     }
                     );
             }

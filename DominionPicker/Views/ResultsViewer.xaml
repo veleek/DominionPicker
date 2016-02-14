@@ -65,7 +65,7 @@
 
             <ScrollViewer Margin="0,0,12,0">
                 <StackPanel>
-                    <StackPanel>
+                    <StackPanel Visibility="Collapsed">
                         <!--Visibility="{Binding Configuration.ShowBasicCards, Converter={StaticResource BooleanToVisibilityConverter}}">-->
                         
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

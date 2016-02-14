@@ -150,6 +150,10 @@
   <data name="CardType_Duration" xml:space="preserve">
     <value>Dauer</value>
   </data>
+  <data name="CardType_Event" xml:space="preserve">
+    <value>Ereignis</value>
+    <comment>Plural - Events = Ereignisse</comment>
+  </data>
   <data name="CardType_Knight" xml:space="preserve">
     <value>Ritter</value>
   </data>
@@ -164,6 +168,10 @@
   </data>
   <data name="CardType_Shelter" xml:space="preserve">
     <value>Unterschlupf</value>
+  </data>
+  <data name="CardType_Traveller" xml:space="preserve">
+    <value>Reisender</value>
+    <comment>Plural - Travellers = Reisende</comment>
   </data>
   <data name="CardType_Treasure" xml:space="preserve">
     <value>Geld</value>

@@ -1,5 +1,7 @@
 ﻿$lang = @("CS", "DE", "ES", "FI", "FR", "IT", "NL", "PL")
 
+$VerbosePreference = "Continue"
+
 function GenerateCardsXml($Language = $null, [string[]]$Properties)
 {
     $fileName = ".\DominionPickerCards$(if($Language){ "." + $Language.ToLower() }).xml"
@@ -87,12 +89,14 @@ function GetColumnForValue($Value)
     return -1;
 }
 
+Write-Verbose "Starting Card Processing"
+
 cd 'C:\code\vso\veleek\Dominion Picker\Data\Cards'
 
 
 if(!(Test-Path variable:\cards) -or ((Test-Path variable:\xl) -and $xl.Visible -eq $false))
 {
-    "Creating Excel Instance"
+    Write-Verbose "Creating Excel Instance"
     $xl = New-Object -ComObject "Excel.Application"
     $xl.ScreenUpdating = $false
     #$xl.Visible = $true
@@ -100,6 +104,10 @@ if(!(Test-Path variable:\cards) -or ((Test-Path variable:\xl) -and $xl.Visible -
     $cardInfoPath = (Resolve-Path .\DominionPickerData.xlsx).Path
     $cardsDoc = $xl.Workbooks.Open($cardInfoPath)
     $cards = $cardsDoc.WorkSheets["DominionPickerCards"]
+}
+else
+{
+    Write-Verbose "An instance of Excel already exists so we are using that."
 }
 
 $cardCount = 0 
@@ -124,6 +132,7 @@ $lang | % {
     $langCount++
     $progress = (($langCount/($lang.Count+1))*100)
     Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
+    Write-Verbose "Generating $_ Cards List"
     GenerateCardsXml -Language $_ -Properties "ID","Name_$_","Rules_$_"
 }
 

@@ -16,6 +16,9 @@
       <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} </ListenFor>
       <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} [and] {set} </ListenFor>
       <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} [and] {set} [and] {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} [and] {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} [and] {set} [and] {set} </ListenFor>
       <Feedback> Creating your card list... </Feedback>
       <Navigate />
     </Command>

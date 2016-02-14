@@ -82,16 +82,14 @@
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <localControls:PinnableCheckBox 
+                                        <localControls:PinnableCheckBox 
                                                 IsChecked="{Binding Enabled, Mode=TwoWay}"
                                                 Content="{Binding Set, Converter={StaticResource CardDataLocalizer}}"
                                                 IsPinned="{Binding Required, Mode=TwoWay}"
                                                 Margin="0,-5,-5,-5"
                                                 FontSize="28"
                                                 Width="225">
-                                            </localControls:PinnableCheckBox>
-                                        </StackPanel>
+                                        </localControls:PinnableCheckBox>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -230,7 +228,7 @@
         <local:AddFavoritePopupControl x:Name="AddFavoritePopup"
                                        Grid.Row="0" Grid.RowSpan="2"
                                        SaveFavorite="AddFavoritePopup_SaveFavorite" d:IsLocked="True"/>
-        
+
         <Border x:Name="RequestReviewPopup" Grid.RowSpan="2" Background="{StaticResource PhoneContrastBackgroundBrush}" Visibility="Collapsed" d:IsLocked="True">
             <Border Width="360" Height="200" Background="{StaticResource PhoneBackgroundBrush}" CornerRadius="0">
                 <Grid>
@@ -239,7 +237,7 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
@@ -254,7 +252,7 @@
                         <LineBreak />
                         Don't worry, we won't ask you again.
                     </TextBlock>
-                    
+
                     <Button x:Name="RequestReviewOk"
                             Content="Sure Thing!"
                             Grid.Row="2" Grid.Column="0"
@@ -264,6 +262,45 @@
                             Content="No Thanks"
                             Grid.Row="2" Grid.Column="1"
                             Click="RequestReviewCancel_Click"/>
+                </Grid>
+            </Border>
+        </Border>
+
+        <Border x:Name="UpdatePopup" Grid.RowSpan="2" Background="{StaticResource PhoneContrastBackgroundBrush}" Visibility="Collapsed">
+            <Border MinHeight="200" MaxHeight="600" Background="{StaticResource PhoneBackgroundBrush}" CornerRadius="0" VerticalAlignment="Center">
+                <Grid Width="400">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock TextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,12,0,6" Text="New Features!" FontWeight="Bold" FontSize="30" />
+                    
+                    <TextBlock TextAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" TextWrapping="Wrap" VerticalAlignment="Center" Margin="20,6">
+                        Dominion Picker has been updated with some new features.  
+                        <LineBreak />Check out the help for a full list!
+                      
+                        <LineBreak />
+                        <LineBreak />
+                        • Pin a set with tap and hold so it's always included in the result if possible
+                        <LineBreak />
+                        • View the Dominion Wiki page for any card from the card details page.
+                        <LineBreak/>
+                        • Change when extra cards like Shelters or Events are selected from the Settings.
+                    </TextBlock>
+
+                    <Button x:Name="UpdatePopupOk"
+                            Content="OK"
+                            Grid.Row="2" Grid.ColumnSpan="2"
+                            Click="UpdatePopupOk_Click"
+                            Width="250"/>
+
                 </Grid>
             </Border>
         </Border>

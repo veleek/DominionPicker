@@ -79,6 +79,14 @@ namespace Ben.Dominion
             return cards;
         }
 
+        public void AddRange(IEnumerable<Card> cards)
+        {
+            foreach (Card card in cards)
+            {
+                this.Add(card);
+            }
+        }
+
         public XmlSchema GetSchema()
         {
             return null;

@@ -380,10 +380,10 @@ never be picked</value>
     <value>selected because you're using Prosperity</value>
   </data>
   <data name="Config_PlatinumColonyOption" xml:space="preserve">
-    <value>pick Platinum and Colony</value>
+    <value>when to pick Platinum and Colony</value>
   </data>
   <data name="Config_SheltersOption" xml:space="preserve">
-    <value>pick Shelters or Estates</value>
+    <value>when to pick Shelters or Estates</value>
   </data>
   <data name="PlatinumColonyOption_Always" xml:space="preserve">
     <value>Always use them</value>
@@ -438,5 +438,41 @@ never be picked</value>
   </data>
   <data name="Settings_ShowBasicCards_Description" xml:space="preserve">
     <value>Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup.</value>
+  </data>
+  <data name="CardGroupType_Events" xml:space="preserve">
+    <value>events</value>
+  </data>
+  <data name="Config_EventsOption" xml:space="preserve">
+    <value>when to pick Events</value>
+  </data>
+  <data name="EventsOption_Always" xml:space="preserve">
+    <value>Always select Events</value>
+  </data>
+  <data name="EventsOption_AlwaysWithSet" xml:space="preserve">
+    <value>Always when using a set with Events</value>
+  </data>
+  <data name="EventsOption_AlwaysWithSet_Description" xml:space="preserve">
+    <value>If you are using a set that contains Events, the result will always include two randomly selected Events.</value>
+  </data>
+  <data name="EventsOption_Always_Description" xml:space="preserve">
+    <value>The result will always include two randomly selected Events.</value>
+  </data>
+  <data name="EventsOption_Never" xml:space="preserve">
+    <value>Never select events</value>
+  </data>
+  <data name="EventsOption_Never_Description" xml:space="preserve">
+    <value>Never select any Events.</value>
+  </data>
+  <data name="EventsOption_Randomly" xml:space="preserve">
+    <value>Randomly select </value>
+  </data>
+  <data name="EventsOption_RandomlyWithSet" xml:space="preserve">
+    <value>Randomly when using a set with Events</value>
+  </data>
+  <data name="EventsOption_RandomlyWithSet_Description" xml:space="preserve">
+    <value>If you are using a set that contains Events, the result will include between zero and two randomly selected Events.</value>
+  </data>
+  <data name="EventsOption_Randomly_Description" xml:space="preserve">
+    <value>The result will include between zero and two randomly selected Events.</value>
   </data>
 </root>

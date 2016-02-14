@@ -192,6 +192,20 @@ namespace Ben.Dominion.Models
             }
         }
 
+        public EventsOption PickEvents
+        {
+            get
+            {
+                return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_PickEvents", EventsOption.Randomly);
+            }
+
+            set
+            {
+                IsolatedStorageSettings.ApplicationSettings["Application_PickEvents"] = value;
+                this.OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Gets or sets a value indicating whether or not extra bits and pieces should be shown in the results list.
         /// </summary>
