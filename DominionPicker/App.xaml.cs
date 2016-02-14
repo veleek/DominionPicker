@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO.IsolatedStorage;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Navigation;
 using Windows.Phone.Speech.VoiceCommands;
 using Ben.Dominion.Models;
@@ -199,6 +197,8 @@ namespace Ben.Dominion
 
             if (appVersion == null || appVersion != currentAppVersion)
             {
+                EasyTracker.GetTracker().SendEvent("app", "update", "old-version-" + appVersion, 0);
+                EasyTracker.GetTracker().SendEvent("app", "update", "new-version-" + currentAppVersion, 0);
                 AppLog.Instance.Log("New version detected.  Original: {0}, Current: {1}", appVersion, currentAppVersion);
                 this.IsNewVersion = true;
             }
