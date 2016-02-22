@@ -317,4 +317,6 @@
   <Card ID="302" Name="Wine Merchant" Set="Adventures" Type="Action Reserve" Cost="5" Rules="+1 Buy\n+$4\nPut this on your Tavern mat.\n_____\nAt the end of your Buy phase, if you have at least $2 unspent, you may discard this from your Tavern mat." />
   <!-- Cornucopia -->
   <Card ID="303" Name="Prizes" Set="Cornucopia" Type="Action Prize" Cost="*" Rules="Prizes are a set of five differently-named unique cards that are not part of the supply, but can be gained by playing Tournament.  They include Bag of Gold, Diadem, Followers, Princess, and Trusty Steed." />
+  <!-- Promo -->
+  <Card ID="304" Name="Summon" Set="Promo" Type="Event" Cost="5" Rules="Gain an Action card costing up to $4. Set it aside. If you do, then at the start of your next turn, play it." />
 </ArrayOfCard>

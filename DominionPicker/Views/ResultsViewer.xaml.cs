@@ -154,25 +154,7 @@ namespace Ben.Dominion
 
         private void UpdateSorting(ResultSortOrder sortOrder)
         {
-            /*
-            this.ResultsViewSource.SortDescriptions.Clear();
-
-            if (sortOrder != ResultSortOrder.Name)
-            {
-                this.ResultsViewSource.SortDescriptions.Add(
-                    new SortDescription(
-                        sortOrder.ToString(),
-                        ListSortDirection.Ascending)
-                    );
-            }
-
-            // We always sort by DisplayName after we sort by whatever sort property we have.
-            this.ResultsViewSource.SortDescriptions.Add(
-                new SortDescription(
-                    "DisplayName",
-                    ListSortDirection.Ascending)
-                );
-            */
+            this.MainView.Result.GroupedCards.First(g => g.Key.Type == CardGroupType.KingdomCard).Sort(sortOrder);
 
             // The sort button will display the next sort order option
             String nextSort = sortOrder.Next().ToString();

@@ -29,47 +29,8 @@ namespace Ben.Dominion
             {
                 if (baseBlackMarketCards == null)
                 {
-                    var nonBlackMarketCards = new List<string>
-                    {
-                        // Alchemy Treasures
-                        "Potion",
-
-                        // Prosperity Treasures and Victorys
-                        "Platinum",
-                        "Colony",
-
-                        // Prizes
-                        "Bag of Gold",
-                        "Diadem",
-                        "Followers",
-                        "Princess",
-                        "Trusty Steed",
-
-                        // Dark Ages, non-Supply Cards
-                        "Spoils",
-                        "Madman",
-                        "Mercenary",
-
-                        // Shelters
-                        "Shelters",
-                        "Hovel",
-                        "Necropolis",
-                        "Overgrown Estate",
-                        
-                        // Ruins
-                        "Ruins",
-                        "Abandoned Mine",
-                        "Ruined Library",
-                        "Ruined Market",
-                        "Ruined Village",
-                        "Survivors",
-
-                        // Black Market, Obivously...
-                        "Black Market",
-                    };
-
                     baseBlackMarketCards = new ReadOnlyCollection<Card>(
-                        Cards.AllCards.Where(c => !nonBlackMarketCards.Contains(c.Name)).ToList()
+                        Cards.PickableCards.Except(new[] { Card.FromName("Black Market") }).ToList()
                     );
                 }
 

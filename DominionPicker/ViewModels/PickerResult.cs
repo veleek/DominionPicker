@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Ben.Utilities;
 using Ben.Dominion.ViewModels;
+using System.Collections.Specialized;
 
 namespace Ben.Dominion
 {
@@ -18,6 +19,7 @@ namespace Ben.Dominion
 
         private CardList pool = null;
         private CardList cards = null;
+        private List<CardGrouping<CardGroup>> groupedCards = null;
         private List<string> additionalStuff = null;
         private ResultSortOrder sortOrder;
 
@@ -49,14 +51,27 @@ namespace Ben.Dominion
                         cards.CollectionChanged += Cards_CollectionChanged;
                     }
 
-                    this.OnPropertyChanged("GroupedCards");
+                    this.GroupedCards = null;
                 }
             }
         }
 
-        private void Cards_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Cards_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.OnPropertyChanged("GroupedCards");
+            if(e.Action == NotifyCollectionChangedAction.Replace)
+            {
+                // We want to special case replacements to maintain 'ordering' in the card groups
+                Card originalCard = e.OldItems[0] as Card;
+                Card replacementCard = e.NewItems[0] as Card;
+                CardGrouping<CardGroup> replacementGroup = this.GroupedCards.First(g => g.Key == replacementCard.Group);
+                int index = replacementGroup.IndexOf(originalCard);
+                replacementGroup[index] = replacementCard;
+            }
+            else
+            {
+                // Just null out the whole list and let it get regenerated.
+                this.GroupedCards = null;
+            }
         }
 
         [XmlIgnore]
@@ -64,16 +79,23 @@ namespace Ben.Dominion
         {
             get
             {
-                // TODO: Figure out the best way to order the cards within their individual 
-                // groups.  Maybe provide some sort of way for the user of this class to just
-                // pass in a SortOrder collection thingy to a CardGrouping that will sort it
-                return this.cards
-                    .OrderBy(c => c.DisplayName)
-                    .GroupBy(
-                        c => c.Group,
-                        (g, cards) => new CardGrouping<CardGroup>(g, new CardList(cards)))
-                    .OrderBy(g => g.Key.Type)
-                    .ToList();
+                if (this.groupedCards == null)
+                {
+                    this.groupedCards = this.cards
+                        .OrderBy(c => c.DisplayName)
+                        .GroupBy(
+                            c => c.Group,
+                            (g, cards) => new CardGrouping<CardGroup>(g, new CardList(cards)))
+                        .OrderBy(g => g.Key.Type)
+                        .ToList();
+                }
+
+                return this.groupedCards;
+            }
+
+            set
+            {
+                this.SetProperty(ref this.groupedCards, value);
             }
         }
 
@@ -148,22 +170,14 @@ namespace Ben.Dominion
 
         public void Replace(Card target, Card replacement)
         {
-            if (!this.Cards.Contains(target))
+            // You can only replace kingdom cards.
+            if (target.Group.Type != CardGroupType.KingdomCard)
             {
-                // This occurse if you swipe an 'additional card'
                 return;
-                //throw new InvalidOperationException("You can't replace a card that's not in the result");
             }
 
-            int index = -1;
-            for (int i = 0; i < Cards.Count; i++)
-            {
-                if (Cards[i].Name == target.Name)
-                {
-                    index = i;
-                    break;
-                }
-            }
+            
+            int index = Cards.IndexOf(target);
 
             if (index == -1)
                 System.Diagnostics.Debugger.Break();
@@ -176,7 +190,6 @@ namespace Ben.Dominion
             Pool.Add(target);
 
             Cards[index] = replacement;
-            
         }
 
         public void Sort(ResultSortOrder newSortOrder)

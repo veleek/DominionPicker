@@ -1,10 +1,12 @@
 ﻿namespace Ben.Dominion.ViewModels
 {
     using Data;
-    
+
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Reflection;
+    
     public enum CardGroupType
     {
         None,
@@ -72,6 +74,27 @@
         public CardGrouping(T key, IEnumerable<Card> cards)
             : base(key, cards)
         {
+        }
+
+        public void Sort(ResultSortOrder sortOrder)
+        {
+            IEnumerable<Card> orderedCards;
+            if(sortOrder == ResultSortOrder.Name)
+            {
+                orderedCards = this.OrderBy(c => c.Name);
+            }
+            else
+            {
+                Type cardType = typeof(Card);
+                var sortProperty = cardType.GetProperty(sortOrder.ToString(), BindingFlags.Public | BindingFlags.Instance);
+                orderedCards = this.OrderBy(c => sortProperty.GetValue(c)).ThenBy(c => c.Name);
+            }
+            List<Card> newCardsList = orderedCards.ToList();
+            this.Clear();
+            foreach (Card card in newCardsList)
+            {
+                this.Add(card);
+            }
         }
     }
 }

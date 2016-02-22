@@ -167,7 +167,7 @@
   <Card ID="172" Name="Katakomben" Rules="Sieh dir die obersten 3 Karten von deinem Nachziehstapel an. Wähle eins: Nimm die Karten auf die Hand oder lege die Karten ab und +3 Karten.\n_____\nWenn du diese Karte entsorgst: Nimm dir eine Karte, die weniger kostet." />
   <Card ID="173" Name="Graf" Rules="Wähle eins: Lege 2 Karten aus deiner Hand ab oder lege eine Karte aus deiner Hand auf den Nachziehstapel oder nimm dir ein Kupfer.\nWähle eins: +3 Geld oder entsorge alle deine Handkarten oder nimm dir ein Herzogtum." />
   <Card ID="174" Name="Falschgeld" Rules="1 Geld\n+1 Kauf\nWenn du diese Karte ausspielst, darfst du eine Geldkarte aus deiner Hand wählen und zweimal ausspielen. Wenn du das machst: Entsorge die gewählte Geldkarte." />
-  <Card ID="175" Name="Kulist" Rules="+2 Karten\nJeder Mitspieler muss sich eine Ruinen-Karte nehmen. Du darfst einen weiteren Kulisten aus deiner Hand ausspielen.\n_____\nWenn du diese Karte entsorgst: +3 Karten." />
+  <Card ID="175" Name="Kultist" Rules="+2 Karten\nJeder Mitspieler muss sich eine Ruinen-Karte nehmen. Du darfst einen weiteren Kulisten aus deiner Hand ausspielen.\n_____\nWenn du diese Karte entsorgst: +3 Karten." />
   <Card ID="176" Name="Leichenkarren" Rules="+5 Geld\nDu darfst eine Aktionskarte aus deiner Hand entsorgen. Wenn du das nicht machst: Entsorge diese Karte.\n_____\nWenn du diese Karte nimmst, nimm dir 2 Ruinen-Karten." />
   <Card ID="177" Name="Dame Anna" Rules="Du darfst bis zu 2 Karten aus deiner Hand entsorgen.\nJeder Mitspieler muss die obersten beiden Karten von seinem Nachziehstapel aufdecken, eine davon entsorgen, die 3 bis 6 kostet und die übrigen aufgedeckten Karten ablegen. Wenn dadurch ein Ritter entsorgt wird, entsorge Dame Anna." />
   <Card ID="178" Name="Dame Josephine" Rules="Jeder Mitspieler muss die obersten beiden Karten von seinem Nachziehstapel aufdecken, eine davon entsorgen, die 3 bis 6 kostet und die übrigen aufgedeckten Karten ablegen. Wenn dadurch ein Ritter entsorgt wird, entsorge Dame Josephine.\n_____\n2 Punkte" />
@@ -230,4 +230,63 @@
   <Card ID="235" Name="Steinmetz" />
   <Card ID="236" Name="Steuereintreiber" />
   <Card ID="237" Name="Prinz" />
+  <Card ID="245" Name="Almosen" />
+  <Card ID="246" Name="Amulett" />
+  <Card ID="247" Name="Kunsthandwerker" />
+  <Card ID="248" Name="Ball" />
+  <Card ID="249" Name="Freudenfeuer" />
+  <Card ID="250" Name="Leihgabe" />
+  <Card ID="251" Name="Brückentroll" />
+  <Card ID="252" Name="Karawanenwächter" />
+  <Card ID="253" Name="Champion" />
+  <Card ID="254" Name="Königliche Münze" />
+  <Card ID="255" Name="Schüler" />
+  <Card ID="256" Name="Ferne Lande" />
+  <Card ID="257" Name="Verlies" />
+  <Card ID="258" Name="Duplikat" />
+  <Card ID="259" Name="Expedition" />
+  <Card ID="260" Name="Überfahrt" />
+  <Card ID="261" Name="Flüchtling" />
+  <Card ID="262" Name="Ausrüstung" />
+  <Card ID="263" Name="Riese" />
+  <Card ID="264" Name="Kundschafter" />
+  <Card ID="265" Name="Geisterwald" />
+  <Card ID="266" Name="Held" />
+  <Card ID="267" Name="Gefolgsmann" />
+  <Card ID="268" Name="Erbschaft" />
+  <Card ID="269" Name="Verlorene Kunst" />
+  <Card ID="270" Name="Verlorene Stadt" />
+  <Card ID="271" Name="Elster" />
+  <Card ID="272" Name="Kurier" />
+  <Card ID="273" Name="Geizhals" />
+  <Card ID="274" Name="Mission" />
+  <Card ID="275" Name="Page" />
+  <Card ID="276" Name="Wegsuche" />
+  <Card ID="277" Name="Kleinbauer" />
+  <Card ID="278" Name="Pilgerfahrt" />
+  <Card ID="279" Name="Planung" />
+  <Card ID="280" Name="Hafenstadt" />
+  <Card ID="281" Name="Quest" />
+  <Card ID="282" Name="Überfall" />
+  <Card ID="283" Name="Wildhüter" />
+  <Card ID="284" Name="Rattenfänger" />
+  <Card ID="285" Name="Zerstörung" />
+  <Card ID="286" Name="Relikt" />
+  <Card ID="287" Name="Königliche Kutsche" />
+  <Card ID="288" Name="Zuflucht" />
+  <Card ID="289" Name="Spähtrupp" />
+  <Card ID="290" Name="Seeweg" />
+  <Card ID="291" Name="Soldat" />
+  <Card ID="292" Name="Geschichtenerzähler" />
+  <Card ID="293" Name="Sumpfhexe" />
+  <Card ID="294" Name="Lehrer" />
+  <Card ID="295" Name="Handel" />
+  <Card ID="296" Name="Training" />
+  <Card ID="297" Name="Transformation" />
+  <Card ID="298" Name="Wanderzirkus" />
+  <Card ID="299" Name="Schatzsucher" />
+  <Card ID="300" Name="Schatz" />
+  <Card ID="301" Name="Krieger" />
+  <Card ID="302" Name="Weinhändler" />
+  <Card ID="304" Name="Einladung" />
 </ArrayOfCard>
