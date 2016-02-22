@@ -120,11 +120,23 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value>./Resources/DominionPickerCards.nl.xml</value>
   </data>
+  <data name="CardSet_Adventures" xml:space="preserve">
+    <value>Avonturen</value>
+  </data>
   <data name="CardSet_Alchemy" xml:space="preserve">
     <value>Alchemisten</value>
   </data>
   <data name="CardSet_Base" xml:space="preserve">
     <value>Basisspel</value>
+  </data>
+  <data name="CardSet_DarkAges" xml:space="preserve">
+    <value>De Donkere Middeleeuwen</value>
+  </data>
+  <data name="CardSet_Guilds" xml:space="preserve">
+    <value>De Gilden</value>
+  </data>
+  <data name="CardSet_Hinterlands" xml:space="preserve">
+    <value>Het Achterland</value>
   </data>
   <data name="CardSet_Intrigue" xml:space="preserve">
     <value>Intrige</value>

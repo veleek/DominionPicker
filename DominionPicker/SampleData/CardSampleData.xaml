@@ -1,6 +1,6 @@
 ﻿<Card xmlns="clr-namespace:Ben.Dominion"
       xmlns:vm="clr-namespace:Ben.Dominion.ViewModels"
-         Name="Sample Card" 
+         Name="Sample Card With a Really Long Name" 
          Cost="0*" 
          Set="DarkAges" 
          ID="100" 

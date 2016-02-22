@@ -13,18 +13,27 @@ namespace Ben.Data
     {
         private static Dictionary<object, string> localizedValueMap = new Dictionary<object, string>();
 
-        public ResourceManager ResourceManager { get; set; }
+        private readonly Func<ResourceManager> resourceManagerGetter;
+        private readonly Func<CultureInfo> currentCultureGetter;
 
-        public CultureInfo DefaultCulture { get; set; }
+        public Localizer(Func<ResourceManager> resourceManagerGetter, Func<CultureInfo> currentCultureGetter)
+        {
+            this.resourceManagerGetter = resourceManagerGetter;
+            this.currentCultureGetter = currentCultureGetter;
+        }
 
+        public ResourceManager ResourceManager { get { return resourceManagerGetter(); } }
+
+        public CultureInfo CurrentCulture {  get { return currentCultureGetter(); } }
+        
         public string GetLocalizedValue(object value, params object[] args)
         {
-            return GetLocalizedValue(value, null, DefaultCulture, args);
+            return GetLocalizedValue(value, null, null, args);
         }
 
         public string GetLocalizedValue(object value, string suffix, params object[] args)
         {
-            return GetLocalizedValue(value, suffix, DefaultCulture, args);
+            return GetLocalizedValue(value, suffix, null, args);
         }
 
         public string GetLocalizedValue(object value, string suffix, CultureInfo culture, params object[] args)
@@ -73,7 +82,7 @@ namespace Ben.Data
                         localizedValueKey = localizedValueKey + "_" + suffix;
                     }
 
-                    localizedValue = ResourceManager.GetString(localizedValueKey, culture ?? DefaultCulture ?? CultureInfo.InvariantCulture) ?? "!! Missing Resource for " + localizedValueKey + " !!";
+                    localizedValue = ResourceManager.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource for " + localizedValueKey + " !!";
                 }
 
                 localizedValueMap[valueKey] = localizedValue;
@@ -101,27 +110,30 @@ namespace Ben.Data
                 string valueName = value.ToString();
                 string localizedValueKey = string.Format("{0}_{1}", valueType, valueName);
 
-                localizedValue = ResourceManager.GetString(localizedValueKey, culture ?? DefaultCulture ?? CultureInfo.InvariantCulture) ?? "!! Missing Resource !!";
+                localizedValue = ResourceManager.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource !!";
                 localizedValueMap[localizedValueKey] = localizedValue;
             }
 
             return localizedValue;
         }
+
+        private CultureInfo ResolveCulture(CultureInfo culture)
+        {
+            // If a culture override is provided on the ResourceManager, then we just want to use that one
+            // Otherwise use the culture provided and default to the invariant culture otherwise.
+            return this.CurrentCulture ?? culture ?? CultureInfo.InvariantCulture;
+        }
     }
 
     public static class Localized
     {
-        public static Localizer Strings { get; } = new Localizer
-        {
-            ResourceManager = Ben.Dominion.Resources.Strings.ResourceManager,
-            DefaultCulture = Ben.Dominion.Resources.Strings.Culture,
-        };
+        public static Localizer Strings { get; } = new Localizer(
+            () => Dominion.Resources.Strings.ResourceManager,
+            () => Dominion.Resources.Strings.Culture);
 
-        public static Localizer CardData { get; } = new Localizer
-        {
-            ResourceManager = CardDataStrings.ResourceManager,
-            DefaultCulture = CardDataStrings.Culture,
-        };
+        public static Localizer CardData { get; } = new Localizer(
+            () => CardDataStrings.ResourceManager,
+            () => CardDataStrings.Culture);
     }
     
     public interface ILocalizable

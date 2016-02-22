@@ -120,6 +120,9 @@
   <data name="Application_LocalizedCardsFileName" xml:space="preserve">
     <value>./Resources/DominionPickerCards.de.xml</value>
   </data>
+  <data name="CardSet_Adventures" xml:space="preserve">
+    <value>Avonturen</value>
+  </data>
   <data name="CardSet_Alchemy" xml:space="preserve">
     <value>Alchemisten</value>
   </data>
@@ -128,6 +131,9 @@
   </data>
   <data name="CardSet_Cornucopia" xml:space="preserve">
     <value>Reiche Ernte</value>
+  </data>
+  <data name="CardSet_DarkAges" xml:space="preserve">
+    <value>Dark Ages</value>
   </data>
   <data name="CardSet_Guilds" xml:space="preserve">
     <value>Die Gilden</value>
@@ -140,6 +146,9 @@
   </data>
   <data name="CardSet_Prosperity" xml:space="preserve">
     <value>Blütezeit</value>
+  </data>
+  <data name="CardSet_Seaside" xml:space="preserve">
+    <value>Seaside</value>
   </data>
   <data name="CardType_Action" xml:space="preserve">
     <value>Aktion</value>

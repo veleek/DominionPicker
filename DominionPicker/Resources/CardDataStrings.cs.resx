@@ -126,6 +126,9 @@
   <data name="CardSet_Cornucopia" xml:space="preserve">
     <value>Roh hojnosti</value>
   </data>
+  <data name="CardSet_Hinterlands" xml:space="preserve">
+    <value>Vzdálené kraje</value>
+  </data>
   <data name="CardSet_Intrigue" xml:space="preserve">
     <value>Intriky</value>
   </data>
@@ -135,7 +138,7 @@
   <data name="CardSet_Seaside" xml:space="preserve">
     <value>Pobřeží</value>
   </data>
- <data name="CardType_Action" xml:space="preserve">
+  <data name="CardType_Action" xml:space="preserve">
     <value>Action</value>
   </data>
   <data name="CardType_Attack" xml:space="preserve">
