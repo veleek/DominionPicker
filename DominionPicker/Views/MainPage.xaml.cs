@@ -73,7 +73,7 @@ namespace Ben.Dominion
                 this.ResetFavorites_Click);
         }
 
-        public MainViewModel MainView => MainViewModel.Instance;
+        public MainViewModel MainView { get { return MainViewModel.Instance; } }
 
         public void LoadState()
         {

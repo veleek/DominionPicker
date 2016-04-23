@@ -50,11 +50,11 @@ namespace Ben.Dominion.ViewModels
 
         }
 
-        public static CardLookupViewModel Instance => instance ?? (instance = new CardLookupViewModel());
+        public static CardLookupViewModel Instance { get { return instance ?? (instance = new CardLookupViewModel()); } }
 
-        public CardSelector[] CardSelectors { get; }
+        public CardSelector[] CardSelectors { get; private set; }
 
-        public List<CardSetGrouping> FilteredCardSelectorGroups { get; }
+        public List<CardSetGrouping> FilteredCardSelectorGroups { get; private set; }
 
         public CardList FilteredCards
         {

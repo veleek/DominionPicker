@@ -73,7 +73,7 @@ namespace Ben.Dominion
 
         protected virtual void OnSwipe()
         {
-            this.Swipe?.Invoke(this, EventArgs.Empty);
+            this.Swipe.Invoke(this, EventArgs.Empty);
         }
     }
 }

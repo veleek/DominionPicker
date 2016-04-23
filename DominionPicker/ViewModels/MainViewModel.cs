@@ -83,7 +83,7 @@ namespace Ben.Dominion
             set { this.SetProperty(ref this.blackMarket, value, "BlackMarket"); }
         }
 
-        public ConfigurationModel Configuration => ConfigurationModel.Instance;
+        public ConfigurationModel Configuration { get { return ConfigurationModel.Instance; } }
 
         [XmlIgnore]
         public bool IsGenerating
@@ -127,7 +127,7 @@ namespace Ben.Dominion
                 this.IsGenerating = true;
 
                 // Save the sort order from the current result if there is one.
-                ResultSortOrder sortOrder = this.Result?.SortOrder ?? ResultSortOrder.Name;
+                ResultSortOrder sortOrder = this.Result != null ? this.Result.SortOrder : ResultSortOrder.Name;
                 this.Result = Picker.GenerateCardList(this.Settings, sortOrder);
             }
             finally

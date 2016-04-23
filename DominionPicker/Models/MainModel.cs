@@ -4,6 +4,6 @@
     {
         private static MainModel instance;
 
-        public static MainModel Instance => instance ?? (instance = new MainModel());
+        public static MainModel Instance { get { return instance ?? (instance = new MainModel()); } }
     }
 }

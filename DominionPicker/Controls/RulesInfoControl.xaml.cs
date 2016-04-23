@@ -81,7 +81,7 @@ namespace Ben.Dominion.Controls
 
         public CardSet Set { get; set; }
 
-        public string RulesUri { get; }
+        public string RulesUri { get; private set; }
 
         public string Status
         {

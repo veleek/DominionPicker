@@ -127,11 +127,11 @@ namespace Ben.Data
 
     public static class Localized
     {
-        public static Localizer Strings { get; } = new Localizer(
+        public static Localizer Strings = new Localizer(
             () => Dominion.Resources.Strings.ResourceManager,
             () => Dominion.Resources.Strings.Culture);
 
-        public static Localizer CardData { get; } = new Localizer(
+        public static Localizer CardData = new Localizer(
             () => CardDataStrings.ResourceManager,
             () => CardDataStrings.Culture);
     }

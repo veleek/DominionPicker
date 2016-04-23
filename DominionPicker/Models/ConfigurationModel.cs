@@ -47,7 +47,7 @@ namespace Ben.Dominion.Models
 	    /// Convenience accessor to allow binding to the set of all cards.
 	    /// </summary>
 	    [XmlIgnore]
-	    public IEnumerable<CardSet> AllSets => Cards.AllSets;
+	    public IEnumerable<CardSet> AllSets { get { return Cards.AllSets; } }
 
 	    [XmlIgnore]
         public List<CardSet> OwnedSets
@@ -63,7 +63,7 @@ namespace Ben.Dominion.Models
 
             set
             {
-				this.OwnedSets = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => (CardSet)Enum.Parse(typeof(CardSet), s, true)).ToList();
+                this.OwnedSets = value.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => (CardSet)Enum.Parse(typeof(CardSet), s, true)).ToList();
             }
         }
 

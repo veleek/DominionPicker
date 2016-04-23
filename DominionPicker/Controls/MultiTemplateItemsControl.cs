@@ -22,7 +22,7 @@ namespace Ben.Controls
 			this.DataTemplateMap = dataTemplateMap;
 		}
 
-		public Dictionary<Type, DataTemplate> DataTemplateMap { get; }
+		public Dictionary<Type, DataTemplate> DataTemplateMap { get; private set; }
 
 		public DataTemplate SelectTemplate(object item, DependencyObject container)
 		{

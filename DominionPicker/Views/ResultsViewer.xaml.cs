@@ -59,7 +59,7 @@ namespace Ben.Dominion
             this.ApplicationBar.AddMenuItem(Strings.Menu_About, this.About_Click);
         }
 
-        public MainViewModel MainView => MainViewModel.Instance;
+        public MainViewModel MainView { get { return MainViewModel.Instance; } }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {

@@ -266,7 +266,7 @@ namespace Ben.Utilities
     {
         private static XmlSerializer serializer;
 
-        private static XmlSerializer Serializer => serializer ?? (serializer = new XmlSerializer(typeof(TObject)));
+        private static XmlSerializer Serializer { get { return serializer ?? (serializer = new XmlSerializer(typeof(TObject))); } }
 
         public override TObject Deserialize(TextReader reader)
         {
@@ -298,7 +298,7 @@ namespace Ben.Utilities
     {
         private static DataContractSerializer serializer;
 
-        private static DataContractSerializer Serializer => serializer ?? (serializer = new DataContractSerializer(typeof(TObject)));
+        private static DataContractSerializer Serializer { get { return serializer ?? (serializer = new DataContractSerializer(typeof(TObject))); } }
 
         public override TObject Deserialize(TextReader reader)
         {
@@ -332,7 +332,8 @@ namespace Ben.Utilities
 
     public class JsonSerializer<TObject> : Serializer<TObject>
     {
-        private static JsonSerializer Serializer { get; } = new JsonSerializer();
+        private static JsonSerializer serializer = new JsonSerializer();
+        private static JsonSerializer Serializer { get { return serializer; } }
 
         public override TObject Deserialize(TextReader reader)
         {

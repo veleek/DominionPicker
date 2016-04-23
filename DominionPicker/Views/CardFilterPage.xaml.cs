@@ -35,7 +35,7 @@ namespace Ben.Dominion
             this.ApplicationBar.MenuItems.Add(aboutMenuItem);
         }
 
-        public CardLookupViewModel ViewModel => CardLookupViewModel.Instance;
+        public CardLookupViewModel ViewModel { get { return CardLookupViewModel.Instance; } }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
