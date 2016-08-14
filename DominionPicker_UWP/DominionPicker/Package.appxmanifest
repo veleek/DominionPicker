@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:m1="http://schemas.microsoft.com/appx/2010/manifest" xmlns:phone="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities" xmlns:t="http://schemas.microsoft.com/appx/manifest/types" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10">
+  <Identity Name="138458E7997D1.DominionPicker" Publisher="CN=D33EB068-0180-47D4-8C3D-69151BBD4EFA" Version="3.0.2.0" />
+  <phone:PhoneIdentity PhoneProductId="33f9d727-3010-4191-a244-a2aa54816ce2" PhonePublisherId="b0838bbe-433c-43df-a0c3-f23c011b1868" />
+  <Properties>
+    <DisplayName>Dominion Picker</DisplayName>
+    <PublisherDisplayName>Ben Corp.</PublisherDisplayName>
+    <Logo>StoreLogo.png</Logo>
+  </Properties>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.10586.0" MaxVersionTested="10.0.10586.0" />
+  </Dependencies>
+  <Capabilities>
+    <Capability Name="internetClientServer" />
+    <Capability Name="internetClient" />
+  </Capabilities>
+  <Applications>
+    <Application Id="DominionPicker" Executable="$targetnametoken$.exe" EntryPoint="DominionPicker">
+      <uap:VisualElements DisplayName="Dominion Picker" Description="A Dominon Kingdom Card Randomizer" BackgroundColor="#464646" Square150x150Logo="Square150x150.png" Square44x44Logo="Square44x44Logo.png">
+        <uap:DefaultTile>
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+          </uap:ShowNameOnTiles>
+        </uap:DefaultTile>
+        <uap:SplashScreen Image="SplashScreenImage.jpg" BackgroundColor="#292929" />
+      </uap:VisualElements>
+      <Extensions>
+        <uap:Extension Category="windows.protocol">
+          <uap:Protocol Name="dominionpicker">
+            <uap:DisplayName>My Protocol</uap:DisplayName>
+          </uap:Protocol>
+        </uap:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+</Package>

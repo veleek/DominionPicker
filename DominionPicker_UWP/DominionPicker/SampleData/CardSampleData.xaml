@@ -1,0 +1,23 @@
+﻿<SampleCard 
+  xmlns="using:Ben.Dominion.Sample"
+  xmlns:vm="using:Ben.Dominion.ViewModels"
+  Name="Sample Card With a Really Long Name" 
+  Cost="0*" 
+  CoinCost="2*"
+  HasPotion="True"
+  Set="DarkAges" 
+  ID="100" 
+  Type="Reaction, Victory" 
+  Rules="+1 Card\n+2 Coins\nWhen you gain this, trash a card.\n______\n(This is not in the supply.)"
+  Label="bane"
+  BackgroundColor="Green">
+  <SampleCard.Group>
+    <vm:CardGroup Type="OtherRequired">
+      <vm:CardGroup.Cards>
+        <SampleCardList>
+          <SampleCard Name="Test" />
+        </SampleCardList>
+      </vm:CardGroup.Cards>
+    </vm:CardGroup>
+  </SampleCard.Group>
+</SampleCard>

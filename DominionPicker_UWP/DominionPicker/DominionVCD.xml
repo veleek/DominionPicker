@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Random blog posts with info about VCD stuff
+     https://msdn.microsoft.com/en-us/magazine/jj721592.aspx
+     https://msdn.microsoft.com/en-us/magazine/jj863134.aspx
+     https://msdn.microsoft.com/en-us/library/dn722331.aspx - VCD XML Schema
+-->
+  
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.0">
+  <CommandSet xml:lang="en-US" Name="DominionPickerEn">
+    <CommandPrefix>Dominion</CommandPrefix>
+    <Example> generate a set </Example>
+
+    <Command Name="GenerateSet">
+      <Example> generate a set with guilds and seaside </Example>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} [and] {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {type} [and] {choice} {set} [and] {set} [and] {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} [and] {set} </ListenFor>
+      <ListenFor> [make] [generate] [create] [a] set {choice} {set} [and] {set} [and] {set} </ListenFor>
+      <Feedback> Creating your card list... </Feedback>
+      <Navigate />
+    </Command>
+
+    <PhraseList Label="set">
+      <Item> base </Item>
+      <Item> intrigue </Item>
+      <Item> seaside </Item>
+      <Item> alchemy </Item>
+      <Item> prosperity </Item>
+      <Item> cornucopia </Item>
+      <Item> hinterlands </Item>
+      <Item> dark ages </Item>
+      <Item> guilds </Item>
+      <Item> promo </Item>
+    </PhraseList>
+    
+    <PhraseList Label="choice">
+      <Item> with </Item>
+      <Item> using </Item>
+      <Item> with no </Item>
+      <Item> without </Item>
+    </PhraseList>
+    
+    <PhraseList Label="type">
+      <Item> Plus Actions </Item>
+      <Item> Action Splits </Item>
+      <Item> Plus Buys </Item>
+      <Item> Plus Cards </Item>
+      <Item> Attack </Item>
+      <Item> Attacks </Item>
+      <Item> Attack Cards </Item>
+      <Item> Potions </Item>
+      <Item> Defense </Item>
+      <Item> Defense Cards </Item>
+      <Item> Reaction </Item>
+      <Item> Reaction Cards </Item>
+    </PhraseList>
+
+  </CommandSet>
+</VoiceCommands>
+
+<!-- For Applications targeted at Windows Phone 8.1 -->
+<!--
+    1. Change the version to 1.1
+        <VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
+
+    2. Add PhraseTopic section
+        <PhraseTopic Label="dateTopic" Scenario="Form Filling"> 
+            <Subject> Date/Time </Subject> 
+            <Subject> MyCustomSubject </Subject> 
+        </PhraseTopic>
+-->
+
+<!-- Example -->
+<!--
+
+    The preceding example demonstrates a hypothetical game called 'Contoso ROD3O!' which defines two
+    Commands that a user can say to either start a new game or replay one of three levels in the game.  
+    To initiate the PlayGame command, a user can say "Contoso Rodeo play  a new game" or "Contoso Rodeo
+    play new game". Either phrase will start a new game. To initiate the second Command, a user can say
+    "Contoso Rodeo replay level one", "Contoso Rodeo replay level two", or "Contoso Rodeo replay level 
+    three".
+    The second Command demonstrates how to use a PhraseList with a Command. PhraseLists can be updated 
+    dynamically by the application (e.g., if a user unlocks a new level or game or feature, you might 
+    want to allow the user to give commands for newfeatures after voice commands are already registered.)
+    The third Command demonstrates how the {*} sequence can parallel another command to recognize speech
+    that is not defined in the CommandSet.
+
+  Note:
+
+      [and] Indicates that "and" is optional. Making connecting words like this optional
+            can help both "Contoso Rodeo, play new game" and "open Contoso Rodeo and play
+            a new game" feel natural to speak.
+                 
+      {number} Defined separately from the Command, mapping to "one" or "two" or "three".
+
+-->

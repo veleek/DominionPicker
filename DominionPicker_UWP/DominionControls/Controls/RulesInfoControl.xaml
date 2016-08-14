@@ -1,0 +1,20 @@
+<UserControl x:Class="Ben.Dominion.Controls.RulesInfoControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="Root" d:DesignHeight="86" d:DesignWidth="480" x:FieldModifier="internal">
+  <Grid x:Name="LayoutRoot" Tapped="LayoutRoot_OnTap" DataContext="{Binding RulesInfo, ElementName=Root}" d:DataContext="{d:DesignData Source=../SampleData/RulesInfoSampleData.xaml}">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Border Background="{StaticResource SystemControlForegroundChromeHighBrush}" Width="60" Height="70" Margin="0,6" VerticalAlignment="Top" Grid.RowSpan="2">
+      <!--OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='../Images/SetIcons'}"-->
+    </Border>
+    <StackPanel Grid.Column="1">
+      <TextBlock Style="{StaticResource TitleTextBlockStyle}">
+        <Run Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" />
+        <Run Text=" Rules" />
+      </TextBlock>
+      <ProgressBar x:Name="DownloadProgress" Visibility="{Binding Downloading, Converter={StaticResource BooleanToVisibilityConverter}}" Value="{Binding Progress}" Margin="0,6,0,0" x:FieldModifier="internal" />
+      <TextBlock Text="{Binding Status}" Style="{StaticResource SubtitleTextBlockStyle}" />
+    </StackPanel>
+  </Grid>
+  <!--FontSize="{StaticResource PhoneFontSizeNormal}"-->
+</UserControl>

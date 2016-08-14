@@ -1,0 +1,94 @@
+<Application x:Class="Ben.Dominion.App" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:data="using:Ben.Data" 
+             xmlns:converters="using:Ben.Data.Converters"
+             xmlns:resources="using:Ben.Dominion.Resources"
+             xmlns:controls="using:Ben.Dominion.TestControls"
+             xmlns:sample="using:Ben.Dominion.Sample">
+  <Application.Resources>
+    <converters:StringFormatConverter x:Key="StringFormatConverter" />
+    <converters:UriSourceConverter x:Key="UriSourceConverter" />
+    <converters:TypeConverter x:Key="TypeConverter" />
+
+    <data:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <data:StringConverter x:Key="StringConverter" />
+    <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
+    <data:DebugConverter x:Key="DebugConverter" />
+    <data:ImageConverter x:Key="ImageConverter" />
+    <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    <data:StringsLocalizeConverter x:Key="StringsLocalizer" />
+    <data:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
+    <data:EnumValuesConverter x:Key="EnumValuesConverter" />
+    
+    <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
+    <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
+    
+    <Style x:Key="CardCostTextStyle" TargetType="TextBlock">
+      <Setter Property="FontFamily" Value="{StaticResource BookAntiquaBold}" />
+      <Setter Property="FontSize" Value="23" />
+      <Setter Property="FontWeight" Value="Bold" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="Foreground" Value="Black" />
+    </Style>
+    <Style x:Key="CardNameTextStyle" TargetType="TextBlock">
+      <Setter Property="FontFamily" Value="{StaticResource OptimusPrincepsSemiBold}" />
+      <Setter Property="FontSize" Value="33" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+      <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+
+    <Style x:Key="EnumOptionStyle" TargetType="ComboBox">
+      <Setter Property="HeaderTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <TextBlock Text="{Binding}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Bold" />
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <StackPanel Margin="8" MaxWidth="450">
+              <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
+            </StackPanel>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <Style x:Key="EnumOptionWithDescriptionStyle" TargetType="ComboBox">
+      <Setter Property="HeaderTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <TextBlock Text="{Binding}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Bold" />
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemTemplate">
+        <Setter.Value>
+          <DataTemplate>
+            <StackPanel Margin="8" MaxWidth="450">
+              <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
+              <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}, ConverterParameter=Description}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" />
+            </StackPanel>
+          </DataTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <resources:LocalizedResources x:Key="LocalizedResources" />
+
+    <DataTemplate x:Key="BulletedItem">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto" />
+          <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Ellipse Width="10" Height="10" Fill="{StaticResource SystemControlForegroundChromeHighBrush}" Margin="12,10,-4,0" VerticalAlignment="Top" Opacity=".8" />
+        <TextBlock Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap" Opacity="0.8" Text="{Binding}" />
+      </Grid>
+    </DataTemplate>
+  </Application.Resources>
+</Application>

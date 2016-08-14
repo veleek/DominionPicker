@@ -1,0 +1,73 @@
+<Page x:Class="Ben.Dominion.CardInfo" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:local="using:Ben.Dominion.TestControls" 
+      mc:Ignorable="d" 
+      d:DesignHeight="768" d:DesignWidth="480" 
+      d:DataContext="{d:DesignData Source=../SampleData/CardSampleData.xaml}" 
+      xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation" >
+  
+  <Page.Transitions>
+    <toolkit:TransitionCollection>
+      <toolkit:NavigationThemeTransition>
+        <toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+          <CommonNavigationTransitionInfo />
+        </toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+      </toolkit:NavigationThemeTransition>
+    </toolkit:TransitionCollection>
+  </Page.Transitions>
+  
+  <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <TextBlock Grid.Row="0" HorizontalAlignment="Right" Margin="12,0,12,6" TextAlignment="Right" Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding Strings.Info_Tips, Source={StaticResource LocalizedResources}}" />
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource BodyTextBlockStyle}" />
+      <TextBlock x:Name="PageTitle" Text="{Binding Strings.Info_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource HeaderTextBlockStyle}" />
+    </StackPanel>
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
+      <!--<p2:GestureService.GestureListener>
+        <p1:GestureListener Flick="CardInfo_Flick" />
+      </p2:GestureService.GestureListener>-->
+      <ScrollViewer>
+        <StackPanel>
+          <ScrollViewer Margin="12,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <local:DominionCardControl DataContext="{Binding}"></local:DominionCardControl>
+          </ScrollViewer>
+          <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <Grid Margin="12,0,0,0">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <BitmapIcon UriSource="{Binding Set, Converter={StaticResource UriSourceConverter}, ConverterParameter='Images/SetIcons/'}"
+                        Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                        Width="40"
+                        HorizontalAlignment="Center"
+                        />
+            <TextBlock Grid.Column="1" Margin="12,0,0,0"
+                       Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" 
+                       VerticalAlignment="Center"
+                       Style="{StaticResource TitleTextBlockStyle}" />
+          </Grid>
+          <TextBlock Text="{Binding Strings.Info_Type, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <TextBlock Text="{Binding Type}" Style="{StaticResource TitleTextBlockStyle}" />
+          <TextBlock Text="{Binding Strings.Info_Rules, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <TextBlock Text="{Binding FormattedRules}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
+          <TextBlock Text="{Binding Strings.Info_Wiki, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <HyperlinkButton Content="Dominion Strategy Wiki Page" 
+                           NavigateUri="{Binding StrategyPageUrl}" 
+                           HorizontalContentAlignment="Left" 
+                           Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
+                           FontSize="30">
+          </HyperlinkButton>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
+  </Grid>
+</Page>

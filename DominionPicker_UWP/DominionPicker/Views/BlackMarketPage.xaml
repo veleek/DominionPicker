@@ -1,0 +1,124 @@
+<Page x:Class="Ben.Dominion.BlackMarketPage" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:system="using:System" 
+      xmlns:local="using:Ben.Dominion.TestControls" 
+      xmlns:componentModel="using:System.ComponentModel" 
+      mc:Ignorable="d" 
+      d:DesignHeight="696" d:DesignWidth="480" 
+      DataContext="{Binding Instance.BlackMarket, Source={StaticResource MainView}}" 
+      d:DataContext="{d:DesignData Source=SampleData/BlackMarketSampleData.xaml}" 
+      xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation">
+  <Page.Transitions>
+    <toolkit:TransitionCollection>
+      <toolkit:NavigationThemeTransition>
+        <toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+          <CommonNavigationTransitionInfo />
+        </toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+        <!--Mode="ForwardIn"-->
+      </toolkit:NavigationThemeTransition>
+      <!--<toolkit:TransitionCollection.Backward xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation">
+  <SwivelTransition Mode="BackwardIn" xmlns="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" />
+</toolkit:TransitionCollection.Backward>-->
+    </toolkit:TransitionCollection>
+  </Page.Transitions>
+  <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.Resources>
+      <CollectionViewSource x:Key="HandViewSource" Source="{Binding Hand}">
+        <!--<CollectionViewSource.SortDescriptions>
+          <componentModel:SortDescription PropertyName="DisplayName" />
+        </CollectionViewSource.SortDescriptions>-->
+      </CollectionViewSource>
+    </Grid.Resources>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <!--TitlePanel contains the name of the application and page title-->
+    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
+      <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource BodyTextBlockStyle}" />
+      <TextBlock x:Name="PageTitle" Text="{Binding Strings.BlackMarket_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource HeaderTextBlockStyle}" />
+    </StackPanel>
+    <!--ContentPanel - place additional content here-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+        <RowDefinition Height="Auto" />
+      </Grid.RowDefinitions>
+      <StackPanel Grid.Row="0" Visibility="{Binding Selected, Converter={StaticResource IsValidToVisibilityConverter}}">
+        <TextBlock Text="selected" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
+        <ContentPresenter Content="{Binding Selected}">
+          <ContentPresenter.ContentTemplate>
+            <DataTemplate>
+              <local:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap" Swipe="CardItem_Swipe" />
+            </DataTemplate>
+          </ContentPresenter.ContentTemplate>
+        </ContentPresenter>
+      </StackPanel>
+      <StackPanel Grid.Row="1" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}}">
+        <TextBlock Text="hand" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
+        <ScrollViewer>
+          <ItemsControl ItemsSource="{Binding Source={StaticResource HandViewSource}}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <local:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap" />
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </StackPanel>
+      <!-- True flips the result, so this is only visible when the Hand count is == 0 -->
+      <Button Click="DrawButton_Click" Grid.Row="4" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}">
+        <StackPanel Orientation="Vertical">
+          <TextBlock Text="Draw" TextAlignment="Center" />
+          <TextBlock Text="three cards from the black market deck" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
+        </StackPanel>
+      </Button>
+      <!-- False leaves the result the same, so this is only visible when the Hand count is > 0 -->
+      <StackPanel Orientation="Vertical" Grid.Row="5" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=false}">
+        <TextBlock Text="tap a card to select it for purchase (optional)" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
+        <TextBlock Text="swipe to remove from the black market deck permanantly, and replace it with an additional card" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" Margin="12,5,12,0" />
+        <Button Click="DiscardButton_Click">
+          <StackPanel Orientation="Vertical">
+            <TextBlock Text="Discard" TextAlignment="Center" />
+            <TextBlock Text="the rest after selecting one to buy" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
+          </StackPanel>
+        </Button>
+      </StackPanel>
+    </Grid>
+  </Grid>
+  <Page.BottomAppBar>
+    <CommandBar Visibility="Visible">
+      <AppBarButton Label="reset" Click="Reset_Click">
+        <AppBarButton.Icon>
+          <BitmapIcon UriSource="/Images/appbar.reset.png" />
+        </AppBarButton.Icon>
+      </AppBarButton>
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="reset deck" />
+      </CommandBar.SecondaryCommands>
+      <!--IsMenuEnabled="True"-->
+    </CommandBar>
+  </Page.BottomAppBar>
+  <!--FontSize="{StaticResource PhoneFontSizeNormal}"-->
+  <!--SupportedOrientations="Portrait"-->
+  <!--Orientation="Portrait"-->
+  <!--shell:SystemTray.IsVisible="False"-->
+  <!--shell:SystemTray.Opacity="0"-->
+  <!--<toolkit:TransitionService.NavigationOutTransition xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+  <toolkit:NavigationOutTransition>
+    <toolkit:NavigationOutTransition.Forward>
+      <toolkit:SwivelTransition Mode="ForwardOut" />
+    </toolkit:NavigationOutTransition.Forward>
+    <toolkit:NavigationOutTransition.Backward>
+      <toolkit:SwivelTransition Mode="BackwardOut" />
+    </toolkit:NavigationOutTransition.Backward>
+  </toolkit:NavigationOutTransition>
+</toolkit:TransitionService.NavigationOutTransition>-->
+</Page>
