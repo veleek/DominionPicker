@@ -1,32 +1,14 @@
-//using GoogleAnalytics;
-using GalaSoft.MvvmLight.Threading;
-//using BugSense.Core.Model;
-//using BugSense;
 using Ben.Utilities;
-using Ben.Dominion.Views;
-using Ben.Dominion.Models;
-using System.Reflection;
-using System.IO.IsolatedStorage;
 using System.Diagnostics;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.ApplicationInsights;
+using Ben.Dominion.ViewModels;
 
-// The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 namespace Ben.Dominion
 {
 
@@ -145,8 +127,8 @@ namespace Ben.Dominion
                 case "_Views_BlackMarketPage.xaml":
                     rootFrame.Navigate(typeof(BlackMarketPage), e.Arguments);
                     return true;
-                case "_Views_CardFilterPage.xaml":
-                    rootFrame.Navigate(typeof(CardFilterPage), e.Arguments);
+                case "_Views_CardLookupPage.xaml":
+                    rootFrame.Navigate(typeof(CardLookupPage), e.Arguments);
                     return true;
                 case "_Views_ConfigurationPage.xaml":
                     rootFrame.Navigate(typeof(ConfigurationPage), e.Arguments);
@@ -245,8 +227,9 @@ namespace Ben.Dominion
 
         // Code to execute when the application is deactivated (sent to background)
         // This code will not execute when the application is closing
-        private void Application_Deactivated(object sender, System.Object e)
+        private void Application_Deactivated(object sender, SuspendingEventArgs e)
         {
+            Debug.WriteLine(e?.SuspendingOperation?.Deadline.ToString());
             this.isNew = false;
             MainViewModel.Instance.Save();
         }

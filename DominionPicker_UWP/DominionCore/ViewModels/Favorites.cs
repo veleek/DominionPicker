@@ -3,7 +3,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using Ben.Utilities;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
 
    [DataContract]
@@ -69,44 +69,4 @@ namespace Ben.Dominion
       {
       }
    }
-
-   [DataContract(Name = "FavoriteSetting")]
-   public class OldFavoriteSetting
-      : FavoriteThing<PickerSettings>
-   {
-
-      public OldFavoriteSetting()
-      {
-      }
-
-      public OldFavoriteSetting(String name, PickerSettings result)
-      : base(name, result)
-      {
-      }
-   }
-
-   [DataContract(Name = "FavoriteSet")]
-   public class OldFavoriteSet
-      : FavoriteThing<String>
-   {
-
-      public PickerResult Result
-      {
-         get
-         {
-            return PickerResult.FromList(this.Value.Split(',').Select(i => Int32.Parse(i)));
-         }
-      }
-
-
-      public OldFavoriteSet()
-      {
-      }
-
-      public OldFavoriteSet(String name, PickerResult result)
-      : base(name, result.ToList().Aggregate<int, string>("", (a, b) => a + "," + b).Trim(','))
-      {
-      }
-   }
-
 }

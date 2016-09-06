@@ -7,7 +7,7 @@ using Ben.Utilities;
 using Ben.Dominion.ViewModels;
 using System.Collections.Specialized;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
 
    public class PickerResult

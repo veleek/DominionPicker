@@ -1,21 +1,18 @@
 using System;
-using System.IO.IsolatedStorage;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace Ben.Utilities
 {
 
-    public static class IsolatedStorageExtensions
+    public static class ApplicationDataContainerExtensions
     {
         public static TEnum TryGetEnumOrDefault<TEnum>(this ApplicationDataContainer settings, string key, TEnum defaultValue = default(TEnum))
             where TEnum : struct
         {
             string enumRawValue;
             TEnum enumValue;
-            if(settings.TryGetValue(key, out enumRawValue) && Enum.TryParse(enumRawValue, out enumValue))
+            if (settings.TryGetValue(key, out enumRawValue) && Enum.TryParse(enumRawValue, out enumValue))
             {
                 return enumValue;
             }
@@ -44,7 +41,7 @@ namespace Ben.Utilities
             settings.TryGetValue(key, out original);
 
             // If they are equal, then replace the current value with the provided value
-            if(original == null && comparand == null || (original != null && original.Equals(comparand)))
+            if (original == null && comparand == null || (original != null && original.Equals(comparand)))
             {
                 settings.Values[key] = value;
             }
@@ -75,7 +72,7 @@ namespace Ben.Utilities
             {
                 if (typeof(T).GetTypeInfo().IsEnum)
                 {
-                    if(!(tmp is string))
+                    if (!(tmp is string))
                     {
                         throw new InvalidOperationException($"Unable to parse enum from {tmp.GetType().Name} in app settings.");
                     }
@@ -88,12 +85,6 @@ namespace Ben.Utilities
                 }
             }
             return result;
-        }
-
-        public static async Task<ulong> GetFreeSpace(Windows.Storage.StorageFolder folder)
-        {
-            var retrivedProperties = await folder.Properties.RetrievePropertiesAsync(new string[] { "System.FreeSpace" });
-            return (ulong)retrivedProperties["System.FreeSpace"];
         }
     }
 }

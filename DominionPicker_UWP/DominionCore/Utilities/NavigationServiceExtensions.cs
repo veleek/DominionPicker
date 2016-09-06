@@ -14,10 +14,6 @@ namespace Ben.Utilities
         private static bool isInitialized;
         private static Frame frame;
 
-        protected NavigationServiceHelper()
-        {
-        }
-
         public static bool IsNavigating { get; private set; }
 
         public static void Initialize()
@@ -73,12 +69,12 @@ namespace Ben.Utilities
             IsNavigating = false;
         }
 
-        public static void Navigate(String pageType)
+        public static void Navigate(String pageType, object parameter = null)
         {
-            Navigate(Type.GetType(pageType));
+            Navigate(Type.GetType(pageType), parameter);
         }
 
-        public static void Navigate(Type pageType)
+        public static void Navigate(Type pageType, object parameter = null)
         {
             Initialize();
             if (IsNavigating)
@@ -89,7 +85,7 @@ namespace Ben.Utilities
             IsNavigating = true;
             try
             {
-                frame.Navigate(pageType);
+                frame.Navigate(pageType, parameter);
             }
             catch (InvalidOperationException ioe)
             {
@@ -106,9 +102,9 @@ namespace Ben.Utilities
         /// </summary>
         /// <typeparam name="TView">The type of the view to navigate to</typeparam>
         /// <param name="view">The view to navigate to</param>
-        public static void Navigate<TView>(TView view)
+        public static void Navigate<TView>(TView view, object parameter = null)
         {
-            NavigationServiceHelper<TView>.Navigate(view);
+            NavigationServiceHelper<TView>.Navigate(view, parameter);
         }
 
         public static void CancelNavigation()
@@ -155,7 +151,7 @@ namespace Ben.Utilities
             RegisteredViews[view] = viewType;
         }
 
-        public static void Navigate(TView view)
+        public static void Navigate(TView view, object parameter = null)
         {
             Type viewType;
             if (!RegisteredViews.TryGetValue(view, out viewType))
@@ -163,7 +159,7 @@ namespace Ben.Utilities
                 throw new ArgumentException($"View {view} is not registered");
             }
 
-            Navigate(viewType);
+            Navigate(viewType, parameter);
         }
     }
 

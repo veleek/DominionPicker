@@ -1,5 +1,6 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace Ben.Dominion
 {
@@ -14,6 +15,16 @@ namespace Ben.Dominion
         void CardInfo_Loaded(object sender, RoutedEventArgs e)
         {
             this.DataContext = App.Instance.SelectedCard;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            Card selectedCard = e.Parameter as Card;
+
+            if(selectedCard != null)
+            {
+                this.DataContext = selectedCard;
+            }
         }
 
         //private void CardInfo_Flick(object sender, FlickGestureEventArgs e)

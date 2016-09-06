@@ -23,8 +23,8 @@ namespace Ben.Dominion.Views
         /// <summary>
         /// Navigate to the card lookup page.
         /// </summary>
-        [ViewType(typeof(CardFilterPage))]
-        CardFilter,
+        [ViewType(typeof(CardLookupPage))]
+        CardLookup,
         /// <summary>
         /// Navigate to the black market page.
         /// </summary>
@@ -51,13 +51,21 @@ namespace Ben.Dominion.Views
         }
 
         /// <summary>
+        /// This method does nothing, it just provides a method we can call to ensure 
+        /// that the static initializer get's called.
+        /// </summary>
+        public static void Initialize()
+        {
+        }
+
+        /// <summary>
         /// Extension method for PickerView to make it easy to navigate to the appropriate
         /// view associated with the given enum.
         /// </summary>
         /// <param name="view"></param>
-        public static void Go(this PickerView view)
+        public static void Go(this PickerView view, object parameter = null)
         {
-            NavigationServiceHelper.Navigate(view);
+            NavigationServiceHelper.Navigate(view, parameter);
         }
     }
 }

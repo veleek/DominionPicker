@@ -1,0 +1,167 @@
+<Page x:Class="Ben.Dominion.CardLookupPage" 
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:componentModel="using:System.ComponentModel" 
+      xmlns:animation="using:Windows.UI.Xaml.Media.Animation"
+      xmlns:data="using:Windows.UI.Xaml.Data"
+      xmlns:dominion="using:Ben.Dominion"
+      xmlns:viewModel="using:Ben.Dominion.ViewModels"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:behaviors="using:Ben.Dominion.Behaviors"
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="480" 
+      DataContext="{x:Bind ViewModel}">
+  <Page.Transitions>
+    <animation:TransitionCollection>
+      <animation:NavigationThemeTransition>
+        <animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+          <CommonNavigationTransitionInfo />
+        </animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+      </animation:NavigationThemeTransition>
+    </animation:TransitionCollection>
+  </Page.Transitions>
+
+  <Page.Resources>
+    
+  </Page.Resources>
+
+  <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.Resources>
+
+      <CollectionViewSource x:Name="CardsViewSource" 
+                          Source="{x:Bind ViewModel.FilteredCardSelectorGroups}" 
+                          IsSourceGrouped="True" 
+                          ItemsPath="Elements"/>
+
+      <DataTemplate x:Key="CardItemTemplate" x:DataType="dominion:CardSelector">
+        <Grid Margin="12,0">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+          </Grid.ColumnDefinitions>
+          <CheckBox IsChecked="{Binding Selected, Mode=TwoWay}" Style="{StaticResource CheckBoxWithVerticalAlignmentStyle}" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Center" Padding="8,0,0,0">
+            <TextBlock Text="{x:Bind Card.DisplayName}" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" />
+          </CheckBox>
+
+          <Button Grid.Column="1" Width="32" Height="32" Padding="0"
+                  VerticalAlignment="Center"
+                  Click="CardItemDetails_Click"
+                  Style="{StaticResource RoundButtonStyle}">
+            <SymbolIcon Symbol="Help" Margin="1,0,-1,0"/>
+          </Button>
+        </Grid>
+      </DataTemplate>
+      
+      <DataTemplate x:Key="CardSetGroupTemplate" x:DataType="dominion:CardSetGrouping">
+        <Border Background="{ThemeResource SystemControlForegroundAccentBrush}" Padding="4" Margin="0,4">
+          <Grid DataContext="{Binding Key, Mode=OneTime}">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="{Binding Mode=OneTime, Converter={StaticResource CardDataLocalizer}}" 
+                       Style="{StaticResource TitleTextBlockStyle}" 
+                       TextAlignment="Left" VerticalAlignment="Bottom" Margin="8,0" />
+            <BitmapIcon UriSource="{Binding Mode=OneTime, Converter={StaticResource UriSourceConverter}, ConverterParameter='Images/SetIcons/'}"
+                        Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                        Height="30"
+                        Width="50"
+                        Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        />
+          </Grid>
+        </Border>
+      </DataTemplate>
+
+      <DataTemplate x:Key="CardSetJumpListStyle" x:DataType="data:ICollectionViewGroup">
+        <ContentPresenter ContentTemplate="{StaticResource CardSetGroupTemplate}" Content="{x:Bind Group}" />
+      </DataTemplate>
+      
+    </Grid.Resources>
+    
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <TextBlock x:Name="PageTitle" 
+               Text="{Binding Strings.Lookup_Title, Source={StaticResource LocalizedResources}}"
+               Style="{StaticResource HeaderTextBlockStyle}" Margin="12,0,0,4"  />
+
+    <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+            Style="{StaticResource RoundButtonStyle}" Margin="12" Width="40" Height="40">
+      <SymbolIcon Symbol="Help" Margin="1,0,-1,0" />
+    </Button>
+
+    <TextBox x:Name="SearchTextBox" 
+             PlaceholderText="{Binding Strings.Lookup_SearchHint, Source={StaticResource LocalizedResources}}" 
+             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+             Grid.Row="1" Margin="12,0,12,0">
+      <interactivity:Interaction.Behaviors>
+        <interactions:EventTriggerBehavior EventName="KeyUp">
+          <behaviors:OnKeyAction Key="Enter">
+            <behaviors:CloseKeyboardAction/>
+          </behaviors:OnKeyAction>
+        </interactions:EventTriggerBehavior>
+      </interactivity:Interaction.Behaviors>
+
+    </TextBox>
+
+    <SemanticZoom Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+      <SemanticZoom.ZoomedInView>
+        <ListView ItemsSource="{x:Bind CardsViewSource.View}" 
+                  ItemTemplate="{StaticResource CardItemTemplate}" 
+                  SelectionMode="None">
+          <ListView.GroupStyle>
+            <GroupStyle HidesIfEmpty="True" HeaderTemplate="{StaticResource CardSetGroupTemplate}">
+              <GroupStyle.HeaderContainerStyle>
+                <Style TargetType="ListViewHeaderItem">
+                  <Setter Property="HorizontalAlignment" Value="Stretch" />
+                  <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+              </GroupStyle.HeaderContainerStyle>
+            </GroupStyle>
+          </ListView.GroupStyle>
+          <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+              <Setter Property="HorizontalAlignment" Value="Stretch" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+          </ListView.ItemContainerStyle>
+        </ListView>
+      </SemanticZoom.ZoomedInView>
+      <SemanticZoom.ZoomedOutView>
+        <ListView ItemsSource="{x:Bind CardsViewSource.View.CollectionGroups}" 
+                  SelectionMode="None" 
+                  ItemTemplate="{StaticResource CardSetJumpListStyle}"
+                  Margin="0,8,0,0">
+          <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+              <Setter Property="HorizontalAlignment" Value="Stretch" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+          </ListView.ItemContainerStyle>
+        </ListView>
+      </SemanticZoom.ZoomedOutView>
+    </SemanticZoom>
+  </Grid>
+  
+  <Page.BottomAppBar>
+    <CommandBar IsOpen="false">
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="About">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <behaviors:PickerViewNavigateAction />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+      </CommandBar.SecondaryCommands>
+    </CommandBar>
+  </Page.BottomAppBar>
+</Page>

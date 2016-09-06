@@ -4,13 +4,11 @@ using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Ben.Dominion.Models;
-using Ben.Dominion.Utilities;
 using Ben.Utilities;
 using Windows.ApplicationModel;
 using Windows.Storage;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
     public class MainViewModel
        : NotifyPropertyChangedBase

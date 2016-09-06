@@ -9,7 +9,7 @@ using Ben.Utilities;
 using System.Runtime.CompilerServices;
 using Windows.Storage;
 
-namespace Ben.Dominion.Models
+namespace Ben.Dominion.ViewModels
 {
     /// <summary>
     /// Stores all of the application level configuration

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Ben.Dominion.Models;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
@@ -48,8 +48,8 @@ namespace Ben.Dominion
             };
 
             #if DEBUG
-            // THIS IS NOT A REAL CULTURE JUST THE LOCALIZATION TEST
-            supportedCultures.Add(new CultureInfo("ru-RU"));
+            // Add the psudolocalization culture.
+            supportedCultures.Add(new CultureInfo("qps-ploc"));
             #endif
 
             this.CulturesListPicker.ItemsSource = supportedCultures.OrderBy(c => c.TwoLetterISOLanguageName, StringComparer.OrdinalIgnoreCase);

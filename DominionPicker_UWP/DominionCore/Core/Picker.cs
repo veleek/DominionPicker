@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using Ben.Dominion.ViewModels;
 using Ben.Utilities;
-using Ben.Dominion.Models;
 using System.Threading.Tasks;
 //using GoogleAnalytics;
 
 namespace Ben.Dominion
 {
-
     /// <summary>
     /// Contains all the logic required to generate a set of cards from the full card pool
     /// </summary>

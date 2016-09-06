@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using Ben.Utilities;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
 
    public class FavoritesViewModel

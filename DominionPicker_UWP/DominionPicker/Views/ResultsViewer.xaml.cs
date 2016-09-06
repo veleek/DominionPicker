@@ -9,7 +9,7 @@ using Ben.Dominion.Utilities;
 using Ben.Dominion.Views;
 using Ben.Dominion.ViewModels;
 using Windows.Foundation;
-using Ben.Dominion.TestControls;
+using Ben.Dominion.Controls;
 
 namespace Ben.Dominion
 {
@@ -33,17 +33,16 @@ namespace Ben.Dominion
                    this.GroupedCardsList.IsHitTestVisible = true;
                };
 
-            var refreshButton = new AppBarButton();
-            refreshButton.Click += this.Refresh_Click;
+            CommandBar appBar = (CommandBar)BottomAppBar;
 
-            ((CommandBar)BottomAppBar).PrimaryCommands.Add(refreshButton);
-            this.SortButton = ApplicationBarHelper.CreateIconButton(Strings.Results_SortName, @"/Images/appbar.sort.name.png", this.Sort_Click);
-            ((CommandBar)BottomAppBar).PrimaryCommands.Add(this.SortButton);
-            ((CommandBar)BottomAppBar).AddIconButton(Strings.Results_Save, @"/Images/appbar.favs.addto.png", this.AddFavorite_Click);
-            ((CommandBar)BottomAppBar).AddMenuItem(Strings.Menu_CardLookup, this.CardLookup_Click);
-            ((CommandBar)BottomAppBar).AddMenuItem(Strings.Menu_BlackMarket, this.BlackMarket_Click);
-            ((CommandBar)BottomAppBar).AddMenuItem(Strings.Menu_Settings, this.Settings_Click);
-            ((CommandBar)BottomAppBar).AddMenuItem(Strings.Menu_About, this.About_Click);
+            appBar.AddSymbolButton("!!refresh!!", Symbol.Refresh, this.Refresh_Click);
+            this.SortButton = ApplicationBarHelper.CreateSymbolButton(Strings.Results_SortName, Symbol.Sort, this.Sort_Click);
+            appBar.PrimaryCommands.Add(this.SortButton);
+            appBar.AddSymbolButton(Strings.Results_Save, Symbol.Save, this.AddFavorite_Click);
+            appBar.AddMenuItem(Strings.Menu_CardLookup, this.CardLookup_Click);
+            appBar.AddMenuItem(Strings.Menu_BlackMarket, this.BlackMarket_Click);
+            appBar.AddMenuItem(Strings.Menu_Settings, this.Settings_Click);
+            appBar.AddMenuItem(Strings.Menu_About, this.About_Click);
         }
 
         public MainViewModel MainView
@@ -62,15 +61,7 @@ namespace Ben.Dominion
 
         private void ResultsViewer_BackKeyPress(object sender, BackRequestedEventArgs e)
         {
-            if (this.AddFavoritePopup.IsOpen)
-            {
-                this.AddFavoritePopup.IsOpen = false;
-                e.Handled = true;
-            }
-            else
-            {
-                MainViewModel.Instance.CancelGeneration();
-            }
+            MainViewModel.Instance.CancelGeneration();
         }
 
         private void CardItem_Tap(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
@@ -162,7 +153,7 @@ namespace Ben.Dominion
 
         private void AddFavorite_Click(object sender, RoutedEventArgs e)
         {
-            this.AddFavoritePopup.IsOpen = !this.AddFavoritePopup.IsOpen;
+            //this.AddFavoritePopup.IsOpen = !this.AddFavoritePopup.IsOpen;
         }
 
         private void AddFavoritePopup_SaveFavorite(object sender, FavoriteEventArgs e)
@@ -177,7 +168,7 @@ namespace Ben.Dominion
 
         private void CardLookup_Click(object sender, RoutedEventArgs e)
         {
-            PickerView.CardFilter.Go();
+            PickerView.CardLookup.Go();
         }
 
         private void BlackMarket_Click(object sender, RoutedEventArgs e)

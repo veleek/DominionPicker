@@ -9,7 +9,6 @@
 //------------------------------------------------------------------------------
 namespace Ben.Dominion.Resources
 {
-    using System;
     using System.Globalization;
     using Windows.ApplicationModel.Resources;
     /// <summary>
@@ -94,6 +93,17 @@ namespace Ben.Dominion.Resources
             get
             {
                 return GetString("CardSet_DarkAges");
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Empires.
+        /// </summary>
+        public static string CardSet_Empires
+        {
+            get
+            {
+                return GetString("CardSet_Empires");
             }
         }
 

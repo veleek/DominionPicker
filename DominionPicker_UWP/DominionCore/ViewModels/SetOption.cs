@@ -1,7 +1,7 @@
 using Ben.Utilities;
 using System.Xml.Serialization;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
     /// <summary>
     /// Represents the state of a set selection for the picker.

@@ -2,12 +2,9 @@ using System.IO;
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using Windows.ApplicationModel;
-using Windows.Storage;
 using Windows.UI.Xaml.Shapes;
 
-namespace Ben.Dominion.Utilities
+namespace Ben.Utilities
 {
     public static class XamlHelpers
     {
@@ -20,15 +17,18 @@ namespace Ben.Dominion.Utilities
         /// <returns>A FrameworkElement that can be added to the UI</returns>
         public static FrameworkElement GenerateXamlFromText(Stream stream)
         {
+            Style bodyStyle = (Style)Application.Current.Resources["BodyTextBlockStyle"];
+            DataTemplate bulletedItemTemplate = (DataTemplate)Application.Current.Resources["BulletedItem"];
+
             StackPanel container = new StackPanel();
             using (StreamReader reader = new StreamReader(stream))
             {
-                String line;
+                string line;
                 bool lastWasEmpty = true;
                 do
                 {
                     line = reader.ReadLine();
-                    if (String.IsNullOrEmpty(line))
+                    if (string.IsNullOrEmpty(line))
                     {
                         Rectangle r = new Rectangle
                         {
@@ -46,7 +46,8 @@ namespace Ben.Dominion.Utilities
                             {
                                 TextWrapping = TextWrapping.Wrap,
                                 Text = line,
-                                Style = (Style)Application.Current.Resources["PhoneTextNormalStyle"],
+                                Style = bodyStyle,
+                                FontWeight = Windows.UI.Text.FontWeights.Bold,
                             };
                         }
                         else
@@ -54,7 +55,7 @@ namespace Ben.Dominion.Utilities
                             fe = new ContentPresenter
                             {
                                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                                ContentTemplate = (DataTemplate)Application.Current.Resources["BulletedItem"],
+                                ContentTemplate = bulletedItemTemplate,
                                 Content = line,
                             };
                         }
@@ -66,24 +67,5 @@ namespace Ben.Dominion.Utilities
             return container;
         }
 
-    }
-
-    public class XamlConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string culture)
-        {
-            string streamName = value.ToString();
-            StorageFile sri = Package.Current.InstalledLocation.GetFileAsync(@"\Resources\Changes.txt").GetResults();
-            if (sri == null)
-            {
-                return null;
-            }
-            return XamlHelpers.GenerateXamlFromText(sri.OpenStreamForReadAsync().Result);
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string culture)
-        {
-            throw new InvalidOperationException("Unable to convert XAML back into a text document");
-        }
     }
 }

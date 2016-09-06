@@ -1,4 +1,4 @@
-namespace Ben.Dominion.Models
+namespace Ben.Dominion
 {
     public enum PlatinumColonyOption
     {

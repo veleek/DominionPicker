@@ -1,8 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using Ben.Dominion;
-using Ben.Dominion.Models;
+using Ben.Dominion.ViewModels;
 using Ben.Utilities;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 

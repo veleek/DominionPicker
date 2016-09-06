@@ -16,22 +16,21 @@
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 
 namespace GalaSoft.MvvmLight.Threading
 {
 
-   /// <summary>
-   /// Helper class for dispatcher operations on the UI thread.
-   /// </summary>
-   public static class DispatcherHelper
+    /// <summary>
+    /// Helper class for dispatcher operations on the UI thread.
+    /// </summary>
+    public static class DispatcherHelper
    {
 
       /// <summary>
       /// Gets a reference to the UI thread's dispatcher, after the
       /// <see cref="Initialize" /> method has been called on the UI thread.
       /// </summary>
-      public static Windows.UI.Core.CoreDispatcher UIDispatcher { get; private set; }
+      public static CoreDispatcher UIDispatcher { get; private set; }
 
       /// <summary>
       /// Executes an action on the UI thread. If this method is called

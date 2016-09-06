@@ -1,10 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Ben.Utilities;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
 
    public class BlackMarketViewModel
@@ -14,18 +13,6 @@ namespace Ben.Dominion
       private CardList deck;
       private CardList hand;
       private Card selected;
-
-      public BlackMarketViewModel()
-      {
-         if ( DesignHelper.IsInDesignMode )
-         {
-            this.Deck = new CardList();
-            this.Selected = new Card("Witch", CardType.Action | CardType.Attack)
-               {
-                  Set = CardSet.Base
-               };
-         }
-      }
 
       public static ReadOnlyCollection<Card> BaseBlackMarketCards
       {

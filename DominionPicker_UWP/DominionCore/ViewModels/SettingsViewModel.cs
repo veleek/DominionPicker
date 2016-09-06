@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
-using Ben.Dominion.Models;
 using Ben.Utilities;
 
-namespace Ben.Dominion
+namespace Ben.Dominion.ViewModels
 {
     public class SettingsViewModel
        : NotifyPropertyChangedBase
@@ -20,10 +19,6 @@ namespace Ben.Dominion
         private bool requireTrash;
         private CardRequirementOption plusBuysOption;
         private CardRequirementOption plusActionsOption;
-
-        private bool pickPlatinumColony = true;
-        private bool pickShelterOrEstate = true;
-        private bool showExtras = true;
 
         public SettingsViewModel()
         {

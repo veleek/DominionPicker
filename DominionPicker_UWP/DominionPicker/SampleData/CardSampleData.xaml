@@ -1,10 +1,10 @@
 ﻿<SampleCard 
   xmlns="using:Ben.Dominion.Sample"
-  xmlns:vm="using:Ben.Dominion.ViewModels"
+  xmlns:dominion="using:Ben.Dominion"
   Name="Sample Card With a Really Long Name" 
-  Cost="0*" 
   CoinCost="2*"
   HasPotion="True"
+  DebtCost="8"
   Set="DarkAges" 
   ID="100" 
   Type="Reaction, Victory" 
@@ -12,12 +12,12 @@
   Label="bane"
   BackgroundColor="Green">
   <SampleCard.Group>
-    <vm:CardGroup Type="OtherRequired">
-      <vm:CardGroup.Cards>
+    <dominion:CardGroup Type="OtherRequired">
+      <dominion:CardGroup.Cards>
         <SampleCardList>
           <SampleCard Name="Test" />
         </SampleCardList>
-      </vm:CardGroup.Cards>
-    </vm:CardGroup>
+      </dominion:CardGroup.Cards>
+    </dominion:CardGroup>
   </SampleCard.Group>
 </SampleCard>

@@ -5,26 +5,26 @@ using System.Linq;
 using Windows.UI.Xaml.Data;
 using GalaSoft.MvvmLight.Threading;
 using System.Threading.Tasks;
+using System.Threading;
+using Ben.Utilities;
 
 namespace Ben.Dominion.ViewModels
 {
-    public class CardLookupViewModel
+    public class CardLookupViewModel : NotifyPropertyChangedBase
     {
         public const string FilteredCardsSeachFilter = "<filtered>";
         private static CardLookupViewModel instance;
-        private readonly BackgroundWorker filterWorker;
         private readonly Queue<CardSelector> changedCards = new Queue<CardSelector>();
         private readonly List<CardSetGrouping> cardSelectorGroups;
         private readonly Dictionary<CardSet, CardSetGrouping> filteredGroupsMap;
         private string currentFilter;
 
+        private CancellationTokenSource cts;
+        private Task filterTask;
+        private string searchText;
+
         public CardLookupViewModel()
         {
-            this.filterWorker = new BackgroundWorker
-            {
-                WorkerSupportsCancellation = true
-            };
-            this.filterWorker.DoWork += this.filterWorker_DoWork;
             // Generate 'card selectors' for each card.  A card selector is just an object
             // that pairs a boolean value that indicates whether a card is filtered or not
             // with a specific card and it can be used to databind with.
@@ -46,6 +46,25 @@ namespace Ben.Dominion.ViewModels
             }
         }
 
+        public string SearchText
+        {
+            get
+            {
+                return this.searchText;
+            }
+
+            set
+            {
+                if(this.SetProperty(ref this.searchText, value))
+                {
+                    // Start filtering the cards list.  We'll cancel whatever previous
+                    // filtering has been happening and restart with the new search 
+                    // text.
+                    Task notUsed = this.FilterCardsListAsync(this.searchText);
+                }
+            }
+        }
+
         public CardSelector[] CardSelectors { get; private set; }
 
         public List<CardSetGrouping> FilteredCardSelectorGroups { get; private set; }
@@ -58,35 +77,6 @@ namespace Ben.Dominion.ViewModels
             }
         }
 
-        public static CollectionViewSource CardsViewSource
-        {
-            get
-            {
-                /*
-                if (cardsViewSource == null)
-                {
-
-                cardsViewSource = new GroupedCollectionViewSource<CardSet>
-                {
-                 GroupDescriptions =
-                 {
-                    new PropertyGroupDescription("Card.Set"),
-                 }
-                 , SortDescriptions =
-                 {
-                    new SortDescription("Card.Set", ListSortDirection.Ascending),
-                    new SortDescription("Card.Name", ListSortDirection.Ascending),
-                 }
-                 , Source = Cards.AllCards.Select(c => new CardSelector(c, false)).ToList()
-                };
-                }
-                return cardsViewSource;
-            */
-
-                return null;
-            }
-        }
-
         /// <summary>
         /// Reset the list of filtered cards
         /// </summary>
@@ -94,6 +84,8 @@ namespace Ben.Dominion.ViewModels
         {
             MainViewModel.Instance.Settings.FilteredCards = new CardList();
             this.LoadFilteredCards();
+
+            this.SearchText = string.Empty;
         }
 
         /// <summary>
@@ -117,21 +109,40 @@ namespace Ben.Dominion.ViewModels
             MainViewModel.Instance.Settings.FilteredCards = this.FilteredCards;
         }
 
-        public void FilterCardsList(String newFilter)
+        public async Task FilterCardsListAsync(String newFilter)
         {
             if (newFilter == this.currentFilter && newFilter != String.Empty)
             {
                 return;
             }
-            if (this.filterWorker.IsBusy)
+
+            this.currentFilter = newFilter;
+            
+            if(this.filterTask != null && !this.filterTask.IsCompleted)
             {
-                this.filterWorker.CancelAsync();
-                while (this.filterWorker.IsBusy)
+                if(!this.cts.IsCancellationRequested) cts.Cancel();
+                try
                 {
+                    await this.filterTask;
+                }
+                catch
+                {
+                    // Yes, we're ignoring the result.  We don't care if it failed.  It's a better experience.
                 }
             }
-            this.currentFilter = newFilter;
-            this.filterWorker.RunWorkerAsync();
+
+            cts = new CancellationTokenSource();
+            filterTask = this.FilterCardsListInternalAsync(cts.Token);
+
+            try
+            {
+                // If someone awaits on this task, we want to await until we're done filtering.
+                await this.filterTask;
+            }
+            catch
+            {
+                // Yes, we're ignoring the result.  We don't care if it failed.  It's a better experience.
+            }
         }
 
         /// <summary>
@@ -146,99 +157,89 @@ namespace Ben.Dominion.ViewModels
         /// the dispatcher is invoked to actually filter the cards from the long list 
         /// selector (add/remove from groups) since that needs to happen on the UI thread.
         /// </remarks>
-        private void filterWorker_DoWork(object sender, DoWorkEventArgs e)
+        private async Task FilterCardsListInternalAsync(CancellationToken cancellationToken)
         {
-            if (this.currentFilter == String.Empty)
+            // Looping through all the selectors is expensive, so do it on a non-UI thread.
+
+            await Task.Run(() =>
             {
-                foreach (var card in this.CardSelectors)
+                if (this.currentFilter == String.Empty)
                 {
-                    if (card.Filter(false))
+                    foreach (var card in this.CardSelectors)
                     {
-                        this.changedCards.Enqueue(card);
+                        if (card.Filter(false))
+                        {
+                            this.changedCards.Enqueue(card);
+                        }
                     }
                 }
-            }
-            else if (this.currentFilter == FilteredCardsSeachFilter)
-            {
-                foreach (var card in this.CardSelectors)
+                else if (this.currentFilter == FilteredCardsSeachFilter)
                 {
-                    if (card.Filter(!card.Selected))
+                    foreach (var card in this.CardSelectors)
                     {
-                        this.changedCards.Enqueue(card);
+                        if (card.Filter(!card.Selected))
+                        {
+                            this.changedCards.Enqueue(card);
+                        }
                     }
                 }
-            }
-            else
-            {
-                foreach (var card in this.CardSelectors)
+                else
                 {
-                    // Cancel the filtering if we need to
-                    if (this.filterWorker.CancellationPending)
+                    foreach (var card in this.CardSelectors)
+                    {
+                        // Cancel the filtering if we need to
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            return;
+                        }
+
+                        if (card.Filter(!card.Card.ContainsText(this.currentFilter)))
+                        {
+                            this.changedCards.Enqueue(card);
+                        }
+                    }
+                }
+            });
+
+            // We're on the UI thread here again (we should make sure) and now we can add 
+            // the filtered cards to the appropriate groups so they appear as necessary.
+            for (int i = 0; i < this.cardSelectorGroups.Count; i++)
+            {
+                var baseGroup = this.cardSelectorGroups[i];
+                var filteredGroup = this.FilteredCardSelectorGroups[i];
+                int index = 0;
+                // We have to loop through every card in the group
+                // so that we have an index for the next visible card
+                // otherwise we don't know where in the list to add the 
+                // item 
+                foreach (var c in baseGroup)
+                {
+                    if (cancellationToken.IsCancellationRequested)
                     {
                         return;
                     }
-                    if (card.Filter(!card.Card.ContainsText(this.currentFilter)))
+
+                    await Task.Yield();
+
+                    bool shouldBeVisible = !c.Filtered;
+                    bool isVisible = filteredGroup.Contains(c);
+                    if (shouldBeVisible)
                     {
-                        this.changedCards.Enqueue(card);
+                        if (!isVisible)
+                        {
+                            filteredGroup.Insert(index, c);
+                        }
+                        index++;
+                    }
+                    else
+                    {
+                        if (isVisible)
+                        {
+                            filteredGroup.Remove(c);
+                        }
                     }
                 }
             }
-            if (!this.filterWorker.CancellationPending)
-            {
-                this.UpdateCardsList();
-            }
-        }
-
-        /// <summary>
-        /// Invokes a call on the UI thread to go through the cards and add/remove
-        /// filtered cards from the LongListSelector as appropriate.
-        /// </summary>
-        /// <remarks>
-        /// It would be nice to only loop through cards that were changed, but there's
-        /// not an easy way to manage the actual indexes of the cards without manually
-        /// implementing the observable collection and 
-        /// </remarks>
-        private void UpdateCardsList()
-        {
-            //UpdateCardsListMin();
-            //return;
-            Task updateCardsListTask = DispatcherHelper.CheckBeginInvokeOnUI(() =>
-               {
-                   for (int i = 0; i < this.cardSelectorGroups.Count; i++)
-                   {
-                       var baseGroup = this.cardSelectorGroups[i];
-                       var filteredGroup = this.FilteredCardSelectorGroups[i];
-                       int index = 0;
-                       // We have to loop through every card in the group
-                       // so that we have an index for the next visible card
-                       // otherwise we don't know where in the list to add the 
-                       // item 
-                       foreach (var c in baseGroup)
-                       {
-                           if (this.filterWorker.CancellationPending)
-                           {
-                               return;
-                           }
-                           bool shouldBeVisible = !c.Filtered;
-                           bool isVisible = filteredGroup.Contains(c);
-                           if (shouldBeVisible)
-                           {
-                               if (!isVisible)
-                               {
-                                   filteredGroup.Insert(index, c);
-                               }
-                               index++;
-                           }
-                           else
-                           {
-                               if (isVisible)
-                               {
-                                   filteredGroup.Remove(c);
-                               }
-                           }
-                       }
-                   }
-               });
         }
 
         private void UpdateCardsListMin()

@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Ben.Dominion.Resources;
-using Ben.Dominion.ViewModels;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
@@ -40,7 +41,44 @@ namespace Ben.Dominion
         public CardType Type { get; set; }
 
         [XmlAttribute]
-        public String Cost { get; set; } = "0";
+        public String Cost
+        {
+            get
+            {
+                StringBuilder costBuilder = new StringBuilder();
+
+                if(!string.IsNullOrWhiteSpace(CoinCost))
+                {
+                    costBuilder.Append(this.CoinCost);
+                }
+
+                if(this.HasPotion)
+                {
+                    costBuilder.Append("P");
+                }
+
+                if(!string.IsNullOrWhiteSpace(this.DebtCost))
+                {
+                    if(costBuilder.Length > 0)
+                    {
+                        costBuilder.Append("/");
+                    }
+
+                    costBuilder.Append(this.DebtCost);
+                    costBuilder.Append("D");
+                }
+
+                return costBuilder.ToString();
+            }
+
+            set
+            {
+                Match costMatch = Regex.Match(value, @"^((?<CoinCost>\d+)?(?<HasPotion>P)?)/?((?<DebtCost>\d+)D)?$");
+                this.CoinCost = costMatch.Groups["CoinCost"].Value;
+                this.HasPotion = costMatch.Groups["HasPotion"].Success;
+                this.DebtCost = costMatch.Groups["DebtCost"].Value;
+            }
+        }
 
         [XmlAttribute]
         public String Rules { get; set; }
@@ -65,29 +103,12 @@ namespace Ben.Dominion
         public CardGroup Group { get; set; }
 
         [XmlIgnore]
-        public Boolean HasPotion
-        {
-            get
-            {
-                return this.Cost.ToLower().Contains('p');
-            }
-        }
+        public Boolean HasPotion { get; set; }
 
         [XmlIgnore]
-        public String CoinCost
-        {
-            get
-            {
-                // Remove the P from the cost;
-                string coinCost = this.Cost.Trim('p').ToLower();
-                if (coinCost.Contains('+'))
-                {
-                    // Replace the + (e.g. 3+) with a superscript plus character
-                    coinCost = " " + this.Cost.Replace('+', '\x207A');
-                }
-                return coinCost;
-            }
-        }
+        public String CoinCost { get; set; }
+
+        public String DebtCost { get; set; }
 
         [XmlIgnore]
         public string StrategyPageUrl
@@ -296,17 +317,26 @@ namespace Ben.Dominion
                     case CardType.Reaction:
                     case CardType.Attack:
                     case CardType.Duration:
-                    case CardType.Ruins:
-                    case CardType.Reserve:
-                    case CardType.Event:
-                    case CardType.Shelter:
                     case CardType.Prize:
+                    case CardType.Ruins:
+                    case CardType.Shelter:
+                    case CardType.Looter:
+                    case CardType.Knight:
+                    case CardType.Reserve:
+                    case CardType.Traveller:
+                    case CardType.Event:
+                    case CardType.Landmark:
+                    case CardType.Castle:
+                    case CardType.Gathering:
                         if (type.HasFlag(typeToCheck))
                         {
                             colors.Add(GetColorForType(typeToCheck));
                         }
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException("type", $"Unsupported Card Type {type}");
                 }
+
                 typeToCheck = (CardType)((int)typeToCheck << 1);
             }
             return colors;
@@ -320,6 +350,8 @@ namespace Ben.Dominion
                     return Color.FromArgb(255, 235, 180, 15); // #EBB40F
 
                 case CardType.Victory:
+                case CardType.Landmark:
+                case CardType.Castle:
                     return Color.FromArgb(255, 97, 121, 57); // #617939
 
                 case CardType.Curse:

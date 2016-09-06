@@ -1,4 +1,4 @@
-<UserControl x:Class="Ben.Dominion.TestControls.DominionCardControl" 
+<UserControl x:Class="Ben.Dominion.Controls.DominionCardControl" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -21,23 +21,23 @@
             <ControlTemplate TargetType="ScrollViewer">
               <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
                 <VisualStateManager.VisualStateGroups>
-                  <VisualStateGroup x:Name="ScrollStates" x:FieldModifier="internal">
+                  <VisualStateGroup x:Name="ScrollStates">
                     <VisualStateGroup.Transitions>
                       <VisualTransition GeneratedDuration="00:00:00.5" />
                     </VisualStateGroup.Transitions>
-                    <VisualState x:Name="Scrolling" x:FieldModifier="internal">
+                    <VisualState x:Name="Scrolling">
                       <Storyboard>
                         <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="VerticalScrollBar" EnableDependentAnimation="True" />
                         <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="HorizontalScrollBar" EnableDependentAnimation="True" />
                       </Storyboard>
                     </VisualState>
-                    <VisualState x:Name="NotScrolling" x:FieldModifier="internal" />
+                    <VisualState x:Name="NotScrolling" />
                   </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
                 <Grid Margin="{TemplateBinding Padding}">
-                  <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ManipulationCompleted="ScrollViewer_ManipulationCompleted" x:FieldModifier="internal" />
-                  <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5" x:FieldModifier="internal" />
-                  <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto" x:FieldModifier="internal" />
+                  <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ManipulationCompleted="ScrollViewer_ManipulationCompleted" />
+                  <ScrollBar x:Name="VerticalScrollBar" HorizontalAlignment="Right" Height="Auto" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Opacity="0" Orientation="Vertical" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" VerticalAlignment="Stretch" Width="5" />
+                  <ScrollBar x:Name="HorizontalScrollBar" HorizontalAlignment="Stretch" Height="5" IsHitTestVisible="False" IsTabStop="False" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Opacity="0" Orientation="Horizontal" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" VerticalAlignment="Bottom" Width="Auto" />
                 </Grid>
               </Border>
             </ControlTemplate>
@@ -48,19 +48,22 @@
     <StackPanel>
       <TextBlock Text="{Binding Label}" Visibility="{Binding Label, Converter={StaticResource IsValidToVisibilityConverter}}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
       <Border Margin="2" Background="{Binding BackgroundColor}" CornerRadius="5" BorderBrush="White" BorderThickness="2">
-        <Grid Margin="0,1">
+        <Grid Margin="8,1,0,1">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" MinWidth="6" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
-          <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="12,0,6,0" />
-          <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="5,0,0,0" Style="{StaticResource CardCostTextStyle}" />
-          <Image Source="/Images/potion_small.png" Height="30" Grid.Column="1" Margin="0,0,12,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-          <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="2,6,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black" />
-          <TextBlock Text="{Binding DisplayName}" Grid.Column="2" Margin="0,3,12,0" Style="{StaticResource CardNameTextStyle}" Foreground="White" />
-          <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images/SetIcons'}" Visibility="{Binding ShowSetIcon, ElementName=CardControl, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="2" HorizontalAlignment="Right" Width="40" Margin="5,5" />
+          <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="2,7" Visibility="{Binding CoinCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="0,0,0,1" Style="{StaticResource CardCostTextStyle}" Visibility="{Binding CoinCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <Image Source="/Images/debt.png" Grid.Column="1" Width="32" Height="32" Margin="2,7" Visibility="{Binding DebtCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <TextBlock Text="{Binding DebtCost}" Grid.Column="1" Margin="0,0,0,1" Style="{StaticResource CardCostTextStyle}" Visibility="{Binding DebtCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <Image Source="/Images/potion_small.png" Height="30" Grid.Column="2" Margin="2,7" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+          <TextBlock Text="{Binding DisplayName}" Grid.Column="3" Margin="6,6,0,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black" Grid.ColumnSpan="2" />
+          <TextBlock Text="{Binding DisplayName}" Grid.Column="3" Margin="4,5,0,1" Style="{StaticResource CardNameTextStyle}" Foreground="White" Grid.ColumnSpan="2" />
+          <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images/SetIcons'}" Visibility="{Binding ShowSetIcon, ElementName=CardControl, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="4" HorizontalAlignment="Right" Width="40" Margin="0,5,5,5" />
         </Grid>
       </Border>
     </StackPanel>

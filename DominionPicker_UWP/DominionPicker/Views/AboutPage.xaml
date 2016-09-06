@@ -5,26 +5,21 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:local="using:Ben.Dominion.Controls" 
       xmlns:dominion="using:Ben.Dominion" 
-      xmlns:util="using:Ben.Dominion.Utilities" 
-      xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation" 
+      xmlns:animation="using:Windows.UI.Xaml.Media.Animation" 
       mc:Ignorable="d" 
       d:DesignWidth="480" d:DesignHeight="768" >
   <Page.Transitions>
-    <toolkit:TransitionCollection>
-      <toolkit:NavigationThemeTransition>
-        <toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+    <animation:TransitionCollection>
+      <animation:NavigationThemeTransition>
+        <animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
           <CommonNavigationTransitionInfo />
-        </toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
-        <!--Mode="ForwardIn"-->
-      </toolkit:NavigationThemeTransition>
-      <!--<toolkit:TransitionCollection.Backward xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation">
-  <SwivelTransition Mode="BackwardIn" xmlns="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" />
-</toolkit:TransitionCollection.Backward>-->
-    </toolkit:TransitionCollection>
+        </animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+      </animation:NavigationThemeTransition>
+    </animation:TransitionCollection>
   </Page.Transitions>
   <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid.Resources>
-      <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlockStyle}">
+      <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource SubheaderTextBlockStyle}">
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="VerticalAlignment" Value="Top" />
       </Style>
@@ -34,7 +29,7 @@
       </Style>
       <Style x:Key="AboutLinkStyle" TargetType="HyperlinkButton">
         <Setter Property="FontSize" Value="20" />
-        <!--<Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" />-->
+        <Setter Property="Foreground" Value="{StaticResource SystemControlForegroundAccentBrush}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
       </Style>
       <Style x:Key="CopyrightStyle" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
@@ -46,12 +41,10 @@
       <RowDefinition Height="*" />
       <RowDefinition Height="Auto" />
     </Grid.RowDefinitions>
-    <Pivot x:Name="RootPivot" Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Grid.Row="0" x:FieldModifier="internal">
-      <Pivot.TitleTemplate>
-        <DataTemplate></DataTemplate>
-      </Pivot.TitleTemplate>
+    <Pivot x:Name="RootPivot" 
+           Grid.Row="0" >
       <PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
-        <Grid x:Name="ContentPanel" Grid.Row="1">
+        <Grid x:Name="ContentPanel">
           <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -66,33 +59,28 @@
               </HyperlinkButton>
               <Rectangle Height="12" />
               <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Version:" />
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Margin="0" x:Name="VersionTextBlock" Text="1.0.0.0" />
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Version:" />
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Margin="12,0" x:Name="VersionTextBlock" Text="1.0.0.0"/>
               </StackPanel>
               <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Feedback:" />
-                <HyperlinkButton Content="randall.ben@gmail.com" NavigateUri="mailto:randall.ben@gmail.com?Subject=Dominion+Picker+Feedback" Style="{StaticResource AboutLinkStyle}">
-                  <!--TargetName="EmailLink"-->
-                </HyperlinkButton>
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Feedback:" VerticalAlignment="Center"/>
+                <HyperlinkButton Content="randall.ben@gmail.com" NavigateUri="mailto:randall.ben@gmail.com?Subject=Dominion+Picker+Feedback" Style="{StaticResource AboutLinkStyle}" Margin="12,0"/>
               </StackPanel>
               <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource BodyTextBlockStyle}" Text="Donate:" />
-                <HyperlinkButton Content="Support the development with Paypal" NavigateUri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=Windows+Phone+Dominion+Picker&amp;currency_code=USD" Style="{StaticResource AboutLinkStyle}">
-                  <!--TargetName="PaypalLink"-->
-                </HyperlinkButton>
+                <HyperlinkButton Content="Support the developer!" NavigateUri="https://cash.me/$veleek" Style="{StaticResource AboutLinkStyle}" />
               </StackPanel>
-              <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
+              <TextBlock Style="{StaticResource AboutContentStyle}" >
                                 This app allows to easily select a randomized set of cards for a game of Dominion.  All comments and suggestions are appreciated and can be directed to the email address above.
                             </TextBlock>
-              <TextBlock Text="Looking for something completely unrelated?  Why not try out my solitaire game? :)" TextWrapping="Wrap" Margin="12,6" />
-              <HyperlinkButton Content="A+ Solitaire (on the WP7 Marketplace)" Click="MarketplaceButton_Click" Tag="7627a3ef-da59-e011-854c-00237de2db9e" Style="{StaticResource AboutLinkStyle}" />
+
               <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
-              <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
+              <TextBlock Margin="0,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="James Lao - for telling me that many of my ideas are stupid." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Stephane Plante - for giving me new ideas to replace the ones James ruined." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Brian Chase - Because he asked to have his name here." />
-              <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="12,12,0,0" />
-              <StackPanel>
+              
+              <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="0,12,0,0" />
+              <StackPanel Margin="12,0">
                 <TextBlock Style="{StaticResource CopyrightStyle}">
                                     All Dominion imagery and card info is
                                     <LineBreak />
@@ -100,34 +88,12 @@
                                 </TextBlock>
               </StackPanel>
               <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                <Run Text="Thumbtack by Aimeê Ferreira from" />
-                <Hyperlink NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=23926"> the Noun Project</Hyperlink>
+                <Run Text="Thumbtack by Aimeê Ferreira from "/>
+                <Hyperlink NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=23926">the Noun Project</Hyperlink>
               </TextBlock>
-              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
+              <!--<TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
               <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Card by Stephen JB Thomas from the Noun Project" />
-              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Flash Cards by Rohan Gupta from the Noun Project" />
-              <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
-                                Microsoft Public License (Ms-PL)
-                                <LineBreak/>
-                                This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
-                                <LineBreak/>                                
-                                1. Definitions
-                                The terms "reproduce," "reproduction," "derivative works," and "distribution" have the same meaning here as under U.S. copyright law.
-                                A "contribution" is the original software, or any additions or changes to the software.
-                                A "contributor" is any person that distributes its contribution under this license.
-                                "Licensed patents" are a contributor's patent claims that read directly on its contribution.
-                                <LineBreak/>
-                                2. Grant of Rights
-                                (A) Copyright Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free copyright license to reproduce its contribution, prepare derivative works of its contribution, and distribute its contribution or any derivative works that you create.
-                                (B) Patent Grant- Subject to the terms of this license, including the license conditions and limitations in section 3, each contributor grants you a non-exclusive, worldwide, royalty-free license under its licensed patents to make, have made, use, sell, offer for sale, import, and/or otherwise dispose of its contribution in the software or derivative works of the contribution in the software.
-                                <LineBreak/>
-                                3. Conditions and Limitations
-                                (A) No Trademark License- This license does not grant you rights to use any contributors' name, logo, or trademarks.
-                                (B) If you bring a patent claim against any contributor over patents that you claim are infringed by the software, your patent license from such contributor to the software ends automatically.
-                                (C) If you distribute any portion of the software, you must retain all copyright, patent, trademark, and attribution notices that are present in the software.
-                                (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
-                                (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
-                            </TextBlock>-->
+              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Flash Cards by Rohan Gupta from the Noun Project" />-->
             </StackPanel>
           </ScrollViewer>
         </Grid>
@@ -150,12 +116,12 @@
         <ScrollViewer>
           <StackPanel>
             <TextBlock Style="{StaticResource AboutContentStyle}" Text="{Binding Strings.About_RulesDescription, Source={StaticResource LocalizedResources}}" />
-            <ItemsControl x:Name="RulesInfo" x:FieldModifier="internal">
+            <ItemsControl x:Name="RulesInfo">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                  <!--<p1:TransferControl x:Name="DominionTransferControl" Header="{Binding Monitor.Name}" Margin="12,6,0,6" Tap="DominionTransferControl_OnTap" Icon="{Binding IconPath}" Monitor="{Binding Monitor}" x:FieldModifier="internal">
+                  <!--<p1:TransferControl x:Name="DominionTransferControl" Header="{Binding Monitor.Name}" Margin="12,6,0,6" Tap="DominionTransferControl_OnTap" Icon="{Binding IconPath}" Monitor="{Binding Monitor}">
                     <p1:TransferControl.Template>
-                      <ControlTemplate TargetType="toolkit:TransferControl">
+                      <ControlTemplate TargetType="TransferControl">
                         <Border x:Name="TransferControl" Margin="0,0,0,12">
                           <FlyoutBase.AttachedFlyout>
                             <MenuFlyout IsEnabled="{Binding Path=IsContextMenuEnabled,RelativeSource={RelativeSource TemplatedParent}}">
@@ -163,16 +129,16 @@
                             </MenuFlyout>
                           </FlyoutBase.AttachedFlyout>
                           <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="ControlStates" x:FieldModifier="internal">
-                              <VisualState x:Name="Default" x:FieldModifier="internal">
+                            <VisualStateGroup x:Name="ControlStates">
+                              <VisualState x:Name="Default">
                                 <Storyboard>
                                   <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="TransferProgressBar">
                                     <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
                                   </ObjectAnimationUsingKeyFrames>
                                 </Storyboard>
                               </VisualState>
-                              <VisualState x:Name="NoProgressBar" x:FieldModifier="internal" />
-                              <VisualState x:Name="Hidden" x:FieldModifier="internal">
+                              <VisualState x:Name="NoProgressBar" />
+                              <VisualState x:Name="Hidden">
                                 <Storyboard>
                                   <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="Root">
                                     <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
@@ -195,8 +161,8 @@
 </Border.OpacityMask>--><!--
                             </Border>
                             <StackPanel Grid.Column="1" x:Name="ListItem">
-                              <ContentControl x:Name="Header" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource SystemControlForegroundChromeHighBrush}" Margin="12,0,0,0" HorizontalAlignment="Left" IsTabStop="False" x:FieldModifier="internal" />
-                              <ProgressBar x:Name="TransferProgressBar" Value="{Binding Path=Monitor.BytesTransferred,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" Minimum="0" Maximum="{Binding Path=Monitor.TotalBytesToTransfer,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" IsIndeterminate="{Binding Path=Monitor.IsProgressIndeterminate,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,FallbackValue=False}" Visibility="Collapsed" Style="{TemplateBinding ProgressBarStyle}" Margin="0,4,12,4" x:FieldModifier="internal" />
+                              <ContentControl x:Name="Header" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource SystemControlForegroundChromeHighBrush}" Margin="12,0,0,0" HorizontalAlignment="Left" IsTabStop="False" />
+                              <ProgressBar x:Name="TransferProgressBar" Value="{Binding Path=Monitor.BytesTransferred,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" Minimum="0" Maximum="{Binding Path=Monitor.TotalBytesToTransfer,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" IsIndeterminate="{Binding Path=Monitor.IsProgressIndeterminate,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,FallbackValue=False}" Visibility="Collapsed" Style="{TemplateBinding ProgressBarStyle}" Margin="0,4,12,4" />
                               <StackPanel Orientation="Horizontal">
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="13,0,0,6" Visibility="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}" Text="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}}" />
                                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="13,0,0,6" Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}" Text=" - " />
@@ -216,12 +182,12 @@
       </PivotItem>
       <PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
         <PivotItem.Resources>
-          <util:XamlConverter x:Key="XamlConverter" />
+          <converters:XamlConverter xmlns:converters="using:Ben.Data.Converters"  x:Key="XamlConverter" />
         </PivotItem.Resources>
-        <ScrollViewer x:Name="ChangesScrollViewer" Content="{Binding Source=./Resources/Changes.txt, Converter={StaticResource XamlConverter}}" />
+        <ScrollViewer Content="{Binding Source='DominionCore\\Resources\\Changes.txt', Converter={StaticResource XamlConverter}}" />
       </PivotItem>
     </Pivot>
-    <Grid Grid.Row="1" Margin="12,0,0,0">
+    <Grid Grid.Row="1" Margin="8">
       <Grid.ColumnDefinitions>
         <ColumnDefinition />
         <ColumnDefinition />
@@ -230,21 +196,14 @@
         <RowDefinition Height="Auto" />
         <RowDefinition Height="Auto" />
       </Grid.RowDefinitions>
-      <Button x:Name="RateButton" Grid.Column="0" Content="{Binding Strings.About_Rate, Source={StaticResource LocalizedResources}}" Click="RateButton_Click" />
-      <Button x:Name="BuyNowButton" Grid.Column="1" Content="{Binding Strings.About_Update, Source={StaticResource LocalizedResources}}" Click="UpdateButton_Click" />
+      <Button x:Name="RateButton" 
+              Grid.Column="0" HorizontalAlignment="Stretch" Margin="8"
+              Content="{Binding Strings.About_Rate, Source={StaticResource LocalizedResources}}" 
+              Click="RateButton_Click" />
+      <Button x:Name="BuyNowButton" 
+              Grid.Column="1" HorizontalAlignment="Stretch" Margin="8"
+              Content="{Binding Strings.About_Update, Source={StaticResource LocalizedResources}}" 
+              Click="UpdateButton_Click" />
     </Grid>
   </Grid>
-  <!--FontSize="{StaticResource PhoneFontSizeNormal}"-->
-  <!--Orientation="Portrait"-->
-  <!--shell:SystemTray.IsVisible="True"-->
-  <!--<toolkit:TransitionService.NavigationOutTransition xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
-  <toolkit:NavigationOutTransition>
-    <toolkit:NavigationOutTransition.Forward>
-      <toolkit:SwivelTransition Mode="ForwardOut" />
-    </toolkit:NavigationOutTransition.Forward>
-    <toolkit:NavigationOutTransition.Backward>
-      <toolkit:SwivelTransition Mode="BackwardOut" />
-    </toolkit:NavigationOutTransition.Backward>
-  </toolkit:NavigationOutTransition>
-</toolkit:TransitionService.NavigationOutTransition>-->
 </Page>

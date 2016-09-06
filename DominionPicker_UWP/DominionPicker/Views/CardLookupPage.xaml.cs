@@ -9,12 +9,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Ben.Dominion
 {
-
-    public partial class CardFilterPage
-       : Windows.UI.Xaml.Controls.Page
+    public partial class CardLookupPage : Page
     {
-
-        public CardFilterPage()
+        public CardLookupPage()
         {
             this.InitializeComponent();
             var resetFilteredMenuItem = new AppBarButton
@@ -56,68 +53,11 @@ namespace Ben.Dominion
         }
 
         /// <summary>
-        /// Reset the list of filtered cards
-        /// </summary>
-        private void ResetFilteredCards()
-        {
-            this.ViewModel.ResetFilteredCards();
-            this.ClearFilter();
-        }
-
-        private void ClearFilter()
-        {
-            if (this.SearchTextBox.Text == String.Empty)
-            {
-                // Manually filter on empty
-                this.ViewModel.FilterCardsList(String.Empty);
-            }
-            else
-            {
-                this.SearchTextBox.Text = String.Empty;
-            }
-        }
-
-        /// <summary>
-        /// An event handler to listen for changes to the search box text and dynamically filter the cards list
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            this.ViewModel.FilterCardsList(this.SearchTextBox.Text);
-        }
-
-        /// <summary>
-        /// An event handler to listen for keys on the text box to handle closing the filter if you press enter
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchTextBox_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
-        {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                this.CardsList.Focus(FocusState.Programmatic);
-            }
-        }
-
-        /// <summary>
-        /// Called when the SearchBox action icon is tapped to clear the current search filter
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SearchTextBox_ActionIconTapped(object sender, EventArgs e)
-        {
-            this.ClearFilter();
-        }
-
-        /// <summary>
         /// Called to show only the currently filtered cards in the list box
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ShowFilteredCards_Click(object sender, RoutedEventArgs e)
         {
-            this.ViewModel.FilterCardsList(CardLookupViewModel.FilteredCardsSeachFilter);
+            this.ViewModel.SearchText = CardLookupViewModel.FilteredCardsSeachFilter;
         }
 
         private async void ResetFilteredCards_Click(object sender, RoutedEventArgs e)
@@ -134,7 +74,7 @@ namespace Ben.Dominion
             IUICommand result = await resetDialog.ShowAsync();
             if (result.Label == "OK")
             {
-                this.ResetFilteredCards();
+                this.ViewModel.ResetFilteredCards();
             }
         }
 
@@ -148,7 +88,5 @@ namespace Ben.Dominion
         {
             PickerView.About.Go();
         }
-
     }
-
 }

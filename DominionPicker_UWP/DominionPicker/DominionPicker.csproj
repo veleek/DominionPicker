@@ -99,11 +99,12 @@
       <Name>Microsoft Mobile Extension SDK for Universal App Platform</Name>
     </SDKReference>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <SDKReference Include="BehaviorsXamlSDKManaged , Version=12.0">
-      <Name>BehaviorsXamlSDKManaged</Name>
-    </SDKReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\CloseKeyboardAction.cs" />
+    <Compile Include="Behaviors\DelegatingAction.cs" />
+    <Compile Include="Behaviors\OnKeyAction.cs" />
+    <Compile Include="Behaviors\PickerViewNavigateAction.cs" />
     <Compile Include="Controls\DominionCardControl.xaml.cs">
       <DependentUpon>DominionCardControl.xaml</DependentUpon>
     </Compile>
@@ -112,11 +113,14 @@
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\AddFavoriteDialog.xaml.cs">
+      <DependentUpon>AddFavoriteDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BlackMarketPage.xaml.cs">
       <DependentUpon>BlackMarketPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CardFilterPage.xaml.cs">
-      <DependentUpon>CardFilterPage.xaml</DependentUpon>
+    <Compile Include="Views\CardLookupPage.xaml.cs">
+      <DependentUpon>CardLookupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ConfigurationPage.xaml.cs">
       <DependentUpon>ConfigurationPage.xaml</DependentUpon>
@@ -134,10 +138,16 @@
     </Compile>
     <Compile Include="Views\PickerView.cs">
     </Compile>
+    <Compile Include="Views\Dialogs\RequestReviewDialog.xaml.cs">
+      <DependentUpon>RequestReviewDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ResultsViewer.xaml.cs">
       <DependentUpon>ResultsViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="SampleData\SampleDataHelpers.cs">
+    </Compile>
+    <Compile Include="Views\Dialogs\UpdateDialog.xaml.cs">
+      <DependentUpon>UpdateDialog.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +164,8 @@
     <Content Include="ApplicationIcon.scale-100.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Images\debt.png" />
+    <Content Include="Images\SetIcons\empires.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="analytics.xml" />
     <Content Include="Images\coin_extrasmall.png" />
@@ -169,8 +181,6 @@
     <Content Include="Square44x44Logo.scale-200.png" />
     <Content Include="StoreLogo.scale-100.png" />
     <Content Include="StoreLogo.scale-200.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="DominionVCD.xml" />
     <Content Include="Images\actionicon.cancel.png" />
     <Content Include="Images\appbar.questionmark.png" />
@@ -219,11 +229,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dialogs\AddFavoriteDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BlackMarketPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CardFilterPage.xaml">
+    <Page Include="Views\CardLookupPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -239,15 +253,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dialogs\RequestReviewDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ResultsViewer.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dialogs\UpdateDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DominionControls\DominionControls.csproj">
+    <ProjectReference Include="..\DominionControls\Ben.Controls.csproj">
       <Project>{673410fc-ff55-49c9-9345-37c6423ea716}</Project>
-      <Name>DominionControls</Name>
+      <Name>Ben.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\DominionCore\DominionCore.csproj">
       <Project>{3b6524d8-ead8-465c-8d85-501b6cade5b6}</Project>

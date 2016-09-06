@@ -1,4 +1,8 @@
-﻿Version 2.4
+﻿Version 3.0
+Converted to UWP
+Added support for Empires
+
+Version 2.4
 Updated German and Dutch card names.
 Fixed localization of Set names in most places.
 Update BlackMarket to filter out a bunch of the cards that aren't valid.
@@ -31,7 +35,6 @@ Version 1.9.3 Change Notes:
 Removed support for localization because app was revoked from marketplace because not the entire application was localized.  The language of various portions of the UI and the cards can still be localized from the settings menu. 
 
 Version 1.9.2 Change Notes:
-
 Updated for Windows Phone 8
 Added localization support including most cards Czech, Dutch, Finnish (Suomi), French, German, Italian, Polish, Spanish.
 Added Black Market Deck.

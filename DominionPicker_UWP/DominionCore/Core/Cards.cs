@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Ben.Data;
@@ -18,6 +17,7 @@ namespace Ben.Dominion
         public static ReadOnlyCollection<Card> allCards;
         private static ReadOnlyCollection<CardSet> allSets;
         private static ReadOnlyCollection<CardType> allTypes;
+        private static ReadOnlyCollection<Card> nonPickableCards;
         private static ReadOnlyCollection<Card> pickableCards;
         private static Dictionary<Int32, Card> lookup;
         private static Dictionary<string, Card> nameLookup;
@@ -41,6 +41,7 @@ namespace Ben.Dominion
                             CardSet.DarkAges,
                             CardSet.Guilds,
                             CardSet.Adventures,
+                            CardSet.Empires,
                             CardSet.Promo,
                         }
                     );
@@ -88,92 +89,15 @@ namespace Ben.Dominion
             }
         }
 
-        public static ReadOnlyCollection<String> NonPickableCards
+        public static ReadOnlyCollection<Card> NonPickableCards
         {
             get
             {
-                return new ReadOnlyCollection<string>(new List<string>
+                if(nonPickableCards == null)
                 {
-                   // Base Cards
-                   "Copper",
-                   "Silver",
-                   "Gold",
-                   "Estate",
-                   "Duchy",
-                   "Province",
-                   "Curse",
-                   // Alchemy Treasures
-                   "Potion",
-                   // Prosperity Treasures and Victorys
-                   "Platinum",
-                   "Colony",
-                   // Prizes
-                   "Bag of Gold",
-                   "Diadem",
-                   "Followers",
-                   "Princess",
-                   "Trusty Steed",
-                   "Prizes",
-                   // Dark Ages, non-Supply Cards
-                   "Spoils",
-                   "Madman",
-                   "Mercenary",
-                   // Shelters
-                   "Shelters",
-                   "Hovel",
-                   "Necropolis",
-                   "Overgrown Estate",
-                   // Ruins
-                   "Ruins",
-                   "Abandoned Mine",
-                   "Ruined Library",
-                   "Ruined Market",
-                   "Ruined Village",
-                   "Survivors",
-                   // Knights
-                   "Dame Anna",
-                   "Dame Josephine",
-                   "Dame Molly",
-                   "Dame Natalie",
-                   "Dame Sylvia",
-                   "Sir Bailey",
-                   "Sir Destry",
-                   "Sir Martin",
-                   "Sir Michael",
-                   "Sir Vander",
-                   // Traveller Upgrade Cards
-                   "Champion",
-                   "Disciple",
-                   "Fugitive",
-                   "Hero",
-                   "Soldier",
-                   "Teacher",
-                   "Treasure Hunter",
-                   "Warrior",
-                   // Events
-                   "Alms",
-                   "Borrow",
-                   "Quest",
-                   "Save",
-                   "Scouting Party",
-                   "Travelling Fair",
-                   "Bonfire",
-                   "Expedition",
-                   "Ferry",
-                   "Plan",
-                   "Mission",
-                   "Pilgrimage",
-                   "Ball",
-                   "Raid",
-                   "Seaway",
-                   "Trade",
-                   "Lost Arts",
-                   "Training",
-                   "Inheritance",
-                   "Pathfinding",
-                   "Summon",
+                    nonPickableCards = new ReadOnlyCollection<Card>(AllCards.Where(c => !c.Pickable).ToList());
                 }
-                );
+                return nonPickableCards;
             }
         }
 
@@ -183,7 +107,7 @@ namespace Ben.Dominion
             {
                 if (pickableCards == null)
                 {
-                    pickableCards = new ReadOnlyCollection<Card>(AllCards.Where(c => !NonPickableCards.Contains(c.Name)).ToList());
+                    pickableCards = new ReadOnlyCollection<Card>(AllCards.Where(c => c.Pickable).ToList());
                 }
                 return pickableCards;
             }
@@ -246,7 +170,7 @@ namespace Ben.Dominion
 
         private static async Task<List<Card>> LoadCardsFromFileAsync(string fileName)
         {
-            using (var stream = await Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(PickerCardsFileName))
+            using (var stream = await Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(fileName))
             {
                 return GenericXmlSerializer.Deserialize<List<Card>>(stream);
             }
@@ -276,54 +200,10 @@ namespace Ben.Dominion
             }
             this.Insert(i, card);
         }
-    }
 
-    /// <summary>
-    /// A simple key value pair to joins a specific card with a filtered status
-    /// that can be used for data binding a check box.
-    /// </summary>
-    public class CardSelector : IComparable<CardSelector>
-    {
-        public CardSelector()
-        {
-        }
-
-        public CardSelector(Card card, bool selected)
-        {
-            this.Card = card;
-            this.Selected = selected;
-        }
-
-        public Card Card { get; set; }
-
-        public bool Selected { get; set; }
-
-        public bool Filtered { get; set; }
-
-        public int CompareTo(CardSelector other)
-        {
-            return String.CompareOrdinal(this.Card.Name, other.Card.Name);
-        }
-
-        public bool Filter(bool filtered)
-        {
-            if (filtered == this.Filtered)
-            {
-                return false;
-            }
-            this.Filtered = filtered;
-            return true;
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>
-        /// A string that represents the current object.
-        /// </returns>
         public override string ToString()
         {
-            return string.Format("[{0}] {1}", this.Selected ? "X" : "_", this.Card);
+            return "CardSetGrouping: " + this.Key;
         }
     }
 }

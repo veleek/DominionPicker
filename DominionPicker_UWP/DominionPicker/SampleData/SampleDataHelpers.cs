@@ -28,8 +28,4 @@ namespace Ben.Dominion.Sample
     {
         public CardSet Key { get; set; }
     }
-
-    public class SampleMainViewModel : MainViewModel
-    {
-    }
 }

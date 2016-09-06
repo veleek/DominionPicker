@@ -362,27 +362,4 @@
       </Setter.Value>
     </Setter>
   </Style>
-
-  <!--
-  <Style TargetType="local:SwipeableBase">
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="local:SwipeableBase">
-          <Grid>
-            <Border BorderThickness="0,1,1,1">
-              <Border.BorderBrush>
-                <SolidColorBrush Color="{StaticResource SystemChromeMediumColor}" />
-              </Border.BorderBrush>
-              <ScrollContentPresenter 
-                        x:Name="PART_ScrollContentPresenter"
-                        Content="{TemplateBinding Content}"
-                        ContentTemplate="{TemplateBinding ContentTemplate}"
-                        Margin="{TemplateBinding Padding}" />
-            </Border>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
-  -->
 </ResourceDictionary>

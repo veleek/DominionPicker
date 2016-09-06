@@ -7,8 +7,8 @@
     <ProjectGuid>{673410FC-FF55-49C9-9345-37C6423EA716}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DominionControls</RootNamespace>
-    <AssemblyName>DominionControls</AssemblyName>
+    <RootNamespace>Ben.Controls</RootNamespace>
+    <AssemblyName>Ben.Controls</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -107,34 +107,11 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AddFavoritePopupControl.xaml.cs">
-      <DependentUpon>AddFavoritePopupControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\MultiTemplateItemsControl.cs" />
     <Compile Include="Controls\PinnableCheckBox.cs" />
-    <Compile Include="Controls\RulesInfoControl.xaml.cs">
-      <DependentUpon>RulesInfoControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\Swipeable.xaml.cs">
-      <DependentUpon>Swipeable.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Controls\SwipeableBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\DominionControls.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\AddFavoritePopupControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\RulesInfoControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\Swipeable.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Content Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
     </Content>

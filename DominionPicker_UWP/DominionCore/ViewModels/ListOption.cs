@@ -60,8 +60,6 @@ namespace Ben.Dominion
             }
         }
 
-        public object Dummy { get; set; }
-
         public bool Is(TOptionType value)
         {
             return OptionValue.Equals(value);

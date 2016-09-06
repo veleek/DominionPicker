@@ -1,14 +1,13 @@
 using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using System.Windows.Input;
 using Ben.Utilities;
 
-namespace Ben.Dominion.TestControls
+namespace Ben.Dominion.Controls
 {
 
     public partial class DominionCardControl
-       : Windows.UI.Xaml.Controls.UserControl
+       : UserControl
     {
         public static readonly DependencyProperty CardProperty = DependencyProperty.Register("Card", typeof(Card), typeof(DominionCardControl), new PropertyMetadata(null));
         public static readonly DependencyProperty ShowSetIconProperty = DependencyProperty.Register("ShowSetIcon", typeof(bool), typeof(DominionCardControl), new PropertyMetadata(true));

@@ -43,7 +43,7 @@ namespace Ben.Dominion.Utilities
 
         private void CardLookup_Click(object sender, RoutedEventArgs e)
         {
-            PickerView.CardFilter.Go();
+            PickerView.CardLookup.Go();
         }
 
         private void BlackMarket_Click(object sender, RoutedEventArgs e)
@@ -90,8 +90,22 @@ namespace Ben.Dominion.Utilities
         public static AppBarButton CreateIconButton(string text, Uri iconUri, RoutedEventHandler clickHandler)
         {
             var iconButton = new AppBarButton();
+            iconButton.Label = text;
             iconButton.Click += clickHandler;
             return iconButton;
+        }
+
+        public static AppBarButton CreateSymbolButton(string text, Symbol symbol, RoutedEventHandler clickHandler)
+        {
+            var symbolButton = new AppBarButton
+            {
+                Label = text,
+                Icon = new SymbolIcon(symbol)
+            };
+
+            symbolButton.Click += clickHandler;
+
+            return symbolButton;
         }
     }
 
@@ -106,5 +120,10 @@ namespace Ben.Dominion.Utilities
         {
             appBar.PrimaryCommands.Add(ApplicationBarHelper.CreateIconButton(text, iconPath, clickHandler));
         }
-    }
+
+        public static void AddSymbolButton(this CommandBar appBar, string text, Symbol symbol, RoutedEventHandler clickHandler)
+        { 
+               appBar.PrimaryCommands.Add(ApplicationBarHelper.CreateSymbolButton(text, symbol, clickHandler));
+        }
+}
 }

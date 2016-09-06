@@ -1,0 +1,29 @@
+﻿<ContentDialog
+  x:Class="Ben.Dominion.Views.UpdateDialog"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:local="using:Ben.Dominion.Views"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  mc:Ignorable="d"
+  Title="New Features!"
+  PrimaryButtonText="OK"
+  PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+  Width="550">
+
+  <TextBlock TextWrapping="Wrap">
+        Dominion Picker has been updated with some new features.  
+        <LineBreak />
+        Check out the help for a full list!
+        <LineBreak />
+        <LineBreak />
+        • Pin a set with tap and hold so it's always included in the result if possible
+        <LineBreak />
+        • View the Dominion Wiki page for any card from the card details page.
+        <LineBreak />
+        • Change when extra cards like Shelters or Events are selected from the Settings page.
+        <LineBreak />
+        • Updated to a Universal App.  Try it out on Windows!
+  </TextBlock>
+
+</ContentDialog>

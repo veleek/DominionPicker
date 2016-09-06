@@ -16,6 +16,7 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -152,24 +153,25 @@
     <PRIResource Include="Resources\cs\CardDataStrings.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BrushAlphaConverter.cs" />
     <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Converters\Dominion\CardDataStringsLocalizeConverter.cs" />
+    <Compile Include="Converters\Dominion\StringsLocalizeConverter.cs" />
     <Compile Include="Converters\EnumValuesConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\TypeConverter.cs" />
     <Compile Include="Converters\UriSourceConverter.cs" />
+    <Compile Include="Converters\XamlConverter.cs" />
     <Compile Include="Core\Card.cs" />
     <Compile Include="Core\CardGroup.cs" />
     <Compile Include="Core\CardList.cs" />
     <Compile Include="Core\CardListExtensions.cs" />
     <Compile Include="Core\Cards.cs" />
     <Compile Include="Core\CardSelectionEnums.cs" />
+    <Compile Include="Core\CardSelector.cs" />
     <Compile Include="Core\CardSet.cs" />
     <Compile Include="Core\CardType.cs" />
     <Compile Include="Core\Picker.cs" />
-    <Compile Include="Core\PickerOptionEnums.cs" />
-    <Compile Include="Core\PickerOptions.cs" />
-    <Compile Include="Core\PickerSettings.cs" />
-    <Compile Include="Core\PickerState.cs" />
     <Compile Include="Core\ResultSortOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\CardDataStrings2.cs" />
@@ -184,16 +186,14 @@
     <Compile Include="Utilities\AppLog.cs" />
     <Compile Include="Utilities\AsyncLazy.cs" />
     <Compile Include="Converters\Converters.cs" />
-    <Compile Include="Utilities\DesignHelper.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FrameworkExtensions.cs" />
     <Compile Include="Utilities\GenericSerializer.cs" />
     <Compile Include="Utilities\Grouping.cs" />
     <Compile Include="Utilities\IsolatedStorageExtensions.cs" />
-    <Compile Include="Utilities\LocalizeConverter.cs" />
+    <Compile Include="Converters\LocalizeConverter.cs" />
     <Compile Include="Utilities\Localizer.cs" />
-    <Compile Include="Utilities\MetroGridHelper.cs" />
     <Compile Include="Utilities\NavigationServiceExtensions.cs" />
     <Compile Include="Utilities\NotifyPropertyChangedBase.cs" />
     <Compile Include="Utilities\StorageExtensions.cs" />

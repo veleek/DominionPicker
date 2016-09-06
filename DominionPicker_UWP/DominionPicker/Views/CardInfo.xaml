@@ -3,20 +3,20 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:local="using:Ben.Dominion.TestControls" 
+      xmlns:dominionControls="using:Ben.Dominion.Controls" 
       mc:Ignorable="d" 
       d:DesignHeight="768" d:DesignWidth="480" 
       d:DataContext="{d:DesignData Source=../SampleData/CardSampleData.xaml}" 
-      xmlns:toolkit="using:Windows.UI.Xaml.Media.Animation" >
+      xmlns:animation="using:Windows.UI.Xaml.Media.Animation" >
   
   <Page.Transitions>
-    <toolkit:TransitionCollection>
-      <toolkit:NavigationThemeTransition>
-        <toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+    <animation:TransitionCollection>
+      <animation:NavigationThemeTransition>
+        <animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
           <CommonNavigationTransitionInfo />
-        </toolkit:NavigationThemeTransition.DefaultNavigationTransitionInfo>
-      </toolkit:NavigationThemeTransition>
-    </toolkit:TransitionCollection>
+        </animation:NavigationThemeTransition.DefaultNavigationTransitionInfo>
+      </animation:NavigationThemeTransition>
+    </animation:TransitionCollection>
   </Page.Transitions>
   
   <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -36,7 +36,7 @@
       <ScrollViewer>
         <StackPanel>
           <ScrollViewer Margin="12,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <local:DominionCardControl DataContext="{Binding}"></local:DominionCardControl>
+            <dominionControls:DominionCardControl Card="{Binding}"/>
           </ScrollViewer>
           <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
           <Grid Margin="12,0,0,0">

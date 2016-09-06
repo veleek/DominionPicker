@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPickerTest", "Domin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionCore", "DominionCore\DominionCore.csproj", "{3B6524D8-EAD8-465C-8D85-501B6CADE5B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionControls", "DominionControls\DominionControls.csproj", "{673410FC-FF55-49C9-9345-37C6423EA716}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ben.Controls", "DominionControls\Ben.Controls.csproj", "{673410FC-FF55-49C9-9345-37C6423EA716}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

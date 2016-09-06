@@ -1,8 +1,12 @@
 using System;
-using System.Threading.Tasks;
+
 using Windows.UI.Xaml;
+
+using Ben.Dominion.ViewModels;
 using Ben.Utilities;
+
 using GalaSoft.MvvmLight.Threading;
+
 using GestureEventArgs = Windows.UI.Xaml.Input.TappedRoutedEventArgs;
 
 namespace Ben.Dominion
