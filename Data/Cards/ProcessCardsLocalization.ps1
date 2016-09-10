@@ -2,7 +2,7 @@
 
 $VerbosePreference = "Continue"
 
-function GenerateCardsXml($Language = $null, [string[]]$Properties)
+function GenerateCardsXml($Language = $null, [string[]]$Properties, $PropertyColumns)
 {
     $fileName = ".\DominionPickerCards$(if($Language){ "." + $Language.ToLower() }).xml"
     
@@ -17,10 +17,6 @@ function GenerateCardsXml($Language = $null, [string[]]$Properties)
     '<ArrayOfCard>' | Add-Content $fileName
 
     $lastSetName = $null
-    $propertyColumns = @{}
-    $Properties | % {
-        $propertyColumns[$_] = GetColumnForValue $_ 
-    }
 
     for($i = 0; $i -lt $cardCount; $i++)
     {
@@ -29,7 +25,7 @@ function GenerateCardsXml($Language = $null, [string[]]$Properties)
         $row = 2+$i
         $values = $Properties | % { 
             
-            $propertyValue = $cards.Cells[$row, $propertyColumns[$_]].Text
+            $propertyValue = $cards.Cells[$row, $PropertyColumns[$_]].Text
 
             $propertyName = $_
             if($Language -and $propertyName.Contains("$Language"))
@@ -45,13 +41,14 @@ function GenerateCardsXml($Language = $null, [string[]]$Properties)
                     "  <!-- $lastSetName -->" | Add-Content $fileName
                 }
             }
+            
+            if($propertyName -eq "Pickable")
+            {
+              $propertyValue = $propertyValue.ToLower();
+            }
 
             if(![string]::IsNullOrWhiteSpace($propertyValue))
             {
-                if($propertyValue -eq "Young Witch") 
-                { 
-                    $na = 4 
-                }
                 $propertyValue = $propertyValue.Replace([char]0x2018,"`'")
                 $propertyValue = $propertyValue.Replace([char]0x2019,"`'")
                 $propertyValue = $propertyValue.Replace([char]0x201C,"`"")
@@ -125,8 +122,12 @@ while($cards.Cells[$row,1].Formula)
 Write-Progress -Activity "Generating Localized Card Files" -Status "Generating EN (default) Cards List" -Id 10 -PercentComplete 1
 
 # Make the default language file
-GenerateCardsXml -Properties "ID","Name","Set","Type","Cost","Rules"
+$props = @("ID","Name","Set","Type","Cost","Pickable","Rules")
+$propertyColumns = @{}
+$props | % { $propertyColumns[$_] = GetColumnForValue $_ }
+GenerateCardsXml -Properties $props -PropertyColumns $propertyColumns
 
+<#
 $langCount = 0
 $lang | % { 
     $langCount++
@@ -135,6 +136,7 @@ $lang | % {
     Write-Verbose "Generating $_ Cards List"
     GenerateCardsXml -Language $_ -Properties "ID","Name_$_","Rules_$_"
 }
+#>
 
 Write-Progress -Activity "Generating Localized Card Files" -Id 10 -Completed
 

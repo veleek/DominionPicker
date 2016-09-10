@@ -319,4 +319,76 @@
   <Card ID="303" Name="Prizes" Set="Cornucopia" Type="Action Prize" Cost="*" Rules="Prizes are a set of five differently-named unique cards that are not part of the supply, but can be gained by playing Tournament.  They include Bag of Gold, Diadem, Followers, Princess, and Trusty Steed." />
   <!-- Promo -->
   <Card ID="304" Name="Summon" Set="Promo" Type="Event" Cost="5" Rules="Gain an Action card costing up to $4. Set it aside. If you do, then at the start of your next turn, play it." />
+  <!-- Empires -->
+  <Card ID="305" Name="Advance" Set="Empires" Type="Event" Cost="0" Rules="You may trash an Action card from your hand. If you do, gain an Action card costing up to $1." />
+  <Card ID="306" Name="Annex" Set="Empires" Type="Event" Cost="8D" Rules="Look through your discard pile. Shuffle all but up to 5 cards from it into your deck. Gain a Duchy." />
+  <Card ID="307" Name="Aqueduct" Set="Empires" Type="Landmark" Rules="When you gain a Treasure, move 1{VP} from its pile to this. When you gain a Victory card, take the {VP} from this.\n_____\nSetup: Put 8{VP} on the Silver and Gold piles." />
+  <Card ID="308" Name="Archive" Set="Empires" Type="Action, Duration" Cost="5" Rules="+1 Action\nSet aside the top 3 cards of your deck face down (you may look at them). Now and at the start of your next two turns, put one into your hand." />
+  <Card ID="309" Name="Arena" Set="Empires" Type="Landmark" Rules="At the start of your Buy phase, you may discard an Action card. If you do, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="310" Name="Bandit Fort" Set="Empires" Type="Landmark" Rules="When scoring, -2{VP} for each Silver and each Gold you have." />
+  <Card ID="311" Name="Banquet" Set="Empires" Type="Event" Cost="3" Rules="Gain 2 Coppers and a non-Victory card costing up to $1." />
+  <Card ID="312" Name="Basilica" Set="Empires" Type="Landmark" Rules="When you buy a card, if you have $1 or more left, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="313" Name="Baths" Set="Empires" Type="Landmark" Rules="When you end your turn without having gained a card, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="314" Name="Battlefield" Set="Empires" Type="Landmark" Rules="When you gain a Victory card, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="315" Name="Bustling Village" Set="Empires" Type="Action" Cost="5" Rules="+1 Card\n+3 Actions\nLook through your discard pile. You may reveal a Settlers from it and put it into your hand." />
+  <Card ID="316" Name="Capital" Set="Empires" Type="Treasure" Cost="5" Rules="$1\n+1 Buy\n_____\nWhen you discard this from play, take 6D, and then you may pay off {{Debt}}." />
+  <Card ID="317" Name="Castles" Set="Empires" Type="Victory, Castle" Cost="3" Rules="Sort the Castle pile by cost, putting the more expensive Castles on the bottom. For a 2-player game, use only one of each Castle. Only the top card of the pile can be gained or bought." />
+  <Card ID="318" Name="Catapult" Set="Empires" Type="Action" Cost="3" Rules="+$1\nTrash a card from your hand. If it costs $1 or more, each other player gains a Curse. If it's a Treasure, each other player discards down to 3 cards in hand." />
+  <Card ID="319" Name="Chariot Race" Set="Empires" Type="Action" Cost="3" Rules="+1 Action\nReveal the top card of your deck and put it into your hand. The player to your left reveals the top card of their deck. If your card costs more, +$1 and +1{VP}." />
+  <Card ID="320" Name="Charm" Set="Empires" Type="Treasure" Cost="5" Rules="When you play this, choose one: +1 Buy and +$1; or the next time you buy a card this turn, you may also gain a differently named card with the same cost." />
+  <Card ID="321" Name="City Quarter" Set="Empires" Type="Action" Cost="8D" Rules="+2 Actions\nReveal your hand. +1 Card per Action card revealed." />
+  <Card ID="322" Name="Colonnade" Set="Empires" Type="Landmark" Rules="When you buy an Action card, if you have a copy of it in play, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="323" Name="Conquest" Set="Empires" Type="Event" Cost="6" Rules="Gain 2 Silvers. +1{VP} per Silver you've gained this turn." />
+  <Card ID="324" Name="Crown" Set="Empires" Type="Action, Treasure" Cost="5" Rules="If it's your Action phase, you may play an Action from your hand twice.\nIf it's your Buy phase, you may play a Treasure from your hand twice." />
+  <Card ID="325" Name="Crumbling Castle" Set="Empires" Type="Victory, Castle" Cost="4" Rules="1 {VP}\n_____\nWhen you gain or trash this, +1{VP} and gain a Silver." />
+  <Card ID="326" Name="Defiled Shrine" Set="Empires" Type="Landmark" Rules="When you gain an Action, move 1{VP} from its pile to this. When you buy a Curse, take the {VP} from this.\n_____\nSetup: Put 2{VP} on each non-Gathering Action Supply pile." />
+  <Card ID="327" Name="Delve" Set="Empires" Type="Event" Cost="2" Rules="+1 Buy\nGain a Silver." />
+  <Card ID="328" Name="Dominate" Set="Empires" Type="Event" Cost="14" Rules="Gain a Province. If you do, +9{VP}." />
+  <Card ID="329" Name="Donate" Set="Empires" Type="Event" Cost="8D" Rules="After this turn, put all cards from your deck and discard pile into your hand, trash any number, shuffle your hand into your deck, then draw 5 cards." />
+  <Card ID="330" Name="Emporium" Set="Empires" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\n+$1\n_____\nWhen you gain this, if you have at least 5 Action cards in play, +2{VP}." />
+  <Card ID="331" Name="Encampment" Set="Empires" Type="Action" Cost="2" Rules="+2 Cards\n+2 Actions\nYou may reveal a Gold or Plunder from your hand. If you do not, set this aside, and return it to the Supply at the start of Clean-up." />
+  <Card ID="332" Name="Enchantress" Set="Empires" Type="Action, Attack, Duration" Cost="3" Rules="Until your next turn, the first time each other player plays an Action card on their turn, they get +1 Card and +1 Action instead of following its instructions.\nAt the start of your next turn, +2 Cards." />
+  <Card ID="333" Name="Engineer" Set="Empires" Type="Action" Cost="4D" Rules="Gain a card costing up to $1.\nYou may trash this.\nIf you do, gain a card costing up to $1." />
+  <Card ID="334" Name="Farmers' Market" Set="Empires" Type="Action, Gathering" Cost="3" Rules="+1 Buy\nIf there are 4{VP} or more on the Farmers' Market Supply pile, take them and trash this. Otherwise, add 1{VP} to the pile and then +$1 per 1{VP} on the pile." />
+  <Card ID="335" Name="Fortune" Set="Empires" Type="Treasure" Cost="8/8D" Rules="+1 Buy\nWhen you play this, double your {{Cost}} if you haven't yet this turn.\n_____\nWhen you gain this, gain a Gold per Gladiator you have in play." />
+  <Card ID="336" Name="Forum" Set="Empires" Type="Action" Cost="5" Rules="+3 Cards\n+1 Action\nDiscard 2 cards.\n_____\nWhen you buy this, +1 Buy." />
+  <Card ID="337" Name="Fountain" Set="Empires" Type="Landmark" Rules="When scoring, 15{VP} if you have at least 10 Coppers." />
+  <Card ID="338" Name="Gladiator" Set="Empires" Type="Action" Cost="3" Rules="+$1\nReveal a card from your hand. The player to your left may reveal a copy from their hand. If they do not, +$1 and trash a Gladiator from the Supply." />
+  <Card ID="339" Name="Grand Castle" Set="Empires" Type="Victory, Castle" Cost="9" Rules="5 {VP}\n_____\nWhen you gain this, reveal your hand. +1{VP} per Victory card in your hand and/or in play." />
+  <Card ID="340" Name="Groundskeeper" Set="Empires" Type="Action" Cost="5" Rules="+1 Card\n+1 Action\n_____\nWhile this is in play, when you gain a Victory card, +1{VP}." />
+  <Card ID="341" Name="Haunted Castle" Set="Empires" Type="Victory, Castle" Cost="6" Rules="2 {VP}\n_____\nWhen you gain this during your turn, gain a Gold, and each other player with 5 or more cards in hand puts 2 cards from their hand onto their deck." />
+  <Card ID="342" Name="Humble Castle" Set="Empires" Type="Treasure, Victory, Castle" Cost="3" Rules="$1\n_____\nWorth 1{VP} per Castle you have." />
+  <Card ID="343" Name="Keep" Set="Empires" Type="Landmark" Rules="When scoring, 5{VP} per differently named Treasure you have, that you have more copies of than each other player, or tied for most." />
+  <Card ID="344" Name="King's Castle" Set="Empires" Type="Victory, Castle" Cost="10" Rules="Worth 2{VP} per Castle you have." />
+  <Card ID="345" Name="Labyrinth" Set="Empires" Type="Landmark" Rules="When you gain a 2nd card in one of your turns, take 2{VP} from here.\n_____\nSetup: Put 6{VP} here per player." />
+  <Card ID="346" Name="Legionary" Set="Empires" Type="Action, Attack" Cost="5" Rules="+$1\nYou may reveal a Gold from your hand. If you do, each other player discards down to 2 cards in hand, then draws a card." />
+  <Card ID="347" Name="Mountain Pass" Set="Empires" Type="Landmark" Rules="When you are the first player to gain a Province, after that turn, each player bids once, up to 40D, ending with you. High bidder gets +8{VP} and takes the {{Debt}} they bid." />
+  <Card ID="348" Name="Museum" Set="Empires" Type="Landmark" Rules="When scoring, 2{VP} per differently named card you have." />
+  <Card ID="349" Name="Obelisk" Set="Empires" Type="Landmark" Rules="When scoring, 2{VP} per card you have from the chosen pile.\n_____\nSetup: Choose a random Action Supply pile." />
+  <Card ID="350" Name="Opulent Castle" Set="Empires" Type="Action, Victory, Castle" Cost="7" Rules="Discard any number of Victory cards. +$1 per card discarded.\n_____\n3 {VP}" />
+  <Card ID="351" Name="Orchard" Set="Empires" Type="Landmark" Rules="When scoring, 4{VP} per differently named Action card you have 3 or more copies of." />
+  <Card ID="352" Name="Overlord" Set="Empires" Type="Action" Cost="8D" Rules="Play this as if it were an Action card in the Supply costing up to $1. This is that card until it leaves play." />
+  <Card ID="353" Name="Palace" Set="Empires" Type="Landmark" Rules="When scoring, 3{VP} per set you have of Copper - Silver - Gold." />
+  <Card ID="354" Name="Patrician" Set="Empires" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nReveal the top card of your deck. If it costs $1 or more, put it into your hand." />
+  <Card ID="355" Name="Plunder" Set="Empires" Type="Treasure" Cost="5" Rules="$1\n+1{VP}" />
+  <Card ID="356" Name="Ritual" Set="Empires" Type="Event" Cost="4" Rules="Gain a Curse. If you do, trash a card from your hand. +1{VP} per $1 it cost." />
+  <Card ID="357" Name="Rocks" Set="Empires" Type="Treasure" Cost="4" Rules="$1\n_____\nWhen you gain or trash this, gain a Silver; if it is your Buy phase, put the Silver on your deck, otherwise put it into your hand." />
+  <Card ID="358" Name="Royal Blacksmith" Set="Empires" Type="Action" Cost="8D" Rules="+5 Cards\nReveal your hand; discard the Coppers." />
+  <Card ID="359" Name="Sacrifice" Set="Empires" Type="Action" Cost="4" Rules="Trash a card from your hand. If it's an...\nAction card, +2 Cards, +2 Actions\nTreasure card, +$1\nVictory card, +2{VP}" />
+  <Card ID="360" Name="Salt the Earth" Set="Empires" Type="Event" Cost="4" Rules="+1{VP}\nTrash a Victory card from the Supply." />
+  <Card ID="361" Name="Settlers" Set="Empires" Type="Action" Cost="2" Rules="+1 Card\n+1 Action\nLook through your discard pile. You may reveal a Copper from it and put it into your hand." />
+  <Card ID="362" Name="Small Castle" Set="Empires" Type="Action, Victory, Castle" Cost="5" Rules="Trash this or a Castle from your hand. If you do, gain a Castle.\n_____\n2 {VP}" />
+  <Card ID="363" Name="Sprawling Castle" Set="Empires" Type="Victory, Castle" Cost="8" Rules="4 {VP}\n_____\nWhen you gain this, gain a Duchy or 3 Estates." />
+  <Card ID="364" Name="Tax" Set="Empires" Type="Event" Cost="2" Rules="Add 2D to a Supply pile.\n_____\nSetup: Add 1D to each Supply pile. When a player buys a card, they take the {{Debt}} from its pile." />
+  <Card ID="365" Name="Temple" Set="Empires" Type="Action, Gathering" Cost="4" Rules="+1{VP}\nTrash from 1 to 3 differently named cards from your hand. Add 1{VP} to the Temple Supply pile.\n_____\nWhen you gain this, take the {VP} from the Temple Supply pile." />
+  <Card ID="366" Name="Tomb" Set="Empires" Type="Landmark" Rules="When you trash a card, +1{VP}." />
+  <Card ID="367" Name="Tower" Set="Empires" Type="Landmark" Rules="When scoring, 1{VP} per non-Victory card you have from an empty Supply pile." />
+  <Card ID="368" Name="Triumph" Set="Empires" Type="Event" Cost="5D" Rules="Gain an Estate. If you did, +1{VP} per card you've gained this turn." />
+  <Card ID="369" Name="Triumphal Arch" Set="Empires" Type="Landmark" Rules="When scoring, 3{VP} per copy you have of the 2nd most common Action card among your cards (if it's a tie, count either)." />
+  <Card ID="370" Name="Villa" Set="Empires" Type="Action" Cost="4" Rules="+2 Actions\n+1 Buy\n+$1\n_____\nWhen you gain this, put it into your hand, +1 Action, and if it's your Buy phase return to your Action phase." />
+  <Card ID="371" Name="Wall" Set="Empires" Type="Landmark" Rules="When scoring, -1{VP} per card you have after the first 15." />
+  <Card ID="372" Name="Wedding" Set="Empires" Type="Event" Cost="4/3D" Rules="+1{VP}\nGain a Gold." />
+  <Card ID="373" Name="Wild Hunt" Set="Empires" Type="Action, Gathering" Cost="5" Rules="Choose one: +3 Cards and add 1{VP} to the Wild Hunt Supply pile; or gain an Estate, and if you do, take the {VP} from the pile." />
+  <Card ID="374" Name="Windfall" Set="Empires" Type="Event" Cost="5" Rules="If your deck and discard pile are empty, gain 3 Golds." />
+  <Card ID="375" Name="Wolf Den" Set="Empires" Type="Landmark" Rules="When scoring, -3{VP} per card you have exactly one copy of." />
 </ArrayOfCard>
