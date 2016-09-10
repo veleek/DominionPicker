@@ -7,6 +7,10 @@
       xmlns:controls="using:Ben.Controls"
       xmlns:dominionControls="using:Ben.Dominion.Controls"
       xmlns:system="using:System" 
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:behaviors="using:Ben.Dominion.Behaviors"
+      xmlns:dominion="using:Ben.Dominion"
       DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}" 
       mc:Ignorable="d" 
       d:DesignHeight="696" d:DesignWidth="480" 
@@ -21,6 +25,13 @@
     </animation:TransitionCollection>
   </Page.Transitions>
   <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid.Resources>
+      <CollectionViewSource x:Name="ResultViewSource" 
+                          Source="{x:Bind MainView.Result.GroupedCards}" 
+                          IsSourceGrouped="True" 
+                          ItemsPath="Elements"/>
+    </Grid.Resources>
+    
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
@@ -35,7 +46,7 @@
       <SymbolIcon Symbol="Help" Margin="1,0,-1,0" />
     </Button>
 
-    <ScrollViewer Grid.Row="1" Margin="12,0,0,0">
+    <ScrollViewer Grid.Row="1" Margin="0">
       <StackPanel>
         <StackPanel Visibility="Collapsed">
           <!--Visibility="{Binding Configuration.ShowBasicCards, Converter={StaticResource BooleanToVisibilityConverter}}">-->
@@ -158,61 +169,104 @@
             <RadioButton GroupName="NumPlayers" Content="6" Style="{StaticResource RadioRoundButton}" Click="PlayersButton_Click" />
           </StackPanel>
         </StackPanel>
-        <SemanticZoom HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="0">
-          <!--<SemanticZoom.ZoomedOutView>
-              <ListView>
-                <TextBlock Text="{Binding Key, Converter={StaticResource StringsLocalizer}}" TextAlignment="Left" TextWrapping="Wrap" Margin="0,6,0,3">
-                    -->
-          <!--Style="{StaticResource PhoneTextAccentStyle}"-->
-          <!--
-                </TextBlock>
-              </ListView>
-            </SemanticZoom.ZoomedOutView>-->
-          <!--IsGroupingEnabled="True"-->
-          <SemanticZoom.ZoomedInView>
-            <ListView ItemsSource="{Binding Result.Cards}" x:Name="GroupedCardsList" HorizontalContentAlignment="Stretch">
-              <ListView.GroupStyle>
-                <GroupStyle HidesIfEmpty="True">
-                  <GroupStyle.HeaderTemplate>
-                    <DataTemplate>
-                      <Border BorderBrush="Turquoise" Background="Fuchsia" BorderThickness="3">
-                        <StackPanel Orientation="Horizontal">
-                          <TextBox Text="{Binding}" />
-                          <TextBox Text=" Some Stuff" />
-                        </StackPanel>
-                      </Border>
-                    </DataTemplate>
-                  </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-              </ListView.GroupStyle>
-              <ListView.ItemContainerStyle>
-                <Style TargetType="ListViewItem">
+
+        <ListView ItemsSource="{x:Bind ResultViewSource.View}" 
+                  SelectionMode="None">
+          <ListView.ItemTemplate>
+            <DataTemplate x:DataType="dominion:Card">
+              <dominionControls:DominionCardControl Card="{Binding}" />
+            </DataTemplate>
+          </ListView.ItemTemplate>
+          <ListView.GroupStyle>
+            <GroupStyle HidesIfEmpty="True">
+              <GroupStyle.HeaderContainerStyle>
+                <Style TargetType="ListViewHeaderItem">
+                  <Setter Property="HorizontalAlignment" Value="Stretch" />
                   <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
-              </ListView.ItemContainerStyle>
-              <ListView.ItemTemplate>
-                <DataTemplate>
-                  <dominionControls:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap" Swipe="DominionCardControl_Swipe"/>
+              </GroupStyle.HeaderContainerStyle>
+              <GroupStyle.HeaderTemplate>
+                <DataTemplate x:DataType="dominion:CardGrouping">
+                  <TextBlock Text="{Binding Key, Mode=OneTime, Converter={StaticResource CardDataLocalizer}}" 
+                       Style="{StaticResource TitleTextBlockStyle}" 
+                       TextAlignment="Left" VerticalAlignment="Bottom" Margin="0" />
                 </DataTemplate>
-              </ListView.ItemTemplate>
-            </ListView>
-          </SemanticZoom.ZoomedInView>
-          <SemanticZoom.ZoomedOutView>
-            <GridView ItemsSource="{Binding Result.GroupedCards}" />
-          </SemanticZoom.ZoomedOutView>
-        </SemanticZoom>
-        <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" Margin="0,6,0,3" Visibility="{Binding Result.HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}">
-            <!--Style="{StaticResource PhoneTextAccentStyle}"-->
+              </GroupStyle.HeaderTemplate>
+            </GroupStyle>
+          </ListView.GroupStyle>
+          <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+              <Setter Property="HorizontalAlignment" Value="Stretch" />
+              <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+          </ListView.ItemContainerStyle>
+        </ListView>
+
+        <TextBlock Text="{Binding Strings.Results_ExtrasDesc, Source={StaticResource LocalizedResources}}" Margin="12,6,0,3" 
+                   Visibility="{Binding Result.HasExtras, Converter={StaticResource IsValidToVisibilityConverter}}">
         </TextBlock>
-        <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding Result.AdditionalStuff}" Margin="12,3" FontFamily="{StaticResource OptimusPrincepsSemiBold}" FontSize="33" />
+        <ItemsControl x:Name="AdditionalStuffList" ItemsSource="{Binding Result.AdditionalStuff}" Margin="12,4,0,0" FontFamily="{StaticResource OptimusPrincepsSemiBold}" FontSize="33" />
       </StackPanel>
     </ScrollViewer>
-    
-    <!--<dominionControls:AddFavoritePopupControl x:Name="AddFavoritePopup" Grid.RowSpan="2" Grid.Row="0" SaveFavorite="AddFavoritePopup_SaveFavorite" Visibility="Collapsed" />-->
+
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar/>
+    <CommandBar>
+      <AppBarButton Label="{Binding Strings.Results_Refresh, Source={StaticResource LocalizedResources}}" Click="Refresh_Click">
+        <AppBarButton.Icon>
+          <SymbolIcon Symbol="Sync" />
+        </AppBarButton.Icon>
+      </AppBarButton>
 
+      <AppBarButton x:Name="SortButton" Label="{Binding Strings.Results_SortName, Source={StaticResource LocalizedResources}}" Click="Sort_Click">
+        <AppBarButton.Icon>
+          <SymbolIcon Symbol="Sort" />
+        </AppBarButton.Icon>
+      </AppBarButton>
+
+      <AppBarButton Label="{Binding Strings.Results_Save, Source={StaticResource LocalizedResources}}" Click="AddFavorite_Click">
+        <AppBarButton.Icon>
+          <SymbolIcon Symbol="Save" />
+        </AppBarButton.Icon>
+      </AppBarButton>
+
+
+      <CommandBar.SecondaryCommands>
+        <AppBarButton Label="{Binding Strings.Menu_CardLookup, Source={StaticResource LocalizedResources}}">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <behaviors:PickerViewNavigateAction View="CardLookup" />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+
+        <AppBarButton Label="{Binding Strings.Menu_BlackMarket, Source={StaticResource LocalizedResources}}">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <behaviors:PickerViewNavigateAction View="BlackMarket" />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+
+        <AppBarButton Label="{Binding Strings.Menu_Settings, Source={StaticResource LocalizedResources}}">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <behaviors:PickerViewNavigateAction View="Settings" />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+
+        <AppBarButton Label="{Binding Strings.Menu_About, Source={StaticResource LocalizedResources}}">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <behaviors:PickerViewNavigateAction View="About" />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+
+      </CommandBar.SecondaryCommands>
+
+    </CommandBar>
   </Page.BottomAppBar>
 </Page>

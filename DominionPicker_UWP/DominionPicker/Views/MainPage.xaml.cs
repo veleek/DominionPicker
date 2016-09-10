@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Ben.Dominion.Controls;
 //using GoogleAnalytics;
 using Ben.Dominion.Resources;
@@ -24,9 +25,6 @@ namespace Ben.Dominion
         private object favoriteEdit;
         private bool reviewRequestShown;
         private bool updatePopupShown;
-        private readonly AppBarButton addFavoriteButton;
-        private readonly AppBarButton resetFavoritesButton;
-        private readonly AppBarButton resetSettingsButton;
 
         public MainPage()
         {
@@ -38,28 +36,14 @@ namespace Ben.Dominion
             this.InitializeComponent();
 
             DispatcherHelper.Initialize();
-            //var backgroundBrush = this.RequestReviewPopup.Background as SolidColorBrush;
-            //var backgroundColor = backgroundBrush.Color;
-            //backgroundColor.A = 0x66;
-            //backgroundBrush.Color = backgroundColor;
 
             // Set the data context of the listbox control to the sample data
             this.Loaded += this.MainPage_Loaded;
-            SystemNavigationManager.GetForCurrentView().BackRequested += this.MainPage_BackKeyPress;
 
-            CommandBar bottomAppBar = BottomAppBar as CommandBar;
-            bottomAppBar.AddMenuItem(Strings.Menu_CardLookup, this.CardLookup_Click);
-            bottomAppBar.AddMenuItem(Strings.Menu_BlackMarket, this.BlackMarket_Click);
-            bottomAppBar.AddMenuItem(Strings.Menu_Settings, this.Settings_Click);
-            //bottomAppBar.AddMenuItem(Strings.Menu_About, this.About_Click);
             if (Debugger.IsAttached)
             {
-                bottomAppBar.AddMenuItem("Debug", (s, a) => NavigationServiceHelper.Navigate(PickerView.Debug));
+                (BottomAppBar as CommandBar).AddMenuItem("Debug", (s, a) => NavigationServiceHelper.Navigate(PickerView.Debug));
             }
-            // Create all the app bar buttons as well.
-            this.resetSettingsButton = ApplicationBarHelper.CreateIconButton(Strings.MainPage_Reset, @"Images/appbar.reset.png", this.ResetSettings_Click);
-            this.addFavoriteButton = ApplicationBarHelper.CreateIconButton(Strings.MainPage_Save, @"/Images/appbar.favs.addto.png", this.AddFavorite_Click);
-            this.resetFavoritesButton = ApplicationBarHelper.CreateIconButton(Strings.MainPage_Reset, @"/Images/appbar.reset.png", this.ResetFavorites_Click);
         }
 
         public MainViewModel MainView
@@ -92,18 +76,11 @@ namespace Ben.Dominion
             this.DataContext = this.MainView;
         }
 
-        public void ShowAddFavoritePopup()
+        public async Task ShowAddFavoritePopupAsync()
         {
-            //this.AddFavoritePopup.IsOpen = true;
-            this.resetSettingsButton.IsEnabled = false;
-            this.addFavoriteButton.IsEnabled = false;
-        }
-
-        public void HideAddFavoritePopup()
-        {
-            //this.AddFavoritePopup.IsOpen = false;
-            this.resetSettingsButton.IsEnabled = true;
-            this.addFavoriteButton.IsEnabled = true;
+            this.favoriteEdit = null;
+            ContentDialog addFavoriteDialog = new AddFavoriteDialog();
+            var result = await addFavoriteDialog.ShowAsync();
         }
 
         private void Create()
@@ -178,7 +155,7 @@ namespace Ben.Dominion
             MainViewModel.Instance.SaveFavoriteSettings(name);
         }
 
-        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.NavigationMode == NavigationMode.New)
             {
@@ -191,6 +168,7 @@ namespace Ben.Dominion
                 //EasyTracker.GetTracker().SendView(new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative).ToString());
                 // Handle any voice commands
             }
+
             base.OnNavigatedTo(e);
         }
 
@@ -217,25 +195,9 @@ namespace Ben.Dominion
             }
         }
 
-        private void MainPage_BackKeyPress(object sender, BackRequestedEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            MainViewModel.Instance.CancelGeneration();
-        }
-
-        private void RootPivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.MainView.PivotIndex = this.RootPivot.SelectedIndex;
-            ((CommandBar)BottomAppBar).PrimaryCommands.Clear();
-            switch (this.RootPivot.SelectedIndex)
-            {
-                case 0:
-                    ((CommandBar)BottomAppBar).PrimaryCommands.Add(this.resetSettingsButton);
-                    ((CommandBar)BottomAppBar).PrimaryCommands.Add(this.addFavoriteButton);
-                    break;
-                case 1:
-                    ((CommandBar)BottomAppBar).PrimaryCommands.Add(this.resetFavoritesButton);
-                    break;
-            }
+            if (MainViewModel.Instance.IsGenerating) MainViewModel.Instance.CancelGeneration();
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -250,14 +212,9 @@ namespace Ben.Dominion
             this.SettingsScrollViewer.UpdateLayout();
         }
 
-        private void AddFavorite_Click(object sender, RoutedEventArgs e)
+        private async void AddFavorite_Click(object sender, RoutedEventArgs e)
         {
-            //if (!this.AddFavoritePopup.IsOpen)
-            {
-                this.favoriteEdit = null;
-                //this.AddFavoritePopup.FavoriteName = String.Empty;
-                this.ShowAddFavoritePopup();
-            }
+            await this.ShowAddFavoritePopupAsync();
         }
 
         private async void ResetFavorites_Click(object sender, RoutedEventArgs e)
@@ -280,32 +237,6 @@ namespace Ben.Dominion
                 this.FavoritesScrollViewer.ChangeView(null, 0, null, true);
                 this.FavoritesScrollViewer.UpdateLayout();
             }
-        }
-
-        private void CardLookup_Click(object sender, RoutedEventArgs e)
-        {
-            PickerView.CardLookup.Go();
-        }
-
-        private void BlackMarket_Click(object sender, RoutedEventArgs e)
-        {
-            PickerView.BlackMarket.Go();
-        }
-
-        private void Settings_Click(object sender, RoutedEventArgs e)
-        {
-            PickerView.Settings.Go();
-        }
-
-        private void About_Click(object sender, RoutedEventArgs e)
-        {
-            PickerView.About.Go();
-        }
-
-        private void UpdatePopupOk_Click(ContentDialog dialog, ContentDialogButtonClickEventArgs args)
-        {
-            dialog.Visibility = Visibility.Collapsed;
-            this.updatePopupShown = true;
         }
 
         private void FavoriteSettingsListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -354,7 +285,6 @@ namespace Ben.Dominion
             {
                 (this.favoriteEdit as FavoriteSetting).Name = e.FavoriteName;
             }
-            this.HideAddFavoritePopup();
         }
 
         private void RenameButton_Click(object sender, RoutedEventArgs e)
@@ -379,10 +309,10 @@ namespace Ben.Dominion
             // that so that we don't steal the focus away from the textbox.
             // *sigh* Yes, it could have been better to just use a separate 
             // page for the name dialog.
-            var showFavoriteTask = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-               {
-                   this.ShowAddFavoritePopup();
-               });
+            var showFavoriteTask = this.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+            {
+                await this.ShowAddFavoritePopupAsync();
+            });
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)

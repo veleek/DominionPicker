@@ -101,7 +101,9 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\CallMethodWithParameterAction.cs" />
     <Compile Include="Behaviors\CloseKeyboardAction.cs" />
+    <Compile Include="Behaviors\Converters.cs" />
     <Compile Include="Behaviors\DelegatingAction.cs" />
     <Compile Include="Behaviors\OnKeyAction.cs" />
     <Compile Include="Behaviors\PickerViewNavigateAction.cs" />

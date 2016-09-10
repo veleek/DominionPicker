@@ -21,6 +21,7 @@ namespace Ben.Dominion.ViewModels
         private FavoritesViewModel favorites = new FavoritesViewModel();
         private BlackMarketViewModel blackMarket = new BlackMarketViewModel();
         private bool isGenerating;
+        private int pivotIndex;
 
         public MainViewModel()
         {
@@ -103,7 +104,11 @@ namespace Ben.Dominion.ViewModels
             }
         }
 
-        public int PivotIndex { get; set; }
+        public int PivotIndex
+        {
+            get { return this.pivotIndex; }
+            set { this.SetProperty(ref this.pivotIndex, value); }
+        }
 
         /// <summary>
         /// 

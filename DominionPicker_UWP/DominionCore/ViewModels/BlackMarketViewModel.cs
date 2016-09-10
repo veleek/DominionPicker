@@ -5,7 +5,6 @@ using Ben.Utilities;
 
 namespace Ben.Dominion.ViewModels
 {
-
    public class BlackMarketViewModel
       : NotifyPropertyChangedBase
    {

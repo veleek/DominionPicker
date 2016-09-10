@@ -1,4 +1,3 @@
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -9,12 +8,6 @@ namespace Ben.Dominion
         public CardInfo()
         {
             InitializeComponent();
-            this.Loaded += new RoutedEventHandler(CardInfo_Loaded);
-        }
-
-        void CardInfo_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.DataContext = App.Instance.SelectedCard;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

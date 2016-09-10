@@ -49,13 +49,17 @@
 
           <Button Grid.Column="1" Width="32" Height="32" Padding="0"
                   VerticalAlignment="Center"
-                  Click="CardItemDetails_Click"
                   Style="{StaticResource RoundButtonStyle}">
+            <interactivity:Interaction.Behaviors>
+              <interactions:EventTriggerBehavior EventName="Click">
+                <behaviors:PickerViewNavigateAction View="CardInfo" Parameter="{x:Bind Card}" />
+              </interactions:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
             <SymbolIcon Symbol="Help" Margin="1,0,-1,0"/>
           </Button>
         </Grid>
       </DataTemplate>
-      
+
       <DataTemplate x:Key="CardSetGroupTemplate" x:DataType="dominion:CardSetGrouping">
         <Border Background="{ThemeResource SystemControlForegroundAccentBrush}" Padding="4" Margin="0,4">
           <Grid DataContext="{Binding Key, Mode=OneTime}">
@@ -80,9 +84,9 @@
       <DataTemplate x:Key="CardSetJumpListStyle" x:DataType="data:ICollectionViewGroup">
         <ContentPresenter ContentTemplate="{StaticResource CardSetGroupTemplate}" Content="{x:Bind Group}" />
       </DataTemplate>
-      
+
     </Grid.Resources>
-    
+
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
@@ -150,14 +154,25 @@
       </SemanticZoom.ZoomedOutView>
     </SemanticZoom>
   </Grid>
-  
+
   <Page.BottomAppBar>
     <CommandBar IsOpen="false">
       <CommandBar.SecondaryCommands>
+        <AppBarButton Label="{Binding Strings.Lookup_ResetFiltered, Source={StaticResource LocalizedResources}}"
+                      Click="ResetFilteredCards_Click"/>
+
+        <AppBarButton Label="{Binding Strings.Lookup_ShowFiltered, Source={StaticResource LocalizedResources}}">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <interactions:ChangePropertyAction TargetObject="{Binding}" PropertyName="SearchText" Value="&lt;filtered&gt;" />
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+        </AppBarButton>
+
         <AppBarButton Label="About">
           <interactivity:Interaction.Behaviors>
             <interactions:EventTriggerBehavior EventName="Click">
-              <behaviors:PickerViewNavigateAction />
+              <behaviors:PickerViewNavigateAction View="About" />
             </interactions:EventTriggerBehavior>
           </interactivity:Interaction.Behaviors>
         </AppBarButton>

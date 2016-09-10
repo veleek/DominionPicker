@@ -52,7 +52,7 @@ namespace Ben.Dominion.Views
 
         /// <summary>
         /// This method does nothing, it just provides a method we can call to ensure 
-        /// that the static initializer get's called.
+        /// that the static initializer gets called.
         /// </summary>
         public static void Initialize()
         {

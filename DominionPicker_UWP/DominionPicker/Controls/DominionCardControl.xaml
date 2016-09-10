@@ -7,7 +7,8 @@
              mc:Ignorable="d" d:DesignHeight="80" d:DesignWidth="480" 
              d:DataContext="{d:DesignData Source=../SampleData/CardSampleData.xaml, IsDesignTimeCreatable=True}"
              x:Name="CardControl">
-  <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+  <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
+                DataContext="{Binding Card, ElementName=CardControl}">
     <ScrollViewer.Style>
       <Style TargetType="ScrollViewer">
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />

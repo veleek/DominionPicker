@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 08/10/2016 23:59:49
+// 	Generated: 09/09/2016 23:57:27
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Ben.Dominion.Resources
@@ -1483,6 +1483,17 @@ namespace Ben.Dominion.Resources
             get
             {
                 return resourceLoader.GetString("Config_PlusBuys");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "refresh"
+        /// </summary>
+        public static string Results_Refresh
+        {
+            get
+            {
+                return resourceLoader.GetString("Results_Refresh");
             }
         }
     }

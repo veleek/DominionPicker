@@ -8,6 +8,7 @@ using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 
 using GestureEventArgs = Windows.UI.Xaml.Input.TappedRoutedEventArgs;
+using Ben.Dominion.Controls;
 
 namespace Ben.Dominion
 {
@@ -20,20 +21,14 @@ namespace Ben.Dominion
         {
             this.InitializeComponent();
             this.Loaded += (s, e) =>
-               {
-                   DispatcherHelper.Initialize();
-                   MainViewModel.Instance.BlackMarket.Reset();
-               };
+            {
+                MainViewModel.Instance.BlackMarket.Reset();
+            };
         }
 
-        private void DrawButton_Click(object sender, RoutedEventArgs e)
+        public BlackMarketViewModel ViewModel
         {
-            MainViewModel.Instance.BlackMarket.Draw();
-        }
-
-        private void DiscardButton_Click(object sender, RoutedEventArgs e)
-        {
-            MainViewModel.Instance.BlackMarket.Discard();
+            get { return MainViewModel.Instance.BlackMarket; }
         }
 
         private void Reset_Click(object sender, RoutedEventArgs e)
@@ -43,8 +38,8 @@ namespace Ben.Dominion
 
         private void CardItem_Tap(object sender, GestureEventArgs gestureEventArgs)
         {
-            var card = sender.GetContext<Card>();
-            MainViewModel.Instance.BlackMarket.Pick(card);
+            DominionCardControl cardControl = sender as DominionCardControl; 
+            MainViewModel.Instance.BlackMarket.Pick(cardControl.Card);
         }
 
         private void CardItem_Swipe(Object sender, EventArgs e)

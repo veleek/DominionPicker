@@ -5,11 +5,10 @@ using Ben.Utilities;
 
 namespace Ben.Dominion.Controls
 {
-
     public partial class DominionCardControl
        : UserControl
     {
-        public static readonly DependencyProperty CardProperty = DependencyProperty.Register("Card", typeof(Card), typeof(DominionCardControl), new PropertyMetadata(null));
+        public static readonly DependencyProperty CardProperty = DependencyProperty.Register("Card", typeof(Card), typeof(DominionCardControl), new PropertyMetadata(null, OnCardChanged));
         public static readonly DependencyProperty ShowSetIconProperty = DependencyProperty.Register("ShowSetIcon", typeof(bool), typeof(DominionCardControl), new PropertyMetadata(true));
         public static readonly DependencyProperty IsSwipeEnabledProperty = DependencyProperty.Register("IsSwipeEnabled", typeof(bool), typeof(DominionCardControl), new PropertyMetadata(true));
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register("Header", typeof(string), typeof(DominionCardControl), new PropertyMetadata(null));
@@ -29,10 +28,7 @@ namespace Ben.Dominion.Controls
             }
             set
             {
-                if(value != null)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Loading Card {value.DisplayName} into control");
-                }
+                // Apparently this method NEVER gets called!??!?! :(
                 this.SetValue(CardProperty, value);
             }
         }
@@ -71,6 +67,11 @@ namespace Ben.Dominion.Controls
             {
                 this.SetValue(ShowSetIconProperty, value);
             }
+        }
+
+        private static void OnCardChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            // This may not be needed. 
         }
 
         private void ScrollViewer_ManipulationCompleted(object sender, Windows.UI.Xaml.Input.ManipulationCompletedRoutedEventArgs e)

@@ -511,4 +511,7 @@ never be picked</value>
   <data name="Config_PlusBuys" xml:space="preserve">
     <value>Cards with +Buy</value>
   </data>
+  <data name="Results_Refresh" xml:space="preserve">
+    <value>refresh</value>
+  </data>
 </root>

@@ -4,17 +4,22 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:animation="using:Windows.UI.Xaml.Media.Animation"
-      xmlns:controls="using:Ben.Dominion.TestControls"
       mc:Ignorable="d" 
       d:DesignHeight="768" 
       d:DesignWidth="480">
-  
+
   <Page.Resources>
     <DataTemplate x:Key="WrappedTextBlockTemplate">
-      <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+      <TextBlock Text="{Binding}" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" Margin="0"/>
     </DataTemplate>
+
+    <Style TargetType="CheckBox" BasedOn="{StaticResource CheckBoxWithVerticalAlignmentStyle}">
+      <Setter Property="VerticalAlignment" Value="Top" />
+      <Setter Property="Padding" Value="8,-1,8,0" />
+      <Setter Property="Margin" Value="0,6,0,0" />
+    </Style>
   </Page.Resources>
-  
+
   <Page.Transitions>
     <animation:TransitionCollection>
       <animation:NavigationThemeTransition>
@@ -24,21 +29,25 @@
       </animation:NavigationThemeTransition>
     </animation:TransitionCollection>
   </Page.Transitions>
-  
+
   <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,00,0,6">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource BodyTextBlockStyle}" />
-      <TextBlock x:Name="PageTitle" Text="{Binding Strings.Config_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource HeaderTextBlockStyle}" />
-    </StackPanel>
-    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+
+    <TextBlock x:Name="PageTitle" 
+               Text="{Binding Strings.Config_Title, Source={StaticResource LocalizedResources}}"
+               Style="{StaticResource HeaderTextBlockStyle}" Margin="12,0,0,4"  />
+
+    <Grid x:Name="ContentPanel" Grid.Row="1" HorizontalAlignment="Stretch">
       <ScrollViewer>
-        <StackPanel>
+        <StackPanel Margin="12,0,12,0" MaxWidth="500">
+          <!--
           <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding Strings.Config_PickerOptions, Source={StaticResource LocalizedResources}}" />
-          <ComboBox x:Name="OwnedSets" Header="{Binding Strings.Config_OwnedSets, Source={StaticResource LocalizedResources}}" ItemsSource="{Binding AllSets}" IsEnabled="false">
+          <ComboBox x:Name="OwnedSets" ItemsSource="{Binding AllSets}" IsEnabled="true"
+                    Header="{Binding Strings.Config_OwnedSets, Source={StaticResource LocalizedResources}}"
+                    HorizontalAlignment="Stretch" IsTapEnabled="False" Style="{StaticResource MultiSelectComboBoxStyle}">
             <ComboBox.HeaderTemplate>
               <DataTemplate>
                 <TextBlock Text="{Binding}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Bold" />
@@ -49,77 +58,64 @@
                 <TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" />
               </DataTemplate>
             </ComboBox.ItemTemplate>
-            <!--SelectionMode="Multiple"-->
-            <!--<ComboBox.FullModeItemTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-  <DataTemplate>
-    <TextBlock Text="{Binding Converter={StaticResource CardDataLocalizer}}" VerticalAlignment="Center" Style="{StaticResource PhoneTextLargeStyle}" />
-  </DataTemplate>
-</ComboBox.FullModeItemTemplate>-->
           </ComboBox>
           <TextBlock Text="{Binding Strings.Config_OwnedSetsDescription, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
-          
+          -->
+
           <ComboBox x:Name="PlatinumColonyOption" 
                     Header="{Binding Strings.Config_PlatinumColonyOption, Source={StaticResource LocalizedResources}}" 
                     ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}}" 
                     SelectedItem="{Binding PickPlatinumColony, Mode=TwoWay}" 
-                    Style="{StaticResource EnumOptionStyle}"/>
+                    Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
 
           <ComboBox x:Name="SheltersOption" 
                     Header="{Binding Strings.Config_SheltersOption, Source={StaticResource LocalizedResources}}" 
                     ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}}" SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}" 
-                    Style="{StaticResource EnumOptionStyle}"/>
+                    Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
           <ComboBox x:Name="EventsOption" 
                     Header="{Binding Strings.Config_EventsOption, Source={StaticResource LocalizedResources}}" 
                     ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}}" 
                     SelectedItem="{Binding PickEvents, Mode=TwoWay}" 
-                    Style="{StaticResource EnumOptionStyle}"/>
+                    Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
 
           <CheckBox IsChecked="{Binding ShowExtras, Mode=TwoWay}" ContentTemplate="{StaticResource WrappedTextBlockTemplate}" Content="{Binding Strings.Settings_ShowExtras, Source={StaticResource LocalizedResources}}" />
-          <CheckBox IsChecked="{Binding ShowBasicCards, Mode=TwoWay}">
+          <CheckBox IsChecked="{Binding ShowBasicCards, Mode=TwoWay}" >
             <StackPanel>
-              <TextBlock Text="{Binding Strings.Settings_ShowBasicCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
-              <TextBlock Text="{Binding Strings.Settings_ShowBasicCards_Description, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
+              <TextBlock Text="{Binding Strings.Settings_ShowBasicCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" Style="{StaticResource TitleTextBlockStyle}" />
+              <TextBlock Text="{Binding Strings.Settings_ShowBasicCards_Description, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" Style="{StaticResource SubtleTextBlockStyle}" Margin="0" />
             </StackPanel>
           </CheckBox>
-          <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" />
-          <ComboBox x:Name="CulturesListPicker" ItemsSource="{Binding SupportedCultures}" Header="{Binding Strings.Config_Language, Source={StaticResource LocalizedResources}}" SelectedItem="{Binding CurrentCulture, Mode=TwoWay}">
+          <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="{Binding Strings.Config_LanguageOptions, Source={StaticResource LocalizedResources}}" Margin="0,12,0,0" />
+          <ComboBox x:Name="CulturesListPicker" Header="{Binding Strings.Config_Language, Source={StaticResource LocalizedResources}}" 
+                    ItemsSource="{Binding SupportedCultures}" 
+                    SelectedItem="{Binding CurrentCulture, Mode=TwoWay}"
+                    HorizontalAlignment="Stretch">
             <ComboBox.ItemTemplate>
               <DataTemplate>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                   <Border CornerRadius="4" Background="{ThemeResource SystemControlForegroundAccentBrush}" MinWidth="40" MinHeight="40" Margin="6">
                     <TextBlock Text="{Binding TwoLetterISOLanguageName}" Foreground="WhiteSmoke" VerticalAlignment="Center" TextAlignment="Center">
-                                            <!--FontSize="{StaticResource PhoneFontSizeNormal}"-->
                     </TextBlock>
                   </Border>
                   <TextBlock Text="{Binding NativeName}" VerticalAlignment="Center" />
                 </StackPanel>
               </DataTemplate>
             </ComboBox.ItemTemplate>
-            <!--<ComboBox.FullModeItemTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-  <DataTemplate>
-    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-      <Border CornerRadius="4" Background="{StaticResource PhoneAccentBrush}" MinWidth="40" MinHeight="40" Margin="6">
-        <TextBlock Text="{Binding TwoLetterISOLanguageName}" Foreground="WhiteSmoke" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" TextAlignment="Center" />
-      </Border>
-      <TextBlock Text="{Binding NativeName}" Style="{StaticResource PhoneTextLargeStyle}" VerticalAlignment="Center" />
-    </StackPanel>
-  </DataTemplate>
-</ComboBox.FullModeItemTemplate>-->
           </ComboBox>
           <TextBlock Text="{Binding Strings.Config_LanguageDescription, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
-          <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
+          <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}">
             <StackPanel>
               <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="User Interface" />
               <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="This includes page titles, picker settings, descriptions, etc." TextWrapping="Wrap" />
             </StackPanel>
           </CheckBox>
-          <CheckBox IsChecked="{Binding LocalizeCardData, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
+          <CheckBox IsChecked="{Binding LocalizeCardData, Mode=TwoWay}">
             <StackPanel>
               <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Card Details" />
               <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="The card names, types, and sets" TextWrapping="Wrap" />
             </StackPanel>
           </CheckBox>
-          <CheckBox IsChecked="{Binding LocalizeRulesText, Mode=TwoWay}" VerticalAlignment="Top" Padding="0,-6,0,0">
+          <CheckBox IsChecked="{Binding LocalizeRulesText, Mode=TwoWay}">
             <StackPanel>
               <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Rules Text" />
               <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="The descriptive rules text on the card." TextWrapping="Wrap" />

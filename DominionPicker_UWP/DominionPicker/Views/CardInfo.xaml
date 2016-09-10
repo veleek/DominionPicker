@@ -24,19 +24,15 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <TextBlock Grid.Row="0" HorizontalAlignment="Right" Margin="12,0,12,6" TextAlignment="Right" Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding Strings.Info_Tips, Source={StaticResource LocalizedResources}}" />
+    <TextBlock Grid.Row="0" HorizontalAlignment="Right" Margin="0,12,12,0" TextAlignment="Right" Style="{StaticResource SubtitleTextBlockStyle}" Text="{Binding Strings.Info_Tips, Source={StaticResource LocalizedResources}}" />
     <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource BodyTextBlockStyle}" />
-      <TextBlock x:Name="PageTitle" Text="{Binding Strings.Info_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource HeaderTextBlockStyle}" />
+      <TextBlock x:Name="PageTitle" Text="{Binding Strings.Info_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource HeaderTextBlockStyle}" />
     </StackPanel>
-    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,0,0">
-      <!--<p2:GestureService.GestureListener>
-        <p1:GestureListener Flick="CardInfo_Flick" />
-      </p2:GestureService.GestureListener>-->
+    <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
       <ScrollViewer>
         <StackPanel>
-          <ScrollViewer Margin="12,0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-            <dominionControls:DominionCardControl Card="{Binding}"/>
+          <ScrollViewer Margin="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <dominionControls:DominionCardControl Card="{Binding}" Margin="0,0,0,0"/>
           </ScrollViewer>
           <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
           <Grid Margin="12,0,0,0">

@@ -84,7 +84,7 @@ namespace Ben.Dominion.Utilities
 
         public static AppBarButton CreateIconButton(string text, string iconPath, RoutedEventHandler clickHandler)
         {
-            return CreateIconButton(text, new Uri(iconPath, UriKind.Relative), clickHandler);
+            return CreateIconButton(text, new Uri("ms-appx:///" + iconPath, UriKind.Absolute), clickHandler);
         }
 
         public static AppBarButton CreateIconButton(string text, Uri iconUri, RoutedEventHandler clickHandler)
@@ -92,6 +92,7 @@ namespace Ben.Dominion.Utilities
             var iconButton = new AppBarButton();
             iconButton.Label = text;
             iconButton.Click += clickHandler;
+            iconButton.Icon = new BitmapIcon { UriSource = iconUri };
             return iconButton;
         }
 
@@ -122,8 +123,8 @@ namespace Ben.Dominion.Utilities
         }
 
         public static void AddSymbolButton(this CommandBar appBar, string text, Symbol symbol, RoutedEventHandler clickHandler)
-        { 
-               appBar.PrimaryCommands.Add(ApplicationBarHelper.CreateSymbolButton(text, symbol, clickHandler));
+        {
+            appBar.PrimaryCommands.Add(ApplicationBarHelper.CreateSymbolButton(text, symbol, clickHandler));
         }
 }
 }

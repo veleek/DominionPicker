@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Threading;
 using System.Threading.Tasks;
 using System.Threading;
 using Ben.Utilities;
+using System.Collections.ObjectModel;
 
 namespace Ben.Dominion.ViewModels
 {
@@ -34,7 +35,7 @@ namespace Ben.Dominion.ViewModels
             // Note, this is is a duplicate of the previous because we want to construct an 
             // explicitly separate set of CardGroupings so that we can modify one while using
             // the others as part of our filtering process.
-            this.FilteredCardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToList();
+            this.FilteredCardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToObservableCollection();
             this.filteredGroupsMap = this.FilteredCardSelectorGroups.ToDictionary(g => g.Key);
         }
 
@@ -67,7 +68,7 @@ namespace Ben.Dominion.ViewModels
 
         public CardSelector[] CardSelectors { get; private set; }
 
-        public List<CardSetGrouping> FilteredCardSelectorGroups { get; private set; }
+        public ObservableCollection<CardSetGrouping> FilteredCardSelectorGroups { get; private set; }
 
         public CardList FilteredCards
         {
@@ -207,11 +208,25 @@ namespace Ben.Dominion.ViewModels
             {
                 var baseGroup = this.cardSelectorGroups[i];
                 var filteredGroup = this.FilteredCardSelectorGroups[i];
-                int index = 0;
+
                 // We have to loop through every card in the group
                 // so that we have an index for the next visible card
                 // otherwise we don't know where in the list to add the 
                 // item 
+
+                CardSetGrouping group = new CardSetGrouping(baseGroup.Key, new CardSelector[0]);
+
+                foreach(var c in baseGroup)
+                {
+                    if(!c.Filtered)
+                    {
+                        group.Add(c);
+                    }
+                }
+
+                this.FilteredCardSelectorGroups[i] = group;
+
+                /*
                 foreach (var c in baseGroup)
                 {
                     if (cancellationToken.IsCancellationRequested)
@@ -223,6 +238,7 @@ namespace Ben.Dominion.ViewModels
 
                     bool shouldBeVisible = !c.Filtered;
                     bool isVisible = filteredGroup.Contains(c);
+
                     if (shouldBeVisible)
                     {
                         if (!isVisible)
@@ -239,6 +255,7 @@ namespace Ben.Dominion.ViewModels
                         }
                     }
                 }
+                */
             }
         }
 

@@ -161,6 +161,7 @@
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\TypeConverter.cs" />
     <Compile Include="Converters\UriSourceConverter.cs" />
+    <Compile Include="Converters\ValueWhenConverter.cs" />
     <Compile Include="Converters\XamlConverter.cs" />
     <Compile Include="Core\Card.cs" />
     <Compile Include="Core\CardGroup.cs" />
@@ -185,7 +186,6 @@
     <Compile Include="Resources\StringsExtensions.cs" />
     <Compile Include="Utilities\AppLog.cs" />
     <Compile Include="Utilities\AsyncLazy.cs" />
-    <Compile Include="Converters\Converters.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
     <Compile Include="Utilities\EnumHelper.cs" />
     <Compile Include="Utilities\FrameworkExtensions.cs" />

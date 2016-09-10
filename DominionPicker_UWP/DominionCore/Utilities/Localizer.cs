@@ -50,7 +50,7 @@ namespace Ben.Data
             return GetLocalizedValue(value, suffix, null, args);
         }
 
-        public string GetLocalizedValue(object value, string suffix, CultureInfo culture, params object[] args)
+        public string GetLocalizedValue(object value, string suffix, string culture, params object[] args)
         {
             if (value == null)
             {
@@ -112,7 +112,7 @@ namespace Ben.Data
             return localizedValue;
         }
 
-        private string GetRawLocalizedValue(object value, CultureInfo culture)
+        private string GetRawLocalizedValue(object value, string culture)
         {
             string localizedValue;
             if (!localizedValueMap.TryGetValue(value, out localizedValue))
@@ -120,17 +120,19 @@ namespace Ben.Data
                 string valueType = value.GetType().Name;
                 string valueName = value.ToString();
                 string localizedValueKey = string.Format("{0}_{1}", valueType, valueName);
+                localizedValue = this.ResourceLoader.GetString(localizedValueKey);
                 //localizedValue = ResourceManager.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource !!";
                 localizedValueMap[localizedValueKey] = localizedValue;
             }
             return localizedValue;
         }
 
-        private CultureInfo ResolveCulture(CultureInfo culture)
+        private CultureInfo ResolveCulture(string culture)
         {
+            CultureInfo cultureInfo = string.IsNullOrWhiteSpace(culture) ? null : new CultureInfo(culture);
             // If a culture override is provided on the ResourceManager, then we just want to use that one
             // Otherwise use the culture provided and default to the invariant culture otherwise.
-            return this.CurrentCulture ?? culture ?? CultureInfo.InvariantCulture;
+            return this.CurrentCulture ?? cultureInfo ?? CultureInfo.InvariantCulture;
         }
 
     }

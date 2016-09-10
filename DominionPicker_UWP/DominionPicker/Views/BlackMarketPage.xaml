@@ -8,11 +8,16 @@
       xmlns:dominionControls="using:Ben.Dominion.Controls" 
       xmlns:viewModels="using:Ben.Dominion.ViewModels"
       xmlns:componentModel="using:System.ComponentModel" 
+      xmlns:animation="using:Windows.UI.Xaml.Media.Animation"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:behaviors="using:Ben.Dominion.Behaviors"
+
       mc:Ignorable="d" 
       d:DesignHeight="696" d:DesignWidth="480" 
-      DataContext="{Binding Instance.BlackMarket, Source={StaticResource MainView}}" 
-      d:DataContext="{d:DesignInstance viewModels:BlackMarketViewModel}" 
-      xmlns:animation="using:Windows.UI.Xaml.Media.Animation">
+      DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}" 
+      d:DataContext="{d:DesignInstance viewModels:BlackMarketViewModel}">
+
   <Page.Transitions>
     <animation:TransitionCollection>
       <animation:NavigationThemeTransition>
@@ -22,20 +27,27 @@
       </animation:NavigationThemeTransition>
     </animation:TransitionCollection>
   </Page.Transitions>
+
   <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
     <Grid.Resources>
       <CollectionViewSource x:Key="HandViewSource" Source="{Binding Hand}"/>
     </Grid.Resources>
+
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    
-    <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,0,0,6">
-      <TextBlock x:Name="ApplicationTitle" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Style="{StaticResource BodyTextBlockStyle}" />
-      <TextBlock x:Name="PageTitle" Text="{Binding Strings.BlackMarket_Title, Source={StaticResource LocalizedResources}}" Margin="9,-7,0,0" Style="{StaticResource HeaderTextBlockStyle}" />
-    </StackPanel>
-    
+
+    <TextBlock x:Name="PageTitle" 
+               Text="{Binding Strings.BlackMarket_Title, Source={StaticResource LocalizedResources}}"
+               Style="{StaticResource HeaderTextBlockStyle}" Margin="12,0,0,4"  />
+
+    <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"
+            Style="{StaticResource RoundButtonStyle}" Margin="12" Width="40" Height="40">
+      <SymbolIcon Symbol="Help" Margin="1,0,-1,0" />
+    </Button>
+
     <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
       <Grid.RowDefinitions>
         <RowDefinition Height="Auto" />
@@ -47,13 +59,7 @@
       </Grid.RowDefinitions>
       <StackPanel Grid.Row="0" Visibility="{Binding Selected, Converter={StaticResource IsValidToVisibilityConverter}}">
         <TextBlock Text="selected" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
-        <ContentPresenter Content="{Binding Selected}">
-          <ContentPresenter.ContentTemplate>
-            <DataTemplate>
-              <dominionControls:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap" Swipe="CardItem_Swipe" />
-            </DataTemplate>
-          </ContentPresenter.ContentTemplate>
-        </ContentPresenter>
+        <dominionControls:DominionCardControl Card="{Binding Selected}" Tapped="CardItem_Tap" Swipe="CardItem_Swipe" />
       </StackPanel>
       <StackPanel Grid.Row="1" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}}">
         <TextBlock Text="hand" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
@@ -61,37 +67,76 @@
           <ItemsControl ItemsSource="{Binding Source={StaticResource HandViewSource}}">
             <ItemsControl.ItemTemplate>
               <DataTemplate>
-                <dominionControls:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap" />
+                <dominionControls:DominionCardControl Card="{Binding}" Tapped="CardItem_Tap"/>
               </DataTemplate>
             </ItemsControl.ItemTemplate>
           </ItemsControl>
         </ScrollViewer>
       </StackPanel>
+
       <!-- True flips the result, so this is only visible when the Hand count is == 0 -->
-      <Button Click="DrawButton_Click" Grid.Row="4" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}">
+      <Button Grid.Row="2" HorizontalAlignment="Stretch" Margin="0,4"
+              Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}">
+        <interactivity:Interaction.Behaviors>
+          <interactions:EventTriggerBehavior EventName="Click">
+            <interactions:EventTriggerBehavior.Actions>
+              <interactions:CallMethodAction TargetObject="{Binding}" MethodName="Draw" />
+            </interactions:EventTriggerBehavior.Actions>
+          </interactions:EventTriggerBehavior>
+        </interactivity:Interaction.Behaviors>
+
         <StackPanel Orientation="Vertical">
-          <TextBlock Text="Draw" TextAlignment="Center" />
-          <TextBlock Text="three cards from the black market deck" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
+          <TextBlock Text="Draw" TextAlignment="Center" Style="{StaticResource TitleTextBlockStyle}" />
+          <TextBlock Text="three cards from the black market deck" TextWrapping="Wrap" TextAlignment="Center" 
+                     Style="{StaticResource SubtitleTextBlockStyle}" 
+                     Foreground="{StaticResource ApplicationSecondaryForegroundThemeBrush}"/>
         </StackPanel>
       </Button>
+
       <!-- False leaves the result the same, so this is only visible when the Hand count is > 0 -->
-      <StackPanel Orientation="Vertical" Grid.Row="5" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=false}">
-        <TextBlock Text="tap a card to select it for purchase (optional)" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" />
-        <TextBlock Text="swipe to remove from the black market deck permanantly, and replace it with an additional card" TextWrapping="Wrap" Style="{StaticResource SubtitleTextBlockStyle}" Margin="12,5,12,0" />
-        <Button Click="DiscardButton_Click">
+      <StackPanel Orientation="Vertical" Grid.Row="3" Visibility="{Binding Hand.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=false}">
+        
+        <TextBlock Text="Tap a card to select it for purchase (optional)" TextWrapping="Wrap" 
+                   Style="{StaticResource SubtleTextBlockStyle}"
+                   Margin="0,4">
+        </TextBlock>
+        <TextBlock Text="Swipe to remove from the black market deck permanantly, and replace it with an additional card" 
+                   TextWrapping="Wrap" 
+                   Style="{StaticResource SubtleTextBlockStyle}" 
+                   Margin="0,4" />
+
+        <Button HorizontalAlignment="Stretch" Margin="0,4">
+          <interactivity:Interaction.Behaviors>
+            <interactions:EventTriggerBehavior EventName="Click">
+              <interactions:EventTriggerBehavior.Actions>
+                <interactions:CallMethodAction TargetObject="{Binding}" MethodName="Discard" />
+              </interactions:EventTriggerBehavior.Actions>
+            </interactions:EventTriggerBehavior>
+          </interactivity:Interaction.Behaviors>
+
           <StackPanel Orientation="Vertical">
-            <TextBlock Text="Discard" TextAlignment="Center" />
-            <TextBlock Text="the rest after selecting one to buy" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
+            <TextBlock Text="Discard" TextAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
+            <TextBlock Text="the rest after selecting one to buy" TextWrapping="Wrap" TextAlignment="Center" 
+                       Style="{StaticResource SubtitleTextBlockStyle}"                        
+                       Foreground="{StaticResource ApplicationSecondaryForegroundThemeBrush}"/>
           </StackPanel>
         </Button>
       </StackPanel>
     </Grid>
   </Grid>
+
   <Page.BottomAppBar>
     <CommandBar Visibility="Visible">
-      <AppBarButton Label="reset" Click="Reset_Click">
+      <AppBarButton Label="reset">
+        <interactivity:Interaction.Behaviors>
+          <interactions:EventTriggerBehavior EventName="Click">
+            <interactions:EventTriggerBehavior.Actions>
+              <interactions:CallMethodAction TargetObject="{Binding}" MethodName="Reset" />
+            </interactions:EventTriggerBehavior.Actions>
+          </interactions:EventTriggerBehavior>
+        </interactivity:Interaction.Behaviors>
         <AppBarButton.Icon>
-          <BitmapIcon UriSource="/Images/appbar.reset.png" />
+          <SymbolIcon Symbol="Refresh" />
         </AppBarButton.Icon>
       </AppBarButton>
       <CommandBar.SecondaryCommands>
