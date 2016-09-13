@@ -10,7 +10,6 @@
       xmlns:behaviors="using:Ben.Dominion.Behaviors"
       xmlns:converters="using:Ben.Data.Converters"
       mc:Ignorable="d" 
-      d:DesignWidth="480" d:DesignHeight="696" 
       DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}" 
       >
   <!--<p2:SystemTray.ProgressIndicator>
@@ -23,14 +22,11 @@
         <RowDefinition Height="*" />
       </Grid.RowDefinitions>
       <Pivot x:Name="RootPivot" Grid.Row="1" Margin="0,-10,0,0" 
-             Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}"
-             SelectedIndex="{Binding PivotIndex, Mode=TwoWay}" >
-        <Pivot.TitleTemplate>
-          <DataTemplate />
-        </Pivot.TitleTemplate>
+             SelectedIndex="{Binding PivotIndex, Mode=TwoWay}" 
+             MinWidth="360" MaxWidth="640" HorizontalAlignment="Left">
         <PivotItem Header="{Binding Strings.MainPage_Create, Source={StaticResource LocalizedResources}}" 
-                 Margin="0,0,0,0" 
-                 DataContext="{Binding Settings}">
+                   DataContext="{Binding Settings}"
+                   Margin="0">
           <Grid>
             <Grid.RowDefinitions>
               <RowDefinition Height="*" />
@@ -38,7 +34,7 @@
             </Grid.RowDefinitions>
             <ScrollViewer Name="SettingsScrollViewer" Margin="0" Grid.Row="0" VerticalScrollBarVisibility="Visible" VerticalScrollMode="Auto">
               <StackPanel Margin="12,0,12,24">
-                <ItemsControl x:Name="SetsItemsControl" ItemsSource="{Binding Sets}" Margin="0">
+                <ItemsControl x:Name="SetsItemsControl" ItemsSource="{Binding Sets}" Margin="0,0,0,12">
                   <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                       <VariableSizedWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="4" HorizontalChildrenAlignment="Left"/>
@@ -47,20 +43,20 @@
                   <ItemsControl.ItemTemplate>
                     <DataTemplate>
                       <controls:PinnableCheckBox IsChecked="{Binding Enabled, Mode=TwoWay}" 
-                                                  Content="{Binding Set, Converter={StaticResource CardDataLocalizer}}" 
-                                                  IsPinned="{Binding Required, Mode=TwoWay}" 
-                                                  FontSize="32" 
-                                                  VerticalContentAlignment="Center"
-                                                  VerticalAlignment="Center"
-                                                  HorizontalAlignment="Stretch"
-                                                  MinWidth="225"
-                                                  Padding="8,-5,0,0"
-                                                  Margin="0,5,0,5"/>
+                                                 IsPinned="{Binding Required, Mode=TwoWay}" 
+                                                 VerticalContentAlignment="Center"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Stretch"
+                                                 MinWidth="168"
+                                                 MaxWidth="168"
+                                                 Margin="0,4">
+                        <TextBlock Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" Style="{StaticResource SubtitleTextBlockStyle}"/>
+                      </controls:PinnableCheckBox>
                     </DataTemplate>
                   </ItemsControl.ItemTemplate>
                 </ItemsControl>
                 <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" 
-                         Text="{Binding Strings.Settings_AddnOptions, Source={StaticResource LocalizedResources}}" />
+                           Text="{Binding Strings.Settings_AddnOptions, Source={StaticResource LocalizedResources}}" />
                 <Grid Margin="0,2">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -69,39 +65,33 @@
                   <CheckBox IsChecked="{Binding MinimumCardsPerSet.Enabled, Mode=TwoWay}" HorizontalContentAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Strings.Settings_MinCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" TextAlignment="Right" />
                   </CheckBox>
-                  <ComboBox ItemsSource="{Binding MinimumCardsPerSetValues}" SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Stretch" Margin="8,0">
-                    <!--ExpansionMode="FullScreenOnly"-->
-                    <!--FullModeHeader="{Binding Strings.Settings_MinCardsDescription, Source={StaticResource LocalizedResources}}"-->
-                    <!--<ComboBox.FullModeItemTemplate xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-                    <DataTemplate>
-                      <StackPanel Orientation="Horizontal">
-                        <TextBlock FontSize="40" Text="{Binding}" TextAlignment="Right" Width="40" />
-                        <TextBlock FontSize="40" Text=" Cards" />
-                      </StackPanel>
-                    </DataTemplate>
-                  </ComboBox.FullModeItemTemplate>-->
-                  </ComboBox>
+                  <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="8,0"
+                            ItemsSource="{Binding MinimumCardsPerSetValues}" 
+                            SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" />
                 </Grid>
+                
                 <CheckBox IsChecked="{Binding RequireDefense, Mode=TwoWay}" Margin="0,2">
                   <TextBlock Text="{Binding Strings.Settings_RequireDefense, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                 </CheckBox>
+                
                 <CheckBox IsChecked="{Binding RequireTrash, Mode=TwoWay}" Margin="0,2">
                   <TextBlock Text="{Binding Strings.Settings_RequireTrash, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" />
                 </CheckBox>
 
                 <ComboBox Header="{Binding Strings.Config_PlusBuys, Source={StaticResource LocalizedResources}}"
-                        ItemsSource="{Binding PlusBuysOption, Converter={StaticResource EnumValuesConverter}}"
-                        SelectedItem="{Binding PlusBuysOption}" 
-                        Width="450" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
+                          ItemsSource="{Binding PlusBuysOption, Converter={StaticResource EnumValuesConverter}}"
+                          SelectedItem="{Binding PlusBuysOption}" 
+                          HorizontalAlignment="Stretch" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
 
                 <ComboBox Header="{Binding Strings.Config_PlusActions, Source={StaticResource LocalizedResources}}"
-                        ItemsSource="{Binding PlusActionsOption, Converter={StaticResource EnumValuesConverter}}"
-                        SelectedItem="{Binding PlusActionsOption}" 
-                        Width="450" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
+                          ItemsSource="{Binding PlusActionsOption, Converter={StaticResource EnumValuesConverter}}"
+                          SelectedItem="{Binding PlusActionsOption}" 
+                          HorizontalAlignment="Stretch" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
 
               </StackPanel>
             </ScrollViewer>
 
+            <!-- Add a tiny gradient to transparent upwards so that stuff that scrolls off the bottom just fades instead of running into the button or an invisible line.-->
             <Rectangle Height="24" IsHitTestVisible="False" VerticalAlignment="Bottom">
               <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
@@ -117,38 +107,66 @@
                   Height="100" HorizontalAlignment="Stretch" Margin="12,12,12,12" FontSize="32"/>
           </Grid>
         </PivotItem>
-        <PivotItem Header="{Binding Strings.MainPage_Favorites, Source={StaticResource LocalizedResources}}" Margin="12,0" DataContext="{Binding Favorites}">
-          <ScrollViewer Margin="0,0,0,0" x:Name="FavoritesScrollViewer">
-            <StackPanel>
-              <TextBlock Text="{Binding Strings.Favorites_SettingsTitle, Source={StaticResource LocalizedResources}}" Margin="12,12,0,0" Style="{StaticResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-              <TextBlock Text="{Binding Strings.Favorites_SettingsDesc, Source={StaticResource LocalizedResources}}" Margin="12,0,0,0" Style="{StaticResource SubtitleTextBlockStyle}" />
-              <TextBlock Visibility="{Binding FavoriteSettings.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}" Margin="12,6,0,0" TextWrapping="Wrap" Text="{Binding Strings.Favorites_NoSettings, Source={StaticResource LocalizedResources}}"></TextBlock>
-              <ListBox x:Name="FavoriteSettingsListBox" ItemsSource="{Binding FavoriteSettings}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="FavoriteSettingsListBox_SelectionChanged">
+        <PivotItem Header="{Binding Strings.MainPage_Favorites, Source={StaticResource LocalizedResources}}" 
+                   DataContext="{Binding Favorites}"
+                   Margin="0">
+          <ScrollViewer x:Name="FavoritesScrollViewer">
+            <StackPanel Margin="12,0">
+              <TextBlock Text="{Binding Strings.Favorites_SettingsTitle, Source={StaticResource LocalizedResources}}"
+                         Margin="0,12,0,0" Style="{StaticResource TitleTextBlockStyle}" 
+                         Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+              <TextBlock Text="{Binding Strings.Favorites_SettingsDesc, Source={StaticResource LocalizedResources}}"
+                         Margin="0,0,0,0" Style="{StaticResource SubtleTextBlockStyle}" />
+              <TextBlock Text="{Binding Strings.Favorites_NoSettings, Source={StaticResource LocalizedResources}}"
+                         Visibility="{Binding FavoriteSettings.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}" 
+                         Margin="0,6,0,0" TextWrapping="Wrap" />
+              <ListBox x:Name="FavoriteSettingsListBox" ItemsSource="{Binding FavoriteSettings}" 
+                       ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                       SelectionChanged="FavoriteSettingsListBox_SelectionChanged">
                 <ListBox.ItemContainerStyle>
                   <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                   </Style>
                 </ListBox.ItemContainerStyle>
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <StackPanel>
+                      <interactivity:Interaction.Behaviors>
+                        <interactions:EventTriggerBehavior EventName="Holding">
+                          <interactions:EventTriggerBehavior.Actions>
+                            <behaviors:OpenFlyoutAction />
+                          </interactions:EventTriggerBehavior.Actions>
+                        </interactions:EventTriggerBehavior>
+                      </interactivity:Interaction.Behaviors>
                       <FlyoutBase.AttachedFlyout>
                         <MenuFlyout x:Name="FavoritesContextMenu">
-                          <MenuFlyoutItem x:Name="RenameButton" Text="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" Tag="rename" Click="RenameButton_Click" />
-                          <MenuFlyoutItem x:Name="EditButton" Text="{Binding Strings.Favorites_Edit, Source={StaticResource LocalizedResources}}" Tag="edit" Click="EditButton_Click" />
-                          <MenuFlyoutItem x:Name="DeleteButton" Text="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" Tag="delete" Click="DeleteButton_Click" />
+                          <MenuFlyoutItem Text="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" 
+                                          Click="RenameButton_Click" />
+                          <MenuFlyoutItem Text="{Binding Strings.Favorites_Edit, Source={StaticResource LocalizedResources}}" 
+                                          Click="EditButton_Click" />
+                          <MenuFlyoutItem Text="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" 
+                                          Click="DeleteButton_Click" />
                         </MenuFlyout>
                       </FlyoutBase.AttachedFlyout>
-                      <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="Wrap" />
-                      <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" Margin="12,0,0,0" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
+                      <TextBlock Text="{Binding Name}" 
+                                 Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
+                      <TextBlock Text="{Binding Value, Converter={StaticResource StringConverter}}" 
+                                 Style="{StaticResource SubtleTextBlockStyle}" TextWrapping="Wrap" />
                     </StackPanel>
                   </DataTemplate>
                 </ListBox.ItemTemplate>
               </ListBox>
-              <TextBlock Text="{Binding Strings.Favorites_SetsTitle, Source={StaticResource LocalizedResources}}" Margin="12,36,0,0" Style="{StaticResource TitleTextBlockStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
-              <TextBlock Text="{Binding Strings.Favorites_SetsDesc, Source={StaticResource LocalizedResources}}" Margin="12,0,0,0" Style="{StaticResource SubtitleTextBlockStyle}" />
-              <TextBlock Visibility="{Binding FavoriteSets.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}" Margin="12,6,0,0" TextWrapping="Wrap" Text="{Binding Strings.Favorites_NoSets, Source={StaticResource LocalizedResources}}"></TextBlock>
-              <ListBox x:Name="FavoriteSetsListBox" ItemsSource="{Binding FavoriteSets}" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="FavoriteSetsListBox_SelectionChanged">
+              <TextBlock Text="{Binding Strings.Favorites_SetsTitle, Source={StaticResource LocalizedResources}}" 
+                         Margin="0,36,0,0" Style="{StaticResource TitleTextBlockStyle}" 
+                         Foreground="{ThemeResource SystemControlForegroundAccentBrush}" />
+              <TextBlock Text="{Binding Strings.Favorites_SetsDesc, Source={StaticResource LocalizedResources}}" 
+                         Margin="0,0,0,0" Style="{StaticResource SubtleTextBlockStyle}" />
+              <TextBlock Text="{Binding Strings.Favorites_NoSets, Source={StaticResource LocalizedResources}}"
+                         Visibility="{Binding FavoriteSets.Count, Converter={StaticResource IsValidToVisibilityConverter}, ConverterParameter=true}" 
+                         Margin="0,6,0,0" TextWrapping="Wrap" />
+              <ListBox x:Name="FavoriteSetsListBox" ItemsSource="{Binding FavoriteSets}" 
+                       ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                       SelectionChanged="FavoriteSetsListBox_SelectionChanged">
                 <ListBox.ItemContainerStyle>
                   <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
@@ -157,14 +175,23 @@
                 <ListBox.ItemTemplate>
                   <DataTemplate>
                     <StackPanel>
+                      <interactivity:Interaction.Behaviors>
+                        <interactions:EventTriggerBehavior EventName="Holding">
+                          <interactions:EventTriggerBehavior.Actions>
+                            <behaviors:OpenFlyoutAction />
+                          </interactions:EventTriggerBehavior.Actions>
+                        </interactions:EventTriggerBehavior>
+                      </interactivity:Interaction.Behaviors>
                       <FlyoutBase.AttachedFlyout>
                         <MenuFlyout x:Name="FavoritesContextMenu">
-                          <MenuFlyoutItem x:Name="RenameButton" Text="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" Tag="rename" Click="RenameButton_Click" />
-                          <MenuFlyoutItem x:Name="DeleteButton" Text="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" Tag="delete" Click="DeleteButton_Click" />
+                          <MenuFlyoutItem Text="{Binding Strings.Favorites_Rename, Source={StaticResource LocalizedResources}}" 
+                                          Click="RenameButton_Click" />
+                          <MenuFlyoutItem Text="{Binding Strings.Favorites_Delete, Source={StaticResource LocalizedResources}}" 
+                                          Click="DeleteButton_Click" />
                         </MenuFlyout>
                       </FlyoutBase.AttachedFlyout>
-                      <TextBlock Text="{Binding Name}" Margin="12,0,0,0" Style="{StaticResource TitleTextBlockStyle}" />
-                      <TextBlock Text="{Binding Value}" Margin="12,0,0,0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                      <TextBlock Text="{Binding Name}" Margin="0,0,0,0" Style="{StaticResource SubtitleTextBlockStyle}" />
+                      <TextBlock Text="{Binding Value}" Margin="0,0,0,0" Style="{StaticResource SubtleTextBlockStyle}" />
                     </StackPanel>
                   </DataTemplate>
                 </ListBox.ItemTemplate>
@@ -175,12 +202,10 @@
       </Pivot>
     </Grid>
 
-    <!--<dominionControls:AddFavoritePopupControl x:Name="AddFavoritePopup" Grid.Row="0" Grid.RowSpan="2" SaveFavorite="AddFavoritePopup_SaveFavorite" d:IsLocked="True" />-->
-
   </Grid>
 
   <Page.BottomAppBar>
-    <CommandBar Background="Green" IsSticky="True">
+    <CommandBar IsSticky="True">
       <CommandBar.Resources>
         <converters:ValueWhenWithParameterConverter x:Key="VisibleWhenOnGivenPivot" UseParameterAs="When">
           <converters:ValueWhenWithParameterConverter.Value>
@@ -220,7 +245,9 @@
         <AppBarButton Label="{Binding Strings.Menu_CardLookup, Source={StaticResource LocalizedResources}}">
           <interactivity:Interaction.Behaviors>
             <interactions:EventTriggerBehavior EventName="Click">
-              <behaviors:PickerViewNavigateAction View="CardLookup" />
+              <interactions:EventTriggerBehavior.Actions>
+                <behaviors:PickerViewNavigateAction View="CardLookup" />
+              </interactions:EventTriggerBehavior.Actions>
             </interactions:EventTriggerBehavior>
           </interactivity:Interaction.Behaviors>
         </AppBarButton>
@@ -228,7 +255,9 @@
         <AppBarButton Label="{Binding Strings.Menu_BlackMarket, Source={StaticResource LocalizedResources}}">
           <interactivity:Interaction.Behaviors>
             <interactions:EventTriggerBehavior EventName="Click">
-              <behaviors:PickerViewNavigateAction View="BlackMarket" />
+              <interactions:EventTriggerBehavior.Actions>
+                <behaviors:PickerViewNavigateAction View="BlackMarket" />
+              </interactions:EventTriggerBehavior.Actions>
             </interactions:EventTriggerBehavior>
           </interactivity:Interaction.Behaviors>
         </AppBarButton>
@@ -236,7 +265,9 @@
         <AppBarButton Label="{Binding Strings.Menu_Settings, Source={StaticResource LocalizedResources}}">
           <interactivity:Interaction.Behaviors>
             <interactions:EventTriggerBehavior EventName="Click">
-              <behaviors:PickerViewNavigateAction View="Settings" />
+              <interactions:EventTriggerBehavior.Actions>
+                <behaviors:PickerViewNavigateAction View="Settings" />
+              </interactions:EventTriggerBehavior.Actions>
             </interactions:EventTriggerBehavior>
           </interactivity:Interaction.Behaviors>
         </AppBarButton>
@@ -244,7 +275,9 @@
         <AppBarButton Label="{Binding Strings.Menu_About, Source={StaticResource LocalizedResources}}">
           <interactivity:Interaction.Behaviors>
             <interactions:EventTriggerBehavior EventName="Click">
-              <behaviors:PickerViewNavigateAction View="About" />
+              <interactions:EventTriggerBehavior.Actions>
+                <behaviors:PickerViewNavigateAction View="About" />
+              </interactions:EventTriggerBehavior.Actions>
             </interactions:EventTriggerBehavior>
           </interactivity:Interaction.Behaviors>
         </AppBarButton>

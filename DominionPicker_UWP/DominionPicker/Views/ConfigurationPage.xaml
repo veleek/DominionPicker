@@ -5,6 +5,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:animation="using:Windows.UI.Xaml.Media.Animation"
       mc:Ignorable="d" 
+      DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}"
       d:DesignHeight="768" 
       d:DesignWidth="480">
 

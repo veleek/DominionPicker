@@ -69,6 +69,7 @@
     <PlatformTarget>ARM</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
     <PlatformTarget>ARM</PlatformTarget>
@@ -103,6 +104,10 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en</MultilingualFallbackLanguage>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="project.json" />
     <Content Include="Resources\Changes.txt" />
@@ -121,20 +126,21 @@
     <Content Include="Resources\DominionPickerCards.nl.xml" />
     <Content Include="Resources\DominionPickerCards.pl.xml" />
     <Content Include="Resources\DominionPickerCards.xml" />
-    <Content Include="Resources\OldPickerState.xml" />
-    <Content Include="Resources\ANTQUAB.TTF" />
+    <Content Include="Resources\Fonts\ANTQUAB.TTF" />
     <Content Include="Resources\Dominican-SmallCaps.ttf" />
-    <Content Include="Resources\OptimusPrincepsSemiBold.ttf" />
-    <PRIResource Include="Resources\Strings.resw">
+    <Content Include="Resources\Fonts\OptimusPrincepsSemiBold.ttf" />
+    <PRIResource Include="Resources\qps-ploc\Strings.resw" />
+    <PRIResource Include="Resources\qps-ploc\CardDataStrings.resw" />
+    <PRIResource Include="Resources\en\Strings.resw">
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
       <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Strings.cs</LastGenOutput>
     </PRIResource>
-    <PRIResource Include="Resources\CardDataStrings.resw">
+    <PRIResource Include="Resources\en\CardDataStrings.resw">
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
+      <Generator>ReswFileCodeGenerator</Generator>
+      <LastGenOutput>CardDataStrings.cs</LastGenOutput>
     </PRIResource>
-    <PRIResource Include="Resources\en\Strings.resw" />
-    <PRIResource Include="Resources\en\CardDataStrings.resw" />
     <PRIResource Include="Resources\pl\Strings.resw" />
     <PRIResource Include="Resources\pl\CardDataStrings.resw" />
     <PRIResource Include="Resources\nl\Strings.resw" />
@@ -175,15 +181,19 @@
     <Compile Include="Core\Picker.cs" />
     <Compile Include="Core\ResultSortOrder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\CardDataStrings2.cs" />
-    <Compile Include="Resources\LocalizedResources.cs" />
-    <Compile Include="Resources\ResourceBase.cs" />
-    <Compile Include="Resources\Strings.cs">
+    <Compile Include="Resources\en\CardDataStrings.Extensions.cs" />
+    <Compile Include="Resources\en\CardDataStrings.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CardDataStrings.resw</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\en\Strings.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resw</DependentUpon>
     </Compile>
-    <Compile Include="Resources\StringsExtensions.cs" />
+    <Compile Include="Resources\LocalizedResources.cs" />
+    <Compile Include="Resources\en\Strings.Extensions.cs" />
     <Compile Include="Utilities\AppLog.cs" />
     <Compile Include="Utilities\AsyncLazy.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
@@ -210,11 +220,18 @@
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <EmbeddedResource Include="Properties\DominionCore.rd.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\DominionCore.fr.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.qps-ploc.xlf" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

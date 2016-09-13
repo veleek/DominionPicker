@@ -138,9 +138,6 @@
   <data name="About_Update" xml:space="preserve">
     <value>Update</value>
   </data>
-  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
-    <value>./Resources/DominionPickerCards.de.xml</value>
-  </data>
   <data name="Application_Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
@@ -262,14 +259,12 @@ werden nie ausgewählt</value>
   </data>
   <data name="Menu_About" xml:space="preserve">
     <value>Hilfe/Über</value>
-    <comment></comment>
   </data>
   <data name="Menu_BlackMarket" xml:space="preserve">
     <value>Schwarzmarkt Deck</value>
   </data>
   <data name="Menu_CardLookup" xml:space="preserve">
     <value>Liste aller Karten/Filter</value>
-    <comment></comment>
   </data>
   <data name="Results_ExtrasDesc" xml:space="preserve">
     <value>benötigte Zusatzkarten, Spielmarken, usw.</value>
@@ -298,7 +293,6 @@ Drücken for weitere Informationen</value>
   </data>
   <data name="Settings_AddnOptions" xml:space="preserve">
     <value>weitere Optionen</value>
-    <comment></comment>
   </data>
   <data name="Settings_MinCards" xml:space="preserve">
     <value>Mindestanzahl an Karten pro Set:</value>

@@ -48,8 +48,8 @@
     </ScrollViewer.Style>
     <StackPanel>
       <TextBlock Text="{Binding Label}" Visibility="{Binding Label, Converter={StaticResource IsValidToVisibilityConverter}}" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0" />
-      <Border Margin="2" Background="{Binding BackgroundColor}" CornerRadius="5" BorderBrush="White" BorderThickness="2">
-        <Grid Margin="8,1,0,1">
+      <Border Margin="2" Background="{Binding BackgroundColor}" CornerRadius="5" BorderBrush="DarkGray" BorderThickness="1">
+        <Grid Margin="4,1,0,1">
           <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
@@ -57,14 +57,16 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto" />
           </Grid.ColumnDefinitions>
-          <Image Source="/Images/coin.png" Grid.Column="0" Width="32" Height="32" Margin="2,7" Visibility="{Binding CoinCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <Image Source="/Images/coin.png" Grid.Column="0" Width="28" Height="28" Margin="2,0" Visibility="{Binding CoinCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
           <TextBlock Text="{Binding CoinCost}" Grid.Column="0" Margin="0,0,0,1" Style="{StaticResource CardCostTextStyle}" Visibility="{Binding CoinCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
-          <Image Source="/Images/debt.png" Grid.Column="1" Width="32" Height="32" Margin="2,7" Visibility="{Binding DebtCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
+          <Image Source="/Images/debt.png" Grid.Column="1" Width="28" Height="28" Margin="2,0" Visibility="{Binding DebtCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
           <TextBlock Text="{Binding DebtCost}" Grid.Column="1" Margin="0,0,0,1" Style="{StaticResource CardCostTextStyle}" Visibility="{Binding DebtCost, Converter={StaticResource IsValidToVisibilityConverter}}" />
-          <Image Source="/Images/potion_small.png" Height="30" Grid.Column="2" Margin="2,7" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
+          <Image Source="/Images/potion_small.png" Height="28" Grid.Column="2" Margin="2,0" Visibility="{Binding HasPotion, Converter={StaticResource BooleanToVisibilityConverter}}" />
           <TextBlock Text="{Binding DisplayName}" Grid.Column="3" Margin="6,6,0,0" Style="{StaticResource CardNameTextStyle}" Foreground="Black" Grid.ColumnSpan="2" />
           <TextBlock Text="{Binding DisplayName}" Grid.Column="3" Margin="4,5,0,1" Style="{StaticResource CardNameTextStyle}" Foreground="White" Grid.ColumnSpan="2" />
-          <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images/SetIcons'}" Visibility="{Binding ShowSetIcon, ElementName=CardControl, Converter={StaticResource BooleanToVisibilityConverter}}" Grid.Column="4" HorizontalAlignment="Right" Width="40" Margin="0,5,5,5" />
+          <Border Background="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='Images/SetIcons'}" 
+                  Visibility="{Binding ShowSetIcon, ElementName=CardControl, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                  Grid.Column="4" HorizontalAlignment="Right" Width="40" Height="28" Margin="0,4,4,4" />
         </Grid>
       </Border>
     </StackPanel>

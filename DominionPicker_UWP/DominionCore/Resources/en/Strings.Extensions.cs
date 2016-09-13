@@ -11,5 +11,4 @@ namespace Ben.Dominion.Resources
 
         public static CultureInfo Culture { get; set; }
     }
-
 }

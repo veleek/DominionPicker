@@ -135,6 +135,9 @@
   <data name="CardSet_DarkAges" xml:space="preserve">
     <value>Dark Ages</value>
   </data>
+  <data name="CardSet_Empires" xml:space="preserve">
+    <value>Empires</value>
+  </data>
   <data name="CardSet_Guilds" xml:space="preserve">
     <value>Guilds</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="CardType_Knight" xml:space="preserve">
     <value>Knight</value>
+  </data>
+  <data name="CardType_Landmark" xml:space="preserve">
+    <value>Landmark</value>
   </data>
   <data name="CardType_Looter" xml:space="preserve">
     <value>Looter</value>

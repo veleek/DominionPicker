@@ -106,6 +106,7 @@
     <Compile Include="Behaviors\Converters.cs" />
     <Compile Include="Behaviors\DelegatingAction.cs" />
     <Compile Include="Behaviors\OnKeyAction.cs" />
+    <Compile Include="Behaviors\OpenFlyoutAction.cs" />
     <Compile Include="Behaviors\PickerViewNavigateAction.cs" />
     <Compile Include="Controls\DominionCardControl.xaml.cs">
       <DependentUpon>DominionCardControl.xaml</DependentUpon>

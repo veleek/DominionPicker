@@ -96,7 +96,12 @@ namespace Ben.Data
                     ResourceMap map = ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
                     ResourceCandidate localizedCandidate = map.GetValue(localizedValueKey, context);
                     
-                    localizedValue = localizedCandidate.ValueAsString ?? "!! Missing Resource for " + localizedValueKey + " !!";
+                    if(localizedCandidate == null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Unable to find localized value {localizedValueKey}");
+                    }
+
+                    localizedValue = localizedCandidate?.ValueAsString ?? "!! Missing Resource for " + localizedValueKey + " !!";
                     //localizedValue = ResourceManager.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource for " + localizedValueKey + " !!";
                 }
                 localizedValueMap[valueKey] = localizedValue;

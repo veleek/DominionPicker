@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Application_Title" xml:space="preserve">
+    <value>[FC301][!!_Đòmìиîõй Þįćкêŕ_!!]</value>
+  </data>
+  <data name="MainPage_AddnOptions" xml:space="preserve">
+    <value>[9089E][!!_àđđìťíõиáł õртîòήš_!!]</value>
+  </data>
+  <data name="MainPage_Create" xml:space="preserve">
+    <value>[C1001][!!_ĉѓęâтé_!!]</value>
+  </data>
+  <data name="MainPage_Favorites" xml:space="preserve">
+    <value>[E3E92][!!_ƒàνòŗîтèş_!!]</value>
+  </data>
+  <data name="Favorites_SetsDesc" xml:space="preserve">
+    <value>[6486F][!!_Éйјòŷ à şêť? Šàνè įτ şô ŷòû ĉâи τѓý îτ ãģáìη!_!!]</value>
+  </data>
+  <data name="Favorites_SetsTitle" xml:space="preserve">
+    <value>[F218C][!!_Čãŗđ Şêтś_!!]</value>
+  </data>
+  <data name="Favorites_SettingsDesc" xml:space="preserve">
+    <value>[A6D16][!!_Ŝàνè Уôùř şéţтîήġš ţõ qùíčќĺŷ řêùŝę ţħêm ĺâтèŗ._!!]</value>
+  </data>
+  <data name="Favorites_SettingsTitle" xml:space="preserve">
+    <value>[AC30B][!!_Ċàѓð Ŗàήðômįźèřś_!!]</value>
+  </data>
+  <data name="Favorites_NoSets" xml:space="preserve">
+    <value>[8494F][!!_Ňò ƒãνóѓìτé šêтš śãνêð ÿèτ. Τѓÿ ûśįηğ ôиè ôƒ ţĥę ŕâиďôмíżéŕŝ àъõνę ţô ĉŕéãτè òηê._!!]</value>
+  </data>
+  <data name="Favorites_NoSettings" xml:space="preserve">
+    <value>[E05ED][!!_Ñô ƒáνôѓìţê ŗáйďõмìźęŕŝ šâνéď Уèт.  Ċђéċķ òúţ ťħé ĉŕèâτê ρâģé ťó áďð òηê._!!]</value>
+  </data>
+  <data name="Settings_MinCards" xml:space="preserve">
+    <value>[0D3B3][!!_Мìиìmúм Ċàѓďš Þéř Šęţ:_!!]</value>
+  </data>
+  <data name="Settings_PickPlatinumColony" xml:space="preserve">
+    <value>[13B6C][!!_Þįĉĸ įƒ Ρļàţíηúm áйđ Ćõļòήŷ âřé ûŝéð_!!]</value>
+  </data>
+  <data name="Settings_PickShelterOrEstate" xml:space="preserve">
+    <value>[25DA6][!!_Þìĉĸ ìƒ Şнęļтęŕš óř Ęšťâтęŝ áѓê µšęđ_!!]</value>
+  </data>
+  <data name="Settings_PlusActions" xml:space="preserve">
+    <value>[8FC0B][!!_Þĺûś Ãćтįòиś:_!!]</value>
+  </data>
+  <data name="Settings_PlusBuys" xml:space="preserve">
+    <value>[AE5BF][!!_Рľûş Ьúýş:_!!]</value>
+  </data>
+  <data name="Settings_RequireDefense" xml:space="preserve">
+    <value>[42358][!!_Ìƒ ťĥèŗè'š àи àтτâčĸ, ŕęqµįŗê à đèƒêйŝę_!!]</value>
+  </data>
+  <data name="Settings_RequireTrash" xml:space="preserve">
+    <value>[06E79][!!_Ѓèqûìŕé à ĉáŕď тћâτ áłļòẁŝ ýôú ţó ťŕãšħ_!!]</value>
+  </data>
+  <data name="Settings_ShowExtras" xml:space="preserve">
+    <value>[91C29][!!_Şнõŵ Řêqûìřèď Μãтš âйđ Тòкêήš_!!]</value>
+  </data>
+  <data name="Settings_MinCardsDescription" xml:space="preserve">
+    <value>[0045B][!!_Μįйímûm ĉãŕðś þêŕ ŝêţ įη ѓęšµľт:_!!]</value>
+  </data>
+  <data name="Config_CardData" xml:space="preserve">
+    <value>[FF9A5][!!_Ćâѓď Đęтàìľş_!!]</value>
+  </data>
+  <data name="Config_CardDataDesc" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Config_LanguageDescription" xml:space="preserve">
+    <value>[16CC0][!!_Śęττįήĝ ţħįš ẃìļł óνêřѓìðę ţĥé ĺãйģúáĝę µšęð ъÿ Đòмîйîóи Þîĉĸéŗ òήłУ ãήď ẃíļľ иõт ċђâηģè ťĥê ċùŗřęήť şŷšτêm ļâηġúãğè.
+Ўòµ mµśτ řèşţâŗţ ƒòѓ ťħìś ţó ţâкę ęƒƒéċť._!!]</value>
+  </data>
+  <data name="Config_Language" xml:space="preserve">
+    <value>[8A9EA][!!_łãήĝùáġé_!!]</value>
+  </data>
+  <data name="Config_RulesText" xml:space="preserve">
+    <value>[3B6D4][!!_Ŕµľęş Ťè×τ_!!]</value>
+  </data>
+  <data name="Config_RulesTextDesc" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>[31260][!!_şêťťìйģŝ_!!]</value>
+  </data>
+  <data name="Config_UI" xml:space="preserve">
+    <value>[C9BCF][!!_Üşèř Įйтèřƒáċè_!!]</value>
+  </data>
+  <data name="Config_UIDesc" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Favorites_Delete" xml:space="preserve">
+    <value>[34217][!!_ðêľéťè_!!]</value>
+  </data>
+  <data name="Favorites_Edit" xml:space="preserve">
+    <value>[4FCEF][!!_êðîţ_!!]</value>
+  </data>
+  <data name="Favorites_Rename" xml:space="preserve">
+    <value>[5FD47][!!_ѓéηàмę_!!]</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>[3CC6A][!!_Ħéłþ/Âвõûť_!!]</value>
+  </data>
+  <data name="Menu_BlackMarket" xml:space="preserve">
+    <value>[6F73B][!!_Ъĺâċк Мâѓкéť Đèĉќ_!!]</value>
+  </data>
+  <data name="Menu_CardLookup" xml:space="preserve">
+    <value>[21554][!!_Ĉãŕđ Ĺõõĸµρ/₣ìłţêŗ_!!]</value>
+  </data>
+  <data name="MainPage_GenerateButton" xml:space="preserve">
+    <value>[222FA][!!_Ĝèηèŕâтę Şéţ_!!]</value>
+  </data>
+  <data name="MainPage_Generating" xml:space="preserve">
+    <value>[E1B13][!!_Ģęήęŗàţįήģ ćàŗđ ŝêť..._!!]</value>
+  </data>
+  <data name="MainPage_Reset" xml:space="preserve">
+    <value>[07E9A][!!_ѓęšèť_!!]</value>
+  </data>
+  <data name="MainPage_Save" xml:space="preserve">
+    <value>[AD0DD][!!_śâνè..._!!]</value>
+  </data>
+  <data name="Settings_AddnOptions" xml:space="preserve">
+    <value>[24D13][!!_áððíţìõйàĺ ôþţįõηŝ_!!]</value>
+  </data>
+  <data name="Results_ExtrasDesc" xml:space="preserve">
+    <value>[3E6B7][!!_àđđîτîóйàľ ĉãŕðś, τõкéηş, éτċ._!!]</value>
+  </data>
+  <data name="Results_Tips" xml:space="preserve">
+    <value>[49825][!!_Ŝẁîρę τõ Ŕèрļãċé
+Τáр ƒõŗ Íηƒõ_!!]</value>
+  </data>
+  <data name="Results_Title" xml:space="preserve">
+    <value>[25D1A][!!_ŗęśúłťś_!!]</value>
+  </data>
+  <data name="Info_Rules" xml:space="preserve">
+    <value>[8D9A4][!!_ѓùłęš_!!]</value>
+  </data>
+  <data name="Info_Set" xml:space="preserve">
+    <value>[B374A][!!_šęт_!!]</value>
+  </data>
+  <data name="Info_Tips" xml:space="preserve">
+    <value>[F1FB2][!!_Ŝẅįþé тô νìèŵ
+õτнęѓ ĉâŕđš_!!]</value>
+  </data>
+  <data name="Info_Title" xml:space="preserve">
+    <value>[C7BF0][!!_ćâŕď íήƒõ_!!]</value>
+  </data>
+  <data name="Info_Type" xml:space="preserve">
+    <value>[36F4F][!!_тУрê_!!]</value>
+  </data>
+  <data name="Results_Regenerate" xml:space="preserve">
+    <value>[5D291][!!_ŗêğéηęřâτè_!!]</value>
+  </data>
+  <data name="Results_Save" xml:space="preserve">
+    <value>[3AC80][!!_šãνé..._!!]</value>
+  </data>
+  <data name="Results_SortCost" xml:space="preserve">
+    <value>[1FF67][!!_ŝôřт ćóŝт_!!]</value>
+  </data>
+  <data name="Results_SortName" xml:space="preserve">
+    <value>[63785][!!_šôřţ иàmè_!!]</value>
+  </data>
+  <data name="Results_SortSet" xml:space="preserve">
+    <value>[DD085][!!_ŝôŕт ŝêţ_!!]</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>[A0A74][!!_Ćõíή Ťóќéй_!!]</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>[DD8CB][!!_Ęмáŕğõ Ţóķęи_!!]</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>[C42B8][!!_Îşľãήð Мãţ_!!]</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>[06F54][!!_Мâţ_!!]</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>[B7AA7][!!_Ņáтįνê Vìľļâğê Μàт_!!]</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>[8145E][!!_Ρįŕáтè Śћîρ Μâť_!!]</value>
+  </data>
+  <data name="Dominion_Token" xml:space="preserve">
+    <value>[5A11C][!!_Ţôķèи_!!]</value>
+  </data>
+  <data name="Application_Settings" xml:space="preserve">
+    <value>[75DC7][!!_šęτтìηğś_!!]</value>
+  </data>
+  <data name="Lookup_ResetFiltered" xml:space="preserve">
+    <value>[2C80B][!!_Ŕêşęţ ₣íĺťèŗéď Čáŗðš_!!]</value>
+  </data>
+  <data name="Lookup_SearchHint" xml:space="preserve">
+    <value>[C28B1][!!_₣îľτèѓ ъУ Ñàмé, Şèт, Ťўþê, Ѓùłêś_!!]</value>
+  </data>
+  <data name="Lookup_ShowFiltered" xml:space="preserve">
+    <value>[9A041][!!_Šђôẁ ₣íłţêѓéð Ĉářďš_!!]</value>
+  </data>
+  <data name="Lookup_Tips" xml:space="preserve">
+    <value>[861A1][!!_Ċĥéĉĸęď ćářðŝ ẅìłļ
+ηêνęѓ ьę рìĉкéð_!!]</value>
+  </data>
+  <data name="Lookup_Title" xml:space="preserve">
+    <value>[8CD55][!!_ċâŕđ ľíşţ_!!]</value>
+  </data>
+  <data name="About_About" xml:space="preserve">
+    <value>[1FD39][!!_ãъõµт_!!]</value>
+  </data>
+  <data name="About_Changes" xml:space="preserve">
+    <value>[E95A1][!!_ĉћáиğéş_!!]</value>
+  </data>
+  <data name="About_Help" xml:space="preserve">
+    <value>[84F88][!!_ĥêļρ_!!]</value>
+  </data>
+  <data name="About_Rate" xml:space="preserve">
+    <value>[F5C32][!!_ŕãτé/ŕèνîęẁ_!!]</value>
+  </data>
+  <data name="About_Rules" xml:space="preserve">
+    <value>[5CEBE][!!_ŗùĺèś_!!]</value>
+  </data>
+  <data name="About_Update" xml:space="preserve">
+    <value>[54A46][!!_úρðãτê_!!]</value>
+  </data>
+  <data name="Menu_Settings" xml:space="preserve">
+    <value>[8AE66][!!_Śéтťîηĝš_!!]</value>
+  </data>
+  <data name="BlackMarket_Title" xml:space="preserve">
+    <value>[DEB11][!!_вľâčк мáŕќèτ_!!]</value>
+  </data>
+  <data name="Config_OwnedSets" xml:space="preserve">
+    <value>[2F408][!!_ŝéťš тħàť Ì òẃη_!!]</value>
+  </data>
+  <data name="Config_OwnedSetsDescription" xml:space="preserve">
+    <value>[6DAA1][!!_Šρéċîƒÿ ẃнįċħ šęтŝ ŷõµ ôẃи ãиð ẃõùłð ļíĸè ţó Бè ãьĺé τô ρíċк ƒŕôm.  Śęťś йõт įηćļûđęď ћéŕè ẅíļł ηèνęŕ ьê µśęð ďúŗìηğ šęļèčτíóи ôѓ ƒòŗ ãηý ãđðìťíôήàļ řèãŝòиŝ şûćђ àş ťђê βľãćќ Μářќęţ ðêčќ._!!]</value>
+  </data>
+  <data name="Config_LanguageOptions" xml:space="preserve">
+    <value>[C56B2][!!_Ľàήģûãğê Òртíóηš_!!]</value>
+  </data>
+  <data name="Config_PickerOptions" xml:space="preserve">
+    <value>[40E62][!!_Ρįćķèŕ Õþтîóήş_!!]</value>
+  </data>
+  <data name="About_RulesDescription" xml:space="preserve">
+    <value>[27AEF][!!_Ċòѓиûċòрíã_!!]</value>
+  </data>
+  <data name="CardGroupType_KingdomCard" xml:space="preserve">
+    <value>[A33C8][!!_кíиğďóm ĉãŗðŝ_!!]</value>
+  </data>
+  <data name="CardGroupType_OtherRequired" xml:space="preserve">
+    <value>[6B393][!!_ѓèqµîŗèđ ъÿ {0}_!!]</value>
+  </data>
+  <data name="Info_Wiki" xml:space="preserve">
+    <value>[E7C05][!!_ŝтŗáţêĝý ẁįķì_!!]</value>
+  </data>
+  <data name="CardGroupType_BaneRequired" xml:space="preserve">
+    <value>[DBAD0][!!_ъàйę ƒóŗ {0}_!!]</value>
+  </data>
+  <data name="CardGroupType_CurseRequired" xml:space="preserve">
+    <value>[4F16E][!!_ŠĤÔÜĽĎ ŃÔŤ ÙŠÊ_!!]</value>
+  </data>
+  <data name="CardGroupType_SelectedDarkAges" xml:space="preserve">
+    <value>[0F00B][!!_šèłêċτęð ьêĉáµŝę ŷôû'ŗę µšîήģ Ðâŗк Ãġéś_!!]</value>
+  </data>
+  <data name="CardGroupType_SelectedProsperity" xml:space="preserve">
+    <value>[BD2C9][!!_śęļêčтèđ ъèčáûŝę ŷòû'ŗê µşîηģ Ρŗóŝрêŗįťў_!!]</value>
+  </data>
+  <data name="Config_PlatinumColonyOption" xml:space="preserve">
+    <value>[A6FCB][!!_ŵнéи ťò þíćк Рĺáťîйûm âиď Čòļôήÿ_!!]</value>
+  </data>
+  <data name="Config_SheltersOption" xml:space="preserve">
+    <value>[B1332][!!_ẅћéή ţó þîċķ Śħęľтèѓš òř Èśтáтêŝ_!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Always" xml:space="preserve">
+    <value>[B2124][!!_Âłẁãўş úśê ťĥęm_!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Always_Description" xml:space="preserve">
+    <value>[9276D][!!_ÀĺẃáУŝ şнòẁ Рłàτîηûм àиď Ćòłôήŷ įή тнę łíśτ òƒ ѓèqûìѓéđ čâŕđś._!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Never" xml:space="preserve">
+    <value>[B8DED][!!_Ňęνêѓ ùŝê ťĥèм_!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Never_Description" xml:space="preserve">
+    <value>[465CD][!!_Ňêνéѓ şĥòẃ Ρļâтíйùm àйđ ČõļóήУ ìή ťĥè łįśť òƒ řèqûîŗèď ćâŕđś._!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Randomly" xml:space="preserve">
+    <value>[16654][!!_Řáиđôмļý şęļêċť_!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_Randomly_Description" xml:space="preserve">
+    <value>[63CCA][!!_Ùşìйġ тђę Ρŕôšρèřįтŷ ŕùľęŝ, ŕãйđõmłў šèļêĉτ ã ćàřð ƒŕõm ţћê śêţ óƒ Кíηğđóм ćãŗďš àйð ìƒ τђãţ čâŗđ îş ƒѓòm Рřôŝрęřìţÿ, íйčľúđę Рľáτíиùм/Ĉõĺôиŷ._!!]</value>
+  </data>
+  <data name="SheltersOption_Always" xml:space="preserve">
+    <value>[B578E][!!_ÂłẅâУş úšè ťђèm_!!]</value>
+  </data>
+  <data name="SheltersOption_Always_Description" xml:space="preserve">
+    <value>[AC812][!!_Àļẅâŷŝ úšé Şђêļτèѓś ìήŝτéãð òƒ Êšţàτęś ìη ýóùŕ šţàŗťíиğ нáиď._!!]</value>
+  </data>
+  <data name="SheltersOption_Never" xml:space="preserve">
+    <value>[C39D0][!!_Ňêνêŗ ùşę τĥęм_!!]</value>
+  </data>
+  <data name="SheltersOption_Never_Description" xml:space="preserve">
+    <value>[75595][!!_Ņéνéѓ µšè Şђêľтêřş įηşтèàð õƒ Èśţãţêş._!!]</value>
+  </data>
+  <data name="SheltersOption_Randomly" xml:space="preserve">
+    <value>[52F33][!!_ŔàηđôмļУ šêļèĉт_!!]</value>
+  </data>
+  <data name="SheltersOption_Randomly_Description" xml:space="preserve">
+    <value>[131DF][!!_Úšìиĝ τĥê Ďàѓķ Àġêş ѓùłéś, ŗãйđôмłУ ŝéļèċţ à ĉâŗð ƒŕóm ţħę şèт òƒ Κîйġðõм čãѓđş àиď îƒ τнâţ ĉàřð íş ƒѓóм Ďãŕĸ Áğêş, ùśę Śĥèľťêŕš įиšτèâð óƒ Èšτâτêš._!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_AlwaysWithProsperity" xml:space="preserve">
+    <value>[5B51E][!!_Âłẁãўš ẅђèи ûšìйġ Þŗõśρèѓìţý_!!]</value>
+  </data>
+  <data name="PlatinumColonyOption_AlwaysWithProsperity_Description" xml:space="preserve">
+    <value>[039AA][!!_Įƒ ťħé śêļęĉţéď ŝęτ ôƒ Κíηģďõм ćàѓđš įηċłùďêš àиУ ƒŕõм Рřôŝþéѓìťў, ţнêή àłẃâÿś íήčľúđę Ρłâţîηûm áиđ ĈòłòйУ._!!]</value>
+  </data>
+  <data name="SheltersOption_AlwaysWithDarkAges" xml:space="preserve">
+    <value>[C2D77][!!_Áļŵáўś ŵћéй µśįήģ Ďâŕķ Âģèš_!!]</value>
+  </data>
+  <data name="SheltersOption_AlwaysWithDarkAges_Description" xml:space="preserve">
+    <value>[A0A5E][!!_Ìƒ тћé šéĺèĉţęď şèτ õƒ Ќįηĝďõм ćáŗďś įйčłùďèš ãήў ƒřõм Ďáŗĸ Àġêŝ, ťĥéй àļẃáŷš ûšê Śђęĺţęѓŝ įήşτéãď õƒ Éśťáтęš._!!]</value>
+  </data>
+  <data name="Settings_ShowBasicCards" xml:space="preserve">
+    <value>[70238][!!_Šĥôẁ Вàŝîĉ Ĉãŗđš_!!]</value>
+  </data>
+  <data name="Settings_ShowBasicCards_Description" xml:space="preserve">
+    <value>[B4FA6][!!_Ľîśťŝ ţħé ŕèqúìѓèď ήúmъęѓ òƒ àļľ õƒ тĥé ьáŝįč ĉáŗðš вãşêð ôи тħé иúмБêѓ ôƒ рłàУęřš śęĺèćτêð íή âðďíţíôи ţó тħè śţàŗтíήġ ħàйď мâќéûþ._!!]</value>
+  </data>
+  <data name="CardGroupType_Events" xml:space="preserve">
+    <value>[76023][!!_ęνęηţŝ_!!]</value>
+  </data>
+  <data name="Config_EventsOption" xml:space="preserve">
+    <value>[77A2E][!!_ẃĥèή ťó þîĉк Ęνęиťś_!!]</value>
+  </data>
+  <data name="EventsOption_Always" xml:space="preserve">
+    <value>[0FD48][!!_Âľẃáýš ŝèłęĉť Êνèηтš_!!]</value>
+  </data>
+  <data name="EventsOption_AlwaysWithSet" xml:space="preserve">
+    <value>[E4056][!!_Ãļẅâÿś ŵђęй ûşįηġ à şéτ ẃìťђ Éνéηťŝ_!!]</value>
+  </data>
+  <data name="EventsOption_AlwaysWithSet_Description" xml:space="preserve">
+    <value>[A8AC7][!!_Ìƒ ýóû ãѓę ûŝîηġ á šęť тĥáť ċòйтâìиś Êνêήţş, ťћè ѓèŝûłτ ẅíľł âľŵãŷŝ îиčļùðę ťẅõ ŗáйðôмľÿ śęłêĉτêð Êνęйťś._!!]</value>
+  </data>
+  <data name="EventsOption_Always_Description" xml:space="preserve">
+    <value>[CCBED][!!_Ťĥè řêşµľт ŵįľļ ãĺẅáÿş įήćĺûđê ťẃò ŕãйďóмĺÿ šèłèċтéđ Ęνêήтš._!!]</value>
+  </data>
+  <data name="EventsOption_Never" xml:space="preserve">
+    <value>[5E573][!!_Ñèνèŕ ŝéľèčţ éνêитš_!!]</value>
+  </data>
+  <data name="EventsOption_Never_Description" xml:space="preserve">
+    <value>[CA7DF][!!_Ñéνêŗ šêľéĉт ãήý Êνéиţš._!!]</value>
+  </data>
+  <data name="EventsOption_Randomly" xml:space="preserve">
+    <value>[3A715][!!_Ŗâиđómľÿ šêłèĉт _!!]</value>
+  </data>
+  <data name="EventsOption_RandomlyWithSet" xml:space="preserve">
+    <value>[88EF6][!!_Řãήđõмľў ẁĥêй ùŝìηġ á śêţ ŵįťн Êνéитŝ_!!]</value>
+  </data>
+  <data name="EventsOption_RandomlyWithSet_Description" xml:space="preserve">
+    <value>[1AB13][!!_Îƒ ÿóµ âŕé µşíйğ á şèτ ţħàт ĉóйťãíήŝ Ęνèήτŝ, ţħę ŗéśùļť ẃíłļ îйċĺúđé вèťŵèęή źèřò âήđ тẅõ ѓàйďômļŷ šęľęčτèď Ęνêήтš._!!]</value>
+  </data>
+  <data name="EventsOption_Randomly_Description" xml:space="preserve">
+    <value>[D6986][!!_Τнè ŗęśùļт ẁįĺł ìήĉľùđé ьéťẁéèи źèѓô ãηď τẁò ŕàήďòmľÿ šêłęĉτęð Êνęйťŝ._!!]</value>
+  </data>
+  <data name="CardRequirementOption_NoPreference" xml:space="preserve">
+    <value>[298D8][!!_Ńô Рřêƒéřèйĉè_!!]</value>
+  </data>
+  <data name="CardRequirementOption_NoPreference_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CardRequirementOption_Prevent" xml:space="preserve">
+    <value>[DCB20][!!_Þѓęνęйτ Àļł_!!]</value>
+  </data>
+  <data name="CardRequirementOption_PreventPlus2" xml:space="preserve">
+    <value>[79473][!!_Рŗéνéит Âĺļ +2_!!]</value>
+  </data>
+  <data name="CardRequirementOption_PreventPlus2_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CardRequirementOption_Prevent_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CardRequirementOption_Require" xml:space="preserve">
+    <value>[5B102][!!_Ŕęqùîřê Ãτ Ĺęâšτ Óηè_!!]</value>
+  </data>
+  <data name="CardRequirementOption_RequirePlus2" xml:space="preserve">
+    <value>[0AB48][!!_Ŕêqµįѓé Áţ Ļèàşτ Õиé +2_!!]</value>
+  </data>
+  <data name="CardRequirementOption_RequirePlus2_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="CardRequirementOption_Require_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="Config_PlusActions" xml:space="preserve">
+    <value>[F127A][!!_Ćãŕđś ẁîτĥ +Áčťîòή_!!]</value>
+  </data>
+  <data name="Config_PlusBuys" xml:space="preserve">
+    <value>[DDE3A][!!_Ćâŗðś ẃįťħ +ßûУ_!!]</value>
+  </data>
+  <data name="Results_Refresh" xml:space="preserve">
+    <value>[4968F][!!_řęƒѓèşћ_!!]</value>
+  </data>
+</root>

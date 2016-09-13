@@ -81,6 +81,25 @@ namespace Ben.Dominion.ViewModels
         }
 
         [XmlIgnore]
+        public List<CultureInfo> SupportedCultures { get; } = new List<CultureInfo>
+        {
+            //null,
+            new CultureInfo("cs-CZ"),
+            new CultureInfo("de-DE"),
+            new CultureInfo("en-US"),
+            new CultureInfo("es-ES"),
+            new CultureInfo("fi-FI"),
+            new CultureInfo("fr-FR"),
+            new CultureInfo("it-IT"),
+            new CultureInfo("nl-NL"),
+            new CultureInfo("pl-PL"),
+#if DEBUG
+            // Add the psudolocalization culture.
+            new CultureInfo("qps-ploc")
+#endif
+        }.OrderBy(c => c.TwoLetterISOLanguageName, StringComparer.OrdinalIgnoreCase).ToList();
+
+        [XmlIgnore]
         public CultureInfo CurrentCulture
         {
             get
@@ -246,8 +265,9 @@ namespace Ben.Dominion.ViewModels
 
         private bool GetAppSetting([CallerMemberName]string key = null, bool defaultValue = true)
         {
-            string settingValue = GetAppSetting(key, defaultValue.ToString());
-            return Boolean.Parse(settingValue);
+            return GetAppSetting<bool>(key, defaultValue);
+            //string settingValue = GetAppSetting(key, defaultValue.ToString());
+            //return Boolean.Parse(settingValue);
         }
 
         private TValue GetAppSetting<TValue>([CallerMemberName]string key = null, TValue defaultValue = default(TValue))

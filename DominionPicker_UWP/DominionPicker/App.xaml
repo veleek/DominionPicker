@@ -24,10 +24,11 @@
     <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
     <data:EnumValuesConverter x:Key="EnumValuesConverter" />
 
-    <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
-    <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
+    <FontFamily x:Key="BookAntiquaBold">ms-appx:///DominionCore/Resources/Fonts/ANTQUAB.TTF#Book Antiqua</FontFamily>
+    <FontFamily x:Key="OptimusPrincepsSemiBold">ms-appx:///DominionCore/Resources/Fonts/OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
 
     <resources:LocalizedResources x:Key="LocalizedResources" />
+    <resources:Strings x:Key="Strings" />
 
     <DataTemplate x:Key="BulletedItem">
       <Grid>
@@ -51,13 +52,14 @@
     
     <Style x:Key="CardNameTextStyle" TargetType="TextBlock">
       <Setter Property="FontFamily" Value="{StaticResource OptimusPrincepsSemiBold}" />
-      <Setter Property="FontSize" Value="33" />
+      <Setter Property="FontSize" Value="26" />
       <Setter Property="VerticalAlignment" Value="Center" />
       <Setter Property="HorizontalAlignment" Value="Left" />
     </Style>
 
     <Style x:Key="SubtleTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
       <Setter Property="Foreground" Value="{StaticResource ApplicationSecondaryForegroundThemeBrush}" />
+      <Setter Property="FontSize" Value="18" />
     </Style>
 
     <Style x:Key="EnumOptionStyle" TargetType="ComboBox">

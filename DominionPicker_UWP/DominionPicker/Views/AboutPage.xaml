@@ -43,7 +43,7 @@
     </Grid.RowDefinitions>
     <Pivot x:Name="RootPivot" 
            Grid.Row="0" >
-      <PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
+      <PivotItem Header="{Binding About_About, Source={StaticResource Strings}, Mode=OneTime}" Margin="12,0">
         <Grid x:Name="ContentPanel">
           <Grid.RowDefinitions>
             <RowDefinition Height="*" />

@@ -12246,11 +12246,10 @@
     },
     "Newtonsoft.Json/8.0.3": {
       "sha512": "KGsYQdS2zLH+H8x2cZaSI7e+YZ4SFIbyy1YJQYl6GYBWjf5o4H1A68nxyq+WTyVSOJQ4GqS/DiPE+UseUizgMg==",
-      "type": "Package",
+      "type": "package",
       "files": [
+        "Newtonsoft.Json.8.0.3.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -12263,7 +12262,6 @@
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
         "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "package/services/metadata/core-properties/199d932507f04f0285dade0302b87d22.psmdcp",
         "tools/install.ps1"
       ]
     },

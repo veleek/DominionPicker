@@ -5,7 +5,6 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:dominionControls="using:Ben.Dominion.Controls" 
       mc:Ignorable="d" 
-      d:DesignHeight="768" d:DesignWidth="480" 
       d:DataContext="{d:DesignData Source=../SampleData/CardSampleData.xaml}" 
       xmlns:animation="using:Windows.UI.Xaml.Media.Animation" >
   
@@ -34,7 +33,7 @@
           <ScrollViewer Margin="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
             <dominionControls:DominionCardControl Card="{Binding}" Margin="0,0,0,0"/>
           </ScrollViewer>
-          <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <TextBlock Text="{Binding Strings.Info_Set, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtleTextBlockStyle}" />
           <Grid Margin="12,0,0,0">
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="Auto" />
@@ -51,16 +50,16 @@
                        VerticalAlignment="Center"
                        Style="{StaticResource TitleTextBlockStyle}" />
           </Grid>
-          <TextBlock Text="{Binding Strings.Info_Type, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <TextBlock Text="{Binding Strings.Info_Type, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtleTextBlockStyle}" />
           <TextBlock Text="{Binding Type}" Style="{StaticResource TitleTextBlockStyle}" />
           <TextBlock Text="{Binding Strings.Info_Rules, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
           <TextBlock Text="{Binding FormattedRules}" Style="{StaticResource TitleTextBlockStyle}" TextWrapping="Wrap" TextAlignment="Center" />
-          <TextBlock Text="{Binding Strings.Info_Wiki, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" />
+          <TextBlock Text="{Binding Strings.Info_Wiki, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtleTextBlockStyle}" />
           <HyperlinkButton Content="Dominion Strategy Wiki Page" 
                            NavigateUri="{Binding StrategyPageUrl}" 
                            HorizontalContentAlignment="Left" 
                            Foreground="{ThemeResource SystemControlForegroundAccentBrush}"
-                           FontSize="30">
+                           FontSize="20">
           </HyperlinkButton>
         </StackPanel>
       </ScrollViewer>
