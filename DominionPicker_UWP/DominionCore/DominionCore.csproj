@@ -129,6 +129,8 @@
     <Content Include="Resources\Fonts\ANTQUAB.TTF" />
     <Content Include="Resources\Dominican-SmallCaps.ttf" />
     <Content Include="Resources\Fonts\OptimusPrincepsSemiBold.ttf" />
+    <PRIResource Include="Resources\fr\CardDataStrings.resw" />
+    <PRIResource Include="Resources\fr\Strings.resw" />
     <PRIResource Include="Resources\qps-ploc\Strings.resw" />
     <PRIResource Include="Resources\qps-ploc\CardDataStrings.resw" />
     <PRIResource Include="Resources\en\Strings.resw">
@@ -147,8 +149,6 @@
     <PRIResource Include="Resources\nl\CardDataStrings.resw" />
     <PRIResource Include="Resources\it\Strings.resw" />
     <PRIResource Include="Resources\it\CardDataStrings.resw" />
-    <PRIResource Include="Resources\fr\Strings.resw" />
-    <PRIResource Include="Resources\fr\CardDataStrings.resw" />
     <PRIResource Include="Resources\fi\Strings.resw" />
     <PRIResource Include="Resources\fi\CardDataStrings.resw" />
     <PRIResource Include="Resources\es\Strings.resw" />
@@ -221,9 +221,9 @@
     <EmbeddedResource Include="Properties\DominionCore.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\DominionCore.fr.xlf" />
     <XliffResource Include="MultilingualResources\DominionCore.qps-ploc.xlf" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

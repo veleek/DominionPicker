@@ -180,6 +180,7 @@ namespace Ben.Dominion
             // If this is a new app version and we haven't done any one-time upgrade stuff
             if (App.Instance.IsNewVersion && appLaunchCount > 1 && !this.updatePopupShown)
             {
+                this.updatePopupShown = true;
                 UpdateDialog updateDialog = new UpdateDialog();
                 await updateDialog.ShowAsync();
             }
