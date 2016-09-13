@@ -221,6 +221,14 @@
     <EmbeddedResource Include="Properties\DominionCore.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <XliffResource Include="MultilingualResources\DominionCore.cs.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.de.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.es.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.fi.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.fr.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.it.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.nl.xlf" />
+    <XliffResource Include="MultilingualResources\DominionCore.pl.xlf" />
     <XliffResource Include="MultilingualResources\DominionCore.qps-ploc.xlf" />
   </ItemGroup>
   <ItemGroup />

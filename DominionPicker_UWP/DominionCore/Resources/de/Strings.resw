@@ -1,110 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,81 +12,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About_About" xml:space="preserve">
-    <value>Über</value>
-    <comment>Colloquially it is called "Über".  More professional look "Impressum" is better.</comment>
+  <data name="MainPage_AddnOptions" xml:space="preserve">
+    <value>weitere Optionen</value>
   </data>
-  <data name="About_Changes" xml:space="preserve">
-    <value>Changelog</value>
-    <comment>Many German apps just call it Changelog, in games for example.  The real translation would be "Änderungen"</comment>
+  <data name="MainPage_Create" xml:space="preserve">
+    <value>Erzeugen</value>
   </data>
-  <data name="About_Help" xml:space="preserve">
-    <value>Hilfe</value>
-  </data>
-  <data name="About_Rate" xml:space="preserve">
-    <value>Bewerten</value>
-    <comment>"Bewerten" only means "rate" but if you use the full translation "Bewerten und Kritik schreiben" it won't patch to your button. But this one word normally describes both</comment>
-  </data>
-  <data name="About_Rules" xml:space="preserve">
-    <value>Regeln</value>
-  </data>
-  <data name="About_Update" xml:space="preserve">
-    <value>Update</value>
-  </data>
-  <data name="Application_Settings" xml:space="preserve">
-    <value>Einstellungen</value>
-  </data>
-  <data name="Config_CardData" xml:space="preserve">
-    <value>Kartendetails</value>
-  </data>
-  <data name="Config_Language" xml:space="preserve">
-    <value>Sprache</value>
-  </data>
-  <data name="Config_RulesText" xml:space="preserve">
-    <value>Regeln</value>
-    <comment>If the whole rules of one edition is meant "Regelwerk" is your word. Otherwise i would just call it "Regeln" which is just the translation for "rules"</comment>
-  </data>
-  <data name="Config_Title" xml:space="preserve">
-    <value>Einstellungen</value>
-  </data>
-  <data name="Config_UI" xml:space="preserve">
-    <value>Benutzeroberfläche</value>
-  </data>
-  <data name="Dominion_CoinToken" xml:space="preserve">
-    <value>Geldmarker</value>
-  </data>
-  <data name="Dominion_EmargoToken" xml:space="preserve">
-    <value>Embargomarker</value>
-  </data>
-  <data name="Dominion_IslandMat" xml:space="preserve">
-    <value>Tableau Insel</value>
-  </data>
-  <data name="Dominion_Mat" xml:space="preserve">
-    <value>Tableau</value>
-  </data>
-  <data name="Dominion_NativeVillageMat" xml:space="preserve">
-    <value>Tableau Eingeborenendorf</value>
-  </data>
-  <data name="Dominion_PirateMat" xml:space="preserve">
-    <value>Tableau Piratenschiff</value>
-  </data>
-  <data name="Dominion_Token" xml:space="preserve">
-    <value>Marker</value>
-  </data>
-  <data name="Favorites_Delete" xml:space="preserve">
-    <value>löschen</value>
-  </data>
-  <data name="Favorites_Edit" xml:space="preserve">
-    <value>bearbeiten</value>
-  </data>
-  <data name="Favorites_NoSets" xml:space="preserve">
-    <value>Es wurden noch keine Favoriten gespeichert. Bitte nutzen sie einen der  Zufallsgeneratoren um ein Deck zu erzeugen.</value>
-  </data>
-  <data name="Favorites_NoSettings" xml:space="preserve">
-    <value>Es wurden noch keine Zufallsgeneratoren gespeichert. Bitte gehen Sie auf die "Erzeugen"-Seite um welche zu speichern.</value>
-  </data>
-  <data name="Favorites_Rename" xml:space="preserve">
-    <value>Umbenennen</value>
+  <data name="MainPage_Favorites" xml:space="preserve">
+    <value>Favoriten</value>
   </data>
   <data name="Favorites_SetsDesc" xml:space="preserve">
     <value>Hat ihnen ein Set gefallen? Dann speichern Sie es um es erneut zu verwenden!</value>
@@ -204,100 +32,14 @@
   </data>
   <data name="Favorites_SettingsTitle" xml:space="preserve">
     <value>Zufallsgenerator</value>
-    <comment>I think in this context the word is the best choice. There is no real translation for Card Randomizer, my word means"random generator".</comment>
   </data>
-  <data name="Info_Rules" xml:space="preserve">
-    <value>regeln</value>
+  <data name="Favorites_NoSets" xml:space="preserve">
+    <value>Es wurden noch keine Favoriten gespeichert. Bitte nutzen sie einen der  Zufallsgeneratoren um ein Deck zu erzeugen.</value>
   </data>
-  <data name="Info_Tips" xml:space="preserve">
-    <value>Für weitere Karten
-einfach wischen</value>
-  </data>
-  <data name="Info_Title" xml:space="preserve">
-    <value>informationen</value>
-  </data>
-  <data name="Info_Type" xml:space="preserve">
-    <value>typ</value>
-  </data>
-  <data name="Lookup_ResetFiltered" xml:space="preserve">
-    <value>gefilterte Karten zurücksetzen</value>
-  </data>
-  <data name="Lookup_SearchHint" xml:space="preserve">
-    <value>Filtern nach Name, Set, Typ, Regel</value>
-  </data>
-  <data name="Lookup_ShowFiltered" xml:space="preserve">
-    <value>gefilterte Karten anzeigen</value>
-  </data>
-  <data name="Lookup_Tips" xml:space="preserve">
-    <value>angekreuzte Karten
-werden nie ausgewählt</value>
-  </data>
-  <data name="Lookup_Title" xml:space="preserve">
-    <value>Kartenliste</value>
-    <comment>If its to long just use "Kartenliste".  "Liste aller Karten" means "list of all cards".</comment>
-  </data>
-  <data name="MainPage_AddnOptions" xml:space="preserve">
-    <value>weitere Optionen</value>
-  </data>
-  <data name="MainPage_Create" xml:space="preserve">
-    <value>Erzeugen</value>
-  </data>
-  <data name="MainPage_Favorites" xml:space="preserve">
-    <value>Favoriten</value>
-  </data>
-  <data name="MainPage_GenerateButton" xml:space="preserve">
-    <value>Set erzeugen</value>
-  </data>
-  <data name="MainPage_Generating" xml:space="preserve">
-    <value>Erzeuge Kartenset…</value>
-  </data>
-  <data name="MainPage_Reset" xml:space="preserve">
-    <value>Zurücksetzen</value>
-  </data>
-  <data name="MainPage_Save" xml:space="preserve">
-    <value>Speichern…</value>
-  </data>
-  <data name="Menu_About" xml:space="preserve">
-    <value>Hilfe/Über</value>
-  </data>
-  <data name="Menu_BlackMarket" xml:space="preserve">
-    <value>Schwarzmarkt Deck</value>
-  </data>
-  <data name="Menu_CardLookup" xml:space="preserve">
-    <value>Liste aller Karten/Filter</value>
-  </data>
-  <data name="Results_ExtrasDesc" xml:space="preserve">
-    <value>benötigte Zusatzkarten, Spielmarken, usw.</value>
-  </data>
-  <data name="Results_Regenerate" xml:space="preserve">
-    <value>neu erzeugen</value>
-  </data>
-  <data name="Results_Save" xml:space="preserve">
-    <value>speichern…</value>
-  </data>
-  <data name="Results_SortCost" xml:space="preserve">
-    <value>nach kosten</value>
-  </data>
-  <data name="Results_SortName" xml:space="preserve">
-    <value>nach alphabet</value>
-  </data>
-  <data name="Results_SortSet" xml:space="preserve">
-    <value>nach set</value>
-  </data>
-  <data name="Results_Tips" xml:space="preserve">
-    <value>Wischen um Karte auszutauschen
-Drücken for weitere Informationen</value>
-  </data>
-  <data name="Results_Title" xml:space="preserve">
-    <value>ergebnis</value>
-  </data>
-  <data name="Settings_AddnOptions" xml:space="preserve">
-    <value>weitere Optionen</value>
+  <data name="Favorites_NoSettings" xml:space="preserve">
+    <value>Es wurden noch keine Zufallsgeneratoren gespeichert. Bitte gehen Sie auf die "Erzeugen"-Seite um welche zu speichern.</value>
   </data>
   <data name="Settings_MinCards" xml:space="preserve">
-    <value>Mindestanzahl an Karten pro Set:</value>
-  </data>
-  <data name="Settings_MinCardsDescription" xml:space="preserve">
     <value>Mindestanzahl an Karten pro Set:</value>
   </data>
   <data name="Settings_PickPlatinumColony" xml:space="preserve">
@@ -320,5 +62,152 @@ Drücken for weitere Informationen</value>
   </data>
   <data name="Settings_ShowExtras" xml:space="preserve">
     <value>Benötigte Zusatzkarten anzeigen</value>
+  </data>
+  <data name="Settings_MinCardsDescription" xml:space="preserve">
+    <value>Mindestanzahl an Karten pro Set:</value>
+  </data>
+  <data name="Config_CardData" xml:space="preserve">
+    <value>Kartendetails</value>
+  </data>
+  <data name="Config_Language" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="Config_RulesText" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="Config_Title" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Config_UI" xml:space="preserve">
+    <value>Benutzeroberfläche</value>
+  </data>
+  <data name="Favorites_Delete" xml:space="preserve">
+    <value>löschen</value>
+  </data>
+  <data name="Favorites_Edit" xml:space="preserve">
+    <value>bearbeiten</value>
+  </data>
+  <data name="Favorites_Rename" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="Menu_About" xml:space="preserve">
+    <value>Hilfe/Über</value>
+  </data>
+  <data name="Menu_BlackMarket" xml:space="preserve">
+    <value>Schwarzmarkt Deck</value>
+  </data>
+  <data name="Menu_CardLookup" xml:space="preserve">
+    <value>Liste aller Karten/Filter</value>
+  </data>
+  <data name="MainPage_GenerateButton" xml:space="preserve">
+    <value>Set erzeugen</value>
+  </data>
+  <data name="MainPage_Generating" xml:space="preserve">
+    <value>Erzeuge Kartenset…</value>
+  </data>
+  <data name="MainPage_Reset" xml:space="preserve">
+    <value>Zurücksetzen</value>
+  </data>
+  <data name="MainPage_Save" xml:space="preserve">
+    <value>Speichern…</value>
+  </data>
+  <data name="Settings_AddnOptions" xml:space="preserve">
+    <value>weitere Optionen</value>
+  </data>
+  <data name="Results_ExtrasDesc" xml:space="preserve">
+    <value>benötigte Zusatzkarten, Spielmarken, usw.</value>
+  </data>
+  <data name="Results_Tips" xml:space="preserve">
+    <value>Wischen um Karte auszutauschen
+Drücken for weitere Informationen</value>
+  </data>
+  <data name="Results_Title" xml:space="preserve">
+    <value>ergebnis</value>
+  </data>
+  <data name="Info_Rules" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="Info_Tips" xml:space="preserve">
+    <value>Für weitere Karten
+einfach wischen</value>
+  </data>
+  <data name="Info_Title" xml:space="preserve">
+    <value>informationen</value>
+  </data>
+  <data name="Info_Type" xml:space="preserve">
+    <value>typ</value>
+  </data>
+  <data name="Results_Regenerate" xml:space="preserve">
+    <value>neu erzeugen</value>
+  </data>
+  <data name="Results_Save" xml:space="preserve">
+    <value>Speichern…</value>
+  </data>
+  <data name="Results_SortCost" xml:space="preserve">
+    <value>nach kosten</value>
+  </data>
+  <data name="Results_SortName" xml:space="preserve">
+    <value>nach alphabet</value>
+  </data>
+  <data name="Results_SortSet" xml:space="preserve">
+    <value>nach set</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>Geldmarker</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>Embargomarker</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>Tableau Insel</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>Tableau</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>Tableau Eingeborenendorf</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>Tableau Piratenschiff</value>
+  </data>
+  <data name="Dominion_Token" xml:space="preserve">
+    <value>Marker</value>
+  </data>
+  <data name="Application_Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Lookup_ResetFiltered" xml:space="preserve">
+    <value>gefilterte Karten zurücksetzen</value>
+  </data>
+  <data name="Lookup_SearchHint" xml:space="preserve">
+    <value>Filtern nach Name, Set, Typ, Regel</value>
+  </data>
+  <data name="Lookup_ShowFiltered" xml:space="preserve">
+    <value>gefilterte Karten anzeigen</value>
+  </data>
+  <data name="Lookup_Tips" xml:space="preserve">
+    <value>angekreuzte Karten
+werden nie ausgewählt</value>
+  </data>
+  <data name="Lookup_Title" xml:space="preserve">
+    <value>Kartenliste</value>
+  </data>
+  <data name="About_About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="About_Changes" xml:space="preserve">
+    <value>Changelog</value>
+  </data>
+  <data name="About_Help" xml:space="preserve">
+    <value>Hilfe</value>
+  </data>
+  <data name="About_Rate" xml:space="preserve">
+    <value>Bewerten</value>
+  </data>
+  <data name="About_Rules" xml:space="preserve">
+    <value>Regeln</value>
+  </data>
+  <data name="About_Update" xml:space="preserve">
+    <value>Update</value>
   </data>
 </root>
