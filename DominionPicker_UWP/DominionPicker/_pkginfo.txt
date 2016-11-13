@@ -1,1 +1,1 @@
-C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\AppPackages\DominionPicker_3.0.2.0\DominionPicker_3.0.2.0_x86_x64_arm.appxbundle
+C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\AppPackages\DominionPicker_3.0.5.0\DominionPicker_3.0.5.0_x86_x64_arm.appxbundle

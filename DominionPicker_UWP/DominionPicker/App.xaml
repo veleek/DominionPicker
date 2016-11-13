@@ -87,7 +87,7 @@
       <Setter Property="HeaderTemplate">
         <Setter.Value>
           <DataTemplate>
-            <TextBlock Text="{Binding}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Bold" />
+            <TextBlock Text="{Binding}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" FontWeight="Bold" Margin="0,8,0,0" />
           </DataTemplate>
         </Setter.Value>
       </Setter>

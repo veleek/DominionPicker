@@ -560,8 +560,8 @@ never be picked</source>
           <target state="final" state-qualifier="mt-suggestion">[B4FA6][!!_Ľîśťŝ ţħé ŕèqúìѓèď ήúmъęѓ òƒ àļľ õƒ тĥé ьáŝįč ĉáŗðš вãşêð ôи тħé иúмБêѓ ôƒ рłàУęřš śęĺèćτêð íή âðďíţíôи ţó тħè śţàŗтíήġ ħàйď мâќéûþ._!!]</target>
         </trans-unit>
         <trans-unit id="CardGroupType_Events" translate="yes" xml:space="preserve">
-          <source>events</source>
-          <target state="final" state-qualifier="mt-suggestion">[76023][!!_ęνęηţŝ_!!]</target>
+          <source>events/landmarks</source>
+          <target state="translated">[16950][!!_ęνęητš/ĺãήďмàřќš_!!]</target>
         </trans-unit>
         <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
           <source>when to pick Events</source>

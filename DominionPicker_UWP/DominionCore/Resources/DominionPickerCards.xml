@@ -272,7 +272,7 @@
   <Card ID="257" Name="Dungeon" Set="Adventures" Type="Action Duration" Cost="3" Pickable="true" Rules="+1 Action\nNow and at the start of your next turn: +2 Cards, then discard 2 cards." />
   <Card ID="258" Name="Duplicate" Set="Adventures" Type="Action Reserve" Cost="4" Pickable="true" Rules="Put this on your Tavern mat.\n_____\nWhen you gain a card costing up to $6, you may call this, to gain a copy of that card." />
   <Card ID="259" Name="Expedition" Set="Adventures" Type="Event" Cost="3" Pickable="false" Rules="Draw 2 extra cards for your next hand." />
-  <Card ID="260" Name="Ferry" Set="Adventures" Type="Event" Cost="3" Pickable="false" Rules="Move your -$2 cost token to an Action Supply pile (cards from that pile cost $2 less on your turns, but not less than $0." />
+  <Card ID="260" Name="Ferry" Set="Adventures" Type="Event" Cost="3" Pickable="false" Rules="Move your -$2 cost token to an Action Supply pile (cards from that pile cost $2 less on your turns, but not less than $0)." />
   <Card ID="261" Name="Fugitive" Set="Adventures" Type="Action Traveller" Cost="4" Pickable="false" Rules="+2 Cards\n+1 Action\nDiscard a card.\n_____\nWhen you discard this from play, you may exchange it for a Disciple.\n(This is not in the Supply)" />
   <Card ID="262" Name="Gear" Set="Adventures" Type="Action Duration" Cost="3" Pickable="true" Rules="+2 Cards\nSet aside up to 2 cards from your hand face down. At the start of your next turn, put them into your hand." />
   <Card ID="263" Name="Giant" Set="Adventures" Type="Action Attack" Cost="5" Pickable="true" Rules="Turn your Journey token over (it starts face up). If it's face down, +$1. If it's face up, +$5, and each other player reveals the top card of his deck, trashes it if it costs from $3 to $6, and otherwise discards it and gains a Curse." />
@@ -316,7 +316,7 @@
   <Card ID="301" Name="Warrior" Set="Adventures" Type="Action Attack Traveller" Cost="4" Pickable="true" Rules="+2 Cards\nFor each Traveller you have in play (including this) each other player discards the top card of his deck and trashes it if it costs $3 or $4.\n_____\nWhen you discard this from play, you may exchange it for a Hero.\n(This is not in the Supply)" />
   <Card ID="302" Name="Wine Merchant" Set="Adventures" Type="Action Reserve" Cost="5" Pickable="true" Rules="+1 Buy\n+$4\nPut this on your Tavern mat.\n_____\nAt the end of your Buy phase, if you have at least $2 unspent, you may discard this from your Tavern mat." />
   <!-- Cornucopia -->
-  <Card ID="303" Name="Prizes" Set="Cornucopia" Type="Action Prize" Cost="*" Pickable="true" Rules="Prizes are a set of five differently-named unique cards that are not part of the supply, but can be gained by playing Tournament.  They include Bag of Gold, Diadem, Followers, Princess, and Trusty Steed." />
+  <Card ID="303" Name="Prizes" Set="Cornucopia" Type="Action Prize" Cost="*" Pickable="false" Rules="Prizes are a set of five differently-named unique cards that are not part of the supply, but can be gained by playing Tournament.  They include Bag of Gold, Diadem, Followers, Princess, and Trusty Steed." />
   <!-- Promo -->
   <Card ID="304" Name="Summon" Set="Promo" Type="Event" Cost="5" Pickable="false" Rules="Gain an Action card costing up to $4. Set it aside. If you do, then at the start of your next turn, play it." />
   <!-- Empires -->

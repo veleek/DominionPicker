@@ -560,8 +560,8 @@ never be picked</target>
           <target state="new">Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup.</target>
         </trans-unit>
         <trans-unit id="CardGroupType_Events" translate="yes" xml:space="preserve">
-          <source>events</source>
-          <target state="new">events</target>
+          <source>events/landmarks</source>
+          <target state="new">events/landmarks</target>
         </trans-unit>
         <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
           <source>when to pick Events</source>

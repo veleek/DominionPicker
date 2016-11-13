@@ -437,7 +437,7 @@ never be picked</value>
     <value>Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup.</value>
   </data>
   <data name="CardGroupType_Events" xml:space="preserve">
-    <value>events</value>
+    <value>events/landmarks</value>
   </data>
   <data name="Config_EventsOption" xml:space="preserve">
     <value>when to pick Events</value>

@@ -1,6 +1,7 @@
 ﻿Version 3.0
 Converted to UWP
 Added support for Empires
+Fixed up a bunch of localization.
 
 Version 2.4
 Updated German and Dutch card names.

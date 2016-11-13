@@ -369,6 +369,7 @@ namespace Ben.Dominion
                 case CardType.Looter:
                 case CardType.Traveller:
                 case CardType.Event:
+                case CardType.Gathering:
                     return Color.FromArgb(255, 160, 155, 165); // #A09BA5
 
                 case CardType.Prize:

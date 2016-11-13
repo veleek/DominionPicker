@@ -1,0 +1,3 @@
+MainPackage=C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\bin\ARM\Release\DominionPicker_3.0.5.0_ARM.appx
+SymbolPackage=C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\AppPackages\DominionPicker_3.0.5.0_Test\DominionPicker_3.0.5.0_ARM.appxsym
+ResourcePack=C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\bin\ARM\Release\DominionPicker_3.0.5.0_scale-200.appx

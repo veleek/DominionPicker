@@ -165,7 +165,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.scale-100.png" />
-    <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Images\debt.png" />
     <Content Include="Images\SetIcons\empires.png" />

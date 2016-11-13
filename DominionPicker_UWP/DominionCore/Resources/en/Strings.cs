@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 09/11/2016 23:06:54
+// 	Generated: 11/07/2016 23:33:47
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Ben.Dominion.Resources
@@ -1212,7 +1212,7 @@ namespace Ben.Dominion.Resources
         }
         
         /// <summary>
-        /// Localized resource similar to "events"
+        /// Localized resource similar to "events/landmarks"
         /// </summary>
         public static string CardGroupType_Events
         {

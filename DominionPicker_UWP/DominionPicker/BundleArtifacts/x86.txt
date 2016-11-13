@@ -1,0 +1,2 @@
+MainPackage=C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\bin\x86\Release\DominionPicker_3.0.5.0_x86.appx
+SymbolPackage=C:\Code\VSO\Veleek\Dominion Picker\DominionPicker_UWP\DominionPicker\AppPackages\DominionPicker_3.0.5.0_Test\DominionPicker_3.0.5.0_x86.appxsym

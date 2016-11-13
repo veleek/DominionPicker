@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities" xmlns:m1="http://schemas.microsoft.com/appx/2010/manifest" xmlns:phone="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities" xmlns:t="http://schemas.microsoft.com/appx/manifest/types" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" IgnorableNamespaces="">
-  <Identity Name="138458E7997D1.DominionPicker" Publisher="CN=D33EB068-0180-47D4-8C3D-69151BBD4EFA" Version="3.0.3.0" />
+<Package xmlns:m1="http://schemas.microsoft.com/appx/2010/manifest" 
+         xmlns:phone="http://schemas.microsoft.com/appx/2014/phone/manifest" 
+         xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" 
+         xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" 
+         xmlns:t="http://schemas.microsoft.com/appx/manifest/types"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" 
+         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10">
+  <Identity Name="138458E7997D1.DominionPicker" Publisher="CN=D33EB068-0180-47D4-8C3D-69151BBD4EFA" Version="3.0.5.0" />
   <phone:PhoneIdentity PhoneProductId="33f9d727-3010-4191-a244-a2aa54816ce2" PhonePublisherId="b0838bbe-433c-43df-a0c3-f23c011b1868" />
   <Properties>
     <DisplayName>Dominion Picker</DisplayName>
@@ -30,7 +36,7 @@
       <Extensions>
         <uap:Extension Category="windows.protocol">
           <uap:Protocol Name="dominionpicker">
-            <uap:DisplayName>My Protocol</uap:DisplayName>
+            <uap:DisplayName>Dominion Picker Protocol</uap:DisplayName>
           </uap:Protocol>
         </uap:Extension>
       </Extensions>

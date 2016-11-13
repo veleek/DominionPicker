@@ -77,7 +77,14 @@ namespace Ben.Utilities
                         throw new InvalidOperationException($"Unable to parse enum from {tmp.GetType().Name} in app settings.");
                     }
 
-                    value = (T)Enum.Parse(typeof(T), tmp as string);
+                    try
+                    {
+                        value = (T)Enum.Parse(typeof(T), tmp as string);
+                    }
+                    catch
+                    {
+                        // Ignore this for now.
+                    }
                 }
                 else
                 {
