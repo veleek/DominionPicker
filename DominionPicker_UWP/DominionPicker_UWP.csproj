@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{6AE8F7D0-02DA-4031-8C37-6470FE1A98D0}</ProjectGuid>
+    <ProjectGuid>{5809A10A-BC48-4A6D-A6FA-6BA52AC91385}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ben.Dominion</RootNamespace>
