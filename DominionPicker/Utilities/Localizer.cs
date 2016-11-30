@@ -51,7 +51,6 @@ namespace Ben.Data
             {
                 string valueType = value.GetType().Name;
                 string valueName = value.ToString();
-
                 Enum enumValue = value as Enum;
                 bool isFlags = enumValue != null && enumValue.GetType().GetCustomAttributes<FlagsAttribute>().Any();
                 if (isFlags && ((int)value) != 0)
@@ -67,7 +66,7 @@ namespace Ben.Data
 
                     localizedValue = string.Join(", ", localizedEnumParts);
                 }
-                else if(localizableValue != null)
+                else if (localizableValue != null)
                 {
                     // If it's localized, then we'll let them determine
                     // the appropriate way to get the raw localized value
@@ -76,8 +75,7 @@ namespace Ben.Data
                 else
                 {
                     string localizedValueKey = string.Format("{0}_{1}", valueType, valueName);
-
-                    if(!string.IsNullOrWhiteSpace(suffix))
+                    if (!string.IsNullOrWhiteSpace(suffix))
                     {
                         localizedValueKey = localizedValueKey + "_" + suffix;
                     }

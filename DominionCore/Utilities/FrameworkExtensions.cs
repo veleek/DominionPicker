@@ -1,7 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+#if NETFX_CORE
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+#else
+using System.Windows;
+using System.Windows.Media;
+#endif
 
 namespace Ben.Utilities
 {
@@ -57,10 +63,10 @@ namespace Ben.Utilities
                 throw new ArgumentNullException("childName");
             }
             T foundChild = null;
-            int childrenCount = Windows.UI.Xaml.Media.VisualTreeHelper.GetChildrenCount(parent);
+            int childrenCount = VisualTreeHelper.GetChildrenCount(parent);
             for (int i = 0; i < childrenCount; i++)
             {
-                var child = Windows.UI.Xaml.Media.VisualTreeHelper.GetChild(parent, i);
+                var child = VisualTreeHelper.GetChild(parent, i);
                 // If the child is not of the request child type child
                 T childType = child as T;
                 if (childType == null)

@@ -1,10 +1,17 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+
+#if NETFX_CORE
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using System.Linq;
-using System.Reflection;
+#else
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+#endif 
 
 namespace Ben.Utilities
 {
@@ -20,7 +27,11 @@ namespace Ben.Utilities
         {
             if (!isInitialized)
             {
+#if NETFX_CORE
                 var rootFrame = Window.Current.Content as Frame;
+#else
+                var rootFrame = Application.Current.RootVisual as Frame;
+#endif
                 if (rootFrame == null)
                 {
                     throw new InvalidOperationException("Application.Current.RootVisual must be of type Frame to use NavigationServiceEx");
@@ -44,14 +55,25 @@ namespace Ben.Utilities
 
         private static void Frame_Navigating(Object sender, NavigatingCancelEventArgs e)
         {
-            AppLog.Instance.Debug("Navigating: {0}, Mode: {1}, AppInitiated? {2}", e.SourcePageType.Name + "?" + e.Parameter, e.NavigationMode, "");
+#if NETFX_CORE
+            Uri uri = new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative);
+#else
+            Uri uri = e.Uri;
+#endif
+            AppLog.Instance.Debug("Navigating: {0}, Mode: {1}, AppInitiated? {2}", uri, e.NavigationMode, "");
         }
 
         private static void Frame_Navigated(Object sender, NavigationEventArgs e)
         {
-            AppLog.Instance.Debug("Navigated: {0}, Mode: {1}, AppInitiated? {2}", new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative), e.NavigationMode, "");
+#if NETFX_CORE
+            Uri uri = new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative);
+#else
+            Uri uri = e.Uri;
+#endif
+
+            AppLog.Instance.Debug("Navigated: {0}, Mode: {1}, AppInitiated? {2}", uri, e.NavigationMode, "");
             IsNavigating = false;
-            if (!new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative).IsAbsoluteUri || new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative).AbsoluteUri != "app://external/")
+            if (!uri.IsAbsoluteUri || uri.AbsoluteUri != "app://external/")
             {
                 //EasyTracker.GetTracker().SendView(new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative).ToString());
             }
@@ -59,7 +81,12 @@ namespace Ben.Utilities
 
         private static void Frame_NavigationStopped(Object sender, NavigationEventArgs e)
         {
-            AppLog.Instance.Debug("NavigationStopped: {0}, Mode: {1}, AppInitiated? {2}", new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative), e.NavigationMode, "");
+#if NETFX_CORE
+            Uri uri = new Uri("/" + e.SourcePageType.Name + ".xaml", UriKind.Relative);
+#else
+            Uri uri = e.Uri;
+#endif
+            AppLog.Instance.Debug("NavigationStopped: {0}, Mode: {1}, AppInitiated? {2}", uri, e.NavigationMode, "");
             IsNavigating = false;
         }
 
@@ -85,7 +112,8 @@ namespace Ben.Utilities
             IsNavigating = true;
             try
             {
-                frame.Navigate(pageType, parameter);
+                throw new NotImplementedException();
+                //frame.Navigate(pageType, parameter);
             }
             catch (InvalidOperationException ioe)
             {

@@ -1,6 +1,12 @@
 ﻿using System;
 using System.IO;
+#if NETFX_CORE
 using Windows.UI.Xaml.Data;
+using ConverterCulture = System.String;
+#else
+using System.Windows.Data;
+using ConverterCulture = System.Globalization.CultureInfo;
+#endif
 
 namespace Ben.Data.Converters
 {
@@ -16,7 +22,7 @@ namespace Ben.Data.Converters
 
         public string BasePath { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, string culture)
+        public object Convert(object value, Type targetType, object parameter, ConverterCulture culture)
         {
             String path = this.BasePath;
             if (parameter != null)
@@ -33,7 +39,7 @@ namespace Ben.Data.Converters
             return new Uri("ms-appx:///" + fullPath);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string culture)
+        public object ConvertBack(object value, Type targetType, object parameter, ConverterCulture culture)
         {
             throw new NotImplementedException();
         }

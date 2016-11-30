@@ -65,9 +65,15 @@ namespace Ben.Utilities
             using (MemoryStream stream = new MemoryStream())
             {
                 Serialize(stream, o);
+#if NETFX_CORE
                 ArraySegment<byte> buffer;
                 stream.TryGetBuffer(out buffer);
                 String data = Encoding.UTF8.GetString(buffer.Array, 0, (int)stream.Length);
+#else
+                byte[] buffer = stream.GetBuffer();
+                string data = Encoding.UTF8.GetString(buffer, 0, buffer.Length);
+#endif
+
                 return data;
             }
         }
@@ -120,7 +126,11 @@ namespace Ben.Utilities
                 catch (SerializationException e)
                 {
                     String msg = e.Message + (e.InnerException != null ? Environment.NewLine + e.InnerException.Message : "");
-                    var messageDialogTask = new Windows.UI.Popups.MessageDialog(msg, "Serialize Exception").ShowAsync();
+#if NETFX_CORE
+                    (new Windows.UI.Popups.MessageDialog(msg, "Serialize Exception")).ShowAsync().GetResults();
+#else
+                    System.Windows.MessageBox.Show(msg);
+#endif
                 }
             }
             catch
@@ -150,7 +160,11 @@ namespace Ben.Utilities
             catch (SerializationException e)
             {
                 String msg = e.Message + Environment.NewLine + (e.InnerException != null ? e.InnerException.Message : "");
+#if NETFX_CORE
                 await (new Windows.UI.Popups.MessageDialog(msg, "Serialize Exception")).ShowAsync();
+#else
+                System.Windows.MessageBox.Show(msg);
+#endif
             }
         }
 

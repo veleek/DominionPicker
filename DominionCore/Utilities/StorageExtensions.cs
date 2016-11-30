@@ -13,5 +13,19 @@ namespace Ben.Utilities
             relativePath = relativePath.Replace('/', '\\');
             return await folder.OpenStreamForReadAsync(relativePath);
         }
+
+        public static async Task<IStorageItem> TryGetItemAsync(this IStorageFolder folder, string relativePath)
+        {
+            try
+            {
+                relativePath = relativePath.Replace('/', '\\');
+                IStorageItem item = await folder.GetItemAsync(relativePath);
+                return item;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

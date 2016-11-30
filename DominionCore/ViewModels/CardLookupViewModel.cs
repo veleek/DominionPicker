@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using Windows.UI.Xaml.Data;
 using GalaSoft.MvvmLight.Threading;
 using System.Threading.Tasks;
 using System.Threading;

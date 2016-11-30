@@ -6,8 +6,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 using Ben.Dominion.Resources;
+#if NETFX_CORE
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using Windows.Foundation;
+#else
+using System.Windows;
+using System.Windows.Media;
+#endif
 
 namespace Ben.Dominion
 {
@@ -265,8 +271,8 @@ namespace Ben.Dominion
                 else
                 {
                     LinearGradientBrush grad = new LinearGradientBrush();
-                    grad.StartPoint = new Windows.Foundation.Point(0.5, 0);
-                    grad.EndPoint = new Windows.Foundation.Point(0.5, 1);
+                    grad.StartPoint = new Point(0.5, 0);
+                    grad.EndPoint = new Point(0.5, 1);
                     //Double offsetStep = 1.0 / (colors.Count - 1);
                     //Double offset = 0.0;
                     if (colors.Count > 2)

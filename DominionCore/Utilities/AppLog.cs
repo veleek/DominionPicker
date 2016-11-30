@@ -1,8 +1,11 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
+#if NETFX_CORE
+using Windows.UI;
 using Windows.UI.Xaml.Media;
-//using GoogleAnalytics;
+#else
+using System.Windows.Media;
+#endif
 
 namespace Ben.Utilities
 {
@@ -111,7 +114,7 @@ namespace Ben.Utilities
 
         public LogLevel Level { get; set; }
 
-        public Windows.UI.Color Color
+        public Color Color
         {
             get
             {
@@ -119,20 +122,20 @@ namespace Ben.Utilities
             }
         }
 
-        public static Windows.UI.Color GetColorForLevel(LogLevel level)
+        public static Color GetColorForLevel(LogLevel level)
         {
             switch (level)
             {
                 case LogLevel.Debug:
-                    return Windows.UI.Colors.LightGray;
+                    return Colors.LightGray;
                 case LogLevel.Info:
-                    return Windows.UI.Colors.Gray;
+                    return Colors.Gray;
                 case LogLevel.Warning:
-                    return Windows.UI.Colors.Orange;
+                    return Colors.Orange;
                 case LogLevel.Error:
-                    return Windows.UI.Colors.Red;
+                    return Colors.Red;
                 default:
-                    return Windows.UI.Colors.Green;
+                    return Colors.Green;
             }
         }
 

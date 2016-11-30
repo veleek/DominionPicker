@@ -1,5 +1,11 @@
 ﻿using System;
+#if NETFX_CORE
 using Windows.UI.Xaml.Data;
+using ConverterCulture = System.String;
+#else
+using System.Windows.Data;
+using ConverterCulture = System.Globalization.CultureInfo;
+#endif
 
 namespace Ben.Data
 {
@@ -9,7 +15,7 @@ namespace Ben.Data
     public class EnumValuesConverter : IValueConverter
     {
 
-        public object Convert(object value, Type targetType, object parameter, string culture)
+        public object Convert(object value, Type targetType, object parameter, ConverterCulture culture)
         {
             if (value == null)
             {
@@ -23,7 +29,7 @@ namespace Ben.Data
             return EnumHelper.GetValues(valueType, excludeDefault);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string culture)
+        public object ConvertBack(object value, Type targetType, object parameter, ConverterCulture culture)
         {
             throw new InvalidOperationException("Unable to convert enum values collection into an enum value");
         }

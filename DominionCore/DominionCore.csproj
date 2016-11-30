@@ -201,8 +201,10 @@
     <Compile Include="Utilities\FrameworkExtensions.cs" />
     <Compile Include="Utilities\GenericSerializer.cs" />
     <Compile Include="Utilities\Grouping.cs" />
+    <Compile Include="Utilities\ILocalizable.cs" />
     <Compile Include="Utilities\IsolatedStorageExtensions.cs" />
     <Compile Include="Converters\LocalizeConverter.cs" />
+    <Compile Include="Utilities\Localized.cs" />
     <Compile Include="Utilities\Localizer.cs" />
     <Compile Include="Utilities\NavigationServiceExtensions.cs" />
     <Compile Include="Utilities\NotifyPropertyChangedBase.cs" />

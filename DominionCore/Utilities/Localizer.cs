@@ -2,10 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using Ben.Dominion.Resources;
 using System.Linq;
+#if NETFX_CORE
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
+using ResourceManager = Windows.ApplicationModel.Resources.ResourceLoader;
+#else
+using System.Resources;
+#endif
 
 namespace Ben.Data
 {
@@ -14,17 +18,17 @@ namespace Ben.Data
     {
         private static Dictionary<object, string> localizedValueMap = new Dictionary<object, string>();
         private readonly string resourceSubTree;
-        private readonly Func<ResourceLoader> resourceManagerGetter;
+        private readonly Func<ResourceManager> resourceManagerGetter;
         private readonly Func<CultureInfo> currentCultureGetter;
 
-        public Localizer(string resourceSubTree, Func<ResourceLoader> resourceManagerGetter, Func<CultureInfo> currentCultureGetter)
+        public Localizer(string resourceSubTree, Func<ResourceManager> resourceManagerGetter, Func<CultureInfo> currentCultureGetter)
         {
             this.resourceSubTree = resourceSubTree;
             this.resourceManagerGetter = resourceManagerGetter;
             this.currentCultureGetter = currentCultureGetter;
         }
 
-        public ResourceLoader ResourceLoader
+        public ResourceManager ResourceLoader
         {
             get
             {
@@ -75,6 +79,7 @@ namespace Ben.Data
                             localizedEnumParts.Add(GetRawLocalizedValue(flag, culture));
                         }
                     }
+
                     localizedValue = string.Join(", ", localizedEnumParts);
                 }
                 else if (localizableValue != null)
@@ -91,6 +96,7 @@ namespace Ben.Data
                         localizedValueKey = localizedValueKey + "_" + suffix;
                     }
 
+#if NETFX_CORE
                     ResourceContext context = new ResourceContext();
                     context.Languages = new string[] { ResolveCulture(culture).ToString() };
                     ResourceMap map = ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
@@ -102,7 +108,9 @@ namespace Ben.Data
                     }
 
                     localizedValue = localizedCandidate?.ValueAsString ?? "!! Missing Resource for " + localizedValueKey + " !!";
-                    //localizedValue = ResourceManager.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource for " + localizedValueKey + " !!";
+#else
+                    localizedValue = this.ResourceLoader.GetString(localizedValueKey, ResolveCulture(culture)) ?? "!! Missing Resource for " + localizedValueKey + " !!";
+#endif
                 }
                 localizedValueMap[valueKey] = localizedValue;
             }
@@ -141,20 +149,4 @@ namespace Ben.Data
         }
 
     }
-
-    public static class Localized
-    {
-        public static Localizer Strings = new Localizer("DominionCore/Strings", () => ResourceLoader.GetForViewIndependentUse("Strings"), () => Dominion.Resources.Strings.Culture);
-        public static Localizer CardData = new Localizer("DominionCore/CardDataStrings", () => ResourceLoader.GetForViewIndependentUse("CardDataStrings"), () => CardDataStrings.Culture);
-    }
-
-    public interface ILocalizable
-    {
-
-        object[] LocalizedContext { get; }
-
-        string ToString(Localizer localizer);
-
-    }
-
 }

@@ -1,8 +1,18 @@
 using System.IO;
+#if NETFX_CORE
 using System;
+using Windows.UI;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
+using Windows.UI.Text;
+using Windows.Foundation;
+#else
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Shapes;
+#endif
 
 namespace Ben.Utilities
 {
@@ -47,7 +57,7 @@ namespace Ben.Utilities
                                 TextWrapping = TextWrapping.Wrap,
                                 Text = line,
                                 Style = bodyStyle,
-                                FontWeight = Windows.UI.Text.FontWeights.Bold,
+                                FontWeight = FontWeights.Bold,
                             };
                         }
                         else

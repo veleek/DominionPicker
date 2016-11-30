@@ -1,6 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
+#if NETFX_CORE
 using Windows.UI.Xaml.Data;
+using ConverterCulture = System.String;
+#else
+using System.Windows.Data;
+using ConverterCulture = System.Globalization.CultureInfo;
+#endif
+
 
 namespace Ben.Data.Converters
 {
@@ -12,7 +19,7 @@ namespace Ben.Data.Converters
         public object OtherwiseValueBack { get; set; }
         public bool Debug { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, string language)
+        public object Convert(object value, Type targetType, object parameter, ConverterCulture language)
         {
             if (Debug) Debugger.Break();
 
@@ -28,7 +35,7 @@ namespace Ben.Data.Converters
 
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        public object ConvertBack(object value, Type targetType, object parameter, ConverterCulture language)
         {
             if (Debug) Debugger.Break();
 
@@ -61,7 +68,7 @@ namespace Ben.Data.Converters
 
         public bool Debug { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, string language)
+        public object Convert(object value, Type targetType, object parameter, ConverterCulture language)
         {
             if (Debug) Debugger.Break();
 
@@ -79,7 +86,7 @@ namespace Ben.Data.Converters
             return ParamValue(UseParameterAsOption.Otherwise, parameter, Otherwise);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        public object ConvertBack(object value, Type targetType, object parameter, ConverterCulture language)
         {
             if (Debug) Debugger.Break();
 
