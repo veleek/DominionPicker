@@ -18,6 +18,7 @@ namespace Ben.Dominion
 
         public Card()
         {
+            this.Cost = string.Empty;
         }
 
         public Card(String name, CardType type)
@@ -41,6 +42,9 @@ namespace Ben.Dominion
 
         [XmlAttribute]
         public String Cost { get; set; }
+
+        [XmlAttribute]
+        public Boolean Pickable { get; set; }
 
         [XmlAttribute]
         public String Rules { get; set; }
@@ -254,26 +258,26 @@ namespace Ben.Dominion
             CardType typeToCheck = (CardType) (1);
             while(Enum.IsDefined(typeof(CardType), typeToCheck))
             {
-                switch (typeToCheck)
-                {
-                    case CardType.Treasure:
-                    case CardType.Victory:
-                    case CardType.Curse:
-                    case CardType.Action:
-                    case CardType.Reaction:
-                    case CardType.Attack:
-                    case CardType.Duration:
-                    case CardType.Ruins:
-                    case CardType.Reserve:
-                    case CardType.Event:
-                    case CardType.Shelter:
-                    case CardType.Prize:
+                //switch (typeToCheck)
+                //{
+                //    case CardType.Treasure:
+                //    case CardType.Victory:
+                //    case CardType.Curse:
+                //    case CardType.Action:
+                //    case CardType.Reaction:
+                //    case CardType.Attack:
+                //    case CardType.Duration:
+                //    case CardType.Ruins:
+                //    case CardType.Reserve:
+                //    case CardType.Event:
+                //    case CardType.Shelter:
+                //    case CardType.Prize:
                         if (type.HasFlag(typeToCheck))
                         {
                             colors.Add(GetColorForType(typeToCheck));
                         }
-                        break;
-                }
+                //        break;
+                //}
 
                 typeToCheck = (CardType)((int)typeToCheck << 1);
             }
@@ -288,6 +292,7 @@ namespace Ben.Dominion
                 case CardType.Treasure:
                     return Color.FromArgb(255, 235, 180, 15); // #EBB40F
                 case CardType.Victory:
+                case CardType.Landmark:
                     return Color.FromArgb(255, 97, 121, 57); // #617939
                 case CardType.Curse:
                     return Color.FromArgb(255, 123, 65, 141);
@@ -304,6 +309,8 @@ namespace Ben.Dominion
                 case CardType.Looter:
                 case CardType.Traveller:
                 case CardType.Event:
+                case CardType.Castle:
+                case CardType.Gathering:
                     return Color.FromArgb(255, 160, 155, 165); // #A09BA5
                 case CardType.Prize:
                     return Color.FromArgb(255, 71, 135, 255); // #4787FF

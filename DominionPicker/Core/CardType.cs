@@ -21,5 +21,8 @@ namespace Ben.Dominion
         Reserve = 0x1000,
         Traveller = 0x2000,
         Event = 0x4000,
+        Landmark = 0x8000,
+        Castle = 0x10000,
+        Gathering = 0x20000,
     }
 }

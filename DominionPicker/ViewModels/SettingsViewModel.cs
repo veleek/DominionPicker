@@ -42,7 +42,7 @@ namespace Ben.Dominion
             {
                 if (this.sets == null)
                 {
-                    this.sets = ConfigurationModel.Instance.OwnedSets.Select(s => new SetOption { Set = s, Enabled = s != CardSet.Promo }).ToList();
+                    this.sets = Cards.AllSets.Select(s => new SetOption { Set = s, Enabled = s != CardSet.Promo }).ToList();
                 }
 
                 return this.sets;

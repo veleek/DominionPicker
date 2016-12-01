@@ -135,6 +135,9 @@
   <data name="CardSet_DarkAges" xml:space="preserve">
     <value>Dark Ages</value>
   </data>
+  <data name="CardSet_Empires" xml:space="preserve">
+    <value>Empires</value>
+  </data>
   <data name="CardSet_Guilds" xml:space="preserve">
     <value>Guilds</value>
   </data>

@@ -380,7 +380,7 @@ namespace Ben.Dominion
                 if (numberOfEvents > 0)
                 {
                     var eventsGroup = new CardGroup(CardGroupType.Events);
-                    var events = Cards.AllCards.Where(c => c.IsType(CardType.Event)).OrderBy(_ => Guid.NewGuid()).Take(numberOfEvents).Select(e => e.WithGroup(eventsGroup));
+                    var events = Cards.AllCards.Where(c => c.IsType(CardType.Event | CardType.Landmark)).OrderBy(_ => Guid.NewGuid()).Take(numberOfEvents).Select(e => e.WithGroup(eventsGroup));
 
                     result.Cards.AddRange(events);
                 }

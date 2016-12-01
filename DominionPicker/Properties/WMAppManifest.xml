@@ -12,7 +12,7 @@
     <Language code="nl" />
     <Language code="pl" />-->
   </Languages>
-  <App xmlns="" ProductID="{33f9d727-3010-4191-a244-a2aa54816ce2}" Title="Dominion Picker" RuntimeType="Silverlight" Version="2.4.0.0" Genre="apps.normal" Author="Ben Randall" Description="A Dominon Kingdom Card Randomizer" Publisher="Ben Corp." PublisherID="{b0838bbe-433c-43df-a0c3-f23c011b1868}">
+  <App xmlns="" ProductID="{33f9d727-3010-4191-a244-a2aa54816ce2}" Title="Dominion Picker" RuntimeType="Silverlight" Version="2.5.0.0" Genre="apps.normal" Author="Ben Randall" Description="A Dominon Kingdom Card Randomizer" Publisher="Ben Corp." PublisherID="{b0838bbe-433c-43df-a0c3-f23c011b1868}">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

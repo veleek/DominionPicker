@@ -1,4 +1,7 @@
-﻿Version 2.4
+﻿Version 2.5
+Adding support for Empires
+
+Version 2.4
 Updated German and Dutch card names.
 Fixed localization of Set names in most places.
 Update BlackMarket to filter out a bunch of the cards that aren't valid.

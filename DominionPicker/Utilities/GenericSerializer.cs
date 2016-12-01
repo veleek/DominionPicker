@@ -117,11 +117,9 @@ namespace Ben.Utilities
 
                 t = serializer.Deserialize(stream) as T;
             }
-            catch (SerializationException e)
+            catch (Exception e)
             {
-                String msg = e.Message +
-                             (e.InnerException != null ? Environment.NewLine + e.InnerException.Message : "");
-                MessageBox.Show(msg, "Serialize Exception", MessageBoxButton.OK);
+                MessageBox.Show(e.ToString(), "Serialize Exception", MessageBoxButton.OK);
             }
 
             return t;
