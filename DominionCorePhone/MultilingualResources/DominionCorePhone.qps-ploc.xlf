@@ -1,0 +1,665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en" target-language="qps-ploc" original="DOMINIONCOREPHONE/RESOURCES/CARDDATASTRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="DOMINIONCOREPHONE/RESOURCES/CARDDATASTRINGS.RESX" datatype="resx">
+        <trans-unit id="Application_LocalizedCardsFileName" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="CardSet_Adventures" translate="yes" xml:space="preserve">
+          <source>Adventures</source>
+          <target state="final" state-qualifier="mt-suggestion">[9A8A6][!!_Àđνęηţµřęŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Alchemy" translate="yes" xml:space="preserve">
+          <source>Alchemy</source>
+          <target state="final" state-qualifier="mt-suggestion">[17695][!!_Âĺċћêмŷ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Base" translate="yes" xml:space="preserve">
+          <source>Base</source>
+          <target state="final" state-qualifier="mt-suggestion">[4BC0C][!!_βàŝé_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Cornucopia" translate="yes" xml:space="preserve">
+          <source>Cornucopia</source>
+          <target state="final" state-qualifier="mt-suggestion">[27AEF][!!_Ċòѓиûċòрíã_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_DarkAges" translate="yes" xml:space="preserve">
+          <source>Dark Ages</source>
+          <target state="final" state-qualifier="mt-suggestion">[9D04D][!!_Đàŕĸ Âģęŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Empires" translate="yes" xml:space="preserve">
+          <source>Empires</source>
+          <target state="final" state-qualifier="mt-suggestion">[4D2F5][!!_Ęмρìŗèş_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Guilds" translate="yes" xml:space="preserve">
+          <source>Guilds</source>
+          <target state="final" state-qualifier="mt-suggestion">[18C77][!!_Ġùîłđš_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Hinterlands" translate="yes" xml:space="preserve">
+          <source>Hinterlands</source>
+          <target state="final" state-qualifier="mt-suggestion">[9701A][!!_Ħîηţéŗłâηðŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Intrigue" translate="yes" xml:space="preserve">
+          <source>Intrigue</source>
+          <target state="final" state-qualifier="mt-suggestion">[575C1][!!_Įήţŕîğµè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Promo" translate="yes" xml:space="preserve">
+          <source>Promo</source>
+          <target state="final" state-qualifier="mt-suggestion">[97034][!!_Рѓómõ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Prosperity" translate="yes" xml:space="preserve">
+          <source>Prosperity</source>
+          <target state="final" state-qualifier="mt-suggestion">[D60BB][!!_Рřóšρéříτý_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Seaside" translate="yes" xml:space="preserve">
+          <source>Seaside</source>
+          <target state="final" state-qualifier="mt-suggestion">[B04D3][!!_Śêâśíðę_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Action" translate="yes" xml:space="preserve">
+          <source>Action</source>
+          <target state="final" state-qualifier="mt-suggestion">[93137][!!_Áĉтîôή_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Attack" translate="yes" xml:space="preserve">
+          <source>Attack</source>
+          <target state="final" state-qualifier="mt-suggestion">[35A14][!!_Âťτâćк_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Curse" translate="yes" xml:space="preserve">
+          <source>Curse</source>
+          <target state="final" state-qualifier="mt-suggestion">[09D5E][!!_Čúřŝè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Duration" translate="yes" xml:space="preserve">
+          <source>Duration</source>
+          <target state="final" state-qualifier="mt-suggestion">[B919B][!!_Ðµřãτíóи_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Event" translate="yes" xml:space="preserve">
+          <source>Event</source>
+          <target state="final" state-qualifier="mt-suggestion">[9CCE0][!!_Èνêηт_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Knight" translate="yes" xml:space="preserve">
+          <source>Knight</source>
+          <target state="final" state-qualifier="mt-suggestion">[353AE][!!_Кηìğћτ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Landmark" translate="yes" xml:space="preserve">
+          <source>Landmark</source>
+          <target state="final" state-qualifier="mt-suggestion">[0C40D][!!_Ľàиđmãŗĸ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Looter" translate="yes" xml:space="preserve">
+          <source>Looter</source>
+          <target state="final" state-qualifier="mt-suggestion">[48FE9][!!_Ļôóтèѓ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Prize" translate="yes" xml:space="preserve">
+          <source>Prize</source>
+          <target state="final" state-qualifier="mt-suggestion">[5FE7A][!!_Þŗìžê_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Reaction" translate="yes" xml:space="preserve">
+          <source>Reaction</source>
+          <target state="final" state-qualifier="mt-suggestion">[C6879][!!_Ѓêãćтìòи_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Reserve" translate="yes" xml:space="preserve">
+          <source>Reserve</source>
+          <target state="final" state-qualifier="mt-suggestion">[D6B97][!!_Ŕèšêŗνè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Ruins" translate="yes" xml:space="preserve">
+          <source>Ruins</source>
+          <target state="final" state-qualifier="mt-suggestion">[B89F0][!!_Ŕùįйš_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Shelter" translate="yes" xml:space="preserve">
+          <source>Shelter</source>
+          <target state="final" state-qualifier="mt-suggestion">[FCADD][!!_Śĥęļтèŗ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Traveller" translate="yes" xml:space="preserve">
+          <source>Traveller</source>
+          <target state="final" state-qualifier="mt-suggestion">[696C7][!!_Ťѓáνèľļęѓ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Treasure" translate="yes" xml:space="preserve">
+          <source>Treasure</source>
+          <target state="final" state-qualifier="mt-suggestion">[45165][!!_Тŗęàśûŗè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardType_Victory" translate="yes" xml:space="preserve">
+          <source>Victory</source>
+          <target state="final" state-qualifier="mt-suggestion">[EE3EB][!!_Vįčţôŗý_!!]</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+  <file datatype="xml" source-language="en" target-language="qps-ploc" original="DOMINIONCOREPHONE/RESOURCES/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="DOMINIONCOREPHONE/RESOURCES/STRINGS.RESX" datatype="resx">
+        <trans-unit id="About_About" translate="yes" xml:space="preserve">
+          <source>about</source>
+          <target state="final" state-qualifier="mt-suggestion">[1FD39][!!_ãъõµт_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_Changes" translate="yes" xml:space="preserve">
+          <source>changes</source>
+          <target state="final" state-qualifier="mt-suggestion">[E95A1][!!_ĉћáиğéş_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_Help" translate="yes" xml:space="preserve">
+          <source>help</source>
+          <target state="final" state-qualifier="mt-suggestion">[84F88][!!_ĥêļρ_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_Rate" translate="yes" xml:space="preserve">
+          <source>rate/review</source>
+          <target state="final" state-qualifier="mt-suggestion">[F5C32][!!_ŕãτé/ŕèνîęẁ_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_Rules" translate="yes" xml:space="preserve">
+          <source>rules</source>
+          <target state="final" state-qualifier="mt-suggestion">[8D9A4][!!_ѓùłęš_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_RulesDescription" translate="yes" xml:space="preserve">
+          <source>Download PDFs of the full versions of the Dominion Rules for each set.  The files are saved locally for quick access any time later.</source>
+          <target state="translated">[27AEF][!!_Ċòѓиûċòрíã_!!]</target>
+        </trans-unit>
+        <trans-unit id="About_Update" translate="yes" xml:space="preserve">
+          <source>update</source>
+          <target state="final" state-qualifier="mt-suggestion">[54A46][!!_úρðãτê_!!]</target>
+        </trans-unit>
+        <trans-unit id="Application_Settings" translate="yes" xml:space="preserve">
+          <source>settings</source>
+          <target state="final" state-qualifier="mt-suggestion">[31260][!!_şêťťìйģŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Application_Title" translate="yes" xml:space="preserve">
+          <source>Dominion Picker</source>
+          <target state="final" state-qualifier="mt-suggestion">[FC301][!!_Đòmìиîõй Þįćкêŕ_!!]</target>
+        </trans-unit>
+        <trans-unit id="BlackMarket_Title" translate="yes" xml:space="preserve">
+          <source>black market</source>
+          <target state="final" state-qualifier="mt-suggestion">[DEB11][!!_вľâčк мáŕќèτ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_BaneRequired" translate="yes" xml:space="preserve">
+          <source>bane for {0}</source>
+          <target state="final" state-qualifier="mt-suggestion">[DBAD0][!!_ъàйę ƒóŗ {0}_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_CurseRequired" translate="yes" xml:space="preserve">
+          <source>SHOULD NOT USE</source>
+          <target state="final" state-qualifier="mt-suggestion">[4F16E][!!_ŠĤÔÜĽĎ ŃÔŤ ÙŠÊ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_Events" translate="yes" xml:space="preserve">
+          <source>events/landmarks</source>
+          <target state="translated">[16950][!!_ęνęητš/ĺãήďмàřќš_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_KingdomCard" translate="yes" xml:space="preserve">
+          <source>kingdom cards</source>
+          <target state="final" state-qualifier="mt-suggestion">[A33C8][!!_кíиğďóm ĉãŗðŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_OtherRequired" translate="yes" xml:space="preserve">
+          <source>required by {0}</source>
+          <target state="final" state-qualifier="mt-suggestion">[6B393][!!_ѓèqµîŗèđ ъÿ {0}_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_SelectedDarkAges" translate="yes" xml:space="preserve">
+          <source>selected because you're using Dark Ages</source>
+          <target state="final" state-qualifier="mt-suggestion">[0F00B][!!_šèłêċτęð ьêĉáµŝę ŷôû'ŗę µšîήģ Ðâŗк Ãġéś_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardGroupType_SelectedProsperity" translate="yes" xml:space="preserve">
+          <source>selected because you're using Prosperity</source>
+          <target state="final" state-qualifier="mt-suggestion">[BD2C9][!!_śęļêčтèđ ъèčáûŝę ŷòû'ŗê µşîηģ Ρŗóŝрêŗįťў_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_NoPreference" translate="yes" xml:space="preserve">
+          <source>No Preference</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[298D8][!!_Ńô Рřêƒéřèйĉè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_NoPreference_Description" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_Prevent" translate="yes" xml:space="preserve">
+          <source>Prevent All</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[DCB20][!!_Þѓęνęйτ Àļł_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_PreventPlus2" translate="yes" xml:space="preserve">
+          <source>Prevent All +2</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[79473][!!_Рŗéνéит Âĺļ +2_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_PreventPlus2_Description" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_Prevent_Description" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_Require" translate="yes" xml:space="preserve">
+          <source>Require At Least One</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[5B102][!!_Ŕęqùîřê Ãτ Ĺęâšτ Óηè_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_RequirePlus2" translate="yes" xml:space="preserve">
+          <source>Require At Least One +2</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[0AB48][!!_Ŕêqµįѓé Áţ Ļèàşτ Õиé +2_!!]</target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_RequirePlus2_Description" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="CardRequirementOption_Require_Description" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="Config_CardData" translate="yes" xml:space="preserve">
+          <source>Card Details</source>
+          <target state="final" state-qualifier="mt-suggestion">[FF9A5][!!_Ćâѓď Đęтàìľş_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_CardDataDesc" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
+          <source>when to pick Events</source>
+          <target state="final" state-qualifier="mt-suggestion">[77A2E][!!_ẃĥèή ťó þîĉк Ęνęиťś_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_Language" translate="yes" xml:space="preserve">
+          <source>language</source>
+          <target state="final" state-qualifier="mt-suggestion">[8A9EA][!!_łãήĝùáġé_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_LanguageDescription" translate="yes" xml:space="preserve">
+          <source>Setting this will override the language used by Dominion Picker only and will not change the current system language.
+You must restart for this to take effect.</source>
+          <target state="final" state-qualifier="mt-suggestion">[16CC0][!!_Śęττįήĝ ţħįš ẃìļł óνêřѓìðę ţĥé ĺãйģúáĝę µšęð ъÿ Đòмîйîóи Þîĉĸéŗ òήłУ ãήď ẃíļľ иõт ċђâηģè ťĥê ċùŗřęήť şŷšτêm ļâηġúãğè.
+Ўòµ mµśτ řèşţâŗţ ƒòѓ ťħìś ţó ţâкę ęƒƒéċť._!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_LanguageOptions" translate="yes" xml:space="preserve">
+          <source>Language Options</source>
+          <target state="final" state-qualifier="mt-suggestion">[C56B2][!!_Ľàήģûãğê Òртíóηš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_OwnedSets" translate="yes" xml:space="preserve">
+          <source>sets that I own</source>
+          <target state="final" state-qualifier="mt-suggestion">[2F408][!!_ŝéťš тħàť Ì òẃη_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_OwnedSetsDescription" translate="yes" xml:space="preserve">
+          <source>Specify which sets you own and would like to be able to pick from.  Sets not included here will never be used during selection or for any additional reasons such as the Black Market deck.</source>
+          <target state="final" state-qualifier="mt-suggestion">[6DAA1][!!_Šρéċîƒÿ ẃнįċħ šęтŝ ŷõµ ôẃи ãиð ẃõùłð ļíĸè ţó Бè ãьĺé τô ρíċк ƒŕôm.  Śęťś йõт įηćļûđęď ћéŕè ẅíļł ηèνęŕ ьê µśęð ďúŗìηğ šęļèčτíóи ôѓ ƒòŗ ãηý ãđðìťíôήàļ řèãŝòиŝ şûćђ àş ťђê βľãćќ Μářќęţ ðêčќ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_PickerOptions" translate="yes" xml:space="preserve">
+          <source>Picker Options</source>
+          <target state="final" state-qualifier="mt-suggestion">[40E62][!!_Ρįćķèŕ Õþтîóήş_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_PlatinumColonyOption" translate="yes" xml:space="preserve">
+          <source>when to pick Platinum and Colony</source>
+          <target state="final" state-qualifier="mt-suggestion">[A6FCB][!!_ŵнéи ťò þíćк Рĺáťîйûm âиď Čòļôήÿ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_PlusActions" translate="yes" xml:space="preserve">
+          <source>Cards with +Action</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[F127A][!!_Ćãŕđś ẁîτĥ +Áčťîòή_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_PlusBuys" translate="yes" xml:space="preserve">
+          <source>Cards with +Buy</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[DDE3A][!!_Ćâŗðś ẃįťħ +ßûУ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_RulesText" translate="yes" xml:space="preserve">
+          <source>Rules Text</source>
+          <target state="final" state-qualifier="mt-suggestion">[3B6D4][!!_Ŕµľęş Ťè×τ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_RulesTextDesc" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="Config_SheltersOption" translate="yes" xml:space="preserve">
+          <source>when to pick Shelters or Estates</source>
+          <target state="final" state-qualifier="mt-suggestion">[B1332][!!_ẅћéή ţó þîċķ Śħęľтèѓš òř Èśтáтêŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_Title" translate="yes" xml:space="preserve">
+          <source>settings</source>
+          <target state="final" state-qualifier="mt-suggestion">[31260][!!_şêťťìйģŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_UI" translate="yes" xml:space="preserve">
+          <source>User Interface</source>
+          <target state="final" state-qualifier="mt-suggestion">[C9BCF][!!_Üşèř Įйтèřƒáċè_!!]</target>
+        </trans-unit>
+        <trans-unit id="Config_UIDesc" translate="yes" xml:space="preserve">
+          <source></source>
+          <target state="final" state-qualifier="mt-suggestion"></target>
+        </trans-unit>
+        <trans-unit id="Dominion_CoinToken" translate="yes" xml:space="preserve">
+          <source>Coin Token</source>
+          <target state="final" state-qualifier="mt-suggestion">[A0A74][!!_Ćõíή Ťóќéй_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_EmargoToken" translate="yes" xml:space="preserve">
+          <source>Emargo Token</source>
+          <target state="final" state-qualifier="mt-suggestion">[DD8CB][!!_Ęмáŕğõ Ţóķęи_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_IslandMat" translate="yes" xml:space="preserve">
+          <source>Island Mat</source>
+          <target state="final" state-qualifier="mt-suggestion">[C42B8][!!_Îşľãήð Мãţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_Mat" translate="yes" xml:space="preserve">
+          <source>Mat</source>
+          <target state="final" state-qualifier="mt-suggestion">[06F54][!!_Мâţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_NativeVillageMat" translate="yes" xml:space="preserve">
+          <source>Native Village Mat</source>
+          <target state="final" state-qualifier="mt-suggestion">[B7AA7][!!_Ņáтįνê Vìľļâğê Μàт_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_PirateMat" translate="yes" xml:space="preserve">
+          <source>Pirate Ship Mat</source>
+          <target state="final" state-qualifier="mt-suggestion">[8145E][!!_Ρįŕáтè Śћîρ Μâť_!!]</target>
+        </trans-unit>
+        <trans-unit id="Dominion_Token" translate="yes" xml:space="preserve">
+          <source>Token</source>
+          <target state="final" state-qualifier="mt-suggestion">[5A11C][!!_Ţôķèи_!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Always" translate="yes" xml:space="preserve">
+          <source>Always select Events</source>
+          <target state="final" state-qualifier="mt-suggestion">[0FD48][!!_Âľẃáýš ŝèłęĉť Êνèηтš_!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_AlwaysWithSet" translate="yes" xml:space="preserve">
+          <source>Always when using a set with Events</source>
+          <target state="final" state-qualifier="mt-suggestion">[E4056][!!_Ãļẅâÿś ŵђęй ûşįηġ à şéτ ẃìťђ Éνéηťŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_AlwaysWithSet_Description" translate="yes" xml:space="preserve">
+          <source>If you are using a set that contains Events, the result will always include two randomly selected Events.</source>
+          <target state="final" state-qualifier="mt-suggestion">[A8AC7][!!_Ìƒ ýóû ãѓę ûŝîηġ á šęť тĥáť ċòйтâìиś Êνêήţş, ťћè ѓèŝûłτ ẅíľł âľŵãŷŝ îиčļùðę ťẅõ ŗáйðôмľÿ śęłêĉτêð Êνęйťś._!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Always_Description" translate="yes" xml:space="preserve">
+          <source>The result will always include two randomly selected Events.</source>
+          <target state="final" state-qualifier="mt-suggestion">[CCBED][!!_Ťĥè řêşµľт ŵįľļ ãĺẅáÿş įήćĺûđê ťẃò ŕãйďóмĺÿ šèłèċтéđ Ęνêήтš._!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Never" translate="yes" xml:space="preserve">
+          <source>Never select events</source>
+          <target state="final" state-qualifier="mt-suggestion">[5E573][!!_Ñèνèŕ ŝéľèčţ éνêитš_!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Never_Description" translate="yes" xml:space="preserve">
+          <source>Never select any Events.</source>
+          <target state="final" state-qualifier="mt-suggestion">[CA7DF][!!_Ñéνêŗ šêľéĉт ãήý Êνéиţš._!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Randomly" translate="yes" xml:space="preserve">
+          <source>Randomly select </source>
+          <target state="final" state-qualifier="mt-suggestion">[3A715][!!_Ŗâиđómľÿ šêłèĉт _!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_RandomlyWithSet" translate="yes" xml:space="preserve">
+          <source>Randomly when using a set with Events</source>
+          <target state="final" state-qualifier="mt-suggestion">[88EF6][!!_Řãήđõмľў ẁĥêй ùŝìηġ á śêţ ŵįťн Êνéитŝ_!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_RandomlyWithSet_Description" translate="yes" xml:space="preserve">
+          <source>If you are using a set that contains Events, the result will include between zero and two randomly selected Events.</source>
+          <target state="final" state-qualifier="mt-suggestion">[1AB13][!!_Îƒ ÿóµ âŕé µşíйğ á şèτ ţħàт ĉóйťãíήŝ Ęνèήτŝ, ţħę ŗéśùļť ẃíłļ îйċĺúđé вèťŵèęή źèřò âήđ тẅõ ѓàйďômļŷ šęľęčτèď Ęνêήтš._!!]</target>
+        </trans-unit>
+        <trans-unit id="EventsOption_Randomly_Description" translate="yes" xml:space="preserve">
+          <source>The result will include between zero and two randomly selected Events.</source>
+          <target state="final" state-qualifier="mt-suggestion">[D6986][!!_Τнè ŗęśùļт ẁįĺł ìήĉľùđé ьéťẁéèи źèѓô ãηď τẁò ŕàήďòmľÿ šêłęĉτęð Êνęйťŝ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_Delete" translate="yes" xml:space="preserve">
+          <source>delete</source>
+          <target state="final" state-qualifier="mt-suggestion">[34217][!!_ðêľéťè_!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_Edit" translate="yes" xml:space="preserve">
+          <source>edit</source>
+          <target state="final" state-qualifier="mt-suggestion">[4FCEF][!!_êðîţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_NoSets" translate="yes" xml:space="preserve">
+          <source>No favorite sets saved yet. Try using one of the randomizers above to create one.</source>
+          <target state="final" state-qualifier="mt-suggestion">[8494F][!!_Ňò ƒãνóѓìτé šêтš śãνêð ÿèτ. Τѓÿ ûśįηğ ôиè ôƒ ţĥę ŕâиďôмíżéŕŝ àъõνę ţô ĉŕéãτè òηê._!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_NoSettings" translate="yes" xml:space="preserve">
+          <source>No favorite randomizers saved yet.  Check out the create page to add one.</source>
+          <target state="final" state-qualifier="mt-suggestion">[E05ED][!!_Ñô ƒáνôѓìţê ŗáйďõмìźęŕŝ šâνéď Уèт.  Ċђéċķ òúţ ťħé ĉŕèâτê ρâģé ťó áďð òηê._!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_Rename" translate="yes" xml:space="preserve">
+          <source>rename</source>
+          <target state="final" state-qualifier="mt-suggestion">[5FD47][!!_ѓéηàмę_!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_SetsDesc" translate="yes" xml:space="preserve">
+          <source>Enjoy a set? Save it so you can try it again!</source>
+          <target state="final" state-qualifier="mt-suggestion">[6486F][!!_Éйјòŷ à şêť? Šàνè įτ şô ŷòû ĉâи τѓý îτ ãģáìη!_!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_SetsTitle" translate="yes" xml:space="preserve">
+          <source>Card Sets</source>
+          <target state="final" state-qualifier="mt-suggestion">[F218C][!!_Čãŗđ Şêтś_!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_SettingsDesc" translate="yes" xml:space="preserve">
+          <source>Save your settings to quickly reuse them later.</source>
+          <target state="final" state-qualifier="mt-suggestion">[A6D16][!!_Ŝàνè Уôùř şéţтîήġš ţõ qùíčќĺŷ řêùŝę ţħêm ĺâтèŗ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Favorites_SettingsTitle" translate="yes" xml:space="preserve">
+          <source>Card Randomizers</source>
+          <target state="final" state-qualifier="mt-suggestion">[AC30B][!!_Ċàѓð Ŗàήðômįźèřś_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Rules" translate="yes" xml:space="preserve">
+          <source>rules</source>
+          <target state="final" state-qualifier="mt-suggestion">[8D9A4][!!_ѓùłęš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Set" translate="yes" xml:space="preserve">
+          <source>set</source>
+          <target state="final" state-qualifier="mt-suggestion">[B374A][!!_šęт_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Tips" translate="yes" xml:space="preserve">
+          <source>Swipe to view
+other cards</source>
+          <target state="final" state-qualifier="mt-suggestion">[F1FB2][!!_Ŝẅįþé тô νìèŵ
+õτнęѓ ĉâŕđš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Title" translate="yes" xml:space="preserve">
+          <source>card info</source>
+          <target state="final" state-qualifier="mt-suggestion">[C7BF0][!!_ćâŕď íήƒõ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Type" translate="yes" xml:space="preserve">
+          <source>type</source>
+          <target state="final" state-qualifier="mt-suggestion">[36F4F][!!_тУрê_!!]</target>
+        </trans-unit>
+        <trans-unit id="Info_Wiki" translate="yes" xml:space="preserve">
+          <source>strategy wiki</source>
+          <target state="final" state-qualifier="mt-suggestion">[E7C05][!!_ŝтŗáţêĝý ẁįķì_!!]</target>
+        </trans-unit>
+        <trans-unit id="Lookup_ResetFiltered" translate="yes" xml:space="preserve">
+          <source>Reset Filtered Cards</source>
+          <target state="final" state-qualifier="mt-suggestion">[2C80B][!!_Ŕêşęţ ₣íĺťèŗéď Čáŗðš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Lookup_SearchHint" translate="yes" xml:space="preserve">
+          <source>Filter by Name, Set, Type, Rules</source>
+          <target state="final" state-qualifier="mt-suggestion">[C28B1][!!_₣îľτèѓ ъУ Ñàмé, Şèт, Ťўþê, Ѓùłêś_!!]</target>
+        </trans-unit>
+        <trans-unit id="Lookup_ShowFiltered" translate="yes" xml:space="preserve">
+          <source>Show Filtered Cards</source>
+          <target state="final" state-qualifier="mt-suggestion">[9A041][!!_Šђôẁ ₣íłţêѓéð Ĉářďš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Lookup_Tips" translate="yes" xml:space="preserve">
+          <source>Checked cards will
+never be picked</source>
+          <target state="final" state-qualifier="mt-suggestion">[861A1][!!_Ċĥéĉĸęď ćářðŝ ẅìłļ
+ηêνęѓ ьę рìĉкéð_!!]</target>
+        </trans-unit>
+        <trans-unit id="Lookup_Title" translate="yes" xml:space="preserve">
+          <source>card list</source>
+          <target state="final" state-qualifier="mt-suggestion">[8CD55][!!_ċâŕđ ľíşţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_AddnOptions" translate="yes" xml:space="preserve">
+          <source>additional options</source>
+          <target state="final" state-qualifier="mt-suggestion">[9089E][!!_àđđìťíõиáł õртîòήš_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_Create" translate="yes" xml:space="preserve">
+          <source>create</source>
+          <target state="final" state-qualifier="mt-suggestion">[C1001][!!_ĉѓęâтé_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_Favorites" translate="yes" xml:space="preserve">
+          <source>favorites</source>
+          <target state="final" state-qualifier="mt-suggestion">[E3E92][!!_ƒàνòŗîтèş_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_GenerateButton" translate="yes" xml:space="preserve">
+          <source>Generate Set</source>
+          <target state="final" state-qualifier="mt-suggestion">[222FA][!!_Ĝèηèŕâтę Şéţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_Generating" translate="yes" xml:space="preserve">
+          <source>Generating card set...</source>
+          <target state="final" state-qualifier="mt-suggestion">[E1B13][!!_Ģęήęŗàţįήģ ćàŗđ ŝêť..._!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_Reset" translate="yes" xml:space="preserve">
+          <source>reset</source>
+          <target state="final" state-qualifier="mt-suggestion">[07E9A][!!_ѓęšèť_!!]</target>
+        </trans-unit>
+        <trans-unit id="MainPage_Save" translate="yes" xml:space="preserve">
+          <source>save...</source>
+          <target state="final" state-qualifier="mt-suggestion">[AD0DD][!!_śâνè..._!!]</target>
+        </trans-unit>
+        <trans-unit id="Menu_About" translate="yes" xml:space="preserve">
+          <source>Help/About</source>
+          <target state="final" state-qualifier="mt-suggestion">[3CC6A][!!_Ħéłþ/Âвõûť_!!]</target>
+        </trans-unit>
+        <trans-unit id="Menu_BlackMarket" translate="yes" xml:space="preserve">
+          <source>Black Market Deck</source>
+          <target state="final" state-qualifier="mt-suggestion">[6F73B][!!_Ъĺâċк Мâѓкéť Đèĉќ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Menu_CardLookup" translate="yes" xml:space="preserve">
+          <source>Card Lookup/Filter</source>
+          <target state="final" state-qualifier="mt-suggestion">[21554][!!_Ĉãŕđ Ĺõõĸµρ/₣ìłţêŗ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Menu_Settings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="final" state-qualifier="mt-suggestion">[8AE66][!!_Śéтťîηĝš_!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Always" translate="yes" xml:space="preserve">
+          <source>Always use them</source>
+          <target state="final" state-qualifier="mt-suggestion">[B2124][!!_Âłẁãўş úśê ťĥęm_!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_AlwaysWithProsperity" translate="yes" xml:space="preserve">
+          <source>Always when using Prosperity</source>
+          <target state="final" state-qualifier="mt-suggestion">[5B51E][!!_Âłẁãўš ẅђèи ûšìйġ Þŗõśρèѓìţý_!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_AlwaysWithProsperity_Description" translate="yes" xml:space="preserve">
+          <source>If the selected set of Kingdom cards includes any from Prosperity, then always include Platinum and Colony.</source>
+          <target state="final" state-qualifier="mt-suggestion">[039AA][!!_Įƒ ťħé śêļęĉţéď ŝęτ ôƒ Κíηģďõм ćàѓđš įηċłùďêš àиУ ƒŕõм Рřôŝþéѓìťў, ţнêή àłẃâÿś íήčľúđę Ρłâţîηûm áиđ ĈòłòйУ._!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Always_Description" translate="yes" xml:space="preserve">
+          <source>Always show Platinum and Colony in the list of required cards.</source>
+          <target state="final" state-qualifier="mt-suggestion">[9276D][!!_ÀĺẃáУŝ şнòẁ Рłàτîηûм àиď Ćòłôήŷ įή тнę łíśτ òƒ ѓèqûìѓéđ čâŕđś._!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Never" translate="yes" xml:space="preserve">
+          <source>Never use them</source>
+          <target state="final" state-qualifier="mt-suggestion">[B8DED][!!_Ňęνêѓ ùŝê ťĥèм_!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Never_Description" translate="yes" xml:space="preserve">
+          <source>Never show Platinum and Colony in the list of required cards.</source>
+          <target state="final" state-qualifier="mt-suggestion">[465CD][!!_Ňêνéѓ şĥòẃ Ρļâтíйùm àйđ ČõļóήУ ìή ťĥè łįśť òƒ řèqûîŗèď ćâŕđś._!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Randomly" translate="yes" xml:space="preserve">
+          <source>Randomly select</source>
+          <target state="final" state-qualifier="mt-suggestion">[16654][!!_Řáиđôмļý şęļêċť_!!]</target>
+        </trans-unit>
+        <trans-unit id="PlatinumColonyOption_Randomly_Description" translate="yes" xml:space="preserve">
+          <source>Using the Prosperity rules, randomly select a card from the set of Kingdom cards and if that card is from Prosperity, include Platinum/Colony.</source>
+          <target state="final" state-qualifier="mt-suggestion">[63CCA][!!_Ùşìйġ тђę Ρŕôšρèřįтŷ ŕùľęŝ, ŕãйđõmłў šèļêĉτ ã ćàřð ƒŕõm ţћê śêţ óƒ Кíηğđóм ćãŗďš àйð ìƒ τђãţ čâŗđ îş ƒѓòm Рřôŝрęřìţÿ, íйčľúđę Рľáτíиùм/Ĉõĺôиŷ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_ExtrasDesc" translate="yes" xml:space="preserve">
+          <source>additional cards, tokens, etc.</source>
+          <target state="final" state-qualifier="mt-suggestion">[3E6B7][!!_àđđîτîóйàľ ĉãŕðś, τõкéηş, éτċ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_Refresh" translate="yes" xml:space="preserve">
+          <source>refresh</source>
+          <target state="needs-review-translation" state-qualifier="mt-suggestion">[4968F][!!_řęƒѓèşћ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_Regenerate" translate="yes" xml:space="preserve">
+          <source>regenerate</source>
+          <target state="final" state-qualifier="mt-suggestion">[5D291][!!_ŗêğéηęřâτè_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_Save" translate="yes" xml:space="preserve">
+          <source>save...</source>
+          <target state="final" state-qualifier="mt-suggestion">[AD0DD][!!_śâνè..._!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_SortCost" translate="yes" xml:space="preserve">
+          <source>sort cost</source>
+          <target state="final" state-qualifier="mt-suggestion">[1FF67][!!_ŝôřт ćóŝт_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_SortName" translate="yes" xml:space="preserve">
+          <source>sort name</source>
+          <target state="final" state-qualifier="mt-suggestion">[63785][!!_šôřţ иàmè_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_SortSet" translate="yes" xml:space="preserve">
+          <source>sort set</source>
+          <target state="final" state-qualifier="mt-suggestion">[DD085][!!_ŝôŕт ŝêţ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_Tips" translate="yes" xml:space="preserve">
+          <source>Swipe to Replace
+Tap for Info</source>
+          <target state="final" state-qualifier="mt-suggestion">[49825][!!_Ŝẁîρę τõ Ŕèрļãċé
+Τáр ƒõŗ Íηƒõ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Results_Title" translate="yes" xml:space="preserve">
+          <source>results</source>
+          <target state="final" state-qualifier="mt-suggestion">[25D1A][!!_ŗęśúłťś_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_AddnOptions" translate="yes" xml:space="preserve">
+          <source>additional options</source>
+          <target state="final" state-qualifier="mt-suggestion">[9089E][!!_àđđìťíõиáł õртîòήš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_MinCards" translate="yes" xml:space="preserve">
+          <source>Minimum Cards Per Set:</source>
+          <target state="final" state-qualifier="mt-suggestion">[0D3B3][!!_Мìиìmúм Ċàѓďš Þéř Šęţ:_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_MinCardsDescription" translate="yes" xml:space="preserve">
+          <source>Minimum cards per set in result:</source>
+          <target state="final" state-qualifier="mt-suggestion">[0045B][!!_Μįйímûm ĉãŕðś þêŕ ŝêţ įη ѓęšµľт:_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_PickPlatinumColony" translate="yes" xml:space="preserve">
+          <source>Pick if Platinum and Colony are used</source>
+          <target state="final" state-qualifier="mt-suggestion">[13B6C][!!_Þįĉĸ įƒ Ρļàţíηúm áйđ Ćõļòήŷ âřé ûŝéð_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_PickShelterOrEstate" translate="yes" xml:space="preserve">
+          <source>Pick if Shelters or Estates are used</source>
+          <target state="final" state-qualifier="mt-suggestion">[25DA6][!!_Þìĉĸ ìƒ Şнęļтęŕš óř Ęšťâтęŝ áѓê µšęđ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_PlusActions" translate="yes" xml:space="preserve">
+          <source>Plus Actions:</source>
+          <target state="final" state-qualifier="mt-suggestion">[8FC0B][!!_Þĺûś Ãćтįòиś:_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_PlusBuys" translate="yes" xml:space="preserve">
+          <source>Plus Buys:</source>
+          <target state="final" state-qualifier="mt-suggestion">[AE5BF][!!_Рľûş Ьúýş:_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_RequireDefense" translate="yes" xml:space="preserve">
+          <source>If there's an attack, require a defense</source>
+          <target state="final" state-qualifier="mt-suggestion">[42358][!!_Ìƒ ťĥèŗè'š àи àтτâčĸ, ŕęqµįŗê à đèƒêйŝę_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_RequireTrash" translate="yes" xml:space="preserve">
+          <source>Require a card that allows you to trash</source>
+          <target state="final" state-qualifier="mt-suggestion">[06E79][!!_Ѓèqûìŕé à ĉáŕď тћâτ áłļòẁŝ ýôú ţó ťŕãšħ_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_ShowBasicCards" translate="yes" xml:space="preserve">
+          <source>Show Basic Cards</source>
+          <target state="final" state-qualifier="mt-suggestion">[70238][!!_Šĥôẁ Вàŝîĉ Ĉãŗđš_!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_ShowBasicCards_Description" translate="yes" xml:space="preserve">
+          <source>Lists the required number of all of the basic cards based on the number of players selected in addition to the starting hand makeup.</source>
+          <target state="final" state-qualifier="mt-suggestion">[B4FA6][!!_Ľîśťŝ ţħé ŕèqúìѓèď ήúmъęѓ òƒ àļľ õƒ тĥé ьáŝįč ĉáŗðš вãşêð ôи тħé иúмБêѓ ôƒ рłàУęřš śęĺèćτêð íή âðďíţíôи ţó тħè śţàŗтíήġ ħàйď мâќéûþ._!!]</target>
+        </trans-unit>
+        <trans-unit id="Settings_ShowExtras" translate="yes" xml:space="preserve">
+          <source>Show Required Mats and Tokens</source>
+          <target state="final" state-qualifier="mt-suggestion">[91C29][!!_Şнõŵ Řêqûìřèď Μãтš âйđ Тòкêήš_!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Always" translate="yes" xml:space="preserve">
+          <source>Always use them</source>
+          <target state="final" state-qualifier="mt-suggestion">[B2124][!!_Âłẁãўş úśê ťĥęm_!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_AlwaysWithDarkAges" translate="yes" xml:space="preserve">
+          <source>Always when using Dark Ages</source>
+          <target state="final" state-qualifier="mt-suggestion">[C2D77][!!_Áļŵáўś ŵћéй µśįήģ Ďâŕķ Âģèš_!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_AlwaysWithDarkAges_Description" translate="yes" xml:space="preserve">
+          <source>If the selected set of Kingdom cards includes any from Dark Ages, then always use Shelters instead of Estates.</source>
+          <target state="final" state-qualifier="mt-suggestion">[A0A5E][!!_Ìƒ тћé šéĺèĉţęď şèτ õƒ Ќįηĝďõм ćáŗďś įйčłùďèš ãήў ƒřõм Ďáŗĸ Àġêŝ, ťĥéй àļẃáŷš ûšê Śђęĺţęѓŝ įήşτéãď õƒ Éśťáтęš._!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Always_Description" translate="yes" xml:space="preserve">
+          <source>Always use Shelters instead of Estates in your starting hand.</source>
+          <target state="final" state-qualifier="mt-suggestion">[AC812][!!_Àļẅâŷŝ úšé Şђêļτèѓś ìήŝτéãð òƒ Êšţàτęś ìη ýóùŕ šţàŗťíиğ нáиď._!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Never" translate="yes" xml:space="preserve">
+          <source>Never use them</source>
+          <target state="final" state-qualifier="mt-suggestion">[B8DED][!!_Ňęνêѓ ùŝê ťĥèм_!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Never_Description" translate="yes" xml:space="preserve">
+          <source>Never use Shelters instead of Estates.</source>
+          <target state="final" state-qualifier="mt-suggestion">[75595][!!_Ņéνéѓ µšè Şђêľтêřş įηşтèàð õƒ Èśţãţêş._!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Randomly" translate="yes" xml:space="preserve">
+          <source>Randomly select</source>
+          <target state="final" state-qualifier="mt-suggestion">[16654][!!_Řáиđôмļý şęļêċť_!!]</target>
+        </trans-unit>
+        <trans-unit id="SheltersOption_Randomly_Description" translate="yes" xml:space="preserve">
+          <source>Using the Dark Ages rules, randomly select a card from the set of Kingdom cards and if that card is from Dark Ages, use Shelters instead of Estates.</source>
+          <target state="final" state-qualifier="mt-suggestion">[131DF][!!_Úšìиĝ τĥê Ďàѓķ Àġêş ѓùłéś, ŗãйđôмłУ ŝéļèċţ à ĉâŗð ƒŕóm ţħę şèт òƒ Κîйġðõм čãѓđş àиď îƒ τнâţ ĉàřð íş ƒѓóм Ďãŕĸ Áğêş, ùśę Śĥèľťêŕš įиšτèâð óƒ Èšτâτêš._!!]</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

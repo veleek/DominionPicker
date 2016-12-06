@@ -99,7 +99,7 @@ namespace Ben.Data
 #if NETFX_CORE
                     ResourceContext context = new ResourceContext();
                     context.Languages = new string[] { ResolveCulture(culture).ToString() };
-                    ResourceMap map = ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
+                    ResourceMap map = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
                     ResourceCandidate localizedCandidate = map.GetValue(localizedValueKey, context);
                     
                     if(localizedCandidate == null)

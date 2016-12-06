@@ -163,6 +163,7 @@ namespace Ben.Utilities
 #if NETFX_CORE
                 await (new Windows.UI.Popups.MessageDialog(msg, "Serialize Exception")).ShowAsync();
 #else
+                await System.Threading.Tasks.Task.Yield();
                 System.Windows.MessageBox.Show(msg);
 #endif
             }
