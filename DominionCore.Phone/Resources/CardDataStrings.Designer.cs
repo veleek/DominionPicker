@@ -22,7 +22,7 @@ namespace Ben.Dominion.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class CardDataStrings {
+    public class CardDataStrings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Ben.Dominion.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("DominionCorePhone.Resources.CardDataStrings", typeof(CardDataStrings).Assembly);
@@ -51,7 +51,7 @@ namespace Ben.Dominion.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
-        internal static string Application_LocalizedCardsFileName {
+        public static string Application_LocalizedCardsFileName {
             get {
                 return ResourceManager.GetString("Application_LocalizedCardsFileName", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Adventures.
         /// </summary>
-        internal static string CardSet_Adventures {
+        public static string CardSet_Adventures {
             get {
                 return ResourceManager.GetString("CardSet_Adventures", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Alchemy.
         /// </summary>
-        internal static string CardSet_Alchemy {
+        public static string CardSet_Alchemy {
             get {
                 return ResourceManager.GetString("CardSet_Alchemy", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Base.
         /// </summary>
-        internal static string CardSet_Base {
+        public static string CardSet_Base {
             get {
                 return ResourceManager.GetString("CardSet_Base", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cornucopia.
         /// </summary>
-        internal static string CardSet_Cornucopia {
+        public static string CardSet_Cornucopia {
             get {
                 return ResourceManager.GetString("CardSet_Cornucopia", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Dark Ages.
         /// </summary>
-        internal static string CardSet_DarkAges {
+        public static string CardSet_DarkAges {
             get {
                 return ResourceManager.GetString("CardSet_DarkAges", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Empires.
         /// </summary>
-        internal static string CardSet_Empires {
+        public static string CardSet_Empires {
             get {
                 return ResourceManager.GetString("CardSet_Empires", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Guilds.
         /// </summary>
-        internal static string CardSet_Guilds {
+        public static string CardSet_Guilds {
             get {
                 return ResourceManager.GetString("CardSet_Guilds", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Hinterlands.
         /// </summary>
-        internal static string CardSet_Hinterlands {
+        public static string CardSet_Hinterlands {
             get {
                 return ResourceManager.GetString("CardSet_Hinterlands", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Intrigue.
         /// </summary>
-        internal static string CardSet_Intrigue {
+        public static string CardSet_Intrigue {
             get {
                 return ResourceManager.GetString("CardSet_Intrigue", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Promo.
         /// </summary>
-        internal static string CardSet_Promo {
+        public static string CardSet_Promo {
             get {
                 return ResourceManager.GetString("CardSet_Promo", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Prosperity.
         /// </summary>
-        internal static string CardSet_Prosperity {
+        public static string CardSet_Prosperity {
             get {
                 return ResourceManager.GetString("CardSet_Prosperity", resourceCulture);
             }
@@ -171,7 +171,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Seaside.
         /// </summary>
-        internal static string CardSet_Seaside {
+        public static string CardSet_Seaside {
             get {
                 return ResourceManager.GetString("CardSet_Seaside", resourceCulture);
             }
@@ -180,7 +180,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Action.
         /// </summary>
-        internal static string CardType_Action {
+        public static string CardType_Action {
             get {
                 return ResourceManager.GetString("CardType_Action", resourceCulture);
             }
@@ -189,7 +189,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Attack.
         /// </summary>
-        internal static string CardType_Attack {
+        public static string CardType_Attack {
             get {
                 return ResourceManager.GetString("CardType_Attack", resourceCulture);
             }
@@ -198,7 +198,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Curse.
         /// </summary>
-        internal static string CardType_Curse {
+        public static string CardType_Curse {
             get {
                 return ResourceManager.GetString("CardType_Curse", resourceCulture);
             }
@@ -207,7 +207,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Duration.
         /// </summary>
-        internal static string CardType_Duration {
+        public static string CardType_Duration {
             get {
                 return ResourceManager.GetString("CardType_Duration", resourceCulture);
             }
@@ -216,7 +216,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Event.
         /// </summary>
-        internal static string CardType_Event {
+        public static string CardType_Event {
             get {
                 return ResourceManager.GetString("CardType_Event", resourceCulture);
             }
@@ -225,7 +225,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Knight.
         /// </summary>
-        internal static string CardType_Knight {
+        public static string CardType_Knight {
             get {
                 return ResourceManager.GetString("CardType_Knight", resourceCulture);
             }
@@ -234,7 +234,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Landmark.
         /// </summary>
-        internal static string CardType_Landmark {
+        public static string CardType_Landmark {
             get {
                 return ResourceManager.GetString("CardType_Landmark", resourceCulture);
             }
@@ -243,7 +243,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Looter.
         /// </summary>
-        internal static string CardType_Looter {
+        public static string CardType_Looter {
             get {
                 return ResourceManager.GetString("CardType_Looter", resourceCulture);
             }
@@ -252,7 +252,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Prize.
         /// </summary>
-        internal static string CardType_Prize {
+        public static string CardType_Prize {
             get {
                 return ResourceManager.GetString("CardType_Prize", resourceCulture);
             }
@@ -261,7 +261,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reaction.
         /// </summary>
-        internal static string CardType_Reaction {
+        public static string CardType_Reaction {
             get {
                 return ResourceManager.GetString("CardType_Reaction", resourceCulture);
             }
@@ -270,7 +270,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Reserve.
         /// </summary>
-        internal static string CardType_Reserve {
+        public static string CardType_Reserve {
             get {
                 return ResourceManager.GetString("CardType_Reserve", resourceCulture);
             }
@@ -279,7 +279,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ruins.
         /// </summary>
-        internal static string CardType_Ruins {
+        public static string CardType_Ruins {
             get {
                 return ResourceManager.GetString("CardType_Ruins", resourceCulture);
             }
@@ -288,7 +288,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Shelter.
         /// </summary>
-        internal static string CardType_Shelter {
+        public static string CardType_Shelter {
             get {
                 return ResourceManager.GetString("CardType_Shelter", resourceCulture);
             }
@@ -297,7 +297,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Traveller.
         /// </summary>
-        internal static string CardType_Traveller {
+        public static string CardType_Traveller {
             get {
                 return ResourceManager.GetString("CardType_Traveller", resourceCulture);
             }
@@ -306,7 +306,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Treasure.
         /// </summary>
-        internal static string CardType_Treasure {
+        public static string CardType_Treasure {
             get {
                 return ResourceManager.GetString("CardType_Treasure", resourceCulture);
             }
@@ -315,7 +315,7 @@ namespace Ben.Dominion.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Victory.
         /// </summary>
-        internal static string CardType_Victory {
+        public static string CardType_Victory {
             get {
                 return ResourceManager.GetString("CardType_Victory", resourceCulture);
             }

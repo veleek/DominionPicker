@@ -6,8 +6,7 @@ namespace Ben.Dominion.Resources
     {
         public static string GetString(string key)
         {
-            //return resourceLoader.GetString(key);
-            throw new System.NotImplementedException();
+            return resourceLoader.GetString(key);
         }
 
         public static CultureInfo Culture { get; set; }

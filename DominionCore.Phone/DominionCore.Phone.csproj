@@ -89,9 +89,12 @@
     <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\DominionCore\**\*.*" >
+    <Compile Include="..\DominionCore\**\*.cs">
       <Link>%(RecursiveDir)%(FileName)</Link>
     </Compile>
+    <Content Include="..\DominionCore\**\*.ttf;..\DominionCore\**\*.txt;..\DominionCore\**\*.xml;">
+      <Link>%(RecursiveDir)%(FileName)</Link>
+    </Content>
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,7 +126,7 @@
     <EmbeddedResource Include="Resources\CardDataStrings.pl.resx" />
     <EmbeddedResource Include="Resources\CardDataStrings.qps-ploc.resx" />
     <EmbeddedResource Include="Resources\CardDataStrings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CardDataStrings.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
     </EmbeddedResource>
@@ -137,7 +140,7 @@
     <EmbeddedResource Include="Resources\Strings.pl.resx" />
     <EmbeddedResource Include="Resources\Strings.qps-ploc.resx" />
     <EmbeddedResource Include="Resources\Strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
     </EmbeddedResource>
