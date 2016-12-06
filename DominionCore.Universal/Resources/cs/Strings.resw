@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Config_CardDataDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="Config_RulesTextDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="Config_UIDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>Žeton mince</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>Žeton embarga</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>Tabulka ostrova</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>Tabulka</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>Tabulka domorodé vesnice</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>Tabulka pirátské lodi</value>
+  </data>
+  <data name="Dominion_Token" xml:space="preserve">
+    <value>Žeton</value>
+  </data>
+  <data name="CardRequirementOption_NoPreference_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="CardRequirementOption_PreventPlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="CardRequirementOption_Prevent_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="CardRequirementOption_RequirePlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+  <data name="CardRequirementOption_Require_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.cs.xml</value>
+  </data>
+</root>

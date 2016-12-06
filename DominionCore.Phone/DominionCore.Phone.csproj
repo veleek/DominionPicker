@@ -89,15 +89,9 @@
     <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\DominionCore\**\*.cs" Exclude="..\DominionCore\**\TemporaryGeneratedFile_*.cs;..\DominionCore\Resources\**\*.cs">
+    <Compile Include="..\DominionCore\**\*.*" >
       <Link>%(RecursiveDir)%(FileName)</Link>
     </Compile>
-    <!-- <PRIResource Include="..\DominionCore\Resources\en\*.resw"> -->
-    <!-- <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace> -->
-    <!-- <Generator>ReswFileCodeGenerator</Generator> -->
-    <!-- <LastGenOutput>Strings.cs</LastGenOutput> -->
-    <!-- <Link>Resources\en\%(FileName)</Link> -->
-    <!-- </PRIResource> -->
     <Compile Include="Resources\CardDataStrings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
