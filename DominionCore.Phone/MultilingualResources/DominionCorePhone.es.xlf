@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-  <file datatype="xml" source-language="en" target-language="cs" original="DOMINIONCOREPHONE/RESOURCES/CARDDATASTRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="de" target-language="es" original="DOMINIONCORE.PHONE/RESOURCES/CARDDATASTRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="DOMINIONCOREPHONE/RESOURCES/CARDDATASTRINGS.RESX" datatype="resx">
+      <group id="DOMINIONCORE.PHONE/RESOURCES/CARDDATASTRINGS.RESX" datatype="resx">
         <trans-unit id="Application_LocalizedCardsFileName" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated">./Resources/DominionPickerCards.cs.xml</target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="CardSet_Adventures" translate="yes" xml:space="preserve">
           <source>Adventures</source>
@@ -20,11 +20,11 @@
         </trans-unit>
         <trans-unit id="CardSet_Base" translate="yes" xml:space="preserve">
           <source>Base</source>
-          <target state="translated">Základní sada</target>
+          <target state="new">Base</target>
         </trans-unit>
         <trans-unit id="CardSet_Cornucopia" translate="yes" xml:space="preserve">
           <source>Cornucopia</source>
-          <target state="translated">Roh hojnosti</target>
+          <target state="new">Cornucopia</target>
         </trans-unit>
         <trans-unit id="CardSet_DarkAges" translate="yes" xml:space="preserve">
           <source>Dark Ages</source>
@@ -40,15 +40,15 @@
         </trans-unit>
         <trans-unit id="CardSet_Hinterlands" translate="yes" xml:space="preserve">
           <source>Hinterlands</source>
-          <target state="translated">Vzdálené kraje</target>
+          <target state="new">Hinterlands</target>
         </trans-unit>
         <trans-unit id="CardSet_Intrigue" translate="yes" xml:space="preserve">
           <source>Intrigue</source>
-          <target state="translated">Intriky</target>
+          <target state="new">Intrigue</target>
         </trans-unit>
         <trans-unit id="CardSet_Promo" translate="yes" xml:space="preserve">
           <source>Promo</source>
-          <target state="translated">Promo karty</target>
+          <target state="new">Promo</target>
         </trans-unit>
         <trans-unit id="CardSet_Prosperity" translate="yes" xml:space="preserve">
           <source>Prosperity</source>
@@ -56,15 +56,15 @@
         </trans-unit>
         <trans-unit id="CardSet_Seaside" translate="yes" xml:space="preserve">
           <source>Seaside</source>
-          <target state="translated">Pobřeží</target>
+          <target state="new">Seaside</target>
         </trans-unit>
         <trans-unit id="CardType_Action" translate="yes" xml:space="preserve">
           <source>Action</source>
-          <target state="needs-review-translation">Action</target>
+          <target state="new">Action</target>
         </trans-unit>
         <trans-unit id="CardType_Attack" translate="yes" xml:space="preserve">
           <source>Attack</source>
-          <target state="translated">Attaque</target>
+          <target state="new">Attack</target>
         </trans-unit>
         <trans-unit id="CardType_Curse" translate="yes" xml:space="preserve">
           <source>Curse</source>
@@ -72,7 +72,7 @@
         </trans-unit>
         <trans-unit id="CardType_Duration" translate="yes" xml:space="preserve">
           <source>Duration</source>
-          <target state="translated">Durée</target>
+          <target state="new">Duration</target>
         </trans-unit>
         <trans-unit id="CardType_Event" translate="yes" xml:space="preserve">
           <source>Event</source>
@@ -96,7 +96,7 @@
         </trans-unit>
         <trans-unit id="CardType_Reaction" translate="yes" xml:space="preserve">
           <source>Reaction</source>
-          <target state="translated">Réaction</target>
+          <target state="new">Reaction</target>
         </trans-unit>
         <trans-unit id="CardType_Reserve" translate="yes" xml:space="preserve">
           <source>Reserve</source>
@@ -116,21 +116,21 @@
         </trans-unit>
         <trans-unit id="CardType_Treasure" translate="yes" xml:space="preserve">
           <source>Treasure</source>
-          <target state="translated">Trésor</target>
+          <target state="new">Treasure</target>
         </trans-unit>
         <trans-unit id="CardType_Victory" translate="yes" xml:space="preserve">
           <source>Victory</source>
-          <target state="translated">Victoire</target>
+          <target state="new">Victory</target>
         </trans-unit>
       </group>
     </body>
   </file>
-  <file datatype="xml" source-language="en" target-language="cs" original="DOMINIONCOREPHONE/RESOURCES/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+  <file datatype="xml" source-language="de" target-language="es" original="DOMINIONCORE.PHONE/RESOURCES/STRINGS.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1795.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="DOMINIONCOREPHONE/RESOURCES/STRINGS.RESX" datatype="resx">
+      <group id="DOMINIONCORE.PHONE/RESOURCES/STRINGS.RESX" datatype="resx">
         <trans-unit id="About_About" translate="yes" xml:space="preserve">
           <source>about</source>
           <target state="new">about</target>
@@ -205,7 +205,7 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_NoPreference_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent" translate="yes" xml:space="preserve">
           <source>Prevent All</source>
@@ -217,11 +217,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_PreventPlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require" translate="yes" xml:space="preserve">
           <source>Require At Least One</source>
@@ -233,11 +233,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_RequirePlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="Config_CardData" translate="yes" xml:space="preserve">
           <source>Card Details</source>
@@ -245,7 +245,7 @@
         </trans-unit>
         <trans-unit id="Config_CardDataDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
           <source>when to pick Events</source>
@@ -295,7 +295,7 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_RulesTextDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="Config_SheltersOption" translate="yes" xml:space="preserve">
           <source>when to pick Shelters or Estates</source>
@@ -311,35 +311,35 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_UIDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="translated"></target>
+          <target state="new"></target>
         </trans-unit>
         <trans-unit id="Dominion_CoinToken" translate="yes" xml:space="preserve">
           <source>Coin Token</source>
-          <target state="translated">Žeton mince</target>
+          <target state="new">Coin Token</target>
         </trans-unit>
         <trans-unit id="Dominion_EmargoToken" translate="yes" xml:space="preserve">
           <source>Emargo Token</source>
-          <target state="translated">Žeton embarga</target>
+          <target state="new">Emargo Token</target>
         </trans-unit>
         <trans-unit id="Dominion_IslandMat" translate="yes" xml:space="preserve">
           <source>Island Mat</source>
-          <target state="translated">Tabulka ostrova</target>
+          <target state="new">Island Mat</target>
         </trans-unit>
         <trans-unit id="Dominion_Mat" translate="yes" xml:space="preserve">
           <source>Mat</source>
-          <target state="translated">Tabulka</target>
+          <target state="new">Mat</target>
         </trans-unit>
         <trans-unit id="Dominion_NativeVillageMat" translate="yes" xml:space="preserve">
           <source>Native Village Mat</source>
-          <target state="translated">Tabulka domorodé vesnice</target>
+          <target state="new">Native Village Mat</target>
         </trans-unit>
         <trans-unit id="Dominion_PirateMat" translate="yes" xml:space="preserve">
           <source>Pirate Ship Mat</source>
-          <target state="translated">Tabulka pirátské lodi</target>
+          <target state="new">Pirate Ship Mat</target>
         </trans-unit>
         <trans-unit id="Dominion_Token" translate="yes" xml:space="preserve">
           <source>Token</source>
-          <target state="translated">Žeton</target>
+          <target state="new">Token</target>
         </trans-unit>
         <trans-unit id="EventsOption_Always" translate="yes" xml:space="preserve">
           <source>Always select Events</source>

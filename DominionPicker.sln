@@ -35,7 +35,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Universal", "Universal", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Phone", "Phone", "{57C1B593-7258-4DEF-BF40-186D87C2A81A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionCorePhone", "DominionCorePhone\DominionCorePhone.csproj", "{9B525983-13E7-490D-B271-7A93DF5147AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionCore.Phone", "DominionCore.Phone\DominionCore.Phone.csproj", "{9B525983-13E7-490D-B271-7A93DF5147AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
