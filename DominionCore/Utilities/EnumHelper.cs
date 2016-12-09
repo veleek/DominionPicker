@@ -5,7 +5,6 @@ using System.Reflection;
 
 namespace Ben.Data
 {
-
     class EnumHelper
     {
         private static readonly IDictionary<Type, object[]> Cache = new Dictionary<Type, object[]>();

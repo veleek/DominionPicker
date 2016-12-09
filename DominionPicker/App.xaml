@@ -5,6 +5,9 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:data="clr-namespace:Ben.Data"
     xmlns:local="clr-namespace:Ben.Dominion"
+    xmlns:dominionconverters="clr-namespace:Ben.Dominion.Converters;assembly=DominionCorePhone"
+    xmlns:converters="clr-namespace:Ben.Data.Converters;assembly=DominionCorePhone"
+    xmlns:resources="clr-namespace:Ben.Dominion.Resources;assembly=DominionCorePhone"
     Startup="App_OnStartup">
 
     <Application.Resources>
@@ -14,9 +17,9 @@
         <data:DebugConverter x:Key="DebugConverter" />
         <data:ImageConverter x:Key="ImageConverter" />
         <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-        <data:StringsLocalizeConverter x:Key="StringsLocalizer"/>
-        <data:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
-        <data:EnumValuesConverter x:Key="EnumValuesConverter" />
+        <dominionconverters:StringsLocalizeConverter x:Key="StringsLocalizer"/>
+        <dominionconverters:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
+        <converters:EnumValuesConverter x:Key="EnumValuesConverter" />
 
         <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
         <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
@@ -36,7 +39,7 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
         </Style>
 
-        <local:LocalizedResources x:Key="LocalizedResources" />
+        <resources:LocalizedResources x:Key="LocalizedResources" />
 
         <Style x:Key="PhoneButtonBase" TargetType="ButtonBase">
             <Setter Property="Background" Value="Transparent"/>

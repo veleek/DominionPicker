@@ -81,11 +81,21 @@ namespace Ben.Dominion
         {
             get
             {
-                if (allCards == null)
+                try
                 {
-                    allCards = new ReadOnlyCollection<Card>((Load().Result).OrderBy(c => c.Set).ThenBy(c => c.Name).ToList());
+                    if (allCards == null)
+                    {
+                        allCards = new ReadOnlyCollection<Card>((Load().Result).OrderBy(c => c.Set).ThenBy(c => c.Name).ToList());
+                    }
+                    return allCards;
                 }
-                return allCards;
+                catch (AggregateException ae)
+                {
+                    Exception ie = ae.InnerException;
+                    string em = ie.ToString();
+                    System.Diagnostics.Debug.WriteLine(ie.ToString());
+                    throw;
+                }
             }
         }
 
@@ -170,7 +180,7 @@ namespace Ben.Dominion
 
         private static async Task<List<Card>> LoadCardsFromFileAsync(string fileName)
         {
-            using (var stream = await Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(fileName))
+            using (var stream = await FileUtility.OpenApplicationStreamAsync(fileName))
             {
                 return GenericXmlSerializer.Deserialize<List<Card>>(stream);
             }

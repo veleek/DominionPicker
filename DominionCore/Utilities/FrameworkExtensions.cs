@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 #if NETFX_CORE
+using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 #else
@@ -113,7 +114,7 @@ namespace Ben.Utilities
 
     public static class SystemExtensions
     {
-        public static Double GetMagnitude(this Windows.Foundation.Point p)
+        public static Double GetMagnitude(this Point p)
         {
             return Math.Sqrt(p.X * p.X + p.Y * p.Y);
         }

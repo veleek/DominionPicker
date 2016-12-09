@@ -48,6 +48,8 @@ namespace Ben.Dominion.Views
     {
         public static void RegisterAll()
         {
+            NavigationServiceHelper.RegisterAll<PickerView>();
+
             Type type = typeof (PickerView);
             var views = Enum.GetValues(type).Cast<PickerView>();
 
@@ -59,7 +61,9 @@ namespace Ben.Dominion.Views
 
                 if (description != null)
                 {
-                    NavigationServiceHelper<PickerView>.RegisterView(view, description.Description);
+                    
+                    //throw new NotImplementedException();
+                    ////NavigationServiceHelper<PickerView>.RegisterView(view, description.Description.GetType());
                 }
             }
         }

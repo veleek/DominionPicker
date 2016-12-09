@@ -117,8 +117,7 @@ namespace Ben.Dominion.ViewModels
         {
             try
             {
-                StorageFolder packageLocation = Package.Current.InstalledLocation;
-                using (Stream stream = await packageLocation.SafeOpenStreamForReadAsync(@"DominionCore\Resources\DefaultPickerView.xml"))
+                using (Stream stream = await FileUtility.OpenApplicationStreamAsync(@"DominionCore\Resources\DefaultPickerView.xml"))
                 {
                     return GenericXmlSerializer.Deserialize<MainViewModel>(stream);
                 }
@@ -177,64 +176,61 @@ namespace Ben.Dominion.ViewModels
         {
             MainViewModel view = null;
             DateTime start = DateTime.UtcNow;
+
             try
             {
-                AppLog.Instance.Log("Loading picker view...");
-                if (UseIsolatedStorage)
+                try
                 {
-                    if (view == null)
+                    AppLog.Instance.Log("Loading picker view...");
+                    if (UseIsolatedStorage)
                     {
-                        StorageFolder folder = ApplicationData.Current.LocalFolder;
-                        IStorageFile file = await folder.TryGetItemAsync(PickerStateFileName) as IStorageFile;
-
-                        if (file != null)
+                        if (view == null)
                         {
-                            using (Stream stream = await file.OpenStreamForReadAsync())
+                            Stream stream = await FileUtility.OpenUserStreamAsync(PickerStateFileName);
+                            if (stream != null)
                             {
-                                StreamReader reader = new StreamReader(stream);
-                                var content = reader.ReadToEnd();
-                                stream.Position = 0;
-                                XmlSerializer serializer = new XmlSerializer(typeof(MainViewModel));
-                                view = serializer.Deserialize(stream) as MainViewModel;
-                                //view = GenericXmlSerializer.Deserialize<MainViewModel>(stream);
-                                //view = GenericContractSerializer.Deserialize<MainViewModel>(stream);
+                                using (stream)
+                                {
+                                    StreamReader reader = new StreamReader(stream);
+                                    var content = reader.ReadToEnd();
+                                    stream.Position = 0;
+                                    XmlSerializer serializer = new XmlSerializer(typeof(MainViewModel));
+                                    view = serializer.Deserialize(stream) as MainViewModel;
+                                }
                             }
                         }
                     }
                 }
+                catch (IsolatedStorageException ise)
+                {
+                    AppLog.Instance.Error("IsolatedStorageException while loading Picker view model.");
+                    AppLog.Instance.Error(ise.ToString());
+                    // Just ignore the exception
+                }
+                catch (SerializationException se)
+                {
+                    AppLog.Instance.Error("Unable to deserialize saved state");
+                    AppLog.Instance.Error(se.ToString());
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    AppLog.Instance.Error("MainViewModel was likely empty");
+                    AppLog.Instance.Error(ioe.ToString());
+                }
+
+                if (view == null)
+                {
+                    AppLog.Instance.Log("Using default picker view model");
+                    view = await LoadDefault();
+                }
             }
-            catch (IsolatedStorageException ise)
+            catch (Exception e)
             {
-                AppLog.Instance.Error("IsolatedStorageException while loading Picker view model.");
-                AppLog.Instance.Error(ise.ToString());
-                // Just ignore the exception
-            }
-            catch (SerializationException se)
-            {
-                AppLog.Instance.Error("Unable to deserialize saved state");
-                AppLog.Instance.Error(se.ToString());
-            }
-            catch (InvalidOperationException ioe)
-            {
-                AppLog.Instance.Error("MainViewModel was likely empty");
-                AppLog.Instance.Error(ioe.ToString());
-            }
-            catch (Exception)
-            {
+                AppLog.Instance.Log("Failed to load view state.");
+                AppLog.Instance.Error(e.ToString());
                 throw;
             }
 
-            if (view == null)
-            {
-                AppLog.Instance.Log("Using default picker view model");
-                view = await LoadDefault();
-            }
-            else
-            {
-                // TODO: This is a bit of a hack to enable 'updating' to a newer version of the 
-                // settings which will include all of sets so they don't have to reset their settings
-                //throw new NotImplementedException();
-            }
             TimeSpan elapsedTime = DateTime.UtcNow - start;
             AppLog.Instance.Log(String.Format("Loaded view: {0}ms", elapsedTime.TotalMilliseconds));
             return view;

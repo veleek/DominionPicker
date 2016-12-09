@@ -57,12 +57,12 @@ namespace Ben.Dominion
             this.ClearFilter();
         }
 
-        private void ClearFilter()
+        private async void ClearFilter()
         {
             if (this.SearchTextBox.Text == String.Empty)
             {
                 // Manually filter on empty
-                this.ViewModel.FilterCardsList(String.Empty);
+                await this.ViewModel.FilterCardsListAsync(String.Empty);
             }
             else
             {
@@ -75,9 +75,9 @@ namespace Ben.Dominion
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.ViewModel.FilterCardsList(this.SearchTextBox.Text);
+            await this.ViewModel.FilterCardsListAsync(this.SearchTextBox.Text);
         }
 
         /// <summary>
@@ -108,9 +108,9 @@ namespace Ben.Dominion
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ShowFilteredCards_Click(object sender, EventArgs e)
+        private async void ShowFilteredCards_Click(object sender, EventArgs e)
         {
-            this.ViewModel.FilterCardsList(CardLookupViewModel.FilteredCardsSeachFilter);
+            await this.ViewModel.FilterCardsListAsync(CardLookupViewModel.FilteredCardsSeachFilter);
         }
 
         private void ResetFilteredCards_Click(object sender, EventArgs e)

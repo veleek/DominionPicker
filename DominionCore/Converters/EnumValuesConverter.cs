@@ -7,7 +7,7 @@ using System.Windows.Data;
 using ConverterCulture = System.Globalization.CultureInfo;
 #endif
 
-namespace Ben.Data
+namespace Ben.Data.Converters
 {
     /// <summary> 
     /// Takes an enum object and returns a collection of valid values for that object

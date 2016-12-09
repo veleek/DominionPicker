@@ -241,7 +241,7 @@ namespace Ben.Dominion
             if (properties.Size != 0)
             {
                 TaskCompletionSource<object> stateUpdated = new TaskCompletionSource<object>();
-                DispatcherHelper.RunAsync(() =>
+                Task dispatcherTask = DispatcherHelper.RunAsync(() =>
                 {
                     this.State = TransferRequestState.Complete;
                     stateUpdated.SetResult(null);

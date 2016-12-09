@@ -9,13 +9,13 @@ using System.Windows.Navigation;
 using Ben.Dominion.Resources;
 using Ben.Dominion.Utilities;
 using Ben.Dominion.Views;
+using Ben.Dominion.ViewModels;
 using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 using GoogleAnalytics;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using Ben.Dominion.Models;
 
 namespace Ben.Dominion
 {
@@ -206,14 +206,6 @@ namespace Ben.Dominion
             // If this is a new app version and we haven't done any one-time upgrade stuff
             if (App.Instance.IsNewVersion && appLaunchCount > 1 && !this.updatePopupShown)
             {
-                // This will pickup any old settings and merge them in with the new settings model
-                PickerState.MergeWithNewState();
-
-                // Move some settings from the picker settings into the config
-                ConfigurationModel.Instance.PickPlatinumColony = MainViewModel.Instance.Settings.PickPlatinumColony ? PlatinumColonyOption.Randomly : PlatinumColonyOption.Never;
-                ConfigurationModel.Instance.PickSheltersOrEstates = MainViewModel.Instance.Settings.PickShelterOrEstate ? SheltersOption.Randomly : SheltersOption.Never;
-                ConfigurationModel.Instance.ShowExtras = MainViewModel.Instance.Settings.ShowExtras;
-
                 this.UpdatePopup.Visibility = Visibility.Visible;
             }
 
@@ -281,7 +273,7 @@ namespace Ben.Dominion
             }
         }
 
-        private void ResetFavorites_Click(object sender, EventArgs e)
+        private async void ResetFavorites_Click(object sender, EventArgs e)
         {
             var res =
                 MessageBox.Show(
@@ -291,7 +283,9 @@ namespace Ben.Dominion
             if (res == MessageBoxResult.OK)
             {
                 // Load up the defaults and clear out what we have 
-                MainViewModel.Instance.Favorites = MainViewModel.LoadDefault().Favorites;
+
+                var defaultViewModel = await MainViewModel.LoadDefault();
+                MainViewModel.Instance.Favorites = defaultViewModel.Favorites;
                 this.FavoritesScrollViewer.ScrollToVerticalOffset(0);
             }
         }

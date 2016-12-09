@@ -190,15 +190,4 @@ namespace Ben.Utilities
             Navigate(viewType, parameter);
         }
     }
-
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-    public class ViewTypeAttribute : Attribute
-    {
-        public ViewTypeAttribute(Type viewType)
-        {
-            this.ViewType = viewType;
-        }
-
-        public Type ViewType { get; private set; }
-    }
 }

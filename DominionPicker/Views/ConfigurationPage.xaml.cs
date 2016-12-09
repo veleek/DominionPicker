@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Ben.Dominion.Models;
+using Ben.Dominion.ViewModels;
 using Microsoft.Phone.Controls;
 
 namespace Ben.Dominion

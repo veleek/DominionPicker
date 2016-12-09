@@ -273,9 +273,9 @@
       <Project>{673410fc-ff55-49c9-9345-37c6423ea716}</Project>
       <Name>Ben.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DominionCore\DominionCore.csproj">
-      <Project>{3b6524d8-ead8-465c-8d85-501b6cade5b6}</Project>
-      <Name>DominionCore</Name>
+    <ProjectReference Include="..\DominionCore.Universal\DominionCore.Universal.csproj">
+      <Project>{235d26d2-5f7b-4d6f-96bd-92c9d029138f}</Project>
+      <Name>DominionCore.Universal</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

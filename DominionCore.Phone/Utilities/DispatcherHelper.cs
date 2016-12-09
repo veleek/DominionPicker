@@ -1,4 +1,4 @@
-﻿﻿// ****************************************************************************
+﻿// ****************************************************************************
 // <copyright file="DispatcherHelper.cs" company="GalaSoft Laurent Bugnion">
 // Copyright © GalaSoft Laurent Bugnion 2009-2013
 // </copyright>
@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Threading;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace GalaSoft.MvvmLight.Threading
 {
@@ -37,7 +38,7 @@ namespace GalaSoft.MvvmLight.Threading
 
         /// <summary>
         /// Executes an action on the UI thread. If this method is called
-        /// from the UI thread, the action is executed immendiately. If the
+        /// from the UI thread, the action is executed immediately. If the
         /// method is called from another thread, the action will be enqueued
         /// on the UI thread's dispatcher and executed asynchronously.
         /// <para>For additional operations on the UI thread, you can get a
@@ -46,15 +47,19 @@ namespace GalaSoft.MvvmLight.Threading
         /// </summary>
         /// <param name="action">The action that will be executed on the UI
         /// thread.</param>
-        public static void CheckBeginInvokeOnUI(Action action)
+        public static Task CheckBeginInvokeOnUI(Action action)
         {
+            
             if (UIDispatcher.CheckAccess())
             {
+                // If we're already on the UI thread just invoke it immediately.
                 action();
+                return Task.FromResult(true);
             }
             else
             {
-                UIDispatcher.BeginInvoke(action);
+                // Otherwise run it async.
+                return RunAsync(action);
             }
         }
 
@@ -62,9 +67,17 @@ namespace GalaSoft.MvvmLight.Threading
         /// Invokes an action asynchronously on the UI thread.
         /// </summary>
         /// <param name="action">The action that must be executed.</param>
-        public static DispatcherOperation RunAsync(Action action)
+        public static Task RunAsync(Action action)
         {
-            return UIDispatcher.BeginInvoke(action);
+            TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
+
+            UIDispatcher.BeginInvoke(() =>
+            {
+                action();
+                tcs.SetResult(true);
+            });
+
+            return tcs.Task;
         }
 
         /// <summary>

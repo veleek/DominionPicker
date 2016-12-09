@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5c47433a-c4cd-45aa-89fe-11627273cbee</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DominionCore</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BrushAlphaConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\Dominion\CardDataStringsLocalizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\Dominion\StringsLocalizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\EnumValuesConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\LocalizeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\StringFormatConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TypeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\UriSourceConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ValueWhenConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\XamlConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Card.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardListExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Cards.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardSelectionEnums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Picker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ResultSortOrder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\LocalizedResources.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AppLog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\AsyncLazy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\EnumHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\FileUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\FrameworkExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\GenericSerializer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Grouping.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ILocalizable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\IsolatedStorageExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localized.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localizer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\NavigationServiceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyPropertyChangedBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\StorageExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewTypeAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Utilities\XamlHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BlackMarketViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CardLookupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ConfigurationModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\Favorites.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FavoritesViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ListOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PickerResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SetOption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Changes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DefaultPickerView.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.cs.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.de.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.es.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.fi.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.fr.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.it.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.nl.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.pl.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\DominionPickerCards.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Fonts\ANTQUAB.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Fonts\OptimusPrincepsSemiBold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

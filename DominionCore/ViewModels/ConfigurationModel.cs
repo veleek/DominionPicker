@@ -270,6 +270,8 @@ namespace Ben.Dominion.ViewModels
             //return Boolean.Parse(settingValue);
         }
 
+
+#if NETFX_CORE
         private TValue GetAppSetting<TValue>([CallerMemberName]string key = null, TValue defaultValue = default(TValue))
         {
             return ApplicationData.Current.LocalSettings.TryGetOrDefault("Application_" + key, defaultValue);
@@ -285,6 +287,29 @@ namespace Ben.Dominion.ViewModels
 
             return updated;
         }
+#else
+        private TValue GetAppSetting<TValue>([CallerMemberName]string key = null, TValue defaultValue = default(TValue))
+        {
+            
+            return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_" + key, defaultValue);
+        }
+
+        private bool SetAppSetting<TValue>(TValue value, [CallerMemberName]string key = null)
+        {
+            TValue current = (TValue)IsolatedStorageSettings.ApplicationSettings["Application_" + key];
+
+            if (Equals(current, value)) {
+                return false;
+            }
+
+            IsolatedStorageSettings.ApplicationSettings["Application_" + key] = value;
+            this.OnPropertyChanged(key);
+
+            return true;
+        }
+#endif
+
+        
 
         private static ConfigurationModel Load()
         {

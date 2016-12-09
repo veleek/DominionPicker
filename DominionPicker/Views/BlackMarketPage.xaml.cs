@@ -5,6 +5,7 @@ using Ben.Utilities;
 using GalaSoft.MvvmLight.Threading;
 using Microsoft.Phone.Controls;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {

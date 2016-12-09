@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Navigation;
 using Windows.Phone.Speech.VoiceCommands;
-using Ben.Dominion.Models;
 using Ben.Dominion.Views;
 using Ben.Utilities;
 using BugSense;
@@ -15,6 +14,7 @@ using GoogleAnalytics;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
+using Ben.Dominion.ViewModels;
 
 namespace Ben.Dominion
 {
