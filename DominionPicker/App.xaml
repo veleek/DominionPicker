@@ -14,12 +14,12 @@
         <data:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <data:StringConverter x:Key="StringConverter" />
         <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
-        <data:DebugConverter x:Key="DebugConverter" />
         <data:ImageConverter x:Key="ImageConverter" />
         <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
         <dominionconverters:StringsLocalizeConverter x:Key="StringsLocalizer"/>
         <dominionconverters:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
         <converters:EnumValuesConverter x:Key="EnumValuesConverter" />
+        <converters:DebugConverter x:Key="DebugConverter" />
 
         <FontFamily x:Key="BookAntiquaBold">\Resources\ANTQUAB.TTF#Book Antiqua</FontFamily>
         <FontFamily x:Key="OptimusPrincepsSemiBold">\Resources\OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>

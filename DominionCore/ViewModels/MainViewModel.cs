@@ -117,7 +117,7 @@ namespace Ben.Dominion.ViewModels
         {
             try
             {
-                using (Stream stream = await FileUtility.OpenApplicationStreamAsync(@"DominionCore\Resources\DefaultPickerView.xml"))
+                using (Stream stream = await FileUtility.OpenApplicationStreamAsync(@"\DominionCore.Universal\Resources\DefaultPickerView.xml"))
                 {
                     return GenericXmlSerializer.Deserialize<MainViewModel>(stream);
                 }

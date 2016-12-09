@@ -45,7 +45,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\IsolatedStorageExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localized.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Localizer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\NavigationServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\NotifyPropertyChangedBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\StorageExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\ViewTypeAttribute.cs" />

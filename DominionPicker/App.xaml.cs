@@ -181,7 +181,7 @@ namespace Ben.Dominion
 
             // Make sure to initialize the Navigation Service
             NavigationServiceHelper.Initialize(this.RootFrame);
-            PickerViews.RegisterAll();
+            NavigationServiceHelper.RegisterAll<PickerView>();
 
             //AdManager.Initialize(AdApplicationId, "10016484", "10016485", "10016486", "10016482");
 

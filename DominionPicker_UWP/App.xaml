@@ -11,6 +11,8 @@
     <converters:TypeConverter x:Key="TypeConverter" />
     <converters:BrushAlphaConverter x:Key="BrushAlphaConverter" />
     <converters:ColorAlphaConverter x:Key="ColorAlphaConverter" />
+    <converters:DebugConverter x:Key="DebugConverter" />
+    <converters:EnumValuesConverter x:Key="EnumValuesConverter" />
 
     <dominionConverters:StringsLocalizeConverter x:Key="StringsLocalizer" />
     <dominionConverters:CardDataLocalizeConverter x:Key="CardDataLocalizer" />
@@ -19,10 +21,10 @@
     <data:StringConverter x:Key="StringConverter" />
     <data:IsValidToBooleanConverter x:Key="IsValidToBooleanConverter" />
     <data:IsValidToVisibilityConverter x:Key="IsValidToVisibilityConverter" />
-    <data:DebugConverter x:Key="DebugConverter" />
+    
     <data:ImageConverter x:Key="ImageConverter" />
     <data:ColorToBrushConverter x:Key="ColorToBrushConverter" />
-    <data:EnumValuesConverter x:Key="EnumValuesConverter" />
+    
 
     <FontFamily x:Key="BookAntiquaBold">ms-appx:///DominionCore/Resources/Fonts/ANTQUAB.TTF#Book Antiqua</FontFamily>
     <FontFamily x:Key="OptimusPrincepsSemiBold">ms-appx:///DominionCore/Resources/Fonts/OptimusPrincepsSemiBold.ttf#OptimusPrincepsSemiBold</FontFamily>
