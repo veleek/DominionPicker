@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cards", "Cards", "{B15C7027
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ben.Controls", "DominionControls\Ben.Controls.csproj", "{673410FC-FF55-49C9-9345-37C6423EA716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPicker_UWP", "DominionPicker_UWP\DominionPicker_UWP.csproj", "{5809A10A-BC48-4A6D-A6FA-6BA52AC91385}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPicker.Universal", "DominionPicker.Universal\DominionPicker.Universal.csproj", "{5809A10A-BC48-4A6D-A6FA-6BA52AC91385}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DominionPickerTest", "DominionPickerTest\DominionPickerTest.csproj", "{98B477CA-7833-45BB-83A5-8F8E0C5944AA}"
 EndProject
