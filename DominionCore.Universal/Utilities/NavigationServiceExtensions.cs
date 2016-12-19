@@ -112,8 +112,7 @@ namespace Ben.Utilities
             IsNavigating = true;
             try
             {
-                throw new NotImplementedException();
-                //frame.Navigate(pageType, parameter);
+                frame.Navigate(pageType, parameter);
             }
             catch (InvalidOperationException ioe)
             {

@@ -12,4 +12,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="CardSet_Base" xml:space="preserve">
+    <value>Zestaw podstawowy</value>
+  </data>
+  <data name="CardSet_Cornucopia" xml:space="preserve">
+    <value>Róg Obfitości</value>
+  </data>
+  <data name="CardSet_Intrigue" xml:space="preserve">
+    <value>Intryga</value>
+  </data>
+  <data name="CardSet_Promo" xml:space="preserve">
+    <value>Karty promocyjne</value>
+  </data>
+  <data name="CardType_Action" xml:space="preserve">
+    <value>Akcja</value>
+  </data>
+  <data name="CardType_Attack" xml:space="preserve">
+    <value>Atak</value>
+  </data>
+  <data name="CardType_Reaction" xml:space="preserve">
+    <value>Reakcja</value>
+  </data>
+  <data name="CardType_Treasure" xml:space="preserve">
+    <value>Skarb</value>
+  </data>
+  <data name="CardType_Victory" xml:space="preserve">
+    <value>Zwycięstwo</value>
+  </data>
 </root>

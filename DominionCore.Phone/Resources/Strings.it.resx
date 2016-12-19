@@ -12,4 +12,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CardRequirementOption_NoPreference_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="CardRequirementOption_PreventPlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="CardRequirementOption_Prevent_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="CardRequirementOption_RequirePlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="CardRequirementOption_Require_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="Config_CardDataDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="Config_RulesTextDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="Config_UIDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.it.xml</value>
+  </data>
+  <data name="Dominion_CoinToken" xml:space="preserve">
+    <value>Segnalino Moneta</value>
+  </data>
+  <data name="Dominion_EmargoToken" xml:space="preserve">
+    <value>Segnalino Embargo</value>
+  </data>
+  <data name="Dominion_IslandMat" xml:space="preserve">
+    <value>Tassello Isola</value>
+  </data>
+  <data name="Dominion_Mat" xml:space="preserve">
+    <value>Tassello</value>
+  </data>
+  <data name="Dominion_NativeVillageMat" xml:space="preserve">
+    <value>Tassello Villaggio Indigeno</value>
+  </data>
+  <data name="Dominion_PirateMat" xml:space="preserve">
+    <value>Tassello Nave Pirata</value>
+  </data>
+  <data name="Dominion_Token" xml:space="preserve">
+    <value>Segnalino</value>
+  </data>
 </root>

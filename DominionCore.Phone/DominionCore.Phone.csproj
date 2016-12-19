@@ -101,6 +101,7 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Utilities\DispatcherHelper.cs" />
+    <Compile Include="Utilities\FileUtility.cs" />
     <Compile Include="Utilities\NavigationServiceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,7 @@
       <group id="DOMINIONCORE.PHONE/RESOURCES/CARDDATASTRINGS.RESX" datatype="resx">
         <trans-unit id="Application_LocalizedCardsFileName" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="CardSet_Adventures" translate="yes" xml:space="preserve">
           <source>Adventures</source>
@@ -20,11 +20,11 @@
         </trans-unit>
         <trans-unit id="CardSet_Base" translate="yes" xml:space="preserve">
           <source>Base</source>
-          <target state="new">Base</target>
+          <target state="translated">Zestaw podstawowy</target>
         </trans-unit>
         <trans-unit id="CardSet_Cornucopia" translate="yes" xml:space="preserve">
           <source>Cornucopia</source>
-          <target state="new">Cornucopia</target>
+          <target state="translated">Róg Obfitości</target>
         </trans-unit>
         <trans-unit id="CardSet_DarkAges" translate="yes" xml:space="preserve">
           <source>Dark Ages</source>
@@ -44,11 +44,11 @@
         </trans-unit>
         <trans-unit id="CardSet_Intrigue" translate="yes" xml:space="preserve">
           <source>Intrigue</source>
-          <target state="new">Intrigue</target>
+          <target state="translated">Intryga</target>
         </trans-unit>
         <trans-unit id="CardSet_Promo" translate="yes" xml:space="preserve">
           <source>Promo</source>
-          <target state="new">Promo</target>
+          <target state="translated">Karty promocyjne</target>
         </trans-unit>
         <trans-unit id="CardSet_Prosperity" translate="yes" xml:space="preserve">
           <source>Prosperity</source>
@@ -60,11 +60,11 @@
         </trans-unit>
         <trans-unit id="CardType_Action" translate="yes" xml:space="preserve">
           <source>Action</source>
-          <target state="new">Action</target>
+          <target state="translated">Akcja</target>
         </trans-unit>
         <trans-unit id="CardType_Attack" translate="yes" xml:space="preserve">
           <source>Attack</source>
-          <target state="new">Attack</target>
+          <target state="translated">Atak</target>
         </trans-unit>
         <trans-unit id="CardType_Curse" translate="yes" xml:space="preserve">
           <source>Curse</source>
@@ -96,7 +96,7 @@
         </trans-unit>
         <trans-unit id="CardType_Reaction" translate="yes" xml:space="preserve">
           <source>Reaction</source>
-          <target state="new">Reaction</target>
+          <target state="translated">Reakcja</target>
         </trans-unit>
         <trans-unit id="CardType_Reserve" translate="yes" xml:space="preserve">
           <source>Reserve</source>
@@ -116,11 +116,11 @@
         </trans-unit>
         <trans-unit id="CardType_Treasure" translate="yes" xml:space="preserve">
           <source>Treasure</source>
-          <target state="new">Treasure</target>
+          <target state="translated">Skarb</target>
         </trans-unit>
         <trans-unit id="CardType_Victory" translate="yes" xml:space="preserve">
           <source>Victory</source>
-          <target state="new">Victory</target>
+          <target state="translated">Zwycięstwo</target>
         </trans-unit>
       </group>
     </body>
@@ -205,7 +205,7 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_NoPreference_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent" translate="yes" xml:space="preserve">
           <source>Prevent All</source>
@@ -217,11 +217,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_PreventPlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require" translate="yes" xml:space="preserve">
           <source>Require At Least One</source>
@@ -233,11 +233,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_RequirePlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="Config_CardData" translate="yes" xml:space="preserve">
           <source>Card Details</source>
@@ -245,7 +245,7 @@
         </trans-unit>
         <trans-unit id="Config_CardDataDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
           <source>when to pick Events</source>
@@ -295,7 +295,7 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_RulesTextDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="Config_SheltersOption" translate="yes" xml:space="preserve">
           <source>when to pick Shelters or Estates</source>
@@ -311,7 +311,7 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_UIDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="final">./Resources/DominionPickerCards.pl.xml</target>
         </trans-unit>
         <trans-unit id="Dominion_CoinToken" translate="yes" xml:space="preserve">
           <source>Coin Token</source>

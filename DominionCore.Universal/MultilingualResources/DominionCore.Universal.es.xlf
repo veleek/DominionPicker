@@ -20,7 +20,7 @@
         </trans-unit>
         <trans-unit id="CardSet_Base" translate="yes" xml:space="preserve">
           <source>Base</source>
-          <target state="translated">B?sico</target>
+          <target state="translated">Básico</target>
         </trans-unit>
         <trans-unit id="CardSet_Cornucopia" translate="yes" xml:space="preserve">
           <source>Cornucopia</source>

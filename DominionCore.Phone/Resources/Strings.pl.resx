@@ -12,4 +12,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CardRequirementOption_NoPreference_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="CardRequirementOption_PreventPlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="CardRequirementOption_Prevent_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="CardRequirementOption_RequirePlus2_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="CardRequirementOption_Require_Description" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="Config_CardDataDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="Config_RulesTextDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
+  <data name="Config_UIDesc" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.pl.xml</value>
+  </data>
 </root>

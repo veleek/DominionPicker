@@ -37,7 +37,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\AppLog.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\AsyncLazy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\EnumHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Utilities\FileUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\FrameworkExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\GenericSerializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Utilities\Grouping.cs" />

@@ -296,7 +296,8 @@ namespace Ben.Dominion.ViewModels
 
         private bool SetAppSetting<TValue>(TValue value, [CallerMemberName]string key = null)
         {
-            TValue current = (TValue)IsolatedStorageSettings.ApplicationSettings["Application_" + key];
+            TValue current;
+            IsolatedStorageSettings.ApplicationSettings.TryGetValue("Application_" + key, out current);
 
             if (Equals(current, value)) {
                 return false;

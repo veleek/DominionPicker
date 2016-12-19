@@ -10,8 +10,14 @@ namespace Ben.Data
     public static class Localized
     {
 #if NETFX_CORE
-        public static Localizer Strings = new Localizer("DominionCore/Strings", () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("Strings"), () => Dominion.Resources.Strings.Culture);
-        public static Localizer CardData = new Localizer("DominionCore/CardDataStrings", () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("CardDataStrings"), () => CardDataStrings.Culture);
+        public static Localizer Strings = new Localizer(
+            "DominionCore.Universal/Strings", 
+            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("Strings"), 
+            () => Dominion.Resources.Strings.Culture);
+        public static Localizer CardData = new Localizer(
+            "DominionCore.Universal/CardDataStrings", 
+            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("CardDataStrings"), 
+            () => CardDataStrings.Culture);
 #else
         public static Localizer Strings = new Localizer(
             string.Empty,

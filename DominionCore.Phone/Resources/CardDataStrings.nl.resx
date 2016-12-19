@@ -12,4 +12,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Application_LocalizedCardsFileName" xml:space="preserve">
+    <value>./Resources/DominionPickerCards.nl.xml</value>
+  </data>
+  <data name="CardSet_Adventures" xml:space="preserve">
+    <value>Avonturen</value>
+  </data>
+  <data name="CardSet_Alchemy" xml:space="preserve">
+    <value>Alchemisten</value>
+  </data>
+  <data name="CardSet_Base" xml:space="preserve">
+    <value>Basisspel</value>
+  </data>
+  <data name="CardSet_DarkAges" xml:space="preserve">
+    <value>De Donkere Middeleeuwen</value>
+  </data>
+  <data name="CardSet_Guilds" xml:space="preserve">
+    <value>De Gilden</value>
+  </data>
+  <data name="CardSet_Hinterlands" xml:space="preserve">
+    <value>Het Achterland</value>
+  </data>
+  <data name="CardSet_Intrigue" xml:space="preserve">
+    <value>Intrige</value>
+  </data>
+  <data name="CardSet_Promo" xml:space="preserve">
+    <value>Promotie</value>
+  </data>
+  <data name="CardSet_Prosperity" xml:space="preserve">
+    <value>Welvaart</value>
+  </data>
+  <data name="CardSet_Seaside" xml:space="preserve">
+    <value>Hijs de Zeilen</value>
+  </data>
+  <data name="CardType_Action" xml:space="preserve">
+    <value>Actie</value>
+  </data>
+  <data name="CardType_Attack" xml:space="preserve">
+    <value>Aanval</value>
+  </data>
+  <data name="CardType_Duration" xml:space="preserve">
+    <value>Duurzaam</value>
+  </data>
+  <data name="CardType_Reaction" xml:space="preserve">
+    <value>Reactie</value>
+  </data>
+  <data name="CardType_Treasure" xml:space="preserve">
+    <value>Geld</value>
+  </data>
+  <data name="CardType_Victory" xml:space="preserve">
+    <value>Overwinning</value>
+  </data>
 </root>

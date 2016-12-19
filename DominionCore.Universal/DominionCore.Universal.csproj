@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="Resources\en\Strings.Extensions.cs" />
     <Compile Include="Utilities\DispatcherHelper.cs" />
+    <Compile Include="Utilities\FileUtility.cs" />
     <Compile Include="Utilities\NavigationServiceExtensions.cs" />
     <EmbeddedResource Include="Properties\DominionCore.Universal.rd.xml" />
   </ItemGroup>

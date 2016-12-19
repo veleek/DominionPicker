@@ -8,7 +8,7 @@
       <group id="DOMINIONCORE.PHONE/RESOURCES/CARDDATASTRINGS.RESX" datatype="resx">
         <trans-unit id="Application_LocalizedCardsFileName" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="CardSet_Adventures" translate="yes" xml:space="preserve">
           <source>Adventures</source>
@@ -16,11 +16,11 @@
         </trans-unit>
         <trans-unit id="CardSet_Alchemy" translate="yes" xml:space="preserve">
           <source>Alchemy</source>
-          <target state="new">Alchemy</target>
+          <target state="translated">Alchemia</target>
         </trans-unit>
         <trans-unit id="CardSet_Base" translate="yes" xml:space="preserve">
           <source>Base</source>
-          <target state="new">Base</target>
+          <target state="translated">Set Base</target>
         </trans-unit>
         <trans-unit id="CardSet_Cornucopia" translate="yes" xml:space="preserve">
           <source>Cornucopia</source>
@@ -44,7 +44,7 @@
         </trans-unit>
         <trans-unit id="CardSet_Intrigue" translate="yes" xml:space="preserve">
           <source>Intrigue</source>
-          <target state="new">Intrigue</target>
+          <target state="translated">Intrigo</target>
         </trans-unit>
         <trans-unit id="CardSet_Promo" translate="yes" xml:space="preserve">
           <source>Promo</source>
@@ -52,7 +52,7 @@
         </trans-unit>
         <trans-unit id="CardSet_Prosperity" translate="yes" xml:space="preserve">
           <source>Prosperity</source>
-          <target state="new">Prosperity</target>
+          <target state="translated">Prosperità</target>
         </trans-unit>
         <trans-unit id="CardSet_Seaside" translate="yes" xml:space="preserve">
           <source>Seaside</source>
@@ -60,11 +60,11 @@
         </trans-unit>
         <trans-unit id="CardType_Action" translate="yes" xml:space="preserve">
           <source>Action</source>
-          <target state="new">Action</target>
+          <target state="translated">Azione</target>
         </trans-unit>
         <trans-unit id="CardType_Attack" translate="yes" xml:space="preserve">
           <source>Attack</source>
-          <target state="new">Attack</target>
+          <target state="translated">Attacco</target>
         </trans-unit>
         <trans-unit id="CardType_Curse" translate="yes" xml:space="preserve">
           <source>Curse</source>
@@ -72,7 +72,7 @@
         </trans-unit>
         <trans-unit id="CardType_Duration" translate="yes" xml:space="preserve">
           <source>Duration</source>
-          <target state="new">Duration</target>
+          <target state="translated">Durata</target>
         </trans-unit>
         <trans-unit id="CardType_Event" translate="yes" xml:space="preserve">
           <source>Event</source>
@@ -96,7 +96,7 @@
         </trans-unit>
         <trans-unit id="CardType_Reaction" translate="yes" xml:space="preserve">
           <source>Reaction</source>
-          <target state="new">Reaction</target>
+          <target state="translated">Reazione</target>
         </trans-unit>
         <trans-unit id="CardType_Reserve" translate="yes" xml:space="preserve">
           <source>Reserve</source>
@@ -116,11 +116,11 @@
         </trans-unit>
         <trans-unit id="CardType_Treasure" translate="yes" xml:space="preserve">
           <source>Treasure</source>
-          <target state="new">Treasure</target>
+          <target state="translated">Tesoro</target>
         </trans-unit>
         <trans-unit id="CardType_Victory" translate="yes" xml:space="preserve">
           <source>Victory</source>
-          <target state="new">Victory</target>
+          <target state="translated">Vittoria</target>
         </trans-unit>
       </group>
     </body>
@@ -205,7 +205,7 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_NoPreference_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent" translate="yes" xml:space="preserve">
           <source>Prevent All</source>
@@ -217,11 +217,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_PreventPlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Prevent_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require" translate="yes" xml:space="preserve">
           <source>Require At Least One</source>
@@ -233,11 +233,11 @@
         </trans-unit>
         <trans-unit id="CardRequirementOption_RequirePlus2_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="CardRequirementOption_Require_Description" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="Config_CardData" translate="yes" xml:space="preserve">
           <source>Card Details</source>
@@ -245,7 +245,7 @@
         </trans-unit>
         <trans-unit id="Config_CardDataDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="Config_EventsOption" translate="yes" xml:space="preserve">
           <source>when to pick Events</source>
@@ -295,7 +295,7 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_RulesTextDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="Config_SheltersOption" translate="yes" xml:space="preserve">
           <source>when to pick Shelters or Estates</source>
@@ -311,35 +311,35 @@ You must restart for this to take effect.</target>
         </trans-unit>
         <trans-unit id="Config_UIDesc" translate="yes" xml:space="preserve">
           <source></source>
-          <target state="new"></target>
+          <target state="translated">./Resources/DominionPickerCards.it.xml</target>
         </trans-unit>
         <trans-unit id="Dominion_CoinToken" translate="yes" xml:space="preserve">
           <source>Coin Token</source>
-          <target state="new">Coin Token</target>
+          <target state="translated">Segnalino Moneta</target>
         </trans-unit>
         <trans-unit id="Dominion_EmargoToken" translate="yes" xml:space="preserve">
           <source>Emargo Token</source>
-          <target state="new">Emargo Token</target>
+          <target state="translated">Segnalino Embargo</target>
         </trans-unit>
         <trans-unit id="Dominion_IslandMat" translate="yes" xml:space="preserve">
           <source>Island Mat</source>
-          <target state="new">Island Mat</target>
+          <target state="translated">Tassello Isola</target>
         </trans-unit>
         <trans-unit id="Dominion_Mat" translate="yes" xml:space="preserve">
           <source>Mat</source>
-          <target state="new">Mat</target>
+          <target state="translated">Tassello</target>
         </trans-unit>
         <trans-unit id="Dominion_NativeVillageMat" translate="yes" xml:space="preserve">
           <source>Native Village Mat</source>
-          <target state="new">Native Village Mat</target>
+          <target state="translated">Tassello Villaggio Indigeno</target>
         </trans-unit>
         <trans-unit id="Dominion_PirateMat" translate="yes" xml:space="preserve">
           <source>Pirate Ship Mat</source>
-          <target state="new">Pirate Ship Mat</target>
+          <target state="translated">Tassello Nave Pirata</target>
         </trans-unit>
         <trans-unit id="Dominion_Token" translate="yes" xml:space="preserve">
           <source>Token</source>
-          <target state="new">Token</target>
+          <target state="translated">Segnalino</target>
         </trans-unit>
         <trans-unit id="EventsOption_Always" translate="yes" xml:space="preserve">
           <source>Always select Events</source>

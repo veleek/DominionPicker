@@ -7,13 +7,14 @@ using Ben.Data;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
 using Windows.ApplicationModel;
+using System.Reflection;
 
 namespace Ben.Dominion
 {
 
     public static class Cards
     {
-        public static readonly string PickerCardsFileName = @"DominionCore\Resources\DominionPickerCards.xml";
+        public static readonly string PickerCardsFileName = @".\Resources\DominionPickerCards.xml";
         public static ReadOnlyCollection<Card> allCards;
         private static ReadOnlyCollection<CardSet> allSets;
         private static ReadOnlyCollection<CardType> allTypes;
@@ -180,6 +181,11 @@ namespace Ben.Dominion
 
         private static async Task<List<Card>> LoadCardsFromFileAsync(string fileName)
         {
+#if NETFX_CORE
+            // On NETFX_CORE we need to append the assembly name to get deployed resources
+            fileName = fileName.TrimStart('.', '\\', '/');
+            fileName = System.IO.Path.Combine(typeof(Cards).GetTypeInfo().Assembly.GetName().Name, fileName);
+#endif
             using (var stream = await FileUtility.OpenApplicationStreamAsync(fileName))
             {
                 return GenericXmlSerializer.Deserialize<List<Card>>(stream);

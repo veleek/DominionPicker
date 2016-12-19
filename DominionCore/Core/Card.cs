@@ -79,8 +79,9 @@ namespace Ben.Dominion
 
             set
             {
-                Match costMatch = Regex.Match(value, @"^((?<CoinCost>\d+)?(?<HasPotion>P)?)/?((?<DebtCost>\d+)D)?$");
-                this.CoinCost = costMatch.Groups["CoinCost"].Value;
+                Match costMatch = Regex.Match(value, @"^\*|(((?<CoinCost>\d+[\+\*]?)?(?<HasPotion>[pP])?)/?((?<DebtCost>\d+)[dD])?)$");
+                System.Diagnostics.Debug.Assert(costMatch.Success, "Failed to parse cost for " + this.Name);
+                this.CoinCost = costMatch.Groups["CoinCost"].Value.Replace('+', '\x207A');
                 this.HasPotion = costMatch.Groups["HasPotion"].Success;
                 this.DebtCost = costMatch.Groups["DebtCost"].Value;
             }
@@ -244,6 +245,7 @@ namespace Ben.Dominion
 
         public override string ToString()
         {
+            System.Diagnostics.Debug.WriteLine("Card.ToString()");
             return String.Format("{0} - {1} ({2}): {3}", this.Name, this.Type, this.Set, this.Cost);
         }
 
