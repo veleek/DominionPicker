@@ -290,7 +290,6 @@ namespace Ben.Dominion.ViewModels
 #else
         private TValue GetAppSetting<TValue>([CallerMemberName]string key = null, TValue defaultValue = default(TValue))
         {
-            
             return IsolatedStorageSettings.ApplicationSettings.TryGetOrDefault("Application_" + key, defaultValue);
         }
 
