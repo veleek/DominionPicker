@@ -39,11 +39,19 @@ namespace Ben.Dominion
 
             // Set the data context of the listbox control to the sample data
             this.Loaded += this.MainPage_Loaded;
+            this.SetsGrid.Loaded += this.SetsGrid_Loaded;
 
             if (Debugger.IsAttached)
             {
                 (BottomAppBar as CommandBar).AddMenuItem("Debug", (s, a) => NavigationServiceHelper.Navigate(PickerView.Debug));
             }
+        }
+
+        private void SetsGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            DependencyObject grid = sender as DependencyObject;
+            ScrollViewer.SetHorizontalScrollBarVisibility(grid, ScrollBarVisibility.Hidden);
+            ScrollViewer.SetVerticalScrollBarVisibility(grid, ScrollBarVisibility.Hidden);
         }
 
         public MainViewModel MainView

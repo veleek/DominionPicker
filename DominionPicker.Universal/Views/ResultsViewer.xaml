@@ -6,6 +6,7 @@
       xmlns:componentModel="using:System.ComponentModel" 
       xmlns:controls="using:Ben.Controls"
       xmlns:dominionControls="using:Ben.Dominion.Controls"
+      xmlns:toolkitControls="using:Microsoft.Toolkit.Uwp.UI.Controls"
       xmlns:system="using:System" 
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
@@ -178,15 +179,21 @@
                   SelectionMode="None">
           <ListView.ItemTemplate>
             <DataTemplate x:DataType="dominion:Card">
-              <dominionControls:DominionCardControl Card="{x:Bind}">
-                <interactivity:Interaction.Behaviors>
-                  <interactions:EventTriggerBehavior EventName="Tapped">
-                    <interactions:EventTriggerBehavior.Actions>
-                      <behaviors:PickerViewNavigateAction View="CardInfo" Parameter="{x:Bind}" />
-                    </interactions:EventTriggerBehavior.Actions>
-                  </interactions:EventTriggerBehavior>
-                </interactivity:Interaction.Behaviors>
-              </dominionControls:DominionCardControl>
+              <toolkitControls:SlidableListItem MouseSlidingEnabled="True"
+                                                IsRightCommandEnabled="{x:Bind Group.CanBeReplaced}" IsLeftCommandEnabled="False"
+                                                RightBackground="Red" RightLabel="Replace"
+                                                RightCommandRequested="SlidableListItem_RightCommandRequested"
+                                                >
+                <dominionControls:DominionCardControl Card="{x:Bind}">
+                  <interactivity:Interaction.Behaviors>
+                    <interactions:EventTriggerBehavior EventName="Tapped">
+                      <interactions:EventTriggerBehavior.Actions>
+                        <behaviors:PickerViewNavigateAction View="CardInfo" Parameter="{x:Bind}" />
+                      </interactions:EventTriggerBehavior.Actions>
+                    </interactions:EventTriggerBehavior>
+                  </interactivity:Interaction.Behaviors>
+                </dominionControls:DominionCardControl>
+              </toolkitControls:SlidableListItem>
             </DataTemplate>
           </ListView.ItemTemplate>
           <ListView.GroupStyle>

@@ -245,8 +245,11 @@ namespace Ben.Dominion
 
         public override string ToString()
         {
-            System.Diagnostics.Debug.WriteLine("Card.ToString()");
+#if DEBUG
             return String.Format("{0} - {1} ({2}): {3}", this.Name, this.Type, this.Set, this.Cost);
+#else
+            return this.Name;
+#endif
         }
 
         [XmlIgnore]

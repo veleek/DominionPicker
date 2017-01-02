@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <MainViewModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Settings>
-    <SelectedSets>Base,Intrigue,Seaside,Alchemy,Prosperity,Cornucopia,Hinterlands,DarkAges,Guilds,Adventures</SelectedSets>
+    <SelectedSets>Base,Intrigue,Seaside,Alchemy,Prosperity,Cornucopia,Hinterlands,DarkAges,Guilds,Adventures,Empires</SelectedSets>
     <FilteredCards></FilteredCards>
     <MinimumCardsPerSet Enabled="true">5</MinimumCardsPerSet>
     <RequireDefense>false</RequireDefense>
@@ -21,7 +21,7 @@
       <FavoriteSetting>
         <Name>All Sets - Pick 2</Name>
         <Value>
-          <SelectedSets>Base,Intrigue,Seaside,Alchemy,Prosperity,Cornucopia,Hinterlands,DarkAges,Guilds,Adventures</SelectedSets>
+          <SelectedSets>Base,Intrigue,Seaside,Alchemy,Prosperity,Cornucopia,Hinterlands,DarkAges,Guilds,Adventures,Empires</SelectedSets>
           <FilteredCards></FilteredCards>
           <MinimumCardsPerSet Enabled="true">5</MinimumCardsPerSet>
           <RequireDefense>true</RequireDefense>

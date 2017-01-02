@@ -10,6 +10,7 @@ using Ben.Dominion.Views;
 using Ben.Dominion.ViewModels;
 using Windows.Foundation;
 using Ben.Dominion.Controls;
+using System.Windows.Input;
 
 namespace Ben.Dominion
 {
@@ -45,15 +46,6 @@ namespace Ben.Dominion
         {
             this.UpdateSorting(this.MainView.Result.SortOrder);
             base.OnNavigatedTo(e);
-        }
-
-        private void DominionCardControl_Swipe(object sender, EventArgs e)
-        {
-            DominionCardControl cardControl = sender as DominionCardControl;
-            if (cardControl.Card.Group.Type == CardGroupType.KingdomCard)
-            {
-                this.MainView.Result.Replace(cardControl.Card);
-            }
         }
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
@@ -141,6 +133,16 @@ namespace Ben.Dominion
                 case "3":
                 default:
                     break;
+            }
+        }
+
+        private void SlidableListItem_RightCommandRequested(object sender, EventArgs e)
+        {
+            Control listItem = sender as Control;
+            Card selectedCard = listItem.DataContext as Card;
+            if(selectedCard.Group.Type == CardGroupType.KingdomCard)
+            {
+                this.MainView.Result.Replace(selectedCard);
             }
         }
     }

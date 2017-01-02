@@ -26,7 +26,6 @@ namespace Ben.Dominion
 
         public IEnumerable<Card> Cards { get; set; }
 
-
         public CardGroup()
         : this(CardGroupType.None, (Card[])null)
         {
@@ -46,6 +45,18 @@ namespace Ben.Dominion
         {
             this.Type = type;
             this.Cards = cards;
+        }
+
+        /// <summary>
+        /// Indicates whether cards in this group can be replaced at the users request.
+        /// E.g. These cards are not added as a requirement of some other card.
+        /// </summary>
+        /// <remarks>
+        /// We need this value for some binding scenarios, so this is the easiest way to expose it.
+        /// </remarks>
+        public bool CanBeReplaced
+        {
+            get { return this.Type == CardGroupType.KingdomCard; }
         }
 
         public override string ToString()

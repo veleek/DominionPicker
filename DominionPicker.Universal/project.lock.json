@@ -3,17 +3,17 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -22,10 +22,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -255,6 +255,55 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -293,7 +342,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -303,12 +352,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -1826,20 +1875,42 @@
             "rid": "win8-aot"
           }
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-arm"
+          },
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -1848,10 +1919,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -2031,6 +2102,55 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -2069,7 +2189,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -2079,12 +2199,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Private.DataContractSerialization/4.1.0": {
@@ -3513,20 +3633,31 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -3535,10 +3666,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -3715,6 +3846,55 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -3753,7 +3933,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -3763,12 +3943,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Private.DataContractSerialization/4.1.0": {
@@ -5158,20 +5338,31 @@
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -5180,10 +5371,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -5368,6 +5559,55 @@
           "runtimes/win10-x64/native/_._": {}
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -5406,7 +5646,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -5416,12 +5656,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Private.DataContractSerialization/4.1.0": {
@@ -6853,20 +7093,31 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -6875,10 +7126,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -7055,6 +7306,55 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -7093,7 +7393,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -7103,12 +7403,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Private.DataContractSerialization/4.1.0": {
@@ -8498,20 +8798,31 @@
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -8520,10 +8831,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -8708,6 +9019,55 @@
           "runtimes/win10-x86/native/_._": {}
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -8746,7 +9106,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -8756,12 +9116,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.any.System.Private.DataContractSerialization/4.1.0": {
@@ -10193,20 +10553,31 @@
         "runtime": {
           "lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Microsoft.ApplicationInsights/1.0.0": {
+      "Microsoft.ApplicationInsights/2.2.0": {
         "compile": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         },
         "runtime": {
-          "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll": {}
+          "lib/uap10.0/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
+      "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0"
+          "Microsoft.ApplicationInsights": "1.2.3"
         },
         "compile": {
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
@@ -10215,10 +10586,10 @@
           "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
+      "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
         "dependencies": {
-          "Microsoft.ApplicationInsights": "1.0.0",
-          "Microsoft.ApplicationInsights.PersistenceChannel": "1.0.0"
+          "Microsoft.ApplicationInsights": "[1.2.3]",
+          "Microsoft.ApplicationInsights.PersistenceChannel": "[1.2.3]"
         },
         "compile": {
           "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll": {}
@@ -10395,6 +10766,55 @@
           "System.Xml.XmlSerializer": "4.0.10"
         }
       },
+      "Microsoft.Toolkit.Uwp/1.2.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Xaml.Behaviors.Uwp.Managed": "1.1.0",
+          "Win2D.uwp": "1.18.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+        "dependencies": {
+          "Microsoft.Toolkit.Uwp": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI": "1.2.0",
+          "Microsoft.Toolkit.Uwp.UI.Animations": "1.2.0"
+        },
+        "compile": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll": {}
+        }
+      },
       "Microsoft.VisualBasic/10.0.0": {
         "dependencies": {
           "System.Collections": "4.0.10",
@@ -10433,7 +10853,7 @@
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
         }
       },
-      "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
+      "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
         "compile": {
           "lib/uap10.0/Microsoft.Xaml.Interactions.dll": {},
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
@@ -10443,12 +10863,12 @@
           "lib/uap10.0/Microsoft.Xaml.Interactivity.dll": {}
         }
       },
-      "Newtonsoft.Json/8.0.3": {
+      "Newtonsoft.Json/9.0.1": {
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll": {}
         }
       },
       "runtime.aot.System.Private.DataContractSerialization/4.1.0": {
@@ -11838,58 +12258,68 @@
         "runtime": {
           "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll": {}
         }
+      },
+      "Win2D.uwp/1.18.0": {
+        "compile": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "runtime": {
+          "lib/uap10.0/Microsoft.Graphics.Canvas.winmd": {}
+        },
+        "native": {
+          "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "Microsoft.ApplicationInsights/1.0.0": {
-      "sha512": "HZ47/thX57SOuIivSvIbsR6L9CCb/Yt3IyB2i4KHmmNlf3DO+lqFwWIKDdbDNWKX+qh0Rg20/JSMPK0dwUsYYw==",
-      "type": "Package",
+    "Microsoft.ApplicationInsights/2.2.0": {
+      "sha512": "+JJ6qygUKQY2YnRfr0GlgdbKAhUqZhwd9zija0aKdDVQK60lQtnsBKzFY8/kMg0SH2MRXtmLkHG53oiNDQsLJQ==",
+      "type": "package",
       "files": [
+        "Microsoft.ApplicationInsights.2.2.0.nupkg.sha512",
         "Microsoft.ApplicationInsights.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/net40/Microsoft.ApplicationInsights.XML",
         "lib/net40/Microsoft.ApplicationInsights.dll",
         "lib/net45/Microsoft.ApplicationInsights.XML",
         "lib/net45/Microsoft.ApplicationInsights.dll",
-        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.XML",
+        "lib/net46/Microsoft.ApplicationInsights.XML",
+        "lib/net46/Microsoft.ApplicationInsights.dll",
+        "lib/netstandard1.5/Microsoft.ApplicationInsights.XML",
+        "lib/netstandard1.5/Microsoft.ApplicationInsights.dll",
         "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.dll",
-        "lib/wp8/Microsoft.ApplicationInsights.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.dll",
-        "package/services/metadata/core-properties/b9e7bc7ab2454491af07046165ff01d0.psmdcp"
+        "lib/uap10.0/Microsoft.ApplicationInsights.dll",
+        "lib/wp8/Microsoft.ApplicationInsights.dll"
       ]
     },
-    "Microsoft.ApplicationInsights.PersistenceChannel/1.0.0": {
-      "sha512": "0qQXC+CtbyF2RPuld5pF74fxsnP6ml0LUnzQ6GL9AXXY64LPsLDsPUAymoUffo7LZvPDppZboTYX59TfVxKA7A==",
-      "type": "Package",
+    "Microsoft.ApplicationInsights.PersistenceChannel/1.2.3": {
+      "sha512": "5MGcvPQVaGlGyAVh9adg4sSkIVSYDKn+H3+YnZa9hi1gH/g6UsRt4HLc8vp/IxjlbmXbJyAB7dYJV/NHmAGAgA==",
+      "type": "package",
       "files": [
+        "Microsoft.ApplicationInsights.PersistenceChannel.1.2.3.nupkg.sha512",
         "Microsoft.ApplicationInsights.PersistenceChannel.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/net40/Microsoft.ApplicationInsights.PersistenceChannel.XML",
         "lib/net40/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "lib/portable-win8+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.XML",
+        "lib/net45/Microsoft.ApplicationInsights.PersistenceChannel.XML",
+        "lib/net45/Microsoft.ApplicationInsights.PersistenceChannel.dll",
+        "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.XML",
         "lib/portable-win81+wpa81/Microsoft.ApplicationInsights.PersistenceChannel.dll",
         "lib/wp8/Microsoft.ApplicationInsights.PersistenceChannel.XML",
-        "lib/wp8/Microsoft.ApplicationInsights.PersistenceChannel.dll",
-        "package/services/metadata/core-properties/dc9ebba80e7343fdbd0a39a3cdeb672c.psmdcp"
+        "lib/wp8/Microsoft.ApplicationInsights.PersistenceChannel.dll"
       ]
     },
-    "Microsoft.ApplicationInsights.WindowsApps/1.0.0": {
-      "sha512": "fNCAjIwvbTV+G0dT14bgM5tptsqeSaKQaCrlq7QknOq1Xdm8ZmgsDYddMgXkvykyKLjWyU6fKuOpj6fsQJy+wQ==",
-      "type": "Package",
+    "Microsoft.ApplicationInsights.WindowsApps/1.1.1": {
+      "sha512": "Orj0UQrjQ2z0aWZZoexl734Ge7Q4oVev3VFSsk6t8l2kImrfJ1eygkJWtQ1d7u0kF6MLLrvUvsMSxo+0rgPiMQ==",
+      "type": "package",
       "files": [
+        "Microsoft.ApplicationInsights.WindowsApps.1.1.1.nupkg.sha512",
         "Microsoft.ApplicationInsights.WindowsApps.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
         "lib/win81/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
         "lib/wp8/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
         "lib/wp8/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
         "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.XML",
-        "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.dll",
-        "package/services/metadata/core-properties/4f6f732debe548beaa1183418e8d65cc.psmdcp"
+        "lib/wpa81/Microsoft.ApplicationInsights.Extensibility.Windows.dll"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -12437,6 +12867,68 @@
         "runtimes/win81-x86/native/api-ms-win-security-cpwl-l1-1-0.dll"
       ]
     },
+    "Microsoft.Toolkit.Uwp/1.2.0": {
+      "sha512": "YZZTfjWNLV3PZ770PtgxxcPRE0ej4S1lLrdOZbCs62OA9Gt0EJOowvwXElPDTBNozn9JtgVZZKn4aBrAlWZ7og==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI/1.2.0": {
+      "sha512": "G534s6yLmM8T18uSghrte0MuHrde84wEajhwsfocBZYZ88VvLuJRoPVcgpB8RwSst9pLv2nqSBbN82PThXyYGA==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI.Animations/1.2.0": {
+      "sha512": "uitHw6qNyo7z28FrGV5a+LDBxLBt39gZEyUQpYdelhO6hzHKzbjEO2FJWSLQohFH04DkMv4hT9DcZOFXLFg0bQ==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.Animations.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.Animations.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Animations.xml"
+      ]
+    },
+    "Microsoft.Toolkit.Uwp.UI.Controls/1.2.0": {
+      "sha512": "MrDNHZm3Dfq6pWikiRLE9tJESb/jZMrnkCALNySLoxATdOTiQNaK1GOMBawvv6pWIaPwqevYpIO2v2JjqS12WA==",
+      "type": "package",
+      "files": [
+        "Microsoft.Toolkit.Uwp.UI.Controls.1.2.0.nupkg.sha512",
+        "Microsoft.Toolkit.Uwp.UI.Controls.nuspec",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.dll",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pdb",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.pri",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls.xml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/BladeView/BladeView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/DropShadowPanel/DropShadowPanel.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/GridSplitter/GridSplitter.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HamburgerMenu/HamburgerMenu.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/HeaderedTextBlock/HeaderedTextBlock.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/ImageEx/ImageEx.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/MasterDetailsView/MasterDetailsView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Microsoft.Toolkit.Uwp.UI.Controls.xr.xml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/PullToRefreshListView/PullToRefreshListView.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RadialGauge/RadialGauge.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RangeSelector/RangeSelector.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/RotatorTile/RotatorTile.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/SlidableListItem/SlidableListItem.xaml",
+        "lib/uap10.0/Microsoft.Toolkit.Uwp.UI.Controls/Themes/Generic.xaml"
+      ]
+    },
     "Microsoft.VisualBasic/10.0.0": {
       "sha512": "5BEm2/HAVd97whRlCChU7rmSh/9cwGlZ/NTNe3Jl07zuPWfKQq5TUvVNUmdvmEe8QRecJLZ4/e7WF1i1O8V42g==",
       "type": "Package",
@@ -12500,11 +12992,11 @@
         "ref/xamarinmac20/_._"
       ]
     },
-    "Microsoft.Xaml.Behaviors.Uwp.Managed/1.2.0-beta1": {
-      "sha512": "UlZ8cuXiTd+z2YDYOrcc5O/SEKlHLXi1xI9a1omh9wLwvqSjIeXIg3uw5hM3fQggX/SuNAwTqPFPnFMUayZxAw==",
+    "Microsoft.Xaml.Behaviors.Uwp.Managed/2.0.0": {
+      "sha512": "LfzU68PVP33nqsuSlO5xAYuoI/itVKz4VVJSIunrS7iqqxE3sy0Q+VvtoYnFcBAoGnY83ZVn8Mnc9HYqOBiPmg==",
       "type": "package",
       "files": [
-        "Microsoft.Xaml.Behaviors.Uwp.Managed.1.2.0-beta1.nupkg.sha512",
+        "Microsoft.Xaml.Behaviors.Uwp.Managed.2.0.0.nupkg.sha512",
         "Microsoft.Xaml.Behaviors.Uwp.Managed.nuspec",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactions.Design.dll",
         "lib/uap10.0/Design/Microsoft.Xaml.Interactivity.Design.dll",
@@ -12516,13 +13008,12 @@
         "lib/uap10.0/Microsoft.Xaml.Interactivity.xml"
       ]
     },
-    "Newtonsoft.Json/8.0.3": {
-      "sha512": "KGsYQdS2zLH+H8x2cZaSI7e+YZ4SFIbyy1YJQYl6GYBWjf5o4H1A68nxyq+WTyVSOJQ4GqS/DiPE+UseUizgMg==",
-      "type": "Package",
+    "Newtonsoft.Json/9.0.1": {
+      "sha512": "U82mHQSKaIk+lpSVCbWYKNavmNH1i5xrExDEquU1i6I5pV6UMOqRnJRSlKO3cMPfcpp0RgDY+8jUXHdQ4IfXvw==",
+      "type": "package",
       "files": [
+        "Newtonsoft.Json.9.0.1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
-        "[Content_Types].xml",
-        "_rels/.rels",
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
         "lib/net35/Newtonsoft.Json.dll",
@@ -12531,11 +13022,12 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
-        "package/services/metadata/core-properties/199d932507f04f0285dade0302b87d22.psmdcp",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81/Newtonsoft.Json.xml",
         "tools/install.ps1"
       ]
     },
@@ -15401,16 +15893,34 @@
         "runtime.json",
         "runtimes/win8-aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
+    },
+    "Win2D.uwp/1.18.0": {
+      "sha512": "qPRgHJF9l7vKLyM/adOjUHE9OE90nYFCpa3/IOaBu1lMyiMwcfXyV2JEri+beNir0eo7luzz8dRBpyBIkjK9qw==",
+      "type": "package",
+      "files": [
+        "Win2D.uwp.1.18.0.nupkg.sha512",
+        "Win2D.uwp.nuspec",
+        "Win2d.githash.txt",
+        "build/native/Win2D.uwp.targets",
+        "include/Microsoft.Graphics.Canvas.h",
+        "include/Microsoft.Graphics.Canvas.native.h",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.winmd",
+        "lib/uap10.0/Microsoft.Graphics.Canvas.xml",
+        "runtimes/win10-arm/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x64/native/Microsoft.Graphics.Canvas.dll",
+        "runtimes/win10-x86/native/Microsoft.Graphics.Canvas.dll"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "": [
-      "Microsoft.ApplicationInsights >= 1.0.0",
-      "Microsoft.ApplicationInsights.PersistenceChannel >= 1.0.0",
-      "Microsoft.ApplicationInsights.WindowsApps >= 1.0.0",
+      "Microsoft.ApplicationInsights >= 2.2.0",
+      "Microsoft.ApplicationInsights.PersistenceChannel >= 1.2.3",
+      "Microsoft.ApplicationInsights.WindowsApps >= 1.1.1",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.1.0",
-      "Microsoft.Xaml.Behaviors.Uwp.Managed >= 1.2.0-beta1",
-      "Newtonsoft.Json >= 8.0.3"
+      "Microsoft.Toolkit.Uwp.UI.Controls >= 1.2.0",
+      "Microsoft.Xaml.Behaviors.Uwp.Managed >= 2.0.0",
+      "Newtonsoft.Json >= 9.0.1"
     ],
     "UAP,Version=v10.0": []
   }

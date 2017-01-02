@@ -65,17 +65,19 @@
 
           <ComboBox x:Name="PlatinumColonyOption" 
                     Header="{Binding Strings.Config_PlatinumColonyOption, Source={StaticResource LocalizedResources}}" 
-                    ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}}" 
+                    ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}" 
                     SelectedItem="{Binding PickPlatinumColony, Mode=TwoWay}" 
                     Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
 
           <ComboBox x:Name="SheltersOption" 
                     Header="{Binding Strings.Config_SheltersOption, Source={StaticResource LocalizedResources}}" 
-                    ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}}" SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}" 
+                    ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}" 
+                    SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}" 
                     Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
+            
           <ComboBox x:Name="EventsOption" 
                     Header="{Binding Strings.Config_EventsOption, Source={StaticResource LocalizedResources}}" 
-                    ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}}" 
+                    ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}" 
                     SelectedItem="{Binding PickEvents, Mode=TwoWay}" 
                     Style="{StaticResource EnumOptionWithDescriptionStyle}"/>
 
