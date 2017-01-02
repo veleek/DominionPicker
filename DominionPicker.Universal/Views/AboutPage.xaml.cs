@@ -23,7 +23,7 @@ namespace Ben.Dominion
             version += " - DEBUG";
 #endif
             this.VersionTextBlock.Text = version;
-            this.RulesInfo.ItemsSource = new[] { new RulesInfoItem(CardSet.Base), new RulesInfoItem(CardSet.Intrigue), new RulesInfoItem(CardSet.Seaside), new RulesInfoItem(CardSet.Alchemy), new RulesInfoItem(CardSet.Prosperity), new RulesInfoItem(CardSet.Cornucopia), new RulesInfoItem(CardSet.Hinterlands), new RulesInfoItem(CardSet.DarkAges), new RulesInfoItem(CardSet.Guilds), new RulesInfoItem(CardSet.Adventures), };
+            //this.RulesInfo.ItemsSource = new[] { new RulesInfoItem(CardSet.Base), new RulesInfoItem(CardSet.Intrigue), new RulesInfoItem(CardSet.Seaside), new RulesInfoItem(CardSet.Alchemy), new RulesInfoItem(CardSet.Prosperity), new RulesInfoItem(CardSet.Cornucopia), new RulesInfoItem(CardSet.Hinterlands), new RulesInfoItem(CardSet.DarkAges), new RulesInfoItem(CardSet.Guilds), new RulesInfoItem(CardSet.Adventures), };
         }
 
         public class RulesInfoItem

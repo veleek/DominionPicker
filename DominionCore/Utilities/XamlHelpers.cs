@@ -1,13 +1,9 @@
 using System.IO;
 #if NETFX_CORE
-using System;
-using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Shapes;
 using Windows.UI.Text;
-using Windows.Foundation;
 #else
 using System.Windows;
 using System.Windows.Controls;

@@ -1,4 +1,11 @@
-﻿Version 3.0
+﻿Version 3.1
+Feature: Added swiping back into UWP version.
+Cleanup: Cleaned up layout on main page.
+Bug: Fixed changelist on about page.
+Bug: Fixed crashing bug on settings page.
+Bug: Fixed loading files from correct paths.
+
+Version 3.0
 Converted to UWP
 Added support for Empires
 Fixed up a bunch of localization.

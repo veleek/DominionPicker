@@ -112,14 +112,15 @@
           </StackPanel>
         </ScrollViewer>
       </PivotItem>
-      <PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
+      <!--<PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
         <ScrollViewer>
           <StackPanel>
             <TextBlock Style="{StaticResource AboutContentStyle}" Text="{Binding Strings.About_RulesDescription, Source={StaticResource LocalizedResources}}" />
             <ItemsControl x:Name="RulesInfo">
               <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                  <!--<p1:TransferControl x:Name="DominionTransferControl" Header="{Binding Monitor.Name}" Margin="12,6,0,6" Tap="DominionTransferControl_OnTap" Icon="{Binding IconPath}" Monitor="{Binding Monitor}">
+                  -->
+      <!--<p1:TransferControl x:Name="DominionTransferControl" Header="{Binding Monitor.Name}" Margin="12,6,0,6" Tap="DominionTransferControl_OnTap" Icon="{Binding IconPath}" Monitor="{Binding Monitor}">
                     <p1:TransferControl.Template>
                       <ControlTemplate TargetType="TransferControl">
                         <Border x:Name="TransferControl" Margin="0,0,0,12">
@@ -173,18 +174,18 @@
                         </Border>
                       </ControlTemplate>
                     </p1:TransferControl.Template>
-                  </p1:TransferControl>-->
+                  </p1:TransferControl>--><!--
                 </DataTemplate>
               </ItemsControl.ItemTemplate>
             </ItemsControl>
           </StackPanel>
         </ScrollViewer>
-      </PivotItem>
+      </PivotItem>-->
       <PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
         <PivotItem.Resources>
           <converters:XamlConverter xmlns:converters="using:Ben.Data.Converters"  x:Key="XamlConverter" />
         </PivotItem.Resources>
-        <ScrollViewer Content="{Binding Source='DominionCore\\Resources\\Changes.txt', Converter={StaticResource XamlConverter}}" />
+        <ScrollViewer Content="{Binding Source='\\DominionCore.Universal\\Resources\\Changes.txt', Converter={StaticResource XamlConverter}}" />
       </PivotItem>
     </Pivot>
     <Grid Grid.Row="1" Margin="8">

@@ -26,8 +26,7 @@ namespace Ben.Data.Converters
                 Stream xamlStream = null;
                 Task.Run(async () =>
                 {
-                    Task<Stream> xamlStreamTask = Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(streamName);
-                    xamlStream = await xamlStreamTask;
+                    xamlStream = await FileUtility.OpenApplicationStreamAsync(streamName);
                 }).Wait();
                 
                 return XamlHelpers.GenerateXamlFromText(xamlStream);
