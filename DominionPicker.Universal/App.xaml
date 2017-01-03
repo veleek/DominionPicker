@@ -66,6 +66,7 @@
 
     <Style x:Key="EnumOptionStyle" TargetType="ComboBox">
       <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
       <Setter Property="HeaderTemplate">
         <Setter.Value>
           <DataTemplate>
@@ -86,6 +87,7 @@
 
     <Style x:Key="EnumOptionWithDescriptionStyle" TargetType="ComboBox">
       <Setter Property="HorizontalAlignment" Value="Stretch" />
+      <Setter Property="HorizontalContentAlignment" Value="Left" />
       <Setter Property="HeaderTemplate">
         <Setter.Value>
           <DataTemplate>
@@ -96,7 +98,7 @@
       <Setter Property="ItemTemplate">
         <Setter.Value>
           <DataTemplate>
-            <StackPanel Margin="8" MaxWidth="450">
+            <StackPanel Margin="8" MaxWidth="450" HorizontalAlignment="Left">
               <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
               <TextBlock Text="{Binding Converter={StaticResource StringsLocalizer}, ConverterParameter=Description}" Style="{StaticResource CaptionTextBlockStyle}" TextWrapping="Wrap" />
             </StackPanel>

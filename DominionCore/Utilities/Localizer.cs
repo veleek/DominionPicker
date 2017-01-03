@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Reflection;
 using System.Linq;
 #if NETFX_CORE
-using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
 using ResourceManager = Windows.ApplicationModel.Resources.ResourceLoader;
 #else
@@ -20,12 +19,18 @@ namespace Ben.Data
         private readonly string resourceSubTree;
         private readonly Func<ResourceManager> resourceManagerGetter;
         private readonly Func<CultureInfo> currentCultureGetter;
+#if NETFX_CORE
+        private readonly ResourceMap map;
+#endif
 
         public Localizer(string resourceSubTree, Func<ResourceManager> resourceManagerGetter, Func<CultureInfo> currentCultureGetter)
         {
             this.resourceSubTree = resourceSubTree;
             this.resourceManagerGetter = resourceManagerGetter;
             this.currentCultureGetter = currentCultureGetter;
+#if NETFX_CORE
+            this.map = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
+#endif
         }
 
         public ResourceManager ResourceLoader
@@ -99,7 +104,6 @@ namespace Ben.Data
 #if NETFX_CORE
                     ResourceContext context = new ResourceContext();
                     context.Languages = new string[] { ResolveCulture(culture).ToString() };
-                    ResourceMap map = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
                     ResourceCandidate localizedCandidate = map.GetValue(localizedValueKey, context);
                     
                     if(localizedCandidate == null)

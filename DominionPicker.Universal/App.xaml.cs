@@ -46,6 +46,8 @@ namespace Ben.Dominion
             if (Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
+                this.DebugSettings.IsBindingTracingEnabled = true;
+                this.DebugSettings.BindingFailed += DebugSettings_BindingFailed;
             }
 #endif
             Application_Launching(e);
@@ -115,6 +117,11 @@ namespace Ben.Dominion
                        }
                    }
                };
+        }
+
+        private void DebugSettings_BindingFailed(object sender, BindingFailedEventArgs e)
+        {
+            Debug.WriteLine(e.Message);
         }
 
         bool TryToNavigateToTileReference(Frame rootFrame, LaunchActivatedEventArgs e)

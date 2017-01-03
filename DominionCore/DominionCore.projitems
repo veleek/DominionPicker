@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Core\CardSelectionEnums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\CardSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\CardSet.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CardSetGrouping.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\CardType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\Picker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Core\ResultSortOrder.cs" />

@@ -11,7 +11,7 @@ namespace Ben.Utilities
         public static async Task<Stream> SafeOpenStreamForReadAsync(this StorageFolder folder, string relativePath)
         {
             relativePath = relativePath.Replace('/', '\\');
-            return await folder.OpenStreamForReadAsync(relativePath);
+            return await folder.OpenStreamForReadAsync(relativePath).ConfigureAwait(false);
         }
 
         public static async Task<IStorageItem> TryGetItemAsync(this IStorageFolder folder, string relativePath)

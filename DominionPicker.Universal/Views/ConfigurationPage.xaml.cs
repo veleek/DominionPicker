@@ -9,18 +9,14 @@ namespace Ben.Dominion
     {
         public ConfigurationPage()
         {
-            Debug.WriteLine("ConfigurationPage constructor");
             this.InitializeComponent();
-            Debug.WriteLine("ConfigurationPage constructor done");
         }
 
         public ConfigurationModel ViewModel
         {
             get
             {
-                Debug.WriteLine("Loading Configuration Instance");
                 ConfigurationModel viewModel = ConfigurationModel.Instance;
-                Debug.WriteLine("Configuration Instance loaded.");
                 return viewModel;
             }
         }

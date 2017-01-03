@@ -408,18 +408,6 @@ namespace Ben.Dominion
 
     }
 
-    public class AlphabeticalCardComparer
-       : IComparer<Card>
-    {
-
-        public int Compare(Card x, Card y)
-        {
-            CompareInfo c = CompareInfo.GetCompareInfo(CardDataStrings.Culture.ToString());
-            return c.Compare(x.DisplayName, y.DisplayName, CompareOptions.IgnoreCase);
-        }
-
-    }
-
     public class CardIdComparer
        : EqualityComparer<Card>
     {

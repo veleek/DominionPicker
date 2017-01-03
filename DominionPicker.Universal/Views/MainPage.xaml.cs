@@ -29,9 +29,11 @@ namespace Ben.Dominion
         public MainPage()
         {
             // Force the resources to be initialized before anything tries to access them.
-            var x = Strings.About_About;
-            var y = CardDataStrings.Application_LocalizedCardsFileName;
+            var config = ConfigurationModel.Instance;
+            Strings.EnsureLoaded();
+            CardDataStrings.EnsureLoaded();
             PickerViews.Initialize();
+            Cards.EnsureLoaded().Wait();
 
             this.InitializeComponent();
 

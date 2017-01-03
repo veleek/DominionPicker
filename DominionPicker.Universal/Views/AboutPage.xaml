@@ -75,9 +75,10 @@
 
               <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
               <TextBlock Margin="0,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Brian Chase - Because he asked to have his name here." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="James Lao - for telling me that many of my ideas are stupid." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Stephane Plante - for giving me new ideas to replace the ones James ruined." />
-              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Brian Chase - Because he asked to have his name here." />
+              
               
               <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="0,12,0,0" />
               <StackPanel Margin="12,0">

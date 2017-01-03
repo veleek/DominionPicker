@@ -12,7 +12,7 @@ namespace Ben.Utilities
     {
         public static async Task<Stream> OpenApplicationStreamAsync(string path)
         {
-            return await Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(path);
+            return await Package.Current.InstalledLocation.SafeOpenStreamForReadAsync(path).ConfigureAwait(false);
         }
 
         public static async Task<Stream> OpenUserStreamAsync(string path)

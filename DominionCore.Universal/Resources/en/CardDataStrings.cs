@@ -22,9 +22,10 @@
 // --------------------------------------------------------------------------------------------------
 namespace Ben.Dominion.Resources
 {
+    using System;
     using Windows.ApplicationModel.Resources;
-    
-    
+
+
     public partial class CardDataStrings
     {
         

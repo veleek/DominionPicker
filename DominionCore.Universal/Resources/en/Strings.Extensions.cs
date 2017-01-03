@@ -4,6 +4,10 @@ namespace Ben.Dominion.Resources
 
     public partial class Strings
     {
+        public static void EnsureLoaded()
+        {
+        }
+
         public static string GetString(string key)
         {
             return resourceLoader.GetString(key);

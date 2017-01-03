@@ -3,166 +3,99 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using Ben.Data;
 using Ben.Dominion.Resources;
 using Ben.Utilities;
-using Windows.ApplicationModel;
 using System.Reflection;
 
 namespace Ben.Dominion
 {
-
     public static class Cards
     {
         public static readonly string PickerCardsFileName = @".\Resources\DominionPickerCards.xml";
-        public static ReadOnlyCollection<Card> allCards;
-        private static ReadOnlyCollection<CardSet> allSets;
-        private static ReadOnlyCollection<CardType> allTypes;
-        private static ReadOnlyCollection<Card> nonPickableCards;
-        private static ReadOnlyCollection<Card> pickableCards;
-        private static Dictionary<Int32, Card> lookup;
-        private static Dictionary<string, Card> nameLookup;
 
-        public static ReadOnlyCollection<CardSet> AllSets
-        {
-            get
-            {
-                if (allSets == null)
+        public static ReadOnlyCollection<CardSet> AllSets { get; } = 
+            new ReadOnlyCollection<CardSet>(
+                new List<CardSet>
                 {
-                    allSets = new ReadOnlyCollection<CardSet>(
-                        new List<CardSet>
-                        {
-                            CardSet.Base,
-                            CardSet.Intrigue,
-                            CardSet.Seaside,
-                            CardSet.Alchemy,
-                            CardSet.Prosperity,
-                            CardSet.Cornucopia,
-                            CardSet.Hinterlands,
-                            CardSet.DarkAges,
-                            CardSet.Guilds,
-                            CardSet.Adventures,
-                            CardSet.Empires,
-                            CardSet.Promo,
-                        }
-                    );
+                    CardSet.Base,
+                    CardSet.Intrigue,
+                    CardSet.Seaside,
+                    CardSet.Alchemy,
+                    CardSet.Prosperity,
+                    CardSet.Cornucopia,
+                    CardSet.Hinterlands,
+                    CardSet.DarkAges,
+                    CardSet.Guilds,
+                    CardSet.Adventures,
+                    CardSet.Empires,
+                    CardSet.Promo,
                 }
-                return allSets;
-            }
-        }
+            );
 
-        public static ReadOnlyCollection<CardType> AllTypes
-        {
-            get
-            {
-                if (allTypes == null)
+        public static ReadOnlyCollection<CardType> AllTypes { get; } =
+            new ReadOnlyCollection<CardType>(
+                new List<CardType>
                 {
-                    allTypes = new ReadOnlyCollection<CardType>(new List<CardType>
-                        {
-                            CardType.Action,
-                            CardType.Attack,
-                            CardType.Curse,
-                            CardType.Duration,
-                            CardType.Knight,
-                            CardType.Looter,
-                            CardType.Prize,
-                            CardType.Reaction,
-                            CardType.Ruins,
-                            CardType.Shelter,
-                            CardType.Treasure,
-                            CardType.Victory,
-                        }
-                    );
+                    CardType.Action,
+                    CardType.Attack,
+                    CardType.Curse,
+                    CardType.Duration,
+                    CardType.Knight,
+                    CardType.Looter,
+                    CardType.Prize,
+                    CardType.Reaction,
+                    CardType.Ruins,
+                    CardType.Shelter,
+                    CardType.Treasure,
+                    CardType.Victory,
                 }
-                return allTypes;
-            }
-        }
+            );
 
-        public static ReadOnlyCollection<Card> AllCards
-        {
-            get
-            {
-                try
-                {
-                    if (allCards == null)
-                    {
-                        allCards = new ReadOnlyCollection<Card>((Load().Result).OrderBy(c => c.Set).ThenBy(c => c.Name).ToList());
-                    }
-                    return allCards;
-                }
-                catch (AggregateException ae)
-                {
-                    Exception ie = ae.InnerException;
-                    string em = ie.ToString();
-                    System.Diagnostics.Debug.WriteLine(ie.ToString());
-                    throw;
-                }
-            }
-        }
+        public static ReadOnlyCollection<Card> AllCards { get; private set; }
+        
+        public static ReadOnlyCollection<Card> NonPickableCards { get; private set; }
 
-        public static ReadOnlyCollection<Card> NonPickableCards
-        {
-            get
-            {
-                if(nonPickableCards == null)
-                {
-                    nonPickableCards = new ReadOnlyCollection<Card>(AllCards.Where(c => !c.Pickable).ToList());
-                }
-                return nonPickableCards;
-            }
-        }
+        public static ReadOnlyCollection<Card> PickableCards { get; private set; }
 
-        public static ReadOnlyCollection<Card> PickableCards
-        {
-            get
-            {
-                if (pickableCards == null)
-                {
-                    pickableCards = new ReadOnlyCollection<Card>(AllCards.Where(c => c.Pickable).ToList());
-                }
-                return pickableCards;
-            }
-        }
+        public static Dictionary<Int32, Card> Lookup { get; private set; }
 
-        public static Dictionary<Int32, Card> Lookup
-        {
-            get
-            {
-                if (lookup == null)
-                {
-                    lookup = AllCards.ToDictionary(c => c.ID);
-                }
-                return lookup;
-            }
-        }
+        public static Dictionary<string, Card> NameLookup { get; private set; }
 
-        public static Dictionary<string, Card> NameLookup
+        /// <summary>
+        /// Force everything to get loaded and initialize all of the sets.
+        /// </summary>
+        /// <returns></returns>
+        public static async Task EnsureLoaded()
         {
-            get
+            if(AllCards == null)
             {
-                if (nameLookup == null)
-                {
-                    nameLookup = AllCards.ToDictionary(c => c.Name, StringComparer.OrdinalIgnoreCase);
-                }
-                return nameLookup;
+                var cards = (await Load().ConfigureAwait(false)).OrderBy(c => c.Set).ThenBy(c => c.Name).ToList();
+                AllCards = new ReadOnlyCollection<Card>(cards);
+                NonPickableCards = new ReadOnlyCollection<Card>(cards.Where(c => !c.Pickable).ToList());
+                PickableCards = new ReadOnlyCollection<Card>(cards.Where(c => c.Pickable).ToList());
+                Lookup = cards.ToDictionary(c => c.ID);
+                NameLookup = cards.ToDictionary(c => c.Name, StringComparer.OrdinalIgnoreCase);
             }
         }
 
         public static async Task<List<Card>> Load(bool localizeRulesText = false)
         {
             // Load the base list of cards.
-            List<Card> cards = await LoadCardsFromFileAsync(PickerCardsFileName);
+            List<Card> cards = await LoadCardsFromFileAsync(PickerCardsFileName).ConfigureAwait(false);
 
             // Check to see if we should load any localized cards.  This string is localized
             // so that we find the appropriate file depending on our locale.
+#if NETFX_CORE
+            string localizedFileName = CardDataStrings.GetString(nameof(CardDataStrings.Application_LocalizedCardsFileName));
+#else
             string localizedFileName = CardDataStrings.Application_LocalizedCardsFileName;
+#endif
             if (!string.IsNullOrWhiteSpace(localizedFileName))
             {
-                List<Card> localizedCards = await LoadCardsFromFileAsync(localizedFileName);
+                List<Card> localizedCards = await LoadCardsFromFileAsync(localizedFileName).ConfigureAwait(false);
                 if (localizedCards != null && localizedCards.Count > 0)
                 {
                     var localizeLookup = localizedCards.ToDictionary(c => c.ID);
-                    bool mergeRulesText = localizeRulesText;
                     // Loop through each card in the current set, and merge the localized
                     // version ontop if we have it.
                     foreach (var card in cards)
@@ -170,7 +103,7 @@ namespace Ben.Dominion
                         Card c;
                         if (localizeLookup.TryGetValue(card.ID, out c))
                         {
-                            card.MergeFrom(c, mergeRulesText);
+                            card.MergeFrom(c, mergeRules: localizeRulesText);
                         }
                     }
                 }
@@ -186,40 +119,10 @@ namespace Ben.Dominion
             fileName = fileName.TrimStart('.', '\\', '/');
             fileName = System.IO.Path.Combine(typeof(Cards).GetTypeInfo().Assembly.GetName().Name, fileName);
 #endif
-            using (var stream = await FileUtility.OpenApplicationStreamAsync(fileName))
+            using (var stream = await FileUtility.OpenApplicationStreamAsync(fileName).ConfigureAwait(false))
             {
                 return GenericXmlSerializer.Deserialize<List<Card>>(stream);
             }
-        }
-    }
-
-    /// <summary>
-    /// A grouping of card selectors by set
-    /// </summary>
-    public class CardSetGrouping
-       : ObservableGrouping<CardSet, CardSelector>
-    {
-        public CardSetGrouping(CardSet key, IEnumerable<CardSelector> cards)
-        : base(key, cards)
-        {
-        }
-
-        public void SortedInsert(CardSelector card)
-        {
-            int i;
-            for (i = 0; i < this.Count; i++)
-            {
-                if (card.CompareTo(this[i]) < 0)
-                {
-                    break;
-                }
-            }
-            this.Insert(i, card);
-        }
-
-        public override string ToString()
-        {
-            return "CardSetGrouping: " + this.Key;
         }
     }
 }
