@@ -6,32 +6,23 @@ namespace Ben.Dominion.Resources
     public partial class CardDataStrings
     {
         private static CultureInfo culture;
-        private static readonly ResourceContext context = new ResourceContext();
-        private static readonly ResourceMap map = ResourceManager.Current.MainResourceMap.GetSubtree("DominionCore.Universal/CardDataStrings");
 
         public static void EnsureLoaded()
         {
-            // This method does nothing except make sure that 
-        }
-
-        public static string GetString(string key)
-        {
-            if(Culture != null)
-            {
-                ResourceCandidate localizedCandidate = map.GetValue(key, context);
-                return localizedCandidate.ValueAsString;
-            }
-
-            return resourceLoader.GetString(key);
+            // This method does nothing except make sure that this class is properly loaded ahead of time.
         }
 
         public static CultureInfo Culture
         {
-            get { return culture; }
+            get
+            {
+                return culture;
+            }
+
             set
             {
                 culture = value;
-                context.Languages = culture == null ? null : new string[] { culture.ToString() };
+                _context.Languages = culture == null ? null : new string[] { culture.ToString() };
             }
         }
     }

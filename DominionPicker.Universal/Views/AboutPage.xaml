@@ -54,7 +54,7 @@
             <StackPanel>
               <TextBlock Style="{StaticResource AboutHeaderStyle}" Foreground="{ThemeResource SystemControlForegroundAccentBrush}" Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" />
               <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="by Ben Randall" />
-              <HyperlinkButton Content="http://www.benrandall.ca" NavigateUri="http://www.benrandall.ca" Style="{StaticResource AboutLinkStyle}">
+              <HyperlinkButton Content="http://www.veleek.com/DominionPicker" NavigateUri="http://www.veleek.com/DominionPicker" Style="{StaticResource AboutLinkStyle}">
                 <!--TargetName="Website"-->
               </HyperlinkButton>
               <Rectangle Height="12" />
@@ -76,10 +76,13 @@
               <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
               <TextBlock Margin="0,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Brian Chase - Because he asked to have his name here." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Jeroen ter Heerdt - for Dutch translations." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Lukas Kautzsch - for German card translations." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="James Lao - for telling me that many of my ideas are stupid." />
               <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Stephane Plante - for giving me new ideas to replace the ones James ruined." />
-              
-              
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Tomas Zöller - for German UI and card translations." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Many others for feedback, bug reports, and feature requests!" />
+
               <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="0,12,0,0" />
               <StackPanel Margin="12,0">
                 <TextBlock Style="{StaticResource CopyrightStyle}">
@@ -89,8 +92,8 @@
                                 </TextBlock>
               </StackPanel>
               <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                <Run Text="Thumbtack by Aimeê Ferreira from "/>
-                <Hyperlink NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=23926">the Noun Project</Hyperlink>
+                <Run Text="Thumbtack by Alexandr Cherkinsky from "/>
+                <Hyperlink NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=172903">the Noun Project</Hyperlink>
               </TextBlock>
               <!--<TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
               <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Card by Stephen JB Thomas from the Noun Project" />
@@ -113,75 +116,7 @@
           </StackPanel>
         </ScrollViewer>
       </PivotItem>
-      <!--<PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
-        <ScrollViewer>
-          <StackPanel>
-            <TextBlock Style="{StaticResource AboutContentStyle}" Text="{Binding Strings.About_RulesDescription, Source={StaticResource LocalizedResources}}" />
-            <ItemsControl x:Name="RulesInfo">
-              <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                  -->
-      <!--<p1:TransferControl x:Name="DominionTransferControl" Header="{Binding Monitor.Name}" Margin="12,6,0,6" Tap="DominionTransferControl_OnTap" Icon="{Binding IconPath}" Monitor="{Binding Monitor}">
-                    <p1:TransferControl.Template>
-                      <ControlTemplate TargetType="TransferControl">
-                        <Border x:Name="TransferControl" Margin="0,0,0,12">
-                          <FlyoutBase.AttachedFlyout>
-                            <MenuFlyout IsEnabled="{Binding Path=IsContextMenuEnabled,RelativeSource={RelativeSource TemplatedParent}}">
-                              <MenuFlyoutItem Text="cancel" x:Name="ContextMenuCancel" />
-                            </MenuFlyout>
-                          </FlyoutBase.AttachedFlyout>
-                          <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="ControlStates">
-                              <VisualState x:Name="Default">
-                                <Storyboard>
-                                  <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="TransferProgressBar">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
-                                  </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                              </VisualState>
-                              <VisualState x:Name="NoProgressBar" />
-                              <VisualState x:Name="Hidden">
-                                <Storyboard>
-                                  <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="Root">
-                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed" />
-                                  </ObjectAnimationUsingKeyFrames>
-                                </Storyboard>
-                              </VisualState>
-                            </VisualStateGroup>
-                          </VisualStateManager.VisualStateGroups>
-                          <Grid x:Name="Root">
-                            <Grid.RowDefinitions>
-                              <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition Width="Auto" />
-                              <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border x:Name="Icon" Background="{StaticResource SystemControlForegroundChromeHighBrush}" MinWidth="60" MinHeight="60" Margin="0,6" VerticalAlignment="Top">
-                              --><!--<Border.OpacityMask xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-  <ImageBrush ImageSource="{Binding Path=Icon,RelativeSource={RelativeSource TemplatedParent}}" Stretch="Uniform"></ImageBrush>
-</Border.OpacityMask>--><!--
-                            </Border>
-                            <StackPanel Grid.Column="1" x:Name="ListItem">
-                              <ContentControl x:Name="Header" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" FontFamily="{StaticResource PhoneFontFamilyNormal}" FontSize="{StaticResource PhoneFontSizeLarge}" Foreground="{StaticResource SystemControlForegroundChromeHighBrush}" Margin="12,0,0,0" HorizontalAlignment="Left" IsTabStop="False" />
-                              <ProgressBar x:Name="TransferProgressBar" Value="{Binding Path=Monitor.BytesTransferred,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" Minimum="0" Maximum="{Binding Path=Monitor.TotalBytesToTransfer,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}" IsIndeterminate="{Binding Path=Monitor.IsProgressIndeterminate,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay,FallbackValue=False}" Visibility="Collapsed" Style="{TemplateBinding ProgressBarStyle}" Margin="0,4,12,4" />
-                              <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="13,0,0,6" Visibility="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}" Text="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}}" />
-                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="13,0,0,6" Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}" Text=" - " />
-                                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Margin="13,0,0,6" Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}" Text="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}}" />
-                              </StackPanel>
-                            </StackPanel>
-                          </Grid>
-                        </Border>
-                      </ControlTemplate>
-                    </p1:TransferControl.Template>
-                  </p1:TransferControl>--><!--
-                </DataTemplate>
-              </ItemsControl.ItemTemplate>
-            </ItemsControl>
-          </StackPanel>
-        </ScrollViewer>
-      </PivotItem>-->
+ 
       <PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
         <PivotItem.Resources>
           <converters:XamlConverter xmlns:converters="using:Ben.Data.Converters"  x:Key="XamlConverter" />

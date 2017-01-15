@@ -391,4 +391,23 @@
   <Card ID="373" Name="Wild Hunt" Set="Empires" Type="Action Gathering" Cost="5" Pickable="true" Rules="Choose one: +3 Cards and add 1{VP} to the Wild Hunt Supply pile; or gain an Estate, and if you do, take the {VP} from the pile." />
   <Card ID="374" Name="Windfall" Set="Empires" Type="Event" Cost="5" Pickable="false" Rules="If your deck and discard pile are empty, gain 3 Golds." />
   <Card ID="375" Name="Wolf Den" Set="Empires" Type="Landmark" Pickable="false" Rules="When scoring, -3{VP} per card you have exactly one copy of." />
+  <!-- Base2E -->
+  <Card ID="376" Name="Merchant" Set="Base2E" Type="Action" Cost="3" Pickable="true" Rules="+1 Card\n+1 Action\nThe first time you play a Silver this turn, +$1." />
+  <Card ID="377" Name="Harbinger" Set="Base2E" Type="Action" Cost="3" Pickable="true" Rules="+1 Card\n+1 Action\nLook through your discard pile. You may put a card from it onto your deck." />
+  <Card ID="378" Name="Vassal" Set="Base2E" Type="Action" Cost="3" Pickable="true" Rules="Discard the top card of your deck. If it is an Action card, you may play it." />
+  <Card ID="379" Name="Artisan" Set="Base2E" Type="Action" Cost="6" Pickable="true" Rules="Gain a card to your hand costing up to $5. Put a card from your hand onto your deck." />
+  <Card ID="380" Name="Sentry" Set="Base2E" Type="Action" Cost="5" Pickable="true" Rules="+1 Card\n+1 Action\nLook at the top 2 cards of your deck. Trash and/or discard any number of them. Put the rest back in any order." />
+  <Card ID="381" Name="Poacher" Set="Base2E" Type="Action" Cost="4" Pickable="true" Rules="+1 Card\n+1 Action\n+$1. Discard a card per empty supply pile." />
+  <Card ID="382" Name="Bandit" Set="Base2E" Type="Action Attack" Cost="5" Pickable="true" Rules="Gain a Gold. Each other player reveals the top 2 cards of their deck, trashes a revealed treasure other than Copper, and discards the rest." />
+  <!-- Intrigue2E -->
+  <Card ID="383" Name="Lurker" Set="Intrigue2E" Type="Action" Cost="2" Pickable="true" Rules="+1 Action\nChoose one: Trash an Action card from the Supply, or gain an Action card from the trash." />
+  <Card ID="384" Name="Mill" Set="Intrigue2E" Type="Action Victory" Cost="4" Pickable="true" Rules="+1 Card\n+1 Action\nYou may discard 2 cards, for +$2. Worth 1VP" />
+  <Card ID="385" Name="Diplomat" Set="Intrigue2E" Type="Action Reaction" Cost="4" Pickable="true" Rules="+2 Cards. If you have 5 or fewer cards in hand (after drawing), +2 Actions. — When another player plays an Attack card, you may first reveal this from a hand of 5 or more cards, to draw 2 cards then discard 3." />
+  <Card ID="386" Name="Patrol" Set="Intrigue2E" Type="Action" Cost="5" Pickable="true" Rules="+3 Cards. Reveal the top 4 cards of your deck. Put the Victory cards and Curses into your hand. Put the rest back in any order." />
+  <Card ID="387" Name="Replace" Set="Intrigue2E" Type="Action Attack" Cost="5" Pickable="true" Rules="Trash a card from your hand. Gain a card costing up to $2 more than it. If the gained card is an Action or Treasure, put it onto your deck; if it's a Victory card, each other player gains a Curse." />
+  <Card ID="388" Name="Secret Passage" Set="Intrigue2E" Type="Action" Cost="4" Pickable="true" Rules="+2 Cards\n+1 Action\nTake a card from your hand and put it anywhere in your deck." />
+  <Card ID="389" Name="Courtier" Set="Intrigue2E" Type="Action" Cost="5" Pickable="true" Rules="Reveal a card from your hand. For each type it has (Action, Attack, etc.), choose one: +1 Action; or +1 Buy; or +$3; or gain a Gold. The choices must be different." />
+  <!-- Promo -->
+  <Card ID="390" Name="Sauna" Set="Promo" Type="Action" Cost="4" Pickable="true" Rules="+1 Card\n+1 Action\nYou may play an Avanto from your hand. — While this is in play, when you play a Silver, you may trash a card from your hand." />
+  <Card ID="391" Name="Avanto" Set="Promo" Type="Action" Cost="5" Pickable="false" Rules="+3 Cards. You may play an Sauna from your hand." />
 </ArrayOfCard>

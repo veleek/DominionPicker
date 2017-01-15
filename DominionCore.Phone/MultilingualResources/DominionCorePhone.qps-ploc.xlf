@@ -122,6 +122,14 @@
           <source>Victory</source>
           <target state="final" state-qualifier="mt-suggestion">[EE3EB][!!_Vįčţôŗý_!!]</target>
         </trans-unit>
+        <trans-unit id="CardSet_Base2E" translate="yes" xml:space="preserve">
+          <source>Base 2Ed.</source>
+          <target state="new">Base 2Ed.</target>
+        </trans-unit>
+        <trans-unit id="CardSet_Intrigue2E" translate="yes" xml:space="preserve">
+          <source>Intrigue 2Ed.</source>
+          <target state="new">Intrigue 2Ed.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -18,7 +18,9 @@ namespace Ben.Dominion
                 new List<CardSet>
                 {
                     CardSet.Base,
+                    CardSet.Base2E,
                     CardSet.Intrigue,
+                    CardSet.Intrigue2E,
                     CardSet.Seaside,
                     CardSet.Alchemy,
                     CardSet.Prosperity,
@@ -85,11 +87,7 @@ namespace Ben.Dominion
 
             // Check to see if we should load any localized cards.  This string is localized
             // so that we find the appropriate file depending on our locale.
-#if NETFX_CORE
-            string localizedFileName = CardDataStrings.GetString(nameof(CardDataStrings.Application_LocalizedCardsFileName));
-#else
             string localizedFileName = CardDataStrings.Application_LocalizedCardsFileName;
-#endif
             if (!string.IsNullOrWhiteSpace(localizedFileName))
             {
                 List<Card> localizedCards = await LoadCardsFromFileAsync(localizedFileName).ConfigureAwait(false);

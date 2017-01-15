@@ -166,7 +166,9 @@
     <Content Include="ApplicationIcon.scale-100.png" />
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Images\debt.png" />
+    <Content Include="Images\SetIcons\base2e.png" />
     <Content Include="Images\SetIcons\empires.png" />
+    <Content Include="Images\SetIcons\intrigue2e.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="analytics.xml" />
     <Content Include="Images\coin_extrasmall.png" />

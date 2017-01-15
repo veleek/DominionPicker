@@ -13,10 +13,7 @@
       mc:Ignorable="d" 
       DataContext="{Binding MainView, RelativeSource={RelativeSource Self}}" 
       >
-
-  <!--<p2:SystemTray.ProgressIndicator>
-    <p1:ProgressIndicator Text="{Binding Strings.MainPage_Generating, Source={StaticResource LocalizedResources}}" IsIndeterminate="True" />
-  </p2:SystemTray.ProgressIndicator>-->
+  
   <Grid x:Name="ContentRoot">
     <Grid x:Name="LayoutRoot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
       <Grid.RowDefinitions>
@@ -141,6 +138,11 @@
                             <behaviors:OpenFlyoutAction />
                           </interactions:EventTriggerBehavior.Actions>
                         </interactions:EventTriggerBehavior>
+                        <interactions:EventTriggerBehavior EventName="RightTapped">
+                          <interactions:EventTriggerBehavior.Actions>
+                            <behaviors:OpenFlyoutAction />
+                          </interactions:EventTriggerBehavior.Actions>
+                        </interactions:EventTriggerBehavior>
                       </interactivity:Interaction.Behaviors>
                       <FlyoutBase.AttachedFlyout>
                         <MenuFlyout x:Name="FavoritesContextMenu">
@@ -181,6 +183,11 @@
                     <StackPanel>
                       <interactivity:Interaction.Behaviors>
                         <interactions:EventTriggerBehavior EventName="Holding">
+                          <interactions:EventTriggerBehavior.Actions>
+                            <behaviors:OpenFlyoutAction />
+                          </interactions:EventTriggerBehavior.Actions>
+                        </interactions:EventTriggerBehavior>
+                        <interactions:EventTriggerBehavior EventName="RightTapped">
                           <interactions:EventTriggerBehavior.Actions>
                             <behaviors:OpenFlyoutAction />
                           </interactions:EventTriggerBehavior.Actions>

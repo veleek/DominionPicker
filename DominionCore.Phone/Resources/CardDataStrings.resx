@@ -129,6 +129,9 @@
   <data name="CardSet_Base" xml:space="preserve">
     <value>Base</value>
   </data>
+  <data name="CardSet_Base2E" xml:space="preserve">
+    <value>Base 2Ed.</value>
+  </data>
   <data name="CardSet_Cornucopia" xml:space="preserve">
     <value>Cornucopia</value>
   </data>
@@ -146,6 +149,9 @@
   </data>
   <data name="CardSet_Intrigue" xml:space="preserve">
     <value>Intrigue</value>
+  </data>
+  <data name="CardSet_Intrigue2E" xml:space="preserve">
+    <value>Intrigue 2Ed.</value>
   </data>
   <data name="CardSet_Promo" xml:space="preserve">
     <value>Promo</value>

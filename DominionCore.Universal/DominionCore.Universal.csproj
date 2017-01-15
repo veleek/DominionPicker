@@ -131,12 +131,12 @@
     <PRIResource Include="Resources\qps-ploc\CardDataStrings.resw" />
     <PRIResource Include="Resources\en\Strings.resw">
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
-      <Generator>PublicReswFileCodeGenerator</Generator>
+      <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>Strings.cs</LastGenOutput>
     </PRIResource>
     <PRIResource Include="Resources\en\CardDataStrings.resw">
       <CustomToolNamespace>Ben.Dominion.Resources</CustomToolNamespace>
-      <Generator>PublicReswFileCodeGenerator</Generator>
+      <Generator>ReswFileCodeGenerator</Generator>
       <LastGenOutput>CardDataStrings.cs</LastGenOutput>
     </PRIResource>
   </ItemGroup>

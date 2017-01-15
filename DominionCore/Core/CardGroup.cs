@@ -123,7 +123,7 @@ namespace Ben.Dominion
         public void Sort(ResultSortOrder sortOrder)
         {
             IEnumerable<Card> orderedCards;
-            if (sortOrder == ResultSortOrder.Name)
+            if (sortOrder == ResultSortOrder.Name || sortOrder == ResultSortOrder.None)
             {
                 orderedCards = this.OrderBy(c => c.Name);
             }

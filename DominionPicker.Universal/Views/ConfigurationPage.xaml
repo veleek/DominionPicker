@@ -106,7 +106,6 @@
             </ComboBox.ItemTemplate>
           </ComboBox>
           <TextBlock Text="{Binding Strings.Config_LanguageDescription, Source={StaticResource LocalizedResources}}" Style="{StaticResource SubtitleTextBlockStyle}" TextWrapping="Wrap" />
-          <!--
           <CheckBox IsChecked="{Binding LocalizeUI, Mode=TwoWay}">
             <StackPanel>
               <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="User Interface" />
@@ -119,6 +118,7 @@
               <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="The card names, types, and sets" TextWrapping="Wrap" />
             </StackPanel>
           </CheckBox>
+          <!--
           <CheckBox IsChecked="{Binding LocalizeRulesText, Mode=TwoWay}">
             <StackPanel>
               <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Rules Text" />

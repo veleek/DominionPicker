@@ -18,170 +18,145 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-    
-    <toolkit:TransitionService.NavigationInTransition>
-        <toolkit:NavigationInTransition>
-            <toolkit:NavigationInTransition.Forward>
-                <toolkit:SwivelTransition Mode="ForwardIn" />
-            </toolkit:NavigationInTransition.Forward>
-            <toolkit:NavigationInTransition.Backward>
-                <toolkit:SwivelTransition Mode="BackwardIn"/>
-            </toolkit:NavigationInTransition.Backward>
-        </toolkit:NavigationInTransition>
-    </toolkit:TransitionService.NavigationInTransition>
-    <toolkit:TransitionService.NavigationOutTransition>
-        <toolkit:NavigationOutTransition>
-            <toolkit:NavigationOutTransition.Forward>
-                <toolkit:SwivelTransition Mode="ForwardOut" />
-            </toolkit:NavigationOutTransition.Forward>
-            <toolkit:NavigationOutTransition.Backward>
-                <toolkit:SwivelTransition Mode="BackwardOut" />
-            </toolkit:NavigationOutTransition.Backward>
-        </toolkit:NavigationOutTransition>
-    </toolkit:TransitionService.NavigationOutTransition>
-    
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.Resources>
-            <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextLargeStyle}">
-                <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-            </Style>
 
-            <Style x:Key="AboutContentStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
-                <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-            </Style>
-            
-            <Style x:Key="AboutLinkStyle" TargetType="HyperlinkButton" >
-                <Setter Property="FontSize" Value="20" />
-                <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" />
-                <Setter Property="HorizontalAlignment" Value="Left" />
-            </Style>
+  <toolkit:TransitionService.NavigationInTransition>
+    <toolkit:NavigationInTransition>
+      <toolkit:NavigationInTransition.Forward>
+        <toolkit:SwivelTransition Mode="ForwardIn" />
+      </toolkit:NavigationInTransition.Forward>
+      <toolkit:NavigationInTransition.Backward>
+        <toolkit:SwivelTransition Mode="BackwardIn"/>
+      </toolkit:NavigationInTransition.Backward>
+    </toolkit:NavigationInTransition>
+  </toolkit:TransitionService.NavigationInTransition>
+  <toolkit:TransitionService.NavigationOutTransition>
+    <toolkit:NavigationOutTransition>
+      <toolkit:NavigationOutTransition.Forward>
+        <toolkit:SwivelTransition Mode="ForwardOut" />
+      </toolkit:NavigationOutTransition.Forward>
+      <toolkit:NavigationOutTransition.Backward>
+        <toolkit:SwivelTransition Mode="BackwardOut" />
+      </toolkit:NavigationOutTransition.Backward>
+    </toolkit:NavigationOutTransition>
+  </toolkit:TransitionService.NavigationOutTransition>
 
-            <Style x:Key="CopyrightStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
-                <Setter Property="TextWrapping" Value="Wrap"/>
-                <Setter Property="TextAlignment" Value="Center"/>
-            </Style>
-        </Grid.Resources>
-        
-        <Grid.RowDefinitions>
+  <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid.Resources>
+      <Style x:Key="AboutHeaderStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextLargeStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+      </Style>
+
+      <Style x:Key="AboutContentStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextNormalStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+      </Style>
+
+      <Style x:Key="AboutLinkStyle" TargetType="HyperlinkButton" >
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Foreground" Value="{StaticResource PhoneAccentBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+      </Style>
+
+      <Style x:Key="CopyrightStyle" TargetType="TextBlock" BasedOn="{StaticResource PhoneTextSubtleStyle}">
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+      </Style>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <controls:Pivot x:Name="RootPivot" Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Grid.Row="0">
+      <controls:Pivot.TitleTemplate>
+        <DataTemplate>
+
+        </DataTemplate>
+      </controls:Pivot.TitleTemplate>
+
+      <controls:PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" >
+          <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
 
-        <controls:Pivot x:Name="RootPivot" Title="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" Grid.Row="0">
-            <controls:Pivot.TitleTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </controls:Pivot.TitleTemplate>
-            
-            <controls:PivotItem Header="{Binding Strings.About_About, Source={StaticResource LocalizedResources}}" Margin="12,0">
-                <Grid x:Name="ContentPanel" Grid.Row="1" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <ScrollViewer Grid.Row="0">
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource AboutHeaderStyle}"
+          <ScrollViewer Grid.Row="0">
+            <StackPanel>
+              <TextBlock Style="{StaticResource AboutHeaderStyle}"
                                        Foreground="{StaticResource PhoneAccentBrush}"
                                        Text="{Binding Strings.Application_Title, Source={StaticResource LocalizedResources}}" />
-                            <TextBlock Style="{StaticResource AboutHeaderStyle}"
+              <TextBlock Style="{StaticResource AboutHeaderStyle}"
                                        Text="by Ben Randall" />
-                            <HyperlinkButton Content="http://www.benrandall.ca" 
+              <HyperlinkButton Content="http://www.veleek.com/DominionPicker" 
                                              TargetName="Website"
-                                             NavigateUri="http://www.benrandall.ca"
+                                             NavigateUri="http://www.veleek.com/DominionPicker"
                                              Style="{StaticResource AboutLinkStyle}" />
 
-                            <Rectangle Height="12" />
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+              <Rectangle Height="12" />
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Version:"/>
+                <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
                                            Foreground="{StaticResource PhoneAccentBrush}"
                                            Margin="0"
                                            x:Name="VersionTextBlock" 
                                            Text="1.0.0.0"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Feedback:"/>
+              </StackPanel>
+              <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Feedback:"/>
 
-                                <HyperlinkButton Content="randall.ben@gmail.com" 
+                <HyperlinkButton Content="randall.ben@gmail.com" 
                                              NavigateUri="mailto:randall.ben@gmail.com?Subject=Dominion+Picker+Feedback"
                                              TargetName="EmailLink"
                                              Style="{StaticResource AboutLinkStyle}"/>
-                            </StackPanel>
+              </StackPanel>
 
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource PhoneTextNormalStyle}" Text="Donate:"/>
-                                <HyperlinkButton Content="Support the development with Paypal" 
-                                                 NavigateUri="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=veleek@gmail.com&amp;lc=US&amp;item_name=Ben+Corp.&amp;item_number=Windows+Phone+Dominion+Picker&amp;currency_code=USD"
-                                                 TargetName="PaypalLink"
-                                                 Style="{StaticResource AboutLinkStyle}"/>
-                            </StackPanel>
-
-                            <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
+              <TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
                                 This app allows to easily select a randomized set of cards for a game of Dominion.  All comments and suggestions are appreciated and can be directed to the email address above.
-                            </TextBlock>
+              </TextBlock>
 
-                            <TextBlock Text="Looking for something completely unrelated?  Why not try out my solitaire game? :)"
-                                       TextWrapping="Wrap"
-                                       Margin="12,6"/>
-                            <HyperlinkButton Content="A+ Solitaire (on the WP7 Marketplace)" 
-                                             Click="MarketplaceButton_Click"
-                                             Tag="7627a3ef-da59-e011-854c-00237de2db9e"
-                                             Style="{StaticResource AboutLinkStyle}"/>
-                            <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
+              <TextBlock Text="Acknowledgements" Style="{StaticResource AboutHeaderStyle}" />
 
-                            <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
-                           
-                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
-                                            HorizontalAlignment="Left"
-                                            Content="James Lao - for telling me that many of my ideas are stupid."/>
+              <TextBlock Margin="12,6,0,6" TextWrapping="Wrap" Text="Special thanks (in alphabetical order) to the following people who have helped make the app even better:" />
 
-                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
-                                            HorizontalAlignment="Left"
-                                            Content="Stephane Plante - for giving me new ideas to replace the ones James ruined."/>
-                            
-                            <ContentControl ContentTemplate="{StaticResource BulletedItem}"
-                                            HorizontalAlignment="Left"
-                                            Content="Brian Chase - Because he asked to have his name here."/>
-                                                        
-                            <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="12,12,0,0"/>
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Brian Chase - Because he asked to have his name here." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Jeroen ter Heerdt - for Dutch card translations." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Lukas Kautzsch - for German card translations." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="James Lao - for telling me that many of my ideas are stupid." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Stephane Plante - for giving me new ideas to replace the ones James ruined." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Tomas Zöller - for German UI and card translations." />
+              <ContentControl ContentTemplate="{StaticResource BulletedItem}" HorizontalAlignment="Left" Content="Many others for feedback, bug reports, and feature requests!" />
 
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource CopyrightStyle}">
+              <TextBlock Text="Additional Licenses" Style="{StaticResource AboutHeaderStyle}" Margin="12,12,0,0"/>
+
+              <StackPanel>
+                <TextBlock Style="{StaticResource CopyrightStyle}">
                                     All Dominion imagery and card info is
                                     <LineBreak/>
                                     ©2008 Rio Grande Games
-                                </TextBlock>
-                            </StackPanel>
-                            
-                            <RichTextBox TextWrapping="Wrap" TextAlignment="Center">
-                                <Paragraph>
-                                    <Run Text="Thumbtack by Aimeê Ferreira from" />
-                                    <InlineUIContainer>
-                                        <HyperlinkButton Content="the Noun Project" Margin="-12,0"
-                                                         TargetName="The Noun Project - Thumbtack"
-                                                         NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=23926"
-                                                         Foreground="{StaticResource PhoneAccentBrush}"/>
-                                    </InlineUIContainer>
-                                </Paragraph>
-                            </RichTextBox>
-                            
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Card by Stephen JB Thomas from the Noun Project" />
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Flash Cards by Rohan Gupta from the Noun Project" />
-                            
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="from the Noun Project" />
-                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="from the Noun Project" />
-                            
-                            
-                            
+                </TextBlock>
+              </StackPanel>
 
-                            <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
+              <RichTextBox TextWrapping="Wrap" TextAlignment="Center">
+                <Paragraph>
+                  <Run Text="Thumbtack by Alexandr Cherkinsky from "/>
+                  <InlineUIContainer>
+                    <HyperlinkButton Content="the Noun Project" Margin="-12,0"
+                                                         TargetName="The Noun Project - Thumbtack"
+                                                         NavigateUri="https://thenounproject.com/search/?q=pin&amp;i=172903"
+                                                         Foreground="{StaticResource PhoneAccentBrush}"/>
+                  </InlineUIContainer>
+                </Paragraph>
+              </RichTextBox>
+
+              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="people by useiconic.com from the Noun Project" />
+              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Card by Stephen JB Thomas from the Noun Project" />
+              <TextBlock TextWrapping="Wrap" TextAlignment="Center" Text="Flash Cards by Rohan Gupta from the Noun Project" />
+
+              <!--<TextBlock Style="{StaticResource AboutContentStyle}" Margin="12">
                                 Microsoft Public License (Ms-PL)
                                 <LineBreak/>
                                 This license governs use of the accompanying software. If you use the software, you accept this license. If you do not accept the license, do not use the software.
@@ -203,88 +178,88 @@
                                 (D) If you distribute any portion of the software in source code form, you may do so only under this license by including a complete copy of this license with your distribution. If you distribute any portion of the software in compiled or object code form, you may only do so under a license that complies with this license.
                                 (E) The software is licensed "as-is." You bear the risk of using it. The contributors give no express warranties, guarantees or conditions. You may have additional consumer rights under your local laws which this license cannot change. To the extent permitted under your local laws, the contributors exclude the implied warranties of merchantability, fitness for a particular purpose and non-infringement.
                             </TextBlock>-->
-                        </StackPanel>
-                    </ScrollViewer>
+            </StackPanel>
+          </ScrollViewer>
 
-                </Grid>
-            </controls:PivotItem>
+        </Grid>
+      </controls:PivotItem>
 
-            <controls:PivotItem Header="{Binding Strings.About_Help, Source={StaticResource LocalizedResources}}" Margin="12,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Sets"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="Filter cards to those from the selected sets"/>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Minimum card per set"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="Each set in the final list will have at least this many cards.  This does not force a specific number of sets so it will still be possible to get only a single set in the result.  Sets that are pinned are always included in the result."/>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="+Actions/Buys Policy"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="This defines how cards with +Actions/+Buys are filtered.  If require is selected, there will be at least on card of that type in the final list.  If prevent is selected, none of those cards will be in the final list.  The +2 options do the same for cards with +2 only."/>
-                        <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Favorites"/>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="From the create page, you can save the current randomizer settings as a favorite.  From the results page, you can save the card list as a favorite.  You can access these from the favorites pivot where you can also edit/rename/delete them using the context menu (tap and hold)."/>
-                    </StackPanel>
-                </ScrollViewer>
-            </controls:PivotItem>
+      <controls:PivotItem Header="{Binding Strings.About_Help, Source={StaticResource LocalizedResources}}" Margin="12,0">
+        <ScrollViewer>
+          <StackPanel>
+            <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Sets"/>
+            <TextBlock Style="{StaticResource AboutContentStyle}" Text="Filter cards to those from the selected sets"/>
+            <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Minimum card per set"/>
+            <TextBlock Style="{StaticResource AboutContentStyle}" Text="Each set in the final list will have at least this many cards.  This does not force a specific number of sets so it will still be possible to get only a single set in the result.  Sets that are pinned are always included in the result."/>
+            <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="+Actions/Buys Policy"/>
+            <TextBlock Style="{StaticResource AboutContentStyle}" Text="This defines how cards with +Actions/+Buys are filtered.  If require is selected, there will be at least on card of that type in the final list.  If prevent is selected, none of those cards will be in the final list.  The +2 options do the same for cards with +2 only."/>
+            <TextBlock Style="{StaticResource AboutHeaderStyle}" Text="Favorites"/>
+            <TextBlock Style="{StaticResource AboutContentStyle}" Text="From the create page, you can save the current randomizer settings as a favorite.  From the results page, you can save the card list as a favorite.  You can access these from the favorites pivot where you can also edit/rename/delete them using the context menu (tap and hold)."/>
+          </StackPanel>
+        </ScrollViewer>
+      </controls:PivotItem>
 
-            <controls:PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
-                <ScrollViewer>
-                    <StackPanel>
-                        <TextBlock Style="{StaticResource AboutContentStyle}" Text="{Binding Strings.About_RulesDescription, Source={StaticResource LocalizedResources}}"/>
+      <controls:PivotItem Header="{Binding Strings.About_Rules, Source={StaticResource LocalizedResources}}" Margin="12,0">
+        <ScrollViewer>
+          <StackPanel>
+            <TextBlock Style="{StaticResource AboutContentStyle}" Text="{Binding Strings.About_RulesDescription, Source={StaticResource LocalizedResources}}"/>
 
-                        <ItemsControl x:Name="RulesInfo">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <toolkit:TransferControl x:Name="DominionTransferControl" 
+            <ItemsControl x:Name="RulesInfo">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <toolkit:TransferControl x:Name="DominionTransferControl" 
                                                              Header="{Binding Monitor.Name}" 
                                                              Margin="12,6,0,6" 
                                                              Tap="DominionTransferControl_OnTap" 
                                                              Icon="{Binding IconPath}"
                                                              Monitor="{Binding Monitor}">
-                                        <toolkit:TransferControl.Template>
-                                            <ControlTemplate TargetType="toolkit:TransferControl">
-                                                <Border x:Name="TransferControl" Margin="0,0,0,12">
-                                                    <toolkit:ContextMenuService.ContextMenu>
-                                                        <toolkit:ContextMenu  IsEnabled="{Binding Path=IsContextMenuEnabled,RelativeSource={RelativeSource TemplatedParent}}">
-                                                            <toolkit:MenuItem Header="cancel" x:Name="ContextMenuCancel"/>
-                                                        </toolkit:ContextMenu>
-                                                    </toolkit:ContextMenuService.ContextMenu>
-                                                    <VisualStateManager.VisualStateGroups>
-                                                        <VisualStateGroup x:Name="ControlStates">
-                                                            <VisualState x:Name="Default">
-                                                                <Storyboard>
-                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="TransferProgressBar">
-                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
-                                                                    </ObjectAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </VisualState>
-                                                            <VisualState x:Name="NoProgressBar" />
-                                                            <VisualState x:Name="Hidden">
-                                                                <Storyboard>
-                                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="Root">
-                                                                        <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                                                                    </ObjectAnimationUsingKeyFrames>
-                                                                </Storyboard>
-                                                            </VisualState>
-                                                        </VisualStateGroup>
-                                                    </VisualStateManager.VisualStateGroups>
-                                                    <Grid x:Name="Root">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="*" />
-                                                        </Grid.RowDefinitions>
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition Width="*" />
-                                                        </Grid.ColumnDefinitions>
-                                                        <Border x:Name="Icon"
+                    <toolkit:TransferControl.Template>
+                      <ControlTemplate TargetType="toolkit:TransferControl">
+                        <Border x:Name="TransferControl" Margin="0,0,0,12">
+                          <toolkit:ContextMenuService.ContextMenu>
+                            <toolkit:ContextMenu  IsEnabled="{Binding Path=IsContextMenuEnabled,RelativeSource={RelativeSource TemplatedParent}}">
+                              <toolkit:MenuItem Header="cancel" x:Name="ContextMenuCancel"/>
+                            </toolkit:ContextMenu>
+                          </toolkit:ContextMenuService.ContextMenu>
+                          <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ControlStates">
+                              <VisualState x:Name="Default">
+                                <Storyboard>
+                                  <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="TransferProgressBar">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Visible" />
+                                  </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                              </VisualState>
+                              <VisualState x:Name="NoProgressBar" />
+                              <VisualState x:Name="Hidden">
+                                <Storyboard>
+                                  <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Control.Visibility)" Storyboard.TargetName="Root">
+                                    <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                                  </ObjectAnimationUsingKeyFrames>
+                                </Storyboard>
+                              </VisualState>
+                            </VisualStateGroup>
+                          </VisualStateManager.VisualStateGroups>
+                          <Grid x:Name="Root">
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="Auto" />
+                              <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="Icon"
                                                     Background="{StaticResource PhoneForegroundBrush}"
                                                     MinWidth="60"
                                                     MinHeight="60"
                                                     Margin="0,6"
                                                     VerticalAlignment="Top">
-                                                            <Border.OpacityMask>
-                                                                <ImageBrush ImageSource="{Binding Path=Icon,RelativeSource={RelativeSource TemplatedParent}}" Stretch="Uniform" ></ImageBrush>
-                                                            </Border.OpacityMask>
-                                                        </Border>
-                                                        <StackPanel Grid.Column="1" x:Name="ListItem">
-                                                            <ContentControl x:Name="Header" 
+                              <Border.OpacityMask>
+                                <ImageBrush ImageSource="{Binding Path=Icon,RelativeSource={RelativeSource TemplatedParent}}" Stretch="Uniform" ></ImageBrush>
+                              </Border.OpacityMask>
+                            </Border>
+                            <StackPanel Grid.Column="1" x:Name="ListItem">
+                              <ContentControl x:Name="Header" 
                                                                 Content="{TemplateBinding Header}" 
                                                                 ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                                 FontFamily="{StaticResource PhoneFontFamilyNormal}"
@@ -294,7 +269,7 @@
                                                                 HorizontalAlignment="Left"
                                                                 IsTabStop="False"
                                                                 />
-                                                            <ProgressBar x:Name="TransferProgressBar"
+                              <ProgressBar x:Name="TransferProgressBar"
                                                              Value="{Binding Path=Monitor.BytesTransferred,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
                                                              Minimum="0"
                                                              Maximum="{Binding Path=Monitor.TotalBytesToTransfer,RelativeSource={RelativeSource TemplatedParent},Mode=OneWay}"
@@ -303,58 +278,58 @@
                                                              Style="{TemplateBinding ProgressBarStyle}"
                                                              Margin="0,4,12,4"
                                                              />
-                                                            <StackPanel Orientation="Horizontal">
-                                                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+                              <StackPanel Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
                                                                        Margin="13,0,0,6"
                                                                        Visibility="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
                                                                        Text="{Binding Monitor.FileStatus, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
                                                                        Margin="13,0,0,6"
                                                                        Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
                                                                        Text=" - " />
-                                                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
+                                <TextBlock Style="{StaticResource PhoneTextSubtleStyle}"
                                                                        Margin="13,0,0,6"
                                                                        Visibility="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource IsValidToVisibilityConverter}}"
                                                                        Text="{Binding Monitor.ErrorMessage, RelativeSource={RelativeSource TemplatedParent}}" />
-                                                            </StackPanel>
-                                                            
-                                                        </StackPanel>
-                                                    </Grid>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </toolkit:TransferControl.Template>
-                                    </toolkit:TransferControl>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                      
-                    </StackPanel>
-                </ScrollViewer>
-            </controls:PivotItem>
+                              </StackPanel>
 
-            <controls:PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
-                <controls:PivotItem.Resources>
-                    <converters:XamlConverter x:Key="XamlConverter" />
-                </controls:PivotItem.Resources>
-                <ScrollViewer x:Name="ChangesScrollViewer" Content="{Binding Source=./Resources/Changes.txt, Converter={StaticResource XamlConverter}}"/>
-            </controls:PivotItem>
-        </controls:Pivot>
+                            </StackPanel>
+                          </Grid>
+                        </Border>
+                      </ControlTemplate>
+                    </toolkit:TransferControl.Template>
+                  </toolkit:TransferControl>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-        <Grid Grid.Row="1" Margin="12,0,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+          </StackPanel>
+        </ScrollViewer>
+      </controls:PivotItem>
 
-            <Button x:Name="RateButton" Grid.Column="0" Content="{Binding Strings.About_Rate, Source={StaticResource LocalizedResources}}" Click="RateButton_Click"/>
-            <Button x:Name="BuyNowButton" Grid.Column="1" Content="{Binding Strings.About_Update, Source={StaticResource LocalizedResources}}" Click="UpdateButton_Click"/>
-        </Grid>
+      <controls:PivotItem Header="{Binding Strings.About_Changes, Source={StaticResource LocalizedResources}}" Margin="12,0">
+        <controls:PivotItem.Resources>
+          <converters:XamlConverter x:Key="XamlConverter" />
+        </controls:PivotItem.Resources>
+        <ScrollViewer x:Name="ChangesScrollViewer" Content="{Binding Source=./Resources/Changes.txt, Converter={StaticResource XamlConverter}}"/>
+      </controls:PivotItem>
+    </controls:Pivot>
 
-        
+    <Grid Grid.Row="1" Margin="12,0,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition/>
+        <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+      </Grid.RowDefinitions>
+
+      <Button x:Name="RateButton" Grid.Column="0" Content="{Binding Strings.About_Rate, Source={StaticResource LocalizedResources}}" Click="RateButton_Click"/>
+      <Button x:Name="BuyNowButton" Grid.Column="1" Content="{Binding Strings.About_Update, Source={StaticResource LocalizedResources}}" Click="UpdateButton_Click"/>
     </Grid>
+
+
+  </Grid>
 </phone:PhoneApplicationPage>

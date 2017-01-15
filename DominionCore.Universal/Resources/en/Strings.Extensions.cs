@@ -4,15 +4,27 @@ namespace Ben.Dominion.Resources
 
     public partial class Strings
     {
+        private static CultureInfo culture;
+
         public static void EnsureLoaded()
         {
         }
 
-        public static string GetString(string key)
+        public static CultureInfo Culture
         {
-            return resourceLoader.GetString(key);
-        }
+            get
+            {
+                return culture;
+            }
 
-        public static CultureInfo Culture { get; set; }
+            set
+            {
+                culture = value;
+                if (culture != null)
+                {
+                    _context.Languages = culture == null ? null : new string[] { culture.ToString() };
+                }
+            }
+        }
     }
 }

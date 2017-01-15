@@ -173,7 +173,7 @@ namespace Ben.Dominion
 
         public Boolean InSet(CardSet set)
         {
-            return set == this.Set;
+            return this.Set != CardSet.None;
         }
 
         public Boolean InSet(IEnumerable<CardSet> sets)

@@ -1,4 +1,6 @@
-﻿$lang = @("CS", "DE", "ES", "FI", "FR", "IT", "NL", "PL")
+﻿param(
+ $Languages = @("CS", "DE", "ES", "FI", "FR", "IT", "NL", "PL")
+)
 
 $VerbosePreference = "Continue"
 
@@ -88,8 +90,7 @@ function GetColumnForValue($Value)
 
 Write-Verbose "Starting Card Processing"
 
-cd 'C:\code\vso\veleek\Dominion Picker\Data\Cards'
-
+cd $PSScriptRoot
 
 if($true) #!(Test-Path variable:\cards) -or ((Test-Path variable:\xl) -and $xl.Visible -eq $false))
 {
@@ -128,19 +129,20 @@ $propertyColumns = @{}
 $props | % { $propertyColumns[$_] = GetColumnForValue $_ }
 GenerateCardsXml -Properties $props -PropertyColumns $propertyColumns
 
-#<#
-$langCount = 0
-$lang | % { 
-    $langCount++
-    $progress = (($langCount/($lang.Count+1))*100)
-    Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
-    Write-Verbose "Generating $_ Cards List"
-    $locProps = @("ID","Name_$_","Rules_$_")
-    $locPropColumns = @{}
-    $locProps | % { $locPropColumns[$_] = GetColumnForValue $_ }
-    GenerateCardsXml -Language $_ -Properties $locProps -PropertyColumns $locPropColumns
+if($Languages -and ($Languages.Count -gt 0))
+{
+	$langCount = 0
+	$Languages | % { 
+		$langCount++
+		$progress = (($langCount/($Languages.Count+1))*100)
+		Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
+		Write-Verbose "Generating $_ Cards List"
+		$locProps = @("ID","Name_$_","Rules_$_")
+		$locPropColumns = @{}
+		$locProps | % { $locPropColumns[$_] = GetColumnForValue $_ }
+		GenerateCardsXml -Language $_ -Properties $locProps -PropertyColumns $locPropColumns
+	}
 }
-##>
 
 Write-Progress -Activity "Generating Localized Card Files" -Id 10 -Completed
 

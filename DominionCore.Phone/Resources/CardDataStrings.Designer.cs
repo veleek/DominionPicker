@@ -97,6 +97,15 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Base 2Ed..
+        /// </summary>
+        public static string CardSet_Base2E {
+            get {
+                return ResourceManager.GetString("CardSet_Base2E", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cornucopia.
         /// </summary>
         public static string CardSet_Cornucopia {
@@ -147,6 +156,15 @@ namespace Ben.Dominion.Resources {
         public static string CardSet_Intrigue {
             get {
                 return ResourceManager.GetString("CardSet_Intrigue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Intrigue 2Ed..
+        /// </summary>
+        public static string CardSet_Intrigue2E {
+            get {
+                return ResourceManager.GetString("CardSet_Intrigue2E", resourceCulture);
             }
         }
         

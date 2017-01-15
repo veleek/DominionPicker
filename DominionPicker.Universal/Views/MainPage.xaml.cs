@@ -274,7 +274,25 @@ namespace Ben.Dominion
             {
                 // Just in case;
                 this.MainView.CancelGeneration();
-                this.MainView.Result = (e.AddedItems[0] as FavoriteSet).Value;
+                PickerResult result = (e.AddedItems[0] as FavoriteSet).Value;
+
+                CardGroup kingdomCards = new CardGroup(CardGroupType.KingdomCard);
+                CardGroup eventCards = new CardGroup(CardGroupType.Events);
+                foreach (var card in result.Cards)
+                {
+                    switch (card.Type)
+                    {
+                        case CardType.Event:
+                        case CardType.Landmark:
+                            card.Group = eventCards;
+                            break;
+                        default:
+                            card.Group = kingdomCards;
+                            break;
+                    }
+                }
+
+                this.MainView.Result = result;
                 NavigationServiceHelper.Navigate(PickerView.Results);
                 // Clear the selection
                 this.FavoriteSetsListBox.SelectedItem = null;

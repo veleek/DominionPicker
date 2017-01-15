@@ -23,59 +23,6 @@ namespace Ben.Dominion
             version += " - DEBUG";
 #endif
             this.VersionTextBlock.Text = version;
-            //this.RulesInfo.ItemsSource = new[] { new RulesInfoItem(CardSet.Base), new RulesInfoItem(CardSet.Intrigue), new RulesInfoItem(CardSet.Seaside), new RulesInfoItem(CardSet.Alchemy), new RulesInfoItem(CardSet.Prosperity), new RulesInfoItem(CardSet.Cornucopia), new RulesInfoItem(CardSet.Hinterlands), new RulesInfoItem(CardSet.DarkAges), new RulesInfoItem(CardSet.Guilds), new RulesInfoItem(CardSet.Adventures), };
-        }
-
-        public class RulesInfoItem
-        {
-
-            public RulesInfoItem(CardSet set)
-            {
-                string rulesUrl;
-                switch (set)
-                {
-                    case CardSet.Base:
-                        rulesUrl = "http://riograndegames.com/getFile.php?id=348";
-                        break;
-                    case CardSet.Intrigue:
-                    case CardSet.Seaside:
-                    case CardSet.Alchemy:
-                    case CardSet.Prosperity:
-                    case CardSet.Cornucopia:
-                    case CardSet.Hinterlands:
-                    case CardSet.DarkAges:
-                    case CardSet.Guilds:
-                        rulesUrl = string.Format("http://dominiongame.info/dominion{0}rules.pdf", set);
-                        break;
-                    case CardSet.Adventures:
-                        rulesUrl = "http://riograndegames.com/getFile.php?id=1907";
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException("set");
-                }
-                //this.Monitor = new DownloadingTransferMonitor(rulesUrl, string.Format("Dominion{0}Rules.pdf", set), Localized.CardData.GetLocalizedValue(set));
-                this.IconPath = string.Format("../Images/SetIcons/{0}.png", set);
-            }
-
-            //public DownloadingTransferMonitor Monitor { get; set; }
-
-            public string IconPath { get; set; }
-
-        }
-
-        private void DominionTransferControl_OnTap(object sender, GestureEventArgs e)
-        {
-            //var transferControl = sender as TransferControl;
-            //if ( transferControl == null )
-            //{
-            //   throw new ArgumentException("Sender must be a TransferControl", "sender");
-            //}
-            //var monitor = transferControl.Monitor as DownloadingTransferMonitor;
-            //if ( monitor == null )
-            //{
-            //   throw new ArgumentException("TransferControl's Monitor must be a DownloadingTransferMonitor", "sender");
-            //}
-            //await monitor.OpenRulesAsync();
         }
 
         private async void EmailButton_Click(object sender, RoutedEventArgs e)

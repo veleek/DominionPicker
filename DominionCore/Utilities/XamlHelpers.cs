@@ -48,6 +48,7 @@ namespace Ben.Utilities
                         FrameworkElement fe;
                         if (lastWasEmpty)
                         {
+                            if (line.StartsWith("## ")) line = line.Substring(3);
                             fe = new TextBlock
                             {
                                 TextWrapping = TextWrapping.Wrap,
@@ -58,6 +59,7 @@ namespace Ben.Utilities
                         }
                         else
                         {
+                            if(line.StartsWith("* ")) line = line.Substring(2);
                             fe = new ContentPresenter
                             {
                                 HorizontalAlignment = HorizontalAlignment.Stretch,

@@ -14,11 +14,12 @@
     SecondaryButtonText="Cancel"
     PrimaryButtonClick="AcceptButtonClick"
     SecondaryButtonClick="CancelButtonClick"
-    IsPrimaryButtonEnabled="{Binding Text, ElementName=FavoriteNameTextBox, Converter={StaticResource IsValidToBooleanConverter}}">
+    IsPrimaryButtonEnabled="{Binding Text, ElementName=FavoriteNameTextBox, Converter={StaticResource IsValidToBooleanConverter}}"
+    x:Name="FavoriteContentDialog">
 
-  <StackPanel Margin="0,12,52,0">
+  <StackPanel Margin="0,12,0,0">
     <TextBox x:Name="FavoriteNameTextBox" TextWrapping="NoWrap" MaxLength="64" 
-             Text="{Binding FavoriteName, Mode=TwoWay}">
+             Text="{Binding FavoriteName, Mode=TwoWay, ElementName=FavoriteContentDialog}">
       <i:Interaction.Behaviors>
         <interactions:EventTriggerBehavior EventName="KeyUp">
           <behaviors:OnKeyAction Key="Enter">

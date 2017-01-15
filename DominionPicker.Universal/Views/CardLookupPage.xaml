@@ -49,12 +49,8 @@
 
           <Button Grid.Column="1" Width="32" Height="32" Padding="0"
                   VerticalAlignment="Center"
-                  Style="{StaticResource RoundButtonStyle}">
-            <interactivity:Interaction.Behaviors>
-              <interactions:EventTriggerBehavior EventName="Click">
-                <behaviors:PickerViewNavigateAction View="CardInfo" Parameter="{x:Bind Card}" />
-              </interactions:EventTriggerBehavior>
-            </interactivity:Interaction.Behaviors>
+                  Style="{StaticResource RoundButtonStyle}"
+                  Click="CardInfoButton_Click">
             <SymbolIcon Symbol="Help" Margin="1,0,-1,0"/>
           </Button>
         </Grid>
@@ -98,7 +94,8 @@
                Style="{StaticResource HeaderTextBlockStyle}" Margin="12,0,0,4"  />
 
     <Button Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Top"
-            Style="{StaticResource RoundButtonStyle}" Margin="12" Width="40" Height="40">
+            Style="{StaticResource RoundButtonStyle}" Margin="12" Width="40" Height="40"
+            Click="CardLookupHelp_Click">
       <SymbolIcon Symbol="Help" Margin="1,0,-1,0" />
     </Button>
 

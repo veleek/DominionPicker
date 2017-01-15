@@ -7,6 +7,7 @@ using Ben.Utilities;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
 
 namespace Ben.Dominion
 {
@@ -48,6 +49,17 @@ namespace Ben.Dominion
             {
                 this.ViewModel.ResetFilteredCards();
             }
+        }
+
+        private void CardInfoButton_Click(object sender, RoutedEventArgs e)
+        {
+            PickerView.CardInfo.Go(sender.GetContext<CardSelector>().Card);
+        }
+
+        private void CardLookupHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageDialog dialog = new MessageDialog("Cards that are checked will never be selected.\r\n");
+            IAsyncOperation<IUICommand> t = dialog.ShowAsync();
         }
     }
 }

@@ -188,6 +188,11 @@ namespace Ben.Dominion
         /// <param name="result">The result to add the additional cards to</param>
         public static void AddAdditionalCards(SettingsViewModel settings, PickerResult result)
         {
+            if(result.Cards.Count == 0)
+            {
+                return;
+            }
+
             result.AdditionalStuff = new List<string>();
             if (result.HasCard("Young Witch"))
             {
