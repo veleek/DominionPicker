@@ -15,6 +15,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Marketplace;
 using Microsoft.Phone.Shell;
 using Ben.Dominion.ViewModels;
+using System.Threading.Tasks;
 
 namespace Ben.Dominion
 {
@@ -187,6 +188,10 @@ namespace Ben.Dominion
 
             // Make sure the configuration has been initialized first
             var config = ConfigurationModel.Instance;
+
+            // And that all the cards are loaded.
+            var loadCardsTask = Task.Run(async () => await Cards.EnsureLoaded());
+            loadCardsTask.Wait();
 
             // Then load the main view model
             this.Resources.Add("MainView", MainViewModel.Instance);
