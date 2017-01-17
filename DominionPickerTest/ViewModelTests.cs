@@ -16,7 +16,6 @@ namespace DominionPickerTest
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            Cards.allCards = new System.Collections.ObjectModel.ReadOnlyCollection<Card>(AllCards);
         }
 
         [TestMethod]

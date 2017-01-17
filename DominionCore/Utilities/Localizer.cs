@@ -74,7 +74,7 @@ namespace Ben.Data
                 string valueName = value.ToString();
                 Enum enumValue = value as Enum;
                 bool isFlags = enumValue != null && enumValue.GetType().GetTypeInfo().GetCustomAttributes<FlagsAttribute>().Any();
-                if (isFlags && ((int)value) != 0)
+                if (isFlags && enumValue.GetType() != typeof(Dominion.CardSet) && ((int)value) != 0)
                 {
                     List<string> localizedEnumParts = new List<string>();
                     foreach (var flag in Enum.GetValues(enumValue.GetType()))

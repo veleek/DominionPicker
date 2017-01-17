@@ -1,5 +1,6 @@
 ﻿param(
- $Languages = @("CS", "DE", "ES", "FI", "FR", "IT", "NL", "PL")
+	$Languages = @("CS", "DE", "ES", "FI", "FR", "IT", "NL", "PL"),
+	[Switch]$OnlyDefault
 )
 
 $VerbosePreference = "Continue"
@@ -92,58 +93,60 @@ Write-Verbose "Starting Card Processing"
 
 cd $PSScriptRoot
 
-if($true) #!(Test-Path variable:\cards) -or ((Test-Path variable:\xl) -and $xl.Visible -eq $false))
+Write-Verbose "Creating Excel Instance"
+$xl = New-Object -ComObject "Excel.Application"
+
+try
 {
-    Write-Verbose "Creating Excel Instance"
-    $xl = New-Object -ComObject "Excel.Application"
-    $xl.ScreenUpdating = $false
-    #$xl.Visible = $true
+	$xl.ScreenUpdating = $false
 
-    $cardInfoPath = (Resolve-Path .\DominionPickerData.xlsx).Path
-    $cardsDoc = $xl.Workbooks.Open($cardInfoPath)
-    $cards = $cardsDoc.WorkSheets["DominionPickerCards"]
-}
-else
-{
-    Write-Verbose "An instance of Excel already exists so we are using that."
-}
+	$cardInfoPath = (Resolve-Path .\DominionPickerData.xlsx).Path
+	$cardsDoc = $xl.Workbooks.Open($cardInfoPath)
+	$cards = $cardsDoc.WorkSheets["DominionPickerCards"]
 
-$cardCount = 0 
-$row=2
-do
-{
-    $cardCount++
-    $row++
-    
-}
-while($cards.Cells[$row,1].Formula)
-
-"Found $cardCount Cards"
-#$cardCount = 10
-
-Write-Progress -Activity "Generating Localized Card Files" -Status "Generating EN (default) Cards List" -Id 10 -PercentComplete 1
-
-# Make the default language file
-$props = @("ID","Name","Set","Type","Cost","Pickable","Rules")
-$propertyColumns = @{}
-$props | % { $propertyColumns[$_] = GetColumnForValue $_ }
-GenerateCardsXml -Properties $props -PropertyColumns $propertyColumns
-
-if($Languages -and ($Languages.Count -gt 0))
-{
-	$langCount = 0
-	$Languages | % { 
-		$langCount++
-		$progress = (($langCount/($Languages.Count+1))*100)
-		Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
-		Write-Verbose "Generating $_ Cards List"
-		$locProps = @("ID","Name_$_","Rules_$_")
-		$locPropColumns = @{}
-		$locProps | % { $locPropColumns[$_] = GetColumnForValue $_ }
-		GenerateCardsXml -Language $_ -Properties $locProps -PropertyColumns $locPropColumns
+	$cardCount = 0 
+	$row=2
+	do
+	{
+		$cardCount++
+		$row++
+		
 	}
+	while($cards.Cells[$row,1].Formula)
+
+	"Found $cardCount Cards"
+	#$cardCount = 10
+
+	Write-Progress -Activity "Generating Localized Card Files" -Status "Generating EN (default) Cards List" -Id 10 -PercentComplete 1
+
+	# Make the default language file
+	$props = @("ID","Name","Set","Type","Cost","Pickable","Rules")
+	$propertyColumns = @{}
+	$props | % { $propertyColumns[$_] = GetColumnForValue $_ }
+	GenerateCardsXml -Properties $props -PropertyColumns $propertyColumns
+
+	if($Languages -and ($Languages.Count -gt 0) -and (!$OnlyDefault))
+	{
+		$langCount = 0
+		$Languages | % { 
+			$langCount++
+			$progress = (($langCount/($Languages.Count+1))*100)
+			Write-Progress -Activity "Generating Localized Card Files" -Status "Generating $_ Cards List" -Id 10 -PercentComplete $progress
+			Write-Verbose "Generating $_ Cards List"
+			$locProps = @("ID","Name_$_","Rules_$_")
+			$locPropColumns = @{}
+			$locProps | % { $locPropColumns[$_] = GetColumnForValue $_ }
+			GenerateCardsXml -Language $_ -Properties $locProps -PropertyColumns $locPropColumns
+		}
+	}
+
+	Write-Progress -Activity "Generating Localized Card Files" -Id 10 -Completed
+}
+finally
+{
+	Write-Host "Killing Excel instance"
+	gps Excel | kill
 }
 
-Write-Progress -Activity "Generating Localized Card Files" -Id 10 -Completed
-
+Write-Host "Processing Complete.  Copying all localized card files to clipboard."
 dir DominionPickerCards*.xml | Set-Clipboard

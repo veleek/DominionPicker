@@ -43,6 +43,29 @@ namespace Ben.Dominion
         [XmlAttribute]
         public CardSet Set { get; set; }
 
+        /// <summary>
+        /// Gets the set to use as the icon for this card.
+        /// </summary>
+        [XmlIgnore]
+        public CardSet SetIcon
+        {
+            get
+            {
+                if(this.InSet(new[] { CardSet.Base, CardSet.Base2E }))
+                {
+                    return CardSet.Base;
+                }
+                else if (this.InSet(new[] { CardSet.Intrigue, CardSet.Intrigue2E }))
+                {
+                    return CardSet.Intrigue;
+                }
+                else
+                {
+                    return this.Set;
+                }
+            }
+        }
+
         [XmlAttribute]
         public CardType Type { get; set; }
 
@@ -115,6 +138,7 @@ namespace Ben.Dominion
         [XmlIgnore]
         public String CoinCost { get; set; }
 
+        [XmlIgnore]
         public String DebtCost { get; set; }
 
         [XmlIgnore]
@@ -126,6 +150,7 @@ namespace Ben.Dominion
             }
         }
 
+        [XmlIgnore]
         private string SetString
         {
             get
@@ -134,6 +159,7 @@ namespace Ben.Dominion
             }
         }
 
+        [XmlIgnore]
         private string TypeString
         {
             get
@@ -173,12 +199,12 @@ namespace Ben.Dominion
 
         public Boolean InSet(CardSet set)
         {
-            return this.Set != CardSet.None;
+            return (this.Set & set) != CardSet.None;
         }
 
         public Boolean InSet(IEnumerable<CardSet> sets)
         {
-            return sets.Contains(this.Set);
+            return sets.Any(set => this.InSet(set));
         }
 
         public Boolean IsType(CardType cardType)

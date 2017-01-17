@@ -97,7 +97,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Base 2Ed..
+        ///   Looks up a localized string similar to Base 2E.
         /// </summary>
         public static string CardSet_Base2E {
             get {
@@ -160,7 +160,7 @@ namespace Ben.Dominion.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Intrigue 2Ed..
+        ///   Looks up a localized string similar to Intrigue 2E.
         /// </summary>
         public static string CardSet_Intrigue2E {
             get {

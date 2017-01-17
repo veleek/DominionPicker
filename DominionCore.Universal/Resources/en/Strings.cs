@@ -1530,8 +1530,6 @@ namespace Ben.Dominion.Resources
         
         public static string GetString(string propertyName)
         {
-            var langs = string.Join(", ", Context.Languages);
-            System.Diagnostics.Debug.WriteLine($"GetString({propertyName}, {langs})");
             return Map.GetValue(propertyName, Context).ValueAsString;
         }
     }

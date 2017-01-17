@@ -90,7 +90,7 @@ namespace Ben.Dominion.Resources
         }
         
         /// <example>
-        /// Base 2Ed.
+        /// Base 2E
         /// </example>
         public static string CardSet_Base2E
         {
@@ -167,7 +167,7 @@ namespace Ben.Dominion.Resources
         }
         
         /// <example>
-        /// Intrigue 2Ed.
+        /// Intrigue 2E
         /// </example>
         public static string CardSet_Intrigue2E
         {

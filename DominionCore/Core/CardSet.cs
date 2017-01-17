@@ -1,8 +1,9 @@
+using System;
 using Ben.Data;
 
 namespace Ben.Dominion
 {
-
+    [Flags]
     public enum CardSet
     {
         None = 0x0000,

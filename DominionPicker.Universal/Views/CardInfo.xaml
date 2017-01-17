@@ -40,13 +40,13 @@
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <BitmapIcon UriSource="{Binding Set, Converter={StaticResource UriSourceConverter}, ConverterParameter='Images/SetIcons/'}"
+            <BitmapIcon UriSource="{Binding SetIcon, Converter={StaticResource UriSourceConverter}, ConverterParameter='Images/SetIcons/'}"
                         Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
                         Width="40"
                         HorizontalAlignment="Center"
                         />
             <TextBlock Grid.Column="1" Margin="12,0,0,0"
-                       Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" 
+                       Text="{Binding SetIcon, Converter={StaticResource CardDataLocalizer}}" 
                        VerticalAlignment="Center"
                        Style="{StaticResource TitleTextBlockStyle}" />
           </Grid>

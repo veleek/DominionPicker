@@ -51,7 +51,7 @@ namespace GalaSoft.MvvmLight.Threading
          }
          else
          {
-                await UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
+            await UIDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => action());
          }
       }
 

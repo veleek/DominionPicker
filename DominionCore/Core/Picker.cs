@@ -50,17 +50,23 @@ namespace Ben.Dominion
                                                 .OrderBy(s => Guid.NewGuid())
                                                 .Take(maxSets)
                                                 .ToList();
-                        // Fill in the remainder with random sets 
+                        // Fill in the remainder with random sets.  We don't care if it's
+                        // one that's already in the result which means that we could end 
+                        // up with fewer than N sets (e.g. even if MinCardsPerSet is 5 we
+                        // can still end up with all cards from a single set).
                         for (int i = availableSets.Count; i < maxSets; i++)
                         {
                             availableSets.Add(settings.SelectedSets[random.Next(settings.SelectedSets.Count)]);
                         }
+
                         availableSets = availableSets.Distinct().ToList();
                     }
+
                     // 2. Initialize the card pool   
                     {
                         result.Pool = Cards.PickableCards.Where(c => c.InSet(availableSets)).Where(c => !settings.FilteredCards.Ids.Contains(c.ID)).OrderBy(c => Guid.NewGuid()).ToCardList();
                     }
+
                     // 3. Generate a set of cards
                     {
                         List<Card> cardSet = new List<Card>();

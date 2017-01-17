@@ -70,9 +70,9 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Background="{StaticResource PhoneForegroundBrush}"
-                            OpacityMask="{Binding Set, Converter={StaticResource ImageConverter}, ConverterParameter='/Images/SetIcons'}"
+                            OpacityMask="{Binding SetIcon, Converter={StaticResource ImageConverter}, ConverterParameter='/Images/SetIcons'}"
                             Width="40" HorizontalAlignment="Left"/>
-                        <TextBlock Grid.Column="1" Text="{Binding Set, Converter={StaticResource CardDataLocalizer}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                        <TextBlock Grid.Column="1" Text="{Binding SetIcon, Converter={StaticResource CardDataLocalizer}}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                     </Grid>
                     <TextBlock Text="{Binding Strings.Info_Type, Source={StaticResource LocalizedResources}}" Style="{StaticResource PhoneTextSubtleStyle}"/>
                     <TextBlock Text="{Binding Type}" Style="{StaticResource PhoneTextExtraLargeStyle}"/>

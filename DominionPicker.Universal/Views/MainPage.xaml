@@ -67,7 +67,7 @@
                     <TextBlock Text="{Binding Strings.Settings_MinCards, Source={StaticResource LocalizedResources}}" TextWrapping="Wrap" TextAlignment="Right" />
                   </CheckBox>
                   <ComboBox Grid.Column="1" HorizontalAlignment="Stretch" Margin="8,0"
-                            ItemsSource="{Binding MinimumCardsPerSetValues}" 
+                            ItemsSource="{Binding MinimumCardsPerSetValues, Mode=OneTime}" 
                             SelectedItem="{Binding MinimumCardsPerSet.OptionValue, Mode=TwoWay}" />
                 </Grid>
 
@@ -80,13 +80,13 @@
                 </CheckBox>
 
                 <ComboBox Header="{Binding Strings.Config_PlusBuys, Source={StaticResource LocalizedResources}}"
-                          ItemsSource="{Binding PlusBuysOption, Converter={StaticResource EnumValuesConverter}}"
-                          SelectedItem="{Binding PlusBuysOption}" 
+                          ItemsSource="{Binding PlusBuysOption, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}"
+                          SelectedItem="{Binding PlusBuysOption, Mode=TwoWay}" 
                           HorizontalAlignment="Stretch" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
 
                 <ComboBox Header="{Binding Strings.Config_PlusActions, Source={StaticResource LocalizedResources}}"
-                          ItemsSource="{Binding PlusActionsOption, Converter={StaticResource EnumValuesConverter}}"
-                          SelectedItem="{Binding PlusActionsOption}" 
+                          ItemsSource="{Binding PlusActionsOption, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}"
+                          SelectedItem="{Binding PlusActionsOption, Mode=TwoWay}" 
                           HorizontalAlignment="Stretch" Margin="0,4" Style="{StaticResource EnumOptionStyle}"/>
 
               </StackPanel>

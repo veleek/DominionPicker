@@ -123,12 +123,12 @@
           <target state="translated">Victoire</target>
         </trans-unit>
         <trans-unit id="CardSet_Base2E" translate="yes" xml:space="preserve">
-          <source>Base 2Ed.</source>
-          <target state="new">Base 2Ed.</target>
+          <source>Base 2E</source>
+          <target state="new">Base 2E</target>
         </trans-unit>
         <trans-unit id="CardSet_Intrigue2E" translate="yes" xml:space="preserve">
-          <source>Intrigue 2Ed.</source>
-          <target state="new">Intrigue 2Ed.</target>
+          <source>Intrigue 2E</source>
+          <target state="new">Intrigue 2E</target>
         </trans-unit>
       </group>
     </body>

@@ -19,7 +19,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Ben.Dominion
 {
-
     public partial class MainPage : Page
     {
         private object favoriteEdit;

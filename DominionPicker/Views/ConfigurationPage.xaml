@@ -121,7 +121,7 @@
 
                     <toolkit:ListPicker x:Name="PlatinumColonyOption"
                                         Header="{Binding Strings.Config_PlatinumColonyOption, Source={StaticResource LocalizedResources}}"
-                                        ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}}"
+                                        ItemsSource="{Binding PickPlatinumColony, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}"
                                         SelectedItem="{Binding PickPlatinumColony, Mode=TwoWay}"
                                         ExpansionMode="FullScreenOnly"
                                         Style="{StaticResource EnumOptionStyle}">
@@ -129,7 +129,7 @@
 
                     <toolkit:ListPicker x:Name="SheltersOption"
                                         Header="{Binding Strings.Config_SheltersOption, Source={StaticResource LocalizedResources}}"
-                                        ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}}"
+                                        ItemsSource="{Binding PickSheltersOrEstates, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}"
                                         SelectedItem="{Binding PickSheltersOrEstates, Mode=TwoWay}"
                                         ExpansionMode="FullScreenOnly"
                                         Style="{StaticResource EnumOptionStyle}">
@@ -137,7 +137,7 @@
 
                     <toolkit:ListPicker x:Name="EventsOption"
                                         Header="{Binding Strings.Config_EventsOption, Source={StaticResource LocalizedResources}}"
-                                        ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}}"
+                                        ItemsSource="{Binding PickEvents, Converter={StaticResource EnumValuesConverter}, Mode=OneTime}"
                                         SelectedItem="{Binding PickEvents, Mode=TwoWay}"
                                         ExpansionMode="FullScreenOnly"
                                         Style="{StaticResource EnumOptionStyle}">

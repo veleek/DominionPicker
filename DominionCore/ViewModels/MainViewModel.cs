@@ -43,7 +43,7 @@ namespace Ben.Dominion.ViewModels
             }
             set
             {
-                SetProperty(ref settings, value, "Settings");
+                SetProperty(ref settings, value);
             }
         }
 
@@ -55,7 +55,7 @@ namespace Ben.Dominion.ViewModels
             }
             set
             {
-                SetProperty(ref result, value, "Result");
+                SetProperty(ref result, value);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Ben.Dominion.ViewModels
             }
             set
             {
-                SetProperty(ref favorites, value, "Favorites");
+                SetProperty(ref favorites, value);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Ben.Dominion.ViewModels
             }
             set
             {
-                this.SetProperty(ref this.blackMarket, value, "BlackMarket");
+                this.SetProperty(ref this.blackMarket, value);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Ben.Dominion.ViewModels
             }
             set
             {
-                SetProperty(ref isGenerating, value, "IsGenerating");
+                SetProperty(ref isGenerating, value);
             }
         }
 

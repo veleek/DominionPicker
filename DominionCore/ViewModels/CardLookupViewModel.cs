@@ -28,12 +28,12 @@ namespace Ben.Dominion.ViewModels
             // that pairs a boolean value that indicates whether a card is filtered or not
             // with a specific card and it can be used to databind with.
             this.CardSelectors = Cards.AllCards // Cards.PickableCards
-                           .OrderBy(c => c.Name).ThenBy(c => c.Set).Select(c => new CardSelector(c, false)).ToArray();
-            this.cardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToList();
+                           .OrderBy(c => c.Name).ThenBy(c => c.SetIcon).Select(c => new CardSelector(c, false)).ToArray();
+            this.cardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.SetIcon, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToList();
             // Note, this is is a duplicate of the previous because we want to construct an 
             // explicitly separate set of CardGroupings so that we can modify one while using
             // the others as part of our filtering process.
-            this.FilteredCardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.Set, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToObservableCollection();
+            this.FilteredCardSelectorGroups = this.CardSelectors.GroupBy(c => c.Card.SetIcon, (set, setCards) => new CardSetGrouping(set, setCards)).OrderBy(g => g.Key).ToObservableCollection();
             this.filteredGroupsMap = this.FilteredCardSelectorGroups.ToDictionary(g => g.Key);
         }
 
@@ -264,7 +264,7 @@ namespace Ben.Dominion.ViewModels
                    while (this.changedCards.Count > 0)
                    {
                        var card = this.changedCards.Dequeue();
-                       var group = this.filteredGroupsMap[card.Card.Set];
+                       var group = this.filteredGroupsMap[card.Card.SetIcon];
                        if (card.Filtered)
                        {
                            group.Remove(card);
