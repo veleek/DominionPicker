@@ -2,7 +2,6 @@ using System;
 
 namespace Ben.Dominion
 {
-
     [Flags]
     public enum CardType
     {

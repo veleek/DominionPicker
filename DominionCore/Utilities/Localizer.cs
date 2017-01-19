@@ -6,8 +6,14 @@ using System.Linq;
 #if NETFX_CORE
 using Windows.ApplicationModel.Resources.Core;
 using ResourceManager = Windows.ApplicationModel.Resources.ResourceLoader;
+
+using Windows.UI.Xaml.Data;
+using CultureIdentifier = System.String;
 #else
 using System.Resources;
+
+using System.Windows.Data;
+using CultureIdentifier = System.Globalization.CultureInfo;
 #endif
 
 namespace Ben.Data
@@ -19,15 +25,21 @@ namespace Ben.Data
         private readonly string resourceSubTree;
         private readonly Func<ResourceManager> resourceManagerGetter;
         private readonly Func<CultureInfo> currentCultureGetter;
+        private readonly Func<string, string> getString;
 #if NETFX_CORE
         private readonly ResourceMap map;
 #endif
 
-        public Localizer(string resourceSubTree, Func<ResourceManager> resourceManagerGetter, Func<CultureInfo> currentCultureGetter)
+        public Localizer(
+            string resourceSubTree, 
+            Func<ResourceManager> resourceManagerGetter, 
+            Func<CultureInfo> currentCultureGetter,
+            Func<string, string> getLocalizedString)
         {
             this.resourceSubTree = resourceSubTree;
             this.resourceManagerGetter = resourceManagerGetter;
             this.currentCultureGetter = currentCultureGetter;
+            this.getString = getLocalizedString;
 #if NETFX_CORE
             this.map = Windows.ApplicationModel.Resources.Core.ResourceManager.Current.MainResourceMap.GetSubtree(this.resourceSubTree);
 #endif
@@ -49,6 +61,11 @@ namespace Ben.Data
             }
         }
 
+        public string GetString(string resourceName)
+        {
+            return this.getString(resourceName);
+        }
+
         public string GetLocalizedValue(object value, params object[] args)
         {
             return GetLocalizedValue(value, null, null, args);
@@ -59,7 +76,7 @@ namespace Ben.Data
             return GetLocalizedValue(value, suffix, null, args);
         }
 
-        public string GetLocalizedValue(object value, string suffix, string culture, params object[] args)
+        public string GetLocalizedValue(object value, string suffix, CultureIdentifier culture, params object[] args)
         {
             if (value == null)
             {
@@ -74,7 +91,7 @@ namespace Ben.Data
                 string valueName = value.ToString();
                 Enum enumValue = value as Enum;
                 bool isFlags = enumValue != null && enumValue.GetType().GetTypeInfo().GetCustomAttributes<FlagsAttribute>().Any();
-                if (isFlags && enumValue.GetType() != typeof(Dominion.CardSet) && ((int)value) != 0)
+                if (isFlags && ((int)value) != 0)
                 {
                     List<string> localizedEnumParts = new List<string>();
                     foreach (var flag in Enum.GetValues(enumValue.GetType()))
@@ -129,7 +146,7 @@ namespace Ben.Data
             return localizedValue;
         }
 
-        private string GetRawLocalizedValue(object value, string culture)
+        private string GetRawLocalizedValue(object value, CultureIdentifier culture)
         {
             string localizedValue;
             if (!localizedValueMap.TryGetValue(value, out localizedValue))
@@ -144,9 +161,13 @@ namespace Ben.Data
             return localizedValue;
         }
 
-        private CultureInfo ResolveCulture(string culture)
+        private CultureInfo ResolveCulture(CultureIdentifier culture)
         {
+#if NETFX_CORE
             CultureInfo cultureInfo = string.IsNullOrWhiteSpace(culture) ? null : new CultureInfo(culture);
+#else
+            CultureInfo cultureInfo = culture;
+#endif
             // If a culture override is provided on the ResourceManager, then we just want to use that one
             // Otherwise use the culture provided and default to the invariant culture otherwise.
             return this.CurrentCulture ?? cultureInfo ?? CultureInfo.InvariantCulture;

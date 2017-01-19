@@ -455,7 +455,7 @@ namespace Ben.Dominion.Resources
             return ResourceManager.Current.MainResourceMap.GetSubtree(resourceName);
         }
         
-        private static string GetString(string propertyName)
+        public static string GetString(string propertyName)
         {
             return Map.GetValue(propertyName, Context).ValueAsString;
         }

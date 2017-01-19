@@ -12,22 +12,27 @@ namespace Ben.Data
 #if NETFX_CORE
         public static Localizer Strings = new Localizer(
             "DominionCore.Universal/Strings", 
-            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("Strings"), 
-            () => Dominion.Resources.Strings.Culture);
+            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("DominionCore.Universal/Strings"), 
+            () => Dominion.Resources.Strings.Culture,
+            Dominion.Resources.Strings.GetString);
         public static Localizer CardData = new Localizer(
             "DominionCore.Universal/CardDataStrings", 
-            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("CardDataStrings"), 
-            () => CardDataStrings.Culture);
+            () => Windows.ApplicationModel.Resources.ResourceLoader.GetForViewIndependentUse("DominionCore.Universal/CardDataStrings"), 
+            () => CardDataStrings.Culture,
+            CardDataStrings.GetString);
 #else
         public static Localizer Strings = new Localizer(
             string.Empty,
             () => Dominion.Resources.Strings.ResourceManager,
-            () => Dominion.Resources.Strings.Culture);
+            () => Dominion.Resources.Strings.Culture,
+            Dominion.Resources.Strings.ResourceManager.GetString
+        );
 
         public static Localizer CardData = new Localizer(
             string.Empty,
             () => CardDataStrings.ResourceManager,
-            () => CardDataStrings.Culture);
+            () => CardDataStrings.Culture,
+            CardDataStrings.ResourceManager.GetString);
 #endif
     }
 }

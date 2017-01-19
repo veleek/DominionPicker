@@ -17,7 +17,6 @@ using System.Windows.Media;
 
 namespace Ben.Dominion
 {
-
     public class Card
     {
         private string setString;

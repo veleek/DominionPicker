@@ -88,7 +88,8 @@ namespace Ben.Dominion
         public async Task ShowAddFavoritePopupAsync()
         {
             this.favoriteEdit = null;
-            ContentDialog addFavoriteDialog = new AddFavoriteDialog();
+            AddFavoriteDialog addFavoriteDialog = new AddFavoriteDialog();
+            addFavoriteDialog.SaveFavorite += (s, args) => this.MainView.SaveFavoriteSettings(args.FavoriteName);
             var result = await addFavoriteDialog.ShowAsync();
         }
 

@@ -35,7 +35,8 @@ namespace Ben.Dominion.Views
         {
             if (String.IsNullOrEmpty(this.FavoriteName))
             {
-                throw new InvalidOperationException("Somehow this got called with an empty name");
+                return;
+                //throw new InvalidOperationException("Somehow this got called with an empty name");
             }
 
             SaveFavorite?.Invoke(this, new FavoriteEventArgs(FavoriteName));

@@ -195,6 +195,7 @@
     <Content Include="Images\coin_extrasmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\debt.png" />
     <Content Include="Images\hand.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

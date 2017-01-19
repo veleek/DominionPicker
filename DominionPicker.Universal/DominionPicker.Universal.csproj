@@ -24,6 +24,7 @@
     <PackageCertificateThumbprint>B0F1CA87723B703E5A1C8F624D3889E2EA907F26</PackageCertificateThumbprint>
     <PackageCertificateKeyFile>DominionPicker_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxBundle>Auto</AppxBundle>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
